@@ -70,11 +70,9 @@ function NumerosSection({ numeros }: NumerosSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
+          <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-2">
             Nossos <span className="text-blue-600">números</span> comprovam
-            nossa
-            <br />
-            <span className="text-blue-600">excelência</span>
+            nossa <span className="text-blue-600">excelência</span>
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto">
             Estamos conectados com as principais tecnologias do ramo hoteleiro

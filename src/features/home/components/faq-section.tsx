@@ -37,7 +37,7 @@ function FAQSection({ faq }: FAQSectionProps) {
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 to-transparent" />
             </div>
-            
+
             {/* Decorative elements */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-2xl -z-10" />
             <div className="absolute -top-4 -left-4 w-16 h-16 bg-blue-50 rounded-xl -z-10" />
@@ -57,7 +57,7 @@ function FAQSection({ faq }: FAQSectionProps) {
                 <HelpCircle className="w-4 h-4" />
                 <span>FAQ</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-[#1e3a5f] mb-2">
+              <h2 className="text-3xl sm:text-5xl font-bold text-[#1e3a5f] mb-2">
                 Perguntas e <span className="text-blue-500">respostas</span>
               </h2>
               <p className="text-gray-500">

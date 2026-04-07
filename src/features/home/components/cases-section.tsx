@@ -73,7 +73,7 @@ function CasesSection({ cases }: CasesSectionProps) {
               align: "start",
               loop: true,
             }}
-            className="w-full max-w-5xl mx-auto"
+            className="w-full max-w-8xl mx-auto"
           >
             <CarouselContent className="-ml-4">
               {visibleCases.map((caseItem) => (
