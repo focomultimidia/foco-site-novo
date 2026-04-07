@@ -1,0 +1,15 @@
+export { HeroSection } from "./hero-section";
+export { ProdutosSection } from "./produtos-section";
+export { NaMidiaSection } from "./na-midia-section";
+export { DoresSection } from "./dores-section";
+export { EventosSection } from "./eventos-section";
+export { IntegracoesSection } from "./integracoes-section";
+export { OrbitalAnimation } from "./orbital-animation";
+export { LogoTicker } from "./logo-ticker";
+export { DepoimentosSection } from "./depoimentos-section";
+export { DiferenciaisSection } from "./diferenciais-section";
+export { CasesSection } from "./cases-section";
+export { SegurancaSection } from "./seguranca-section";
+export { TiposPropriedadeSection } from "./tipos-propriedade-section";
+export { NumerosSection } from "./numeros-section";
+export { FAQSection } from "./faq-section";

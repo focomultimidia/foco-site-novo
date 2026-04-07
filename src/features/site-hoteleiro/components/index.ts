@@ -1,0 +1,12 @@
+export { HeroSection } from "./hero-section";
+export { IntroSection } from "./intro-section";
+export { RecursosGridSection } from "./recursos-grid-section";
+export { ExperienciasSection } from "./experiencias-section";
+export { VantagensSection } from "./vantagens-section";
+export { ReservaSection } from "./reserva-section";
+export { IntegracoesOrbitalSection } from "./integracoes-orbital-section";
+export { PorQueEscolherSection } from "./por-que-escolher-section";
+export { IntegracoesSolucoesSection } from "./integracoes-solucoes-section";
+export { RecursosSection } from "./recursos-section";
+export { BeneficiosSection } from "./beneficios-section";
+export { ComoFuncionaSection } from "./como-funciona-section";

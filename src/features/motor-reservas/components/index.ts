@@ -1,0 +1,10 @@
+export { HeroSection } from "./hero-section";
+export { OQueESection } from "./o-que-e-section";
+export { VantagensSection } from "./vantagens-section";
+export { AumenteReservasSection } from "./aumente-reservas-section";
+export { FuncionalidadesSection } from "./funcionalidades-section";
+export { IntegracoesSistemasSection } from "./integracoes-sistemas-section";
+export { PareComissoesSection } from "./pare-comissoes-section";
+export { IntegracoesMarketingSection } from "./integracoes-marketing-section";
+export { GerencieCelularSection } from "./gerencie-celular-section";
+export { PorQueFocoSection } from "./por-que-foco-section";
