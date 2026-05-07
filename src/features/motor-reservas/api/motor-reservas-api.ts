@@ -2,12 +2,12 @@ import type { MotorReservasData } from "../types";
 
 const motorReservasData: MotorReservasData = {
   hero: {
-    titulo: "Motor de Reservas que Converte",
-    subtitulo: "Booking Engine Profissional",
-    descricao: "Transforme visitantes em hóspedes com nosso motor de reservas otimizado para conversão. Processo de reserva simplificado, pagamento integrado e confirmação instantânea.",
-    ctaPrimario: "Testar Grátis",
+    titulo: "Motor de reservas para hotéis com alta conversão e integração total",
+    subtitulo: "Venda direta sem comissão",
+    descricao: "Checkout simples, PIX e cartões integrados, comparador de preços e funcionalidades avançadas para maximizar conversões.",
+    ctaPrimario: "Garantir meu 1º mês grátis",
     ctaSecundario: "Ver Demonstração",
-    imagemUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=800&fit=crop",
+    imagemUrl: "/assets/imgs/motor-de-reservas/motor-de-reservas1.png",
   },
   recursos: [
     {
@@ -72,23 +72,53 @@ const motorReservasData: MotorReservasData = {
   faq: [
     {
       id: "1",
-      pergunta: "Quais formas de pagamento são aceitas?",
-      resposta: "Aceitamos cartões de crédito (parcelamento em até 12x), PIX, boleto bancário e transferência.",
+      pergunta: "O que é um motor de reservas para hotéis?",
+      resposta: "É uma ferramenta que permite que o hóspede faça reservas direto no site do hotel, com pagamento online e confirmação imediata.",
     },
     {
       id: "2",
-      pergunta: "Posso configurar políticas de cancelamento?",
-      resposta: "Sim, você pode configurar políticas flexíveis de acordo com as necessidades do seu hotel.",
+      pergunta: "Como o motor de reservas da Foco aumenta minhas vendas diretas?",
+      resposta: "Com recursos como comparador de preços, urgência, escassez, Pix e recuperação de carrinho, ele transforma visitantes em hóspedes.",
     },
     {
       id: "3",
-      pergunta: "Como funciona a confirmação de reservas?",
-      resposta: "O hóspede recebe confirmação automática por email e SMS com todos os detalhes da reserva.",
+      pergunta: "O motor de reservas funciona integrado com meu PMS?",
+      resposta: "Sim. Ele se conecta aos principais sistemas de gestão hoteleira do Brasil e também ao PMS próprio da Foco.",
     },
     {
       id: "4",
-      pergunta: "É possível integrar com meu PMS?",
-      resposta: "Sim, temos integração nativa com os principais PMSs do mercado.",
+      pergunta: "É possível usar o motor junto com o Channel Manager?",
+      resposta: "Sim. Com a integração Foco, você pode distribuir tarifas para mais de 800 canais com sincronização automática.",
+    },
+    {
+      id: "5",
+      pergunta: "O motor aceita quais formas de pagamento?",
+      resposta: "Pix com confirmação automática, cartões de crédito e links de pagamento via WhatsApp ou e-mail — tudo seguro e integrado.",
+    },
+    {
+      id: "6",
+      pergunta: "O sistema envia mensagens automáticas para os hóspedes?",
+      resposta: "Sim. E-mails e mensagens no WhatsApp podem ser enviados com confirmação de reserva, pré check-in, lembretes e muito mais.",
+    },
+    {
+      id: "7",
+      pergunta: "É possível oferecer promoções, pacotes e cupons?",
+      resposta: "Sim. Você pode criar tarifas promocionais, pacotes temáticos, landing pages e ofertas com descontos por pagamento.",
+    },
+    {
+      id: "8",
+      pergunta: "O motor de reservas é responsivo e funciona no celular?",
+      resposta: "Sim. Tanto para o hóspede quanto para o hoteleiro, ele funciona perfeitamente em qualquer dispositivo, com design otimizado.",
+    },
+    {
+      id: "9",
+      pergunta: "É possível mensurar os resultados das minhas campanhas de marketing?",
+      resposta: "Sim. O motor é integrado com GA4, Google Ads, Meta Ads, Tag Manager, RD Station e AskFlow para medir ROI e conversões.",
+    },
+    {
+      id: "10",
+      pergunta: "Consigo gerenciar reservas manualmente pela extranet?",
+      resposta: "Sim. Pelo celular ou desktop, é possível cadastrar reservas manuais, atualizar tarifas e acompanhar todas as vendas.",
     },
   ],
 };

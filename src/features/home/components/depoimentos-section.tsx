@@ -92,7 +92,7 @@ function DepoimentosSection({ depoimentos }: DepoimentosSectionProps) {
               <CarouselContent className="-ml-0">
                 {depoimentos.map((depoimento) => (
                   <CarouselItem key={depoimento.id} className="basis-full pl-0">
-                    <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg h-full">
+                    <div className="bg-white rounded-2xl p-6 md:p-8 h-full">
                       <div className="flex gap-1 mb-4">
                         {[...Array(5)].map((_, i) => (
                           <Star

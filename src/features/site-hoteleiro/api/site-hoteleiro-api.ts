@@ -2,12 +2,12 @@ import type { SiteHoteleiroData } from "../types";
 
 const siteHoteleiroData: SiteHoteleiroData = {
   hero: {
-    titulo: "Site Hoteleiro que Converte Visitantes em Hóspedes",
-    subtitulo: "Website Profissional para Hotéis",
-    descricao: "Tenha um site moderno, responsivo e otimizado para SEO que transforma visitantes em reservas diretas. Reduza sua dependência de OTAs e aumente sua margem de lucro.",
-    ctaPrimario: "Solicitar Demonstração",
+    titulo: "Site hoteleiro que converte visitantes em hóspedes",
+    subtitulo: "Website profissional para hotéis, pousadas e aluguel por temporada",
+    descricao: "Tenha um site moderno, responsivo e otimizado para SEO, 100% modular e editável. Reduza sua dependência de OTAs e aumente sua margem de lucro.",
+    ctaPrimario: "Garantir meu 1º mês grátis",
     ctaSecundario: "Ver Templates",
-    imagemUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop",
+    imagemUrl: "/assets/imgs/site-hoteleiro/img-hero.png",
   },
   recursos: [
     {
@@ -94,32 +94,6 @@ const siteHoteleiroData: SiteHoteleiroData = {
       numero: 4,
       titulo: "Lance seu Site",
       descricao: "Publique seu novo site e comece a receber reservas diretas",
-    },
-  ],
-  depoimentos: [
-    {
-      id: "1",
-      rating: 5,
-      content: "Depois de lançar nosso novo site com a Foco, as reservas diretas aumentaram 60% em apenas 3 meses. O ROI foi impressionante.",
-      author: "Ricardo Mendes",
-      hotel: "Hotel Premium SP",
-      imageUrl: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-    },
-    {
-      id: "2",
-      rating: 5,
-      content: "O site ficou lindo e super fácil de gerenciar. Consigo atualizar fotos e pacotes sozinha, sem depender de desenvolvedor.",
-      author: "Camila Santos",
-      hotel: "Pousada do Lago",
-      imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-    },
-    {
-      id: "3",
-      rating: 5,
-      content: "Finalmente temos um site que representa a qualidade do nosso hotel. A taxa de conversão melhorou muito.",
-      author: "Bruno Costa",
-      hotel: "Beach Hotel",
-      imageUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
     },
   ],
   faq: [

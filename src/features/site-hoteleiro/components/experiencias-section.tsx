@@ -6,19 +6,23 @@ import { Check } from "lucide-react";
 const experiencias = [
   {
     texto:
-      "Descubra como o design intuitivo e a velocidade de carregamento transformam visitantes em hóspedes.",
+      "Design intuitivo e a velocidade de carregamento transformam visitantes em hóspedes.",
   },
   {
     texto:
-      "Tenha um site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede à reserva.",
+      "Site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede à reserva.",
   },
   {
     texto:
-      "Crie landing pages para pacotes, promoções ou eventos, levando o cliente direto ao motor de reservas.",
+      "Landing pages para pacotes, promoções ou eventos, levando o cliente direto ao motor de reservas.",
   },
   {
     texto:
-      "Destaque promoções na capa do site para converter tráfego em vendas e aumentar sua taxa de ocupação.",
+      "Venda mais com pacotes em destaque na capa do site.",
+  },
+  {
+    texto:
+      "Capture leads (clientes interessados) com formulários personalizados.",
   },
 ];
 
@@ -38,10 +42,6 @@ function ExperienciasSection() {
             <span className="text-blue-500">Experiências incríveis</span> para
             que os visitantes não abandonem seu site
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
-            Descubra como o design intuitivo e a velocidade de carregamento
-            transformam visitantes em hóspedes pagantes.
-          </p>
         </motion.div>
 
         {/* Content Grid */}
@@ -81,7 +81,7 @@ function ExperienciasSection() {
           >
             <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-2xl overflow-hidden p-6 flex items-center justify-center">
               <img
-                src="/secction3.png"
+                src="/assets/imgs/site-hoteleiro/experiencias/modelo-site.png"
                 alt="Experiência do hóspede com popup de desconto"
                 className="max-w-full max-h-full object-contain"
               />

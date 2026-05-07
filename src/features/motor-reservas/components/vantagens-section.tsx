@@ -58,10 +58,6 @@ function VantagensSection() {
             Vantagens do <span className="text-blue-500">motor de reservas</span>{" "}
             para hotéis e pousadas
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
-            Nossos sistemas inovam a gestão hoteleira e marcam presença nas
-            principais feiras do setor, unindo tecnologia e hospitalidade.
-          </p>
         </motion.div>
 
         {/* Grid - 2 columns x 3 rows */}

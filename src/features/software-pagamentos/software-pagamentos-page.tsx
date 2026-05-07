@@ -21,96 +21,7 @@ import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
-import type { Depoimento, Numero, ArtigoMidia } from "@/features/home/types";
-import type { VideoDepoimento } from "@/features/ui/components/video-testimonials-carousel";
-
-// Dados mockados para as seções de prova social
-const depoimentosData: Depoimento[] = [
-  {
-    id: "1",
-    texto: "O Foco Pay eliminou completamente os erros de conciliação do nosso hotel. A automação financeira nos economiza horas de trabalho toda semana.",
-    autor: "Fernanda Lima",
-    cargo: "Gerente Financeira, Hotel Central",
-    avatar: "FL",
-  },
-  {
-    id: "2",
-    texto: "A integração com múltiplos gateways de pagamento nos deu flexibilidade total. Nossos hóspedes podem pagar da forma que preferem.",
-    autor: "Ricardo Mendes",
-    cargo: "Diretor, Resort Paradise",
-    avatar: "RM",
-  },
-  {
-    id: "3",
-    texto: "A segurança das transações é impressionante. Nunca tivemos problemas com fraudes desde que implementamos o Foco Pay.",
-    autor: "Ana Paula Costa",
-    cargo: "Proprietária, Pousada do Sol",
-    avatar: "AC",
-  },
-];
-
-const videosData: VideoDepoimento[] = [
-  {
-    id: "1",
-    title: "Como automatizamos 100% da gestão financeira",
-    thumbnailUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Hotel Plaza",
-    hotel: "São Paulo",
-  },
-  {
-    id: "2",
-    title: "Integração perfeita com todos os gateways",
-    thumbnailUrl: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Pousada Mar Azul",
-    hotel: "Rio de Janeiro",
-  },
-  {
-    id: "3",
-    title: "Segurança e rapidez em cada transação",
-    thumbnailUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Resort Paradise",
-    hotel: "Bahia",
-  },
-];
-
-const numerosData: Numero[] = [
-  { id: "1", valor: "4", sufixo: "+", label: "gateways integrados" },
-  { id: "2", valor: "2500", sufixo: "+", label: "clientes ativos" },
-  { id: "3", valor: "18", sufixo: "", label: "anos de mercado" },
-  { id: "4", valor: "99.9", sufixo: "%", label: "uptime garantido" },
-  { id: "5", valor: "50", sufixo: "+", label: "integrações disponíveis" },
-  { id: "6", valor: "24", sufixo: "h", label: "suporte disponível" },
-];
-
-const artigosMidiaData: ArtigoMidia[] = [
-  {
-    id: "1",
-    publicacao: "Hotel Management",
-    data: "Mar 2024",
-    titulo: "Foco Pay: a revolução nos pagamentos hoteleiros",
-    descricao: "Como a automação financeira está transformando a gestão de receitas no setor hoteleiro.",
-    link: "#",
-  },
-  {
-    id: "2",
-    publicacao: "Turismo 360",
-    data: "Fev 2024",
-    titulo: "Segurança e agilidade nas transações de hotéis",
-    descricao: "Especialistas explicam a importância de um software de pagamentos robusto.",
-    link: "#",
-  },
-  {
-    id: "3",
-    publicacao: "Hospedagem News",
-    data: "Jan 2024",
-    titulo: "Integração multi-gateway: tendência para 2024",
-    descricao: "Hotéis que oferecem múltiplas formas de pagamento aumentam conversão em 35%.",
-    link: "#",
-  },
-];
+import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
 function SoftwarePagamentosPage() {
   const { data, isLoading, isError, refetch } = useSoftwarePagamentosPage();
@@ -156,7 +67,7 @@ function SoftwarePagamentosPage() {
       <MeiosPagamentoSection />
 
       {/* Prova Social: Depoimentos (Aprovação 97%) */}
-      <DepoimentosSection depoimentos={depoimentosData} />
+      <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Prova Social: Vídeos */}
       <VideoTestimonialsCarousel
@@ -168,10 +79,10 @@ function SoftwarePagamentosPage() {
       />
 
       {/* Prova Social: Na Mídia */}
-      <NaMidiaSection artigos={artigosMidiaData} />
+      <NaMidiaSection artigos={artigosMidia} />
 
       {/* Bloco de Autoridade e Confiança */}
-      <NumerosSection numeros={numerosData} />
+      <NumerosSection numeros={numeros} />
       <TrustedLogosMarquee />
 
       {/* Prova Social: Carrossel de Produtos */}

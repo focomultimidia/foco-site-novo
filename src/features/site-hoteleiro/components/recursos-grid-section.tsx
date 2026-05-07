@@ -107,7 +107,7 @@ function RecursosGridSection() {
             <span className="text-blue-500">Recursos essenciais</span> de um
             site hoteleiro que converte visitantes em hóspedes
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-6xl mx-auto">
             A Foco oferece recursos práticos, integrados e pensados para
             destacar sua estrutura, engajar visitantes e gerar reservas diretas,
             sem comissões.

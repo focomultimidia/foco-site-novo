@@ -40,17 +40,17 @@ const vantagens = [
   {
     icon: TrendingUp,
     descricao:
-      "Crie páginas de vendas focadas em conversão de reservas e leve o seu cliente direto até o seu pacote ou promoção.",
+      "Crie páginas de vendas e leve o seu cliente direto até o seu pacote ou promoção.",
   },
   {
     icon: UserCircle,
     descricao:
-      "Área do cliente com acesso ao histórico de compras e pontuação do sistema de fidelidade do motor de reservas.",
+      "Área do cliente com acesso ao histórico de compras do motor de reservas.",
   },
   {
     icon: Briefcase,
     descricao:
-      "Área corporativa para agências, operadoras e empresas reservarem a qualquer momento. Tudo isso integrado com o motor de reservas.",
+      "Área corporativa para agências, operadoras e empresas reservarem a qualquer momento.",
   },
 ];
 
@@ -71,7 +71,7 @@ function VantagensSection() {
             <span className="text-blue-500">site exclusivo</span> para hotéis e
             pousadas
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-5xl mx-auto">
             O guia completo para transformar seu site em sua principal máquina
             de vendas diretas, garantindo a melhor margem de lucro.
           </p>

@@ -4,17 +4,17 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 
 const recursos = [
-  "Chegadas, saídas e cancelamentos de reservas",
+  "Visualização de chegadas, saídas e cancelamentos em tempo real",
   "Listagem de reservas diretas e dos canais conectados",
-  "CRM para gerenciar orçamentos",
-  "Reserva manual para você vender de onde estiver",
-  "Atualização de tarifas, restrições e disponibilidade",
-  "E muitos outros recursos",
+  "CRM integrado para envio rápido de orçamentos personalizados",
+  "Atualização de tarifas, disponibilidade e restrições instantaneamente",
+  "Acesso rápido a relatórios e status de ocupação",
+  "Interface responsiva e segura, adaptada ao dia a dia do gestor",
 ];
 
 function GerencieCelularSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-slate-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -29,8 +29,7 @@ function GerencieCelularSection() {
             <span className="text-blue-500">celular</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">
-            Navegue pelos principais recursos da nossa extranet do seu celular e
-            administre o seu hotel de onde estiver.
+            Acesse os principais recursos da extranet diretamente do seu smartphone. Administre o dia a dia do seu hotel com mobilidade, agilidade e total controle.
           </p>
         </motion.div>
 

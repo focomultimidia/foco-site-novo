@@ -1,237 +1,379 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Globe, Calendar, LayoutGrid, Monitor, CreditCard, Users, Smartphone, Link2 } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  Globe,
+  Calendar,
+  LayoutGrid,
+  Monitor,
+  CreditCard,
+  Users,
+  Smartphone,
+  Link2,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-interface NavItem {
-  label: string;
-  href: string;
-  children?: { label: string; href: string; icon: React.ComponentType<{ className?: string }> }[];
-}
+// ─── Data ─────────────────────────────────────────────────────────────────────
 
 const softwaresSubmenu = [
-  { label: "Site Hoteleiro", href: "/site-hoteleiro", icon: Globe },
-  { label: "Motor de Reservas", href: "/motor-de-reservas", icon: Calendar },
-  { label: "Channel Manager", href: "/channel-manager", icon: LayoutGrid },
-  { label: "Gestão Hoteleira (PMS)", href: "/gestao-hoteleira", icon: Monitor },
-  { label: "Experiência do Hóspede", href: "/experiencia-do-hospede", icon: Smartphone },
-  { label: "Software de Pagamentos", href: "/software-de-pagamentos", icon: CreditCard },
-  { label: "CRM Hoteleiro", href: "/crm-hoteleiro", icon: Users },
-  { label: "Integrações Hoteleiras", href: "/integracoes-hoteleiras", icon: Link2 },
+  {
+    label: "Site Hoteleiro",
+    description: "Presença digital profissional para o seu hotel",
+    href: "/site-hoteleiro",
+    icon: Globe,
+    iconClass: "bg-blue-50 text-blue-600",
+  },
+  {
+    label: "Motor de Reservas",
+    description: "Venda direta sem comissões de OTAs",
+    href: "/motor-de-reservas",
+    icon: Calendar,
+    iconClass: "bg-emerald-50 text-emerald-600",
+  },
+  {
+    label: "Channel Manager",
+    description: "Sincronize +450 canais em tempo real",
+    href: "/channel-manager",
+    icon: LayoutGrid,
+    iconClass: "bg-violet-50 text-violet-600",
+  },
+  {
+    label: "Gestão Hoteleira (PMS)",
+    description: "Controle total da operação do seu hotel",
+    href: "/gestao-hoteleira",
+    icon: Monitor,
+    iconClass: "bg-sky-50 text-sky-600",
+  },
+  {
+    label: "Experiência do Hóspede",
+    description: "Encante e fidelize quem se hospeda com você",
+    href: "/experiencia-do-hospede",
+    icon: Smartphone,
+    iconClass: "bg-orange-50 text-orange-600",
+  },
+  {
+    label: "Software de Pagamentos",
+    description: "Receba com segurança e PCI Compliance",
+    href: "/software-de-pagamentos",
+    icon: CreditCard,
+    iconClass: "bg-pink-50 text-pink-600",
+  },
+  {
+    label: "CRM Hoteleiro",
+    description: "Relacionamento e fidelização de hóspedes",
+    href: "/crm-hoteleiro",
+    icon: Users,
+    iconClass: "bg-amber-50 text-amber-600",
+  },
+  {
+    label: "Integrações Hoteleiras",
+    description: "Conecte seu hotel ao ecossistema digital",
+    href: "/integracoes-hoteleiras",
+    icon: Link2,
+    iconClass: "bg-teal-50 text-teal-600",
+  },
 ];
 
-const navItems: NavItem[] = [
+const navLinks = [
   { label: "Quem somos", href: "/quem-somos" },
-  { label: "Softwares hoteleiro", href: "/softwares", children: softwaresSubmenu },
   { label: "Marketing", href: "/marketing" },
   { label: "Blog", href: "/blog" },
   { label: "Seja um parceiro", href: "/parceiro" },
 ];
 
-function isActiveRoute(currentPath: string, href: string): boolean {
-  if (href === "/") return currentPath === "/";
-  return currentPath.startsWith(href);
+const itemVariants = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.22 } },
+};
+
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function isActiveRoute(path: string, href: string): boolean {
+  if (href === "/") return path === "/";
+  return path.startsWith(href);
 }
+
+// ─── Header ───────────────────────────────────────────────────────────────────
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isSoftwaresOpen, setIsSoftwaresOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileSoftwaresOpen, setIsMobileSoftwaresOpen] = useState(false);
+  const [isMegamenuOpen, setIsMegamenuOpen] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileOpen(false);
+    setIsMegamenuOpen(false);
+  }, [location.pathname]);
+
+  const openMegamenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setIsMegamenuOpen(true);
+  };
+
+  const scheduleMegamenuClose = () => {
+    closeTimer.current = setTimeout(() => setIsMegamenuOpen(false), 120);
+  };
+
+  const softwaresActive = softwaresSubmenu.some((s) => isActiveRoute(location.pathname, s.href));
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm"
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100/60"
           : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div
+          className={`flex items-center justify-between transition-all duration-300 ${
+            isScrolled ? "py-3" : "py-5"
+          }`}
+        >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="shrink-0">
             <img
               src="/logo-foco.png"
               alt="Foco Tecnologia e Marketing"
-              className="h-10 w-auto"
+              className="h-9 w-auto transition-all duration-300"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <div key={item.label} className="relative">
-                {item.children ? (
-                  <div
-                    className="relative"
-                    onMouseEnter={() => setIsSoftwaresOpen(true)}
-                    onMouseLeave={() => setIsSoftwaresOpen(false)}
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-6">
+
+            {/* ── Softwares — Flyout Megamenu ─────────── */}
+            <div
+              className="relative"
+              onMouseEnter={openMegamenu}
+              onMouseLeave={scheduleMegamenuClose}
+            >
+              <button
+                className={`relative flex items-center gap-1 px-1 py-1 text-md font-regular transition-colors duration-300 group ${
+                  softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
+                }`}
+              >
+                Softwares hoteleiro
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    isMegamenuOpen ? "rotate-180" : ""
+                  }`}
+                />
+                {/* Active underline */}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 bg-blue-600 ${
+                    softwaresActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence>
+                {isMegamenuOpen && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    onMouseEnter={openMegamenu}
+                    onMouseLeave={scheduleMegamenuClose}
+                    style={{ transformOrigin: "top center" }}
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-[620px] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-900/20 border border-slate-100/80 overflow-hidden z-50"
                   >
-                    <button
-                      className={`flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                        isActiveRoute(location.pathname, item.href)
-                          ? "text-blue-600"
-                          : "text-gray-700 hover:text-blue-600"
-                      }`}
-                    >
-                      {item.label}
-                      <ChevronDown className={`w-4 h-4 transition-transform ${isSoftwaresOpen ? "rotate-180" : ""}`} />
-                    </button>
-                    <AnimatePresence>
-                      {isSoftwaresOpen && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50"
-                        >
-                          {item.children.map((child) => {
-                            const Icon = child.icon;
-                            return (
-                              <Link
-                                key={child.label}
-                                to={child.href}
-                                className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                    {/* Caret */}
+                    <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-white border-l border-t border-slate-100 rotate-45" />
+
+                    {/* Grid */}
+                    <div className="p-6 grid grid-cols-2 gap-3.5 bg-white">
+                      {softwaresSubmenu.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <motion.div key={item.href} variants={itemVariants}>
+                            <Link
+                              to={item.href}
+                              className="flex items-start gap-3 p-3 rounded-xl hover:bg-gray-50 transition-all duration-200 group/card"
+                            >
+                              <div
+                                className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-200 group-hover/card:-translate-y-0.5 ${item.iconClass}`}
                               >
-                                <Icon className="w-4 h-4 text-blue-500" />
-                                {child.label}
-                              </Link>
-                            );
-                          })}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                      isActiveRoute(location.pathname, item.href)
-                        ? "text-blue-600"
-                        : "text-gray-700 hover:text-blue-600"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
+                                <Icon className="w-[18px] h-[18px]" />
+                              </div>
+                              <div className="min-w-0 pt-0.5">
+                                <p className="text-md font-semibold text-slate-800 group-hover/card:text-blue-600 transition-colors leading-snug">
+                                  {item.label}
+                                </p>
+                                <p className="text-sm text-slate-500 mt-0.5 leading-snug">
+                                  {item.description}
+                                </p>
+                              </div>
+                            </Link>
+                          </motion.div>
+                        );
+                      })}
+                    </div>
+
+
+                  </motion.div>
                 )}
-              </div>
+              </AnimatePresence>
+            </div>
+
+            {/* ── Demais links ─────────────────────────── */}
+            {navLinks.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`relative px-1 py-1 text-md font-regular transition-colors duration-300 group ${
+                  isActiveRoute(location.pathname, item.href)
+                    ? "text-blue-600"
+                    : "text-[#244248] hover:text-blue-600"
+                }`}
+              >
+                {item.label}
+                <span
+                  className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 bg-blue-600 ${
+                    isActiveRoute(location.pathname, item.href)
+                      ? "w-full"
+                      : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </Link>
             ))}
           </nav>
 
-          {/* CTA Button */}
+          {/* CTA */}
           <div className="hidden lg:flex items-center">
             <Button
               size="sm"
-              className="bg-blue-600 text-white hover:bg-blue-700 rounded-full px-6"
+              className="bg-[#285992] hover:bg-[#154781] text-white font-semibold px-5 py-5 rounded-full text-sm shadow-md shadow-blue-900/20 hover:shadow-lg hover:shadow-blue-900/30 hover:-translate-y-px transition-all duration-300"
             >
-              Fale com um consultor
+              Agendar uma demonstração
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="lg:hidden p-2 rounded-md transition-colors duration-300 text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            <AnimatePresence mode="wait" initial={false}>
+              {isMobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="block"
+                >
+                  <X className="w-5 h-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="open"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                  className="block"
+                >
+                  <Menu className="w-5 h-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile menu ───────────────────────────────── */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-gray-100"
+            transition={{ duration: 0.25 }}
+            className="lg:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-slate-100"
           >
-            <div className="container mx-auto px-4 py-4">
-              <nav className="flex flex-col gap-2">
-                {navItems.map((item) => (
-                  <div key={item.label}>
-                    {item.children ? (
-                      <div>
-                        <button
-                          onClick={() => setIsSoftwaresOpen(!isSoftwaresOpen)}
-                          className={`w-full flex items-center justify-between px-4 py-3 rounded-md text-sm font-medium transition-colors ${
-                            isActiveRoute(location.pathname, item.href)
-                              ? "text-blue-600 bg-blue-50"
-                              : "text-gray-700 hover:bg-gray-50"
-                          }`}
-                        >
-                          {item.label}
-                          <ChevronDown className={`w-4 h-4 transition-transform ${isSoftwaresOpen ? "rotate-180" : ""}`} />
-                        </button>
-                        <AnimatePresence>
-                          {isSoftwaresOpen && (
-                            <motion.div
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="overflow-hidden"
-                            >
-                              <div className="pl-4 py-2 space-y-1">
-                                {item.children.map((child) => {
-                                  const Icon = child.icon;
-                                  return (
-                                    <Link
-                                      key={child.label}
-                                      to={child.href}
-                                      className="flex items-center gap-3 px-4 py-2.5 rounded-md text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors"
-                                      onClick={() => setIsMobileMenuOpen(false)}
-                                    >
-                                      <Icon className="w-4 h-4 text-blue-500" />
-                                      {child.label}
-                                    </Link>
-                                  );
-                                })}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </div>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
-                          isActiveRoute(location.pathname, item.href)
-                            ? "text-blue-600 bg-blue-50"
-                            : "text-gray-700 hover:bg-gray-50"
-                        }`}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {item.label}
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </nav>
-              <div className="mt-4 pt-4 border-t border-gray-100">
-                <Button
-                  className="w-full bg-blue-600 text-white hover:bg-blue-700 rounded-full"
+            <div className="container mx-auto px-4 py-4 space-y-1">
+              {/* Softwares accordion */}
+              <div>
+                <button
+                  onClick={() => setIsMobileSoftwaresOpen((v) => !v)}
+                  className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
                 >
+                  Softwares hoteleiro
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isMobileSoftwaresOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence>
+                  {isMobileSoftwaresOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pl-2 pt-1 pb-2 space-y-0.5">
+                        {softwaresSubmenu.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <Link
+                              key={item.href}
+                              to={item.href}
+                              onClick={() => setIsMobileOpen(false)}
+                              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                            >
+                              <div
+                                className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${item.iconClass}`}
+                              >
+                                <Icon className="w-3.5 h-3.5" />
+                              </div>
+                              {item.label}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {navLinks.map((item) => (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setIsMobileOpen(false)}
+                  className={`block px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    isActiveRoute(location.pathname, item.href)
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-slate-700 hover:bg-slate-50"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              <div className="pt-3 pb-1 border-t border-slate-100">
+                <Button className="w-full bg-[#1e3a5f] hover:bg-[#16304f] text-white font-semibold rounded-full">
                   Fale com um consultor
                 </Button>
               </div>

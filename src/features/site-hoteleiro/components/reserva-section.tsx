@@ -45,7 +45,7 @@ function ReservaSection() {
             Seu hóspede sem trabalho para{" "}
             <span className="text-blue-500">finalizar a reserva</span>
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-5xl mx-auto">
             A integração com o motor de reservas da Foco garante um fluxo de
             navegação fluido e conversão otimizada.
           </p>
@@ -63,7 +63,7 @@ function ReservaSection() {
           >
             <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-2xl overflow-hidden p-6 flex items-center justify-center">
               <img
-                src="/section-5.png"
+                src="/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.png"
                 alt="Motor de reservas integrado"
                 className="max-w-full max-h-full object-contain"
               />

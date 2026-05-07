@@ -62,9 +62,9 @@ function OQueESection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-2xl overflow-hidden p-6 flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center">
               <img
-                src="/section1-crm.png"
+                src="/assets/imgs/crm-hoteleiro/crm-hoteleiro.png"
                 alt="CRM Hoteleiro"
                 className="max-w-full max-h-full object-contain"
               />

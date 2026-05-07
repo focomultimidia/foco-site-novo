@@ -74,10 +74,6 @@ function NumerosSection({ numeros }: NumerosSectionProps) {
             Nossos <span className="text-blue-600">números</span> comprovam
             nossa <span className="text-blue-600">excelência</span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
-            Estamos conectados com as principais tecnologias do ramo hoteleiro
-            para maximizar sua operação e receita
-          </p>
         </motion.div>
 
         {/* Grid */}

@@ -4,37 +4,37 @@ import { motion } from "framer-motion";
 
 const integracoes = [
   {
-    logo: "/motor-de-reservas.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/foco-icon.png",
     titulo: "Motor de Reservas",
     descricao:
       "Converta mais clientes com um motor de reservas eficiente, simples e seguro!",
   },
   {
-    logo: "/google-analytics.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-analytics.png",
     titulo: "Google Analytics",
     descricao:
       "Descubra o perfil do seu hóspede, quais ações de marketing geram mais reservas e muito mais!",
   },
   {
-    logo: "/facebook-ads.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/facebook-ads.png",
     titulo: "Facebook ADS",
     descricao:
       "Crie campanhas e alcance hóspedes em potencial nas principais redes sociais do mundo.",
   },
   {
-    logo: "/asksuite.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/asksuite.png",
     titulo: "Asksuite",
     descricao:
       "Inteligência artificial hoteleira número 1 do mundo, focada em aumentar reservas diretas e otimizar a gestão do atendimento.",
   },
   {
-    logo: "/google-ads.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-ads.png",
     titulo: "Google ADS",
     descricao:
       "Coloque seu hotel no topo da maior rede de pesquisa de hospedagens do mundo!",
   },
   {
-    logo: "/whatsapp.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/whatsapp.png",
     titulo: "WhatsApp",
     descricao:
       "Aumente suas reservas com o aplicativo de mensagens mais usado no Brasil.",

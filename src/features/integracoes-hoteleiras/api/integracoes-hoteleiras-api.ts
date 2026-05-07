@@ -8,8 +8,7 @@ const integracoesHoteleirasData: IntegracoesHoteleirasData = {
       "Conecte seu hotel com as melhores ferramentas do mercado. Nossa plataforma se integra com OTAs, gateways de pagamento, sistemas contábeis e muito mais.",
     ctaPrimario: "Ver Integrações",
     ctaSecundario: "Solicitar Nova Integração",
-    imagemUrl:
-      "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=800&fit=crop",
+    imagemUrl: "/assets/imgs/integracoes-hoteleiras/img-hero.png",
   },
   integracoes: [
     {

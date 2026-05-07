@@ -12,8 +12,23 @@ interface DoresSectionProps {
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "baixa-ocupacao": TrendingDown,
-  prejuizos: AlertTriangle,
+  "prejuizos": AlertTriangle,
   "experiencia-ruim": Frown,
+};
+
+const tabCta: Record<string, { texto: string; botao: string }> = {
+  "baixa-ocupacao": {
+    texto: "Quer atrair mais hóspedes e aumentar as suas reservas?",
+    botao: "Quero atrair mais hóspedes",
+  },
+  "prejuizos": {
+    texto: "Quer parar de ter prejuízos e começar a obter lucros com seu estabelecimento?",
+    botao: "Quero obter lucros",
+  },
+  "experiencia-ruim": {
+    texto: "Quer melhorar a experiência do seu hóspede e aumentar sua reputação online?",
+    botao: "Quero aumentar a reputação do meu hotel",
+  },
 };
 
 function DoresSection({ dores }: DoresSectionProps) {
@@ -87,21 +102,27 @@ function DoresSection({ dores }: DoresSectionProps) {
                     <p className="text-white/70 text-sm mb-4">
                       {solucao.descricao}
                     </p>
-                    {solucao.link && (
-                      <Button
-                        variant="ghost"
-                        className="text-blue-300 hover:text-white hover:bg-white/10 p-0 h-auto text-xs font-medium group rounded-full"
-                        asChild
-                      >
-                        <a href={solucao.link}>
-                          Saiba mais
-                          <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
-                        </a>
-                      </Button>
-                    )}
                   </motion.div>
                 ))}
               </div>
+
+              {/* CTA */}
+              {tabCta[activeDor.id] && (
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                  className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
+                >
+                  <p className="text-white/80 text-base sm:text-lg font-medium text-center sm:text-left">
+                    {tabCta[activeDor.id].texto}
+                  </p>
+                  <Button className="shrink-0 bg-white text-[#1e3a5f] hover:bg-blue-50 font-semibold px-6 py-2.5 rounded-full flex items-center gap-2 group">
+                    {tabCta[activeDor.id].botao}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </motion.div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

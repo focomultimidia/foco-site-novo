@@ -8,49 +8,49 @@ const funcionalidades = [
     icon: Monitor,
     titulo: "Central de reservas (CRS)",
     descricao:
-      "Centralize as reservas na mesma extranet e aumente a produtividade da sua equipe. Todas as vendas do motor de reservas, otas, operadoras e outros canais em um único sistema hoteleiro.",
+      "Consolide todas as reservas do site, OTAs, operadoras e canais diretos em uma única extranet. Menos retrabalho, mais controle e produtividade.",
   },
   {
     icon: Link,
-    titulo: "Link de pagamento",
+    titulo: "Link de pagamento personalizado",
     descricao:
-      "Envie links de pagamento diretamente pelo WhatsApp ou e-mail e feche reservas com rapidez e segurança. Agilidade no atendimento e mais reservas para o seu hotel.",
+      "Envie links por WhatsApp ou e-mail para concluir reservas de forma ágil e segura. Ideal para contatos diretos e fechamentos rápidos.",
   },
   {
     icon: QrCode,
-    titulo: "Pix Automático",
+    titulo: "Pix com confirmação automática",
     descricao:
-      "Receba pagamentos em segundos, com confirmação imediata através da integração PIX. Não perca mais tempo realizando conferência manual de pagamentos.",
+      "Receba pagamentos via Pix com confirmação em segundos, sem conferência manual. Mais agilidade no check-in e no fluxo de caixa.",
   },
   {
     icon: Zap,
-    titulo: "Ações automáticas",
+    titulo: "Ações automáticas para hóspedes",
     descricao:
-      "Comunique-se com o hóspede ativando ações automáticas enviadas por e-mail, a exemplo de lembretes de aniversário, pré check-in, pós check-out e muito mais.",
+      "Automatize e-mails e mensagens no WhatsApp com confirmação de reserva, recuperação de carrinho, pré check-in, consumo, pagamento de conta e mais.",
   },
   {
     icon: BarChart3,
-    titulo: "Dashboards e relatórios",
+    titulo: "Relatórios e dashboards gerenciais",
     descricao:
-      "Centralize as reservas na mesma extranet e aumente a produtividade da sua equipe. Todas as vendas do motor de reservas, otas, operadoras e outros canais em um único sistema hoteleiro.",
+      "Acompanhe reservas, receita, conversão e ocupação em tempo real com relatórios visuais, prontos para tomada de decisão.",
   },
   {
     icon: Calendar,
-    titulo: "Calendário hoteleiro",
+    titulo: "Calendário hoteleiro inteligente",
     descricao:
-      "Centralize as reservas na mesma extranet e aumente a produtividade da sua equipe. Todas as vendas do motor de reservas, otas, operadoras e outros canais em um único sistema hoteleiro.",
+      "Visualize ocupação, bloqueios, tarifas e disponibilidade em um só lugar, com atualização automática integrada ao Channel Manager e PMS.",
   },
   {
     icon: Search,
-    titulo: "Google Hotel e Metabuscadores",
+    titulo: "Integração com Google Hotel e metabuscadores",
     descricao:
-      "Integre seu motor de reservas sem custos adicionais ao Google Hotel, Trivago e outros metabuscadores. Coloque seu hotel na vitrine digital que mais gera reservas.",
+      "Apareça no Google Hotel, Trivago e outros metabuscadores sem custo adicional. Gere tráfego qualificado para seu site com reservas diretas.",
   },
   {
     icon: CreditCard,
     titulo: "Integração de cartões gratuita",
     descricao:
-      "Venda online com cartão de crédito sem pagar taxas extras. Integração direta com Cielo, Rede, Stone, Getnet, Sicredi e outros adquirentes garante flexibilidade, segurança e agilidade.",
+      "Venda online com cartão de crédito sem taxas extras de integração. Compatível com Cielo, Stone, Getnet, Sicredi, Rede e outros.",
   },
 ];
 
@@ -67,14 +67,8 @@ function FuncionalidadesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
-            Confira funcionalidades do{" "}
-            <span className="text-blue-500">motor de reservas</span> para hotéis
-            e pousadas
+            Funcionalidades que aumentam sua produtividade e geram mais reservas diretas
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
-            Da gestão ao pagamento: tudo conectado para mais produtividade e
-            lucro.
-          </p>
         </motion.div>
 
         {/* Grid - 4 columns x 2 rows */}
@@ -88,7 +82,7 @@ function FuncionalidadesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="bg-white rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300 text-center"
+                className="bg-slate-50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-shadow duration-300 text-center"
               >
                 <div className="w-14 h-14 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Icon className="w-7 h-7 text-white" />

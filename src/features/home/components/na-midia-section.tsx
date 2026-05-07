@@ -57,7 +57,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             Reconhecidos pela <span className="text-blue-500">mídia</span>, escolhidos pelos{" "}
             <span className="text-blue-500">hoteleiros</span>
           </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto">
+          <p className="text-gray-500 max-w-5xl mx-auto">
             As principais publicações do setor destacam nossos sistemas como
             referência em tecnologia e eficiência para hotéis e pousadas
           </p>
@@ -69,7 +69,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <Carousel
             setApi={setApi}
@@ -80,20 +80,20 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-0">
+            <CarouselContent className="-ml-0 py-10 -my-10">
               {artigos.map((artigo) => (
                 <CarouselItem key={artigo.id} className="basis-full pl-0">
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100">
                     <div className="grid md:grid-cols-2">
                       <div className="relative h-56 md:h-auto min-h-[280px]">
                         <img
-                          src={`https://images.unsplash.com/photo-${
+                          src={
                             artigo.id === "1"
-                              ? "1551288049-bebda4e38f71"
+                              ? "/assets/imgs/na-midia/materia-1.jpg"
                               : artigo.id === "2"
-                              ? "1460925895917-afdab827c52f"
-                              : "1556761175-5973dc0f32e7"
-                          }?w=600&h=400&fit=crop`}
+                              ? "/assets/imgs/na-midia/materia-2.jpg"
+                              : "/assets/imgs/na-midia/materia-3.jpg"
+                          }
                           alt={artigo.titulo}
                           className="w-full h-full object-cover"
                         />
@@ -128,7 +128,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
                           className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 p-0 h-auto text-sm font-medium group w-fit rounded-full"
                           asChild
                         >
-                          <a href={artigo.link}>
+                          <a href={artigo.link} target="_blank">
                             Ler artigo completo
                             <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
                           </a>

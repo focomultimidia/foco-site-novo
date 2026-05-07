@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Calendar, MapPin, Ticket } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Calendar, MapPin, Ticket } from "lucide-react";
+
 import {
   Carousel,
   CarouselContent,
@@ -56,14 +56,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
             Presença da Foco nas principais{" "}
             <span className="text-blue-500">Feiras de Hotelaria</span>
-            <br />
-            do Brasil
           </h2>
-          <p className="text-gray-500 max-w-3xl mx-auto">
-            A Foco está presente nos principais eventos da hotelaria,
-            apresentando soluções que transformam a gestão e as reservas dos
-            meios de hospedagem.
-          </p>
         </motion.div>
 
         {/* Carousel */}
@@ -72,7 +65,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <Carousel
             setApi={setApi}
@@ -83,20 +76,20 @@ function EventosSection({ eventos }: EventosSectionProps) {
             }}
             className="w-full"
           >
-            <CarouselContent className="-ml-0">
+            <CarouselContent className="-ml-0 py-10 -my-10">
               {eventos.map((evento) => (
                 <CarouselItem key={evento.id} className="basis-full pl-0">
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-lg border border-gray-100">
+                  <div className="bg-white rounded-3xl overflow-hidden border border-gray-100">
                     <div className="grid md:grid-cols-2">
                       <div className="relative h-56 md:h-auto min-h-[280px]">
                         <img
-                          src={`https://images.unsplash.com/photo-${
+                          src={
                             evento.id === "1"
-                              ? "1540575465583"
+                              ? "/assets/imgs/feiras-eventos/equipotel-2025.jpg"
                               : evento.id === "2"
-                              ? "1517457373958"
-                              : "1505373877841"
-                          }?w=600&h=400&fit=crop`}
+                              ? "/assets/imgs/feiras-eventos/expohotel-2025.jpg"
+                              : "/assets/imgs/feiras-eventos/expohotel-2024.jpg"
+                          }
                           alt={evento.titulo}
                           className="w-full h-full object-cover"
                         />
@@ -122,17 +115,6 @@ function EventosSection({ eventos }: EventosSectionProps) {
                         <p className="text-gray-500 text-sm mb-6">
                           {evento.descricao}
                         </p>
-
-                        <Button
-                          variant="ghost"
-                          className="text-blue-600 hover:text-blue-700 hover:bg-blue-50 p-0 h-auto text-sm font-medium group w-fit rounded-full"
-                          asChild
-                        >
-                          <a href={evento.link}>
-                            Saiba mais
-                            <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                          </a>
-                        </Button>
                       </div>
                     </div>
                   </div>

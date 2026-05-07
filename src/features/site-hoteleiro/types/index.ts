@@ -49,6 +49,5 @@ export interface SiteHoteleiroData {
   recursos: Recurso[];
   beneficios: Beneficio[];
   passos: Passo[];
-  depoimentos: Depoimento[];
   faq: FAQItem[];
 }

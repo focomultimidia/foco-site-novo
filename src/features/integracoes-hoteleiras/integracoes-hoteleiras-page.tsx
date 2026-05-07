@@ -22,96 +22,8 @@ import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
-import type { Depoimento, Numero, ArtigoMidia } from "@/features/home/types";
-import type { VideoDepoimento } from "@/features/ui/components/video-testimonials-carousel";
+import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
-// Dados mockados para as seções de prova social
-const depoimentosData: Depoimento[] = [
-  {
-    id: "1",
-    texto: "A integração com o PMS da Foco eliminou completamente o retrabalho da nossa equipe. A sincronização em tempo real é impressionante.",
-    autor: "Carlos Mendes",
-    cargo: "Gerente de TI, Hotel Central",
-    avatar: "CM",
-  },
-  {
-    id: "2",
-    texto: "Conseguimos conectar todos os nossos sistemas em uma única plataforma. A produtividade aumentou em 40%.",
-    autor: "Fernanda Lima",
-    cargo: "Diretora, Resort Paradise",
-    avatar: "FL",
-  },
-  {
-    id: "3",
-    texto: "O suporte técnico da Foco durante o processo de integração foi excepcional. Tudo funcionou perfeitamente desde o primeiro dia.",
-    autor: "Ricardo Souza",
-    cargo: "Proprietário, Pousada do Sol",
-    avatar: "RS",
-  },
-];
-
-const videosData: VideoDepoimento[] = [
-  {
-    id: "1",
-    title: "Como integramos todos os nossos sistemas",
-    thumbnailUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Hotel Plaza",
-    hotel: "São Paulo",
-  },
-  {
-    id: "2",
-    title: "A integração que transformou nossa operação",
-    thumbnailUrl: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Pousada Mar Azul",
-    hotel: "Rio de Janeiro",
-  },
-  {
-    id: "3",
-    title: "Sincronização perfeita entre sistemas",
-    thumbnailUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Resort Paradise",
-    hotel: "Bahia",
-  },
-];
-
-const numerosData: Numero[] = [
-  { id: "1", valor: "18", sufixo: "", label: "PMS's integrados" },
-  { id: "2", valor: "2500", sufixo: "+", label: "clientes ativos" },
-  { id: "3", valor: "18", sufixo: "", label: "anos de mercado" },
-  { id: "4", valor: "99.9", sufixo: "%", label: "uptime garantido" },
-  { id: "5", valor: "50", sufixo: "+", label: "integrações disponíveis" },
-  { id: "6", valor: "24", sufixo: "h", label: "suporte disponível" },
-];
-
-const artigosMidiaData: ArtigoMidia[] = [
-  {
-    id: "1",
-    publicacao: "Hotel Management",
-    data: "Mar 2024",
-    titulo: "Integração de sistemas: o futuro da hotelaria",
-    descricao: "Como a conectividade entre plataformas está revolucionando a gestão hoteleira.",
-    link: "#",
-  },
-  {
-    id: "2",
-    publicacao: "Turismo 360",
-    data: "Fev 2024",
-    titulo: "Foco Multimídia lidera integrações no Brasil",
-    descricao: "Empresa conecta 18 dos principais PMS do mercado brasileiro.",
-    link: "#",
-  },
-  {
-    id: "3",
-    publicacao: "Hospedagem News",
-    data: "Jan 2024",
-    titulo: "Como escolher as integrações certas para seu hotel",
-    descricao: "Guia completo para selecionar as melhores integrações para sua propriedade.",
-    link: "#",
-  },
-];
 
 function IntegracoesHoteleirasPage() {
   const { data, isLoading, isError, refetch } = useIntegracoesHoteleirasPage();
@@ -157,7 +69,7 @@ function IntegracoesHoteleirasPage() {
       <PmsIntegradosSection />
 
       {/* Prova Social: Depoimentos (Aprovação 97%) */}
-      <DepoimentosSection depoimentos={depoimentosData} />
+      <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Section 4: Por que contratar */}
       <PorQueContratarSection />
@@ -172,10 +84,10 @@ function IntegracoesHoteleirasPage() {
       />
 
       {/* Prova Social: Na Mídia */}
-      <NaMidiaSection artigos={artigosMidiaData} />
+      <NaMidiaSection artigos={artigosMidia} />
 
       {/* Bloco de Autoridade e Confiança */}
-      <NumerosSection numeros={numerosData} />
+      <NumerosSection numeros={numeros} />
       <TrustedLogosMarquee />
 
       {/* Prova Social: Carrossel de Produtos */}

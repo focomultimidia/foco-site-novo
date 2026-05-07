@@ -1,32 +1,44 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShoppingCart, Zap, Gift, Percent } from "lucide-react";
+import { Scale, TrendingUp, Layers, Timer, BadgePercent, MessageCircle } from "lucide-react";
 
 const recursos = [
   {
-    icon: ShoppingCart,
-    titulo: "RECUPERAÇÃO DE COMPRAS",
+    icon: Scale,
+    titulo: "Comparador de preços entre canais",
     descricao:
-      "Ative descontos para recuperar reservas não concluídas e aumente sua taxa de conversão em até 15%.",
+      "Mostre ao visitante que reservar direto é a melhor opção. Com o comparador integrado, o sistema exibe os preços em OTAs como Booking e Expedia, destacando a vantagem de fechar pelo seu site.",
   },
   {
-    icon: Zap,
-    titulo: "DESCONTOS ESPECIAIS ATIVOS",
+    icon: TrendingUp,
+    titulo: "Urgência em tempo real",
     descricao:
-      "Crie ofertas como last minute, noite grátis, ou antecipação mínima, além de cupons de desconto.",
+      "Gatilhos como '10 pessoas visualizaram esta oferta hoje' ou '2 reservas nas últimas 2 horas' criam senso de urgência e impulsionam a conversão imediata.",
   },
   {
-    icon: Gift,
-    titulo: "PACOTES COM BENEFÍCIOS",
+    icon: Layers,
+    titulo: "Escassez automatizada",
     descricao:
-      "Configure pacotes promocionais personalizados com valor agregado para diferentes perfis de hóspedes.",
+      "Exiba quantos quartos restam ou destaque quando uma oferta está prestes a acabar. Ninguém quer perder uma oportunidade — a percepção de escassez acelera a decisão de compra.",
   },
   {
-    icon: Percent,
-    titulo: "PÁGINA DE OFERTAS",
+    icon: Timer,
+    titulo: "Contagem regressiva de promoções",
     descricao:
-      "Crie páginas exclusivas para divulgar seus descontos, melhorar o desempenho do seu site e impulsionar as reservas diretas.",
+      "Com um contador visual no motor, crie senso de tempo limitado para ofertas especiais, estimulando o fechamento imediato da reserva.",
+  },
+  {
+    icon: BadgePercent,
+    titulo: "Descontos por forma de pagamento",
+    descricao:
+      "Ofereça benefícios exclusivos para quem paga via Pix ou à vista, incentivando métodos de pagamento mais vantajosos para o hotel.",
+  },
+  {
+    icon: MessageCircle,
+    titulo: "Recuperação de carrinho via WhatsApp",
+    descricao:
+      "Recupere reservas não finalizadas com mensagens automáticas no WhatsApp. O hóspede recebe um lembrete com link direto para concluir a compra, elevando a conversão em até 20%.",
   },
 ];
 
@@ -43,12 +55,10 @@ function AumenteReservasSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-white mb-4 leading-tight">
-            Aumente as <span className="text-blue-300">reservas diretas</span> do
-            seu hotel criando vantagens para o visitante
+            Ferramentas inteligentes para aumentar conversão e reduzir abandono
           </h2>
           <p className="text-white/70 text-lg max-w-3xl mx-auto">
-            Alcance, atraia e converta mais hóspedes no seu site com decisões
-            inteligentes e lucrativas.
+            Gatilhos de urgência, escassez e comparação de preços para acelerar a tomada de decisão e transformar visitantes em hóspedes pagantes.
           </p>
         </motion.div>
 
@@ -74,7 +84,7 @@ function AumenteReservasSection() {
                   className="flex items-start gap-4 bg-white rounded-xl p-5"
                 >
                   <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-6 h-6 text-white" />
+                    <Icon className="w-6 h-6 text-white" strokeWidth={2} />
                   </div>
                   <div>
                     <h3 className="font-bold text-[#1e3a5f] mb-1 text-sm uppercase tracking-wide">

@@ -25,96 +25,8 @@ import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
-import type { Depoimento, Numero, ArtigoMidia } from "@/features/home/types";
-import type { VideoDepoimento } from "@/features/ui/components/video-testimonials-carousel";
+import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
-// Dados mockados para as seções de prova social
-const depoimentosData: Depoimento[] = [
-  {
-    id: "1",
-    texto: "O Foco Pass revolucionou a experiência dos nossos hóspedes. O check-in online eliminou as filas na recepção e aumentou a satisfação.",
-    autor: "Mariana Costa",
-    cargo: "Gerente, Hotel Boutique",
-    avatar: "MC",
-  },
-  {
-    id: "2",
-    texto: "Nossos hóspedes adoram os descontos exclusivos nos parceiros do Foco Pass. É um diferencial que nos destaca da concorrência.",
-    autor: "Pedro Almeida",
-    cargo: "Diretor, Resort Paradise",
-    avatar: "PA",
-  },
-  {
-    id: "3",
-    texto: "O cardápio digital aumentou nossas vendas de room service em 40%. A facilidade de pedir pelo celular faz toda a diferença.",
-    autor: "Carla Mendes",
-    cargo: "Proprietária, Pousada do Sol",
-    avatar: "CM",
-  },
-];
-
-const videosData: VideoDepoimento[] = [
-  {
-    id: "1",
-    title: "Como o Foco Pass transformou nossa experiência do hóspede",
-    thumbnailUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Hotel Fazenda São Paulo",
-    hotel: "São Paulo",
-  },
-  {
-    id: "2",
-    title: "Check-in online: praticidade e agilidade",
-    thumbnailUrl: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Pousada Mar Azul",
-    hotel: "Rio de Janeiro",
-  },
-  {
-    id: "3",
-    title: "Descontos exclusivos que encantam os hóspedes",
-    thumbnailUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop",
-    youtubeId: "dQw4w9WgXcQ",
-    author: "Resort Paradise",
-    hotel: "Bahia",
-  },
-];
-
-const numerosData: Numero[] = [
-  { id: "1", valor: "11", sufixo: "", label: "recursos integrados" },
-  { id: "2", valor: "2500", sufixo: "+", label: "clientes ativos" },
-  { id: "3", valor: "18", sufixo: "", label: "anos de mercado" },
-  { id: "4", valor: "99.9", sufixo: "%", label: "uptime garantido" },
-  { id: "5", valor: "50", sufixo: "+", label: "parceiros de desconto" },
-  { id: "6", valor: "24", sufixo: "h", label: "suporte disponível" },
-];
-
-const artigosMidiaData: ArtigoMidia[] = [
-  {
-    id: "1",
-    publicacao: "Hotel Management",
-    data: "Mar 2024",
-    titulo: "Foco Pass: a revolução na experiência do hóspede",
-    descricao: "Como a automação da jornada do hóspede está transformando a hotelaria brasileira.",
-    link: "#",
-  },
-  {
-    id: "2",
-    publicacao: "Turismo 360",
-    data: "Fev 2024",
-    titulo: "Check-in online: tendência que veio para ficar",
-    descricao: "Especialistas explicam os benefícios da digitalização da experiência do hóspede.",
-    link: "#",
-  },
-  {
-    id: "3",
-    publicacao: "Hospedagem News",
-    data: "Jan 2024",
-    titulo: "Cardápio digital aumenta vendas de room service",
-    descricao: "Estudo mostra crescimento de 40% nas vendas com implementação de cardápio digital.",
-    link: "#",
-  },
-];
 
 function ExperienciaHospedePage() {
   const { data, isLoading, isError, refetch } = useExperienciaHospedePage();
@@ -166,7 +78,7 @@ function ExperienciaHospedePage() {
       <ParaQuemSection />
 
       {/* Prova Social: Depoimentos (Aprovação 97%) */}
-      <DepoimentosSection depoimentos={depoimentosData} />
+      <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Section 6: Cardápio Digital */}
       <CardapioDigitalSection />
@@ -184,10 +96,10 @@ function ExperienciaHospedePage() {
       />
 
       {/* Prova Social: Na Mídia */}
-      <NaMidiaSection artigos={artigosMidiaData} />
+      <NaMidiaSection artigos={artigosMidia} />
 
       {/* Bloco de Autoridade e Confiança */}
-      <NumerosSection numeros={numerosData} />
+      <NumerosSection numeros={numeros} />
       <TrustedLogosMarquee />
 
       {/* Prova Social: Carrossel de Produtos */}

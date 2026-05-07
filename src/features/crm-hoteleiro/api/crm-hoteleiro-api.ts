@@ -8,8 +8,7 @@ const crmHoteleiroData: CrmHoteleiroData = {
       "Conheça seus hóspedes, segmente sua base, automatize campanhas e aumente a recorrência. Um CRM completo desenvolvido especificamente para o mercado hoteleiro.",
     ctaPrimario: "Começar Grátis",
     ctaSecundario: "Ver Demonstração",
-    imagemUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop",
+    imagemUrl: "/assets/imgs/crm-hoteleiro/img-hero.png",
   },
   recursos: [
     {

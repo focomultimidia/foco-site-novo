@@ -1,5 +1,4 @@
 export { HeroSection } from "./hero-section";
-export { IntroSection } from "./intro-section";
 export { RecursosGridSection } from "./recursos-grid-section";
 export { ExperienciasSection } from "./experiencias-section";
 export { VantagensSection } from "./vantagens-section";

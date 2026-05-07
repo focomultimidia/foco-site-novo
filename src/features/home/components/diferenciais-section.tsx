@@ -75,7 +75,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
                     <h3 className="font-bold text-gray-900 text-sm mb-1">
                       {diferencial.titulo}
                     </h3>
-                    <p className="text-gray-500 text-xs leading-relaxed">
+                    <p className="text-gray-500 text-sm leading-relaxed">
                       {diferencial.descricao}
                     </p>
                   </div>
@@ -86,15 +86,15 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
 
           {/* Right Column - Image */}
           <div className="relative order-1 lg:order-2">
-            <div className="relative rounded-3xl overflow-hidden shadow-xl aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[600px]">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[600px]">
               <img
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&h=600&fit=crop"
+                src="/assets/imgs/home/modelo-porque-contratar.jpg"
                 alt="Tecnologia hoteleira Foco"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 to-transparent" />
+              <div className="absolute inset-0" />
             </div>
-            
+
             {/* Decorative elements */}
             <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-blue-100 rounded-2xl -z-10" />
             <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-50 rounded-xl -z-10" />

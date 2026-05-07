@@ -64,6 +64,15 @@ export interface Depoimento {
   avatar: string;
 }
 
+export interface VideoDepoimento {
+  id: string;
+  title: string;
+  thumbnailUrl: string;
+  youtubeId: string;
+  author: string;
+  hotel: string;
+}
+
 export interface Diferencial {
   id: string;
   icone: string;
@@ -113,8 +122,8 @@ export interface HomeData {
   eventos: Evento[];
   categoriasIntegracao: CategoriaIntegracao[];
   depoimentos: Depoimento[];
+  videosData: VideoDepoimento[];
   diferenciais: Diferencial[];
-  cases: Case[];
   certificacoes: Certificacao[];
   tiposPropriedade: TipoPropriedade[];
   numeros: Numero[];

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(ls -d /c/Users/55719/Documents/www/novo-site-foco/src/features/*/)",
+      "Bash(git restore *)",
+      "Bash(Select-String -Path \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\*\\\\types\\\\index.ts\" -Pattern \"ctaSecundario|HeroData\")",
+      "Bash(Select-Object Filename, LineNumber, Line)"
+    ]
+  }
+}

@@ -16,9 +16,9 @@ const feiras = [
   {
     id: "1",
     imagem: "https://images.unsplash.com/photo-1540575465583-0e6896e9a2f5?w=800&h=500&fit=crop",
-    titulo: "Abav Expo",
+    titulo: "Equipotel",
     local: "São Paulo, SP",
-    ano: "2024",
+    ano: "2025",
   },
   {
     id: "2",

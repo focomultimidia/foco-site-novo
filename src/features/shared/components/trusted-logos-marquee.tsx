@@ -157,8 +157,7 @@ function TrustedLogosMarquee() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
-            +2.500 hotéis turbinaram seus resultados com as{" "}
-            <span className="text-blue-500">nossas tecnologias</span>
+            <span className="text-blue-500">+2.500 hotéis</span> turbinaram seus resultados com a Foco
           </h2>
           <p className="text-gray-500 mt-4 max-w-3xl mx-auto">
             Grandes redes e pousadas independentes confiam na Foco para impulsionar seus negócios
@@ -193,7 +192,7 @@ function TrustedLogosMarquee() {
                 key={`${cliente.id}-${index}`}
                 className="flex-shrink-0 group cursor-pointer"
               >
-                <div className="h-16 w-40 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+                <div className="h-16 w-40 flex items-center justify-center transition-all duration-300">
                   <img
                     src={cliente.logo}
                     alt={cliente.nome}

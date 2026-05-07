@@ -8,8 +8,7 @@ const gestaoHoteleiraData: GestaoHoteleiraData = {
       "Controle total da sua operação hoteleira em uma única plataforma. Do check-in ao check-out, financeiro, housekeeping e muito mais.",
     ctaPrimario: "Começar Agora",
     ctaSecundario: "Agendar Demonstração",
-    imagemUrl:
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=800&fit=crop",
+    imagemUrl: "/assets/imgs/gestao-hoteleira-pms/img-hero.png",
   },
   recursos: [
     {

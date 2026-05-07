@@ -1,4 +1,5 @@
 import type { HomeData } from "../types";
+import { artigosMidia, eventos, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
 const homeData: HomeData = {
   hero: {
@@ -120,36 +121,8 @@ const homeData: HomeData = {
       link: "/integracoes-hoteleiras",
     },
   ],
-  artigosMidia: [
-    {
-      id: "1",
-      publicacao: "Revista Hotelaria",
-      data: "Março 2025",
-      titulo: "Inovação digital movimenta a hotelaria na Equipotel 2025",
-      descricao:
-        "A Foco Tecnologia apresenta na Equipotel 2025 a plataforma ROOMS, com destaque para o Pacote de Experiência do Hóspede. As soluções integram ferramentas de operação, vendas e atendimento, incluindo o app Foco Pass, motor de reservas e sistema de pagamentos Foco Pay.",
-      link: "#",
-    },
-    {
-      id: "2",
-      publicacao: "Tech Hotel",
-      data: "Fevereiro 2025",
-      titulo:
-        "Integração com OTAs cresce entre meios de hospedagem em 2025",
-      descricao:
-        "A adoção de tecnologias integradas com plataformas de distribuição online (OTAs), como Booking.com e Expedia, segue em expansão entre meios de hospedagem brasileiros. A tendência reflete o movimento de digitalização e automação operacional no setor.",
-      link: "#",
-    },
-    {
-      id: "3",
-      publicacao: "Hospitality News",
-      data: "Janeiro 2025",
-      titulo: "Foco Tecnologia conquista certificação Premier da Booking.com",
-      descricao:
-        "Pelo segundo ano consecutivo, a Foco Tecnologia é reconhecida com a certificação de excelência Premier da Booking.com, consolidando sua posição como referência em tecnologia hoteleira no Brasil.",
-      link: "#",
-    },
-  ],
+  artigosMidia,
+  videosData,
   dores: [
     {
       id: "baixa-ocupacao",
@@ -240,40 +213,7 @@ const homeData: HomeData = {
       ],
     },
   ],
-  eventos: [
-    {
-      id: "1",
-      tag: "Destaque",
-      data: "Setembro 2025",
-      local: "São Paulo, SP",
-      titulo: "Ecossistema completo da Foco em destaque na Equipotel 2025",
-      descricao:
-        "Apresentamos nossa plataforma integrada com site, motor de reservas, PMS, channel e CRM — unindo gestão e vendas em um só lugar.",
-      link: "#",
-    },
-    {
-      id: "2",
-      tag: "",
-      data: "Outubro 2025",
-      local: "Gramado, RS",
-      titulo:
-        "Foco conectando inovação e gestão no encontro da hotelaria do Sul",
-      descricao:
-        "Estivemos presentes com nossas soluções integradas para reservas, gestão operacional e melhoria da experiência do hóspede, em um dos eventos mais estratégicos do setor.",
-      link: "#",
-    },
-    {
-      id: "3",
-      tag: "",
-      data: "Novembro 2025",
-      local: "São Paulo, SP",
-      titulo:
-        "CRM da Foco em destaque na principal feira da hotelaria nacional",
-      descricao:
-        "Na Expotel, lançamos nosso CRM hoteleiro com notificações via WhatsApp, otimizando o relacionamento com hóspedes e impulsionando vendas diretas.",
-      link: "#",
-    },
-  ],
+  eventos,
   categoriasIntegracao: [
     {
       id: "canais",
@@ -300,40 +240,7 @@ const homeData: HomeData = {
         "Ferramentas de marketing digital para aumentar sua presença online.",
     },
   ],
-  depoimentos: [
-    {
-      id: "1",
-      texto:
-        "Estou feliz e muito satisfeita com a Foco Multimídia. Somos uma pousada pequena e familiar e o Channel Manager simplificou muito o nosso trabalho. A empresa está disponível para atender às nossas dúvidas e problemas a qualquer dia e horário e, por esse motivo, além de ser muito grata por trabalhar com vocês, eu indico a Foco de olhos fechados.",
-      autor: "Gabriela",
-      cargo: "Pousada Michele",
-      avatar: "G",
-    },
-    {
-      id: "2",
-      texto:
-        "O Sistema Hoteleiro da Foco veio e solucionou vários problemas de gerenciamento que nós tínhamos em nossa pousada. O Channel Manager, gerenciamento dos canais das OTAs é fantástico! Outro ponto que eu destaco é o atendimento de todos os setores da empresa que estão sempre disponíveis para nos atender.",
-      autor: "Stephan",
-      cargo: "Rede KS Beach",
-      avatar: "S",
-    },
-    {
-      id: "3",
-      texto:
-        "Somos 9 unidades e desde que eu comecei a trabalhar com o sistema gerenciamento do Channel da Foco, eu tenho mais tempo para lidar com outras atividades, enquanto responsável pela parte comercial. Essa ferramenta é essencial para que eu consiga resolver qualquer demanda com agilidade e segurança.",
-      autor: "Franklin",
-      cargo: "Mariano Hotel",
-      avatar: "F",
-    },
-    {
-      id: "4",
-      texto:
-        "A Foco Tecnologia transformou completamente nossa operação hoteleira. A integração entre todos os sistemas nos economiza horas de trabalho todos os dias. O suporte é excepcional e sempre resolve nossos problemas rapidamente.",
-      autor: "Vitor Vasconcelos",
-      cargo: "Escarpas Eco Village",
-      avatar: "V",
-    },
-  ],
+  depoimentos,
   diferenciais: [
     {
       id: "1",
@@ -392,50 +299,7 @@ const homeData: HomeData = {
         "Utilizamos os principais padrões de segurança e tecnologia para assegurar os dados dos seus hóspedes.",
     },
   ],
-  cases: [
-    {
-      id: "1",
-      tipo: "Case de Sucesso",
-      titulo: "Transformação digital do Hotel Fazenda",
-      imagem:
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop",
-    },
-    {
-      id: "2",
-      tipo: "Depoimento Real",
-      titulo: "Como aumentamos as reservas diretas",
-      imagem:
-        "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&h=400&fit=crop",
-    },
-    {
-      id: "3",
-      tipo: "Case de Sucesso",
-      titulo: "Integração completa com nosso PMS",
-      imagem:
-        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop",
-    },
-    {
-      id: "4",
-      tipo: "Depoimento Real",
-      titulo: "Redução de overbooking em 100%",
-      imagem:
-        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600&h=400&fit=crop",
-    },
-    {
-      id: "5",
-      tipo: "Depoimento Real",
-      titulo: "Suporte técnico diferenciado",
-      imagem:
-        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop",
-    },
-    {
-      id: "6",
-      tipo: "Case de Sucesso",
-      titulo: "Resultados em 30 dias de uso",
-      imagem:
-        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&h=400&fit=crop",
-    },
-  ],
+
   certificacoes: [
     {
       id: "1",
@@ -509,14 +373,7 @@ const homeData: HomeData = {
       icone: "Key",
     },
   ],
-  numeros: [
-    { id: "1", valor: "2.0", sufixo: "Bi", label: "Transações / ano" },
-    { id: "2", valor: "2.5", sufixo: "Mi", label: "Clientes ativos" },
-    { id: "3", valor: "20", sufixo: "Mi", label: "Reservas concluídas" },
-    { id: "4", valor: "97", sufixo: "%", label: "Clientes satisfeitos" },
-    { id: "5", valor: "800", sufixo: "+", label: "Integrações" },
-    { id: "6", valor: "19", sufixo: "", label: "Anos de experiência" },
-  ],
+  numeros,
   faq: [
     {
       id: "1",
