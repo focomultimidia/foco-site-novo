@@ -78,7 +78,8 @@ function DoresSection({ dores }: DoresSectionProps) {
             >
               {/* Header */}
               <div className="text-center mb-10">
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                <h3 className="text-2xl sm:text-3xl font-display font-medium text-white leading-none tracking-tighter antialiased">
+
                   {activeDor.titulo}
                 </h3>
                 <p className="text-white/70 max-w-2xl mx-auto">

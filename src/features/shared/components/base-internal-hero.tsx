@@ -10,6 +10,7 @@ import {
   animate,
 } from "framer-motion";
 import { HeroButton } from "./hero-button";
+import { useInternalHeroGsap } from "@/features/shared/hooks/use-internal-hero-gsap";
 
 // ── Public interfaces ─────────────────────────────────────────────────────────
 
@@ -23,10 +24,18 @@ export interface HeroSlide {
 export interface BaseInternalHeroProps {
   badgeText?: string;
   title: string | React.ReactNode;
+  /** Tailwind classes injected into the <h1>. Falls back to the default dark-navy style. */
+  titleClassName?: string;
   subtitle?: string;
-  description: string;
-  primaryCTA: { label: string; href?: string; onClick?: () => void };
+  description?: string | React.ReactNode;
+  /** Tailwind classes injected into the description <p>. Falls back to the default muted style. */
+  descriptionClassName?: string;
+  primaryCTA?: { label: string; href?: string; onClick?: () => void };
   secondaryCTA?: { label: string; href?: string; onClick?: () => void };
+  /** Extra content rendered inside the CTA row (buttons, badges, etc.). */
+  children?: React.ReactNode;
+  /** Trust-badge labels rendered below the CTAs. Defaults to the standard three items. */
+  trustItems?: string[];
   slides: HeroSlide[];
   /** Injected background layer (color + effects). Fills the hero absolutely behind all content. */
   background?: React.ReactNode;
@@ -218,16 +227,22 @@ function ScreenGlare({ delay = 0 }: { delay?: number }) {
 function BaseInternalHero({
   badgeText,
   title,
+  titleClassName,
   subtitle,
   description,
+  descriptionClassName,
   primaryCTA,
   secondaryCTA,
+  children,
+  trustItems = TRUST_ITEMS,
   slides,
   background,
 }: BaseInternalHeroProps) {
   const [slide, setSlide] = useState(0);
   const sectionRef   = useRef<HTMLElement>(null);
   const isMultiSlide = slides.length > 1;
+
+  useInternalHeroGsap(sectionRef);
 
   // ── Mouse parallax ──────────────────────────────────────────────────────────
   const rawX    = useMotionValue(0);
@@ -256,12 +271,13 @@ function BaseInternalHero({
   return (
     <section
       ref={sectionRef}
+      data-hero="section"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className="relative min-h-[90vh] flex items-center overflow-hidden"
     >
       {/* ── Background (injected by each page) ───────────────────────────── */}
-      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
+      <div data-hero="bg" aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
         {background}
       </div>
 
@@ -270,16 +286,10 @@ function BaseInternalHero({
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* ── LEFT ─────────────────────────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div data-hero="content">
             {badgeText && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.15 }}
+              <div
+                data-hero="badge"
                 className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#285992]/25 bg-white/60 backdrop-blur-sm shadow-sm"
               >
                 <span className="relative flex h-2 w-2 shrink-0">
@@ -287,10 +297,13 @@ function BaseInternalHero({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#285992]" />
                 </span>
                 <span className="text-[#244248] text-sm font-medium tracking-wide">{badgeText}</span>
-              </motion.div>
+              </div>
             )}
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.15rem] font-bold text-[#244248] mb-4 leading-tight tracking-tight">
+            <h1
+              data-hero="title"
+              className={titleClassName || "text-4xl sm:text-5xl lg:text-[3.15rem] font-bold text-[#244248] mb-4 leading-tight tracking-tight"}
+            >
               {title}
             </h1>
 
@@ -300,14 +313,21 @@ function BaseInternalHero({
               </p>
             )}
 
-            <p className="text-lg text-[#244248]/75 mb-8 leading-relaxed max-w-xl">
-              {description}
-            </p>
+            {description && (
+              <p
+                data-hero="description"
+                className={descriptionClassName || "text-lg text-[#244248]/75 mb-8 leading-relaxed max-w-xl"}
+              >
+                {description}
+              </p>
+            )}
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <HeroButton onClick={primaryCTA.onClick} href={primaryCTA.href}>
-                {primaryCTA.label}
-              </HeroButton>
+            <div data-hero="cta" className="flex flex-col sm:flex-row gap-4">
+              {primaryCTA && (
+                <HeroButton onClick={primaryCTA.onClick} href={primaryCTA.href}>
+                  {primaryCTA.label}
+                </HeroButton>
+              )}
               {secondaryCTA && (
                 <HeroButton variant="secondary" onClick={secondaryCTA.onClick} href={secondaryCTA.href}>
                   {secondaryCTA.label}
@@ -315,28 +335,28 @@ function BaseInternalHero({
               )}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              className="flex flex-wrap items-center gap-5 mt-8"
-            >
-              {TRUST_ITEMS.map(text => (
-                <div key={text} className="flex items-center gap-1.5 text-sm text-[#244248]/60">
-                  <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  <span>{text}</span>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
+            {trustItems.length > 0 && (
+              <div
+                data-hero="trust"
+                className="flex flex-wrap items-center gap-5 mt-8"
+              >
+                {trustItems.map(text => (
+                  <div key={text} className="flex items-center gap-1.5 text-sm text-[#244248]/60">
+                    <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span>{text}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {children}
+          </div>
 
           {/* ── RIGHT: Device showcase ──────────────────────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+          <div
+            data-hero="image"
             className="hidden lg:flex items-center justify-center"
           >
             <div className="relative w-full max-w-[640px]" style={{ paddingBottom: "11%" }}>
@@ -460,7 +480,7 @@ function BaseInternalHero({
               </motion.div>
 
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

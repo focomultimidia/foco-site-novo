@@ -79,12 +79,12 @@ function LeadCaptureCTA({
           </div>
 
           {/* Title */}
-          <h2 className="text-4xl sm:text-5xl font-bold text-white leading-[1.15] tracking-tight mb-5">
+          <h2 className="font-display text-4xl sm:text-5xl font-medium text-white leading-none tracking-tighter antialiased mb-5">
             {title}
           </h2>
 
           {/* Subtitle */}
-          <p className="text-base sm:text-lg text-white leading-relaxed mb-11 max-w-xl mx-auto">
+          <p className="text-lg text-white/80 font-light leading-relaxed mb-11 max-w-xl mx-auto">
             {subtitle}
           </p>
 

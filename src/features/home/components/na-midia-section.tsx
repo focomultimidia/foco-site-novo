@@ -53,11 +53,11 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             <span>Na mídia</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Reconhecidos pela <span className="text-blue-500">mídia</span>, escolhidos pelos{" "}
             <span className="text-blue-500">hoteleiros</span>
           </h2>
-          <p className="text-gray-500 max-w-5xl mx-auto">
+          <p className="text-gray-500 text-lg font-light leading-relaxed max-w-5xl mx-auto">
             As principais publicações do setor destacam nossos sistemas como
             referência em tecnologia e eficiência para hotéis e pousadas
           </p>

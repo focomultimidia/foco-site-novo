@@ -17,6 +17,7 @@ import {
   Link2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PremiumCTAButton } from "./premium-cta-button";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -202,7 +203,7 @@ function Header() {
               src="/logo-foco.png"
               alt="Foco Tecnologia e Marketing"
               className="w-auto"
-              animate={{ height: isScrolled ? 28 : 36 }}
+              animate={{ height: isScrolled ? 40 : 50 }}
               transition={CARD_TRANSITION}
             />
           </Link>
@@ -215,7 +216,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 text-md font-regular transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"
@@ -239,7 +240,7 @@ function Header() {
               onMouseLeave={scheduleMegamenuClose}
             >
               <button
-                className={`relative flex items-center gap-1 px-1 py-1 text-md font-regular transition-colors duration-300 group ${
+                className={`relative flex items-center gap-1 px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
                 }`}
               >
@@ -283,7 +284,7 @@ function Header() {
                                 <Icon className="w-[18px] h-[18px]" />
                               </div>
                               <div className="min-w-0 pt-0.5">
-                                <p className="text-md font-semibold text-slate-800 group-hover/card:text-blue-600 transition-colors leading-snug">
+                                <p className="font-display font-medium text-sm tracking-tight text-slate-800 group-hover/card:text-blue-600 transition-colors leading-snug">
                                   {item.label}
                                 </p>
                                 <p className="text-sm text-slate-500 mt-0.5 leading-snug">
@@ -305,7 +306,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 text-md font-regular transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"
@@ -325,14 +326,7 @@ function Header() {
 
           {/* CTA */}
           <div className="hidden lg:flex items-center">
-            <Button
-              size="sm"
-              className={`bg-[#285992] hover:bg-[#154781] text-white font-semibold rounded-full text-sm shadow-md shadow-blue-900/20 hover:shadow-lg hover:shadow-blue-900/30 hover:-translate-y-px transition-all duration-300 ${
-                isScrolled ? "px-4 py-[7px]" : "px-5 py-5"
-              }`}
-            >
-              Agendar uma demonstração
-            </Button>
+            <PremiumCTAButton label="Agendar uma demonstração" />
           </div>
 
           {/* Mobile toggle */}
@@ -390,7 +384,7 @@ function Header() {
                     key={item.href}
                     to={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`block px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    className={`block px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased transition-colors ${
                       isActiveRoute(location.pathname, item.href)
                         ? "text-blue-600 bg-blue-50"
                         : "text-slate-700 hover:bg-slate-50"
@@ -404,7 +398,7 @@ function Header() {
                 <div>
                   <button
                     onClick={() => setIsMobileSoftwaresOpen((v) => !v)}
-                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased text-slate-700 hover:bg-slate-50 transition-colors"
                   >
                     Softwares hoteleiro
                     <ChevronDown
@@ -431,7 +425,7 @@ function Header() {
                                 key={item.href}
                                 to={item.href}
                                 onClick={() => setIsMobileOpen(false)}
-                                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                                className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-mono text-sm tracking-wide text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors"
                               >
                                 <div
                                   className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${item.iconClass}`}
@@ -453,7 +447,7 @@ function Header() {
                     key={item.href}
                     to={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`block px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
+                    className={`block px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased transition-colors ${
                       isActiveRoute(location.pathname, item.href)
                         ? "text-blue-600 bg-blue-50"
                         : "text-slate-700 hover:bg-slate-50"
@@ -464,7 +458,7 @@ function Header() {
                 ))}
 
                 <div className="pt-3 pb-1 border-t border-slate-100">
-                  <Button className="w-full bg-[#1e3a5f] hover:bg-[#16304f] text-white font-semibold rounded-full">
+                  <Button className="w-full bg-[#1e3a5f] hover:bg-[#16304f] text-white font-mono text-sm uppercase tracking-widest antialiased rounded-full">
                     Fale com um consultor
                   </Button>
                 </div>

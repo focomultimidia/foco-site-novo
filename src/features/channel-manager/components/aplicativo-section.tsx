@@ -189,7 +189,7 @@ function AplicativoSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-white mb-4 leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white mb-4 leading-none tracking-tighter antialiased mb-4">
             O <span className="text-blue-300">aplicativo para hotel</span> que
             facilita a sua gestão de tarifas e reservas
           </h2>

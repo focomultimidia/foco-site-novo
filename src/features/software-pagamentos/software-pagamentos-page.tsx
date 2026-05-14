@@ -3,9 +3,10 @@
 import { useSoftwarePagamentosPage } from "./hooks/use-software-pagamentos-page";
 import {
   HeroSection,
-  OQueESection,
   MeiosPagamentoSection,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -61,7 +62,7 @@ function SoftwarePagamentosPage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é o Foco Pay */}
-      <OQueESection />
+      <GenericInfoSection {...INFO_SECTIONS.softwarePagamentos} imageSide="right" />
 
       {/* Section 3: Meios de Pagamento */}
       <MeiosPagamentoSection />

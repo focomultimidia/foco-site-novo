@@ -3,12 +3,13 @@
 import { useChannelManagerPage } from "./hooks/use-channel-manager-page";
 import {
   HeroSection,
-  OQueESection,
   VantagensSection,
   AplicativoSection,
   RecursosSection,
   ChannelManagerFlow,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -25,7 +26,6 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
-
 
 function ChannelManagerPage() {
   const { data, isLoading, isError, refetch } = useChannelManagerPage();
@@ -61,11 +61,12 @@ function ChannelManagerPage() {
 
   return (
     <div className="space-y-0">
+
       {/* Section 1: Hero */}
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é um gestor de canais */}
-      <OQueESection />
+      <GenericInfoSection {...INFO_SECTIONS.channelManager} imageSide="right" />
 
       {/* Section 3: Fluxo de sincronização */}
       <ChannelManagerFlow />

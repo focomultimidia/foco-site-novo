@@ -53,7 +53,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
             <span>Eventos</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Presença da Foco nas principais{" "}
             <span className="text-blue-500">Feiras de Hotelaria</span>
           </h2>

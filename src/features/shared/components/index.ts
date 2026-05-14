@@ -1,4 +1,8 @@
 export { SoftwareProductsCarousel } from "./software-products-carousel";
+export { ProductShowcase } from "./product-showcase";
+export type { ProductShowcaseProps, ProdutoData } from "./product-showcase";
+export { GenericInfoSection } from "./generic-info-section";
+export type { GenericInfoSectionProps } from "./generic-info-section";
 export { WebsitePortfolioCarousel } from "./website-portfolio-carousel";
 export { TrustedLogosMarquee } from "./trusted-logos-marquee";
 export { SmartIntegrationsTabs } from "./smart-integrations-tabs";

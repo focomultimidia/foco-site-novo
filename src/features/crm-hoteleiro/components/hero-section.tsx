@@ -38,7 +38,9 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
       background={<InternalHeroBackground imageSrc="/assets/imgs/hero/bkg-modelos-sites3.png" />}
       badgeText={data.subtitulo}
       title={buildTitle(data.titulo)}
+      titleClassName="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#1a3a45] mb-4 leading-tight tracking-tight"
       description={data.descricao}
+      descriptionClassName="text-lg text-[#244248]/70 mb-8 leading-relaxed max-w-xl"
       primaryCTA={{ label: data.ctaPrimario, onClick: onCtaClick }}
       secondaryCTA={{ label: data.ctaSecundario }}
       slides={SLIDES}

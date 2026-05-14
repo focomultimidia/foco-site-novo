@@ -176,11 +176,11 @@ function IntegracoesSection({ categorias }: IntegracoesSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Potencialize seu hotel com{" "}
             <span className="text-blue-500">integrações inteligentes!</span>
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg font-light leading-relaxed max-w-2xl mx-auto">
             Estamos conectados com as principais tecnologias do ramo hoteleiro
             para maximizar sua operação e receita
           </p>
@@ -192,7 +192,7 @@ function IntegracoesSection({ categorias }: IntegracoesSectionProps) {
             {categorias.map((categoria) => {
               const Icon = iconMap[categoria.id] || Globe;
               const isActive = activeTab === categoria.id;
-              
+
               return (
                 <button
                   key={categoria.id}

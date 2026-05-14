@@ -133,7 +133,7 @@ function IntegracoesMarketingSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Integrações de marketing para atrair mais hóspedes e vender com inteligência
           </h2>
           <p className="text-gray-400 text-lg max-w-6xl mx-auto">

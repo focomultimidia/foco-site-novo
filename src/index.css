@@ -1,3 +1,8 @@
+/* Design System typography — Inter + Space Grotesk + JetBrains Mono
+   display=swap: previne FOIT (flash of invisible text).
+   Pesos alinhados ao design_system.html: 300-600 para display e sans, 400-500 mono. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -54,6 +59,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    /* Inter OpenType features: cv03 = open 6/9, cv04 = open 4, ss01 = alt digits */
+    font-feature-settings: "cv03", "cv04", "ss01";
   }
 }

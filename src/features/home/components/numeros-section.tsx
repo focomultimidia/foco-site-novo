@@ -70,9 +70,9 @@ function NumerosSection({ numeros }: NumerosSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-2">
-            Nossos <span className="text-blue-600">números</span> comprovam
-            nossa <span className="text-blue-600">excelência</span>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+            Nossos <span className="text-blue-500">números</span> comprovam
+            nossa <span className="text-blue-500">excelência</span>
           </h2>
         </motion.div>
 

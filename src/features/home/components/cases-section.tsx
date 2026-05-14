@@ -49,11 +49,11 @@ function CasesSection({ cases }: CasesSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             O que hoteleiros dizem sobre a{" "}
             <span className="text-blue-500">Foco</span>
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">
+          <p className="text-gray-500 text-lg font-light leading-relaxed max-w-xl mx-auto">
             Mais do que tecnologia, entregamos resultados reais. Conheça a
             opinião de quem já transformou seu hotel com as soluções da Foco.
           </p>

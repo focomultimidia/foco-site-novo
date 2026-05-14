@@ -94,7 +94,7 @@ function VideoTestimonialsCarousel({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl lg:text-4xl font-bold text-[#1E3A5F] mb-4"
+              className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4"
             >
               {title}
             </motion.h2>
@@ -104,7 +104,7 @@ function VideoTestimonialsCarousel({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-lg text-gray-600 max-w-2xl mx-auto"
+                className="text-gray-500 text-lg font-light leading-relaxed max-w-2xl mx-auto"
               >
                 {subtitle}
               </motion.p>

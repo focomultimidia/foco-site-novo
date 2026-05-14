@@ -136,7 +136,7 @@ const tabsData: TabData[] = [
 function LogoCard({ src, alt }: Logo) {
   return (
     <div className="flex items-center justify-center p-4 h-24 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-default select-none">
-      <img src={src} alt={alt} className="h-10 w-full object-contain" />
+      <img src={src} alt={alt} className="h-14 w-full object-contain" />
     </div>
   );
 }
@@ -153,7 +153,7 @@ function SmartIntegrationsTabs() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1e3a5f] mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Integrações que conectam todo o ecossistema hoteleiro
           </h2>
         </motion.div>
@@ -203,7 +203,7 @@ function SmartIntegrationsTabs() {
                   {tab.logos.map((logo) => (
                     <CarouselItem
                       key={logo.alt}
-                      className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5"
+                      className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
                     >
                       <LogoCard src={logo.src} alt={logo.alt} />
                     </CarouselItem>

@@ -3,13 +3,14 @@
 import { useMotorReservasPage } from "./hooks/use-motor-reservas-page";
 import {
   HeroSection,
-  OQueESection,
   VantagensSection,
   AumenteReservasSection,
   FuncionalidadesSection,
   IntegracoesMarketingSection,
   GerencieCelularSection,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -67,7 +68,7 @@ function MotorReservasPage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é um motor de reservas */}
-      <OQueESection />
+      <GenericInfoSection {...INFO_SECTIONS.motorReservas} imageSide="right" />
 
       {/* Prova Social: Cases de sucesso */}
       <TrustedLogosMarquee />

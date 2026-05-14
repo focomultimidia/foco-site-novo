@@ -84,7 +84,7 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
             Segurança & Compliance
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight mb-5">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white leading-none tracking-tighter antialiased mb-5">
             Sua operação protegida por
             <br />
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">

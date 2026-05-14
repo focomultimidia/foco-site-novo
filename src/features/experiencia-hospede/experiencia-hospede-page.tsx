@@ -10,6 +10,8 @@ import {
   CardapioDigitalSection,
   PorQueContratarSection,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -65,8 +67,8 @@ function ExperienciaHospedePage() {
       {/* Section 1: Hero */}
       <HeroSection data={data.hero} />
 
-      {/* Section 2: Foco Pass */}
-      <FocoPassSection />
+      {/* Section 2: O que é um motor de reservas */}
+      <GenericInfoSection {...INFO_SECTIONS.experienciaHospede} imageSide="right" />
 
       {/* Section 3: Recursos */}
       <RecursosSection />

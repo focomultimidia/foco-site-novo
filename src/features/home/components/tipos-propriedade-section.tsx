@@ -40,7 +40,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-5xl font-bold text-gray-900 mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             Não importa o{" "}
             <span className="text-blue-600">tamanho da sua propriedade</span>,
             <br />

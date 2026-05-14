@@ -3,10 +3,11 @@
 import { useGestaoHoteleiraPage } from "./hooks/use-gestao-hoteleira-page";
 import {
   HeroSection,
-  OQueESection,
   RecursosSection,
   PorQueContratarSection,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -63,7 +64,7 @@ function GestaoHoteleiraPage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é um sistema PMS */}
-      <OQueESection />
+      <GenericInfoSection {...INFO_SECTIONS.gestaoHoteleira} imageSide="right" />
 
       {/* Section 3: Recursos do PMS */}
       <RecursosSection />

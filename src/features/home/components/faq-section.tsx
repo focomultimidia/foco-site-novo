@@ -57,10 +57,10 @@ function FAQSection({ faq }: FAQSectionProps) {
                 <HelpCircle className="w-4 h-4" />
                 <span>FAQ</span>
               </div>
-              <h2 className="text-3xl sm:text-5xl font-bold text-[#1e3a5f] mb-2">
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
                 Perguntas e <span className="text-blue-500">respostas</span>
               </h2>
-              <p className="text-gray-500">
+              <p className="text-gray-500 text-lg font-light leading-relaxed">
                 Encontre respostas para as principais dúvidas sobre nossos serviços
               </p>
             </motion.div>

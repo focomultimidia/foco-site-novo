@@ -3,9 +3,10 @@
 import { useCrmHoteleiroPage } from "./hooks/use-crm-hoteleiro-page";
 import {
   HeroSection,
-  OQueESection,
   RecursosSection,
 } from "./components";
+import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
+import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
 import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
@@ -62,7 +63,7 @@ function CrmHoteleiroPage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é um CRM */}
-      <OQueESection />
+      <GenericInfoSection {...INFO_SECTIONS.crmHoteleiro} imageSide="right" />
 
       {/* Section 3: Recursos (com título/subtítulo customizado) */}
       <RecursosSection />
