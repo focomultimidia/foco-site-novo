@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function OQueESection() {
   return (
-    <section className="py-12 bg-white">
+    <section className="pb-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

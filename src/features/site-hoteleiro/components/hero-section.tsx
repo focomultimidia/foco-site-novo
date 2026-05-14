@@ -1,6 +1,7 @@
 "use client";
 
 import { BaseInternalHero } from "@/features/shared/components/base-internal-hero";
+import { InternalHeroBackground } from "@/features/shared/components/internal-hero-background";
 import type { HeroData } from "../types";
 
 interface HeroSectionProps {
@@ -9,11 +10,11 @@ interface HeroSectionProps {
 }
 
 const SLIDES = [
-  { desktopImage: "/assets/imgs/site-hoteleiro/1.png", mobileImage: "/assets/imgs/site-hoteleiro/1.png", label: "Busca de disponibilidade",  alt: "Busca de disponibilidade" },
-  { desktopImage: "/assets/imgs/site-hoteleiro/2.png", mobileImage: "/assets/imgs/site-hoteleiro/2.png", label: "Seleção de quarto",         alt: "Seleção de quarto" },
-  { desktopImage: "/assets/imgs/site-hoteleiro/3.png", mobileImage: "/assets/imgs/site-hoteleiro/3.png", label: "Checkout seguro",           alt: "Checkout seguro" },
-  { desktopImage: "/assets/imgs/site-hoteleiro/4.png", mobileImage: "/assets/imgs/site-hoteleiro/4.png", label: "Confirmação instantânea",   alt: "Confirmação instantânea" },
-  { desktopImage: "/assets/imgs/site-hoteleiro/5.png", mobileImage: "/assets/imgs/site-hoteleiro/5.png", label: "Painel do hoteleiro",       alt: "Painel do hoteleiro" },
+  { desktopImage: "/assets/imgs/site-hoteleiro/1.png", mobileImage: "/assets/imgs/site-hoteleiro/site1.png", label: "Busca de disponibilidade",  alt: "Busca de disponibilidade" },
+  { desktopImage: "/assets/imgs/site-hoteleiro/2.png", mobileImage: "/assets/imgs/site-hoteleiro/site2.png", label: "Seleção de quarto",         alt: "Seleção de quarto" },
+  { desktopImage: "/assets/imgs/site-hoteleiro/3.png", mobileImage: "/assets/imgs/site-hoteleiro/site3.png", label: "Checkout seguro",           alt: "Checkout seguro" },
+  { desktopImage: "/assets/imgs/site-hoteleiro/4.png", mobileImage: "/assets/imgs/site-hoteleiro/site4.png", label: "Confirmação instantânea",   alt: "Confirmação instantânea" },
+  { desktopImage: "/assets/imgs/site-hoteleiro/5.png", mobileImage: "/assets/imgs/site-hoteleiro/site1.png", label: "Painel do hoteleiro",       alt: "Painel do hoteleiro" },
 ];
 
 function buildTitle(raw: string) {
@@ -34,6 +35,7 @@ function buildTitle(raw: string) {
 function HeroSection({ data, onCtaClick }: HeroSectionProps) {
   return (
     <BaseInternalHero
+      background={<InternalHeroBackground imageSrc="/assets/imgs/hero/bkg-modelos-sites3.png" />}
       badgeText={data.subtitulo}
       title={buildTitle(data.titulo)}
       description={data.descricao}

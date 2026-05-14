@@ -326,8 +326,8 @@ const ReturnPulse = forwardRef<ReturnPulseHandle, {
 
 // ─── Contact Effects Overlay ──────────────────────────────────────────────────
 function ContactEffectsOverlay({
-  contactId, width, height, borderRadius,
-}: { contactId: number; width: number; height: number; borderRadius: number }) {
+  contactId, width, height, borderRadius, traceBorder = true,
+}: { contactId: number; width: number; height: number; borderRadius: number; traceBorder?: boolean }) {
   if (width === 0 || height === 0) return null;
 
   const minSide = Math.min(width, height);
@@ -411,23 +411,23 @@ function ContactEffectsOverlay({
             />
           </div>
 
-          {/* Border trace — exact perimeter path with M/L/A commands */}
-          <svg style={{
-            position: "absolute", top: -2, left: -2,
-            width: svgW, height: svgH,
-            overflow: "visible", pointerEvents: "none",
-          }}>
-            {isCircle ? (
-              // True circles (Hotel card, Foco card): use <circle> for geometric perfection
-              <motion.circle
-                cx={svgW / 2} cy={svgH / 2} r={circleR + 1}
-                {...strokeProps}
-              />
-            ) : (
-              // Pills & rounded rects: explicit M/L/A path traces the exact perimeter
-              <motion.path d={rectPath} {...strokeProps} />
-            )}
-          </svg>
+          {/* Border trace — skipped when traceBorder={false} (hub card) */}
+          {traceBorder && (
+            <svg style={{
+              position: "absolute", top: -2, left: -2,
+              width: svgW, height: svgH,
+              overflow: "visible", pointerEvents: "none",
+            }}>
+              {isCircle ? (
+                <motion.circle
+                  cx={svgW / 2} cy={svgH / 2} r={circleR + 1}
+                  {...strokeProps}
+                />
+              ) : (
+                <motion.path d={rectPath} {...strokeProps} />
+              )}
+            </svg>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
@@ -728,7 +728,7 @@ const Hub = forwardRef<HubHandle, object>(function Hub(_props, ref) {
           <span className="text-[9px] text-green-400/55 uppercase tracking-[0.18em] font-medium">Ao vivo</span>
         </div>
 
-        <ContactEffectsOverlay contactId={contactId} width={dims.width} height={dims.height} borderRadius={16} />
+        <ContactEffectsOverlay contactId={contactId} width={dims.width} height={dims.height} borderRadius={16} traceBorder={false} />
       </div>
     </motion.div>
   );
@@ -877,10 +877,10 @@ export function ChannelManagerFlow() {
             Sincronização em Tempo Real
           </p>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
-            Dados fluindo em <span className="text-blue-500">perfeita sincronia</span>{" "}
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#fff] mb-4 leading-tight">
+            Conexão mais <span className="text-blue-500">premiada</span>{" "} do Brasil. Dados fluindo em <span className="text-blue-500">perfeita sincronia</span>{" "}
           </h2>
-          <p className="text-gray-500 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-6xl mx-auto">
             Nosso Channel manager centraliza e sincroniza automaticamente todas as informações do seu hotel com os principais canais de venda.
           </p>
         </motion.div>

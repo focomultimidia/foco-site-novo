@@ -5,7 +5,9 @@
       "Bash(ls -d /c/Users/55719/Documents/www/novo-site-foco/src/features/*/)",
       "Bash(git restore *)",
       "Bash(Select-String -Path \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\*\\\\types\\\\index.ts\" -Pattern \"ctaSecundario|HeroData\")",
-      "Bash(Select-Object Filename, LineNumber, Line)"
+      "Bash(Select-Object Filename, LineNumber, Line)",
+      "Bash(del \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\shared\\\\components\\\\hero-layout.tsx\")",
+      "Bash(del \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\shared\\\\components\\\\default-hero-background.tsx\")"
     ]
   }
 }
