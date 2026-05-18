@@ -36,7 +36,7 @@ function buildTitle(title: string, highlight?: string): React.ReactNode {
   return (
     <>
       {title.slice(0, idx)}
-      <span className="text-blue-500">{highlight}</span>
+      <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">{highlight}</span>
       {title.slice(idx + highlight.length)}
     </>
   );

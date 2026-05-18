@@ -878,7 +878,7 @@ export function ChannelManagerFlow() {
           </p>
 
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#fff] leading-none tracking-tighter antialiased mb-4">
-            Conexão mais <span className="text-blue-500">premiada</span>{" "} do Brasil. Dados fluindo em <span className="text-blue-500">perfeita sincronia</span>{" "}
+            Conexão mais <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">premiada</span>{" "} do Brasil. Dados fluindo em <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">perfeita sincronia</span>{" "}
           </h2>
           <p className="text-gray-500 text-lg max-w-6xl mx-auto">
             Nosso Channel manager centraliza e sincroniza automaticamente todas as informações do seu hotel com os principais canais de venda.

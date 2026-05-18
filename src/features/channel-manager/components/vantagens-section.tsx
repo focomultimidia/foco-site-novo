@@ -293,12 +293,12 @@ function VantagensSection() {
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Vantagens do{" "}
-            <span className="text-blue-500">gestor de canais</span>{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">gestor de canais</span>{" "}
             para hotéis e pousadas
           </h2>
           <p className="text-gray-500 text-lg font-light leading-relaxed max-w-4xl mx-auto">
             O nosso{" "}
-            <span className="text-blue-500 font-medium">software de hotelaria</span>{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent font-medium">software de hotelaria</span>{" "}
             permite que você distribua as acomodações em centenas de canais,
             aumentando sua taxa de ocupação, reduzindo os riscos de overbooking e
             otimizando o trabalho da equipe de reservas do seu hotel.

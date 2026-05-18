@@ -57,7 +57,6 @@ const STATS = [
   { icon: Users,      value: "+2.500", label: "Clientes ativos",     iconBg: "bg-blue-500/20",    iconColor: "text-blue-300"    },
   { icon: TrendingUp, value: "+1B",    label: "Transações/ano",      iconBg: "bg-emerald-500/20", iconColor: "text-emerald-300" },
   { icon: Calendar,   value: "+18",    label: "Anos de experiência", iconBg: "bg-orange-500/20",  iconColor: "text-orange-300"  },
-  { icon: Smile,      value: "+2.4k",  label: "Clientes satisfeitos",iconBg: "bg-rose-500/20",    iconColor: "text-rose-300"    },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -351,7 +350,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md border border-white/20 text-white/90 px-5 py-2.5 rounded-full text-sm font-medium mb-7"
             >
               <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-              Sistema completo para hotelaria
+              Ecossistema completo para hotelaria
             </motion.div>
 
             {/* Título — Space Grotesk via font-display */}
@@ -359,14 +358,12 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               initial={{ opacity: 0, y: 36, filter: "blur(16px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
-              className="font-display text-5xl sm:text-6xl lg:text-[4.5rem] font-medium text-white leading-none tracking-tighter antialiased mb-6"
+              className="font-display text-5xl sm:text-6xl lg:text-[3.5rem] font-normal text-white leading-none tracking-tighter antialiased mb-4"
             >
-              10 sistemas
-              <br />
-              hoteleiros em um{" "}
+              Tecnologia hoteleira integrada em uma{" "}
               <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-blue-500 to-cyan-200 bg-clip-text text-transparent">
-                único software
+              <span className="bg-gradient-to-r from-[#fecc29] to-[#fcdf82] bg-clip-text text-transparent">
+                 única plataforma.
               </span>
             </motion.h1>
 
@@ -391,7 +388,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
             >
               <button
                 onClick={onCtaClick}
-                className="group flex items-center gap-2 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-blue-600/40 hover:shadow-blue-500/50 hover:-translate-y-0.5"
+                className="group flex items-center gap-2 bg-gradient-to-t from-[#285992] to-[#427ab9] text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#000]/50 hover:shadow-[#000]/20 hover:-translate-y-0.5"
               >
                 Demonstração grátis
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

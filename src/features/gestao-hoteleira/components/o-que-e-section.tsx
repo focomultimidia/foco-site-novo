@@ -14,8 +14,8 @@ function OQueESection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
-            O que é um <span className="text-blue-500">sistema para hotéis</span>{" "}
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+            O que é um <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">sistema para hotéis</span>{" "}
             com foco em gestão hoteleira?
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">

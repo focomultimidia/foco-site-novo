@@ -55,7 +55,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
 
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Presença da Foco nas principais{" "}
-            <span className="text-blue-500">Feiras de Hotelaria</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Feiras de Hotelaria</span>
           </h2>
         </motion.div>
 

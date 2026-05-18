@@ -43,7 +43,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             Por que contratar o channel manager da
             <br />
-            <span className="text-blue-500">Foco Tecnologia</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Foco Tecnologia</span>
           </h2>
         </motion.div>
 

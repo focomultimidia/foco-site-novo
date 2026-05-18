@@ -42,7 +42,7 @@ function AprovacaoSection() {
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4">
             Clientes que{" "}
-            <span className="text-blue-500">confiam e aprovam</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">confiam e aprovam</span>
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
             Histórias reais de hoteleiros que transformaram seus negócios

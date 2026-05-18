@@ -12,4 +12,3 @@ export { CasesSection } from "./cases-section";
 export { SegurancaSection } from "./seguranca-section";
 export { TiposPropriedadeSection } from "./tipos-propriedade-section";
 export { NumerosSection } from "./numeros-section";
-export { FAQSection } from "./faq-section";

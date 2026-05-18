@@ -106,7 +106,7 @@ const CARD_TRANSITION = { duration: 0.45, ease: [0.25, 0.1, 0.25, 1] } as const;
 // Initial:  generous horizontal padding for the full-width transparent state.
 const rowVariants = {
   initial:  { paddingTop: 20, paddingBottom: 20, paddingLeft: 32, paddingRight: 32 },
-  floating: { paddingTop: 15, paddingBottom: 15, paddingLeft: 15, paddingRight: 15 },
+  floating: { paddingTop: 15, paddingBottom: 15, paddingLeft: 25, paddingRight: 15 },
 };
 
 // cardVariants only handles visual properties.
@@ -216,7 +216,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"
@@ -240,7 +240,7 @@ function Header() {
               onMouseLeave={scheduleMegamenuClose}
             >
               <button
-                className={`relative flex items-center gap-1 px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative flex items-center gap-1 px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
                 }`}
               >
@@ -306,7 +306,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 font-mono text-sm uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"

@@ -301,7 +301,7 @@ function GerencieCelularSection() {
         >
           <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold text-[#1e3a5f] mb-4 leading-tight tracking-tight">
             Gerencie seu motor de reservas pelo{" "}
-            <span className="text-blue-500">celular</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">celular</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto font-light leading-relaxed">
             Acesse os principais recursos da extranet diretamente do seu smartphone.

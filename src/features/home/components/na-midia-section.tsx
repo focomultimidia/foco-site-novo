@@ -54,8 +54,8 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
           </div>
 
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
-            Reconhecidos pela <span className="text-blue-500">mídia</span>, escolhidos pelos{" "}
-            <span className="text-blue-500">hoteleiros</span>
+            Reconhecidos pela <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">mídia</span>, escolhidos pelos{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">hoteleiros</span>
           </h2>
           <p className="text-gray-500 text-lg font-light leading-relaxed max-w-5xl mx-auto">
             As principais publicações do setor destacam nossos sistemas como

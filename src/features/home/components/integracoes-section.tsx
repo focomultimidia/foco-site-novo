@@ -178,7 +178,7 @@ function IntegracoesSection({ categorias }: IntegracoesSectionProps) {
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Potencialize seu hotel com{" "}
-            <span className="text-blue-500">integrações inteligentes!</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">integrações inteligentes!</span>
           </h2>
           <p className="text-gray-500 text-lg font-light leading-relaxed max-w-2xl mx-auto">
             Estamos conectados com as principais tecnologias do ramo hoteleiro

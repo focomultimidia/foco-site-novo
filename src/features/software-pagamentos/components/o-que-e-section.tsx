@@ -14,7 +14,7 @@ function OQueESection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             O que é o <span className="text-[#00838F]">Foco Pay</span>?
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">

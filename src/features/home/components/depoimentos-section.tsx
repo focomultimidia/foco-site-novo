@@ -48,7 +48,7 @@ function DepoimentosSection({ depoimentos }: DepoimentosSectionProps) {
           className="text-center mb-12"
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
-            Quem usa, <span className="text-blue-500">aprova</span> e comprova resultados
+            Quem usa, <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">aprova</span> e comprova resultados
           </h2>
           <p className="text-gray-500 text-lg font-light leading-relaxed max-w-xl mx-auto">
             Junte-se a mais de 2.000 hoteleiros que escolheram a Foco para

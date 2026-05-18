@@ -14,10 +14,10 @@ function PareComissoesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.5rem] font-bold text-[#1e3a5f] mb-4 leading-tight">
-            <span className="text-blue-500">Pare de pagar</span> comissões
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Pare de pagar</span> comissões
             altas, aumente sua lucratividade com{" "}
-            <span className="text-blue-500">reservas diretas</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">reservas diretas</span>
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">
             Conquiste a independência das OTAs e garanta que 100% da sua receita
