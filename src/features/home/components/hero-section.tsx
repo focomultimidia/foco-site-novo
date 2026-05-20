@@ -10,7 +10,6 @@ import {
   Users,
   TrendingUp,
   Calendar,
-  Smile,
 } from "lucide-react";
 import type { HeroData } from "../types";
 

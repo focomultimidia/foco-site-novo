@@ -3,7 +3,6 @@
 import { useExperienciaHospedePage } from "./hooks/use-experiencia-hospede-page";
 import {
   HeroSection,
-  FocoPassSection,
   RecursosSection,
   VantagensSection,
   ParaQuemSection,

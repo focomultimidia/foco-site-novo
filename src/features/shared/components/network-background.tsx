@@ -87,6 +87,7 @@ function NetworkBackground() {
     }
 
     function resize() {
+      if (!canvas) return;
       const w = canvas.offsetWidth;
       const h = canvas.offsetHeight;
       if (!w || !h) return;
@@ -124,6 +125,7 @@ function NetworkBackground() {
     // ── Mouse tracking ────────────────────────────────────────────────────────
 
     function onMouseMove(e: MouseEvent) {
+      if (!canvas) return;
       const r = canvas.getBoundingClientRect();
       mouseRef.current = {
         nx: Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width)  * 2 - 1)),
@@ -138,6 +140,7 @@ function NetworkBackground() {
     // ── Draw loop ─────────────────────────────────────────────────────────────
 
     function draw() {
+      if (!canvas || !ctx) return;
       const { width: W, height: H } = canvas;
       const { nx, ny } = mouseRef.current;
       ctx.clearRect(0, 0, W, H);

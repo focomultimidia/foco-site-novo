@@ -11,7 +11,8 @@
       "Bash(pnpm add *)",
       "Bash(dir \"C:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\assets\" /b)",
       "Bash(git checkout *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(pnpm build *)"
     ]
   }
 }
