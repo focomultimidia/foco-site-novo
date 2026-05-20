@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ── Data (preserved exactly) ──────────────────────────────────────────────────
-
+// ── Data ──────────────────────────────────────────────────────────────────────
 const VANTAGENS = [
   {
     numero: "01",
@@ -64,21 +63,23 @@ const VANTAGENS = [
   },
 ];
 
-// ── Spring — cinematic inertia: sub-amortecida com peso real ─────────────────
-// mass: 1.2 → aumenta a inércia (o card sente mais "pesado" ao acelerar)
-// stiffness: 150, damping: 25 → ζ = 25/(2×√(150×1.2)) = 25/26.83 ≈ 0.93
-// Levemente sub-amortecido: assentamento em ~380ms com overshoot imperceptível.
-const SPRING = { type: "spring" as const, stiffness: 150, damping: 25, mass: 1.2, restDelta: 0.001 };
-
-// ── Sentence-case helper ──────────────────────────────────────────────────────
-// Os dados estão em caixa alta; exibimos com capitalização de frase.
+// ── Helpers ───────────────────────────────────────────────────────────────────
 const sc = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
 
+// ── AccordionPanel ────────────────────────────────────────────────────────────
+/*
+  Architecture decision — WHY a plain <div> instead of <motion.div layout>:
 
-// ══════════════════════════════════════════════════════════════════════════════
-// ACCORDION PANEL
-// ══════════════════════════════════════════════════════════════════════════════
+  Framer Motion's `layout` animates size changes via transform: scaleX/scaleY.
+  That scale is applied to the *entire subtree*, causing text to blur and squish
+  during the animation — impossible to fully compensate even with layoutId tricks.
 
+  The fix: animate `flex` (the width ratio) with a plain CSS transition.
+  The browser changes the box dimensions directly, no transform involved.
+  Text is ALWAYS at 100 % its natural size and never gets rasterised at a
+  different resolution. Content layers are position:absolute so they fill the
+  panel at every frame without layout shift.
+*/
 interface PanelProps {
   item: (typeof VANTAGENS)[number];
   isActive: boolean;
@@ -87,98 +88,99 @@ interface PanelProps {
 
 function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
   return (
-    <motion.div
-      layout
+    /*
+      CSS `flex` transition — expo.out feel (cubic-bezier(0.16,1,0.3,1)):
+        · Starts fast (panel snaps open decisively)
+        · Decelerates smoothly near the end (natural inertia)
+        · Zero scale transforms → zero text distortion
+    */
+    <div
       className="relative overflow-hidden cursor-pointer select-none"
       style={{
         flex: isActive ? "6 1 0%" : "1 1 0%",
-        willChange: "transform",
-        // borderRadius como inline style é obrigatório para que o Framer Motion
-        // aplique a correção de escala inversa (inverse-scale correction) durante
-        // a animação layout. Com apenas a classe rounded-2xl o Framer Motion não
-        // consegue ler o valor computado e os cantos se distorcem.
         borderRadius: 16,
+        transition:
+          "flex 550ms cubic-bezier(0.16, 1, 0.3, 1), " +
+          "filter 550ms cubic-bezier(0.16, 1, 0.3, 1)",
+        willChange: "flex",
         filter: isActive
           ? "drop-shadow(0 12px 28px rgba(40,89,146,0.14)) drop-shadow(0 4px 8px rgba(36,66,72,0.08))"
           : "drop-shadow(0 4px 16px rgba(36,42,82,0.22))",
       }}
-      transition={SPRING}
       onMouseEnter={onEnter}
     >
-      {/* ── Layer A: gradiente azul — base do estado fechado ───────────── */}
-      {/* Fica sempre presente; Layer B sobrepõe quando isActive. */}
+      {/* ── Layer A: blue gradient — always present ──────────────────────── */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#285992] to-[#4876ab]" />
 
-      {/* ── Layer B: glassmorphism — cross-fade ao abrir ─────────────────── */}
-      <motion.div
+      {/* ── Layer B: white overlay — CSS transition, no Framer Motion ───── */}
+      <div
         className="absolute inset-0 bg-white"
-        animate={{ opacity: isActive ? 1 : 0 }}
-        transition={{ duration: 0.35 }}
+        style={{
+          opacity: isActive ? 1 : 0,
+          transition: "opacity 350ms ease",
+        }}
       />
 
-      {/* ── Bevel: visível só no card aberto ────────────────────────────── */}
-      <motion.div
+      {/* ── Bevel: inner border ring ─────────────────────────────────────── */}
+      <div
         className="absolute inset-0 rounded-2xl pointer-events-none"
-        animate={{
+        style={{
           boxShadow: isActive
             ? "inset 0 0 0 1px rgba(255,255,255,0.80)"
             : "inset 0 0 0 0px rgba(255,255,255,0)",
+          transition: "box-shadow 300ms ease",
         }}
-        transition={{ duration: 0.3 }}
       />
 
-      {/* ── Outer border: só no card aberto ─────────────────────────────── */}
-      <motion.div
+      {/* ── Outer border ─────────────────────────────────────────────────── */}
+      <div
         className="absolute inset-0 rounded-2xl border pointer-events-none"
-        animate={{
-          borderColor: isActive
-            ? "rgba(40,89,146,0.22)"
-            : "rgba(0,0,0,0)",
+        style={{
+          borderColor: isActive ? "rgba(40,89,146,0.22)" : "rgba(0,0,0,0)",
+          transition: "border-color 300ms ease",
         }}
-        transition={{ duration: 0.3 }}
       />
 
-      {/* ── Top-edge highlight on active card ───────────────────────────── */}
-      <motion.div
+      {/* ── Top-edge highlight ───────────────────────────────────────────── */}
+      <div
         className="absolute inset-x-0 top-0 h-px pointer-events-none"
-        animate={{
+        style={{
           background: isActive
             ? "linear-gradient(90deg,transparent,rgba(40,89,146,0.35) 40%,rgba(100,160,255,0.5) 60%,transparent)"
             : "transparent",
+          transition: "background 400ms ease",
         }}
-        transition={{ duration: 0.4 }}
       />
 
       {/* ── Content ─────────────────────────────────────────────────────── */}
+      {/*
+        Both states are position:absolute so they never affect the panel's
+        layout — the panel width is driven purely by `flex` above.
+      */}
       <div className="relative z-10 h-full">
         <AnimatePresence mode="wait" initial={false}>
 
           {isActive ? (
-            // ── OPEN STATE ─────────────────────────────────────────────────
+            // ── OPEN STATE ───────────────────────────────────────────────
             <motion.div
               key="open"
               className="absolute inset-0 flex flex-col p-7 xl:p-9"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.18, delay: 0.10 }}
+              transition={{ duration: 0.18, delay: 0.12 }}
             >
               {/* Watermark number — decorative, very low opacity */}
               <span
                 aria-hidden="true"
-                className="
-                  absolute right-0 bottom-0
-                  font-black text-[#285992]/[0.04]
-                  select-none pointer-events-none leading-none
-                "
+                className="absolute right-0 bottom-0 font-black text-[#285992]/[0.04] select-none pointer-events-none leading-none"
                 style={{ fontSize: "clamp(90px, 14vw, 160px)" }}
               >
                 {item.numero}
               </span>
 
-              {/* ── Top block ─────────────────────────────────────────────── */}
+              {/* Badge + separator */}
               <div>
-                {/* Badge + separator */}
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-11 h-11 rounded-2xl bg-[#285992] flex items-center justify-center shrink-0 shadow-lg shadow-[#285992]/30">
                     <span className="text-white font-mono text-xs uppercase tracking-widest">
@@ -188,12 +190,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
                   <div className="h-px flex-1 bg-gradient-to-r from-[#285992]/30 via-[#285992]/10 to-transparent" />
                 </div>
 
-                {/* Title — sentence case, máximo impacto tipográfico */}
-                <h3 className="
-                  font-display font-semibold leading-none tracking-tighter text-[#1e3a5f] antialiased
-                  text-4xl xl:text-5xl
-                  mb-0
-                ">
+                <h3 className="font-display font-semibold leading-none tracking-tighter text-[#1e3a5f] antialiased text-4xl xl:text-5xl">
                   {sc(item.titulo)}
                 </h3>
               </div>
@@ -201,7 +198,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               {/* Thin separator */}
               <div className="my-5 h-px bg-gradient-to-r from-[#285992]/15 to-transparent" />
 
-              {/* ── Description — fade-in + slide-up ──────────────────────── */}
+              {/* Description — slides up after panel is mostly open */}
               <motion.p
                 className="text-gray-500 text-base font-light leading-relaxed flex-1"
                 initial={{ opacity: 0, y: 10 }}
@@ -213,9 +210,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
             </motion.div>
 
           ) : (
-            // ── CLOSED STATE ─────────────────────────────────────────────────
-            // Title: âncora no topo, flui para baixo em writing-mode vertical.
-            // Número: pill-tag minimalista no rodapé — detalhe de joalheria.
+            // ── CLOSED STATE ─────────────────────────────────────────────
             <motion.div
               key="closed"
               className="absolute inset-0 flex flex-col"
@@ -224,40 +219,19 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
-              {/* ── Title — top-anchored, flows downward ─────────────────────
-                  flex justify-center: centers the column horizontally.
-                  items-start: anchors to the top so the text reads from
-                  the very beginning of the available space.
-                  pt-6: luxurious breathing room from the card's top edge.
-              */}
+              {/* Title — vertical writing, anchored to the top */}
               <div className="flex-1 overflow-hidden flex justify-center items-start pt-6">
                 <div style={{ writingMode: "vertical-rl" }}>
-                  <span className="
-                    font-display font-semibold text-white antialiased
-                    tracking-tighter leading-none
-                    text-xl
-                  ">
+                  <span className="font-display font-semibold text-white antialiased tracking-tighter leading-none text-xl">
                     {sc(item.titulo)}
                   </span>
                 </div>
               </div>
 
-              {/* ── Number pill-tag — bottom anchor ──────────────────────────
-                  font-light para contrastar com o peso do título acima.
-                  backdrop-blur-sm + border-white/20 = toque de joalheria tech.
-              */}
+              {/* Number pill-tag — bottom anchor */}
               <div className="shrink-0 flex justify-center pb-5">
-                <div className="
-                  inline-flex items-center
-                  rounded-full px-2.5 py-2.5
-                  border border-white/20
-                  bg-white/10
-                ">
-                  <span className="
-                    font-mono text-[10px] uppercase
-                    text-white/60
-                    tracking-widest
-                  ">
+                <div className="inline-flex items-center rounded-full px-2.5 py-2.5 border border-white/20 bg-white/10">
+                  <span className="font-mono text-[10px] uppercase text-white/60 tracking-widest">
                     {item.numero}
                   </span>
                 </div>
@@ -267,16 +241,12 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
 
         </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// SECTION
-// ══════════════════════════════════════════════════════════════════════════════
-
+// ── Section ───────────────────────────────────────────────────────────────────
 function VantagensSection() {
-  // Inicia com o primeiro card aberto; reverte para ele ao sair do container.
   const [hoveredIdx, setHoveredIdx] = useState(0);
 
   return (
@@ -293,12 +263,16 @@ function VantagensSection() {
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Vantagens do{" "}
-            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">gestor de canais</span>{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+              gestor de canais
+            </span>{" "}
             para hotéis e pousadas
           </h2>
           <p className="text-gray-500 text-lg font-light leading-relaxed max-w-4xl mx-auto">
             O nosso{" "}
-            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent font-medium">software de hotelaria</span>{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent font-medium">
+              software de hotelaria
+            </span>{" "}
             permite que você distribua as acomodações em centenas de canais,
             aumentando sua taxa de ocupação, reduzindo os riscos de overbooking e
             otimizando o trabalho da equipe de reservas do seu hotel.
@@ -306,8 +280,8 @@ function VantagensSection() {
         </motion.div>
 
         {/* ════════════════════════════════════════════════════════════════
-            DESKTOP — Acordeão horizontal (lg+)
-            onMouseLeave no container evita flicker ao mover entre painéis.
+            DESKTOP — Horizontal accordion (lg+)
+            onMouseLeave reverts to the first panel to avoid stuck states.
         ════════════════════════════════════════════════════════════════ */}
         <div
           className="hidden lg:flex gap-2 h-[430px]"
@@ -324,7 +298,7 @@ function VantagensSection() {
         </div>
 
         {/* ════════════════════════════════════════════════════════════════
-            MOBILE — Lista vertical (< lg)
+            MOBILE — Vertical list (< lg)
         ════════════════════════════════════════════════════════════════ */}
         <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
           {VANTAGENS.map((vantagem, index) => (
@@ -334,14 +308,7 @@ function VantagensSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: (index % 2) * 0.07 }}
-              className="
-                relative overflow-hidden
-                bg-white/90 backdrop-blur-xl
-                border border-gray-200/70
-                rounded-2xl p-6
-                shadow-[0_4px_16px_rgba(36,66,72,0.07)]
-                ring-1 ring-white/70
-              "
+              className="relative overflow-hidden bg-white/90 backdrop-blur-xl border border-gray-200/70 rounded-2xl p-6 shadow-[0_4px_16px_rgba(36,66,72,0.07)] ring-1 ring-white/70"
             >
               <span
                 aria-hidden="true"

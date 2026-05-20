@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// ── Data ──────────────────────────────────────────────────────────────────────
+// ── Data (original — unchanged) ───────────────────────────────────────────────
 const EXPERIENCIAS = [
   {
     titulo: "Design que converte",
@@ -41,26 +41,42 @@ const EXPERIENCIAS = [
 function ExperienciasSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [loopKey, setLoopKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
-  // Autoplay — advances every 3.5 s. Resets the timer whenever the user
-  // clicks manually (loopKey increment triggers a fresh setInterval).
+  // Start/stop autoplay based on viewport visibility.
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay — only runs while the section is visible.
+  useEffect(() => {
+    if (!isVisible) return;
     const id = setInterval(() => {
       setActiveIndex(prev => (prev + 1) % EXPERIENCIAS.length);
     }, 3500);
     return () => clearInterval(id);
-  }, [loopKey]);
+  }, [loopKey, isVisible]);
 
   const handleSelect = (i: number) => {
     setActiveIndex(i);
-    setLoopKey(k => k + 1); // restart the 3.5 s countdown from now
+    setLoopKey(k => k + 1);
   };
 
+  const activeItem = EXPERIENCIAS[activeIndex];
+
   return (
-    <section className="py-24 bg-white">
+    <section ref={sectionRef} className="py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Header ──────────────────────────────────────────────────── */}
+        {/* ── Header (original content) ──────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -76,7 +92,7 @@ function ExperienciasSection() {
           </h2>
         </motion.div>
 
-        {/* ── Smart TV Container ───────────────────────────────────────── */}
+        {/* ── Smart TV Container ──────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -89,10 +105,10 @@ function ExperienciasSection() {
         >
           <div className="flex flex-col lg:flex-row">
 
-            {/* ── Left: Controls (40%) ──────────────────────────────────── */}
+            {/* ── Left: Menu (40%) ──────────────────────────────────────── */}
             <div className="lg:w-2/5 p-6 lg:p-10 border-b lg:border-b-0 lg:border-r border-white/5">
 
-              {/* Mobile: horizontal scroll tabs */}
+              {/* Mobile: horizontal scroll tabs — text only, no icons */}
               <div
                 className="flex lg:hidden gap-2 pb-1 overflow-x-auto"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
@@ -113,22 +129,22 @@ function ExperienciasSection() {
                 ))}
               </div>
 
-              {/* Desktop: vertical menu with sliding indicator */}
-              <div className="hidden lg:flex flex-col gap-1">
+              {/* Desktop: vertical menu with sliding indicator — text only, no icons */}
+              <div className="hidden lg:flex flex-col gap-2">
                 {EXPERIENCIAS.map((item, i) => {
                   const isActive = activeIndex === i;
                   return (
                     <motion.button
                       key={i}
                       onClick={() => handleSelect(i)}
-                      className="relative flex items-start gap-3 text-left w-full rounded-xl px-3 py-3"
+                      className="relative flex items-center gap-3 text-left w-full rounded-xl px-4 py-4"
                       whileHover={{ x: isActive ? 0 : 3 }}
                       transition={{ duration: 0.15 }}
                     >
                       {/* Sliding glassmorphism highlight */}
                       {isActive && (
                         <motion.div
-                          layoutId="tv-highlight"
+                          layoutId="experiencias-highlight"
                           className="absolute inset-0 rounded-xl border border-white/20"
                           style={{
                             background: "rgba(255,255,255,0.06)",
@@ -139,44 +155,32 @@ function ExperienciasSection() {
                       )}
 
                       {/* Vertical bar — slides between items via layoutId */}
-                      <div className="relative flex-shrink-0 w-[2px] self-stretch rounded-full bg-white/30 mt-[3px]">
+                      <div className="relative flex-shrink-0 w-[2px] self-stretch rounded-full bg-white/20">
                         {isActive && (
                           <motion.div
-                            layoutId="tv-bar"
+                            layoutId="experiencias-bar"
                             className="absolute inset-0 rounded-full bg-white"
                             transition={{ type: "spring", stiffness: 380, damping: 36 }}
                           />
                         )}
                       </div>
 
-                      {/* Text */}
-                      <div className="flex-1 relative z-10 min-w-0">
-                        <span
-                          className="block font-display font-semibold text-[1.2rem] text-white tracking-tight leading-snug">
-                          {item.titulo}
-                        </span>
-
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.p
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                              className="text-sm text-white leading-relaxed mt-1.5 overflow-hidden"
-                            >
-                              {item.descricao}
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-                      </div>
+                      {/* Title only */}
+                      <span
+                        className="relative z-10 block font-display font-normal text-[1.2rem] tracking-tight leading-snug transition-colors duration-200"
+                        style={{
+                          color: isActive ? "white" : "rgba(255,255,255,0.60)",
+                        }}
+                      >
+                        {item.titulo}
+                      </span>
                     </motion.button>
                   );
                 })}
               </div>
 
-              {/* Dot progress indicators (desktop only) */}
-              <div className="hidden lg:flex items-center gap-2 mt-8">
+              {/* Dot progress indicators (desktop) */}
+              <div className="hidden lg:flex items-center gap-2 mt-6">
                 {EXPERIENCIAS.map((_, i) => (
                   <button
                     key={i}
@@ -184,10 +188,7 @@ function ExperienciasSection() {
                     className="h-[2px] rounded-full transition-all duration-300"
                     style={{
                       width: activeIndex === i ? 20 : 8,
-                      background:
-                        activeIndex === i
-                          ? "#60a5fa"
-                          : "rgba(255,255,255,0.12)",
+                      background: activeIndex === i ? "#60a5fa" : "rgba(255,255,255,0.12)",
                     }}
                   />
                 ))}
@@ -197,16 +198,16 @@ function ExperienciasSection() {
             {/* ── Right: Display (60%) ──────────────────────────────────── */}
             <div className="relative lg:w-3/5 aspect-[4/3] lg:aspect-auto lg:min-h-[460px]">
 
-              {/* Ambient glow behind image */}
+              {/* Ambient glow */}
               <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                   background:
-                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,89,146,0.2), transparent 75%)",
+                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,89,146,0.22), transparent 75%)",
                 }}
               />
 
-              {/* Image with fade + zoom on tab change */}
+              {/* Animated panel: title + description + image */}
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -214,12 +215,24 @@ function ExperienciasSection() {
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
                   transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 flex items-center justify-center p-6 lg:p-10"
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 lg:p-10"
                 >
+                  <div className="text-center">
+                    <h3
+                      className="font-display font-bold text-white text-xl lg:text-3xl tracking-tight leading-tight mb-2"
+                      style={{ textShadow: "0 2px 16px rgba(0,0,0,0.18)" }}
+                    >
+                      {activeItem.titulo}
+                    </h3>
+                    <p className="text-white/70 font-normal text-base leading-relaxed max-w-md mx-auto">
+                      {activeItem.descricao}
+                    </p>
+                  </div>
+
                   <img
-                    src={EXPERIENCIAS[activeIndex].imagem}
-                    alt={EXPERIENCIAS[activeIndex].titulo}
-                    className="max-w-full max-h-full object-contain rounded-xl drop-shadow-2xl"
+                    src={activeItem.imagem}
+                    alt={activeItem.titulo}
+                    className="w-full max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
                   />
                 </motion.div>
               </AnimatePresence>

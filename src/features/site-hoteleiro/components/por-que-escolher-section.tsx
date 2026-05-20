@@ -92,7 +92,7 @@ function ScreenAccordion() {
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 style={{
                   width: "100%", display: "flex", alignItems: "center",
-                  gap: 12, padding: "11px 0",
+                  gap: 12, padding: "15px 0",
                   background: "none", border: "none", cursor: "pointer", textAlign: "left",
                 }}
               >
@@ -104,7 +104,7 @@ function ScreenAccordion() {
                 }}>
                   <Icon style={{ width: 16, height: 16, color: isOpen ? "#285992" : "#94a3b8", transition: "color 0.22s ease" }} strokeWidth={1.7} />
                 </div>
-                <span style={{ flex: 1, fontSize: 15, fontWeight: 700, color: isOpen ? "#0f172a" : "#475569", lineHeight: 1.35, transition: "color 0.22s ease", textAlign: "center" }}>
+                <span style={{ flex: 1, fontSize: 18, fontWeight: 700, color: isOpen ? "#0f172a" : "#475569", lineHeight: 1.35, transition: "color 0.22s ease", textAlign: "left" }}>
                   {b.titulo}
                 </span>
                 <ChevronDown style={{ width: 14, height: 14, color: "rgba(0,0,0,0.3)", flexShrink: 0, transition: "transform 0.22s ease", transform: isOpen ? "rotate(180deg)" : "none" }} />
@@ -119,7 +119,7 @@ function ScreenAccordion() {
                     transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                     style={{ overflow: "hidden" }}
                   >
-                    <p style={{ paddingBottom: 14, paddingLeft: 44, paddingRight: 4, fontSize: 13, color: "#64748b", lineHeight: 1.72, background: "#ffffff", textAlign: "center" }}>
+                    <p style={{ paddingBottom: 14, paddingLeft: 44, paddingRight: 4, fontSize: 16, color: "#64748b", lineHeight: 1.72, background: "#ffffff", textAlign: "left" }}>
                       {b.descricao}
                     </p>
                   </motion.div>
@@ -154,7 +154,7 @@ function PorQueEscolherSection() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          video.playbackRate = 6.5;
+          video.playbackRate = 3.5;
           video.play().catch(() => {
             // Autoplay blocked by browser policy — silently ignore.
           });
@@ -210,7 +210,7 @@ function PorQueEscolherSection() {
         */}
         <div
           className="relative aspect-video mx-auto"
-          style={{ width: "min(1150px, 85vw)", flexShrink: 0 }}
+          style={{ width: "min(1350px, 85vw)", flexShrink: 0 }}
         >
           {/*
             muted + playsInline are mandatory for programmatic autoplay.
@@ -234,10 +234,10 @@ function PorQueEscolherSection() {
             style={{
               position: "absolute",
               zIndex: 10,
-              top: "8.5%",
-              left: "18%",
+              top: "11%",
+              left: "19%",
               width: "62%",
-              height: "61.5%",
+              height: "72.2%",
               overflow: "hidden",
               borderRadius: 4,
               background: "#ffffff",

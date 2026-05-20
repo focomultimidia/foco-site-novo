@@ -96,6 +96,31 @@ const depoimentos: Depoimento[] = [
     cargo: "Escarpas Eco Village",
     avatar: "V",
   },
+  {
+    id: "5",
+    texto:
+      "A Foco Multimídia é aquela empresa que, realmente, temos que chamar de parceira. Sempre pronta para nos atender, seja preventivamente, como corretivamente, inclusive com sugestões de melhoria e performance. O motor de reservas atende muito bem as nossas necessidades. Recomendo a todos!",
+    autor: "Éder",
+    cargo: "Conde Hotel",
+    avatar: "E",
+  },
+  {
+    id: "6",
+    texto:
+      "Estou feliz e muito satisfeita com a Foco Multimídia. Somos uma pousada pequena e familiar e o Channel Manager simplificou muito o nosso trabalho. A empresa está disponível para atender às nossas dúvidas e problemas a qualquer dia e horário e, por esse motivos, além de ser muito grata por trabalhar com vocês, eu indico a Foco de olhos fechados.",
+    autor: "Gabriela",
+    cargo: "Pousada Michele",
+    avatar: "G",
+  },
+  {
+    id: "7",
+    texto:
+      "O Sistema Hoteleiro da Foco veio e solucionou vários problemas de gerenciamento que nós tínhamos em nossa pousada. O Channel Manager, gerenciamento dos canais das OTA’s é fantástico! Outro ponto que eu destaco é o atendimento de todos os setores da empresa que estão sempre disponíveis para nos atender e resolver qualquer problema, nos deixando muito satisfeitos! Somos muito felizes em caminhar ao lado de uma empresa que não para de crescer.",
+    autor: "Ana",
+    cargo: "Cachoeira dos Borges",
+    avatar: "A",
+  },
+
 ];
 
 const numeros: Numero[] = [

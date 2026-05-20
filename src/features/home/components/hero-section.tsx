@@ -20,11 +20,11 @@ gsap.registerPlugin(ScrollTrigger);
 // CONFIGURAÇÃO — ajuste TOTAL_FRAMES para o número real de frames na pasta
 // Frames esperados em: /public/assets/home-hero-frames/0001.webp … NNNN.webp
 // ─────────────────────────────────────────────────────────────────────────────
-const TOTAL_FRAMES = 150;
+const TOTAL_FRAMES = 204;
 
 // Frame exato onde o texto começa a sair.
 // Deve ser < TOTAL_FRAMES. Ajuste conforme o ponto visual desejado na sua sequência.
-const TRIGGER_FRAME = 50; // ← altere aqui se necessário
+const TRIGGER_FRAME = 200; // ← altere aqui se necessário
 
 // Em Next.js, arquivos em /public são servidos pela raiz —
 // /public/assets/home-hero-frames/0001.webp → URL: /assets/home-hero-frames/0001.webp
@@ -54,9 +54,9 @@ interface HeroSectionProps {
 }
 
 const STATS = [
-  { icon: Users,      value: "+2.500", label: "Clientes ativos",     iconBg: "bg-blue-500/20",    iconColor: "text-blue-300"    },
-  { icon: TrendingUp, value: "+1B",    label: "Transações/ano",      iconBg: "bg-emerald-500/20", iconColor: "text-emerald-300" },
-  { icon: Calendar,   value: "+18",    label: "Anos de experiência", iconBg: "bg-orange-500/20",  iconColor: "text-orange-300"  },
+  { icon: Users,      value: "+2.500", label: "Clientes ativos",     iconBg: "bg-white/10",    iconColor: "text-white"    },
+  { icon: TrendingUp, value: "+1B",    label: "Transações/ano",      iconBg: "bg-white/10", iconColor: "text-white" },
+  { icon: Calendar,   value: "+18",    label: "Anos de experiência", iconBg: "bg-white/10",  iconColor: "text-white"  },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
@@ -328,7 +328,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         />
 
         {/* Gradiente horizontal: escurece a esquerda para o texto respirar */}
-        <div className="absolute inset-0 z-[2] bg-gradient-to-r from-black/80 via-black/45 to-black/10 pointer-events-none" />
+        <div className="absolute inset-0 z-[2] pointer-events-none" />
         {/* Gradiente inferior: transição suave para a seção seguinte */}
         <div className="absolute bottom-0 left-0 right-0 h-48 z-[2]  pointer-events-none" />
 
@@ -347,7 +347,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-              className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md border border-white/20 text-white/90 px-5 py-2.5 rounded-full text-sm font-medium mb-7"
+              className="inline-flex items-center gap-2.5 bg-white/10 backdrop-blur-md border border-[#285992]/20 text-[#285992]/90 px-5 py-2.5 rounded-full text-sm font-medium mb-7"
             >
               <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
               Ecossistema completo para hotelaria
@@ -358,11 +358,11 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               initial={{ opacity: 0, y: 36, filter: "blur(16px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
-              className="font-display text-5xl sm:text-6xl lg:text-[3.5rem] font-normal text-white leading-none tracking-tighter antialiased mb-4"
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#1a3a45] mb-4 leading-tight tracking-tight"
             >
               Tecnologia hoteleira integrada em uma{" "}
               <br className="hidden sm:block" />
-              <span className="bg-gradient-to-r from-[#fecc29] to-[#fcdf82] bg-clip-text text-transparent">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]">
                  única plataforma.
               </span>
             </motion.h1>
@@ -372,7 +372,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 0.85, delay: 0.46, ease: EASE }}
-              className="font-sans text-white text-base sm:text-lg font-light leading-relaxed mb-10"
+              className="font-sans text-black text-base sm:text-lg font-light leading-relaxed mb-10"
             >
               Para hotéis e pousadas que querem vender mais,
               <br className="hidden sm:block" />
@@ -406,14 +406,14 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
               {STATS.map(({ icon: Icon, value, label, iconBg, iconColor }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5"
+                  className="flex items-center gap-3 bg-gradient-to-l from-[#285992] to-[#427ab9] backdrop-blur-md border rounded-xl px-4 py-2.5"
                 >
-                  <div className={`w-8 h-8 ${iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                  <div className={`w-8 h-8 ${iconBg} rounded-lg flex items-center justify-center border-white/30 border-2 flex-shrink-0`}>
                     <Icon className={`w-4 h-4 ${iconColor}`} />
                   </div>
                   <div>
-                    <div className="text-white font-bold text-base leading-none">{value}</div>
-                    <div className="text-white/80 text-[14px] mt-0.5 font-sans">{label}</div>
+                    <div className="text-[#ffffff] font-bold text-base leading-none">{value}</div>
+                    <div className="text-[#ffffff]/70 text-[14px] mt-0.5 font-sans">{label}</div>
                   </div>
                 </div>
               ))}
