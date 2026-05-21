@@ -101,6 +101,22 @@ function CardapioDigitalSection() {
   const activeItem = recursos[activeIndex];
 
   return (
+    <>
+      {/*
+        cardapio-water-breathe — opacity pulse with offset phase so it never
+        syncs with the identical animation in experiencias-section or reserva-section.
+      */}
+      <style>{`
+        @keyframes cardapio-water-breathe {
+          0%, 100% { opacity: 0.11; }
+          50%       { opacity: 0.19; }
+        }
+        .cardapio-water-overlay {
+          animation: cardapio-water-breathe 8.5s ease-in-out infinite;
+          animation-delay: -5s;
+        }
+      `}</style>
+
     <section ref={sectionRef} className="py-24 bg-[#fff]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -129,12 +145,41 @@ function CardapioDigitalSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-3xl shadow-2xl overflow-hidden"
+          className="relative rounded-3xl shadow-2xl overflow-hidden"
           style={{
             background:
               "linear-gradient(150deg, #285992 0%, #427ab9 50%, #285992 100%)",
           }}
         >
+          {/*
+            Water ripple overlay — seeds 19/41 differ from experiencias (7/23)
+            and reserva (11/37) so each container has a visually unique wave pattern.
+          */}
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            className="cardapio-water-overlay pointer-events-none absolute inset-0 w-full h-full"
+            style={{ zIndex: 50, mixBlendMode: "overlay" }}
+          >
+            <defs>
+              <filter
+                id="cardapio-water"
+                x="0%" y="0%" width="100%" height="100%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feTurbulence type="turbulence"   baseFrequency="0.013 0.024" numOctaves="2" seed="19" result="bigWaves"    />
+                <feColorMatrix in="bigWaves"    type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.62 0 0 0 0" result="bigLayer"   />
+                <feTurbulence type="fractalNoise" baseFrequency="0.075 0.12"  numOctaves="3" seed="41" result="smallRipples" />
+                <feColorMatrix in="smallRipples" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.27 0 0 0 0" result="smallLayer" />
+                <feMerge>
+                  <feMergeNode in="bigLayer"   />
+                  <feMergeNode in="smallLayer" />
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" filter="url(#cardapio-water)" />
+          </svg>
+
           <div className="flex flex-col lg:flex-row">
 
             {/* ── Left: Menu (40%) ───────────────────────────────────────── */}
@@ -310,6 +355,7 @@ function CardapioDigitalSection() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 

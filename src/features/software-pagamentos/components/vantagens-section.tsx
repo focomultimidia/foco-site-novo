@@ -194,7 +194,7 @@ function VantagensSection() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
-          <div ref={headerRef} className="text-center mb-14 max-w-3xl mx-auto">
+          <div ref={headerRef} className="text-center mb-14 max-w-5xl mx-auto">
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
               Confira recursos exclusivos do nosso{" "}
               <span
@@ -210,7 +210,7 @@ function VantagensSection() {
             </h2>
             <p className="font-sans font-normal text-slate-500 text-lg leading-relaxed">
               Segurança, flexibilidade e automação para transformar a gestão
-              financeira do seu hotel em uma vantagem competitiva real.
+              financeira do seu hotel.
             </p>
           </div>
 

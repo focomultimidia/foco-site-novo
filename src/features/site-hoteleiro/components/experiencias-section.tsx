@@ -73,6 +73,21 @@ function ExperienciasSection() {
   const activeItem = EXPERIENCIAS[activeIndex];
 
   return (
+    <>
+      {/*
+        experiencias-water-breathe — slow opacity pulse on the ripple overlay.
+        Scoped name avoids collision with the identical animation in reserva-section.
+      */}
+      <style>{`
+        @keyframes experiencias-water-breathe {
+          0%, 100% { opacity: 0.10; }
+          50%       { opacity: 0.18; }
+        }
+        .experiencias-water-overlay {
+          animation: experiencias-water-breathe 8s ease-in-out infinite;
+        }
+      `}</style>
+
     <section ref={sectionRef} className="py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -98,11 +113,43 @@ function ExperienciasSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-3xl shadow-2xl overflow-hidden"
+          className="relative rounded-3xl shadow-2xl overflow-hidden"
           style={{
             background: "linear-gradient(150deg, #285992 0%, #427ab9 50%, #285992 100%)",
           }}
         >
+          {/*
+            Water ripple overlay — covers the entire Smart TV container.
+            Two feTurbulence layers (big rolling waves + fine capillaries) produce
+            white pixels whose alpha is derived from the noise channel.
+            mix-blend-mode:overlay blends caustic highlights into the blue gradient
+            without obscuring the menu or display content beneath.
+          */}
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            className="experiencias-water-overlay pointer-events-none absolute inset-0 w-full h-full"
+            style={{ zIndex: 50, mixBlendMode: "overlay" }}
+          >
+            <defs>
+              <filter
+                id="experiencias-water"
+                x="0%" y="0%" width="100%" height="100%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feTurbulence type="turbulence"   baseFrequency="0.012 0.022" numOctaves="2" seed="7"  result="bigWaves"    />
+                <feColorMatrix in="bigWaves"    type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.65 0 0 0 0" result="bigLayer"   />
+                <feTurbulence type="fractalNoise" baseFrequency="0.07 0.11"   numOctaves="3" seed="23" result="smallRipples" />
+                <feColorMatrix in="smallRipples" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.28 0 0 0 0" result="smallLayer" />
+                <feMerge>
+                  <feMergeNode in="bigLayer"   />
+                  <feMergeNode in="smallLayer" />
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" filter="url(#experiencias-water)" />
+          </svg>
+
           <div className="flex flex-col lg:flex-row">
 
             {/* ── Left: Menu (40%) ──────────────────────────────────────── */}
@@ -242,6 +289,7 @@ function ExperienciasSection() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 

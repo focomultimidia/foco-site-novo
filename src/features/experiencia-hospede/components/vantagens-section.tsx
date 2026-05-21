@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useCallback } from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Utensils, MapPin, Ticket, Heart, Shield, Bell } from "lucide-react";
 
 // ── Data (original — unchanged) ───────────────────────────────────────────────
@@ -52,6 +52,70 @@ type VantagemItem = {
   titulo: string;
   descricao: string;
 };
+
+// ── Phone slides ──────────────────────────────────────────────────────────────
+// App do Hóspede screens — matches the section's theme.
+const PHONE_SLIDES = [
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.jpg",  alt: "Foco Pass – Home" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.jpg", alt: "Foco Pass – Atrações" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.png", alt: "Foco Pass – Programação" },
+] as const;
+
+const PHONE_INTERVAL = 3200; // ms between slides
+
+// ── Phone Mockup ──────────────────────────────────────────────────────────────
+// Mirrors the hero-section PhoneMockup exactly:
+// · rounded frame with Dynamic Island notch + home indicator
+// · internal AnimatePresence fade between slides driven by setInterval
+function PhoneMockup() {
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setSlideIdx(prev => (prev + 1) % PHONE_SLIDES.length),
+      PHONE_INTERVAL
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = PHONE_SLIDES[slideIdx];
+
+  return (
+    <div
+      className="bg-[#fbfbfb] rounded-[26px] p-[4px] w-full"
+      style={{
+        boxShadow:
+          "0 24px 56px rgba(0,0,0,0.42), " +
+          "0 0 0 1px rgba(255,255,255,0.07)",
+      }}
+    >
+      <div
+        className="relative bg-white rounded-[22px] overflow-hidden"
+        style={{ aspectRatio: "9/19.5" }}
+      >
+        {/* Dynamic Island */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-12 h-[12px] bg-[#1c1c1e] rounded-full" />
+
+        {/* Screen — crossfade between slides */}
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={slideIdx}
+            src={slide.src}
+            alt={slide.alt}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+
+        {/* Home indicator */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-[4px] bg-black/20 rounded-full z-10" />
+      </div>
+    </div>
+  );
+}
 
 // ── Border Beam ───────────────────────────────────────────────────────────────
 function BorderBeam({ duration }: { duration: number }) {
@@ -227,7 +291,7 @@ function VantagensSection() {
             ))}
           </motion.div>
 
-          {/* Center — Phone mockup */}
+          {/* Center — Animated Phone Mockup */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -235,8 +299,8 @@ function VantagensSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-full max-w-[280px]">
-              {/* Ambient glow behind the phone */}
+            <div className="relative w-full max-w-[260px]">
+              {/* Ambient glow */}
               <div
                 className="absolute pointer-events-none"
                 style={{
@@ -247,13 +311,26 @@ function VantagensSection() {
                   zIndex: 0,
                 }}
               />
-              <div className="relative" style={{ zIndex: 1 }}>
-                <img
-                  src="/section3-experiencia.png"
-                  alt="Foco Pass App"
-                  className="w-full h-auto"
-                />
-              </div>
+
+              {/*
+                Float wrapper — mirrors the center-phone float from hero-section:
+                y oscillates 0 → -10 → 0 every 5.2 s.
+                The whileInView on the parent already handled the scroll entrance;
+                once visible this inner motion.div runs its infinite float loop.
+              */}
+              <motion.div
+                className="relative"
+                style={{ zIndex: 1 }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 5.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
+                }}
+              >
+                <PhoneMockup />
+              </motion.div>
             </div>
           </motion.div>
 

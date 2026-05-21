@@ -73,6 +73,22 @@ function ReservaSection() {
   const activeItem = PASSOS[activeIndex];
 
   return (
+    <>
+      {/*
+        reserva-water-breathe — slow opacity pulse, offset phase vs. experiencias
+        so the two sections never pulse in unison when both are in the viewport.
+      */}
+      <style>{`
+        @keyframes reserva-water-breathe {
+          0%, 100% { opacity: 0.09; }
+          50%       { opacity: 0.17; }
+        }
+        .reserva-water-overlay {
+          animation: reserva-water-breathe 9s ease-in-out infinite;
+          animation-delay: -3s;
+        }
+      `}</style>
+
     <section ref={sectionRef} className="py-24 bg-gray-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -102,11 +118,40 @@ function ReservaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="rounded-3xl shadow-2xl overflow-hidden"
+          className="relative rounded-3xl shadow-2xl overflow-hidden"
           style={{
             background: "radial-gradient(#427ab9 0%, #285992 50%)",
           }}
         >
+          {/*
+            Water ripple overlay — seeds differ from experiencias-section so the
+            two containers always show distinct wave patterns.
+          */}
+          <svg
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            className="reserva-water-overlay pointer-events-none absolute inset-0 w-full h-full"
+            style={{ zIndex: 50, mixBlendMode: "overlay" }}
+          >
+            <defs>
+              <filter
+                id="reserva-water"
+                x="0%" y="0%" width="100%" height="100%"
+                colorInterpolationFilters="sRGB"
+              >
+                <feTurbulence type="turbulence"   baseFrequency="0.014 0.025" numOctaves="2" seed="11" result="bigWaves"    />
+                <feColorMatrix in="bigWaves"    type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.60 0 0 0 0" result="bigLayer"   />
+                <feTurbulence type="fractalNoise" baseFrequency="0.08 0.13"   numOctaves="3" seed="37" result="smallRipples" />
+                <feColorMatrix in="smallRipples" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.25 0 0 0 0" result="smallLayer" />
+                <feMerge>
+                  <feMergeNode in="bigLayer"   />
+                  <feMergeNode in="smallLayer" />
+                </feMerge>
+              </filter>
+            </defs>
+            <rect width="100%" height="100%" filter="url(#reserva-water)" />
+          </svg>
+
           {/*
             lg:flex-row-reverse mirrors the columns on desktop:
               display (60%) → LEFT   |   menu (40%) → RIGHT
@@ -263,6 +308,7 @@ function ReservaSection() {
         </motion.div>
       </div>
     </section>
+    </>
   );
 }
 

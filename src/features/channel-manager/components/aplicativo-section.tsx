@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useCallback } from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from "framer-motion";
 import { Calendar, BedDouble, Send, Tag, BarChart3, LayoutDashboard } from "lucide-react";
 
 const recursos = [
@@ -51,6 +51,70 @@ const recursos = [
 
 type RecursoItem = typeof recursos[0];
 
+// ── Phone slides ──────────────────────────────────────────────────────────────
+// Channel-manager app screenshots cycling inside the phone frame.
+const PHONE_SLIDES = [
+  { src: "/assets/imgs/channel-manager/site1.png", alt: "Channel Manager – Calendário" },
+  { src: "/assets/imgs/channel-manager/site2.png", alt: "Channel Manager – Reservas"  },
+  { src: "/assets/imgs/channel-manager/site3.png", alt: "Channel Manager – Tarifas"   },
+  { src: "/assets/imgs/channel-manager/site4.png", alt: "Channel Manager – Dashboard"  },
+] as const;
+
+const PHONE_INTERVAL = 3000;
+
+// ── Phone Mockup ──────────────────────────────────────────────────────────────
+// Same frame structure as hero-section.tsx (Dynamic Island + home indicator).
+// Self-contained: manages its own slide state and setInterval independently.
+function PhoneMockup() {
+  const [slideIdx, setSlideIdx] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(
+      () => setSlideIdx(prev => (prev + 1) % PHONE_SLIDES.length),
+      PHONE_INTERVAL
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  const slide = PHONE_SLIDES[slideIdx];
+
+  return (
+    <div
+      className="bg-[#fbfbfb] rounded-[26px] p-[4px] w-full"
+      style={{
+        boxShadow:
+          "0 24px 56px rgba(0,0,0,0.48), " +
+          "0 0 0 1px rgba(255,255,255,0.07)",
+      }}
+    >
+      <div
+        className="relative bg-white rounded-[22px] overflow-hidden"
+        style={{ aspectRatio: "9/19.5" }}
+      >
+        {/* Dynamic Island */}
+        <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-12 h-[12px] bg-[#1c1c1e] rounded-full" />
+
+        {/* Screen — crossfade between slides */}
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={slideIdx}
+            src={slide.src}
+            alt={slide.alt}
+            className="absolute inset-0 w-full h-full object-cover object-top"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
+
+        {/* Home indicator */}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-[4px] bg-black/20 rounded-full z-10" />
+      </div>
+    </div>
+  );
+}
+
 // ─── Border Beam ─────────────────────────────────────────────────────────────
 function BorderBeam({ duration }: { duration: number }) {
   return (
@@ -87,8 +151,6 @@ function BorderBeam({ duration }: { duration: number }) {
 }
 
 // ─── Glass Card ───────────────────────────────────────────────────────────────
-// Estático no layout — sem flutuação, sem tilt.
-// Mantém: spotlight de cursor, border beam, glassmorphism.
 function GlassCard({
   recurso,
   index,
@@ -101,7 +163,6 @@ function GlassCard({
   const Icon = recurso.icon;
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Spotlight: brilho radial que segue o cursor dentro do card
   const spotX = useMotionValue(-200);
   const spotY = useMotionValue(-200);
   const spotlight = useMotionTemplate`radial-gradient(180px circle at ${spotX}px ${spotY}px, rgba(255,255,255,0.07), transparent 68%)`;
@@ -139,17 +200,14 @@ function GlassCard({
           boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.30)",
         }}
       >
-        {/* Border beam */}
         <BorderBeam duration={4.5 + index * 0.45} />
 
-        {/* Spotlight overlay */}
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none rounded-xl"
           style={{ background: spotlight }}
         />
 
-        {/* Conteúdo */}
         <div className={`relative flex items-start gap-4 ${align === "left" ? "flex-row-reverse" : ""}`}>
           <div
             className="w-10 h-10 bg-[#1e3a5f] rounded-full flex items-center justify-center flex-shrink-0"
@@ -189,7 +247,7 @@ function AplicativoSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white mb-4 leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white mb-4 leading-none tracking-tighter antialiased">
             O <span className="text-blue-300">aplicativo para hotel</span> que
             facilita a sua gestão de tarifas e reservas
           </h2>
@@ -213,6 +271,7 @@ function AplicativoSection() {
             ))}
           </motion.div>
 
+          {/* ── Center: Phone Mockup ──────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -220,7 +279,8 @@ function AplicativoSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative flex justify-center"
           >
-            <div className="relative w-full max-w-[280px]">
+            <div className="relative w-full max-w-[260px]">
+              {/* Ambient glow */}
               <div
                 className="absolute pointer-events-none"
                 style={{
@@ -231,23 +291,25 @@ function AplicativoSection() {
                   zIndex: 0,
                 }}
               />
-              <div
-                className="relative overflow-hidden rounded-3xl border border-white/10"
-                style={{
-                  boxShadow:
-                    "0 28px 72px rgba(0,0,0,0.60), 0 0 0 1px rgba(255,255,255,0.06) inset",
-                  zIndex: 1,
+
+              {/*
+                Float animation — y oscillates 0 → -10 → 0 every 5.2 s,
+                matching the hero-section center-phone behavior.
+                Delay 0.8 s lets the scroll entrance finish first.
+              */}
+              <motion.div
+                className="relative"
+                style={{ zIndex: 1 }}
+                animate={{ y: [0, -10, 0] }}
+                transition={{
+                  duration: 5.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 0.8,
                 }}
               >
-                <video
-                  src="/assets/videos/channel-manager/app-foco.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-auto block"
-                />
-              </div>
+                <PhoneMockup />
+              </motion.div>
             </div>
           </motion.div>
 

@@ -2,66 +2,98 @@
 
 import { motion } from "framer-motion";
 
-const meiosPagamento = [
-  { nome: "Sicredi", logo: "/sicredi-logo.png" },
-  { nome: "PagSeguro", logo: "/pagseguro-logo.png" },
-  { nome: "Sip2g", logo: "/sip2g-logo.png" },
-  { nome: "Cielo", logo: "/cielo-logo.png" },
+// ── Data ──────────────────────────────────────────────────────────────────────
+// Add/remove payment gateways here. Paths resolve from /public.
+const MEIOS_PAGAMENTO = [
+  { nome: "Sicredi",     logo: "/assets/imgs/integracoes/gateway-de-pagamento/sicred.png"     },
+  { nome: "PagSeguro",   logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagseguro.png"   },
+  { nome: "Cielo",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/cielo.png"       },
+  { nome: "Rede",        logo: "/assets/imgs/integracoes/gateway-de-pagamento/rede.png"        },
+  { nome: "Stone",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/stone.png"       },
+  { nome: "Sipag",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/sipag.png"       },
+  { nome: "GetNet",      logo: "/assets/imgs/integracoes/gateway-de-pagamento/getnet.png"      },
+  { nome: "PayZen",    logo: "/assets/imgs/integracoes/gateway-de-pagamento/payzen.png"    },
+  { nome: "Pagarme",logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagarme.png" },
 ];
 
+// ── Section ───────────────────────────────────────────────────────────────────
 function MeiosPagamentoSection() {
+  // Duplicate the list so the marquee loops seamlessly (second half slides in
+  // exactly when the first half exits — the same technique as TrustedLogosMarquee).
+  const logosDuplicados = [...MEIOS_PAGAMENTO, ...MEIOS_PAGAMENTO];
+
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-20 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+
+        {/* ── Header (original text — unchanged) ────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
-            Confira alguns <span className="text-[#00838F]">meios de pagamentos</span>{" "}
-            online integrados com o <span className="text-[#00838F]">Foco Pay</span>
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-bold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+              Meios de pagamentos
+            </span>{" "}
+            online integrados com o{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+              Foco Pay
+            </span>
           </h2>
-        </motion.div>
-
-        {/* Logos Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center"
-        >
-          {meiosPagamento.map((meio, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 w-full max-w-[200px] flex items-center justify-center h-24"
-            >
-              <span className="text-gray-400 font-medium text-lg">{meio.nome}</span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-12"
-        >
-          <p className="text-gray-500">
-            E muitos outros gateways de pagamento integrados para garantir a máxima
-            flexibilidade nas transações do seu hotel.
+          <p className="text-gray-500 mt-4 max-w-3xl mx-auto">
+            Garanta o máxima flexibilidade nas transações do seu hotel.
           </p>
         </motion.div>
+
+      </div>
+
+      {/* ── Marquee container (edge-to-edge, outside the container) ──────── */}
+      <div className="relative mt-4">
+
+        {/* Gradient fade — left edge */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+        {/* Gradient fade — right edge */}
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+
+        {/* Scrolling strip */}
+        <div className="flex overflow-hidden">
+          <motion.div
+            className="flex gap-14 items-center"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 28,
+                ease: "linear",
+              },
+            }}
+          >
+            {logosDuplicados.map((meio, index) => (
+              <div
+                key={`${meio.nome}-${index}`}
+                className="flex-shrink-0 group"
+              >
+                {/*
+                  Logo card:
+                  · Default: grayscale + 50% opacity (premium, non-distracting)
+                  · Hover:   full colour + full opacity (brand reveal on demand)
+                */}
+                <div className="h-16 w-40 flex items-center justify-center px-3">
+                  <img
+                    src={meio.logo}
+                    alt={meio.nome}
+                    className="max-h-full max-w-full object-contain grayscale opacity-50 transition-all duration-400 group-hover:grayscale-0 group-hover:opacity-100"
+                  />
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );

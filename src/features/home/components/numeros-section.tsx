@@ -30,10 +30,6 @@ interface VanillaTiltOpts {
 }
 
 // ── Metrics data ──────────────────────────────────────────────────────────────
-// iconHoverType drives the CSS micro-interaction per icon semantic:
-//   "lift"   → translate-y pulse  (trend / financial)
-//   "expand" → scale expand       (people / volume)
-//   "spin"   → 45° rotation       (gear / clock / time)
 const METRICAS = [
   {
     icon: TrendingUp,
@@ -79,8 +75,6 @@ const METRICAS = [
   },
 ] as const;
 
-// Per-type Tailwind hover class applied to the icon SVG itself.
-// cubic-bezier(0.34,1.56,0.64,1) = spring overshoot for a physical feel.
 const ICON_HOVER: Record<"lift" | "expand" | "spin", string> = {
   lift:   "group-hover:-translate-y-2 group-hover:scale-[1.08]",
   expand: "group-hover:scale-[1.2]",
@@ -95,9 +89,86 @@ const CARD_SHADOW =
   "0 20px 50px rgba(40,89,146,0.18), " +
   "0 40px 60px rgba(40,89,146,0.10)";
 
+// ── Water ripple overlay ──────────────────────────────────────────────────────
+// Two-layer SVG feTurbulence:
+//   · bigWaves   — large rolling undulation (low baseFrequency)
+//   · smallRipples — fine surface capillaries (high baseFrequency)
+// Both layers produce white pixels with variable alpha derived from the noise
+// channel; mix-blend-mode:overlay blends caustic highlights into the blue card.
+function WaterRippleOverlay({ index }: { index: number }) {
+  const id    = `numeros-water-${index}`;
+  const seed1 = index * 13 + 7;
+  const seed2 = index * 7  + 3;
+
+  return (
+    <svg
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      className="numeros-water-overlay pointer-events-none absolute inset-0 w-full h-full"
+      style={{
+        zIndex: 20,
+        mixBlendMode: "overlay",
+        animationDelay: `${index * -1.35}s`,
+      }}
+    >
+      <defs>
+        <filter
+          id={id}
+          x="0%" y="0%" width="100%" height="100%"
+          colorInterpolationFilters="sRGB"
+        >
+          {/* Layer 1 — broad, slow undulation */}
+          <feTurbulence
+            type="turbulence"
+            baseFrequency="0.016 0.028"
+            numOctaves="2"
+            seed={seed1}
+            result="bigWaves"
+          />
+          {/*
+            Map noise → opaque white with alpha = Red channel of turbulence.
+            Matrix rows: R′ G′ B′ A′ — last column is constant bias.
+              0 0 0 0 1  → R′ = 1 (pure white)
+              0 0 0 0 1  → G′ = 1
+              0 0 0 0 1  → B′ = 1
+              0.7 0 0 0 0 → A′ = 0.7 × R  (noise drives opacity)
+          */}
+          <feColorMatrix
+            in="bigWaves"
+            type="matrix"
+            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.7 0 0 0 0"
+            result="bigLayer"
+          />
+
+          {/* Layer 2 — fine surface capillaries */}
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.09 0.14"
+            numOctaves="3"
+            seed={seed2}
+            result="smallRipples"
+          />
+          <feColorMatrix
+            in="smallRipples"
+            type="matrix"
+            values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.32 0 0 0 0"
+            result="smallLayer"
+          />
+
+          {/* Merge both layers */}
+          <feMerge>
+            <feMergeNode in="bigLayer" />
+            <feMergeNode in="smallLayer" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <rect width="100%" height="100%" filter={`url(#${id})`} />
+    </svg>
+  );
+}
+
 // ── Props ─────────────────────────────────────────────────────────────────────
-// `numeros` is kept for backward compatibility with existing page wiring.
-// Visual data (icons, animation config) lives in METRICAS above.
 interface NumerosSectionProps {
   numeros: Numero[];
 }
@@ -106,10 +177,8 @@ interface NumerosSectionProps {
 function NumerosSection(_props: NumerosSectionProps) {
   const headerRef   = useRef<HTMLDivElement>(null);
   const gridRef     = useRef<HTMLDivElement>(null);
-  // Two-layer refs — wrapperRefs: GSAP, cardRefs: Vanilla-tilt
   const wrapperRefs = useRef<HTMLDivElement[]>([]);
   const cardRefs    = useRef<HTMLDivElement[]>([]);
-  // One ref per animated number span
   const numRefs     = useRef<HTMLSpanElement[]>([]);
 
   useEffect(() => {
@@ -119,11 +188,9 @@ function NumerosSection(_props: NumerosSectionProps) {
     const wrappers = wrapperRefs.current.filter(Boolean);
     const cards    = cardRefs.current.filter(Boolean);
 
-    // ── Initial hidden state ──────────────────────────────────────────────────
     gsap.set(headerRef.current, { opacity: 0, y: 20 });
     gsap.set(wrappers, { opacity: 0, y: 36 });
 
-    // ── Header reveal ─────────────────────────────────────────────────────────
     const headerST = ScrollTrigger.create({
       trigger: headerRef.current,
       start: "top 88%",
@@ -134,7 +201,6 @@ function NumerosSection(_props: NumerosSectionProps) {
         }),
     });
 
-    // ── Card stagger — asymmetric via each + ease ─────────────────────────────
     const gridST = ScrollTrigger.create({
       trigger: gridRef.current,
       start: "top 82%",
@@ -147,9 +213,6 @@ function NumerosSection(_props: NumerosSectionProps) {
         }),
     });
 
-    // ── Number tickers (one ScrollTrigger per number) ─────────────────────────
-    // Each card gets its own GSAP tween triggered when it scrolls into view.
-    // duration and delay vary per index to create an organic, staggered count-up.
     const numSTs: ScrollTrigger[] = [];
 
     METRICAS.forEach((m, i) => {
@@ -159,12 +222,11 @@ function NumerosSection(_props: NumerosSectionProps) {
       const counter = { n: 0 };
       const tween = gsap.to(counter, {
         n: m.valor,
-        duration: 1.8 + i * 0.1,   // each card counts slightly longer
-        delay: i * 0.09,            // each starts slightly later
+        duration: 1.8 + i * 0.1,
+        delay: i * 0.09,
         ease: "power2.out",
         paused: true,
         onUpdate() {
-          // Keep the number integer except for the "5 bi" case (still integer)
           el.textContent = Math.round(counter.n).toString();
         },
         onComplete() {
@@ -182,16 +244,11 @@ function NumerosSection(_props: NumerosSectionProps) {
       numSTs.push(st);
     });
 
-    // ── Vanilla-tilt ──────────────────────────────────────────────────────────
     const initTilt = () => {
       if (!window.VanillaTilt || cards.length === 0) return;
       window.VanillaTilt.init(cards, {
-        max: 5,
-        speed: 400,
-        perspective: 1000,
-        scale: 1.03,
-        glare: true,
-        "max-glare": 0.25,
+        max: 5, speed: 400, perspective: 1000,
+        scale: 1.03, glare: true, "max-glare": 0.25,
       });
     };
 
@@ -219,122 +276,128 @@ function NumerosSection(_props: NumerosSectionProps) {
   }, []);
 
   return (
-    <section ref={gridRef} className="py-20 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <>
+      {/*
+        numeros-water-breathe — gentle opacity pulse per overlay.
+        Each card receives a negative animationDelay so they're staggered
+        and the grid never looks uniform.
+      */}
+      <style>{`
+        @keyframes numeros-water-breathe {
+          0%, 100% { opacity: 0.12; }
+          50%       { opacity: 0.22; }
+        }
+        .numeros-water-overlay {
+          animation: numeros-water-breathe 7s ease-in-out infinite;
+        }
+      `}</style>
 
-        {/* ── Header ──────────────────────────────────────────────────── */}
-        <div ref={headerRef} className="text-center mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
-            Nossos{" "}
-            <span
-              style={{
-                background: "linear-gradient(90deg,#285992,#427ab9,#285992)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              números
-            </span>{" "}
-            comprovam nossa excelência
-          </h2>
-        </div>
+      <section ref={gridRef} className="py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── 2 → 3 → 6 responsive grid ───────────────────────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {METRICAS.map((m, i) => {
-            const Icon = m.icon;
-            const hoverClass = ICON_HOVER[m.iconHoverType];
-
-            return (
-              /* Outer wrapper — GSAP target (opacity + translateY) */
-              <div
-                key={i}
-                ref={el => { if (el) wrapperRefs.current[i] = el; }}
+          {/* ── Header ──────────────────────────────────────────────────── */}
+          <div ref={headerRef} className="text-center mb-12">
+            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
+              Nossos{" "}
+              <span
+                style={{
+                  background: "linear-gradient(90deg,#285992,#427ab9,#285992)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
               >
-                {/*
-                  Inner card — Vanilla-tilt target.
-                  overflow-hidden clips the injected glare div correctly.
-                  group enables child group-hover: classes.
-                */}
+                números
+              </span>{" "}
+              comprovam nossa excelência
+            </h2>
+          </div>
+
+          {/* ── 2 → 3 → 6 responsive grid ───────────────────────────────── */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {METRICAS.map((m, i) => {
+              const Icon = m.icon;
+              const hoverClass = ICON_HOVER[m.iconHoverType];
+
+              return (
                 <div
-                  ref={el => { if (el) cardRefs.current[i] = el; }}
-                  className="group relative h-full rounded-3xl p-6 text-center cursor-default overflow-hidden"
-                  style={{
-                    background: CARD_BG,
-                    border: "1px solid rgba(255,255,255,0.13)",
-                    boxShadow: CARD_SHADOW,
-                  }}
+                  key={i}
+                  ref={el => { if (el) wrapperRefs.current[i] = el; }}
                 >
-                  {/* Specular rim light at top edge */}
-                  <div className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  <div
+                    ref={el => { if (el) cardRefs.current[i] = el; }}
+                    className="group relative h-full rounded-3xl p-6 text-center cursor-default overflow-hidden"
+                    style={{
+                      background: CARD_BG,
+                      border: "1px solid rgba(255,255,255,0.13)",
+                      boxShadow: CARD_SHADOW,
+                    }}
+                  >
+                    {/* Specular rim light */}
+                    <div className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent" />
 
-                  {/* Subtle depth haze at top */}
-                  <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 rounded-t-3xl bg-gradient-to-b from-white/6 to-transparent" />
+                    {/* Depth haze */}
+                    <div className="pointer-events-none absolute top-0 left-0 right-0 h-16 rounded-t-3xl bg-gradient-to-b from-white/6 to-transparent" />
 
-                  {/* ── Content ───────────────────────────────────────── */}
-                  <div className="relative z-10 flex flex-col items-center">
+                    {/* ── Content ───────────────────────────────────────── */}
+                    <div className="relative z-10 flex flex-col items-center">
+                      <div
+                        className="
+                          w-10 h-10 rounded-xl
+                          flex items-center justify-center
+                          mx-auto mb-3 flex-shrink-0
+                          border border-white/20
+                          transition-all duration-500
+                          ease-[cubic-bezier(0.34,1.56,0.64,1)]
+                          group-hover:border-white/45
+                          group-hover:shadow-[0_0_20px_rgba(255,255,255,0.30)]
+                        "
+                        style={{
+                          background: "rgba(255,255,255,0.10)",
+                          backdropFilter: "blur(8px)",
+                          WebkitBackdropFilter: "blur(8px)",
+                          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)",
+                        }}
+                      >
+                        <Icon
+                          className={[
+                            "w-5 h-5 text-white",
+                            "transition-transform duration-500",
+                            "ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                            hoverClass,
+                          ].join(" ")}
+                          strokeWidth={1.7}
+                        />
+                      </div>
+
+                      <div className="text-3xl font-extrabold text-white mb-1 tabular-nums">
+                        +<span ref={el => { if (el) numRefs.current[i] = el; }}>0</span>
+                        {m.sufixo && (
+                          <span className="text-xl font-bold text-blue-200/80 ml-0.5">
+                            {m.sufixo}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="text-blue-100/70 text-xs leading-snug">
+                        {m.label}
+                      </div>
+                    </div>
 
                     {/*
-                      Icon container — glassmorphic chip.
-                      Glow shadow pulses on hover (group-hover:).
+                      Water ripple overlay — z-20 sits above content (z-10).
+                      mix-blend-mode:overlay blends caustic white highlights
+                      into the blue gradient without obscuring text.
+                      pointer-events-none ensures hover states still work.
                     */}
-                    <div
-                      className="
-                        w-10 h-10 rounded-xl
-                        flex items-center justify-center
-                        mx-auto mb-3 flex-shrink-0
-                        border border-white/20
-                        transition-all duration-500
-                        ease-[cubic-bezier(0.34,1.56,0.64,1)]
-                        group-hover:border-white/45
-                        group-hover:shadow-[0_0_20px_rgba(255,255,255,0.30)]
-                      "
-                      style={{
-                        background: "rgba(255,255,255,0.10)",
-                        backdropFilter: "blur(8px)",
-                        WebkitBackdropFilter: "blur(8px)",
-                        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)",
-                      }}
-                    >
-                      {/*
-                        Icon — unique micro-interaction per semantic type:
-                          lift   → up + slight scale (trend/financial)
-                          expand → generous scale   (people/volume)
-                          spin   → 45° rotation    (gear/clock)
-                        All transitions share the spring cubic-bezier.
-                      */}
-                      <Icon
-                        className={[
-                          "w-5 h-5 text-white",
-                          "transition-transform duration-500",
-                          "ease-[cubic-bezier(0.34,1.56,0.64,1)]",
-                          hoverClass,
-                        ].join(" ")}
-                        strokeWidth={1.7}
-                      />
-                    </div>
-
-                    {/* Animated number — GSAP drives the count-up via numRefs */}
-                    <div className="text-3xl font-extrabold text-white mb-1 tabular-nums">
-                      +<span ref={el => { if (el) numRefs.current[i] = el; }}>0</span>
-                      {m.sufixo && (
-                        <span className="text-xl font-bold text-blue-200/80 ml-0.5">
-                          {m.sufixo}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="text-blue-100/70 text-xs leading-snug">
-                      {m.label}
-                    </div>
+                    <WaterRippleOverlay index={i} />
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

@@ -1,20 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Zap, TrendingUp, Clock, LayoutDashboard } from "lucide-react";
-
-// ── CDN ───────────────────────────────────────────────────────────────────────
-const VANILLA_TILT_CDN =
-  "https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js";
-
-declare global {
-  interface Window {
-    VanillaTilt: { init(el: HTMLElement | HTMLElement[], opts?: Record<string, unknown>): void };
-  }
-  // HTMLElement extended by other sections — no re-declaration needed here
-}
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 const RAZOES = [
@@ -48,7 +37,6 @@ const RAZOES = [
   },
 ] as const;
 
-// Identical to vantagens-section visual tokens
 const CARD_BG =
   "linear-gradient(135deg, #1e4d85 0%, #285992 40%, #3a72b0 100%)";
 
@@ -57,15 +45,20 @@ const CARD_SHADOW =
   "0 12px 28px rgba(40,89,146,0.10), " +
   "0 24px 48px rgba(40,89,146,0.10)";
 
-// ── Right-column image ─────────────────────────────────────────────────────────
-const IMAGE_SRC = "/assets/imgs/software-pagamentos/por-que-automatizar.png";
+// ── Media ─────────────────────────────────────────────────────────────────────
+const VIDEO_SRC = "/assets/videos/software-de-pagamento/tablet.mp4";
+const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.png";
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueSection() {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const cardRefs  = useRef<HTMLDivElement[]>([]);
-  const imageRef  = useRef<HTMLDivElement>(null);
+  const [isVideoEnded, setIsVideoEnded] = useState(false);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef  = useRef<HTMLDivElement>(null);
+  const cardRefs   = useRef<HTMLDivElement[]>([]);
+  const videoRef   = useRef<HTMLVideoElement>(null);
+
+  // ── GSAP entrance ─────────────────────────────────────────────────────────
   useEffect(() => {
     if (typeof window === "undefined") return;
     gsap.registerPlugin(ScrollTrigger);
@@ -74,7 +67,6 @@ function PorQueSection() {
 
     gsap.set(headerRef.current, { opacity: 0, y: 20 });
     gsap.set(cards,             { opacity: 0, x: -24 });
-    gsap.set(imageRef.current,  { opacity: 0, x: 24 });
 
     const headerST = ScrollTrigger.create({
       trigger: headerRef.current,
@@ -90,15 +82,11 @@ function PorQueSection() {
       trigger: cards[0] ?? headerRef.current,
       start: "top 82%",
       once: true,
-      onEnter: () => {
+      onEnter: () =>
         gsap.to(cards, {
           opacity: 1, x: 0, duration: 0.65,
           stagger: 0.1, ease: "power3.out",
-        });
-        gsap.to(imageRef.current, {
-          opacity: 1, x: 0, duration: 0.72, delay: 0.15, ease: "power3.out",
-        });
-      },
+        }),
     });
 
     return () => {
@@ -107,16 +95,42 @@ function PorQueSection() {
     };
   }, []);
 
+  // ── Video: play/pause/reset via IntersectionObserver ──────────────────────
+  useEffect(() => {
+    const video   = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.playbackRate = 3.5;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+          video.currentTime = 0;
+          // Reset overlay so the video replays fresh on re-entry
+          setIsVideoEnded(false);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       {/*
-        Border Comet keyframes — scoped to "por-que-comet" to avoid conflicts
-        with pagamentos-comet and vantagens-comet from other sections.
+        Keyframes:
+        · por-que-comet / ccw — border comet on the left cards
+        · float-tablet         — gentle vertical float on the final image
       */}
       <style>{`
         @keyframes por-que-comet {
-          from { transform: translate(-50%, -50%) rotate(0deg);    }
-          to   { transform: translate(-50%, -50%) rotate(360deg);  }
+          from { transform: translate(-50%, -50%) rotate(0deg);   }
+          to   { transform: translate(-50%, -50%) rotate(360deg); }
         }
         @keyframes por-que-comet-ccw {
           from { transform: translate(-50%, -50%) rotate(0deg);    }
@@ -124,13 +138,13 @@ function PorQueSection() {
         }
       `}</style>
 
-      <section className="relative py-24 bg-gray-50 overflow-hidden">
+      <section ref={sectionRef} className="relative py-24 bg-white overflow-hidden">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
-          <div ref={headerRef} className="text-center mb-14 max-w-3xl mx-auto">
+          <div ref={headerRef} className="text-center mb-14 max-w-5xl mx-auto">
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
               Por que{" "}
               <span
@@ -150,10 +164,10 @@ function PorQueSection() {
             </p>
           </div>
 
-          {/* ── 2-column split ───────────────────────────────────────────── */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          {/* ── 30 / 70 split ────────────────────────────────────────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-[33%_67%] gap-10 lg:gap-14 items-center">
 
-            {/* ── Left: 4 cards stacked ─────────────────────────────────── */}
+            {/* ── Left 30%: 4 cards ─────────────────────────────────────── */}
             <div className="flex flex-col gap-4">
               {RAZOES.map((r, i) => {
                 const Icon = r.icon;
@@ -168,7 +182,7 @@ function PorQueSection() {
                       boxShadow: CARD_SHADOW,
                     }}
                   >
-                    {/* ── Border Comet ────────────────────────────────────── */}
+                    {/* Border Comet */}
                     <div
                       aria-hidden="true"
                       className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden"
@@ -177,29 +191,21 @@ function PorQueSection() {
                       <div
                         style={{
                           position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          width: "200%",
-                          height: "200%",
+                          top: "50%", left: "50%",
+                          width: "200%", height: "200%",
                           animation: `${i % 2 === 0 ? "por-que-comet" : "por-que-comet-ccw"} ${5 + i * 0.9}s ${i * 1.3}s linear infinite`,
                           background: [
                             "conic-gradient(",
                             "  from 0deg at 50% 50%,",
-                            "  transparent              0deg,",
-                            "  transparent            310deg,",
-                            "  rgba(0,210,255,0.00)   312deg,",
-                            "  rgba(0,210,255,0.45)   328deg,",
-                            "  rgba(80,230,255,0.80)  340deg,",
-                            "  rgba(200,245,255,0.95) 346deg,",
-                            "  rgba(255,255,255,1.00) 350deg,",
-                            "  rgba(200,240,255,0.50) 355deg,",
-                            "  rgba(0,210,255,0.10)   358deg,",
-                            "  transparent            360deg",
+                            "  transparent 0deg, transparent 310deg,",
+                            "  rgba(0,210,255,0.00) 312deg, rgba(0,210,255,0.45) 328deg,",
+                            "  rgba(80,230,255,0.80) 340deg, rgba(200,245,255,0.95) 346deg,",
+                            "  rgba(255,255,255,1.00) 350deg, rgba(200,240,255,0.50) 355deg,",
+                            "  rgba(0,210,255,0.10) 358deg, transparent 360deg",
                             ")",
                           ].join(""),
                         }}
                       />
-                      {/* Cutout — exposes only the ~1.5 px comet border ring */}
                       <div
                         style={{
                           position: "absolute",
@@ -210,21 +216,17 @@ function PorQueSection() {
                       />
                     </div>
 
-                    {/* Specular rim light */}
+                    {/* Rim light */}
                     <div
                       className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"
                       style={{ zIndex: 10 }}
                     />
 
-                    {/* Content: icon · title · description */}
-                    <div
-                      className="relative flex items-start gap-4"
-                      style={{ zIndex: 10 }}
-                    >
-                      {/* Glassmorphic icon container */}
+                    {/* Content */}
+                    <div className="relative flex items-start gap-3" style={{ zIndex: 10 }}>
                       <div
                         className="
-                          w-11 h-11 rounded-xl flex-shrink-0
+                          w-10 h-10 rounded-xl flex-shrink-0
                           flex items-center justify-center
                           border border-white/20
                           transition-all duration-500
@@ -241,7 +243,7 @@ function PorQueSection() {
                       >
                         <Icon
                           className={[
-                            "w-5 h-5 text-white",
+                            "w-4 h-4 text-white",
                             "transition-transform duration-500",
                             "ease-[cubic-bezier(0.34,1.56,0.64,1)]",
                             r.iconHoverClass,
@@ -249,12 +251,11 @@ function PorQueSection() {
                           strokeWidth={1.7}
                         />
                       </div>
-
                       <div>
-                        <h3 className="font-display font-bold text-white text-[1.05rem] mb-1.5 leading-snug tracking-tight">
+                        <h3 className="font-display font-bold text-white text-[0.92rem] mb-1 leading-snug tracking-tight">
                           {r.titulo}
                         </h3>
-                        <p className="font-sans font-normal text-blue-100/85 text-[0.88rem] leading-relaxed">
+                        <p className="font-sans font-normal text-blue-100/80 text-[0.8rem] leading-relaxed">
                           {r.descricao}
                         </p>
                       </div>
@@ -264,23 +265,34 @@ function PorQueSection() {
               })}
             </div>
 
-            {/* ── Right: static image with premium framing ──────────────── */}
-            <div ref={imageRef} className="flex items-center justify-center">
-              <div
-                className="relative w-full rounded-3xl overflow-hidden"
+            {/* ── Right 70%: video fills container, image fades in on end ── */}
+            <div className="relative" style={{ aspectRatio: "16/10" }}>
+
+              {/* Video — absolute background, plays on scroll enter */}
+              <video
+                ref={videoRef}
+                src={VIDEO_SRC}
+                muted
+                playsInline
+                preload="auto"
+                onEnded={() => setIsVideoEnded(true)}
+                className="absolute inset-0 w-full h-full object-contain block"
+              />
+
+              {/*
+                Final image — always in the DOM, centered absolutely.
+                Fades from opacity-0 to opacity-100 via CSS transition
+                when isVideoEnded becomes true. No float, no shadow, no frame.
+              */}
+              <img
+                src={IMAGE_SRC}
+                alt="Software de pagamentos Foco Pay"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full max-h-full object-contain pointer-events-none"
                 style={{
-                  boxShadow:
-                    "0 24px 64px rgba(40,89,146,0.22), " +
-                    "0 8px 20px rgba(0,0,0,0.12), " +
-                    "0 0 0 1px rgba(40,89,146,0.12)",
+                  opacity: isVideoEnded ? 1 : 0,
+                  transition: "opacity 0.9s ease",
                 }}
-              >
-                <img
-                  src={IMAGE_SRC}
-                  alt="Automação de pagamentos de reservas"
-                  className="w-full h-auto object-cover block"
-                />
-              </div>
+              />
             </div>
 
           </div>
