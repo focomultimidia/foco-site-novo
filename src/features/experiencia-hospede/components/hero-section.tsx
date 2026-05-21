@@ -6,20 +6,45 @@ import { HeroButton } from "@/features/shared/components/hero-button";
 import { InternalHeroBackground } from "@/features/shared/components/internal-hero-background";
 import type { HeroData } from "../types";
 
-// ── Slide pools ───────────────────────────────────────────────────────────────
-// Each phone gets its own ordered subset; starting index is offset so all three
-// screens show different content on load.
-const ALL_SLIDES = [
-  { src: "/assets/imgs/experiencia-hospede/hero/app-1.png", alt: "Foco Pass – Check-in online" },
-  { src: "/assets/imgs/experiencia-hospede/hero/app-2.png", alt: "Foco Pass – Pontos turísticos" },
-  { src: "/assets/imgs/experiencia-hospede/hero/app-3.png", alt: "Foco Pass – Cardápio digital" },
-  { src: "/assets/imgs/experiencia-hospede/hero/app-4.png", alt: "Foco Pass – Descontos exclusivos" },
-];
+// ── Products ──────────────────────────────────────────────────────────────────
+// Each produto owns its image pool, autoplay interval and initial slide.
+// Phones are strictly bound to their produto: when a phone slides to the center
+// it carries its own slideshow state — images never jump between devices.
+const PRODUTOS_HERO = [
+  {
+    id: 0,
+    nome: "Cardápio Digital",
+    interval: 3000,
+    startSlide: 0,
+    slides: [
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.jpg", alt: "Cardápio Digital - Menu principal" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.jpg",  alt: "Cardápio Digital - Escolhendo item" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital2.png",  alt: "Cardápio Digital - Acompanhamento de pedido" },
+    ],
+  },
+  {
+    id: 1,
+    nome: "App do Hóspede",
+    interval: 3500,
+    startSlide: 0,
+    slides: [
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede.jpg",    alt: "Foco Pass - App do Hóspede" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.jpg",      alt: "Foco Pass - Atrações do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.png",      alt: "Foco Pass - Programação do hotel" },
 
-const PHONE_DATA = [
-  { id: 0, interval: 3000, slides: [ALL_SLIDES[0], ALL_SLIDES[1], ALL_SLIDES[2]], startSlide: 0 },
-  { id: 1, interval: 3500, slides: [ALL_SLIDES[1], ALL_SLIDES[2], ALL_SLIDES[3]], startSlide: 1 },
-  { id: 2, interval: 4000, slides: [ALL_SLIDES[2], ALL_SLIDES[3], ALL_SLIDES[0]], startSlide: 2 },
+    ],
+  },
+  {
+    id: 2,
+    nome: "Motor de Reservas",
+    interval: 4000,
+    startSlide: 0,
+    slides: [
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.png", alt: "Motor de Reservas – Busca" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.png", alt: "Motor de Reservas – Quarto" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.png", alt: "Motor de Reservas – Confirmação" },
+    ],
+  },
 ] as const;
 
 // ── Layout geometry ───────────────────────────────────────────────────────────
@@ -197,7 +222,7 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
             */}
             <div className="relative" style={{ width: 620, height: 520 }}>
 
-              {PHONE_DATA.map(phone => {
+              {PRODUTOS_HERO.map(phone => {
                 const role   = getRole(phone.id);
                 const cfg    = ROLE_CFG[role];
                 const isCenter = role === "center";

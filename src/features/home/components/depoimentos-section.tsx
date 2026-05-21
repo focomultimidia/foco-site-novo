@@ -174,7 +174,7 @@ function DepoimentosSection({ depoimentos }: DepoimentosSectionProps) {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16 max-w-5xl mx-auto"
         >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Quem usa,{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               aprova

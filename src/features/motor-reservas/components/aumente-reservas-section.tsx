@@ -329,7 +329,7 @@ function TimelineCard({ recurso, direction, isActive, index }: CardProps) {
           >
             {/* Category chip */}
             <div className="inline-flex items-center px-2.5 py-[5px] mb-4 rounded-full border border-white/[0.08] bg-white/[0.04]">
-              <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-[#7ba3e0]/65">
+              <span className="font-normal text-[9px] uppercase tracking-[0.15em] text-[#7ba3e0]/65">
                 {recurso.label}
               </span>
             </div>

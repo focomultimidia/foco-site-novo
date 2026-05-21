@@ -183,7 +183,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               <div>
                 <div className="flex items-center gap-4 mb-6">
                   <div className="w-11 h-11 rounded-2xl bg-[#285992] flex items-center justify-center shrink-0 shadow-lg shadow-[#285992]/30">
-                    <span className="text-white font-mono text-xs uppercase tracking-widest">
+                    <span className="text-white font-normal text-xs uppercase tracking-widest">
                       {item.numero}
                     </span>
                   </div>
@@ -231,7 +231,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               {/* Number pill-tag — bottom anchor */}
               <div className="shrink-0 flex justify-center pb-5">
                 <div className="inline-flex items-center rounded-full px-2.5 py-2.5 border border-white/20 bg-white/10">
-                  <span className="font-mono text-[10px] uppercase text-white/60 tracking-widest">
+                  <span className="font-normal text-[10px] uppercase text-white/60 tracking-widest">
                     {item.numero}
                   </span>
                 </div>

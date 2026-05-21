@@ -1,4 +1,6 @@
-export { HeroSection } from "./hero-section";
+export { HeroSection }    from "./hero-section";
+export { VantagensSection } from "./vantagens-section";
+export { PorQueSection }  from "./por-que-section";
 export { OQueESection } from "./o-que-e-section";
 export { MeiosPagamentoSection } from "./meios-pagamento-section";
 export { RecursosSection } from "./recursos-section";

@@ -216,7 +216,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"
@@ -240,7 +240,7 @@ function Header() {
               onMouseLeave={scheduleMegamenuClose}
             >
               <button
-                className={`relative flex items-center gap-1 px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative flex items-center gap-1 px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
                 }`}
               >
@@ -306,7 +306,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-1 py-1 font-mono text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
+                className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                   isActiveRoute(location.pathname, item.href)
                     ? "text-blue-600"
                     : "text-[#244248] hover:text-blue-600"
@@ -384,7 +384,7 @@ function Header() {
                     key={item.href}
                     to={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`block px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased transition-colors ${
+                    className={`block px-3 py-3 rounded-xl font-normal text-sm uppercase tracking-widest antialiased transition-colors ${
                       isActiveRoute(location.pathname, item.href)
                         ? "text-blue-600 bg-blue-50"
                         : "text-slate-700 hover:bg-slate-50"
@@ -398,7 +398,7 @@ function Header() {
                 <div>
                   <button
                     onClick={() => setIsMobileSoftwaresOpen((v) => !v)}
-                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased text-slate-700 hover:bg-slate-50 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-3 rounded-xl font-normal text-sm uppercase tracking-widest antialiased text-slate-700 hover:bg-slate-50 transition-colors"
                   >
                     Softwares hoteleiro
                     <ChevronDown
@@ -425,7 +425,7 @@ function Header() {
                                 key={item.href}
                                 to={item.href}
                                 onClick={() => setIsMobileOpen(false)}
-                                className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-mono text-sm tracking-wide text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors"
+                                className="flex items-center gap-3 px-3 py-2.5 rounded-lg font-normal text-sm tracking-wide text-slate-600 hover:bg-slate-50 hover:text-blue-600 transition-colors"
                               >
                                 <div
                                   className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${item.iconClass}`}
@@ -447,7 +447,7 @@ function Header() {
                     key={item.href}
                     to={item.href}
                     onClick={() => setIsMobileOpen(false)}
-                    className={`block px-3 py-3 rounded-xl font-mono text-sm uppercase tracking-widest antialiased transition-colors ${
+                    className={`block px-3 py-3 rounded-xl font-normal text-sm uppercase tracking-widest antialiased transition-colors ${
                       isActiveRoute(location.pathname, item.href)
                         ? "text-blue-600 bg-blue-50"
                         : "text-slate-700 hover:bg-slate-50"
@@ -458,7 +458,7 @@ function Header() {
                 ))}
 
                 <div className="pt-3 pb-1 border-t border-slate-100">
-                  <Button className="w-full bg-[#1e3a5f] hover:bg-[#16304f] text-white font-mono text-sm uppercase tracking-widest antialiased rounded-full">
+                  <Button className="w-full bg-[#1e3a5f] hover:bg-[#16304f] text-white font-normal text-sm uppercase tracking-widest antialiased rounded-full">
                     Fale com um consultor
                   </Button>
                 </div>

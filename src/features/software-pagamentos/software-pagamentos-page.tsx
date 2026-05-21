@@ -4,6 +4,8 @@ import { useSoftwarePagamentosPage } from "./hooks/use-software-pagamentos-page"
 import {
   HeroSection,
   MeiosPagamentoSection,
+  VantagensSection,
+  PorQueSection,
 } from "./components";
 import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
 import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
@@ -66,6 +68,12 @@ function SoftwarePagamentosPage() {
 
       {/* Section 3: Meios de Pagamento */}
       <MeiosPagamentoSection />
+
+      {/* Section 4: Por que automatizar os pagamentos */}
+      <PorQueSection />
+
+      {/* Section 5: Vantagens do FocoPay */}
+      <VantagensSection />
 
       {/* Prova Social: Depoimentos (Aprovação 97%) */}
       <DepoimentosSection depoimentos={depoimentos} />

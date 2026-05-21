@@ -325,7 +325,7 @@ function GerencieCelularSection() {
               transition={{ duration: 0.5 }}
               className="mb-5"
             >
-              <span className="font-mono text-xs uppercase tracking-widest text-blue-500">
+              <span className="font-normal text-xs uppercase tracking-widest text-blue-500">
                 Mobilidade total
               </span>
             </motion.div>
