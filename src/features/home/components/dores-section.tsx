@@ -124,11 +124,7 @@ function AccordionItem({ dor, index, isOpen, onToggle }: AccordionItemProps) {
           }}
         >
           <Icon
-            className="w-6 h-6"
-            style={{
-              color: isOpen ? "#93c5fd" : "#285992",
-              transition: "color 0.28s ease",
-            }}
+            className={`w-6 h-6 transition-colors duration-300 ${isOpen ? "text-blue-300" : "text-[#285992]"}`}
           />
         </div>
 
