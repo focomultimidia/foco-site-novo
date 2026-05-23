@@ -2,23 +2,6 @@
 
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Linkedin, Instagram, Facebook, Youtube } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { toast } from "sonner";
-
-const newsletterSchema = z.object({
-  email: z.string().email("Email inválido"),
-  lgpdConsent: z.boolean().refine((val) => val === true, {
-    message: "Você precisa concordar com a política de privacidade",
-  }),
-});
-
-type NewsletterFormData = z.infer<typeof newsletterSchema>;
 
 interface FooterLink {
   label: string;
@@ -73,28 +56,6 @@ const socialLinks = [
 ];
 
 function Footer() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    watch,
-    setValue,
-  } = useForm<NewsletterFormData>({
-    resolver: zodResolver(newsletterSchema),
-    defaultValues: {
-      lgpdConsent: false,
-    },
-  });
-
-  const lgpdConsent = watch("lgpdConsent");
-
-  const onSubmit = async (_data: NewsletterFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast.success("Inscrição realizada com sucesso!");
-    reset();
-  };
-
   return (
     <footer className="bg-[#1E3A5F] text-white">
       {/* Main Footer */}
@@ -102,14 +63,12 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#00BCD4] to-[#4DD0E1] flex items-center justify-center">
-                <span className="text-white font-bold text-xl">F</span>
-              </div>
-              <div>
-                <span className="font-bold text-xl block">Foco</span>
-                <span className="text-sm text-white/70">Tecnologia e Marketing</span>
-              </div>
+            <Link to="/" className="inline-flex mb-6">
+              <img
+                src="/logo-foco.png"
+                alt="Foco Tecnologia e Marketing"
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="text-white/80 text-sm mb-6 max-w-sm">
               Líder em software para hotelaria no Brasil. Transformando a gestão hoteleira 
@@ -141,43 +100,6 @@ function Footer() {
               </div>
             </div>
 
-            {/* Newsletter Form */}
-            <div className="mt-8">
-              <h4 className="font-semibold text-white mb-3">Assine nossa newsletter</h4>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                <div className="flex gap-2">
-                  <Input
-                    {...register("email")}
-                    placeholder="Seu email"
-                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
-                  />
-                  <Button type="submit" className="bg-[#00BCD4] hover:bg-[#0097A7] text-white shrink-0 rounded-full px-6">
-                    Assinar
-                  </Button>
-                </div>
-                {errors.email && (
-                  <p className="text-sm text-red-300">{errors.email.message}</p>
-                )}
-                <div className="flex items-start gap-2">
-                  <Checkbox
-                    id="lgpdConsent"
-                    checked={lgpdConsent}
-                    onCheckedChange={(checked) => setValue("lgpdConsent", checked as boolean)}
-                    className="mt-0.5 border-white/50 data-[state=checked]:bg-[#00BCD4]"
-                  />
-                  <Label htmlFor="lgpdConsent" className="text-xs text-white/60 cursor-pointer">
-                    Concordo em receber comunicações e aceito a{" "}
-                    <Link to="#" className="text-[#00BCD4] hover:underline">
-                      Política de Privacidade
-                    </Link>
-                    {" "}(LGPD)
-                  </Label>
-                </div>
-                {errors.lgpdConsent && (
-                  <p className="text-sm text-red-300">{errors.lgpdConsent.message}</p>
-                )}
-              </form>
-            </div>
           </div>
 
           {/* Link Columns */}

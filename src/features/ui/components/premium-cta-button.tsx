@@ -35,6 +35,7 @@ interface PremiumCTAButtonProps {
   label?: string;
   onClick?: () => void;
   className?: string;
+  icon?: React.ComponentType<{ className?: string }>;
 }
 
 // Raio do campo magnético (px a partir do centro do botão)
@@ -48,6 +49,7 @@ function PremiumCTAButton({
   label    = "Agendar uma demonstração",
   onClick,
   className,
+  icon: Icon = ArrowRight,
 }: PremiumCTAButtonProps) {
   const outerRef = useRef<HTMLDivElement>(null);
 
@@ -219,9 +221,9 @@ function PremiumCTAButton({
                 {label}
               </span>
 
-              {/* ── Seta com slide no hover ────────────────────────────────── */}
+              {/* ── Ícone com slide no hover ───────────────────────────────── */}
               <span className="relative z-10 flex-shrink-0 translate-x-0 group-hover:translate-x-1 transition-transform duration-200">
-                <ArrowRight className="w-3.5 h-3.5" />
+                <Icon className="w-3.5 h-3.5" />
               </span>
             </motion.button>
           </div>

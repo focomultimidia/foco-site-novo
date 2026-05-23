@@ -118,7 +118,7 @@ function ReservaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-3xl shadow-2xl overflow-hidden"
+          className="relative rounded-[40px] shadow[40px] overflow-hidden"
           style={{
             background: "radial-gradient(#427ab9 0%, #285992 50%)",
           }}

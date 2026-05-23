@@ -219,10 +219,13 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.15 }}
             >
-              {/* Title — vertical writing, anchored to the top */}
-              <div className="flex-1 overflow-hidden flex justify-center items-start pt-6">
-                <div style={{ writingMode: "vertical-rl" }}>
-                  <span className="font-display font-semibold text-white antialiased tracking-tighter leading-none text-xl">
+              {/* Title — vertical writing, bottom-to-top (matches tipos-propriedade-section) */}
+              <div className="flex-1 overflow-hidden flex justify-center items-center">
+                <div style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
+                  <span
+                    className="text-[12px] font-extrabold uppercase whitespace-nowrap text-white drop-shadow-lg leading-none"
+                    style={{ letterSpacing: "0.28em" }}
+                  >
                     {sc(item.titulo)}
                   </span>
                 </div>

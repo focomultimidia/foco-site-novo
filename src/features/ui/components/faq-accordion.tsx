@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { MessageCircle } from "lucide-react";
+import { PremiumCTAButton } from "./premium-cta-button";
 
 interface FAQItem {
   id: string;
@@ -107,10 +107,7 @@ function FAQAccordion({
             className="text-center mt-10"
           >
             <p className="text-gray-600 mb-4">Ainda tem dúvidas?</p>
-            <Button className="bg-[#00BCD4] hover:bg-[#0097A7] text-white rounded-full px-6">
-              <MessageCircle className="w-4 h-4 mr-2" />
-              Falar com especialista
-            </Button>
+            <PremiumCTAButton label="Falar com especialista" icon={MessageCircle} />
           </motion.div>
         )}
       </div>

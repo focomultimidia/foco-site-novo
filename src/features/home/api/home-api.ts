@@ -133,25 +133,25 @@ const homeData: HomeData = {
         {
           titulo: "Mais canais, mais reservas",
           descricao:
-            "Conecte-se a +800 canais de vendas com o nosso Channel Manager, garantindo mais visibilidade e menos overbooking.",
+            "Conecte-se a +800 canais de vendas com o nosso Channel manager, garantindo mais visibilidade e menos overbooking.",
           link: "/channel-manager",
         },
         {
           titulo: "Site que vende para você",
           descricao:
-            "Com um Site Hoteleiro otimizado para transformar acessos em hóspedes, reduzindo custos com comissões.",
+            "Tenha um Site hoteleiro otimizado para transformar acessos em hóspedes, reduzindo custos com comissões.",
           link: "/site-hoteleiro",
         },
         {
           titulo: "Atrair visitantes qualificados",
           descricao:
-            "Tenha uma estratégia de Marketing Digital eficiente com anúncios no Google Hotel e Meta ADS.",
+            "Tenha uma estratégia de Marketing digital eficiente com anúncios no Google Hotel e Meta ADS.",
           link: "#",
         },
         {
           titulo: "Gatilhos para mais reservas",
           descricao:
-            "Nosso Motor de Reservas utiliza gatilhos estratégicos e promoções personalizadas para aumentar a conversão.",
+            "Nosso Motor de reservas utiliza gatilhos estratégicos e promoções personalizadas para aumentar a conversão.",
           link: "/motor-de-reservas",
         },
       ],
@@ -186,7 +186,7 @@ const homeData: HomeData = {
     },
     {
       id: "experiencia-ruim",
-      titulo: "Experiência do hóspede ruim? Isso significa menos reservas!",
+      titulo: "Experiência do hóspede ruim, gerando menos reservas?",
       descricao:
         "Check-in burocrático e atendimento falho? Melhore a experiência, fidelize hóspedes e aumente sua reputação online!",
       solucoes: [
@@ -364,7 +364,7 @@ const homeData: HomeData = {
       id: "6",
       nome: "Resorts",
       descricao: "Tecnologia de ponta para resorts all-inclusive",
-      icone: "Umbrella",
+      icone: "Sun",
     },
     {
       id: "7",

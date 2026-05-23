@@ -1,14 +1,16 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import { Globe, Building2, CreditCard, TrendingUp } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 interface Logo {
   src: string;
@@ -141,9 +143,59 @@ function LogoCard({ src, alt }: Logo) {
   );
 }
 
-function SmartIntegrationsTabs() {
+type AutoplayPlugin = { play: () => void; stop: () => void };
+
+// Carousel that starts only after the parent section enters the viewport.
+// playOnInit: false prevents the plugin from auto-starting on mount;
+// the useEffect below drives play/stop based on the inView signal.
+function LogoCarousel({ logos, inView }: { logos: Logo[]; inView: boolean }) {
+  const [api, setApi] = useState<CarouselApi>();
+
+  useEffect(() => {
+    if (!api) return;
+    const autoplay = api.plugins()?.autoplay as AutoplayPlugin | undefined;
+    if (!autoplay) return;
+    if (inView) {
+      autoplay.play();
+    } else {
+      autoplay.stop();
+    }
+  }, [api, inView]);
+
   return (
-    <section className="py-20 bg-white">
+    <Carousel
+      setApi={setApi}
+      opts={{ align: "start", loop: true }}
+      plugins={[
+        Autoplay({
+          delay: 1800,
+          stopOnInteraction: false,
+          stopOnMouseEnter: true,
+          playOnInit: false,
+        }),
+      ]}
+      className="w-full"
+    >
+      <CarouselContent className="-ml-4">
+        {logos.map((logo) => (
+          <CarouselItem
+            key={logo.alt}
+            className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
+          >
+            <LogoCard src={logo.src} alt={logo.alt} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+    </Carousel>
+  );
+}
+
+function SmartIntegrationsTabs() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: false, amount: 0.2 });
+
+  return (
+    <section ref={sectionRef} className="py-20 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -187,29 +239,7 @@ function SmartIntegrationsTabs() {
                 {tab.description}
               </p>
 
-              {/* Logo Carousel with infinite autoplay */}
-              <Carousel
-                opts={{ align: "start", loop: true }}
-                plugins={[
-                  Autoplay({
-                    delay: 1800,
-                    stopOnInteraction: false,
-                    stopOnMouseEnter: true,
-                  }),
-                ]}
-                className="w-full"
-              >
-                <CarouselContent className="-ml-4">
-                  {tab.logos.map((logo) => (
-                    <CarouselItem
-                      key={logo.alt}
-                      className="pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6"
-                    >
-                      <LogoCard src={logo.src} alt={logo.alt} />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-              </Carousel>
+              <LogoCarousel logos={tab.logos} inView={inView} />
             </TabsContent>
           ))}
         </Tabs>
