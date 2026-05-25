@@ -13,7 +13,8 @@
       "Bash(git checkout *)",
       "Bash(npm install *)",
       "Bash(pnpm build *)",
-      "Bash(Write-Output \"refreshing\")"
+      "Bash(Write-Output \"refreshing\")",
+      "Bash(del \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\home\\\\components\\\\produtos-sanfona-section.tsx\")"
     ]
   }
 }

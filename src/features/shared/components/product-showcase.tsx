@@ -42,10 +42,10 @@ const PRODUTOS: ProdutoData[] = [
   {
     id: "1",
     numero: "01",
-    titulo: "Site Hoteleiro",
-    descricao: "Site profissional com motor de reservas integrado para converter visitantes em hóspedes.",
-    beneficios: ["Design responsivo", "SEO otimizado", "Conversão alta"],
-    link: "/site-hoteleiro",
+    titulo: "Channel Manager",
+    descricao: "Sincronização automática de disponibilidade e tarifas em todos os canais.",
+    beneficios: ["Sincronização em tempo real", "Mais de 100 canais", "Prevenção de overbooking"],
+    link: "/channel-manager",
   },
   {
     id: "2",
@@ -58,23 +58,23 @@ const PRODUTOS: ProdutoData[] = [
   {
     id: "3",
     numero: "03",
-    titulo: "Channel Manager",
-    descricao: "Sincronização automática de disponibilidade e tarifas em todos os canais.",
-    beneficios: ["Sincronização em tempo real", "Mais de 100 canais", "Prevenção de overbooking"],
-    link: "/channel-manager",
-  },
-  {
-    id: "4",
-    numero: "04",
     titulo: "Gestão Hoteleira",
     descricao: "PMS completo para gerenciar todas as operações do seu hotel em um só lugar.",
     beneficios: ["Controle de quartos", "Gestão de hóspedes", "Relatórios completos"],
     link: "/gestao-hoteleira",
   },
   {
+    id: "4",
+    numero: "04",
+    titulo: "Site Hoteleiro",
+    descricao: "Site profissional com motor de reservas integrado para converter visitantes em hóspedes.",
+    beneficios: ["Design responsivo", "SEO otimizado", "Conversão alta"],
+    link: "/site-hoteleiro",
+  },
+  {
     id: "5",
     numero: "05",
-    titulo: "Software de Pagamentos",
+    titulo: "Software de Pagamentos - Foco Pay",
     descricao: "Processamento seguro de pagamentos com múltiplas formas de pagamento.",
     beneficios: ["Pix, cartão e boleto", "Antecipação de recebíveis", "Segurança PCI"],
     link: "/software-pagamentos",
@@ -82,26 +82,10 @@ const PRODUTOS: ProdutoData[] = [
   {
     id: "6",
     numero: "06",
-    titulo: "CRM Hoteleiro",
-    descricao: "Relacionamento com hóspedes para fidelização e campanhas personalizadas.",
-    beneficios: ["Segmentação inteligente", "Automação de marketing", "Histórico completo"],
-    link: "/crm-hoteleiro",
-  },
-  {
-    id: "7",
-    numero: "07",
-    titulo: "Foco Pass",
+    titulo: "Experiência do hóspede - Foco Pass",
     descricao: "Programa de fidelidade para aumentar o retorno dos seus hóspedes.",
     beneficios: ["Pontos e recompensas", "Benefícios exclusivos", "Retenção de clientes"],
     link: "/foco-pass",
-  },
-  {
-    id: "8",
-    numero: "08",
-    titulo: "Integrações Hoteleiras",
-    descricao: "Conecte seu hotel com as principais ferramentas do mercado hoteleiro.",
-    beneficios: ["API aberta", "100+ integrações", "Sincronização automática"],
-    link: "/integracoes",
   },
 ];
 
@@ -113,20 +97,16 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   "03": LayoutGrid,
   "04": Monitor,
   "05": CreditCard,
-  "06": Users,
-  "07": Smartphone,
-  "08": Link2,
+  "06": Smartphone,
 };
 
 const IMAGE_MAP: Record<string, string> = {
-  "01": "/site-hoteleiro.png",
+  "01": "/channel-manager.png",
   "02": "/motor-de-reservas.png",
-  "03": "/channel-manager.png",
-  "04": "/pms-integracoes.png",
+  "03": "/pms-integracoes.png",
+  "04": "/site-hoteleiro.png",
   "05": "/software-de-pagamentos.png",
-  "06": "/crm-hoteleiro.png",
-  "07": "/foco-pass.png",
-  "08": "/integracoes-hoteleiras.png",
+  "06": "/foco-pass.png",
 };
 
 // ── Section header ────────────────────────────────────────────────────────────
@@ -211,7 +191,7 @@ function ProductCard({
         </div>
 
         {/* Description */}
-        <p className={`text-gray-500 text-sm leading-relaxed mb-4 line-clamp-2 ${fullHeight ? "flex-grow" : ""}`}>
+        <p className={`text-gray-500 text-sm leading-relaxed mb-4 ${fullHeight ? "flex-grow" : ""}`}>
           {produto.descricao}
         </p>
 
@@ -220,7 +200,7 @@ function ProductCard({
           {produto.beneficios.map((b) => (
             <li key={b} className="flex items-center gap-2 text-xs text-gray-600">
               <Check className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
-              <span className="line-clamp-1">{b}</span>
+              <span>{b}</span>
             </li>
           ))}
         </ul>
@@ -260,7 +240,7 @@ function ProductCard({
 
 function GridView({ produtos }: { produtos: ProdutoData[] }) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {produtos.map((p, i) => (
         <ProductCard key={p.id} produto={p} index={i} withEntryAnimation />
       ))}

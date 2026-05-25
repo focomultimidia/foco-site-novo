@@ -206,7 +206,7 @@ function SmartIntegrationsTabs() {
           className="text-center mb-10"
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
-            Integrações que conectam todo o ecossistema hoteleiro
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Integrações</span> que conectam todo o <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">ecossistema hoteleiro</span>
           </h2>
         </motion.div>
 

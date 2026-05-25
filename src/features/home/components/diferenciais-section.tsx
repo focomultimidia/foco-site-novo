@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Award,
@@ -13,93 +14,182 @@ import {
 } from "lucide-react";
 import type { Diferencial } from "../types";
 
+// ── Types ─────────────────────────────────────────────────────────────────────
+
 interface DiferenciaisSectionProps {
   diferenciais: Diferencial[];
 }
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Award,
-  Star,
-  Handshake,
-  Shield,
-  Users,
-  Globe,
-  Zap,
-  Lock,
+// ── Maps ──────────────────────────────────────────────────────────────────────
+
+const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+  Award, Star, Handshake, Shield, Users, Globe, Zap, Lock,
 };
 
-function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
+const ACCENT_CYCLE = [
+  { badge: "bg-blue-500/15",    icon: "text-blue-600",    hover: "group-hover:shadow-blue-400/25"   },
+  { badge: "bg-amber-500/15",   icon: "text-amber-600",   hover: "group-hover:shadow-amber-400/25"  },
+  { badge: "bg-emerald-500/15", icon: "text-emerald-600", hover: "group-hover:shadow-emerald-400/25"},
+  { badge: "bg-violet-500/15",  icon: "text-violet-600",  hover: "group-hover:shadow-violet-400/25" },
+];
+
+// ── GlassCard ─────────────────────────────────────────────────────────────────
+
+interface GlassCardProps {
+  diferencial: Diferencial;
+  colorIdx:    number;
+  delay:       number;
+  alignRight?: boolean;
+}
+
+function GlassCard({ diferencial, colorIdx, delay, alignRight = false }: GlassCardProps) {
+  const Icon   = ICON_MAP[diferencial.icone] ?? Award;
+  const accent = ACCENT_CYCLE[colorIdx % ACCENT_CYCLE.length];
+
   return (
-    <section className="py-20 bg-white">
+    <motion.div
+      initial={{ opacity: 0, x: alignRight ? 24 : -24 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={`
+        group flex items-start gap-3.5 p-4 rounded-2xl cursor-default
+        bg-white/65 backdrop-blur-md
+        border border-white/55
+        shadow-lg shadow-slate-900/[0.07]
+        hover:-translate-y-1
+        hover:bg-white/80
+        hover:border-blue-200/60
+        hover:shadow-xl hover:shadow-blue-900/[0.10]
+        transition-all duration-300
+      `}
+    >
+      {/* Icon badge */}
+      <div
+        className={`
+          w-10 h-10 rounded-xl flex items-center justify-center shrink-0
+          ${accent.badge}
+          transition-shadow duration-300
+          group-hover:shadow-lg ${accent.hover}
+        `}
+      >
+        <Icon className={`w-5 h-5 ${accent.icon}`} />
+      </div>
+
+      {/* Text */}
+      <div className="min-w-0">
+        <h3 className="font-bold text-slate-800 text-sm leading-snug mb-1 tracking-tight">
+          {diferencial.titulo}
+        </h3>
+        <p className="text-slate-500 text-xs leading-relaxed">
+          {diferencial.descricao}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+
+function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
+  const left     = diferenciais.slice(0, 4);
+  const right    = diferenciais.slice(4, 8);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.currentTime = 0;
+          video.play();
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.2 },
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section className="py-24 bg-slate-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
-            Por que contratar o channel manager da
-            <br />
-            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Foco Tecnologia</span>
+            Por que contratar o channel manager da{" "}
+            <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+              Foco Tecnologia
+            </span>
           </h2>
         </motion.div>
 
-        {/* Two Column Layout */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start"
-        >
-          {/* Left Column - Cards Grid (1 column x 8 rows) */}
-          <div className="grid grid-cols-1 gap-4 order-2 lg:order-1">
-            {diferenciais.map((diferencial, index) => {
-              const Icon = iconMap[diferencial.icone] || Award;
-              return (
-                <motion.div
-                  key={diferencial.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="flex items-start gap-4 bg-gray-50 rounded-xl p-4 hover:bg-white hover:shadow-md transition-all duration-300 border border-transparent hover:border-gray-100"
-                >
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Icon className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-gray-900 text-sm mb-1">
-                      {diferencial.titulo}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">
-                      {diferencial.descricao}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+        {/* ── Grid ────────────────────────────────────────────────────────────
+             Desktop: [cards-left | video | cards-right]
+             Mobile:  single column, all 8 cards stacked
+        ─────────────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,1.1fr)_1fr] gap-4 lg:gap-4 items-stretch">
 
-          {/* Right Column - Image */}
-          <div className="relative order-1 lg:order-2">
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[600px]">
-              <img
-                src="/assets/imgs/home/modelo-porque-contratar.jpg"
-                alt="Tecnologia hoteleira Foco"
-                className="w-full h-full object-cover"
+          {/* Left column — cards 1–4 */}
+          <div className="flex flex-col gap-4">
+            {left.map((d, i) => (
+              <GlassCard
+                key={d.id}
+                diferencial={d}
+                colorIdx={i}
+                delay={i * 0.09}
+                alignRight={false}
               />
-              <div className="absolute inset-0" />
-            </div>
-
-            {/* Decorative elements */}
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-blue-100 rounded-2xl -z-10" />
-            <div className="absolute -top-4 -right-4 w-16 h-16 bg-blue-50 rounded-xl -z-10" />
+            ))}
           </div>
-        </motion.div>
+
+          {/* Center column — video (desktop only) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative hidden lg:block rounded-2xl overflow-hidden shadow-xl shadow-slate-900/10"
+          >
+            <video
+              ref={videoRef}
+              className="absolute inset-0 w-full h-full object-cover"
+              muted
+              playsInline
+              src="/assets/videos/home/video-section-pq-foco.mp4"
+            />
+            {/* top/bottom fades so the video blends with the section bg */}
+            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-100/60 to-transparent pointer-events-none z-10" />
+            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-100/60 to-transparent pointer-events-none z-10" />
+          </motion.div>
+
+          {/* Right column — cards 5–8 */}
+          <div className="flex flex-col gap-4">
+            {right.map((d, i) => (
+              <GlassCard
+                key={d.id}
+                diferencial={d}
+                colorIdx={i}
+                delay={0.36 + i * 0.09}
+                alignRight
+              />
+            ))}
+          </div>
+
+        </div>
       </div>
     </section>
   );

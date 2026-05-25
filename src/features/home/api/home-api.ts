@@ -71,7 +71,7 @@ const homeData: HomeData = {
     {
       id: "5",
       numero: "05",
-      titulo: "Software de pagamentos",
+      titulo: "Software de pagamentos - Foco Pay",
       descricao:
         "A ferramenta essencial para dar ao hoteleiro a segurança financeira e precisão na gestão de reservas.",
       beneficios: [
@@ -84,20 +84,7 @@ const homeData: HomeData = {
     {
       id: "6",
       numero: "06",
-      titulo: "CRM hoteleiro",
-      descricao:
-        "Centralize dados e interações dos hóspedes para personalizar o atendimento, fidelizar clientes e otimizar marketing e vendas.",
-      beneficios: [
-        "Comunicação por e-mail e WhatsApp",
-        "Gerador de leads no site",
-        "Disparo de campanhas automáticas",
-      ],
-      link: "/crm-hoteleiro",
-    },
-    {
-      id: "7",
-      numero: "07",
-      titulo: "Experiência do hóspede",
+      titulo: "Experiência do hóspede - Foco Pass",
       descricao:
         "Surpreenda seu hóspede com um aplicativo de hotel repleto de recursos e descontos em atrações no seu destino!",
       beneficios: [
@@ -106,19 +93,6 @@ const homeData: HomeData = {
         "Cardápio digital do hotel",
       ],
       link: "/experiencia-do-hospede",
-    },
-    {
-      id: "8",
-      numero: "08",
-      titulo: "Integrações Hoteleiras",
-      descricao:
-        "Promova seu hotel ou pousada na internet e garanta mais reservas com as melhores estratégias de marketing digital hoteleiro.",
-      beneficios: [
-        "Aumente a presença digital",
-        "Inspire hóspedes com conteúdos",
-        "Transforme seguidores em hóspedes",
-      ],
-      link: "/integracoes-hoteleiras",
     },
   ],
   artigosMidia,
@@ -251,10 +225,10 @@ const homeData: HomeData = {
     },
     {
       id: "2",
-      icone: "Star",
-      titulo: "Elite Partner 2025",
+      icone: "Globe",
+      titulo: "+800 Canais Conectados",
       descricao:
-        "Fomos reconhecidos pelo Expedia Group como Elite Partner 2025 por atender a padrões excepcionais de desempenho, integração e suporte.",
+        "Mais de 800 canais de vendas conectados (Booking, Decolar, Expedia, Airbnb, E-HTL e muitos outros).",
     },
     {
       id: "3",
@@ -270,19 +244,19 @@ const homeData: HomeData = {
       descricao:
         "Software hoteleiro com recursos de redundância, backup e segurança de todo o seu histórico de reservas e informações.",
     },
-    {
+   {
       id: "5",
-      icone: "Users",
-      titulo: "2.500+ Hoteleiros Satisfeitos",
+      icone: "Star",
+      titulo: "Elite Partner 2025",
       descricao:
-        "Mais de 2.500 hoteleiros satisfeitos com as nossas soluções no Brasil.",
+        "Fomos reconhecidos pelo Expedia Group como Elite Partner 2025 por atender a padrões excepcionais de desempenho, integração e suporte.",
     },
     {
       id: "6",
-      icone: "Globe",
-      titulo: "800+ Canais Conectados",
+      icone: "Users",
+      titulo: "+2.500 Hoteleiros Satisfeitos",
       descricao:
-        "Mais de 800 canais de vendas conectados (Booking, Decolar, Expedia, Airbnb, E-HTL e muitos outros).",
+        "Mais de 2.500 hoteleiros satisfeitos com as nossas soluções no Brasil.",
     },
     {
       id: "7",

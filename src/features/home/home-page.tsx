@@ -84,7 +84,7 @@ export function HomePage() {
           { id: "5", question: "Os contratos dos sistemas hoteleiros possuem fidelidade?", answer: "Nossos contratos são flexíveis e transparentes. Oferecemos opções com e sem período de fidelidade, permitindo que você escolha o modelo que melhor se adapta às suas necessidades. Acreditamos na qualidade do nosso serviço e não precisamos prender clientes com contratos longos." },
         ]}
         title="Dúvidas Frequentes"
-        subtitle="Tire suas dúvidas sobre o Channel Manager"
+        subtitle="Tire suas dúvidas sobre a Foco Tecnologia e seus produtos"
         badge="FAQ"
         showContactButton
       />
