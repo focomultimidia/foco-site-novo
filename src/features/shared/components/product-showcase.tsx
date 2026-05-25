@@ -2,16 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Check,
-  Globe,
-  Calendar,
-  LayoutGrid,
-  Monitor,
-  CreditCard,
-  Smartphone,
-} from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -22,90 +13,11 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
+import type { ProdutoItem } from "@/features/shared/data/produtos-data";
 
-// ── Types ─────────────────────────────────────────────────────────────────────
-
-export interface ProdutoData {
-  id: string;
-  numero: string;
-  titulo: string;
-  descricao: string;
-  beneficios: string[];
-  link: string;
-}
-
-// ── Canonical data — single source of truth for both view modes ───────────────
-
-const PRODUTOS: ProdutoData[] = [
-  {
-    id: "1",
-    numero: "01",
-    titulo: "Channel Manager",
-    descricao: "Sincronização automática de disponibilidade e tarifas em todos os canais.",
-    beneficios: ["Sincronização em tempo real", "Mais de 100 canais", "Prevenção de overbooking"],
-    link: "/channel-manager",
-  },
-  {
-    id: "2",
-    numero: "02",
-    titulo: "Motor de Reservas",
-    descricao: "Sistema de reservas diretas que elimina comissões de OTAs e aumenta seu lucro.",
-    beneficios: ["Zero comissão", "Confirmação instantânea", "Pagamento integrado"],
-    link: "/motor-reservas",
-  },
-  {
-    id: "3",
-    numero: "03",
-    titulo: "Gestão Hoteleira",
-    descricao: "PMS completo para gerenciar todas as operações do seu hotel em um só lugar.",
-    beneficios: ["Controle de quartos", "Gestão de hóspedes", "Relatórios completos"],
-    link: "/gestao-hoteleira",
-  },
-  {
-    id: "4",
-    numero: "04",
-    titulo: "Site Hoteleiro",
-    descricao: "Site profissional com motor de reservas integrado para converter visitantes em hóspedes.",
-    beneficios: ["Design responsivo", "SEO otimizado", "Conversão alta"],
-    link: "/site-hoteleiro",
-  },
-  {
-    id: "5",
-    numero: "05",
-    titulo: "Software de Pagamentos - Foco Pay",
-    descricao: "Processamento seguro de pagamentos com múltiplas formas de pagamento.",
-    beneficios: ["Pix, cartão e boleto", "Antecipação de recebíveis", "Segurança PCI"],
-    link: "/software-pagamentos",
-  },
-  {
-    id: "6",
-    numero: "06",
-    titulo: "Experiência do hóspede - Foco Pass",
-    descricao: "Programa de fidelidade para aumentar o retorno dos seus hóspedes.",
-    beneficios: ["Pontos e recompensas", "Benefícios exclusivos", "Retenção de clientes"],
-    link: "/foco-pass",
-  },
-];
-
-// ── Icon / image maps ─────────────────────────────────────────────────────────
-
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  "01": Globe,
-  "02": Calendar,
-  "03": LayoutGrid,
-  "04": Monitor,
-  "05": CreditCard,
-  "06": Smartphone,
-};
-
-const IMAGE_MAP: Record<string, string> = {
-  "01": "/channel-manager.png",
-  "02": "/motor-de-reservas.png",
-  "03": "/pms-integracoes.png",
-  "04": "/site-hoteleiro.png",
-  "05": "/software-de-pagamentos.png",
-  "06": "/foco-pass.png",
-};
+// Backward-compat alias so existing imports of ProdutoData still resolve.
+export type { ProdutoItem as ProdutoData };
 
 // ── Section header ────────────────────────────────────────────────────────────
 
@@ -141,9 +53,9 @@ function ShowcaseHeader({ animate }: { animate: boolean }) {
 // ── ProductCard ───────────────────────────────────────────────────────────────
 
 interface ProductCardProps {
-  produto: ProdutoData;
-  index: number;
-  fullHeight?: boolean;
+  produto:            ProdutoItem;
+  index:              number;
+  fullHeight?:        boolean;
   withEntryAnimation?: boolean;
 }
 
@@ -153,8 +65,7 @@ function ProductCard({
   fullHeight = false,
   withEntryAnimation = false,
 }: ProductCardProps) {
-  const Icon  = ICON_MAP[produto.numero] ?? Globe;
-  const image = IMAGE_MAP[produto.numero];
+  const { Icone: Icon, imagem } = produto;
 
   const card = (
     <div
@@ -174,7 +85,10 @@ function ProductCard({
           <h3 className="font-display font-bold text-[#1e3a5f] tracking-tight leading-snug text-lg pr-10">
             {produto.titulo}
           </h3>
-          <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200 shadow-md shadow-blue-500/25">
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-200 shadow-md"
+            style={{ backgroundColor: produto.accent, boxShadow: `0 4px 12px ${produto.accent}40` }}
+          >
             <Icon className="w-5 h-5 text-white" />
           </div>
         </div>
@@ -182,7 +96,7 @@ function ProductCard({
         {/* Product image */}
         <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-xl overflow-hidden mb-4 p-4 flex items-center justify-center">
           <img
-            src={image}
+            src={imagem}
             alt={produto.titulo}
             className="max-w-full max-h-full object-contain"
           />
@@ -197,7 +111,7 @@ function ProductCard({
         <ul className="space-y-2 mb-4">
           {produto.beneficios.map((b) => (
             <li key={b} className="flex items-center gap-2 text-xs text-gray-600">
-              <Check className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
+              <Check className="w-3.5 h-3.5 flex-shrink-0" style={{ color: produto.accent }} />
               <span>{b}</span>
             </li>
           ))}
@@ -206,7 +120,8 @@ function ProductCard({
         {/* CTA — reveals on hover */}
         <div className={`opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${fullHeight ? "mt-auto" : ""}`}>
           <Button
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white rounded-full py-2.5 text-sm font-medium"
+            className="w-full text-white rounded-full py-2.5 text-sm font-medium"
+            style={{ backgroundColor: produto.accent }}
             asChild
           >
             <a href={produto.link} className="flex items-center justify-center gap-2">
@@ -236,10 +151,10 @@ function ProductCard({
 
 // ── GridView ──────────────────────────────────────────────────────────────────
 
-function GridView({ produtos }: { produtos: ProdutoData[] }) {
+function GridView() {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {produtos.map((p, i) => (
+      {PRODUTOS_DATA.map((p, i) => (
         <ProductCard key={p.id} produto={p} index={i} withEntryAnimation />
       ))}
     </div>
@@ -248,7 +163,7 @@ function GridView({ produtos }: { produtos: ProdutoData[] }) {
 
 // ── CarouselView ──────────────────────────────────────────────────────────────
 
-function CarouselView({ produtos }: { produtos: ProdutoData[] }) {
+function CarouselView() {
   const [api, setApi]         = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount]     = useState(0);
@@ -271,7 +186,7 @@ function CarouselView({ produtos }: { produtos: ProdutoData[] }) {
         className="w-full"
       >
         <CarouselContent className="-ml-4">
-          {produtos.map((p, i) => (
+          {PRODUTOS_DATA.map((p, i) => (
             <CarouselItem key={p.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
               <ProductCard produto={p} index={i} fullHeight />
             </CarouselItem>
@@ -304,20 +219,14 @@ function CarouselView({ produtos }: { produtos: ProdutoData[] }) {
 
 export interface ProductShowcaseProps {
   viewMode?: "grid" | "carousel";
-  produtos?: ProdutoData[];
 }
 
-function ProductShowcase({ viewMode = "carousel", produtos }: ProductShowcaseProps) {
-  const items = produtos ?? PRODUTOS;
-
+function ProductShowcase({ viewMode = "carousel" }: ProductShowcaseProps) {
   return (
     <section className={`py-20 ${viewMode === "grid" ? "bg-white" : "bg-slate-50"}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ShowcaseHeader animate={viewMode === "grid"} />
-        {viewMode === "grid"
-          ? <GridView     produtos={items} />
-          : <CarouselView produtos={items} />
-        }
+        {viewMode === "grid" ? <GridView /> : <CarouselView />}
       </div>
     </section>
   );

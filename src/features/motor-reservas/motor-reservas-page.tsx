@@ -21,6 +21,8 @@ import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
+import { ProdutosAccordionSection } from "@/features/shared/components";
+
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -114,6 +116,8 @@ function MotorReservasPage() {
 
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
+
+      <ProdutosAccordionSection />
 
       {/* Lead Capture CTA */}
       <LeadCaptureCTA

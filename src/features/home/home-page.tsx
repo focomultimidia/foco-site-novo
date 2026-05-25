@@ -45,7 +45,7 @@ export function HomePage() {
         onCtaClick={() => setIsLeadModalOpen(true)}
       />
 
-      <ProdutosSection produtos={data.produtos} />
+      <ProdutosSection />
 
       <TrustedLogosMarquee />
 

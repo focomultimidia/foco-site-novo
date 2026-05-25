@@ -141,10 +141,10 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
              Desktop: [cards-left | video | cards-right]
              Mobile:  single column, all 8 cards stacked
         ─────────────────────────────────────────────────────────────────── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,1.1fr)_1fr] gap-4 lg:gap-4 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(260px,1.1fr)_1fr] gap-4 items-stretch">
 
-          {/* Left column — cards 1–4 */}
-          <div className="flex flex-col gap-4">
+          {/* Left column — cards 1–4 | mobile: order-2 */}
+          <div className="flex flex-col gap-4 order-2 lg:order-none">
             {left.map((d, i) => (
               <GlassCard
                 key={d.id}
@@ -156,13 +156,13 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             ))}
           </div>
 
-          {/* Center column — video (desktop only) */}
+          {/* Center column — video | mobile: visible block between title and cards (order-1) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative hidden lg:block rounded-2xl overflow-hidden shadow-xl shadow-slate-900/10"
+            className="relative order-1 lg:order-none aspect-video lg:aspect-auto rounded-2xl overflow-hidden shadow-xl shadow-slate-900/10"
           >
             <video
               ref={videoRef}
@@ -171,13 +171,12 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
               playsInline
               src="/assets/videos/home/video-section-pq-foco.mp4"
             />
-            {/* top/bottom fades so the video blends with the section bg */}
             <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-100/60 to-transparent pointer-events-none z-10" />
             <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-100/60 to-transparent pointer-events-none z-10" />
           </motion.div>
 
-          {/* Right column — cards 5–8 */}
-          <div className="flex flex-col gap-4">
+          {/* Right column — cards 5–8 | mobile: order-3 */}
+          <div className="flex flex-col gap-4 order-3 lg:order-none">
             {right.map((d, i) => (
               <GlassCard
                 key={d.id}

@@ -1,6 +1,8 @@
 export { SoftwareProductsCarousel } from "./software-products-carousel";
 export { ProductShowcase } from "./product-showcase";
 export type { ProductShowcaseProps, ProdutoData } from "./product-showcase";
+export { ProdutosAccordionSection } from "./produtos-accordion-section";
+export type { ProdutosAccordionSectionProps } from "./produtos-accordion-section";
 export { GenericInfoSection } from "./generic-info-section";
 export type { GenericInfoSectionProps } from "./generic-info-section";
 export { WebsitePortfolioCarousel } from "./website-portfolio-carousel";

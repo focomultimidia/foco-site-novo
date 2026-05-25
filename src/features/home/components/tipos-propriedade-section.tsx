@@ -205,18 +205,21 @@ function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
   const desc = SHORT_DESC[tipo.id]  ?? tipo.descricao;
 
   return (
-    <div className="overflow-hidden rounded-2xl">
-      {/* Clickable image header */}
+    <div className="relative overflow-hidden rounded-2xl">
+      {/* Persistent background — shared by header AND expanded content */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img src={img} alt={tipo.nome} className="w-full h-full object-cover" />
+        <div className={`absolute inset-0 bg-gradient-to-b ${ts.overlay}`} />
+        <div className="absolute inset-0 bg-black/52" />
+      </div>
+
+      {/* Clickable header */}
       <button
         type="button"
-        className="relative w-full h-20 overflow-hidden block text-left"
+        className="relative z-10 w-full h-20 block text-left"
         onClick={onToggle}
       >
-        <img src={img} alt={tipo.nome} className="w-full h-full object-cover" />
-        <div className={`absolute inset-0 bg-gradient-to-r ${ts.overlay}`} />
-        <div className="absolute inset-0 bg-black/50" />
-
-        <div className="relative h-full flex items-center px-5 gap-4">
+        <div className="absolute inset-0 flex items-center px-5 gap-4">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
             style={{ backgroundColor: `${ts.accent}30` }}
@@ -236,7 +239,7 @@ function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
         </div>
       </button>
 
-      {/* Expandable description + CTA */}
+      {/* Expandable content — same background continues */}
       <AnimatePresence initial={false}>
         {isActive && (
           <motion.div
@@ -244,10 +247,10 @@ function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
             transition={SPRING}
-            className="overflow-hidden"
+            className="relative z-10 overflow-hidden"
           >
-            <div className="bg-[#151e2e] px-5 py-5">
-              <p className="text-white/60 text-sm leading-relaxed mb-4">{desc}</p>
+            <div className="px-5 pb-6 pt-1">
+              <p className="text-white/75 text-sm leading-relaxed mb-4">{desc}</p>
               <button
                 type="button"
                 className="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full text-[#0f172a]"

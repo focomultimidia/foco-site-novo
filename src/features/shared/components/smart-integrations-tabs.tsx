@@ -212,18 +212,18 @@ function SmartIntegrationsTabs() {
 
         {/* Tabs */}
         <Tabs defaultValue="canais" className="w-full">
-          {/* Tab Navigation — scrollable on mobile */}
-          <div className="flex justify-center mb-8 overflow-x-auto pb-1">
-            <TabsList className="inline-flex flex-nowrap h-auto gap-1 p-1.5 bg-slate-100 border rounded-full border-slate-200 min-w-max">
+          {/* Tab Navigation — 2×2 grid on mobile, pill row on desktop */}
+          <div className="mb-8 md:flex md:justify-center">
+            <TabsList className="grid grid-cols-2 w-full rounded-2xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 bg-slate-100 border border-slate-200">
               {tabsData.map((tab) => {
                 const Icon = tab.icon;
                 return (
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className="flex items-center gap-2 px-5 py-2.5 text-sm font-medium whitespace-nowrap rounded-full data-[state=active]:bg-[#1e3a5f] data-[state=active]:text-white data-[state=active]:shadow-sm flex-shrink-0"
+                    className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-xl md:rounded-full md:px-5 md:py-2.5 md:whitespace-nowrap data-[state=active]:bg-[#1e3a5f] data-[state=active]:text-white data-[state=active]:shadow-sm"
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-4 h-4 shrink-0" />
                     {tab.label}
                   </TabsTrigger>
                 );
