@@ -28,6 +28,7 @@ interface DesktopCardProps {
 function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: DesktopCardProps) {
   const { Icone: Icon } = produto;
   const isDefault = !isExpanded && !isSqueezed;
+  const bkgSrc = produto.bkgImagem ?? produto.imagem;
 
   return (
     <motion.div
@@ -45,7 +46,7 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       >
         <img
-          src={produto.imagem}
+          src={bkgSrc}
           alt={produto.titulo}
           className="w-full h-full object-cover object-top"
         />
@@ -89,7 +90,7 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
             </div>
 
             {/* Horizontal title */}
-            <p className="text-white text-[13px] font-bold text-center tracking-tight leading-snug px-1 drop-shadow-md">
+            <p className="text-white text-[16px] font-bold text-center tracking-tight leading-snug px-1 drop-shadow-md">
               {produto.titulo}
             </p>
 
@@ -169,17 +170,17 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
               <Icon className="w-7 h-7 text-white" />
             </div>
 
-            <h3 className="text-white text-2xl font-bold tracking-tight leading-none mb-2.5">
+            <h3 className="text-white text-[2xl] font-bold tracking-tight leading-none mb-2.5">
               {produto.titulo}
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-5 max-w-xs">
+            <p className="text-white text-lg leading-relaxed mb-5 max-w-sm">
               {produto.descricao}
             </p>
 
             {/* Benefits */}
             <ul className="space-y-1.5 mb-6">
               {produto.beneficios.map((b) => (
-                <li key={b} className="flex items-center gap-2 text-white/80 text-xs">
+                <li key={b} className="flex items-center gap-2 text-white text-sm">
                   <Check className="w-3.5 h-3.5 shrink-0" style={{ color: produto.accent }} />
                   {b}
                 </li>
@@ -212,24 +213,24 @@ interface MobileCardProps {
 
 function MobileCard({ produto, isActive, onToggle }: MobileCardProps) {
   const { Icone: Icon } = produto;
+  const bkgSrc = produto.bkgImagem ?? produto.imagem;
 
   return (
-    <div className="overflow-hidden rounded-2xl">
+    <div className="relative overflow-hidden rounded-2xl">
+      {/* Persistent background — same image/overlay as desktop, shared by header + expanded */}
+      <div className="absolute inset-0 pointer-events-none">
+        <img src={bkgSrc} alt={produto.titulo} className="w-full h-full object-cover object-top" />
+        <div className={`absolute inset-0 bg-gradient-to-b ${produto.overlay}`} />
+        <div className="absolute inset-0 bg-black/52" />
+      </div>
+
       {/* Clickable header */}
       <button
         type="button"
-        className="relative w-full h-20 overflow-hidden block text-left"
+        className="relative z-10 w-full h-20 block text-left"
         onClick={onToggle}
       >
-        <img
-          src={produto.imagem}
-          alt={produto.titulo}
-          className="w-full h-full object-cover object-top"
-        />
-        <div className={`absolute inset-0 bg-gradient-to-r ${produto.overlay}`} />
-        <div className="absolute inset-0 bg-black/50" />
-
-        <div className="relative h-full flex items-center px-5 gap-4">
+        <div className="absolute inset-0 flex items-center px-5 gap-4">
           <div
             className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
             style={{ backgroundColor: `${produto.accent}30` }}
@@ -245,7 +246,7 @@ function MobileCard({ produto, isActive, onToggle }: MobileCardProps) {
         </div>
       </button>
 
-      {/* Expandable content */}
+      {/* Expandable content — same background continues seamlessly */}
       <AnimatePresence initial={false}>
         {isActive && (
           <motion.div
@@ -253,10 +254,10 @@ function MobileCard({ produto, isActive, onToggle }: MobileCardProps) {
             animate={{ height: "auto" }}
             exit={{ height: 0 }}
             transition={SPRING}
-            className="overflow-hidden"
+            className="relative z-10 overflow-hidden"
           >
-            <div className="bg-[#151e2e] px-5 py-5">
-              <p className="text-white/60 text-sm leading-relaxed mb-4">{produto.descricao}</p>
+            <div className="px-5 pb-6 pt-1">
+              <p className="text-white/75 text-sm leading-relaxed mb-4">{produto.descricao}</p>
               <ul className="space-y-1.5 mb-5">
                 {produto.beneficios.map((b) => (
                   <li key={b} className="flex items-center gap-2 text-white/80 text-xs">
@@ -284,12 +285,10 @@ function MobileCard({ produto, isActive, onToggle }: MobileCardProps) {
 // ── Section ───────────────────────────────────────────────────────────────────
 
 export interface ProdutosAccordionSectionProps {
-  title?:    string;
   subtitle?: string;
 }
 
 function ProdutosAccordionSection({
-  title    = "Sistema para hotéis e pousadas aprovado por 97% dos nossos clientes",
   subtitle = "Da reserva à gestão financeira, nossa plataforma reúne produtos inovadores para otimizar cada detalhe do seu hotel ou pousada",
 }: ProdutosAccordionSectionProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -307,7 +306,11 @@ function ProdutosAccordionSection({
           className="text-center mb-12"
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
-            {title}
+            Sistema para hotéis e pousadas{" "}
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+              aprovado por 97%
+            </span>{" "}
+            dos nossos clientes
           </h2>
           {subtitle && (
             <p className="text-gray-500 mt-4 max-w-3xl mx-auto leading-relaxed">{subtitle}</p>

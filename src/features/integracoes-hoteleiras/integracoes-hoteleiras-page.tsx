@@ -5,7 +5,6 @@ import {
   HeroSection,
   ImportanciaSection,
   PmsIntegradosSection,
-  PorQueContratarSection,
 } from "./components";
 
 // Provas Sociais importadas da Home e UI
@@ -15,7 +14,6 @@ import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
-import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -71,9 +69,6 @@ function IntegracoesHoteleirasPage() {
       {/* Prova Social: Depoimentos (Aprovação 97%) */}
       <DepoimentosSection depoimentos={depoimentos} />
 
-      {/* Section 4: Por que contratar */}
-      <PorQueContratarSection />
-
       {/* Prova Social: Vídeos */}
       <VideoTestimonialsCarousel
         items={videosData}
@@ -108,12 +103,6 @@ function IntegracoesHoteleirasPage() {
         showContactButton
       />
 
-      {/* Lead Capture CTA */}
-      <LeadCaptureCTA
-        title="Pronto para conectar seus sistemas?"
-        subtitle="Solicite uma demonstração e descubra como as integrações da Foco podem transformar a operação do seu hotel."
-        badge="Comece agora"
-      />
     </div>
   );
 }

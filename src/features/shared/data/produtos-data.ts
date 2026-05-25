@@ -11,16 +11,17 @@ import type React from "react";
 // ── Type ──────────────────────────────────────────────────────────────────────
 
 export interface ProdutoItem {
-  id:         string;
-  numero:     string;
-  titulo:     string;
-  descricao:  string;
-  beneficios: string[];
-  link:       string;
-  Icone:      React.ComponentType<{ className?: string }>;
-  imagem:     string;
-  accent:     string;
-  overlay:    string;
+  id:          string;
+  numero:      string;
+  titulo:      string;
+  descricao:   string;
+  beneficios:  string[];
+  link:        string;
+  Icone:       React.ComponentType<{ className?: string }>;
+  imagem:      string;
+  bkgImagem?:  string; // optional hero/lifestyle image used as accordion background
+  accent:      string;
+  overlay:     string;
 }
 
 // ── Data — single source of truth ─────────────────────────────────────────────
@@ -34,6 +35,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/channel-manager",
     Icone: Globe,
     imagem: "/channel-manager.png",
+    bkgImagem: "/assets/imgs/channel-manager/bkg-accordion.jpg",
     accent: "#60a5fa",
     overlay: "from-blue-950/85 to-blue-900/25",
   },
@@ -45,6 +47,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/motor-de-reservas",
     Icone: Calendar,
     imagem: "/motor-de-reservas.png",
+    bkgImagem: "/assets/imgs/motor-de-reservas/bkg-accordion.jpg",
     accent: "#34d399",
     overlay: "from-emerald-950/85 to-emerald-900/25",
   },
@@ -56,6 +59,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/gestao-hoteleira",
     Icone: LayoutGrid,
     imagem: "/pms-integracoes.png",
+    bkgImagem: "/assets/imgs/gestao-hoteleira-pms/bkg-accordion.jpg",
     accent: "#a78bfa",
     overlay: "from-violet-950/85 to-violet-900/25",
   },
@@ -67,6 +71,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/site-hoteleiro",
     Icone: Monitor,
     imagem: "/site-hoteleiro.png",
+    bkgImagem: "/assets/imgs/site-hoteleiro/bkg-accordion.jpg",
     accent: "#fbbf24",
     overlay: "from-amber-950/85 to-amber-900/25",
   },
@@ -78,6 +83,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/software-de-pagamentos",
     Icone: CreditCard,
     imagem: "/software-de-pagamentos.png",
+    bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.jpg",
     accent: "#22d3ee",
     overlay: "from-cyan-950/85 to-cyan-900/25",
   },
@@ -89,6 +95,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/experiencia-do-hospede",
     Icone: Smartphone,
     imagem: "/foco-pass.png",
+    bkgImagem: "/assets/imgs/experiencia-do-hospede/bkg-accordion.jpg",
     accent: "#fb7185",
     overlay: "from-rose-950/85 to-rose-900/25",
   },
