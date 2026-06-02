@@ -10,3 +10,5 @@ export { TrustedLogosMarquee } from "./trusted-logos-marquee";
 export { SmartIntegrationsTabs } from "./smart-integrations-tabs";
 export { BaseInternalHero } from "./base-internal-hero";
 export type { BaseInternalHeroProps, HeroSlide } from "./base-internal-hero";
+export { CertificacoesSection } from "./certificacoes-section";
+export type { CertificacoesSectionProps } from "./certificacoes-section";

@@ -16,7 +16,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { PageLoader } from "@/components/ui/page-loader";
 import { ErrorMessage } from "@/components/ui/error-message";
 import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
-import { TrustedLogosMarquee, SmartIntegrationsTabs } from "@/features/shared/components";
+import { TrustedLogosMarquee, SmartIntegrationsTabs, CertificacoesSection } from "@/features/shared/components";
 import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
 import { eventos, depoimentos, numeros, videosData, artigosMidia } from "@/features/shared/data/social-proof-data";
 
@@ -69,6 +69,8 @@ export function HomePage() {
         slidesToShow={3}
       />
       <SegurancaSection certificacoes={data.certificacoes} />
+
+      <CertificacoesSection />
 
       <TiposPropriedadeSection tipos={data.tiposPropriedade} />
 

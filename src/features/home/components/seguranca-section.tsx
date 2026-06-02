@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import {
   Shield,
@@ -35,12 +36,6 @@ const iconColors: Record<number, { bg: string; text: string; border: string }> =
   3: { bg: "bg-emerald-950/60", text: "text-emerald-400", border: "border-emerald-800/50" },
 };
 
-const bentoSizes = [
-  "lg:col-span-2",
-  "lg:col-span-1",
-  "lg:col-span-1",
-  "lg:col-span-2",
-];
 
 const containerVariants = {
   hidden: {},
@@ -55,6 +50,27 @@ const itemVariants: Variants = {
 };
 
 function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Play when ≥25 % of the video is visible; pause when it leaves.
+  // No loop — the video stops naturally at its last frame.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="relative py-24 overflow-hidden bg-slate-950">
       {/* Background grid */}
@@ -98,54 +114,73 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
           </p>
         </motion.div>
 
-        {/* Bento Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-        >
-          {certificacoes.map((cert, index) => {
-            const Icon = iconMap[cert.icone] || Shield;
-            const color = iconColors[index % 4];
-            const bento = bentoSizes[index % 4];
+        {/* Two-column layout: cards left · image right */}
+        <div className="grid grid-cols-1 lg:grid-cols-[6.5fr_3.5fr] gap-10 lg:gap-4 items-stretch">
 
-            return (
-              <motion.div
-                key={cert.id}
-                variants={itemVariants}
-                className={`group relative rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-sm p-6 flex flex-col gap-4 shadow-sm hover:shadow-xl hover:shadow-slate-900/60 hover:-translate-y-1 transition-all duration-300 cursor-default ${bento}`}
-              >
-                {/* Subtle inner glow on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br from-white/[0.03] to-transparent" />
+          {/* Left: 2 × 2 card grid */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-4"
+          >
+            {certificacoes.map((cert, index) => {
+              const Icon = iconMap[cert.icone] || Shield;
+              const color = iconColors[index % 4];
 
-                {/* Icon */}
-                <div
-                  className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 ${color.bg} ${color.border}`}
+              return (
+                <motion.div
+                  key={cert.id}
+                  variants={itemVariants}
+                  className="group relative rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-sm p-6 flex flex-col gap-4 shadow-sm hover:shadow-xl hover:shadow-slate-900/60 hover:-translate-y-1 transition-all duration-300 cursor-default"
                 >
-                  <Icon className={`w-5 h-5 ${color.text}`} />
-                </div>
+                  {/* Subtle inner glow on hover */}
+                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br from-white/[0.03] to-transparent" />
 
-                {/* Text */}
-                <div>
-                  <h3 className="font-semibold text-white text-base mb-1.5">
-                    {cert.titulo}
-                  </h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    {cert.descricao}
-                  </p>
-                </div>
+                  {/* Icon */}
+                  <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 ${color.bg} ${color.border}`}>
+                    <Icon className={`w-5 h-5 ${color.text}`} />
+                  </div>
 
-                {/* Bottom badge */}
-                <div className={`mt-auto inline-flex w-fit items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${color.bg} ${color.border} ${color.text}`}>
-                  <span className={`w-1.5 h-1.5 rounded-full bg-current`} />
-                  Ativo
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                  {/* Text */}
+                  <div>
+                    <h3 className="font-semibold text-white text-base mb-1.5">
+                      {cert.titulo}
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {cert.descricao}
+                    </p>
+                  </div>
+
+                  {/* Bottom badge */}
+                  <div className={`mt-auto inline-flex w-fit items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${color.bg} ${color.border} ${color.text}`}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                    Ativo
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          {/* Right: video area */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/50"
+          >
+            <video
+              ref={videoRef}
+              src="/assets/videos/home/video-security.mp4"
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          </motion.div>
+
+        </div>
 
         {/* Bottom trust bar */}
         <motion.div

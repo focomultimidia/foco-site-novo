@@ -29,11 +29,11 @@ const footerSections: FooterSection[] = [
   {
     title: "Empresa",
     links: [
-      { label: "Sobre Nós", href: "#" },
+      { label: "Sobre Nós", href: "/sobre" },
       { label: "Carreiras", href: "#" },
       { label: "Blog", href: "#" },
       { label: "Eventos", href: "#" },
-      { label: "Parceiros", href: "#" },
+      { label: "Parceiros", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
     ],
   },
   {
@@ -71,10 +71,10 @@ function Footer() {
               />
             </Link>
             <p className="text-white/80 text-sm mb-6 max-w-sm">
-              Líder em software para hotelaria no Brasil. Transformando a gestão hoteleira 
+              Líder em software para hotelaria no Brasil. Transformando a gestão hoteleira
               com tecnologia inovadora desde 2008.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-3">
               <a

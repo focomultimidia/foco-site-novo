@@ -81,13 +81,13 @@ const softwaresSubmenu = [
 
 const navLinksBefore = [
   { label: "Home",       href: "/"          },
-  { label: "Quem somos", href: "/quem-somos"},
+  { label: "Quem somos", href: "/sobre"},
 ];
 
 const navLinksAfter = [
   { label: "Marketing",        href: "/marketing" },
   { label: "Blog",             href: "/blog"      },
-  { label: "Seja um parceiro", href: "/parceiro"  },
+  { label: "Seja um parceiro", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
 ];
 
 const itemVariants = {

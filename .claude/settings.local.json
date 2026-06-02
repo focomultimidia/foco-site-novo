@@ -14,7 +14,10 @@
       "Bash(npm install *)",
       "Bash(pnpm build *)",
       "Bash(Write-Output \"refreshing\")",
-      "Bash(del \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\home\\\\components\\\\produtos-sanfona-section.tsx\")"
+      "Bash(del \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\features\\\\home\\\\components\\\\produtos-sanfona-section.tsx\")",
+      "Bash(Get-ChildItem -Path \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\" -Force)",
+      "Bash(Select-Object Name, Mode)",
+      "PowerShell(@\\(Get-ChildItem -Path \"c:\\\\Users\\\\55719\\\\Documents\\\\www\\\\novo-site-foco\\\\src\\\\components\\\\ui\" -File\\).Count)"
     ]
   }
 }
