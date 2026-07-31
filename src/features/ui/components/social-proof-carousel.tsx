@@ -3,7 +3,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
@@ -75,7 +75,7 @@ function SocialProofCarousel({
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -86,9 +86,7 @@ function SocialProofCarousel({
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="bg-[#00BCD4]/10 text-[#00BCD4] hover:bg-[#00BCD4]/20 mb-4">
-                {badge}
-              </Badge>
+              <SectionEyebrow>{badge}</SectionEyebrow>
             </motion.div>
           )}
           <motion.h2
@@ -137,14 +135,14 @@ function SocialProofCarousel({
                     </div>
                     <div className="p-6">
                       <div className="flex items-center gap-2 text-sm text-gray-500 mb-2">
-                        <span className="font-medium text-[#00BCD4]">{item.source}</span>
+                        <span className="font-medium text-[#0e7490]">{item.source}</span>
                         <span>•</span>
                         <span>{item.date}</span>
                       </div>
                       <h3 className="font-bold text-[#1E3A5F] mb-2 line-clamp-2">{item.title}</h3>
                       <p className="text-sm text-gray-600 mb-4 line-clamp-3">{item.summary}</p>
                       {item.link && (
-                        <Button variant="ghost" className="p-0 h-auto text-[#00BCD4] hover:text-[#1E3A5F] rounded-full">
+                        <Button variant="ghost" className="p-0 h-auto text-[#0e7490] hover:text-[#1E3A5F] rounded-full">
                           Ler mais <ArrowRight className="w-4 h-4 ml-1" />
                         </Button>
                       )}
@@ -174,6 +172,8 @@ function SocialProofCarousel({
                           src={item.imageUrl}
                           alt={item.author}
                           className="w-12 h-12 rounded-full object-cover"
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1E3A5F] to-[#00BCD4] flex items-center justify-center text-white font-bold">

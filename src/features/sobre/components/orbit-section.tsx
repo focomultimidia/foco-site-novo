@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, useMotionValue, useTransform, useSpring, animate } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { Section, StaggerSection, StaggerItem } from "./motion-primitives";
@@ -9,10 +10,10 @@ interface InnerPartner { id: string; label: string; logo: string; angle: number;
 interface OuterPartner { id: string; label: string; angle: number; color: string; }
 
 const INNER_PARTNERS: InnerPartner[] = [
-  { id: "booking", label: "Booking", logo: "/assets/imgs/certificacoes/booking.png", angle: 0   },
-  { id: "expedia", label: "Expedia", logo: "/assets/imgs/certificacoes/expedia.png", angle: 90  },
-  { id: "stone",   label: "Stone",   logo: "/assets/imgs/certificacoes/stone.png",   angle: 180 },
-  { id: "pci",     label: "PCI SSC", logo: "/assets/imgs/certificacoes/pci.png",     angle: 270 },
+  { id: "booking", label: "Booking", logo: "/assets/imgs/certificacoes/booking.webp", angle: 0   },
+  { id: "expedia", label: "Expedia", logo: "/assets/imgs/certificacoes/expedia.webp", angle: 90  },
+  { id: "stone",   label: "Stone",   logo: "/assets/imgs/certificacoes/stone.webp",   angle: 180 },
+  { id: "pci",     label: "PCI SSC", logo: "/assets/imgs/certificacoes/pci.webp",     angle: 270 },
 ];
 
 const OUTER_PARTNERS: OuterPartner[] = [
@@ -107,7 +108,7 @@ function OrbitDiagram() {
           animate={{ scale: [1, 1.9, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ duration: 2.6, repeat: Infinity, ease: "easeOut" }} />
         <motion.div
-          className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-[#285992] to-[#1e3a5f] flex items-center justify-center"
+          className="relative w-16 h-16 rounded-3xl bg-gradient-to-br from-[#285992] to-[#1e3a5f] flex items-center justify-center"
           style={{ boxShadow: "0 12px 40px rgba(40,89,146,0.22)" }}
           animate={{ scale: hovered ? 1.1 : [1, 1.05, 1] }}
           transition={hovered ? { type: "spring", stiffness: 300, damping: 20 } : { duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -119,11 +120,11 @@ function OrbitDiagram() {
       {/* Inner orbit */}
       {INNER_PARTNERS.map(p => (
         <OrbitItem key={p.id} radiusPx={110} startAngle={p.angle} durationSec={innerDur}>
-          <motion.div className="w-14 h-14 rounded-2xl flex items-center justify-center p-2"
+          <motion.div className="w-14 h-14 rounded-3xl flex items-center justify-center p-2"
             style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.95)", boxShadow: "0 8px 32px rgba(30,58,95,0.07)" }}
             animate={hovered ? { boxShadow: "0 12px 40px rgba(40,89,146,0.14), 0 0 0 1.5px rgba(40,89,146,0.22)" } : {}}
             transition={{ duration: 0.35 }}>
-            <img src={p.logo} alt={p.label} className="w-full h-full object-contain" />
+            <img src={p.logo} alt={p.label} width={281} height={70} loading="lazy" decoding="async" className="w-full h-full object-contain" />
           </motion.div>
         </OrbitItem>
       ))}
@@ -149,13 +150,11 @@ function OrbitDiagram() {
 
 export function OrbitSection() {
   return (
-    <Section className="bg-slate-50/60 overflow-hidden">
+    <Section className="bg-[#f4f7fb] overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         <StaggerSection>
           <StaggerItem>
-            <span className="inline-block px-3 py-1 text-xs font-semibold tracking-widest text-[#285992] uppercase bg-[#285992]/8 rounded-full mb-5">
-              Ecossistema Integrado
-            </span>
+            <SectionEyebrow>Ecossistema Integrado</SectionEyebrow>
           </StaggerItem>
           <StaggerItem>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-tight mb-5">

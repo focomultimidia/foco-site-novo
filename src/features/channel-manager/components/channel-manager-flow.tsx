@@ -641,7 +641,7 @@ const Hub = forwardRef<HubHandle, object>(function Hub(_props, ref) {
 
       {/* Pulse rings */}
       {[1.35, 1.75].map((scale, i) => (
-        <motion.div key={i} className="absolute inset-0 rounded-2xl"
+        <motion.div key={i} className="absolute inset-0 rounded-3xl"
           style={{ border: "1px solid rgba(255,255,255,0.05)" }}
           animate={{ scale: [1, scale], opacity: [0.4, 0] }}
           transition={{ duration: 3.2, delay: i * 1.6, repeat: Infinity, ease: "easeOut" }}
@@ -682,7 +682,7 @@ const Hub = forwardRef<HubHandle, object>(function Hub(_props, ref) {
       {/* Hub glass card — pt-10 clears space below the Foco overlay */}
       <div
         ref={cardRef}
-        className="relative flex flex-col items-center gap-4 px-10 pt-20 pb-8 rounded-2xl"
+        className="relative flex flex-col items-center gap-4 px-10 pt-20 pb-8 rounded-3xl"
         style={{
           border: "1px solid rgba(255,255,255,0.09)",
           background: "linear-gradient(145deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 100%)",
@@ -1026,7 +1026,7 @@ export function ChannelManagerFlow() {
               <FocoLogo className="h-5 w-5" />
               <span className="text-[10px] text-white/50 uppercase tracking-[0.18em]">Foco</span>
             </div>
-            <div className="flex flex-col items-center gap-3 px-8 py-5 rounded-2xl"
+            <div className="flex flex-col items-center gap-3 px-8 py-5 rounded-3xl"
               style={{ border: "1px solid rgba(255,255,255,0.09)", background: "rgba(255,255,255,0.025)", backdropFilter: "blur(20px)" }}>
               <div className="flex items-center gap-1">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "rgba(59,130,246,0.15)" }}>

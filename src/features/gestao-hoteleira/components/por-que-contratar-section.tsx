@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function PorQueContratarSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -33,7 +33,7 @@ function PorQueContratarSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               O <strong>PMS (Property Management System)</strong> é a ferramenta
               fundamental para a gestão hoteleira de sucesso. Com este sistema
               para hotel ou pousada, você centraliza todas as ferramentas
@@ -41,7 +41,7 @@ function PorQueContratarSection() {
               significativo na produtividade da sua equipe e, consequentemente, na
               sua lucratividade.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Um PMS para hotel robusto é a sua defesa contra os erros mais
               custosos da hotelaria. Ele elimina de forma definitiva problemas como
               overbookings (reservas duplicadas), a perda do histórico de reservas
@@ -59,10 +59,14 @@ function PorQueContratarSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-2xl overflow-hidden p-6 flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-3xl overflow-hidden p-6 flex items-center justify-center">
               <img
-                src="/section3-pms.png"
+                src="/assets/imgs/gestao-hoteleira-pms/section3-pms.webp"
                 alt="Dashboard do Sistema PMS"
+                width={1920}
+                height={589}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function FocoPassSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -34,21 +34,21 @@ function FocoPassSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               O <strong>Foco Pass</strong> é a solução definitiva para a{" "}
               <strong>automação completa da jornada do seu hóspede</strong>, desde o
               check-in até o check-out. Para o hoteleiro, isso significa{" "}
               <strong>máxima eficiência operacional</strong>, redução de custos com
               tarefas manuais e a garantia de um serviço impecável.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Para o hóspede, o Foco Pass é sinônimo de{" "}
               <strong>comodidade incomparável</strong>. Através do nosso aplicativo de
               hospedagem, ele tem acesso a uma jornada fluida e, o melhor de tudo, a
               descontos exclusivos e curados em bares, restaurantes, receptivos e
               ingressos no destino.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Transforme a estadia em uma experiência completa,{" "}
               <strong>fidelize seu cliente</strong> e veja a satisfação refletida nas
               suas avaliações.
@@ -63,10 +63,14 @@ function FocoPassSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
               <img
-                src="/assets/imgs/experiencia-do-hospede/experiencia-hospede.png"
+                src="/assets/imgs/experiencia-do-hospede/experiencia-hospede.webp"
                 alt="Foco Pass - App de Hospedagem"
+                width={760}
+                height={521}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

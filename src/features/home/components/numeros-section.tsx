@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TrendingUp, Users, Calendar, Link2, Clock } from "lucide-react";
@@ -292,11 +293,12 @@ function NumerosSection(_props: NumerosSectionProps) {
         }
       `}</style>
 
-      <section ref={gridRef} className="py-20 bg-white">
+      <section ref={gridRef} className="py-20 bg-[#f4f7fb]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
           <div ref={headerRef} className="text-center mb-12">
+            <SectionEyebrow>Números inquestionáveis</SectionEyebrow>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
               Nossos{" "}
               <span

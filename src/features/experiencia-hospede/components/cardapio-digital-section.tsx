@@ -19,49 +19,49 @@ const recursos = [
     titulo: "Gerenciamento de produtos",
     descricao:
       "Cadastro detalhado de todos os itens do menu, incluindo custos, margens de lucro e variações (tamanhos, adicionais), para um controle financeiro completo.",
-    imagem: "/assets/imgs/experiencia-do-hospede/gerenciamento-de-produtos.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/gerenciamento-de-produtos.webp",
   },
   {
     icon: Boxes,
     titulo: "Controle de estoque",
     descricao:
       "Gerenciamento preciso de insumos e produtos acabados. Evita desperdícios, otimiza o momento da compra e garante que o cardápio reflita apenas o que está disponível.",
-    imagem: "/assets/imgs/experiencia-do-hospede/controle-de-estoque1.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/controle-de-estoque1.webp",
   },
   {
     icon: LayoutGrid,
     titulo: "Controle de mesas",
     descricao:
       "Visão em tempo real da ocupação do salão e do status de cada mesa. Agiliza o atendimento, a alocação de clientes e o fechamento de contas.",
-    imagem: "/assets/imgs/experiencia-do-hospede/controle-de-mesas.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/controle-de-mesas.webp",
   },
   {
     icon: ClipboardList,
     titulo: "Gestão de pedidos",
     descricao:
       "Recebimento e roteamento automático de pedidos (cozinha, bar, serviço de quarto). Reduz o tempo de espera do cliente e elimina erros de comunicação entre salão e cozinha.",
-    imagem: "/assets/imgs/experiencia-do-hospede/gestao-de-pedidos.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/gestao-de-pedidos.webp",
   },
   {
     icon: Calculator,
     titulo: "Controle de caixa",
     descricao:
       "Registro e conciliação de todas as transações financeiras. Garante a precisão do fechamento diário, reduzindo fraudes e facilitando a auditoria.",
-    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.webp",
   },
   {
     icon: Monitor,
     titulo: "Cardápio online",
     descricao:
       "Interface digital moderna e visualmente atraente. Permite atualizações instantâneas de preços e disponibilidade, além de fotos de alta qualidade para incentivar a compra.",
-    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.webp",
   },
   {
     icon: CreditCard,
     titulo: "Pagamento online",
     descricao:
       "Recebimento de pagamentos via cartão de crédito, débito ou PIX diretamente pelo sistema. Garante segurança na transação e agilidade no checkout do cliente.",
-    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.png",
+    imagem: "/assets/imgs/experiencia-do-hospede/experiencia-hospede.webp",
   },
 ];
 
@@ -117,7 +117,7 @@ function CardapioDigitalSection() {
         }
       `}</style>
 
-    <section ref={sectionRef} className="py-24 bg-[#fff]">
+    <section ref={sectionRef} className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header — original content ──────────────────────────────────── */}
@@ -345,6 +345,8 @@ function CardapioDigitalSection() {
                   <img
                     src={activeItem.imagem}
                     alt={activeItem.titulo}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full max-h-[70%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
                   />
                 </motion.div>

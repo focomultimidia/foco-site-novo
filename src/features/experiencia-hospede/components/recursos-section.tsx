@@ -196,7 +196,7 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
   return (
     <motion.div variants={cardReveal} className="h-full">
       <motion.div
-        className="relative h-full rounded-2xl transform-gpu"
+        className="relative h-full rounded-3xl transform-gpu"
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         variants={cardVariants}
         initial="rest"
@@ -207,11 +207,11 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
         onHoverStart={onHoverStart}
       >
         <div
-          className="relative h-full rounded-2xl p-[1px]"
+          className="relative h-full rounded-3xl p-[1px]"
           style={{ background: "rgba(0,0,0,0.05)" }}
         >
           <motion.div
-            className="absolute inset-0 rounded-2xl"
+            className="absolute inset-0 rounded-3xl"
             style={{ background: borderSpotlight }}
             aria-hidden="true"
           />
@@ -267,9 +267,7 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
 // ── Section ───────────────────────────────────────────────────────────────────
 function RecursosSection() {
   return (
-    <section className="relative py-24 bg-gray-50 overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-300/60 to-transparent" />
-
+    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}

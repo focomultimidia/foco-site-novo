@@ -123,7 +123,7 @@ const cardVariants: Variants = {
 
 function IntegracoesMarketingSection() {
   return (
-    <section className="py-24 bg-slate-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -136,7 +136,7 @@ function IntegracoesMarketingSection() {
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Integrações de marketing para atrair mais hóspedes e vender com inteligência
           </h2>
-          <p className="text-gray-400 text-lg max-w-6xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-6xl mx-auto">
             Conecte seu motor de reservas às principais plataformas de marketing digital e mensure o impacto real de cada campanha em vendas diretas.
           </p>
         </motion.div>
@@ -153,7 +153,7 @@ function IntegracoesMarketingSection() {
             <motion.div
               key={index}
               variants={cardVariants}
-              className="group relative bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default overflow-hidden"
+              className="group relative bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-default overflow-hidden"
             >
               {/* Gradient accent line on hover */}
               <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400" />
@@ -169,7 +169,7 @@ function IntegracoesMarketingSection() {
               </h3>
 
               {/* Description */}
-              <p className="text-sm text-gray-400 leading-relaxed">
+              <p className="text-sm text-gray-500 leading-relaxed">
                 {descricao}
               </p>
             </motion.div>

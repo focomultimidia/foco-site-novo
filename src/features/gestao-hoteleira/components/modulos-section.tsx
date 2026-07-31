@@ -27,7 +27,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 function ModulosSection({ modulos }: ModulosSectionProps) {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,10 +36,10 @@ function ModulosSection({ modulos }: ModulosSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] mb-4">
             Módulos do Sistema
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Um ecossistema completo de módulos integrados para todos os
             departamentos do seu hotel.
           </p>
@@ -57,18 +57,18 @@ function ModulosSection({ modulos }: ModulosSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-shadow"
               >
-                <div className="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6">
-                  <Icon className="w-7 h-7 text-green-600" />
+                <div className="w-14 h-14 bg-gradient-to-br from-[#1e3a5f] to-[#285992] rounded-xl flex items-center justify-center mb-6">
+                  <Icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-[#1e293b] mb-3">
                   {modulo.titulo}
                 </h3>
-                <p className="text-gray-600 mb-6">{modulo.descricao}</p>
+                <p className="text-slate-500 mb-6">{modulo.descricao}</p>
                 <ul className="space-y-2">
                   {modulo.recursos.map((recurso, idx) => (
                     <li key={idx} className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      <span className="text-gray-600">{recurso}</span>
+                      <Check className="w-4 h-4 text-[#285992] flex-shrink-0" />
+                      <span className="text-slate-500">{recurso}</span>
                     </li>
                   ))}
                 </ul>

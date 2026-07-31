@@ -15,36 +15,36 @@ interface IntegracoesSectionProps {
 // Partner logos data by category (6 logos each - 2 per ring)
 const partnerLogos: Record<string, { src: string; alt: string }[]> = {
   canais: [
-    { src: "/booking.png", alt: "Booking" },
-    { src: "/airbnb.png", alt: "Airbnb" },
-    { src: "/expedia.png", alt: "Expedia" },
-    { src: "/decolar.png", alt: "Decolar" },
-    { src: "/cvc.png", alt: "CVC" },
-    { src: "/agoda.png", alt: "Agoda" },
+    { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking" },
+    { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+    { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+    { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+    { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+    { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
   ],
   pms: [
-    { src: "/booking.png", alt: "Booking" },
-    { src: "/airbnb.png", alt: "Airbnb" },
-    { src: "/expedia.png", alt: "Expedia" },
-    { src: "/decolar.png", alt: "Decolar" },
-    { src: "/cvc.png", alt: "CVC" },
-    { src: "/agoda.png", alt: "Agoda" },
+    { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking" },
+    { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+    { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+    { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+    { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+    { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
   ],
   pagamentos: [
-    { src: "/booking.png", alt: "Booking" },
-    { src: "/airbnb.png", alt: "Airbnb" },
-    { src: "/expedia.png", alt: "Expedia" },
-    { src: "/decolar.png", alt: "Decolar" },
-    { src: "/cvc.png", alt: "CVC" },
-    { src: "/agoda.png", alt: "Agoda" },
+    { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking" },
+    { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+    { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+    { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+    { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+    { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
   ],
   marketing: [
-    { src: "/booking.png", alt: "Booking" },
-    { src: "/airbnb.png", alt: "Airbnb" },
-    { src: "/expedia.png", alt: "Expedia" },
-    { src: "/decolar.png", alt: "Decolar" },
-    { src: "/cvc.png", alt: "CVC" },
-    { src: "/agoda.png", alt: "Agoda" },
+    { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking" },
+    { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+    { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+    { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+    { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+    { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
   ],
 };
 
@@ -82,8 +82,8 @@ function OrbitalAnimation({ logos }: { logos: { src: string; alt: string }[] }) 
   return (
     <div className="relative flex items-center justify-center w-full h-[600px] overflow-hidden">
       {/* Logo Central da Foco */}
-      <div className="relative z-10 flex items-center justify-center w-28 h-28 bg-white rounded-2xl shadow-xl border border-slate-100 p-3">
-        <img src="/foco.png" alt="Foco Tecnologia" className="w-full h-full object-contain" />
+      <div className="relative z-10 flex items-center justify-center w-28 h-28 bg-white rounded-3xl shadow-xl border border-slate-100 p-3">
+        <img src="/assets/imgs/logo/foco.webp" alt="Foco Tecnologia" width={500} height={500} loading="lazy" decoding="async" className="w-full h-full object-contain" />
       </div>
 
       {/* Anéis de Órbita */}
@@ -107,7 +107,7 @@ function OrbitalAnimation({ logos }: { logos: { src: string; alt: string }[] }) 
                     logoIndex === 0 ? "top-0 -translate-y-1/2" : "bottom-0 translate-y-1/2"
                   )}
                 >
-                  <img src={logo.src} alt={logo.alt} className="w-full h-full object-contain" />
+                  <img src={logo.src} alt={logo.alt} width={500} height={500} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                 </div>
               );
             })}
@@ -166,7 +166,7 @@ function IntegracoesSection({ categorias }: IntegracoesSectionProps) {
   const currentLogos = partnerLogos[activeTab] || partnerLogos.canais;
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

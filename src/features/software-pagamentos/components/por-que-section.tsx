@@ -47,7 +47,7 @@ const CARD_SHADOW =
 
 // ── Media ─────────────────────────────────────────────────────────────────────
 const VIDEO_SRC = "/assets/videos/software-de-pagamento/tablet.mp4";
-const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.png";
+const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.webp";
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueSection() {
@@ -138,9 +138,7 @@ function PorQueSection() {
         }
       `}</style>
 
-      <section ref={sectionRef} className="relative py-24 bg-white overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
-
+      <section ref={sectionRef} className="relative py-24 bg-[#f4f7fb] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
@@ -175,7 +173,7 @@ function PorQueSection() {
                   <div
                     key={i}
                     ref={el => { if (el) cardRefs.current[i] = el; }}
-                    className="group relative overflow-hidden rounded-2xl p-5 cursor-default transition-transform duration-300 ease-out hover:translate-x-1"
+                    className="group relative overflow-hidden rounded-3xl p-5 cursor-default transition-transform duration-300 ease-out hover:translate-x-1"
                     style={{
                       background: CARD_BG,
                       border: "1px solid rgba(255,255,255,0.12)",
@@ -287,6 +285,8 @@ function PorQueSection() {
               <img
                 src={IMAGE_SRC}
                 alt="Software de pagamentos Foco Pay"
+                loading="lazy"
+                decoding="async"
                 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full max-h-full object-contain pointer-events-none"
                 style={{
                   opacity: isVideoEnded ? 1 : 0,

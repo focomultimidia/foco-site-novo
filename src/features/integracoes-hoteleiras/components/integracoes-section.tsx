@@ -39,7 +39,7 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
   }, {} as Record<string, Integracao[]>);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -48,10 +48,10 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] mb-4">
             Nossas Integrações
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Conecte-se com as principais ferramentas do mercado hoteleiro.
           </p>
         </motion.div>
@@ -71,10 +71,10 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
                 transition={{ duration: 0.5, delay: catIndex * 0.1 }}
               >
                 <div className="flex items-center gap-3 mb-8">
-                  <div className="w-12 h-12 bg-blue-gray-100 rounded-xl flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-blue-gray-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#1e3a5f] to-[#285992] rounded-xl flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-2xl font-semibold text-gray-900">
+                  <h3 className="text-2xl font-semibold text-[#1e293b]">
                     {categoria.nome}
                   </h3>
                 </div>
@@ -95,9 +95,9 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
                         className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow"
                       >
                         <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                          <IntegracaoIcon className="w-6 h-6 text-gray-600" />
+                          <IntegracaoIcon className="w-6 h-6 text-slate-500" />
                         </div>
-                        <h4 className="font-semibold text-gray-900 mb-2">
+                        <h4 className="font-semibold text-[#1e293b] mb-2">
                           {integracao.nome}
                         </h4>
                         <p className="text-sm text-gray-500">

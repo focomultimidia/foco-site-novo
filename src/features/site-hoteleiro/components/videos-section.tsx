@@ -29,7 +29,7 @@ const videos = [
 
 function VideosSection() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -64,6 +64,10 @@ function VideosSection() {
                   <img
                     src={video.thumbnail}
                     alt={video.titulo}
+                    width={400}
+                    height={250}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>

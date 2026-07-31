@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { Globe, Building2, CreditCard, TrendingUp } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import {
@@ -33,39 +34,39 @@ const tabsData: TabData[] = [
     description:
       "Conecte-se a mais de 800 canais de vendas, garantindo mais visibilidade e menos overbooking.",
     logos: [
-      { src: "/assets/imgs/integracoes/canais/booking.png", alt: "Booking.com" },
-      { src: "/assets/imgs/integracoes/canais/airbnb.png", alt: "Airbnb" },
-      { src: "/assets/imgs/integracoes/canais/expedia.png", alt: "Expedia" },
-      { src: "/assets/imgs/integracoes/canais/decolar.png", alt: "Decolar" },
-      { src: "/assets/imgs/integracoes/canais/agoda.png", alt: "Agoda" },
-      { src: "/assets/imgs/integracoes/canais/cvc.png", alt: "CVC" },
-      { src: "/assets/imgs/integracoes/canais/abracorp.png", alt: "Abracorp" },
-      { src: "/assets/imgs/integracoes/canais/almundo.png", alt: "Almundo" },
-      { src: "/assets/imgs/integracoes/canais/avipam.png", alt: "Avipam" },
-      { src: "/assets/imgs/integracoes/canais/b2b-reservas.png", alt: "B2B Reservas" },
-      { src: "/assets/imgs/integracoes/canais/belvitur.png", alt: "Belvitur" },
-      { src: "/assets/imgs/integracoes/canais/best-day.png", alt: "BestDay" },
-      { src: "/assets/imgs/integracoes/canais/copastur.png", alt: "Copastur" },
-      { src: "/assets/imgs/integracoes/canais/costa-brava.png", alt: "Costa Brava" },
-      { src: "/assets/imgs/integracoes/canais/cwt.png", alt: "CWT" },
-      { src: "/assets/imgs/integracoes/canais/google-hoteis.png", alt: "Google Hotéis" },
-      { src: "/assets/imgs/integracoes/canais/grupo-flytour.png", alt: "Grupo Flytour" },
-      { src: "/assets/imgs/integracoes/canais/hostway.png", alt: "Hostway" },
-      { src: "/assets/imgs/integracoes/canais/hotelbeds.png", alt: "Hotelbeds" },
-      { src: "/assets/imgs/integracoes/canais/jetstream.png", alt: "Jet Stream" },
-      { src: "/assets/imgs/integracoes/canais/kontik.png", alt: "Kontik" },
-      { src: "/assets/imgs/integracoes/canais/luck.png", alt: "Luck Viagens" },
-      { src: "/assets/imgs/integracoes/canais/maiorca.png", alt: "Maiorca Turismo" },
-      { src: "/assets/imgs/integracoes/canais/maringa.png", alt: "Maringa Turismo" },
-      { src: "/assets/imgs/integracoes/canais/pontestur.png", alt: "PontesTur" },
-      { src: "/assets/imgs/integracoes/canais/primus.png", alt: "Primus Turismo Viagens" },
-      { src: "/assets/imgs/integracoes/canais/sabre.png", alt: "Sabre" },
-      { src: "/assets/imgs/integracoes/canais/solid.png", alt: "Solid Gestão de Despesas e Viagens" },
-      { src: "/assets/imgs/integracoes/canais/tivolitur.png", alt: "Tivolitur" },
-      { src: "/assets/imgs/integracoes/canais/tour-house.png", alt: "Tour House" },
-      { src: "/assets/imgs/integracoes/canais/tourico.png", alt: "Tourico Holidays" },
-      { src: "/assets/imgs/integracoes/canais/tristar.png", alt: "Tristar" },
-      { src: "/assets/imgs/integracoes/canais/voetur.png", alt: "Voetur" },
+      { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking.com" },
+      { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+      { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+      { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+      { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
+      { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+      { src: "/assets/imgs/integracoes/canais/abracorp.webp", alt: "Abracorp" },
+      { src: "/assets/imgs/integracoes/canais/almundo.webp", alt: "Almundo" },
+      { src: "/assets/imgs/integracoes/canais/avipam.webp", alt: "Avipam" },
+      { src: "/assets/imgs/integracoes/canais/b2b-reservas.webp", alt: "B2B Reservas" },
+      { src: "/assets/imgs/integracoes/canais/belvitur.webp", alt: "Belvitur" },
+      { src: "/assets/imgs/integracoes/canais/best-day.webp", alt: "BestDay" },
+      { src: "/assets/imgs/integracoes/canais/copastur.webp", alt: "Copastur" },
+      { src: "/assets/imgs/integracoes/canais/costa-brava.webp", alt: "Costa Brava" },
+      { src: "/assets/imgs/integracoes/canais/cwt.webp", alt: "CWT" },
+      { src: "/assets/imgs/integracoes/canais/google-hoteis.webp", alt: "Google Hotéis" },
+      { src: "/assets/imgs/integracoes/canais/grupo-flytour.webp", alt: "Grupo Flytour" },
+      { src: "/assets/imgs/integracoes/canais/hostway.webp", alt: "Hostway" },
+      { src: "/assets/imgs/integracoes/canais/hotelbeds.webp", alt: "Hotelbeds" },
+      { src: "/assets/imgs/integracoes/canais/jetstream.webp", alt: "Jet Stream" },
+      { src: "/assets/imgs/integracoes/canais/kontik.webp", alt: "Kontik" },
+      { src: "/assets/imgs/integracoes/canais/luck.webp", alt: "Luck Viagens" },
+      { src: "/assets/imgs/integracoes/canais/maiorca.webp", alt: "Maiorca Turismo" },
+      { src: "/assets/imgs/integracoes/canais/maringa.webp", alt: "Maringa Turismo" },
+      { src: "/assets/imgs/integracoes/canais/pontestur.webp", alt: "PontesTur" },
+      { src: "/assets/imgs/integracoes/canais/primus.webp", alt: "Primus Turismo Viagens" },
+      { src: "/assets/imgs/integracoes/canais/sabre.webp", alt: "Sabre" },
+      { src: "/assets/imgs/integracoes/canais/solid.webp", alt: "Solid Gestão de Despesas e Viagens" },
+      { src: "/assets/imgs/integracoes/canais/tivolitur.webp", alt: "Tivolitur" },
+      { src: "/assets/imgs/integracoes/canais/tour-house.webp", alt: "Tour House" },
+      { src: "/assets/imgs/integracoes/canais/tourico.webp", alt: "Tourico Holidays" },
+      { src: "/assets/imgs/integracoes/canais/tristar.webp", alt: "Tristar" },
+      { src: "/assets/imgs/integracoes/canais/voetur.webp", alt: "Voetur" },
     ],
   },
   {
@@ -75,26 +76,26 @@ const tabsData: TabData[] = [
     description:
       "Integramos com os principais sistemas de gestão hoteleira do mercado.",
     logos: [
-      { src: "/assets/imgs/integracoes/pms/plus.png", alt: "Plus" },
-      { src: "/assets/imgs/integracoes/pms/totvs.png", alt: "TOTVS" },
-      { src: "/assets/imgs/integracoes/pms/hmax.png", alt: "Hmax" },
-      { src: "/assets/imgs/integracoes/pms/silbeck.png", alt: "Silbeck" },
-      { src: "/assets/imgs/integracoes/pms/bitz.png", alt: "Bitz" },
-      { src: "/assets/imgs/integracoes/pms/desbravador.png", alt: "Desbravador" },
-      { src: "/assets/imgs/integracoes/pms/hotelflow.png", alt: "Hotelflow" },
-      { src: "/assets/imgs/integracoes/pms/hits.png", alt: "Hits" },
-      { src: "/assets/imgs/integracoes/pms/adm-hoteleiro.png", alt: "ADM Hoteleiro" },
-      { src: "/assets/imgs/integracoes/pms/to-de-ferias.png", alt: "Tô de Férias" },
-      { src: "/assets/imgs/integracoes/pms/techside.png", alt: "Techside" },
-      { src: "/assets/imgs/integracoes/pms/appsistemas.png", alt: "App Sistemas" },
-      { src: "/assets/imgs/integracoes/pms/carsoft.png", alt: "Carsoft" },
-      { src: "/assets/imgs/integracoes/pms/esolution.png", alt: "eSolution" },
-      { src: "/assets/imgs/integracoes/pms/isasoft.png", alt: "IsaSoft" },
-      { src: "/assets/imgs/integracoes/pms/mde.png", alt: "MDE" },
-      { src: "/assets/imgs/integracoes/pms/newhotel.png", alt: "New Hotel" },
-      { src: "/assets/imgs/integracoes/pms/queops.png", alt: "Queops" },
-      { src: "/assets/imgs/integracoes/pms/saghar.png", alt: "Saghar" },
-      { src: "/assets/imgs/integracoes/pms/simpleshotel.png", alt: "Simples Hotel" },
+      { src: "/assets/imgs/integracoes/pms/plus.webp", alt: "Plus" },
+      { src: "/assets/imgs/integracoes/pms/totvs.webp", alt: "TOTVS" },
+      { src: "/assets/imgs/integracoes/pms/hmax.webp", alt: "Hmax" },
+      { src: "/assets/imgs/integracoes/pms/silbeck.webp", alt: "Silbeck" },
+      { src: "/assets/imgs/integracoes/pms/bitz.webp", alt: "Bitz" },
+      { src: "/assets/imgs/integracoes/pms/desbravador.webp", alt: "Desbravador" },
+      { src: "/assets/imgs/integracoes/pms/hotelflow.webp", alt: "Hotelflow" },
+      { src: "/assets/imgs/integracoes/pms/hits.webp", alt: "Hits" },
+      { src: "/assets/imgs/integracoes/pms/adm-hoteleiro.webp", alt: "ADM Hoteleiro" },
+      { src: "/assets/imgs/integracoes/pms/to-de-ferias.webp", alt: "Tô de Férias" },
+      { src: "/assets/imgs/integracoes/pms/techside.webp", alt: "Techside" },
+      { src: "/assets/imgs/integracoes/pms/appsistemas.webp", alt: "App Sistemas" },
+      { src: "/assets/imgs/integracoes/pms/carsoft.webp", alt: "Carsoft" },
+      { src: "/assets/imgs/integracoes/pms/esolution.webp", alt: "eSolution" },
+      { src: "/assets/imgs/integracoes/pms/isasoft.webp", alt: "IsaSoft" },
+      { src: "/assets/imgs/integracoes/pms/mde.webp", alt: "MDE" },
+      { src: "/assets/imgs/integracoes/pms/newhotel.webp", alt: "New Hotel" },
+      { src: "/assets/imgs/integracoes/pms/queops.webp", alt: "Queops" },
+      { src: "/assets/imgs/integracoes/pms/saghar.webp", alt: "Saghar" },
+      { src: "/assets/imgs/integracoes/pms/simpleshotel.webp", alt: "Simples Hotel" },
     ],
   },
   {
@@ -104,15 +105,15 @@ const tabsData: TabData[] = [
     description:
       "Múltiplas opções de pagamento integradas para maior conversão.",
     logos: [
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/stone.png", alt: "Stone" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/cielo.png", alt: "Cielo" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/pagarme.png", alt: "Pagarme" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/pagseguro.png", alt: "PagSeguro" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/rede.png", alt: "Rede" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/getnet.png", alt: "GetNet" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/payzen.png", alt: "PayZen" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/sicred.png", alt: "Sicred" },
-      { src: "/assets/imgs/integracoes/gateway-de-pagamento/sipag.png", alt: "Sipag" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/stone.webp", alt: "Stone" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/cielo.webp", alt: "Cielo" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/pagarme.webp", alt: "Pagarme" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/pagseguro.webp", alt: "PagSeguro" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/rede.webp", alt: "Rede" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/getnet.webp", alt: "GetNet" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/payzen.webp", alt: "PayZen" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/sicred.webp", alt: "Sicred" },
+      { src: "/assets/imgs/integracoes/gateway-de-pagamento/sipag.webp", alt: "Sipag" },
     ],
   },
   {
@@ -122,15 +123,15 @@ const tabsData: TabData[] = [
     description:
       "Ferramentas de marketing digital para aumentar sua presença online.",
     logos: [
-      { src: "/assets/imgs/integracoes/marketing/google-ads.png", alt: "Google Ads" },
-      { src: "/assets/imgs/integracoes/marketing/facebook-ads.png", alt: "Facebook Ads" },
-      { src: "/assets/imgs/integracoes/marketing/rd-station.png", alt: "RD Station" },
-      { src: "/assets/imgs/integracoes/marketing/facebook-pixel.png", alt: "Facebook Pixel" },
-      { src: "/assets/imgs/integracoes/marketing/reprotel.png", alt: "Reprotel" },
-      { src: "/assets/imgs/integracoes/marketing/tribuzana.png", alt: "Tribuzana" },
-      { src: "/assets/imgs/integracoes/marketing/google-analytics.png", alt: "Google Analytics" },
-      { src: "/assets/imgs/integracoes/marketing/google-search-console.png", alt: "Google Search Console" },
-      { src: "/assets/imgs/integracoes/marketing/google-tag-manager.png", alt: "Google Tag Manager" },
+      { src: "/assets/imgs/integracoes/marketing/google-ads.webp", alt: "Google Ads" },
+      { src: "/assets/imgs/integracoes/marketing/facebook-ads.webp", alt: "Facebook Ads" },
+      { src: "/assets/imgs/integracoes/marketing/rd-station.webp", alt: "RD Station" },
+      { src: "/assets/imgs/integracoes/marketing/facebook-pixel.webp", alt: "Facebook Pixel" },
+      { src: "/assets/imgs/integracoes/marketing/reprotel.webp", alt: "Reprotel" },
+      { src: "/assets/imgs/integracoes/marketing/tribuzana.webp", alt: "Tribuzana" },
+      { src: "/assets/imgs/integracoes/marketing/google-analytics.webp", alt: "Google Analytics" },
+      { src: "/assets/imgs/integracoes/marketing/google-search-console.webp", alt: "Google Search Console" },
+      { src: "/assets/imgs/integracoes/marketing/google-tag-manager.webp", alt: "Google Tag Manager" },
     ],
   },
 ];
@@ -138,7 +139,7 @@ const tabsData: TabData[] = [
 function LogoCard({ src, alt }: Logo) {
   return (
     <div className="flex items-center justify-center p-4 h-24 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300 cursor-default select-none">
-      <img src={src} alt={alt} className="h-14 w-full object-contain" />
+      <img src={src} alt={alt} width={228} height={80} loading="lazy" decoding="async" className="h-14 w-full object-contain" />
     </div>
   );
 }
@@ -195,7 +196,7 @@ function SmartIntegrationsTabs() {
   const inView = useInView(sectionRef, { once: false, amount: 0.2 });
 
   return (
-    <section ref={sectionRef} className="py-20 bg-white">
+    <section ref={sectionRef} className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -205,6 +206,7 @@ function SmartIntegrationsTabs() {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
+          <SectionEyebrow>Nossas integrações</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Integrações</span> que conectam todo o <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">ecossistema hoteleiro</span>
           </h2>
@@ -214,7 +216,7 @@ function SmartIntegrationsTabs() {
         <Tabs defaultValue="canais" className="w-full">
           {/* Tab Navigation — 2×2 grid on mobile, pill row on desktop */}
           <div className="mb-8 md:flex md:justify-center">
-            <TabsList className="grid grid-cols-2 w-full rounded-2xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 bg-slate-100 border border-slate-200">
+            <TabsList className="grid grid-cols-2 w-full rounded-3xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 bg-slate-100 border border-slate-200">
               {tabsData.map((tab) => {
                 const Icon = tab.icon;
                 return (

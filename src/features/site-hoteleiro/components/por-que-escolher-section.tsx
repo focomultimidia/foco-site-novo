@@ -1,7 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Link2,
   Search,
@@ -9,10 +7,9 @@ import {
   TrendingUp,
   Shield,
   Building,
-  ChevronDown,
+  ImagePlus,
 } from "lucide-react";
-
-const VIDEO_SRC = "/assets/videos/site-hoteleiro/notebook.mp4";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const BENEFICIOS = [
@@ -54,200 +51,86 @@ const BENEFICIOS = [
   },
 ] as const;
 
-// ── Screen Accordion ──────────────────────────────────────────────────────────
-function ScreenAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  return (
-    <div
-      style={{
-        height: "100%",
-        maxHeight: "100%",
-        overflowY: "auto",
-        padding: "18px 24px",
-        paddingRight: 12,
-        background: "#ffffff",
-        scrollbarWidth: "thin",
-        scrollbarColor: "rgba(0,0,0,0.12) transparent",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <div style={{ width: "100%", maxWidth: 800 }}>
-
-        {/* macOS traffic lights */}
-        <div style={{ display: "flex", gap: 5, marginBottom: 14 }}>
-          {(["#ff5f57", "#ffbd2e", "#28c840"] as const).map((c) => (
-            <div key={c} style={{ width: 9, height: 9, borderRadius: "50%", background: c }} />
-          ))}
-        </div>
-
-        {BENEFICIOS.map((b, i) => {
-          const Icon = b.icon;
-          const isOpen = openIndex === i;
-          return (
-            <div key={i} style={{ borderBottom: "1px solid rgba(0,0,0,0.07)" }}>
-              <button
-                onClick={() => setOpenIndex(isOpen ? null : i)}
-                style={{
-                  width: "100%", display: "flex", alignItems: "center",
-                  gap: 12, padding: "15px 0",
-                  background: "none", border: "none", cursor: "pointer", textAlign: "left",
-                }}
-              >
-                <div style={{
-                  width: 32, height: 32, borderRadius: 9,
-                  background: isOpen ? "rgba(40,89,146,0.11)" : "rgba(0,0,0,0.04)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  flexShrink: 0, transition: "background 0.22s ease",
-                }}>
-                  <Icon style={{ width: 16, height: 16, color: isOpen ? "#285992" : "#94a3b8", transition: "color 0.22s ease" }} strokeWidth={1.7} />
-                </div>
-                <span style={{ flex: 1, fontSize: 18, fontWeight: 700, color: isOpen ? "#0f172a" : "#475569", lineHeight: 1.35, transition: "color 0.22s ease", textAlign: "left" }}>
-                  {b.titulo}
-                </span>
-                <ChevronDown style={{ width: 14, height: 14, color: "rgba(0,0,0,0.3)", flexShrink: 0, transition: "transform 0.22s ease", transform: isOpen ? "rotate(180deg)" : "none" }} />
-              </button>
-
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                    style={{ overflow: "hidden" }}
-                  >
-                    <p style={{ paddingBottom: 14, paddingLeft: 44, paddingRight: 4, fontSize: 16, color: "#64748b", lineHeight: 1.72, background: "#ffffff", textAlign: "left" }}>
-                      {b.descricao}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          );
-        })}
-
-      </div>
-    </div>
-  );
-}
+// Sticky-stack recipe (same technique contiant.com uses on its "01/02/03"
+// module): each card is `position: sticky` inside ONE shared tall container,
+// with an increasing `top` offset. As the page scrolls, each card catches
+// its own offset in turn and holds there — frozen — while the next card
+// slides up from below and settles just over it, peeking the previous
+// card's top edge. Pure CSS; no scroll-linked JS, no jank.
+const BASE_TOP = 96; // clears the fixed header
+const STAGGER = 30; // px revealed of each earlier card once the next stacks on top
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueEscolherSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const videoRef   = useRef<HTMLVideoElement>(null);
-  const [isScreenOpen, setIsScreenOpen] = useState(false);
-
-  useEffect(() => {
-    const video   = videoRef.current;
-    const section = sectionRef.current;
-    if (!video || !section) return;
-
-    // Reveal accordion once the video finishes playing
-    const handleEnded = () => setIsScreenOpen(true);
-    video.addEventListener("ended", handleEnded);
-
-    // Play automatically when the section is at least 50% in the viewport.
-    // disconnect() after first trigger so the video doesn't restart on re-entry.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.playbackRate = 3.5;
-          video.play().catch(() => {
-            // Autoplay blocked by browser policy — silently ignore.
-          });
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(section);
-
-    return () => {
-      observer.disconnect();
-      video.removeEventListener("ended", handleEnded);
-    };
-  }, []);
-
   return (
-    <section ref={sectionRef} className="bg-white">
-      <div
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          paddingTop: "6vh",
-          paddingBottom: "4vh",
-        }}
-      >
-        {/* ── Header ──────────────────────────────────────────────────── */}
-        <div style={{ textAlign: "center", marginBottom: 56, padding: "0 24px", flexShrink: 0 }}>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
-            Por que escolher a{" "}
-            <span style={{ background: "linear-gradient(90deg,#285992,#427ab9,#285992)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+    <section className="bg-[#f4f7fb] py-20 sm:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14 max-w-2xl mx-auto">
+          <SectionEyebrow className="justify-center">Por que a Foco</SectionEyebrow>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-[#1e293b] leading-tight tracking-tight mb-3">
+            Seis motivos para escolher a{" "}
+            <span
+              style={{
+                background: "linear-gradient(90deg,#285992,#427ab9,#285992)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               Foco
             </span>{" "}
-            para criar o site do seu hotel
+            no site do seu hotel
           </h2>
-          <p className="font-sans" style={{ fontSize: "clamp(0.9rem,1.5vw,1.05rem)", color: "#64748b", lineHeight: 1.75 }}>
-            Tenha um site completo, integrado ao motor de reservas e indexado
-            organicamente no Google para que seus hóspedes te encontrem.
+          <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+            Continue rolando — cada motivo se empilha sobre o anterior.
           </p>
         </div>
 
-        {/* ── Video stage ─────────────────────────────────────────────── */}
-        {/*
-          aspect-video keeps a strict 16:9 box — the container never collapses.
-          object-contain ensures the full notebook frame is always visible.
+        <div className="relative max-w-4xl mx-auto">
+          {BENEFICIOS.map((beneficio, i) => {
+            const Icon = beneficio.icon;
+            const imageOnRight = i % 2 === 1;
+            return (
+              <div
+                key={beneficio.titulo}
+                className="sticky mb-6 sm:mb-8"
+                style={{ top: BASE_TOP + i * STAGGER, zIndex: i + 1 }}
+              >
+                <div
+                  className={`flex flex-col sm:h-[280px] ${
+                    imageOnRight ? "sm:flex-row-reverse" : "sm:flex-row"
+                  } rounded-3xl border border-slate-200 bg-white shadow-[0_18px_40px_-16px_rgba(15,23,42,0.16)] overflow-hidden`}
+                >
+                  {/* ── Image slot — full-bleed to the card's own edge ─────── */}
+                  <div className="relative sm:w-[42%] sm:h-full shrink-0">
+                    <div className="aspect-[16/10] sm:aspect-auto sm:h-full min-h-[160px] w-full bg-gradient-to-br from-[#f4f7fb] to-white border-b sm:border-b-0 border-dashed border-slate-300 flex flex-col items-center justify-center gap-2">
+                      <ImagePlus className="w-6 h-6 text-slate-300" strokeWidth={1.6} />
+                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300">
+                        Imagem
+                      </span>
+                    </div>
+                    <span className="absolute top-4 left-4 font-mono text-[11px] font-semibold tracking-widest text-white bg-[#285992] rounded-full w-8 h-8 flex items-center justify-center shadow-sm">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
 
-          ⚠️  Accordion overlay coordinates are percentage-based so they scale
-          proportionally with the video. Calibrate top/left/width/height here
-          to match the screen area in the last frame of notebook.mp4.
-        */}
-        <div
-          className="relative aspect-video mx-auto"
-          style={{ width: "min(1350px, 85vw)", flexShrink: 0 }}
-        >
-          {/*
-            muted + playsInline are mandatory for programmatic autoplay.
-            No loop — the video plays once and the accordion fades in on end.
-          */}
-          <video
-            ref={videoRef}
-            src={VIDEO_SRC}
-            muted
-            playsInline
-            preload="auto"
-            className="absolute inset-0 w-full h-full object-contain"
-          />
-
-          {/*
-            Accordion overlay — sits above the video at the notebook's screen
-            position. Starts fully transparent and non-interactive; fades in
-            with a 1 s ease transition once isScreenOpen becomes true.
-          */}
-          <div
-            style={{
-              position: "absolute",
-              zIndex: 10,
-              top: "11%",
-              left: "19%",
-              width: "62%",
-              height: "72.2%",
-              overflow: "hidden",
-              borderRadius: 4,
-              background: "#ffffff",
-              opacity: isScreenOpen ? 1 : 0,
-              pointerEvents: isScreenOpen ? "auto" : "none",
-              transition: "opacity 1s ease",
-            }}
-          >
-            <ScreenAccordion />
-          </div>
+                  {/* ── Content ─────────────────────────────────────────────── */}
+                  <div className="flex-1 p-6 sm:p-8 flex flex-col justify-center">
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#1e3a5f] to-[#285992] flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-4 h-4 text-white" strokeWidth={1.8} />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-semibold text-[#1e293b] leading-snug">
+                        {beneficio.titulo}
+                      </h3>
+                    </div>
+                    <p className="text-sm sm:text-[15px] text-slate-500 leading-relaxed">
+                      {beneficio.descricao}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

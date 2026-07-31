@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import type { Beneficio } from "../types";
 
 interface BeneficiosSectionProps {
@@ -11,7 +11,7 @@ interface BeneficiosSectionProps {
 
 function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
+    <section className="py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -21,9 +21,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Badge className="bg-[#00BCD4]/10 text-[#00BCD4] hover:bg-[#00BCD4]/20 mb-4">
-              Benefícios
-            </Badge>
+            <SectionEyebrow>Benefícios</SectionEyebrow>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -49,11 +47,11 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
               {beneficios.map((beneficio) => (
                 <div key={beneficio.id} className="flex gap-4">
                   <div className="w-8 h-8 rounded-full bg-[#00BCD4]/10 flex items-center justify-center shrink-0 mt-1">
-                    <Check className="w-4 h-4 text-[#00BCD4]" />
+                    <Check className="w-4 h-4 text-[#0e7490]" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1E3A5F] mb-1">{beneficio.titulo}</h3>
-                    <p className="text-sm text-gray-600">{beneficio.descricao}</p>
+                    <p className="text-sm text-slate-500">{beneficio.descricao}</p>
                   </div>
                 </div>
               ))}
@@ -77,8 +75,8 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
               >
-                <p className="text-4xl font-bold text-[#00BCD4] mb-1">{beneficio.estatistica}</p>
-                <p className="text-sm text-gray-600">{beneficio.estatisticaLabel}</p>
+                <p className="text-4xl font-bold text-[#0e7490] mb-1">{beneficio.estatistica}</p>
+                <p className="text-sm text-slate-500">{beneficio.estatisticaLabel}</p>
               </motion.div>
             ))}
           </motion.div>

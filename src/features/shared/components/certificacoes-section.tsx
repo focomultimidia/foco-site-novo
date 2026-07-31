@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -8,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const certificacoes = [
   {
     id:       "booking",
-    logo:     "/assets/imgs/certificacoes/booking.png",
+    logo:     "/assets/imgs/certificacoes/booking.webp",
     titulo:   "Booking Connectivity Partner Premier",
     descricao:
       "Oferecemos a você a conexão mais avançada e estável do mercado, garantindo que suas reservas fluam com segurança, agilidade e máxima eficiência.",
@@ -16,7 +17,7 @@ const certificacoes = [
   },
   {
     id:       "expedia",
-    logo:     "/assets/imgs/certificacoes/expedia.png",
+    logo:     "/assets/imgs/certificacoes/expedia.webp",
     titulo:   "Expedia Elite Partner 2025",
     descricao:
       "Estamos no seleto grupo dos 2% melhores fornecedores globais de tecnologia do Expedia Group. Para o seu hotel, isso significa integrações perfeitas e desempenho de reservas otimizado ao máximo.",
@@ -24,7 +25,7 @@ const certificacoes = [
   },
   {
     id:       "stone",
-    logo:     "/assets/imgs/certificacoes/stone.png",
+    logo:     "/assets/imgs/certificacoes/stone.webp",
     titulo:   "Stone Master Partner",
     descricao:
       "Integramos a mais robusta plataforma financeira diretamente ao nosso ecossistema. Facilitamos a gestão do seu negócio com pagamentos rápidos, seguros e sem dor de cabeça.",
@@ -32,7 +33,7 @@ const certificacoes = [
   },
   {
     id:       "pci",
-    logo:     "/assets/imgs/certificacoes/pci.png",
+    logo:     "/assets/imgs/certificacoes/pci.webp",
     titulo:   "Certificação Global PCI SSC",
     descricao:
       "A segurança dos dados dos seus hóspedes é nossa prioridade absoluta. Todas as transações feitas através da Foco seguem os mais rigorosos padrões mundiais de proteção de dados.",
@@ -73,7 +74,7 @@ function CertCard({ cert }: { cert: typeof certificacoes[number] }) {
         transition:      { duration: 0.25, ease: "easeOut" },
       }}
       style={{ backgroundColor: "#ffffff" }}
-      className="relative overflow-hidden rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col gap-4 cursor-default"
+      className="relative overflow-hidden rounded-3xl border border-slate-100 shadow-sm p-5 flex flex-col gap-4 cursor-default"
     >
       {/* Shine sweep */}
       <AnimatePresence>
@@ -105,6 +106,10 @@ function CertCard({ cert }: { cert: typeof certificacoes[number] }) {
         <img
           src={cert.logo}
           alt={cert.titulo}
+          width={281}
+          height={70}
+          loading="lazy"
+          decoding="async"
           className="max-w-full h-auto object-contain"
           style={{
             filter:     isHovered ? "brightness(0) invert(1)" : "none",
@@ -147,24 +152,7 @@ function CertificacoesSection({
   subtitle = "Parceiros e certificações de classe mundial que atestam a qualidade e segurança da nossa plataforma.",
 }: CertificacoesSectionProps) {
   return (
-    <section className="relative py-24 bg-slate-50 overflow-hidden">
-
-      {/* Dot pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(100,116,139,0.12) 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }}
-      />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 70% at 50% 50%, transparent 30%, #f8fafc 100%)",
-        }}
-      />
+    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -176,6 +164,7 @@ function CertificacoesSection({
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <SectionEyebrow>Certificações e parcerias</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Certificações que garantem{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">

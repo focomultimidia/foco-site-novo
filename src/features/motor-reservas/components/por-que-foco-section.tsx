@@ -44,7 +44,7 @@ const beneficios = [
 
 function PorQueFocoSection() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div

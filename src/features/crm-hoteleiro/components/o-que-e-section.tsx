@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function OQueESection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -34,7 +34,7 @@ function OQueESection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               O <strong>CRM (Customer Relationship Management) Hoteleiro</strong> é um
               sistema estratégico focado em gerenciar e analisar as interações e os
               dados de todos os hóspedes e potenciais clientes. Ele vai além de um
@@ -43,7 +43,7 @@ function OQueESection() {
               passando pelas preferências de quarto, consumo no frigobar, reclamações
               e até mesmo datas especiais.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Seu principal objetivo é permitir que o hotel ofereça um atendimento
               altamente personalizado e crie relacionamentos duradouros. Ao conhecer
               profundamente o hóspede, o CRM possibilita a criação de campanhas de
@@ -62,10 +62,14 @@ function OQueESection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
               <img
-                src="/assets/imgs/crm-hoteleiro/crm-hoteleiro.png"
+                src="/assets/imgs/crm-hoteleiro/crm-hoteleiro.webp"
                 alt="CRM Hoteleiro"
+                width={760}
+                height={521}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

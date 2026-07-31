@@ -4,7 +4,7 @@ import { useGestaoHoteleiraPage } from "./hooks/use-gestao-hoteleira-page";
 import {
   HeroSection,
   RecursosSection,
-  PorQueContratarSection,
+  //PorQueContratarSection,
 } from "./components";
 import { GenericInfoSection } from "@/features/shared/components/generic-info-section";
 import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
@@ -76,7 +76,7 @@ function GestaoHoteleiraPage() {
       <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Section 4: Por que contratar */}
-      <PorQueContratarSection />
+      {/*<PorQueContratarSection />*/}
 
       {/* Prova Social: Vídeos */}
       <VideoTestimonialsCarousel

@@ -83,11 +83,11 @@ function AccordionItem({ dor, index, isOpen, onToggle }: AccordionItemProps) {
 
   return (
     <div
-      className="relative rounded-2xl overflow-hidden transition-shadow duration-300"
+      className="relative rounded-3xl overflow-hidden transition-shadow duration-300"
       style={{
         boxShadow: isOpen
           ? "0 8px 32px rgba(40,89,146,0.14), 0 0 0 1px rgba(40,89,146,0.18)"
-          : "0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.06)",
+          : "0 1px 2px rgba(19,40,64,0.04), 0 12px 32px -16px rgba(19,40,64,0.18), 0 0 0 1px rgba(19,40,64,0.07)",
       }}
     >
       {/*
@@ -101,23 +101,25 @@ function AccordionItem({ dor, index, isOpen, onToggle }: AccordionItemProps) {
 
       {/* ── Trigger ────────────────────────────────────────────────────── */}
       {/*
-        backgroundColor is driven exclusively via Framer Motion `animate` so
-        the open→closed transition is smooth and there is no conflict with
-        CSS background shorthand or Tailwind transition utilities.
-        whileHover adds a tinted hover only when closed (non-conflicting since
-        both use the same `backgroundColor` property).
+        O fundo era animado por Framer (`animate={{ backgroundColor }}`), mas o
+        estilo inline nunca chegava a ser aplicado — o cabeçalho aberto ficava
+        com texto branco sobre fundo transparente. Passa a ser `style` + CSS
+        transition: mesmo resultado visual, sem depender do runtime de animação.
+        Aberto  → tinta da marca (#285992), texto branco.
+        Fechado → papel elevado (#fff) sobre a superfície #f4f7fb.
       */}
       <motion.button
         onClick={onToggle}
         className="relative z-10 w-full flex items-center gap-4 px-6 py-6 text-left"
-        animate={{ backgroundColor: isOpen ? "#285992" : "#ffffff" }}
-        whileHover={!isOpen ? { backgroundColor: "#eff6ff" } : {}}
+        style={{
+          backgroundColor: isOpen ? "#285992" : "#ffffff",
+          transition: "background-color 0.28s ease-in-out",
+        }}
         whileTap={{ scale: 0.998 }}
-        transition={{ duration: 0.28, ease: "easeInOut" }}
       >
         {/* Icon badge */}
         <div
-          className="flex-shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center"
+          className="flex-shrink-0 w-12 h-12 rounded-3xl flex items-center justify-center"
           style={{
             background: isOpen ? "rgba(255,255,255,0.13)" : "rgba(30,58,95,0.07)",
             transition: "background 0.28s ease",
@@ -265,7 +267,7 @@ function DoresSection({ dores }: DoresSectionProps) {
         }
       `}</style>
 
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Accordion */}

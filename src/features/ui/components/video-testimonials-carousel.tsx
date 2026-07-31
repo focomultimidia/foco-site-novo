@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import {
   Carousel,
   CarouselContent,
@@ -72,7 +72,12 @@ function VideoTestimonialsCarousel({
 
   return (
     <>
-      <section className="py-16 lg:py-24 bg-gray-50">
+      {/* overflow-hidden: as setas do carrossel (CarouselNext/Previous) usam o
+          offset padrão -right-12/-left-12, que vaza para fora do container em
+          larguras exatas de breakpoint (ex.: 1024px, onde o container ocupa
+          100% do viewport e não sobra gutter) — mesmo padrão usado nas demais
+          seções com carrossel do site. */}
+      <section className="py-16 lg:py-24 bg-[#f4f7fb] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
@@ -84,9 +89,7 @@ function VideoTestimonialsCarousel({
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <Badge className="bg-[#00BCD4]/10 text-[#00BCD4] hover:bg-[#00BCD4]/20 mb-4">
-                  {badge}
-                </Badge>
+                <SectionEyebrow>{badge}</SectionEyebrow>
               </motion.div>
             )}
             <motion.h2
@@ -143,15 +146,18 @@ function VideoTestimonialsCarousel({
                     />
                   */}
                   <div
-                    className="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-black cursor-pointer"
+                    className="group relative aspect-[9/16] overflow-hidden rounded-3xl bg-black cursor-pointer"
                     onClick={() => setSelectedVideo(item)}
                   >
                     {/* Thumbnail (first frame via YouTube CDN) */}
                     <img
                       src={`https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}
                       alt={item.title}
+                      width={480}
+                      height={360}
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
 
                     {/* Gradient overlay */}
@@ -243,7 +249,7 @@ function VideoTestimonialsCarousel({
               </button>
 
               {/* 16:9 YouTube embed */}
-              <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <div className="aspect-video w-full rounded-3xl overflow-hidden shadow-2xl ring-1 ring-white/10">
                 <iframe
                   src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
                   title={selectedVideo.title}

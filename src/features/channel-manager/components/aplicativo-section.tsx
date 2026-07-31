@@ -54,10 +54,10 @@ type RecursoItem = typeof recursos[0];
 // ── Phone slides ──────────────────────────────────────────────────────────────
 // Channel-manager app screenshots cycling inside the phone frame.
 const PHONE_SLIDES = [
-  { src: "/assets/imgs/channel-manager/site1.png", alt: "Channel Manager – Calendário" },
-  { src: "/assets/imgs/channel-manager/site2.png", alt: "Channel Manager – Reservas"  },
-  { src: "/assets/imgs/channel-manager/site3.png", alt: "Channel Manager – Tarifas"   },
-  { src: "/assets/imgs/channel-manager/site4.png", alt: "Channel Manager – Dashboard"  },
+  { src: "/assets/imgs/shared/site1.webp", alt: "Channel Manager – Calendário" },
+  { src: "/assets/imgs/shared/site2.webp", alt: "Channel Manager – Reservas"  },
+  { src: "/assets/imgs/shared/site3.webp", alt: "Channel Manager – Tarifas"   },
+  { src: "/assets/imgs/shared/site4.webp", alt: "Channel Manager – Dashboard"  },
 ] as const;
 
 const PHONE_INTERVAL = 3000;
@@ -83,8 +83,8 @@ function PhoneMockup() {
       className="bg-[#fbfbfb] rounded-[26px] p-[4px] w-full"
       style={{
         boxShadow:
-          "0 24px 56px rgba(0,0,0,0.48), " +
-          "0 0 0 1px rgba(255,255,255,0.07)",
+          "0 30px 60px -24px rgba(19,40,64,0.42), " +
+          "0 0 0 1px rgba(19,40,64,0.08)",
       }}
     >
       <div
@@ -100,6 +100,10 @@ function PhoneMockup() {
             key={slideIdx}
             src={slide.src}
             alt={slide.alt}
+            width={600}
+            height={1098}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-top"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -111,41 +115,6 @@ function PhoneMockup() {
         {/* Home indicator */}
         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-[4px] bg-black/20 rounded-full z-10" />
       </div>
-    </div>
-  );
-}
-
-// ─── Border Beam ─────────────────────────────────────────────────────────────
-function BorderBeam({ duration }: { duration: number }) {
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute pointer-events-none"
-      style={{
-        inset: 0,
-        borderRadius: 12,
-        padding: "1px",
-        WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-        WebkitMaskComposite: "xor",
-        maskComposite: "exclude",
-      }}
-    >
-      <motion.div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: "200%",
-          height: "200%",
-          x: "-50%",
-          y: "-50%",
-          transformOrigin: "center",
-          background:
-            "conic-gradient(from 0deg, transparent 0%, transparent 76%, rgba(255,255,255,0.80) 87%, transparent 100%)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration, repeat: Infinity, ease: "linear" }}
-      />
     </div>
   );
 }
@@ -165,7 +134,7 @@ function GlassCard({
 
   const spotX = useMotionValue(-200);
   const spotY = useMotionValue(-200);
-  const spotlight = useMotionTemplate`radial-gradient(180px circle at ${spotX}px ${spotY}px, rgba(255,255,255,0.07), transparent 68%)`;
+  const spotlight = useMotionTemplate`radial-gradient(180px circle at ${spotX}px ${spotY}px, rgba(40,89,146,0.06), transparent 68%)`;
 
   const onMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -195,13 +164,11 @@ function GlassCard({
         onMouseLeave={onMouseLeave}
         className={`relative overflow-hidden rounded-xl p-5 backdrop-blur-xl ${align === "left" ? "text-right" : ""}`}
         style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.10)",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.30)",
+          background: "#ffffff",
+          border: "1px solid rgba(19,40,64,0.07)",
+          boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 12px 32px -16px rgba(19,40,64,0.18)",
         }}
       >
-        <BorderBeam duration={4.5 + index * 0.45} />
-
         <motion.div
           aria-hidden="true"
           className="absolute inset-0 pointer-events-none rounded-xl"
@@ -211,19 +178,12 @@ function GlassCard({
         <div className={`relative flex items-start gap-4 ${align === "left" ? "flex-row-reverse" : ""}`}>
           <div
             className="w-10 h-10 bg-[#1e3a5f] rounded-full flex items-center justify-center flex-shrink-0"
-            style={{
-              boxShadow:
-                "0 0 10px rgba(59,130,246,0.65), 0 0 22px rgba(59,130,246,0.30), 0 0 40px rgba(59,130,246,0.12)",
-            }}
           >
-            <Icon
-              className="w-5 h-5 text-white"
-              style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.75))" }}
-            />
+            <Icon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="font-bold text-white mb-1">{recurso.titulo}</h3>
-            <p className="text-white/55 text-sm leading-relaxed">{recurso.descricao}</p>
+            <h3 className="font-bold text-[#132840] mb-1">{recurso.titulo}</h3>
+            <p className="text-[#4c5c73] text-sm leading-relaxed">{recurso.descricao}</p>
           </div>
         </div>
       </div>
@@ -237,7 +197,7 @@ function AplicativoSection() {
   const recursosDireita  = recursos.filter((r) => r.lado === "direito");
 
   return (
-    <section className="py-24 bg-[#1e3a5f]">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         <motion.div
@@ -247,11 +207,11 @@ function AplicativoSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white mb-4 leading-none tracking-tighter antialiased">
-            O <span className="text-blue-300">aplicativo para hotel</span> que
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] mb-4 leading-none tracking-tighter antialiased">
+            O <span className="text-[#285992]">aplicativo para hotel</span> que
             facilita a sua gestão de tarifas e reservas
           </h2>
-          <p className="text-white/70 text-lg max-w-3xl mx-auto">
+          <p className="text-[#4c5c73] text-lg max-w-3xl mx-auto">
             A liberdade de gerenciar seu hotel ou pousada de forma simples, rápida
             e sem a necessidade de estar no escritório.
           </p>
@@ -280,17 +240,6 @@ function AplicativoSection() {
             className="relative flex justify-center"
           >
             <div className="relative w-full max-w-[260px]">
-              {/* Ambient glow */}
-              <div
-                className="absolute pointer-events-none"
-                style={{
-                  inset: "-32px",
-                  background:
-                    "radial-gradient(ellipse at center, rgba(59,130,246,0.38) 0%, rgba(14,165,233,0.18) 42%, transparent 68%)",
-                  filter: "blur(32px)",
-                  zIndex: 0,
-                }}
-              />
 
               {/*
                 Float animation — y oscillates 0 → -10 → 0 every 5.2 s,

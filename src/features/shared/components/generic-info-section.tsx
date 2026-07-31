@@ -21,7 +21,7 @@ export interface GenericInfoSectionProps {
    * Alternating this prop across stacked sections prevents visual monotony.
    */
   imageSide?: "left" | "right";
-  /** Section background colour class. Defaults to "bg-white". */
+  /** Classe de fundo da seção. Padrão: a superfície única do site (#f4f7fb). */
   background?: string;
   /** Extra classes applied to the <section> element. */
   className?: string;
@@ -49,7 +49,7 @@ function GenericInfoSection({
   imagePath,
   imageAlt,
   imageSide = "right",
-  background = "bg-white",
+  background = "bg-[#f4f7fb]",
   className = "",
 }: GenericInfoSectionProps) {
 
@@ -90,7 +90,7 @@ function GenericInfoSection({
 
             {/* Body paragraphs — Inter, relaxed leading */}
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-gray-600 text-base lg:text-base leading-relaxed">
+              <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
                 {p}
               </p>
             ))}
@@ -107,6 +107,10 @@ function GenericInfoSection({
             <img
               src={imagePath}
               alt={imageAlt}
+              width={898}
+              height={664}
+              loading="lazy"
+              decoding="async"
               className="w-full h-auto object-contain"
             />
           </motion.div>

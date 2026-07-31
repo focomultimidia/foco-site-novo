@@ -39,7 +39,7 @@ export function HomePage() {
   }
 
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <HeroSection
         data={data.hero}
         onCtaClick={() => setIsLeadModalOpen(true)}
@@ -98,6 +98,6 @@ export function HomePage() {
         description="Preencha seus dados e nossa equipe entrará em contato para agendar uma demonstração personalizada do nosso sistema."
         source="home"
       />
-    </main>
+    </div>
   );
 }

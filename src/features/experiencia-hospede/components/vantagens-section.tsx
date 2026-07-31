@@ -56,9 +56,9 @@ type VantagemItem = {
 // ── Phone slides ──────────────────────────────────────────────────────────────
 // App do Hóspede screens — matches the section's theme.
 const PHONE_SLIDES = [
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.jpg",  alt: "Foco Pass – Home" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.jpg", alt: "Foco Pass – Atrações" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.png", alt: "Foco Pass – Programação" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",  alt: "Foco Pass – Home" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "Foco Pass – Atrações" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp", alt: "Foco Pass – Programação" },
 ] as const;
 
 const PHONE_INTERVAL = 3200; // ms between slides
@@ -85,8 +85,8 @@ function PhoneMockup() {
       className="bg-[#fbfbfb] rounded-[26px] p-[4px] w-full"
       style={{
         boxShadow:
-          "0 24px 56px rgba(0,0,0,0.42), " +
-          "0 0 0 1px rgba(255,255,255,0.07)",
+          "0 30px 60px -24px rgba(19,40,64,0.42), " +
+          "0 0 0 1px rgba(19,40,64,0.08)",
       }}
     >
       <div
@@ -117,42 +117,6 @@ function PhoneMockup() {
   );
 }
 
-// ── Border Beam ───────────────────────────────────────────────────────────────
-function BorderBeam({ duration }: { duration: number }) {
-  return (
-    <div
-      aria-hidden="true"
-      className="absolute pointer-events-none"
-      style={{
-        inset: 0,
-        borderRadius: 12,
-        padding: "1px",
-        WebkitMask:
-          "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-        WebkitMaskComposite: "xor",
-        maskComposite: "exclude",
-      }}
-    >
-      <motion.div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: "200%",
-          height: "200%",
-          x: "-50%",
-          y: "-50%",
-          transformOrigin: "center",
-          background:
-            "conic-gradient(from 0deg, transparent 0%, transparent 76%, rgba(255,255,255,0.80) 87%, transparent 100%)",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration, repeat: Infinity, ease: "linear" }}
-      />
-    </div>
-  );
-}
-
 // ── Glass Card ────────────────────────────────────────────────────────────────
 function GlassCard({
   vantagem,
@@ -168,7 +132,7 @@ function GlassCard({
 
   const spotX = useMotionValue(-200);
   const spotY = useMotionValue(-200);
-  const spotlight = useMotionTemplate`radial-gradient(180px circle at ${spotX}px ${spotY}px, rgba(255,255,255,0.07), transparent 68%)`;
+  const spotlight = useMotionTemplate`radial-gradient(180px circle at ${spotX}px ${spotY}px, rgba(40,89,146,0.06), transparent 68%)`;
 
   const onMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -200,15 +164,11 @@ function GlassCard({
           align === "left" ? "text-right" : ""
         }`}
         style={{
-          background: "rgba(255,255,255,0.03)",
-          border: "1px solid rgba(255,255,255,0.10)",
-          boxShadow:
-            "inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 32px rgba(0,0,0,0.30)",
+          background: "#ffffff",
+          border: "1px solid rgba(19,40,64,0.07)",
+          boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 12px 32px -16px rgba(19,40,64,0.18)",
         }}
       >
-        {/* Border beam */}
-        <BorderBeam duration={4.5 + index * 0.45} />
-
         {/* Spotlight overlay */}
         <motion.div
           aria-hidden="true"
@@ -224,19 +184,12 @@ function GlassCard({
         >
           <div
             className="w-10 h-10 bg-[#1e3a5f] rounded-full flex items-center justify-center flex-shrink-0"
-            style={{
-              boxShadow:
-                "0 0 10px rgba(59,130,246,0.65), 0 0 22px rgba(59,130,246,0.30), 0 0 40px rgba(59,130,246,0.12)",
-            }}
           >
-            <Icon
-              className="w-5 h-5 text-white"
-              style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.75))" }}
-            />
+            <Icon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="font-bold text-white mb-1">{vantagem.titulo}</h3>
-            <p className="text-white/55 text-sm leading-relaxed">
+            <h3 className="font-bold text-[#132840] mb-1">{vantagem.titulo}</h3>
+            <p className="text-[#4c5c73] text-sm leading-relaxed">
               {vantagem.descricao}
             </p>
           </div>
@@ -249,7 +202,7 @@ function GlassCard({
 // ── Section ───────────────────────────────────────────────────────────────────
 function VantagensSection() {
   return (
-    <section className="py-24 bg-[#1e3a5f]">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -260,11 +213,11 @@ function VantagensSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white leading-none tracking-tighter antialiased mb-2">
-            <span className="text-blue-300">Outras vantagens</span> em utilizar
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-2">
+            <span className="text-[#285992]">Outras vantagens</span> em utilizar
             o aplicativo do hóspede
           </h2>
-          <p className="text-white/70 text-lg max-w-3xl mx-auto">
+          <p className="text-[#4c5c73] text-lg max-w-3xl mx-auto">
             Agilidade, conveniência e descontos exclusivos: os diferenciais que
             elevam o padrão de serviço do seu hotel.
           </p>
@@ -300,17 +253,6 @@ function VantagensSection() {
             className="relative flex justify-center"
           >
             <div className="relative w-full max-w-[260px]">
-              {/* Ambient glow */}
-              <div
-                className="absolute pointer-events-none"
-                style={{
-                  inset: "-32px",
-                  background:
-                    "radial-gradient(ellipse at center, rgba(59,130,246,0.38) 0%, rgba(14,165,233,0.18) 42%, transparent 68%)",
-                  filter: "blur(32px)",
-                  zIndex: 0,
-                }}
-              />
 
               {/*
                 Float wrapper — mirrors the center-phone float from hero-section:

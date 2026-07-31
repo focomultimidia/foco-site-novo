@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -163,7 +164,7 @@ function DepoimentosSection({ depoimentos }: DepoimentosSectionProps) {
   };
 
   return (
-    <section ref={sectionRef} className="py-24 bg-gray-50 overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-[#f4f7fb] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ────────────────────────────────────────────────────────── */}
@@ -174,6 +175,7 @@ function DepoimentosSection({ depoimentos }: DepoimentosSectionProps) {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16 max-w-5xl mx-auto"
         >
+          <SectionEyebrow>Depoimentos</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Quem usa,{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">

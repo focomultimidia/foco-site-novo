@@ -7,7 +7,7 @@ const siteHoteleiroData: SiteHoteleiroData = {
     descricao: "Tenha um site moderno, responsivo e otimizado para SEO, 100% modular e editável. Reduza sua dependência de OTAs e aumente sua margem de lucro.",
     ctaPrimario: "Garantir meu 1º mês grátis",
     ctaSecundario: "Ver Templates",
-    imagemUrl: "/assets/imgs/site-hoteleiro/img-hero.png",
+    imagemUrl: "/assets/imgs/site-hoteleiro/img-hero.webp",
   },
   recursos: [
     {

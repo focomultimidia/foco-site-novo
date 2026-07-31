@@ -11,7 +11,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "O Gestor de Canais (ou Channel Manager) é um software de gestão hoteleira fundamental para a distribuição de inventário e otimização de vendas. Sua função principal é sincronizar a disponibilidade e as tarifas do seu hotel ou pousada em tempo real em todos os seus canais de vendas conectados. Isso inclui as principais OTAs (Online Travel Agencies), operadoras, GDS, canais corporativos e, crucialmente, o motor de reservas do seu site.",
       "Ao automatizar essa distribuição, o channel manager elimina o risco de overbooking, garante a precisão dos dados e maximiza a ocupação com eficiência.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.png",
+    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "Channel Manager — Gestor de Canais",
   },
 
@@ -22,7 +22,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "O Motor de reservas (ou Booking Engine) é o software para hotéis essencial que transforma o site do seu empreendimento em um canal de vendas diretas de alta performance. Desenvolvido para aumentar a taxa de conversão de visitantes em hóspedes, este sistema de reservas permite que hotéis, pousadas, hostels e resorts garantam reservas livres de comissões.",
       "Ao centralizar a gestão hoteleira e oferecer disponibilidade 24/7, o motor de reservas eleva a lucratividade do seu negócio, promovendo a independência das OTAs e simplificando toda a jornada de compra do seu cliente com agilidade e segurança.",
     ],
-    imagePath: "/assets/imgs/motor-de-reservas/motor-de-reservas.png",
+    imagePath: "/assets/imgs/motor-de-reservas/motor-de-reservas.webp",
     imageAlt:  "Motor de Reservas — Mockup",
   },
 
@@ -33,7 +33,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Um Property Management System (PMS) é o software operacional responsável por centralizar e automatizar as principais rotinas do hotel: check-in/check-out, gestão de quartos, reservas, tarifação e relatórios financeiros.",
       "Com o PMS integrado ao Channel Manager e ao Motor de Reservas, todas as informações fluem em tempo real, eliminando retrabalho manual e garantindo dados sempre precisos.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.png",
+    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "Gestão Hoteleira PMS — Mockup",
   },
 
@@ -44,7 +44,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "O CRM (Customer Relationship Management) hoteleiro é a plataforma que centraliza o histórico de relacionamento com cada hóspede — preferências, estadias anteriores, comunicações — permitindo campanhas segmentadas e experiências hiperpersonalizadas.",
       "Integrado ao PMS, o CRM transforma dados operacionais em estratégia de fidelização, aumentando o RevPAR e reduzindo o custo de aquisição de clientes.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.png",
+    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "CRM Hoteleiro — Mockup",
   },
 
@@ -55,7 +55,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "O software de pagamentos hoteleiro processa transações com Pix, cartão de crédito/débito e boleto diretamente dentro do fluxo de reserva, eliminando gateways externos e reduzindo fricção na conversão.",
       "Com conciliação automática e antecipação de recebíveis, o hotel mantém o fluxo de caixa saudável sem depender de planilhas manuais.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.png",
+    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "Software de Pagamentos — Mockup",
   },
 
@@ -67,7 +67,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Para o hóspede, o Foco Pass é sinônimo de comodidade incomparável. Através do nosso aplicativo de hospedagem, ele tem acesso a uma jornada fluida e, o melhor de tudo, a descontos exclusivos e curados em bares, restaurantes, receptivos e ingressos no destino.",
       "Transforme a estadia em uma experiência completa, fidelize seu cliente e veja a satisfação refletida nas suas avaliações.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.png",
+    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "Experiência do hóspede - Foco Pass — Mockup",
   },
 

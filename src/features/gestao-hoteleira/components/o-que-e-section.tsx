@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function OQueESection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -34,19 +34,19 @@ function OQueESection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               O <strong>PMS (Property Management System)</strong> é o coração da
               gestão hoteleira moderna. Este sistema de gerenciamento e controle
               de hotéis e pousadas foi desenvolvido para ser a ferramenta central
               que unifica e otimiza todas as operações.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Com o PMS, cada setor da sua propriedade ganha em eficiência: o
               gerente do hotel obtém relatórios estratégicos; o setor de reservas
               gerencia a ocupação com precisão; a recepção agiliza o check-in e o
               check-out; e a camareira recebe as ordens de serviço em tempo real.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Ao automatizar atividades cruciais como fechamento de contas,
               controle de estoque e gestão de tarifas, o Property Management System
               garante mais produtividade para toda a equipe e, consequentemente,
@@ -63,10 +63,14 @@ function OQueESection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
               <img
-                src="/assets/imgs/gestao-hoteleira-pms/pms-hoteleiro.png"
+                src="/assets/imgs/gestao-hoteleira-pms/pms-hoteleiro.webp"
                 alt="Sistema PMS - Gestão Hoteleira"
+                width={760}
+                height={521}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

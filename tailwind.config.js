@@ -13,6 +13,16 @@ module.exports = {
         mono:    ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       colors: {
+        // Superfície contínua do site — ver bloco "SUPERFÍCIE CONTÍNUA" em index.css
+        surface: {
+          DEFAULT: "hsl(var(--surface))",
+          sunk: "hsl(var(--surface-sunk))",
+        },
+        ink: {
+          DEFAULT: "hsl(var(--ink))",
+          soft: "hsl(var(--ink-soft))",
+          faint: "hsl(var(--ink-faint))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

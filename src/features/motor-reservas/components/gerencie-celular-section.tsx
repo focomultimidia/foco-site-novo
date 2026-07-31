@@ -1,12 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useMotionValue,
-  useMotionTemplate,
-} from "framer-motion";
+import { useState, useEffect } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Activity,
   ListChecks,
@@ -20,10 +16,10 @@ import {
 
 // Mobile screenshots cycling on the central phone
 const SLIDES = [
-  "/assets/imgs/motor-de-reservas/site1.png",
-  "/assets/imgs/motor-de-reservas/site2.png",
-  "/assets/imgs/motor-de-reservas/site3.png",
-  "/assets/imgs/motor-de-reservas/site4.png",
+  "/assets/imgs/shared/site1.webp",
+  "/assets/imgs/shared/site2.webp",
+  "/assets/imgs/shared/site3.webp",
+  "/assets/imgs/shared/site4.webp",
 ];
 
 // Original text list preserved exactly, icons mapped per meaning
@@ -84,7 +80,7 @@ function PhoneShell({ image, size = "lg" }: { image: string; size?: "lg" | "sm" 
       <div style={{ position: "relative", height: "100%", borderRadius: d.ri, overflow: "hidden", background: "#f5f5f7" }}>
         {/* Dynamic Island */}
         <div style={{ position: "absolute", top: 9, left: "50%", transform: "translateX(-50%)", width: d.diW, height: d.diH, borderRadius: 100, background: "#1c1c1e", zIndex: 10 }} />
-        <img src={image} alt="App screen" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
+        <img src={image} alt="App screen" width={600} height={1098} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }} />
       </div>
     </div>
   );
@@ -112,6 +108,9 @@ function PhoneAnimated() {
             key={slide}
             src={SLIDES[slide]}
             alt="App screen"
+            width={600}
+            height={1098}
+            decoding="async"
             initial={{ opacity: 0, scale: 1.04 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.97 }}
@@ -137,10 +136,6 @@ function PhoneTrio() {
   return (
     <div className="relative h-[390px] flex items-center justify-center">
 
-      {/* Ambient light blobs behind the phones */}
-      <div className="absolute w-72 h-72 bg-blue-200/22 rounded-full blur-3xl top-1/4 -left-10 pointer-events-none" />
-      <div className="absolute w-52 h-52 bg-indigo-200/18 rounded-full blur-3xl bottom-1/4 right-2 pointer-events-none" />
-
       {/* ── Left phone ────────────────────────────── */}
       <motion.div
         className="absolute hidden sm:block"
@@ -156,7 +151,7 @@ function PhoneTrio() {
           transition={{ duration: 5.9, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
           style={{ rotate: -11 }}
         >
-          <PhoneShell image="/assets/imgs/motor-de-reservas/site2.png" size="sm" />
+          <PhoneShell image="/assets/imgs/shared/site2.webp" size="sm" />
         </motion.div>
       </motion.div>
 
@@ -191,7 +186,7 @@ function PhoneTrio() {
           transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
           style={{ rotate: 11 }}
         >
-          <PhoneShell image="/assets/imgs/motor-de-reservas/site3.png" size="sm" />
+          <PhoneShell image="/assets/imgs/shared/site3.webp" size="sm" />
         </motion.div>
       </motion.div>
 
@@ -222,7 +217,7 @@ function BentoCard({
       whileHover={{ y: -2, transition: { duration: 0.18 } }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative overflow-hidden rounded-2xl p-5 cursor-default"
+      className="relative overflow-hidden rounded-3xl p-5 cursor-default"
       style={{
         background:     "rgba(255,255,255,0.82)",
         backdropFilter: "blur(14px)",
@@ -263,32 +258,9 @@ function BentoCard({
 // ── Section ───────────────────────────────────────────────────────────────────
 
 function GerencieCelularSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Cursor-following spotlight
-  const mouseX  = useMotionValue(0);
-  const mouseY  = useMotionValue(0);
-  const spotlight = useMotionTemplate`radial-gradient(520px circle at ${mouseX}px ${mouseY}px, rgba(59,130,246,0.055), transparent 70%)`;
-
-  function onMouseMove(e: React.MouseEvent) {
-    const r = sectionRef.current?.getBoundingClientRect();
-    if (!r) return;
-    mouseX.set(e.clientX - r.left);
-    mouseY.set(e.clientY - r.top);
-  }
-
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={onMouseMove}
-      className="relative py-24 bg-slate-50 overflow-hidden"
-    >
-      {/* Spotlight overlay — follows cursor, z-0 so it stays behind content */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{ background: spotlight }}
-      />
-
+    // Sem spotlight de cursor: o fundo é apenas a cor da superfície (#f4f7fb).
+    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 z-10">
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
@@ -325,9 +297,7 @@ function GerencieCelularSection() {
               transition={{ duration: 0.5 }}
               className="mb-5"
             >
-              <span className="font-normal text-xs uppercase tracking-widest text-blue-500">
-                Mobilidade total
-              </span>
+              <SectionEyebrow className="mb-0">Mobilidade total</SectionEyebrow>
             </motion.div>
 
             {/* Staggered bento cards

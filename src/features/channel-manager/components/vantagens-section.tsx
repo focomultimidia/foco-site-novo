@@ -123,7 +123,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
 
       {/* ── Bevel: inner border ring ─────────────────────────────────────── */}
       <div
-        className="absolute inset-0 rounded-2xl pointer-events-none"
+        className="absolute inset-0 rounded-3xl pointer-events-none"
         style={{
           boxShadow: isActive
             ? "inset 0 0 0 1px rgba(255,255,255,0.80)"
@@ -134,7 +134,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
 
       {/* ── Outer border ─────────────────────────────────────────────────── */}
       <div
-        className="absolute inset-0 rounded-2xl border pointer-events-none"
+        className="absolute inset-0 rounded-3xl border pointer-events-none"
         style={{
           borderColor: isActive ? "rgba(40,89,146,0.22)" : "rgba(0,0,0,0)",
           transition: "border-color 300ms ease",
@@ -182,7 +182,7 @@ function AccordionPanel({ item, isActive, onEnter }: PanelProps) {
               {/* Badge + separator */}
               <div>
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-11 h-11 rounded-2xl bg-[#285992] flex items-center justify-center shrink-0 shadow-lg shadow-[#285992]/30">
+                  <div className="w-11 h-11 rounded-3xl bg-[#285992] flex items-center justify-center shrink-0 shadow-lg shadow-[#285992]/30">
                     <span className="text-white font-normal text-xs uppercase tracking-widest">
                       {item.numero}
                     </span>
@@ -253,7 +253,7 @@ function VantagensSection() {
   const [hoveredIdx, setHoveredIdx] = useState(0);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ─────────────────────────────────────────────────────── */}
@@ -311,7 +311,7 @@ function VantagensSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.45, delay: (index % 2) * 0.07 }}
-              className="relative overflow-hidden bg-white/90 backdrop-blur-xl border border-gray-200/70 rounded-2xl p-6 shadow-[0_4px_16px_rgba(36,66,72,0.07)] ring-1 ring-white/70"
+              className="relative overflow-hidden bg-white/90 backdrop-blur-xl border border-gray-200/70 rounded-3xl p-6 shadow-[0_4px_16px_rgba(36,66,72,0.07)] ring-1 ring-white/70"
             >
               <span
                 aria-hidden="true"

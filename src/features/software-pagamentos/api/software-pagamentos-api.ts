@@ -8,7 +8,7 @@ const softwarePagamentosData: SoftwarePagamentosData = {
       "Processe pagamentos de forma segura e integrada. Múltiplas formas de pagamento, split de pagamentos, conciliação automática e total conformidade com regulamentações.",
     ctaPrimario: "Ativar Pagamentos",
     ctaSecundario: "Ver Taxas",
-    imagemUrl: "/assets/imgs/software-de-pagamento/img-hero.png",
+    imagemUrl: "/assets/imgs/software-de-pagamento/img-hero.webp",
   },
   recursos: [
     {

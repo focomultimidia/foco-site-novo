@@ -118,7 +118,7 @@ export function LeadCaptureModal({
 
           <Button
             type="submit"
-            className="w-full bg-cyan-600 hover:bg-cyan-700 rounded-full"
+            className="w-full bg-[#285992] hover:bg-[#1f4570] rounded-full"
             disabled={isSubmitting}
           >
             {isSubmitting ? "Enviando..." : "Solicitar Teste Grátis"}

@@ -105,13 +105,6 @@ function SiteHoteleiroPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
-      {/* Lead Capture CTA */}
-      <LeadCaptureCTA
-        title="Pronto para ter um Site Hoteleiro Profissional?"
-        subtitle="Solicite uma demonstração e veja como podemos ajudar seu hotel a vender mais diretamente."
-        badge="Comece agora"
-      />
-
       {/* Prova Social 4: FAQ */}
       <FAQAccordion
         items={data.faq.map((f) => ({ id: f.id, question: f.pergunta, answer: f.resposta }))}
@@ -121,6 +114,12 @@ function SiteHoteleiroPage() {
         showContactButton
       />
 
+      {/* Lead Capture CTA */}
+      <LeadCaptureCTA
+        title="Pronto para ter um Site Hoteleiro Profissional?"
+        subtitle="Solicite uma demonstração e veja como podemos ajudar seu hotel a vender mais diretamente."
+        badge="Comece agora"
+      />
 
     </div>
   );

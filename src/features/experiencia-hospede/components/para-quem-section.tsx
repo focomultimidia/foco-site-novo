@@ -133,6 +133,10 @@ function SegmentoCard({
         <img
           src={segmento.imagem}
           alt={segmento.titulo}
+          width={400}
+          height={250}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
           style={{
             transform: hovered ? "scale(1.10)" : "scale(1.00)",
@@ -191,7 +195,7 @@ function SegmentoCard({
 // ── Section ───────────────────────────────────────────────────────────────────
 function ParaQuemSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <style>{`
         @keyframes para-quem-comet {
           from { transform: rotate(0deg); }

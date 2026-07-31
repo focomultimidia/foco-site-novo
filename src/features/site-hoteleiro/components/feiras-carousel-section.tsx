@@ -54,7 +54,7 @@ function FeirasCarouselSection() {
   };
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -93,11 +93,15 @@ function FeirasCarouselSection() {
             <CarouselContent className="-ml-0">
               {feiras.map((feira) => (
                 <CarouselItem key={feira.id} className="basis-full pl-0">
-                  <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                  <div className="relative rounded-3xl overflow-hidden shadow-lg">
                     <div className="aspect-[16/10] bg-slate-200">
                       <img
                         src={feira.imagem}
                         alt={feira.titulo}
+                        width={800}
+                        height={500}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover"
                       />
                     </div>

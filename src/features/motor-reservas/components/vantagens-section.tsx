@@ -139,7 +139,7 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
   return (
     <motion.div variants={cardReveal} className="h-full">
       <motion.div
-        className="relative h-full rounded-2xl transform-gpu"
+        className="relative h-full rounded-3xl transform-gpu"
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         initial="rest"
         whileHover="hover"
@@ -150,7 +150,7 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
       >
         {/* Solid white 1px border via p-[1px] gap */}
         <div
-          className="relative h-full rounded-2xl p-[1px] border-white"
+          className="relative h-full rounded-3xl p-[1px] border-white"
           style={{
             background: "rgba(255,255,255,0.00)",
             boxShadow:
@@ -224,28 +224,8 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
 function VantagensSection() {
   return (
     <section
-      className="relative py-28 overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 150% 80% at 30% 40%, #f9fafb 0%, #d2d2d2 100%)",
-      }}
-    >
-      {/* Subtle noise grain */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.022]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
-        }}
-      />
-
-      {/* Ambient light blobs */}
-      <div className="pointer-events-none absolute top-[-60px] left-1/3 -translate-x-1/2 w-[800px] h-[320px] rounded-full bg-white/50 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white/50 blur-3xl" />
-      <div className="pointer-events-none absolute left-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white/50 blur-3xl" />
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+      className="relative py-28 overflow-hidden bg-[#f4f7fb]"
+    >      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* Header */}
         <motion.div

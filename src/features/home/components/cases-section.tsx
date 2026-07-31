@@ -39,7 +39,7 @@ function CasesSection({ cases }: CasesSectionProps) {
   const visibleCases = cases.slice(0, 6);
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -82,10 +82,12 @@ function CasesSection({ cases }: CasesSectionProps) {
                   className="pl-4 basis-full md:basis-1/2 lg:basis-1/3"
                 >
                   <div className="group cursor-pointer">
-                    <div className="relative rounded-2xl overflow-hidden aspect-video mb-4">
+                    <div className="relative rounded-3xl overflow-hidden aspect-video mb-4">
                       <img
                         src={caseItem.imagem}
                         alt={caseItem.titulo}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
 

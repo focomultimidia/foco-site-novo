@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { Shield, Award, CheckCircle, Lock } from "lucide-react";
 
 interface Certificacao {
@@ -28,7 +28,7 @@ function CertificationsRow({
   columns = 4,
 }: CertificationsRowProps) {
   const getIcon = (iconType?: string) => {
-    const iconClass = "w-12 h-12 text-[#00BCD4]";
+    const iconClass = "w-12 h-12 text-[#0e7490]";
     switch (iconType) {
       case "shield":
         return <Shield className={iconClass} />;
@@ -50,7 +50,7 @@ function CertificationsRow({
   };
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -61,9 +61,7 @@ function CertificationsRow({
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <Badge className="bg-[#00BCD4]/10 text-[#00BCD4] hover:bg-[#00BCD4]/20 mb-4">
-                {badge}
-              </Badge>
+              <SectionEyebrow>{badge}</SectionEyebrow>
             </motion.div>
           )}
           <motion.h2

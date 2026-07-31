@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import type { Passo } from "../types";
 
 interface ComoFuncionaSectionProps {
@@ -10,7 +10,7 @@ interface ComoFuncionaSectionProps {
 
 function ComoFuncionaSection({ passos }: ComoFuncionaSectionProps) {
   return (
-    <section className="py-16 lg:py-24 bg-white">
+    <section className="py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -20,9 +20,7 @@ function ComoFuncionaSection({ passos }: ComoFuncionaSectionProps) {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Badge className="bg-[#00BCD4]/10 text-[#00BCD4] hover:bg-[#00BCD4]/20 mb-4">
-              Como Funciona
-            </Badge>
+            <SectionEyebrow>Como Funciona</SectionEyebrow>
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -50,7 +48,7 @@ function ComoFuncionaSection({ passos }: ComoFuncionaSectionProps) {
                 <span className="text-2xl font-bold text-white">{passo.numero}</span>
               </div>
               <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{passo.titulo}</h3>
-              <p className="text-sm text-gray-600">{passo.descricao}</p>
+              <p className="text-sm text-slate-500">{passo.descricao}</p>
             </motion.div>
           ))}
         </div>

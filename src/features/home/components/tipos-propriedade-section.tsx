@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
@@ -21,13 +22,13 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 // ── Background images — cycling through 4 hero shots ─────────────────────────
 const IMAGE_MAP: Record<string, string> = {
-  "1": "/assets/imgs/home/pousada.jpg",
-  "2": "/assets/imgs/home/hotel.jpg",
-  "3": "/assets/imgs/home/chale.jpg",
-  "4": "/assets/imgs/home/hotel-fazenda.jpg",
-  "5": "/assets/imgs/home/hostel.jpg",
-  "6": "/assets/imgs/home/resort.jpg",
-  "7": "/assets/imgs/home/aluguel-temporada.jpg",
+  "1": "/assets/imgs/home/pousada.webp",
+  "2": "/assets/imgs/home/hotel.webp",
+  "3": "/assets/imgs/home/chale.webp",
+  "4": "/assets/imgs/home/hotel-fazenda.webp",
+  "5": "/assets/imgs/home/hostel.webp",
+  "6": "/assets/imgs/home/resort.webp",
+  "7": "/assets/imgs/home/aluguel-temporada.webp",
 };
 
 // ── Per-type color identity (overlay gradient + CTA accent) ───────────────────
@@ -85,7 +86,7 @@ function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave }: DesktopC
         animate={{ scale: isActive ? 1.07 : 1 }}
         transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       >
-        <img src={img} alt={tipo.nome} className="w-full h-full object-cover" />
+        <img src={img} alt={tipo.nome} width={900} height={900} loading="lazy" decoding="async" className="w-full h-full object-cover" />
       </motion.div>
 
       {/* Color-coded identity overlay */}
@@ -160,7 +161,7 @@ function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave }: DesktopC
           >
             {/* Icon badge */}
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+              className="w-14 h-14 rounded-3xl flex items-center justify-center mb-5"
               style={{
                 backgroundColor: `${ts.accent}28`,
                 border: `1.5px solid ${ts.accent}55`,
@@ -205,10 +206,10 @@ function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
   const desc = SHORT_DESC[tipo.id]  ?? tipo.descricao;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl">
+    <div className="relative overflow-hidden rounded-3xl">
       {/* Persistent background — shared by header AND expanded content */}
       <div className="absolute inset-0 pointer-events-none">
-        <img src={img} alt={tipo.nome} className="w-full h-full object-cover" />
+        <img src={img} alt={tipo.nome} width={900} height={900} loading="lazy" decoding="async" className="w-full h-full object-cover" />
         <div className={`absolute inset-0 bg-gradient-to-b ${ts.overlay}`} />
         <div className="absolute inset-0 bg-black/52" />
       </div>
@@ -276,7 +277,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header — unchanged from original ────────────────────────── */}
@@ -287,6 +288,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
+          <SectionEyebrow>Foco para todos</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             Não importa o{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">

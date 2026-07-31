@@ -8,7 +8,7 @@ const experienciaHospedeData: ExperienciaHospedeData = {
       "Crie experiências memoráveis em cada etapa da jornada do hóspede. Comunicação personalizada, check-in digital, concierge virtual e muito mais.",
     ctaPrimario: "Implementar Agora",
     ctaSecundario: "Ver Demonstração",
-    imagemUrl: "/assets/imgs/experiencia-do-hospede/img-hero.png",
+    imagemUrl: "/assets/imgs/experiencia-do-hospede/img-hero.webp",
   },
   recursos: [
     {

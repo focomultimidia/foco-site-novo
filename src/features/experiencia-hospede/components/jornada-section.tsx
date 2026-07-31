@@ -26,7 +26,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 
 function JornadaSection({ etapas }: JornadaSectionProps) {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -35,10 +35,10 @@ function JornadaSection({ etapas }: JornadaSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] mb-4">
             Jornada do Hóspede
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Acompanhe e encante seu hóspede em cada momento da experiência.
           </p>
         </motion.div>
@@ -74,10 +74,10 @@ function JornadaSection({ etapas }: JornadaSectionProps) {
                         isEven ? "lg:ml-auto" : "lg:mr-auto"
                       }`}
                     >
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      <h3 className="text-xl font-semibold text-[#1e293b] mb-2">
                         {etapa.titulo}
                       </h3>
-                      <p className="text-gray-600 max-w-sm">
+                      <p className="text-slate-500 max-w-sm">
                         {etapa.descricao}
                       </p>
                     </div>

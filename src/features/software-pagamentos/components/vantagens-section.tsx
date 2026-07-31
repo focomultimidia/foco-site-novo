@@ -173,24 +173,7 @@ function VantagensSection() {
 
   return (
     <>
-      {/*
-        Border Comet keyframes — scoped to "pagamentos-comet" so they don't
-        collide with the identical animation in site-hoteleiro/vantagens-section.
-      */}
-      <style>{`
-        @keyframes pagamentos-comet {
-          from { transform: translate(-50%, -50%) rotate(0deg);    }
-          to   { transform: translate(-50%, -50%) rotate(360deg);  }
-        }
-        @keyframes pagamentos-comet-ccw {
-          from { transform: translate(-50%, -50%) rotate(0deg);    }
-          to   { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-      `}</style>
-
-      <section className="relative py-24 bg-white overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
-
+      <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
@@ -235,47 +218,6 @@ function VantagensSection() {
                       boxShadow: CARD_SHADOW,
                     }}
                   >
-                    {/* ── Border Comet ───────────────────────────────────── */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden"
-                      style={{ zIndex: 0 }}
-                    >
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          width: "200%",
-                          height: "200%",
-                          animation: `${i % 2 === 0 ? "pagamentos-comet" : "pagamentos-comet-ccw"} ${4 + i * 0.8}s ${i * 1.2}s linear infinite`,
-                          background: [
-                            "conic-gradient(",
-                            "  from 0deg at 50% 50%,",
-                            "  transparent              0deg,",
-                            "  transparent            310deg,",
-                            "  rgba(0,210,255,0.00)   312deg,",
-                            "  rgba(0,210,255,0.45)   328deg,",
-                            "  rgba(80,230,255,0.80)  340deg,",
-                            "  rgba(200,245,255,0.95) 346deg,",
-                            "  rgba(255,255,255,1.00) 350deg,",
-                            "  rgba(200,240,255,0.50) 355deg,",
-                            "  rgba(0,210,255,0.10)   358deg,",
-                            "  transparent            360deg",
-                            ")",
-                          ].join(""),
-                        }}
-                      />
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: "1.5px",
-                          borderRadius: "22.5px",
-                          background: CARD_BG,
-                        }}
-                      />
-                    </div>
-
                     {/* Specular rim light */}
                     <div
                       className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
@@ -294,7 +236,7 @@ function VantagensSection() {
                       {/* Glassmorphic icon container */}
                       <div
                         className="
-                          w-12 h-12 rounded-2xl
+                          w-12 h-12 rounded-3xl
                           flex items-center justify-center
                           mb-5 flex-shrink-0
                           border border-white/20

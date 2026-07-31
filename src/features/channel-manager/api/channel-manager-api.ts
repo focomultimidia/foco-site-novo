@@ -9,7 +9,7 @@ const channelManagerData: ChannelManagerData = {
     ctaPrimario: "Conectar Canais",
     ctaSecundario: "Ver Demonstração",
     imagemUrl:
-      "/assets/imgs/channel-manager/img-hero.png",
+      "/assets/imgs/channel-manager/img-hero.webp",
   },
   recursos: [
     {

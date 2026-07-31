@@ -26,7 +26,7 @@ const clientes = [
 
 function AprovacaoSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -58,13 +58,17 @@ function AprovacaoSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-yellow-50 rounded-2xl p-6 border border-yellow-100"
+              className="bg-yellow-50 rounded-3xl p-6 border border-yellow-100"
             >
               {/* Client Photo */}
               <div className="relative w-20 h-20 mx-auto mb-4 bg-slate-100 rounded-full overflow-hidden p-1">
                 <img
                   src={cliente.foto}
                   alt={cliente.nome}
+                  width={200}
+                  height={200}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>

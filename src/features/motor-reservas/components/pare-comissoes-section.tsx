@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function PareComissoesSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -35,10 +35,14 @@ function PareComissoesSection() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-2xl overflow-hidden p-6 flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-slate-50 rounded-3xl overflow-hidden p-6 flex items-center justify-center">
               <img
-                src="/section6.png"
+                src="/assets/imgs/motor-de-reservas/section6.webp"
                 alt="Comparador de preços"
+                width={1920}
+                height={598}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>
@@ -52,7 +56,7 @@ function PareComissoesSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Em um mercado hoteleiro cada vez mais competitivo, a verdadeira
               margem de lucro do seu hotel, pousada ou resort está na capacidade
               de <strong>gerar reservas diretas</strong>. Você está cansado de ver
@@ -60,7 +64,7 @@ function PareComissoesSection() {
               <strong>comissões de terceiros</strong>? Chegou a hora de retomar o
               controle.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Ter um motor de reservas próprio não é apenas uma conveniência, é
               a estratégia mais inteligente para garantir a independência das
               OTAs, <strong>otimizar sua taxa de conversão</strong> e, o mais

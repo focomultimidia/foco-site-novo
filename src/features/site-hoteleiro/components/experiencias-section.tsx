@@ -9,31 +9,31 @@ const EXPERIENCIAS = [
     titulo: "Design que converte",
     descricao:
       "Design intuitivo e velocidade de carregamento transformam visitantes em hóspedes antes mesmo de qualquer clique.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
   },
   {
     titulo: "Gatilhos de reserva",
     descricao:
       "Site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede direto à reserva.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
   },
   {
     titulo: "Landing pages de impacto",
     descricao:
       "Páginas dedicadas para pacotes, promoções ou eventos, com acesso direto ao motor de reservas.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
   },
   {
     titulo: "Pacotes em destaque",
     descricao:
       "Venda mais com pacotes e promoções posicionados estrategicamente na capa do site.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
   },
   {
     titulo: "Captação de leads",
     descricao:
       "Capture clientes interessados com formulários personalizados integrados à operação do hotel.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
   },
 ] as const;
 
@@ -88,7 +88,7 @@ function ExperienciasSection() {
         }
       `}</style>
 
-    <section ref={sectionRef} className="py-24 bg-white">
+    <section ref={sectionRef} className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header (original content) ──────────────────────────────────── */}
@@ -279,6 +279,10 @@ function ExperienciasSection() {
                   <img
                     src={activeItem.imagem}
                     alt={activeItem.titulo}
+                    width={640}
+                    height={440}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
                   />
                 </motion.div>

@@ -12,28 +12,28 @@ const PASSOS = [
     titulo: "Recuperação automática de reservas não concluídas",
     descricao:
       "Envie lembretes por e-mail e WhatsApp para retomar o contato com hóspedes que iniciaram a reserva, mas não finalizaram.",
-    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
   },
   {
     numero: "02",
     titulo: "Reserva finalizada em menos de 1 minuto",
     descricao:
       "Com a integração total entre site e motor, seu hóspede conclui a reserva de forma simples e imediata.",
-    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
   },
   {
     numero: "03",
     titulo: "Gatilhos e alertas de urgência",
     descricao:
       'Ative recursos como "pouca disponibilidade", contadores, descontos, comparador de preços e outros estímulos à decisão.',
-    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
   },
   {
     numero: "04",
     titulo: "Pagamento facilitado e completo",
     descricao:
       "Aceite Pix e todas as bandeiras de cartão de crédito, incentivando a compra online com um processo rápido e confiável.",
-    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.png",
+    imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
   },
 ] as const;
 
@@ -89,7 +89,7 @@ function ReservaSection() {
         }
       `}</style>
 
-    <section ref={sectionRef} className="py-24 bg-gray-50">
+    <section ref={sectionRef} className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header (original content) ──────────────────────────────────── */}
@@ -298,6 +298,10 @@ function ReservaSection() {
                   <img
                     src={activeItem.imagem}
                     alt={activeItem.titulo}
+                    width={640}
+                    height={440}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
                   />
                 </motion.div>

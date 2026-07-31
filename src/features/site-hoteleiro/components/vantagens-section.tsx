@@ -164,36 +164,7 @@ function VantagensSection() {
 
   return (
     <>
-      {/*
-        ── Border Comet keyframes ─────────────────────────────────────────────
-        Technique: a conic-gradient div spins 360° via transform:rotate()
-        (compositor-only — zero layout/paint, 60 fps).
-
-        Inside each card:
-          1. A spinning div (200%×200%) holds the conic-gradient beam.
-          2. A cutout div (inset:1.5px, same card gradient) hides the interior,
-             leaving only the ~1.5px ring at the card's perimeter exposed.
-
-        The comet shape in the gradient:
-          – 310°–342°  tail  : cyan fading in  (rgba(0,210,255, 0→0.9))
-          – 342°–350°  head  : bright white    (rgba(255,255,255, 1))
-          – 350°–358°  wake  : quick fade-out
-          – rest        : transparent gap
-      */}
-      <style>{`
-        @keyframes vantagens-comet {
-          from { transform: translate(-50%, -50%) rotate(0deg);    }
-          to   { transform: translate(-50%, -50%) rotate(360deg);  }
-        }
-        @keyframes vantagens-comet-ccw {
-          from { transform: translate(-50%, -50%) rotate(0deg);    }
-          to   { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-      `}</style>
-
-      <section className="relative py-24 bg-white overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
-
+      <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header ──────────────────────────────────────────────────── */}
@@ -230,11 +201,8 @@ function VantagensSection() {
                   key={i}
                   ref={el => { if (el) wrapperRefs.current[i] = el; }}
                 >
-                  {/*
-                    Inner card — Vanilla-tilt target.
-                    overflow-hidden is required: clips both the VanillaTilt glare
-                    and the border-comet's spinning beam to the card boundary.
-                  */}
+                  {/* Inner card — Vanilla-tilt target. overflow-hidden clips the
+                      VanillaTilt glare to the card boundary. */}
                   <div
                     ref={el => { if (el) cardRefs.current[i] = el; }}
                     className="group relative h-full rounded-3xl p-6 cursor-default overflow-hidden"
@@ -244,72 +212,6 @@ function VantagensSection() {
                       boxShadow: CARD_SHADOW,
                     }}
                   >
-                    {/*
-                      ── Border Comet ───────────────────────────────────────
-                      Layer order (z-index):
-                        z-0  → comet beam (behind everything)
-                        z-0  → cutout (same stacking level, rendered after beam)
-                        z-10 → specular highlights, icon, text
-
-                      The spinning div is 200%×200% centered at 50%/50%.
-                      Its radius (≈141% of the shorter dimension) always reaches
-                      the card corners, so the gradient touches every edge.
-
-                      The cutout div replicates CARD_BG from inset:1.5px inward,
-                      hiding the beam interior — only the ~1.5px perimeter ring
-                      of the spinning gradient shows through.
-                    */}
-                    <div
-                      aria-hidden="true"
-                      className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden"
-                      style={{ zIndex: 0 }}
-                    >
-                      {/* Spinning conic-gradient — the comet source */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          width: "200%",
-                          height: "200%",
-                          // Each card gets its own duration, delay and direction:
-                          //   duration  4.0 → 9.6 s  (index * 0.8 s step)
-                          //   delay     0.0 → 8.4 s  (index * 1.2 s step)
-                          //   direction even → CW, odd → CCW
-                          // The combined variation makes every comet drift apart
-                          // and re-converge organically — zero visual symmetry.
-                          animation: `${i % 2 === 0 ? "vantagens-comet" : "vantagens-comet-ccw"} ${4 + i * 0.8}s ${i * 1.2}s linear infinite`,
-                          background: [
-                            "conic-gradient(",
-                            "  from 0deg at 50% 50%,",
-                            "  transparent              0deg,",
-                            "  transparent            310deg,",
-                            "  rgba(0,210,255,0.00)   312deg,",
-                            "  rgba(0,210,255,0.45)   328deg,",
-                            "  rgba(80,230,255,0.80)  340deg,",
-                            "  rgba(200,245,255,0.95) 346deg,",
-                            "  rgba(255,255,255,1.00) 350deg,",
-                            "  rgba(200,240,255,0.50) 355deg,",
-                            "  rgba(0,210,255,0.10)   358deg,",
-                            "  transparent            360deg",
-                            ")",
-                          ].join(""),
-                        }}
-                      />
-                      {/*
-                        Cutout — replicates the card gradient from inset:1.5px,
-                        masking the beam interior and exposing only the border ring.
-                      */}
-                      <div
-                        style={{
-                          position: "absolute",
-                          inset: "1.5px",
-                          borderRadius: "22.5px",
-                          background: CARD_BG,
-                        }}
-                      />
-                    </div>
-
                     {/* Specular top-edge rim light (z:10) */}
                     <div
                       className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent"
@@ -328,7 +230,7 @@ function VantagensSection() {
                       {/* Icon container — glassmorphic */}
                       <div
                         className="
-                          w-12 h-12 rounded-2xl
+                          w-12 h-12 rounded-3xl
                           flex items-center justify-center
                           mb-5 flex-shrink-0
                           border border-white/20

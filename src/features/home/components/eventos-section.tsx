@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion } from "framer-motion";
 import {
   MapPin,
-  Ticket,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
@@ -13,21 +13,21 @@ import type { Evento } from "../types";
 
 // ── Asset maps ────────────────────────────────────────────────────────────────
 const EVENTO_IMAGES: Record<string, string> = {
-  "1": "/assets/imgs/feiras-eventos/equipotel-2025.jpg",
-  "2": "/assets/imgs/feiras-eventos/expohotel-2025.jpg",
-  "3": "/assets/imgs/feiras-eventos/expohotel-2024.jpg",
-  "4": "/assets/imgs/feiras-eventos/equipotel-2025.jpg",
-  "5": "/assets/imgs/feiras-eventos/expohotel-2025.jpg",
-  "6": "/assets/imgs/feiras-eventos/expohotel-2024.jpg",
+  "1": "/assets/imgs/feiras-eventos/equipotel-2025.webp",
+  "2": "/assets/imgs/feiras-eventos/expohotel-2025.webp",
+  "3": "/assets/imgs/feiras-eventos/expohotel-2024.webp",
+  "4": "/assets/imgs/feiras-eventos/equipotel-2025.webp",
+  "5": "/assets/imgs/feiras-eventos/expohotel-2025.webp",
+  "6": "/assets/imgs/feiras-eventos/expohotel-2024.webp",
 };
 
 const EVENTO_LOGOS: Record<string, string> = {
-  "1": "/assets/imgs/feiras-eventos/equipotel.png",
-  "2": "/assets/imgs/feiras-eventos/expotel.png",
-  "3": "/assets/imgs/feiras-eventos/encatho-exprotel.png",
-  "4": "/assets/imgs/feiras-eventos/equipotel.png",
-  "5": "/assets/imgs/feiras-eventos/expotel.png",
-  "6": "/assets/imgs/feiras-eventos/encatho-exprotel.png",
+  "1": "/assets/imgs/feiras-eventos/equipotel.webp",
+  "2": "/assets/imgs/feiras-eventos/expotel.webp",
+  "3": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
+  "4": "/assets/imgs/feiras-eventos/equipotel.webp",
+  "5": "/assets/imgs/feiras-eventos/expotel.webp",
+  "6": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
 };
 
 // ── Constants ─────────────────────────────────────────────────────────────────
@@ -47,7 +47,7 @@ const LINE_TOP_PX = 68;
 
 
 // ── Giant-card visual identity (copied from motor-reservas/vantagens-section) ──
-// Matches the glass-card aesthetic exactly: rounded-2xl, border-white, blur(16px).
+// Matches the glass-card aesthetic exactly: rounded-3xl, border-white, blur(16px).
 const GIANT_CARD_SHADOW =
   "0 1px 2px rgba(0,0,0,0.04), " +
   "0 4px 8px rgba(0,0,0,0.04), "  +
@@ -65,7 +65,7 @@ function TimelineBadge({ evento, vis }: { evento: Evento; vis: boolean }) {
       <p className="text-[12px] font-bold uppercase tracking-widest text-[#285992] leading-none mb-2.5">
         {evento.data}
       </p>
-      <span className="flex items-center justify-center gap-0.5 mb-3.5 text-[12px] text-slate-400 leading-none">
+      <span className="flex items-center justify-center gap-0.5 mb-3.5 text-[12px] text-slate-500 leading-none">
         <MapPin className="w-2.5 h-2.5 flex-shrink-0" />
         {evento.local}
       </span>
@@ -76,12 +76,16 @@ function TimelineBadge({ evento, vis }: { evento: Evento; vis: boolean }) {
 // ── Desktop event card ────────────────────────────────────────────────────────
 function EventoCard({ evento }: { evento: Evento }) {
   return (
-    <div className="group h-full rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-lg transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-default">
+    <div className="group h-full rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-lg transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-2xl cursor-default">
       <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
         <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
           <img
             src={EVENTO_IMAGES[evento.id] ?? EVENTO_IMAGES["1"]}
             alt={evento.titulo}
+            width={555}
+            height={304}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>
@@ -147,30 +151,10 @@ function EventosSection({ eventos }: EventosSectionProps) {
 
   return (
     <section
-      className="relative py-20 overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 150% 80% at 30% 40%, #f9fafb 10%, #d2d2d2 100%)",
-      }}
+      className="relative py-20 overflow-hidden bg-[#f4f7fb]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Subtle noise grain */}
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.022]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
-        }}
-      />
-
-      {/* Ambient light blobs */}
-      <div className="pointer-events-none absolute top-[-60px] left-1/3 -translate-x-1/2 w-[800px] h-[320px] rounded-full bg-white/50 blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white/50 blur-3xl" />
-      <div className="pointer-events-none absolute left-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white/50 blur-3xl" />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
@@ -181,10 +165,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Ticket className="w-4 h-4" />
-            <span>Eventos</span>
-          </div>
+          <SectionEyebrow>Eventos</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Presente nas principais{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
@@ -196,7 +177,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
         {/*
           ── Desktop (lg+): entire carousel inside a single "giant card" ────────
           Visual identity transplanted from motor-reservas/vantagens-section:
-          · rounded-2xl outer / rounded-[15px] inner  (same as vantagens cards)
+          · rounded-3xl outer / rounded-[15px] inner  (same as vantagens cards)
           · border border-white/80                     (same)
           · backdrop-blur(16px) + bg-white/65          (same glassmorphism)
           · GIANT_CARD_SHADOW                          (same diffuse shadow)
@@ -285,6 +266,10 @@ function EventosSection({ eventos }: EventosSectionProps) {
                                   src={EVENTO_LOGOS[evento.id]}
                                   alt=""
                                   aria-hidden="true"
+                                  width={250}
+                                  height={70}
+                                  loading="lazy"
+                                  decoding="async"
                                   className="max-h-full max-w-[180px] object-contain transition-all duration-300 grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100"
                                 />
                               )}
@@ -396,11 +381,15 @@ function EventosSection({ eventos }: EventosSectionProps) {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-100 shadow-sm">
+              <div className="rounded-3xl overflow-hidden bg-white border border-slate-100 shadow-sm">
                 <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
                   <img
                     src={EVENTO_IMAGES[evento.id] ?? EVENTO_IMAGES["1"]}
                     alt={evento.titulo}
+                    width={555}
+                    height={304}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />

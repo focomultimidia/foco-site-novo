@@ -65,8 +65,12 @@ function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex mb-6">
               <img
-                src="/logo-foco.png"
+                src="/assets/imgs/logo/logo-foco.webp"
                 alt="Foco Tecnologia e Marketing"
+                width={147}
+                height={55}
+                loading="lazy"
+                decoding="async"
                 className="h-10 w-auto brightness-0 invert"
               />
             </Link>
@@ -138,7 +142,7 @@ function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-[#00BCD4] hover:text-white transition-all"
+                  className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-[#00BCD4] hover:text-white transition-all"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />

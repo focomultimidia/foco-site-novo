@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const orbitLogos = [
-  { src: "/booking.png", alt: "Booking" },
-  { src: "/airbnb.png", alt: "Airbnb" },
-  { src: "/expedia.png", alt: "Expedia" },
-  { src: "/decolar.png", alt: "Decolar" },
-  { src: "/cvc.png", alt: "CVC" },
-  { src: "/agoda.png", alt: "Agoda" },
+  { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking" },
+  { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },
+  { src: "/assets/imgs/integracoes/canais/expedia.webp", alt: "Expedia" },
+  { src: "/assets/imgs/integracoes/canais/decolar.webp", alt: "Decolar" },
+  { src: "/assets/imgs/integracoes/canais/cvc.webp", alt: "CVC" },
+  { src: "/assets/imgs/integracoes/canais/agoda.webp", alt: "Agoda" },
 ];
 
 function IntegracoesOrbitalSection() {
@@ -21,7 +21,7 @@ function IntegracoesOrbitalSection() {
   ];
 
   return (
-    <section className="py-24 bg-white overflow-hidden">
+    <section className="py-24 bg-[#f4f7fb] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -50,10 +50,14 @@ function IntegracoesOrbitalSection() {
           className="relative flex items-center justify-center w-full h-[500px]"
         >
           {/* Logo Central da Foco */}
-          <div className="relative z-10 flex items-center justify-center w-28 h-28 bg-white rounded-2xl shadow-xl border border-slate-100 p-3">
+          <div className="relative z-10 flex items-center justify-center w-28 h-28 bg-white rounded-3xl shadow-xl border border-slate-100 p-3">
             <img
-              src="/foco.png"
+              src="/assets/imgs/logo/foco.webp"
               alt="Foco Tecnologia"
+              width={500}
+              height={500}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-contain"
             />
           </div>
@@ -80,6 +84,8 @@ function IntegracoesOrbitalSection() {
                   <img
                     src={logo.src}
                     alt={logo.alt}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-contain"
                   />
                 </div>

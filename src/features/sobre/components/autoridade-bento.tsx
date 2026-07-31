@@ -154,7 +154,7 @@ export function BentoNetworkSection() {
   const dotY = useMotionValue(0);
 
   return (
-    <section className="py-24 lg:py-32 bg-slate-50/60">
+    <section className="py-24 lg:py-32 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           badge="A Rede Foco"
@@ -178,7 +178,7 @@ export function BentoNetworkSection() {
             <BrazilDotMap parallaxX={dotX} parallaxY={dotY} />
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-[#285992]/8 flex items-center justify-center text-[#285992]/55 group-hover:text-[#285992] group-hover:bg-[#285992]/12 transition-colors duration-300">
+                <div className="w-14 h-14 rounded-3xl bg-[#285992]/8 flex items-center justify-center text-[#285992]/55 group-hover:text-[#285992] group-hover:bg-[#285992]/12 transition-colors duration-300">
                   <MapPin className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
                 </div>
                 <span className="text-[10px] font-bold tracking-widest uppercase text-[#285992] bg-[#285992]/8 rounded-full px-2.5 py-1">
@@ -199,7 +199,7 @@ export function BentoNetworkSection() {
           <BentoCard className="min-h-[300px] p-8 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-14 h-14 rounded-2xl bg-[#0f766e]/8 flex items-center justify-center text-[#0f766e]/55 group-hover:text-[#0f766e] group-hover:bg-[#0f766e]/12 transition-colors duration-300">
+                <div className="w-14 h-14 rounded-3xl bg-[#0f766e]/8 flex items-center justify-center text-[#0f766e]/55 group-hover:text-[#0f766e] group-hover:bg-[#0f766e]/12 transition-colors duration-300">
                   <Award className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
                 </div>
                 <span className="text-[10px] font-bold tracking-widest uppercase text-[#0f766e] bg-[#0f766e]/8 rounded-full px-2.5 py-1">
@@ -217,7 +217,7 @@ export function BentoNetworkSection() {
 
           {/* 365 Dias */}
           <BentoCard magnetic className="p-7 flex flex-col gap-6 min-h-[190px]">
-            <div className="w-14 h-14 rounded-2xl bg-[#285992]/8 flex items-center justify-center text-[#285992]/55 group-hover:text-[#285992] group-hover:bg-[#285992]/12 transition-colors duration-300">
+            <div className="w-14 h-14 rounded-3xl bg-[#285992]/8 flex items-center justify-center text-[#285992]/55 group-hover:text-[#285992] group-hover:bg-[#285992]/12 transition-colors duration-300">
               <Clock className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
             </div>
             <div>
@@ -231,7 +231,7 @@ export function BentoNetworkSection() {
 
           {/* < 2 min */}
           <BentoCard magnetic className="p-7 flex flex-col gap-6 min-h-[190px]">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/8 flex items-center justify-center text-emerald-600/55 group-hover:text-emerald-600 group-hover:bg-emerald-500/12 transition-colors duration-300">
+            <div className="w-14 h-14 rounded-3xl bg-emerald-500/8 flex items-center justify-center text-emerald-600/55 group-hover:text-emerald-600 group-hover:bg-emerald-500/12 transition-colors duration-300">
               <TrendingUp className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
             </div>
             <div>
@@ -245,7 +245,7 @@ export function BentoNetworkSection() {
 
           {/* 97% */}
           <BentoCard magnetic className="p-7 flex flex-col gap-6 min-h-[190px]">
-            <div className="w-14 h-14 rounded-2xl bg-[#c9972a]/8 flex items-center justify-center text-[#c9972a]/55 group-hover:text-[#c9972a] group-hover:bg-[#c9972a]/12 transition-colors duration-300">
+            <div className="w-14 h-14 rounded-3xl bg-[#c9972a]/8 flex items-center justify-center text-[#c9972a]/80 group-hover:text-[#9a7318] group-hover:bg-[#c9972a]/12 transition-colors duration-300">
               <Sparkles className="w-8 h-8 group-hover:scale-110 transition-transform duration-300" strokeWidth={1.5} />
             </div>
             <div>

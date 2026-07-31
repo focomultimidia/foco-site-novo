@@ -12,14 +12,19 @@
  *   · Movimento Y em cascata (stagger D=0.15 s entre os 5 elementos de texto).
  *   · Fade + blur lentos (duration 1.1): dissolução gradual sobre todo o range.
  *   · Imagem: animação paralela (y + scale + fade + blur, duration 1.0).
- *   · Background: parallax independente ao longo de toda a seção (sem fade).
  *
  *   scrub: 1.5 → lag suave, ideal para fade/blur cinematográficos.
- *   end: "bottom 35%" → range proporcional para a hero de 90vh.
+ *   start: "bottom 90%" / end: "bottom 35%" → ver nota abaixo sobre por que o
+ *   start é relativo à BASE da seção, não ao topo.
+ *
+ * ── prefers-reduced-motion ──────────────────────────────────────────────────
+ * Usuários que pedem movimento reduzido não recebem nem a entrada nem a saída
+ * no scroll: os elementos já nascem no estado final visível. Isso também
+ * blinda contra qualquer cenário em que a animação de entrada não rode (o
+ * conteúdo nunca fica preso em opacity:0 esperando um rAF que não vem).
  *
  * Data attributes necessários no JSX:
  *   data-hero="section"      → <section> raiz (trigger)
- *   data-hero="bg"           → container do InternalHeroBackground (z-0)
  *   data-hero="badge"        → pill / categoria (opcional)
  *   data-hero="title"        → <h1>
  *   data-hero="description"  → <p> de apoio
@@ -36,6 +41,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function useInternalHeroGsap(sectionRef: RefObject<HTMLElement | null>) {
   useLayoutEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     const ctx = gsap.context(() => {
 
       // ── FASE 1: ENTRADA ────────────────────────────────────────────────────────
@@ -48,6 +57,16 @@ export function useInternalHeroGsap(sectionRef: RefObject<HTMLElement | null>) {
         "[data-hero='trust']",
       ]);
       const imageEl = "[data-hero='image']";
+
+      if (prefersReduced) {
+        // Nenhuma fase roda: garante o estado final visível de imediato, sem
+        // depender de nenhuma animação (nem registra o ScrollTrigger de saída,
+        // que também é movimento).
+        gsap.set([...staggerEls, imageEl], {
+          clearProps: "opacity,transform,filter,willChange",
+        });
+        return;
+      }
 
       gsap.set([...staggerEls, imageEl], { opacity: 0, willChange: "transform, opacity, filter" });
       gsap.set(staggerEls, { y: 60,  filter: "blur(20px)" });
@@ -84,9 +103,29 @@ export function useInternalHeroGsap(sectionRef: RefObject<HTMLElement | null>) {
       const exitTl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start:   "top top",
-          end:     "bottom 35%",  // proporcional à hero de 90vh
-          scrub:   1.5,
+          // "top top" (posição anterior) marca o início da saída no instante em
+          // que o TOPO da seção toca o topo do viewport — o que, para a home
+          // page e as heros internas, coincide com o carregamento da página
+          // (scroll=0), já que a seção começa no topo do documento. Isso só
+          // funciona bem quando a seção inteira cabe em ~90vh: o usuário já viu
+          // tudo antes de precisar rolar, então começar a esmaecer assim que ele
+          // rola é o comportamento certo.
+          //
+          // Heros mais altas que um viewport (como a do Channel Manager, com um
+          // diagrama largo) quebram essa suposição: o usuário ainda precisa
+          // rolar só para revelar description/cta/trust, que ficam abaixo da
+          // dobra — mas o MESMO gesto de scroll já estava progredindo a saída
+          // desde o primeiro pixel, esmaecendo esse conteúdo antes de ele
+          // sequer entrar em vista.
+          //
+          // "bottom 90%" corrige isso sem quebrar o caso antigo: para uma hero
+          // de ~90vh (viewport ~100vh), a base da seção já está a ~90% do
+          // viewport na carga — ou seja, o mesmo ponto de partida de antes,
+          // scroll=0. Para heros mais altas, esse ponto só é atingido depois
+          // que a base da seção (o último elemento, "trust") já foi vista.
+          start: "bottom 90%",
+          end:   "bottom 35%",
+          scrub: 1.5,
         },
       });
 
@@ -141,22 +180,8 @@ export function useInternalHeroGsap(sectionRef: RefObject<HTMLElement | null>) {
           0
         );
 
-      // ── Background — parallax independente ────────────────────────────────────
-      gsap.fromTo(
-        "[data-hero='bg']",
-        { yPercent: 0 },
-        {
-          yPercent:        20,
-          ease:            "none",
-          immediateRender: false,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start:   "top top",
-            end:     "bottom top",
-            scrub:   true,
-          },
-        }
-      );
+      // Não há mais parallax de background: as heros usam apenas a cor
+      // da superfície (#f4f7fb), sem camadas atrás do conteúdo.
 
     }, sectionRef);
 

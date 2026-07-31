@@ -135,6 +135,9 @@ function Header() {
   const [isMegamenuOpen,        setIsMegamenuOpen]        = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location   = useLocation();
+  const megamenuButtonRef  = useRef<HTMLButtonElement | null>(null);
+  const mobileOverlayRef   = useRef<HTMLDivElement | null>(null);
+  const mobileCloseButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 20);
@@ -163,6 +166,24 @@ function Header() {
     closeTimer.current = setTimeout(() => setIsMegamenuOpen(false), 120);
   };
 
+  const closeMegamenu = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setIsMegamenuOpen(false);
+  };
+
+  const handleMegamenuBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      closeMegamenu();
+    }
+  };
+
+  const handleMegamenuKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") {
+      closeMegamenu();
+      megamenuButtonRef.current?.focus();
+    }
+  };
+
   const softwaresActive = softwaresSubmenu.some((s) =>
     isActiveRoute(location.pathname, s.href)
   );
@@ -171,6 +192,39 @@ function Header() {
     setIsMobileOpen(false);
     setIsMobileSoftwaresOpen(false);
   };
+
+  // Focus trap + Escape-to-close for the full-screen mobile nav overlay
+  useEffect(() => {
+    if (!isMobileOpen) return;
+
+    mobileCloseButtonRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeMobile();
+        return;
+      }
+      if (e.key !== "Tab" || !mobileOverlayRef.current) return;
+
+      const focusable = mobileOverlayRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMobileOpen]);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -194,8 +248,11 @@ function Header() {
             {/* Logo */}
             <Link to="/" className="shrink-0">
               <motion.img
-                src="/logo-foco.png"
+                src="/assets/imgs/logo/logo-foco.webp"
                 alt="Foco Tecnologia e Marketing"
+                width={147}
+                height={55}
+                decoding="async"
                 className="w-auto"
                 animate={{ height: isScrolled ? 40 : 50 }}
                 transition={CARD_TRANSITION}
@@ -230,8 +287,16 @@ function Header() {
                 className="relative"
                 onMouseEnter={openMegamenu}
                 onMouseLeave={scheduleMegamenuClose}
+                onFocus={openMegamenu}
+                onBlur={handleMegamenuBlur}
+                onKeyDown={handleMegamenuKeyDown}
               >
                 <button
+                  ref={megamenuButtonRef}
+                  type="button"
+                  aria-expanded={isMegamenuOpen}
+                  aria-haspopup="true"
+                  onClick={() => setIsMegamenuOpen((v) => !v)}
                   className={`relative flex items-center gap-1 px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
                     softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
                   }`}
@@ -258,7 +323,7 @@ function Header() {
                       onMouseEnter={openMegamenu}
                       onMouseLeave={scheduleMegamenuClose}
                       style={{ transformOrigin: "top center" }}
-                      className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-[620px] bg-white/90 backdrop-blur-xl rounded-2xl shadow-2xl shadow-slate-900/20 border border-slate-100/80 overflow-hidden z-50"
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-5 w-[620px] bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl shadow-slate-900/20 border border-slate-100/80 overflow-hidden z-50"
                     >
                       <div className="absolute -top-[5px] left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-white border-l border-t border-slate-100 rotate-45" />
                       <div className="p-6 grid grid-cols-2 gap-3.5 bg-white">
@@ -337,6 +402,10 @@ function Header() {
         {isMobileOpen && (
           <motion.div
             key="mobile-overlay"
+            ref={mobileOverlayRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu principal"
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -347,12 +416,16 @@ function Header() {
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
               <Link to="/" onClick={closeMobile}>
                 <img
-                  src="/logo-foco.png"
+                  src="/assets/imgs/logo/logo-foco.webp"
                   alt="Foco Tecnologia e Marketing"
+                  width={147}
+                  height={55}
+                  decoding="async"
                   className="h-10 w-auto"
                 />
               </Link>
               <button
+                ref={mobileCloseButtonRef}
                 onClick={closeMobile}
                 className="w-11 h-11 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors"
                 aria-label="Fechar menu"
@@ -369,7 +442,7 @@ function Header() {
                   key={item.href}
                   to={item.href}
                   onClick={closeMobile}
-                  className={`flex items-center px-4 py-4 rounded-2xl text-base font-medium tracking-tight transition-colors ${
+                  className={`flex items-center px-4 py-4 rounded-3xl text-base font-medium tracking-tight transition-colors ${
                     isActiveRoute(location.pathname, item.href)
                       ? "text-blue-600 bg-blue-50"
                       : "text-slate-800 hover:bg-slate-50"
@@ -383,7 +456,7 @@ function Header() {
               <div>
                 <button
                   onClick={() => setIsMobileSoftwaresOpen((v) => !v)}
-                  className="w-full flex items-center justify-between px-4 py-4 rounded-2xl text-base font-medium tracking-tight text-slate-800 hover:bg-slate-50 transition-colors"
+                  className="w-full flex items-center justify-between px-4 py-4 rounded-3xl text-base font-medium tracking-tight text-slate-800 hover:bg-slate-50 transition-colors"
                 >
                   Softwares hoteleiro
                   <ChevronDown
@@ -432,7 +505,7 @@ function Header() {
                   key={item.href}
                   to={item.href}
                   onClick={closeMobile}
-                  className={`flex items-center px-4 py-4 rounded-2xl text-base font-medium tracking-tight transition-colors ${
+                  className={`flex items-center px-4 py-4 rounded-3xl text-base font-medium tracking-tight transition-colors ${
                     isActiveRoute(location.pathname, item.href)
                       ? "text-blue-600 bg-blue-50"
                       : "text-slate-800 hover:bg-slate-50"
@@ -446,7 +519,7 @@ function Header() {
             {/* Bottom CTA — identical premium button from desktop */}
             <div className="shrink-0 flex flex-col items-center gap-3 px-5 pt-4 pb-8 border-t border-slate-100">
               <PremiumCTAButton label="Agendar uma demonstração" />
-              <p className="text-xs text-slate-400 tracking-wide">Demonstração gratuita · Sem compromisso</p>
+              <p className="text-xs text-slate-500 tracking-wide">Demonstração gratuita · Sem compromisso</p>
             </div>
           </motion.div>
         )}

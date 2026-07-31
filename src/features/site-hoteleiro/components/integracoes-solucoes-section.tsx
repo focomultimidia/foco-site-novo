@@ -12,37 +12,37 @@ import {
 // ── Data ─────────────────────────────────────────────────────────────────────
 const INTEGRACOES = [
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/foco-icon.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/foco-icon.webp",
     titulo: "Motor de Reservas",
     descricao:
       "Converta mais clientes com um motor de reservas eficiente, simples e seguro!",
   },
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-analytics.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-analytics.webp",
     titulo: "Google Analytics",
     descricao:
       "Descubra o perfil do seu hóspede, quais ações de marketing geram mais reservas e muito mais!",
   },
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/facebook-ads.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/facebook-ads.webp",
     titulo: "Facebook ADS",
     descricao:
       "Crie campanhas e alcance hóspedes em potencial nas principais redes sociais do mundo.",
   },
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/asksuite.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/asksuite.webp",
     titulo: "Asksuite",
     descricao:
       "Inteligência artificial hoteleira número 1 do mundo, focada em aumentar reservas diretas e otimizar a gestão do atendimento.",
   },
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-ads.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/google-ads.webp",
     titulo: "Google ADS",
     descricao:
       "Coloque seu hotel no topo da maior rede de pesquisa de hospedagens do mundo!",
   },
   {
-    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/whatsapp.png",
+    logo: "/assets/imgs/site-hoteleiro/integracoes-marketing/whatsapp.webp",
     titulo: "WhatsApp",
     descricao:
       "Aumente suas reservas com o aplicativo de mensagens mais usado no Brasil.",
@@ -128,7 +128,7 @@ function Card({ logo, titulo, descricao }: CardProps) {
   return (
     <motion.div variants={cardReveal} className="h-full">
       <motion.div
-        className="relative h-full rounded-2xl transform-gpu"
+        className="relative h-full rounded-3xl transform-gpu"
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         initial="rest"
         whileHover="hover"
@@ -138,7 +138,7 @@ function Card({ logo, titulo, descricao }: CardProps) {
         onHoverStart={onHoverStart}
       >
         <div
-          className="relative h-full rounded-2xl p-[1px]"
+          className="relative h-full rounded-3xl p-[1px]"
           style={{
             background: "rgba(255,255,255,0.00)",
             boxShadow:
@@ -190,6 +190,8 @@ function Card({ logo, titulo, descricao }: CardProps) {
                 <img
                   src={logo}
                   alt={titulo}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-contain"
                 />
               </motion.div>
@@ -212,25 +214,8 @@ function Card({ logo, titulo, descricao }: CardProps) {
 function IntegracoesSolucoesSection() {
   return (
     <section
-      className="relative py-28 overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(ellipse 150% 80% at 50% 40%, #f9fafb 0%, #d2d2d2 100%)",
-      }}
+      className="relative py-28 overflow-hidden bg-[#f4f7fb]"
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.022]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          backgroundRepeat: "repeat",
-          backgroundSize: "128px",
-        }}
-      />
-      <div className="pointer-events-none absolute top-[-60px] left-1/3 -translate-x-1/2 w-[800px] h-[320px] rounded-full bg-white blur-3xl" />
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white blur-3xl" />
-      <div className="pointer-events-none absolute left-0 right-1/4 w-[360px] h-[800px] rounded-full bg-white blur-3xl" />
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}

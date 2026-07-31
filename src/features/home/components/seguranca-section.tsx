@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, type Variants } from "framer-motion";
 import {
   Shield,
@@ -29,11 +29,17 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   FileKey2,
 };
 
-const iconColors: Record<number, { bg: string; text: string; border: string }> = {
-  0: { bg: "bg-blue-950/60", text: "text-blue-400", border: "border-blue-800/50" },
-  1: { bg: "bg-cyan-950/60", text: "text-cyan-400", border: "border-cyan-800/50" },
-  2: { bg: "bg-violet-950/60", text: "text-violet-400", border: "border-violet-800/50" },
-  3: { bg: "bg-emerald-950/60", text: "text-emerald-400", border: "border-emerald-800/50" },
+/**
+ * Na versão escura, cor = decoração. Aqui ela ganha função:
+ *   · `tint`  identifica o DOMÍNIO da certificação (dado, rede, infra, pagamento)
+ *   · o selo "Ativo" é sempre esmeralda — status é sinal, não identidade.
+ * Sem isso, quatro cores em cards brancos viraria confete.
+ */
+const iconColors: Record<number, { bg: string; text: string; border: string; rail: string }> = {
+  0: { bg: "bg-[#285992]/8",  text: "text-[#285992]", border: "border-[#285992]/18", rail: "#285992" },
+  1: { bg: "bg-cyan-500/8",   text: "text-cyan-700",  border: "border-cyan-600/18",  rail: "#0e7490" },
+  2: { bg: "bg-violet-500/8", text: "text-violet-700", border: "border-violet-600/18", rail: "#6d28d9" },
+  3: { bg: "bg-amber-500/10", text: "text-amber-700", border: "border-amber-600/20",  rail: "#b45309" },
 };
 
 
@@ -50,74 +56,36 @@ const itemVariants: Variants = {
 };
 
 function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Play when ≥25 % of the video is visible; pause when it leaves.
-  // No loop — the video stops naturally at its last frame.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.25 },
-    );
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section className="relative py-24 overflow-hidden bg-slate-950">
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(to right, #94a3b8 1px, transparent 1px), linear-gradient(to bottom, #94a3b8 1px, transparent 1px)",
-          backgroundSize: "48px 48px",
-        }}
-      />
-
-      {/* Ambient glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-
+    <section className="relative py-24 overflow-hidden bg-[#f4f7fb]">
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16 max-w-3xl mx-auto"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-800/50 bg-blue-950/50 text-blue-400 text-xs font-semibold uppercase tracking-widest mb-6">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Segurança & Compliance
-          </div>
+        {/* Two-column layout: header left · cards right */}
+        <div className="grid grid-cols-1 lg:grid-cols-[3.5fr_6.5fr] gap-10 lg:gap-12 items-center">
 
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white leading-none tracking-tighter antialiased mb-5">
-            Sua operação protegida por
-            <br />
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              tecnologia de classe mundial
-            </span>
-          </h2>
+          {/* Left: badge, title, subtitle */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionEyebrow>Segurança &amp; Compliance</SectionEyebrow>
 
-          <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-            Seguimos os mais altos padrões globais de segurança para garantir que
-            os dados da sua empresa e dos seus hóspedes estejam sempre protegidos.
-          </p>
-        </motion.div>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-5">
+              Sua operação protegida por
+              <br />
+              <span className="bg-gradient-to-r from-[#285992] to-[#0e7490] bg-clip-text text-transparent">
+                tecnologia de classe mundial
+              </span>
+            </h2>
 
-        {/* Two-column layout: cards left · image right */}
-        <div className="grid grid-cols-1 lg:grid-cols-[6.5fr_3.5fr] gap-10 lg:gap-4 items-stretch">
+            <p className="text-[#4c5c73] text-base sm:text-lg leading-relaxed">
+              Seguimos os mais altos padrões globais de segurança para garantir que
+              os dados da sua empresa e dos seus hóspedes estejam sempre protegidos.
+            </p>
+          </motion.div>
 
-          {/* Left: 2 × 2 card grid */}
+          {/* Right: 2 × 2 card grid */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -133,10 +101,16 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
                 <motion.div
                   key={cert.id}
                   variants={itemVariants}
-                  className="group relative rounded-2xl border border-slate-800 bg-slate-900/70 backdrop-blur-sm p-6 flex flex-col gap-4 shadow-sm hover:shadow-xl hover:shadow-slate-900/60 hover:-translate-y-1 transition-all duration-300 cursor-default"
+                  className="group relative overflow-hidden rounded-3xl paper paper-hover p-6 flex flex-col gap-4 cursor-default"
                 >
-                  {/* Subtle inner glow on hover */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br from-white/[0.03] to-transparent" />
+                  {/* Trilho de domínio — 2px de cor na borda esquerda.
+                      Cresce no hover: a identidade do card se declara sem
+                      precisar tingir a superfície inteira. */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 bottom-0 w-[2px] opacity-45 group-hover:opacity-100 group-hover:w-[3px] transition-all duration-300"
+                    style={{ backgroundColor: color.rail }}
+                  />
 
                   {/* Icon */}
                   <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 ${color.bg} ${color.border}`}>
@@ -145,39 +119,25 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
 
                   {/* Text */}
                   <div>
-                    <h3 className="font-semibold text-white text-base mb-1.5">
+                    <h3 className="font-semibold text-[#132840] text-base mb-1.5">
                       {cert.titulo}
                     </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
+                    <p className="text-[#4c5c73] text-sm leading-relaxed">
                       {cert.descricao}
                     </p>
                   </div>
 
-                  {/* Bottom badge */}
-                  <div className={`mt-auto inline-flex w-fit items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border ${color.bg} ${color.border} ${color.text}`}>
-                    <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                  {/* Selo de status — esmeralda em todos, com ponto pulsante */}
+                  <div className="mt-auto inline-flex w-fit items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full border border-emerald-600/20 bg-emerald-500/8 text-emerald-700">
+                    <span className="relative flex h-1.5 w-1.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-600" />
+                    </span>
                     Ativo
                   </div>
                 </motion.div>
               );
             })}
-          </motion.div>
-
-          {/* Right: video area */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative rounded-2xl overflow-hidden border border-slate-800 bg-slate-900/50"
-          >
-            <video
-              ref={videoRef}
-              src="/assets/videos/home/video-security.mp4"
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            />
           </motion.div>
 
         </div>
@@ -188,21 +148,21 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-slate-500 text-sm"
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-[#4c5c73] text-sm"
         >
           <div className="flex items-center gap-2">
-            <Lock className="w-4 h-4 text-slate-600" />
+            <Lock className="w-4 h-4 text-[#285992]/70" />
             <span>Criptografia SSL/TLS</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-slate-800" />
+          <div className="hidden sm:block w-px h-4 bg-[#132840]/12" />
           <div className="flex items-center gap-2">
-            <Cloud className="w-4 h-4 text-slate-600" />
-            <span>Hospedagem AWS & Google Cloud</span>
+            <Cloud className="w-4 h-4 text-[#285992]/70" />
+            <span>Hospedagem AWS &amp; Google Cloud</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-slate-800" />
+          <div className="hidden sm:block w-px h-4 bg-[#132840]/12" />
           <div className="flex items-center gap-2">
-            <FileKey2 className="w-4 h-4 text-slate-600" />
-            <span>Conformidade LGPD & PCI DSS</span>
+            <FileKey2 className="w-4 h-4 text-[#285992]/70" />
+            <span>Conformidade LGPD &amp; PCI DSS</span>
           </div>
         </motion.div>
       </div>

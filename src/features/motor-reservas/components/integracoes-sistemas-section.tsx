@@ -38,7 +38,7 @@ const integracoes = [
 
 function IntegracoesSistemasSection() {
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -70,10 +70,14 @@ function IntegracoesSistemasSection() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden flex items-center justify-center">
               <img
-                src="/section5.png"
+                src="/assets/imgs/motor-de-reservas/section5.webp"
                 alt="Integrações com sistemas"
+                width={1920}
+                height={786}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

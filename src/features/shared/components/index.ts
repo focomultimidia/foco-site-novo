@@ -1,3 +1,4 @@
+export { SectionEyebrow } from "./section-eyebrow";
 export { SoftwareProductsCarousel } from "./software-products-carousel";
 export { ProductShowcase } from "./product-showcase";
 export type { ProductShowcaseProps, ProdutoData } from "./product-showcase";

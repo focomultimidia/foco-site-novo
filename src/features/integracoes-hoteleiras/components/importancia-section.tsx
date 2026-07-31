@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function ImportanciaSection() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
@@ -37,14 +37,14 @@ function ImportanciaSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               No cenário competitivo da hotelaria, a integração de sistemas não é
               mais um luxo, mas sim uma necessidade estratégica. Para o hoteleiro,
               possuir um ecossistema tecnológico onde o PMS (gestão operacional), o
               RMS (gestão de receita), e as ferramentas de Marketing se comunicam
               perfeitamente é o que define a eficiência e a lucratividade do negócio.
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-slate-500 text-lg leading-relaxed">
               Em suma, um sistema integrado transforma a tecnologia de um custo
               operacional em um centro de inteligência e lucro, garantindo que o
               hotel opere com máxima eficiência e esteja sempre um passo à frente da
@@ -60,10 +60,14 @@ function ImportanciaSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[4/3] bg-white rounded-2xl overflow-hidden flex items-center justify-center">
+            <div className="relative w-full aspect-[4/3] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
               <img
-                src="/assets/imgs/integracoes-hoteleiras/integracoes-hoteleiras.png"
+                src="/assets/imgs/integracoes-hoteleiras/integracoes-hoteleiras.webp"
                 alt="Integração de Sistemas"
+                width={760}
+                height={521}
+                loading="lazy"
+                decoding="async"
                 className="max-w-full max-h-full object-contain"
               />
             </div>

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" font-family="Inter, system-ui, sans-serif">
+  <!-- PLACEHOLDER MOCKUP — substituir por screenshot real do Software de Pagamentos -->
+  <rect width="1280" height="800" fill="#F4F7FB"/>
+
+  <!-- Sidebar -->
+  <rect width="88" height="800" fill="#15304F"/>
+  <circle cx="44" cy="46" r="13" fill="#427AB9"/>
+  <g fill="#FFFFFF" opacity="0.16">
+    <rect x="26" y="104" width="36" height="36" rx="10"/>
+    <rect x="26" y="208" width="36" height="36" rx="10"/>
+    <rect x="26" y="260" width="36" height="36" rx="10"/>
+    <rect x="26" y="312" width="36" height="36" rx="10"/>
+  </g>
+  <rect x="26" y="156" width="36" height="36" rx="10" fill="#427AB9"/>
+  <rect x="0" y="156" width="4" height="36" fill="#7FB1E8"/>
+
+  <!-- Top bar -->
+  <rect x="88" width="1192" height="76" fill="#FFFFFF"/>
+  <line x1="88" y1="76" x2="1280" y2="76" stroke="#E4EAF2"/>
+  <text x="124" y="46" font-size="22" font-weight="600" fill="#1E293B">Pagamentos</text>
+  <rect x="1024" y="22" width="130" height="34" rx="10" fill="#F1F5FA"/>
+  <text x="1040" y="44" font-size="13" fill="#54687F">Últimos 30 dias</text>
+  <circle cx="1216" cy="38" r="17" fill="#DCE6F3"/>
+  <circle cx="1216" cy="33" r="6" fill="#9FB4CC"/>
+  <path d="M1205 48a11 11 0 0 1 22 0z" fill="#9FB4CC"/>
+
+  <!-- Balance hero card -->
+  <rect x="124" y="108" width="560" height="196" rx="18" fill="#15304F"/>
+  <circle cx="640" cy="140" r="130" fill="#427AB9" opacity="0.22"/>
+  <text x="156" y="150" font-size="12" fill="#B9D2EC">RECEBIDO NO PERÍODO</text>
+  <text x="156" y="200" font-size="40" font-weight="700" fill="#FFFFFF">R$ 1.284.960</text>
+  <rect x="156" y="224" width="126" height="28" rx="14" fill="#FFFFFF" opacity="0.14"/>
+  <text x="219" y="243" font-size="12" fill="#D6E8FA" text-anchor="middle">+18,4% vs. mês</text>
+  <g font-size="12" fill="#9FC2E4">
+    <text x="156" y="284">Próximo repasse: 14 Jul · R$ 214.300</text>
+  </g>
+
+  <!-- Right KPI stack -->
+  <g>
+    <rect x="708" y="108" width="268" height="90" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <text x="732" y="138" font-size="12" fill="#8497AF">TAXA DE APROVAÇÃO</text>
+    <text x="732" y="176" font-size="26" font-weight="700" fill="#12B886">96,4%</text>
+
+    <rect x="1000" y="108" width="156" height="90" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <text x="1024" y="138" font-size="12" fill="#8497AF">CHARGEBACKS</text>
+    <text x="1024" y="176" font-size="26" font-weight="700" fill="#1E293B">0,2%</text>
+
+    <rect x="708" y="214" width="448" height="90" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <text x="732" y="244" font-size="12" fill="#8497AF">MEIOS DE PAGAMENTO</text>
+    <g>
+      <rect x="732" y="258" width="180" height="14" rx="7" fill="#285992"/>
+      <rect x="916" y="258" width="112" height="14" rx="7" fill="#7FB1E8"/>
+      <rect x="1032" y="258" width="100" height="14" rx="7" fill="#C3D9EE"/>
+    </g>
+    <g font-size="11" fill="#7A8BA3">
+      <text x="732" y="292">Crédito 48%</text><text x="880" y="292">Pix 30%</text><text x="990" y="292">Débito 22%</text>
+    </g>
+  </g>
+
+  <!-- Transactions table -->
+  <rect x="124" y="330" width="1032" height="422" rx="16" fill="#FFFFFF" stroke="#E4EAF2"/>
+  <text x="148" y="366" font-size="15" font-weight="600" fill="#1E293B">Transações recentes</text>
+  <rect x="1012" y="348" width="120" height="30" rx="8" fill="#EAF1F9"/>
+  <text x="1030" y="368" font-size="12" fill="#285992">Exportar CSV</text>
+
+  <g font-size="11" fill="#8497AF">
+    <text x="148" y="404">HÓSPEDE</text><text x="460" y="404">MÉTODO</text><text x="672" y="404">DATA</text>
+    <text x="848" y="404">VALOR</text><text x="1020" y="404">STATUS</text>
+  </g>
+  <line x1="148" y1="418" x2="1132" y2="418" stroke="#EDF1F7"/>
+
+  <g font-size="13" fill="#1E293B">
+    <g>
+      <text x="148" y="452">Marina Alves</text>
+      <rect x="460" y="436" width="34" height="22" rx="5" fill="#DCE6F3"/><text x="504" y="452" fill="#54687F">•••• 4821</text>
+      <text x="672" y="452" fill="#7A8BA3">12 Jul</text>
+      <text x="848" y="452" font-weight="600">R$ 3.760</text>
+      <rect x="1020" y="436" width="88" height="24" rx="12" fill="#E7F7F1"/>
+      <text x="1064" y="452" font-size="11" fill="#0F8A66" text-anchor="middle">Aprovado</text>
+    </g>
+    <line x1="148" y1="476" x2="1132" y2="476" stroke="#EDF1F7"/>
+    <g>
+      <text x="148" y="510">Rafael Monteiro</text>
+      <rect x="460" y="494" width="34" height="22" rx="5" fill="#D7F0E6"/><text x="504" y="510" fill="#54687F">Pix</text>
+      <text x="672" y="510" fill="#7A8BA3">12 Jul</text>
+      <text x="848" y="510" font-weight="600">R$ 1.380</text>
+      <rect x="1020" y="494" width="88" height="24" rx="12" fill="#E7F7F1"/>
+      <text x="1064" y="510" font-size="11" fill="#0F8A66" text-anchor="middle">Aprovado</text>
+    </g>
+    <line x1="148" y1="534" x2="1132" y2="534" stroke="#EDF1F7"/>
+    <g>
+      <text x="148" y="568">Ana Beatriz Costa</text>
+      <rect x="460" y="552" width="34" height="22" rx="5" fill="#DCE6F3"/><text x="504" y="568" fill="#54687F">•••• 1093</text>
+      <text x="672" y="568" fill="#7A8BA3">11 Jul</text>
+      <text x="848" y="568" font-weight="600">R$ 4.140</text>
+      <rect x="1020" y="552" width="88" height="24" rx="12" fill="#FFF4E5"/>
+      <text x="1064" y="568" font-size="11" fill="#B87510" text-anchor="middle">Em análise</text>
+    </g>
+    <line x1="148" y1="592" x2="1132" y2="592" stroke="#EDF1F7"/>
+    <g>
+      <text x="148" y="626">Carlos Nogueira</text>
+      <rect x="460" y="610" width="34" height="22" rx="5" fill="#D7F0E6"/><text x="504" y="626" fill="#54687F">Pix</text>
+      <text x="672" y="626" fill="#7A8BA3">11 Jul</text>
+      <text x="848" y="626" font-weight="600">R$ 890</text>
+      <rect x="1020" y="610" width="88" height="24" rx="12" fill="#E7F7F1"/>
+      <text x="1064" y="626" font-size="11" fill="#0F8A66" text-anchor="middle">Aprovado</text>
+    </g>
+    <line x1="148" y1="650" x2="1132" y2="650" stroke="#EDF1F7"/>
+    <g>
+      <text x="148" y="684">Juliana Prado</text>
+      <rect x="460" y="668" width="34" height="22" rx="5" fill="#DCE6F3"/><text x="504" y="684" fill="#54687F">•••• 7702</text>
+      <text x="672" y="684" fill="#7A8BA3">10 Jul</text>
+      <text x="848" y="684" font-weight="600">R$ 2.250</text>
+      <rect x="1020" y="668" width="88" height="24" rx="12" fill="#E7F7F1"/>
+      <text x="1064" y="684" font-size="11" fill="#0F8A66" text-anchor="middle">Aprovado</text>
+    </g>
+  </g>
+
+  <!-- Security footer -->
+  <g font-size="11" fill="#8497AF">
+    <rect x="148" y="710" width="10" height="12" rx="2" fill="#12B886"/><text x="166" y="720">PCI DSS</text>
+    <rect x="240" y="710" width="10" height="12" rx="2" fill="#12B886"/><text x="258" y="720">Antifraude ativo</text>
+    <rect x="376" y="710" width="10" height="12" rx="2" fill="#12B886"/><text x="394" y="720">Tokenização</text>
+  </g>
+</svg>

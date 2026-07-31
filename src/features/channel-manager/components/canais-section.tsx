@@ -30,7 +30,7 @@ function CanaisSection({ canais }: CanaisSectionProps) {
   }, {} as Record<string, CanalIntegracao[]>);
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,10 +39,10 @@ function CanaisSection({ canais }: CanaisSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] mb-4">
             Canais Integrados
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
             Conecte-se aos principais canais de distribuição do mercado
             hoteleiro mundial.
           </p>
@@ -61,10 +61,10 @@ function CanaisSection({ canais }: CanaisSectionProps) {
                   transition={{ duration: 0.5, delay: catIndex * 0.1 }}
                 >
                   <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-purple-600" />
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#1e3a5f] to-[#285992] rounded-lg flex items-center justify-center">
+                      <Icon className="w-5 h-5 text-white" />
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900">
+                    <h3 className="text-xl font-semibold text-[#1e293b]">
                       {categoriaLabels[categoria]}
                     </h3>
                   </div>
@@ -83,11 +83,11 @@ function CanaisSection({ canais }: CanaisSectionProps) {
                         className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow text-center"
                       >
                         <div className="w-12 h-12 bg-gray-100 rounded-lg mx-auto mb-3 flex items-center justify-center">
-                          <span className="text-lg font-bold text-gray-400">
+                          <span className="text-lg font-bold text-gray-500">
                             {canal.nome.charAt(0)}
                           </span>
                         </div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-[#1e293b]">
                           {canal.nome}
                         </p>
                       </motion.div>

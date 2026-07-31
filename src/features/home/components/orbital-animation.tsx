@@ -22,7 +22,7 @@ function OrbitalAnimation({ logos }: OrbitalAnimationProps) {
   return (
     <div className="relative flex items-center justify-center w-full h-[600px] overflow-hidden">
       {/* Logo Central da Foco */}
-      <div className="relative z-10 flex items-center justify-center w-24 h-24 bg-white rounded-2xl shadow-xl border border-slate-100">
+      <div className="relative z-10 flex items-center justify-center w-24 h-24 bg-white rounded-3xl shadow-xl border border-slate-100">
         <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-3xl">
           F
         </div>
@@ -49,7 +49,7 @@ function OrbitalAnimation({ logos }: OrbitalAnimationProps) {
                     logoIndex === 0 ? "top-0 -translate-y-1/2" : "bottom-0 translate-y-1/2"
                   )}
                 >
-                  <img src={logo.src} alt={logo.alt} className="w-full h-full object-contain" />
+                  <img src={logo.src} alt={logo.alt} width={500} height={500} loading="lazy" decoding="async" className="w-full h-full object-contain" />
                 </div>
               );
             })}

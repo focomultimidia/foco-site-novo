@@ -9,109 +9,109 @@ import { ArrowRight } from "lucide-react";
 const pmsIntegrados = [
   {
     nome: "Plus",
-    logo: "/assets/imgs/integracoes/pms/plus.png",
+    logo: "/assets/imgs/integracoes/pms/plus.webp",
     descricao:
       "Sistema de gestão hoteleira em nuvem desenvolvido pela Foco Tecnologia, para pequenos hoteleiros. Integrado ao motor de reservas e ao gestor de canais, os clientes terão a tranquilidade de disponibilizar 100% das suas ocupações para vendas em mais de 800 canais integrados, sem overbookings.",
   },
   {
     nome: "ADM",
-    logo: "/assets/imgs/integracoes/pms/adm-hoteleiro.png",
+    logo: "/assets/imgs/integracoes/pms/adm-hoteleiro.webp",
     descricao:
       "A ADM Desenvolvimento de Sistemas é uma empresa de tecnologia, sediada em Ilhéus-BA, criada em 2008, que desenvolve e comercializa o ADM Hotel e o ADM Restaurante, ferramentas para gestão de hotéis, pousadas, bares, restaurantes e similares com mais de 1200 licenças em todo o Brasil.",
   },
   {
     nome: "Bitz",
-    logo: "/assets/imgs/integracoes/pms/bitz.png",
+    logo: "/assets/imgs/integracoes/pms/bitz.webp",
     descricao:
       "A Bitz Softwares está há mais de 9 anos no mercado, uma empresa de tecnologia especializada no setor hoteleiro. Nosso propósito é gerar ótimas experiências para as pessoas. Facilitando suas vidas, economizando seu tempo e aumentando seu rendimento no dia-a-dia.",
   },
   {
     nome: "Carsoft",
-    logo: "/assets/imgs/integracoes/pms/carsoft.png",
+    logo: "/assets/imgs/integracoes/pms/carsoft.webp",
     descricao:
       "Xenios – Sistema de gestão de hotéis, pousadas e hostels de fácil utilização. Possui integração com outros módulos como estoque, restaurante, financeiro, eventos, controle de serviços e reserva online direto pelo site do hotel/pousada. Conta com suporte 24 horas.",
   },
   {
     nome: "Desbravador",
-    logo: "/assets/imgs/integracoes/pms/desbravador.png",
+    logo: "/assets/imgs/integracoes/pms/desbravador.webp",
     descricao:
       "Atuamos no desenvolvimento de software para a gestão de hotéis desde 1988. Somos Desbravadores! Atendemos hotéis de pequeno, médio e grande porte, fornecendo soluções que otimizam suas operações e aprimoram a experiência do hóspede. Hoje são mais de 3.500 clientes espalhados em dez países.",
   },
   {
     nome: "eSolution",
-    logo: "/assets/imgs/integracoes/pms/esolution.png",
+    logo: "/assets/imgs/integracoes/pms/esolution.webp",
     descricao:
       "A eSolution é uma empresa de software que está no mercado desde 2007. Sua atuação está focada em softwares de gestão em hotelaria e parques temáticos. Com um ideal de excelência, ela vem ganhando destaque nesses setores.",
   },
   {
     nome: "HMAX",
-    logo: "/assets/imgs/integracoes/pms/hmax.png",
+    logo: "/assets/imgs/integracoes/pms/hmax.webp",
     descricao:
       "A HMAX é uma empresa pioneira no mercado de automação hoteleira. O nosso sistema de gestão oferece 30 anos de conhecimento organizados em módulos, que você pode contratar segundo a sua necessidade. O PMS HMAX está integrado com a Foco Multimídia.",
   },
   {
     nome: "Hotelflow",
-    logo: "/assets/imgs/integracoes/pms/hotelflow.png",
+    logo: "/assets/imgs/integracoes/pms/hotelflow.webp",
     descricao:
       "Com o Hotelflow, você tem em mãos um gerenciamento moderno, prático e intuitivo para aumentar a produtividade do seu empreendimento hoteleiro. O sistema é web, não requer instalação, basta acessar pelo seu navegador e usar de qualquer lugar, até mesmo do seu dispositivo móvel!",
   },
   {
     nome: "Isasoft",
-    logo: "/assets/imgs/integracoes/pms/isasoft.png",
+    logo: "/assets/imgs/integracoes/pms/isasoft.webp",
     descricao:
       "Empresa voltada para o desenvolvimento de sistemas para gerenciamento de micros e pequenas empresas do comércio para todo o território nacional. O Isasoft Inn, foi desenvolvido para administrar pousadas, hotéis e resorts de forma rápida e profissional.",
   },
   {
     nome: "MDE",
-    logo: "/assets/imgs/integracoes/pms/mde.png",
+    logo: "/assets/imgs/integracoes/pms/mde.webp",
     descricao:
       "Há mais de 27 anos a MDE Informática projeta e desenvolve Sistemas de Gestão para os segmentos Hoteleiro e Motelero. Nosso diferencial está em oferecer soluções personalizadas para a necessidade específica de cada cliente.",
   },
   {
     nome: "Newhotel",
-    logo: "/assets/imgs/integracoes/pms/newhotel.png",
+    logo: "/assets/imgs/integracoes/pms/newhotel.webp",
     descricao:
       "Uma empresa de software especializada em desenvolver sistemas para gestão hoteleira. Pioneiros internacionais em soluções Cloud para o setor hoteleiro, estamos no mercado há 37 anos e possuímos um portfólio com mais de 6 mil hotéis, em 64 países.",
   },
   {
     nome: "Queops",
-    logo: "/assets/imgs/integracoes/pms/queops.png",
+    logo: "/assets/imgs/integracoes/pms/queops.webp",
     descricao:
       "A Quéops possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     nome: "Sachar",
-    logo: "/assets/imgs/integracoes/pms/saghar.png",
+    logo: "/assets/imgs/integracoes/pms/saghar.webp",
     descricao:
       "A Sachar (SGH) possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     nome: "Silbeck",
-    logo: "/assets/imgs/integracoes/pms/silbeck.png",
+    logo: "/assets/imgs/integracoes/pms/silbeck.webp",
     descricao:
       "Somos uma empresa de software para gestão hoteleira. Atuamos há 25 anos no mercado com foco na busca da excelência em nosso atendimento e no desenvolvimento de nossos produtos. O nosso objetivo nunca foi oferecer apenas um sistema de gestão.",
   },
   {
     nome: "Simpleshotel",
-    logo: "/assets/imgs/integracoes/pms/simpleshotel.png",
+    logo: "/assets/imgs/integracoes/pms/simpleshotel.webp",
     descricao:
       "A Simple Hotel possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     nome: "Techside",
-    logo: "/assets/imgs/integracoes/pms/techside.png",
+    logo: "/assets/imgs/integracoes/pms/techside.webp",
     descricao:
       "A TechSide (TechHotel) possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     nome: "Tô de Férias",
-    logo: "/assets/imgs/integracoes/pms/to-de-ferias.png",
+    logo: "/assets/imgs/integracoes/pms/to-de-ferias.webp",
     descricao:
       "O TDF Hotel é um PMS completo, integrando as rotinas de recepção, reservas, governança, financeiro e estoque, que possui integrações comerciais e administrativas, além de configurações personalizadas e foco no relacionamento entre hoteleiro e hóspede.",
   },
   {
     nome: "TOTVS",
-    logo: "/assets/imgs/integracoes/pms/totvs.png",
+    logo: "/assets/imgs/integracoes/pms/totvs.webp",
     descricao:
       "A TOTVS cresce junto com a sua empresa. Aumente sua eficiência operacional e produtividade com um software completo para gestão e automação de processos. Não perca tempo e automatize a sua gestão de reservas, unificando toda a sua disponibilidade em um só sistema.",
   },
@@ -226,7 +226,7 @@ function PmsCard({ pms, index, isHovered, isBlurred, onEnter }: PmsCardProps) {
             : "0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)",
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="relative bg-white rounded-2xl border border-slate-100 overflow-hidden flex flex-col h-full"
+        className="relative bg-white rounded-3xl border border-slate-100 overflow-hidden flex flex-col h-full"
       >
         <div className="p-5 flex flex-col h-full">
 
@@ -235,6 +235,10 @@ function PmsCard({ pms, index, isHovered, isBlurred, onEnter }: PmsCardProps) {
             <img
               src={pms.logo}
               alt={pms.nome}
+              width={228}
+              height={80}
+              loading="lazy"
+              decoding="async"
               className="max-h-full max-w-[140px] w-auto object-contain transition-all duration-500"
               style={{
                 filter:    isHovered ? "grayscale(0%) opacity(1)"   : "grayscale(100%) opacity(0.5)",
@@ -260,26 +264,7 @@ function PmsIntegradosSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 bg-slate-50 overflow-hidden">
-
-      {/* Subtle dot pattern */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle, rgba(100,116,139,0.13) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-        }}
-      />
-
-      {/* Radial mask — fades dots at edges */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 90% 75% at 50% 50%, transparent 30%, #f8fafc 100%)",
-        }}
-      />
+    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
 

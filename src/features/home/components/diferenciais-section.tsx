@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion } from "framer-motion";
 import {
   Award,
@@ -53,7 +54,7 @@ function GlassCard({ diferencial, colorIdx, delay, alignRight = false }: GlassCa
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       className={`
-        group flex items-start gap-3.5 p-4 rounded-2xl cursor-default
+        group flex items-start gap-3.5 p-4 rounded-3xl cursor-default
         bg-white/65 backdrop-blur-md
         border border-white/55
         shadow-lg shadow-slate-900/[0.07]
@@ -117,7 +118,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
   }, []);
 
   return (
-    <section className="py-24 bg-slate-100">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
@@ -128,6 +129,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <SectionEyebrow>Contrate agora</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             Por que contratar o channel manager da{" "}
             <br className="hidden sm:block" />
@@ -162,7 +164,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 lg:order-none aspect-video lg:aspect-auto rounded-2xl overflow-hidden shadow-xl shadow-slate-900/10"
+            className="relative order-1 lg:order-none aspect-video lg:aspect-auto rounded-3xl overflow-hidden shadow-xl shadow-slate-900/10"
           >
             <video
               ref={videoRef}

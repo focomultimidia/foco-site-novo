@@ -21,7 +21,7 @@ import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
-import { ProdutosAccordionSection } from "@/features/shared/components";
+//import { ProdutosAccordionSection } from "@/features/shared/components";
 
 
 import { Spinner } from "@/components/ui/spinner";
@@ -117,14 +117,7 @@ function MotorReservasPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
-      <ProdutosAccordionSection />
-
-      {/* Lead Capture CTA */}
-      <LeadCaptureCTA
-        title="Pronto para aumentar suas reservas diretas?"
-        subtitle="Solicite uma demonstração e descubra como o Motor de Reservas da Foco pode transformar seu negócio."
-        badge="Comece agora"
-      />
+      {/*<ProdutosAccordionSection //*>}
 
       {/* Prova Social: FAQ */}
       <FAQAccordion
@@ -132,6 +125,13 @@ function MotorReservasPage() {
         title="Perguntas frequentes sobre o Motor de reservas da Foco"
         badge="FAQ"
         showContactButton
+      />
+
+      {/* Lead Capture CTA */}
+      <LeadCaptureCTA
+        title="Pronto para aumentar suas reservas diretas?"
+        subtitle="Solicite uma demonstração e descubra como o Motor de Reservas da Foco pode transformar seu negócio."
+        badge="Comece agora"
       />
 
     </div>

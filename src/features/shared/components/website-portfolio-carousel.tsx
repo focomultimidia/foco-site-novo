@@ -24,35 +24,35 @@ const TEMPLATES: WebsiteTemplate[] = [
     id: "1",
     nome: "Royal Resort",
     categoria: "Resort & Spa",
-    imagemUrl: "/assets/imgs/motor-de-reservas/1.png?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/shared/1.webp?w=700&h=328&fit=crop",
     previewUrl: "#",
   },
   {
     id: "2",
     nome: "Boutique Urban",
     categoria: "Hotel Urbano",
-    imagemUrl: "/assets/imgs/motor-de-reservas/2.png?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/shared/2.webp?w=700&h=328&fit=crop",
     previewUrl: "#",
   },
   {
     id: "3",
     nome: "Pousada Serena",
     categoria: "Pousada & Chalé",
-    imagemUrl: "/assets/imgs/motor-de-reservas/3.png?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/shared/3.webp?w=700&h=328&fit=crop",
     previewUrl: "#",
   },
   {
     id: "4",
     nome: "Fazenda Vista",
     categoria: "Hotel Fazenda",
-    imagemUrl: "/assets/imgs/motor-de-reservas/4.png?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/shared/4.webp?w=700&h=328&fit=crop",
     previewUrl: "#",
   },
   {
     id: "5",
     nome: "Minimal Suite",
     categoria: "Boutique & Design",
-    imagemUrl: "/assets/imgs/motor-de-reservas/5.png?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/shared/5.webp?w=700&h=328&fit=crop",
     previewUrl: "#",
   },
 ];
@@ -61,18 +61,18 @@ const TEMPLATES: WebsiteTemplate[] = [
 const btnVariants = {
   idle: {
     scale: 1,
-    background: "rgba(255,255,255,0.08)",
-    boxShadow: "0 4px 20px rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.12)",
+    background: "#ffffff",
+    boxShadow: "0 1px 2px rgba(19,40,64,0.05), 0 12px 28px -16px rgba(19,40,64,0.28)",
   },
   hover: {
     scale: 1.12,
-    background: "rgba(255,255,255,0.20)",
-    boxShadow: "0 10px 36px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.28)",
+    background: "#f4f7fb",
+    boxShadow: "0 4px 10px rgba(19,40,64,0.08), 0 16px 36px -16px rgba(19,40,64,0.34)",
   },
   tap: {
     scale: 0.90,
-    background: "rgba(255,255,255,0.05)",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.18)",
+    background: "#eef2f7",
+    boxShadow: "0 2px 8px rgba(19,40,64,0.12)",
   },
 };
 
@@ -96,12 +96,13 @@ function NavButton({
     <motion.button
       onClick={onClick}
       aria-label={direction === "prev" ? "Slide anterior" : "Próximo slide"}
-      className={`absolute top-1/2 -translate-y-1/2 ${side} hidden lg:flex items-center justify-center w-12 h-12 rounded-full z-20 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40`}
-      style={{
-        backdropFilter: "blur(14px)",
-        WebkitBackdropFilter: "blur(14px)",
-        border: "1px solid rgba(255,255,255,0.22)",
-      }}
+      // top-[38%] em vez de top-1/2: centraliza o botão na imagem do card, não
+      // na altura total do item (que inclui a legenda abaixo da imagem).
+      // O -50% de recentragem vai no `style.y`, não numa classe -translate-y:
+      // o Framer Motion já controla `transform` por causa do `scale` do
+      // btnVariants, e uma classe Tailwind de transform seria descartada.
+      className={`absolute top-[38%] ${side} hidden lg:flex items-center justify-center w-12 h-12 rounded-full z-20 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#285992]/40`}
+      style={{ y: "-50%", border: "1px solid rgba(19,40,64,0.09)" }}
       variants={btnVariants}
       initial="idle"
       whileHover="hover"
@@ -114,13 +115,13 @@ function NavButton({
         className="absolute inset-0 rounded-full"
         style={{
           background:
-            "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.22), transparent 68%)",
+            "radial-gradient(circle at 50% 50%, rgba(40,89,146,0.14), transparent 68%)",
         }}
         variants={glowVariants}
         transition={{ duration: 0.28, ease: "easeOut" }}
       />
       <Icon
-        className="w-5 h-5 text-white relative z-10 drop-shadow-sm"
+        className="w-5 h-5 text-[#285992] relative z-10"
         strokeWidth={1.5}
       />
     </motion.button>
@@ -142,17 +143,18 @@ function WebsitePortfolioCarousel() {
   const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
 
   return (
-    <section className="py-20 relative flex overflow-hidden bg-[url('/assets/imgs/hero/bkg-modelos-sites4.png')] bg-cover bg-center">
-
+    // O PNG de fundo saiu: a superfície é #f4f7fb e os modelos de site
+    // passam a ser as únicas peças com imagem — sem competição visual.
+    <section className="py-20 relative flex overflow-hidden bg-[#f4f7fb]">
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-white leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-4">
             Sites de alta performance para{" "}
-            <span className="text-yellow-400">vendas diretas</span>
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">vendas diretas</span>
           </h2>
-          <p className="text-white mt-4 max-w-3xl mx-auto">
+          <p className="text-[#4c5c73] mt-4 max-w-3xl mx-auto">
             Escolha o modelo de sua preferência ou personalize seu site e potencialize sua lucratividade com uma ferramenta desenhada para converter visitantes em hóspedes.
           </p>
         </div>
@@ -170,20 +172,38 @@ function WebsitePortfolioCarousel() {
           ]}
           className="w-full"
         >
+          {/* O viewport do Embla PRECISA de overflow-x:hidden (esconder slides
+              fora da faixa) — mas misturar overflow-x:hidden com overflow-y:
+              visible não funciona como parece: a spec recalcula o eixo
+              "visible" para "auto", e overflow:auto ainda CORTA sombra (só
+              não mostra scrollbar quando não há conteúdo de layout
+              transbordando). Por isso a sombra continuava cortada mesmo com
+              aquele ajuste. A correção real: dar respiro vertical DENTRO de
+              cada slide (pt-4 pb-8 no wrapper abaixo), para a sombra nunca
+              precisar sair da própria caixa do slide — sem depender de
+              relaxar o overflow do viewport compartilhado. */}
           <CarouselContent className="-ml-4">
             {TEMPLATES.map((template) => (
               <CarouselItem
                 key={template.id}
                 className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
               >
-                <div className="group relative bg-white rounded-2xl overflow-hidden border-2 border-white">
+                {/* overflow-hidden vive no wrapper da imagem, não no card: este
+                    div de fora carrega a sombra (.paper/.paper-hover) e o
+                    translateY do hover, e um overflow-hidden na MESMA caixa
+                    que desenha a sombra cortaria a própria sombra. */}
+                <div className="pt-4 pb-8">
+                <div className="group relative rounded-3xl paper paper-hover">
 
-                  <div className="relative overflow-hidden aspect-[16/10]">
+                  <div className="relative overflow-hidden rounded-t-3xl aspect-[16/10]">
                     <img
                       src={template.imagemUrl}
                       alt={template.nome}
+                      width={1280}
+                      height={800}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-[#1e3a5f]/0 group-hover:bg-[#1e3a5f]/55 transition-colors duration-300 flex items-center justify-center">
                       <a
@@ -208,6 +228,7 @@ function WebsitePortfolioCarousel() {
                     </h3>
                   </div>
                 </div>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>
@@ -225,8 +246,8 @@ function WebsitePortfolioCarousel() {
               onClick={() => scrollTo(index)}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 current === index
-                  ? "bg-blue-100 w-8"
-                  : "w-2.5 bg-blue-400 hover:bg-blue-100"
+                  ? "bg-[#285992] w-8"
+                  : "w-2.5 bg-[#285992]/25 hover:bg-[#285992]/50"
               }`}
               aria-label={`Ir para slide ${index + 1}`}
             />

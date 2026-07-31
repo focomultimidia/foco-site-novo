@@ -48,6 +48,10 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
         <img
           src={bkgSrc}
           alt={produto.titulo}
+          width={900}
+          height={900}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover object-top"
         />
       </motion.div>
@@ -108,6 +112,8 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
               <img
                 src={produto.imagem}
                 alt={produto.titulo}
+                loading="lazy"
+                decoding="async"
                 className="w-full object-contain drop-shadow-2xl"
                 style={{ maxHeight: "110px" }}
               />
@@ -160,7 +166,7 @@ function DesktopCard({ produto, isExpanded, isSqueezed, onEnter, onLeave }: Desk
           >
             {/* Icon badge (large) */}
             <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
+              className="w-14 h-14 rounded-3xl flex items-center justify-center mb-5"
               style={{
                 backgroundColor: `${produto.accent}28`,
                 border: `1.5px solid ${produto.accent}55`,
@@ -216,10 +222,10 @@ function MobileCard({ produto, isActive, onToggle }: MobileCardProps) {
   const bkgSrc = produto.bkgImagem ?? produto.imagem;
 
   return (
-    <div className="relative overflow-hidden rounded-2xl">
+    <div className="relative overflow-hidden rounded-3xl">
       {/* Persistent background — same image/overlay as desktop, shared by header + expanded */}
       <div className="absolute inset-0 pointer-events-none">
-        <img src={bkgSrc} alt={produto.titulo} className="w-full h-full object-cover object-top" />
+        <img src={bkgSrc} alt={produto.titulo} width={900} height={900} loading="lazy" decoding="async" className="w-full h-full object-cover object-top" />
         <div className={`absolute inset-0 bg-gradient-to-b ${produto.overlay}`} />
         <div className="absolute inset-0 bg-black/52" />
       </div>
@@ -294,7 +300,7 @@ function ProdutosAccordionSection({
   const [activeId, setActiveId] = useState<string | null>(null);
 
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

@@ -80,10 +80,10 @@ function SmallMetricCard({ value, label, delay }: { value: string; label: string
     <motion.div ref={cardRef}
       initial={{ opacity: 0, scale: 0.88, y: 8 }} whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true }} transition={{ type: "spring", stiffness: 280, damping: 24, delay }}
-      className="relative flex-1 rounded-2xl overflow-hidden p-5 cursor-default"
+      className="relative flex-1 rounded-3xl overflow-hidden p-5 cursor-default"
       style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(14px)", border: "1px solid rgba(226,232,240,0.92)", boxShadow: "0 4px 20px rgba(30,58,95,0.05)" }}
       onMouseMove={onMouseMove} onMouseEnter={() => glowOp.set(1)} onMouseLeave={() => glowOp.set(0)}>
-      <motion.div aria-hidden className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: glow, opacity: glowOp }} />
+      <motion.div aria-hidden className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: glow, opacity: glowOp }} />
       <div className="relative z-10">
         <div className="font-display text-3xl font-bold text-[#1e3a5f] leading-none mb-1">{value}</div>
         <div className="text-[10px] font-medium text-slate-500 leading-snug">{label}</div>
@@ -104,12 +104,12 @@ function LiveCommandCenter() {
         <motion.div
           initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
           transition={{ type: "spring", stiffness: 200, damping: 26, delay: 0.05 }}
-          className="relative flex-1 rounded-2xl overflow-hidden p-6 flex flex-col justify-between min-h-[200px] cursor-default"
+          className="relative flex-1 rounded-3xl overflow-hidden p-6 flex flex-col justify-between min-h-[200px] cursor-default"
           style={{ background: "linear-gradient(145deg, rgba(238,244,253,0.98) 0%, rgba(248,250,252,0.95) 100%)", border: "1px solid rgba(40,89,146,0.14)", boxShadow: "0 8px 32px rgba(40,89,146,0.08), inset 0 1px 0 rgba(255,255,255,0.85)" }}
           whileHover={{ scale: 1.018, boxShadow: "0 14px 48px rgba(40,89,146,0.13), inset 0 1px 0 rgba(255,255,255,0.9)" }}
           onMouseEnter={() => setHeroHovered(true)} onMouseLeave={() => setHeroHovered(false)}>
           <RadarRings active={heroHovered} />
-          <motion.div aria-hidden className="absolute inset-0 pointer-events-none rounded-2xl"
+          <motion.div aria-hidden className="absolute inset-0 pointer-events-none rounded-3xl"
             style={{ background: "radial-gradient(ellipse 75% 55% at 25% 75%, rgba(40,89,146,0.07), transparent)" }}
             animate={{ opacity: [0.4, 0.9, 0.4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} />
           {/* Status badge */}
@@ -141,9 +141,9 @@ function LiveCommandCenter() {
       {/* Channel footer */}
       <motion.div initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         transition={{ delay: 0.34, duration: 0.45, ease: "easeOut" }}
-        className="rounded-2xl px-5 py-3.5 flex items-center gap-3 flex-wrap"
+        className="rounded-3xl px-5 py-3.5 flex items-center gap-3 flex-wrap"
         style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(10px)", border: "1px solid rgba(226,232,240,0.92)", boxShadow: "0 2px 12px rgba(30,58,95,0.04)" }}>
-        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-400 shrink-0">4 canais</span>
+        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500 shrink-0">4 canais</span>
         <div className="h-3 w-px bg-slate-200 shrink-0" />
         {CMD_CHANNELS.map(c => (
           <div key={c.label} className="flex items-center gap-1.5 shrink-0">
@@ -198,11 +198,11 @@ function CultureCard({
     >
       <motion.div ref={cardRef}
         style={{ x: sx, y: sy, background: "rgba(255,255,255,0.82)", backdropFilter: "blur(16px)", WebkitBackdropFilter: "blur(16px)", border: "1px solid rgba(255,255,255,0.92)", boxShadow: "0 20px 40px -15px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.95)" }}
-        className="relative rounded-2xl overflow-hidden cursor-default p-5"
+        className="relative rounded-3xl overflow-hidden cursor-default p-5"
         whileHover={{ scale: 1.022 }} transition={{ scale: { type: "spring", stiffness: 300, damping: 22 } }}
         onMouseMove={onMouseMove} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        <motion.div aria-hidden className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: spotGlow, opacity: glowOp }} />
-        <motion.div aria-hidden className="absolute inset-0 rounded-2xl pointer-events-none bg-white z-30"
+        <motion.div aria-hidden className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: spotGlow, opacity: glowOp }} />
+        <motion.div aria-hidden className="absolute inset-0 rounded-3xl pointer-events-none bg-white z-30"
           animate={{ opacity: isDimmed ? 0.52 : 0 }} transition={{ duration: 0.22 }} />
         <div className="relative z-10">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${pillar.color}10` }}>
@@ -231,12 +231,12 @@ function CultureSection() {
       {/* LEFT: editorial manifesto */}
       <StaggerSection className="lg:sticky lg:top-32 self-start">
         <StaggerItem>
-          <div className="inline-flex items-center justify-center w-11 h-11 rounded-2xl mb-6 bg-[#0f766e]/10 text-[#0f766e]">
+          <div className="inline-flex items-center justify-center w-11 h-11 rounded-3xl mb-6 bg-[#0f766e]/10 text-[#0f766e]">
             <Users className="w-5 h-5" strokeWidth={1.5} />
           </div>
         </StaggerItem>
         <StaggerItem>
-          <span className="block text-[10px] font-bold tracking-[0.15em] uppercase text-[#0f766e]/60 mb-4">Cultura e Time</span>
+          <span className="block text-[10px] font-bold tracking-[0.15em] uppercase text-[#0f766e] mb-4">Cultura e Time</span>
         </StaggerItem>
         <StaggerItem>
           <h3 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] tracking-tight leading-tight mb-5">
@@ -262,13 +262,7 @@ function CultureSection() {
       </StaggerSection>
 
       {/* RIGHT: floating glass cards */}
-      <div className="relative">
-        <div aria-hidden className="absolute -inset-8 pointer-events-none overflow-hidden">
-          <div className="absolute -top-8 -right-8 w-64 h-64 rounded-full blur-3xl opacity-55" style={{ background: "radial-gradient(circle, rgba(186,218,245,0.55) 0%, transparent 68%)" }} />
-          <div className="absolute -bottom-8 -left-8 w-56 h-56 rounded-full blur-3xl opacity-45" style={{ background: "radial-gradient(circle, rgba(196,166,235,0.42) 0%, transparent 68%)" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-3xl opacity-25" style={{ background: "radial-gradient(circle, rgba(186,218,245,0.35) 0%, transparent 68%)" }} />
-        </div>
-        <div className="grid grid-cols-2 gap-4 items-start relative">
+      <div className="relative">        <div className="grid grid-cols-2 gap-4 items-start relative">
           {CULTURE_PILLARS.map((pillar, i) => (
             <motion.div key={pillar.id} className={pillar.gridClass}
               initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
@@ -297,10 +291,10 @@ function FeatureRow({ eyebrow, title, body, icon: Icon, accentColor, visual }: {
     <StaggerSection>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <StaggerItem>
-          <div className="inline-flex items-center justify-center w-11 h-11 rounded-2xl mb-6" style={{ backgroundColor: `${accentColor}14`, color: accentColor }}>
+          <div className="inline-flex items-center justify-center w-11 h-11 rounded-3xl mb-6" style={{ backgroundColor: `${accentColor}14`, color: accentColor }}>
             <Icon className="w-5 h-5" />
           </div>
-          <span className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-4" style={{ color: `${accentColor}80` }}>{eyebrow}</span>
+          <span className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-4" style={{ color: accentColor }}>{eyebrow}</span>
           <h3 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] tracking-tight leading-tight mb-5">{title}</h3>
           <p className="text-slate-500 leading-relaxed text-base">{body}</p>
         </StaggerItem>
@@ -314,7 +308,7 @@ function FeatureRow({ eyebrow, title, body, icon: Icon, accentColor, visual }: {
 
 export function HumanFactorSection() {
   return (
-    <Section className="bg-white">
+    <Section className="bg-[#f4f7fb]">
       <SectionHeader
         badge="O Fator Humano"
         title="Alta tecnologia,"

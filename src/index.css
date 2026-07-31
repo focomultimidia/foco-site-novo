@@ -9,29 +9,49 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* ── Superfície contínua ──────────────────────────────────────────────
+       #f4f7fb é a única cor de fundo do site. A hierarquia entre seções
+       não vem mais de trocar a cor, e sim de LUZ (auras), MATÉRIA (papel
+       elevado vs. tinta) e RELEVO (costuras). */
+    --surface: 214 47% 97%;          /* #f4f7fb — canvas único */
+    --surface-sunk: 214 38% 94%;     /* rebaixo: trilhos, tracks, wells */
+    --ink: 209 51% 15%;              /* #132840 — títulos */
+    --ink-soft: 213 25% 40%;         /* #4c5c73 — corpo de texto */
+    --ink-faint: 213 18% 55%;        /* #7c8899 — legendas */
+
+    --background: 214 47% 97%;
+    --foreground: 209 51% 15%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 209 51% 15%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
+    --popover-foreground: 209 51% 15%;
+    /* Brand blue (#285992) — cor da logo. Substitui o azul genérico
+       padrão do shadcn para que <Button variant="default"> siga a marca. */
+    --primary: 212 57% 36.5%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Tons de apoio puxados um degrau abaixo da superfície: em #f4f7fb o
+       antigo #f1f5f9 desaparecia, deixando botões e chips sem contorno. */
+    --secondary: 213 34% 91%;
+    --secondary-foreground: 209 51% 15%;
+    --muted: 213 34% 91%;
+    --muted-foreground: 213 18% 45%;
+    --accent: 213 34% 91%;
+    --accent-foreground: 209 51% 15%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
+    --border: 213 28% 87%;
+    --input: 213 28% 87%;
+    --ring: 212 57% 36.5%;
     --radius: 0.5rem;
   }
 
   .dark {
+    --surface: 222.2 84% 4.9%;
+    --surface-sunk: 217.2 32.6% 12%;
+    --ink: 210 40% 98%;
+    --ink-soft: 215 20.2% 75%;
+    --ink-faint: 215 20.2% 65.1%;
+
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
     --card: 222.2 84% 4.9%;
@@ -58,9 +78,75 @@
   * {
     @apply border-border;
   }
+  html {
+    background-color: #f4f7fb;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     /* Inter OpenType features: cv03 = open 6/9, cv04 = open 4, ss01 = alt digits */
     font-feature-settings: "cv03", "cv04", "ss01";
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   SUPERFÍCIE ÚNICA
+
+   O site inteiro usa #f4f7fb como fundo, sem nenhum efeito: sem gradientes,
+   texturas, malhas, brilhos ou imagens. Única exceção: a seção
+   ChannelManagerFlow, que mantém o fundo escuro próprio.
+
+   Restam apenas dois utilitários, e ambos descrevem CARDS — não o fundo:
+     · .paper  — card branco elevado sobre a superfície
+     · .sunk   — nicho embutido (mídia)
+   ───────────────────────────────────────────────────────────────────────── */
+
+@layer components {
+
+  /* Card branco sobre a superfície. Sombra em duas camadas: contato curto +
+     difusão longa azulada — é o que separa o card do fundo sem precisar de
+     uma segunda cor de seção. */
+  .paper {
+    background-color: #ffffff;
+    border: 1px solid rgba(19, 40, 64, 0.07);
+    box-shadow:
+      0 1px 2px rgba(19, 40, 64, 0.04),
+      0 12px 32px -16px rgba(19, 40, 64, 0.18);
+  }
+  .paper-hover {
+    transition: box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.35s ease;
+  }
+  .paper-hover:hover {
+    transform: translateY(-3px);
+    border-color: rgba(40, 89, 146, 0.18);
+    box-shadow:
+      0 2px 4px rgba(19, 40, 64, 0.05),
+      0 24px 48px -20px rgba(19, 40, 64, 0.26);
+  }
+
+  /* Inverso do card: afunda no material. Usado em áreas de mídia embutida. */
+  .sunk {
+    background-color: #e8eef6;
+    box-shadow: inset 0 1px 3px rgba(19, 40, 64, 0.10),
+                inset 0 0 0 1px rgba(19, 40, 64, 0.05);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PULSO DE FLUXO — conectores do diagrama (hero do Channel Manager)
+
+   Os traçados usam pathLength="1", o que normaliza o comprimento do caminho:
+   stroke-dasharray e stroke-dashoffset passam a trabalhar em fração (0–1),
+   então o mesmo keyframe serve para caminhos de tamanhos diferentes.
+
+   O offset vai de 0 a -1 porque valores negativos deslocam o padrão para
+   FRENTE ao longo do caminho (positivos empurram para trás). O período de -1
+   equivale exatamente a um ciclo do dasharray, então o loop é contínuo.
+
+   Duração e delay são definidos inline por traçado, para escalonar o fluxo.
+   ────────────────────────────────────────────────────────────────────────── */
+@keyframes cm-flow-pulse {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -1; }
 }

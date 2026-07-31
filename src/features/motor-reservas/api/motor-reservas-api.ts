@@ -7,7 +7,7 @@ const motorReservasData: MotorReservasData = {
     descricao: "Checkout simples, PIX e cartões integrados, comparador de preços e funcionalidades avançadas para maximizar conversões.",
     ctaPrimario: "Garantir meu 1º mês grátis",
     ctaSecundario: "Ver Demonstração",
-    imagemUrl: "/assets/imgs/motor-de-reservas/motor-de-reservas1.png",
+    imagemUrl: "/assets/imgs/motor-de-reservas/motor-de-reservas1.webp",
   },
   recursos: [
     {

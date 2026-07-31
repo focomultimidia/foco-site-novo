@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import {
   motion,
   useInView,
@@ -127,13 +128,15 @@ export function MagneticButton({
         style={{ x: sx, y: sy }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
-        className="relative overflow-hidden inline-flex items-center gap-2.5 bg-white text-[#285992] font-semibold px-8 py-4 rounded-xl shadow-lg"
+        // Era branco sobre fundo escuro; na superfície #f4f7fb o botão passa a
+        // ser a tinta da marca para não sumir no papel.
+        className="relative overflow-hidden inline-flex items-center gap-2.5 bg-gradient-to-t from-[#285992] to-[#427ab9] text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-[#285992]/25"
       >
         <span
           ref={sweepRef}
           aria-hidden
           className="absolute inset-y-0 w-[50%] pointer-events-none"
-          style={{ background: "linear-gradient(90deg,transparent,rgba(40,89,146,0.13),transparent)", transform: "translateX(-130%) skewX(-15deg)" }}
+          style={{ background: "linear-gradient(90deg,transparent,rgba(255,255,255,0.22),transparent)", transform: "translateX(-130%) skewX(-15deg)" }}
         />
         <motion.span animate={{ letterSpacing: hovered ? "0.04em" : "0em" }} transition={{ duration: 0.32 }}>
           {children}
@@ -167,9 +170,7 @@ export function SectionHeader({
   return (
     <StaggerSection className="text-center mb-16 lg:mb-20">
       <StaggerItem>
-        <span className="inline-block px-3 py-1 text-xs font-semibold tracking-widest text-[#285992] uppercase bg-[#285992]/8 rounded-full mb-5">
-          {badge}
-        </span>
+        <SectionEyebrow>{badge}</SectionEyebrow>
       </StaggerItem>
       <StaggerItem>
         <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-none max-w-3xl mx-auto mb-5">

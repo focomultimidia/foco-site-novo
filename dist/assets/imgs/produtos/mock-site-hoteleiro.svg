@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 800" width="1280" height="800" font-family="Inter, system-ui, sans-serif">
+  <!-- PLACEHOLDER MOCKUP — substituir por screenshot real do Site Hoteleiro -->
+  <rect width="1280" height="800" fill="#FFFFFF"/>
+
+  <!-- Browser chrome -->
+  <rect width="1280" height="56" fill="#F4F7FB"/>
+  <line x1="0" y1="56" x2="1280" y2="56" stroke="#E4EAF2"/>
+  <circle cx="34" cy="28" r="6" fill="#E5484D"/><circle cx="56" cy="28" r="6" fill="#F0A020"/><circle cx="78" cy="28" r="6" fill="#12B886"/>
+  <rect x="110" y="14" width="420" height="28" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+  <text x="132" y="33" font-size="12" fill="#8497AF">www.pousadamiramar.com.br</text>
+
+  <!-- Site nav -->
+  <rect x="0" y="56" width="1280" height="64" fill="#FFFFFF"/>
+  <text x="72" y="96" font-size="19" font-weight="700" fill="#15304F">MIRAMAR</text>
+  <g font-size="13" fill="#54687F">
+    <text x="640" y="95">Acomodações</text><text x="772" y="95">Experiências</text><text x="892" y="95">Gastronomia</text><text x="1012" y="95">Contato</text>
+  </g>
+  <rect x="1116" y="76" width="96" height="32" rx="16" fill="#285992"/>
+  <text x="1164" y="96" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Reservar</text>
+
+  <!-- Hero image -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FB8DE"/><stop offset="100%" stop-color="#D6E5F2"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2E6D96"/><stop offset="100%" stop-color="#1B4A6B"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="40%" stop-color="#0A1930" stop-opacity="0"/><stop offset="100%" stop-color="#0A1930" stop-opacity="0.72"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="120" width="1280" height="400" fill="url(#sky)"/>
+  <circle cx="1080" cy="216" r="44" fill="#FFF3D0" opacity="0.9"/>
+  <rect x="0" y="360" width="1280" height="160" fill="url(#sea)"/>
+  <path d="M0 360h1280v18H0z" fill="#FFFFFF" opacity="0.18"/>
+  <path d="M0 520v-60c120-18 220 12 340 4s200-34 320-28 210 40 330 32 190-26 290-32v84z" fill="#E8D9BC"/>
+  <g fill="#2F6B4F" opacity="0.85">
+    <path d="M120 470c-26-16-30-52-6-70 20-14 48-8 58 14 8 18 0 40-18 50z"/>
+    <rect x="128" y="462" width="8" height="46" fill="#6B4A2A"/>
+  </g>
+  <rect x="0" y="120" width="1280" height="400" fill="url(#shade)"/>
+  <text x="72" y="416" font-size="40" font-weight="700" fill="#FFFFFF">Pousada Miramar</text>
+  <text x="72" y="452" font-size="16" fill="#DCE6F3">Pé na areia · Búzios, RJ</text>
+
+  <!-- Floating booking bar -->
+  <rect x="72" y="488" width="1136" height="80" rx="16" fill="#FFFFFF" stroke="#E4EAF2"/>
+  <g>
+    <text x="104" y="518" font-size="11" fill="#8497AF">CHECK-IN</text>
+    <text x="104" y="544" font-size="15" font-weight="600" fill="#1E293B">12 Jul</text>
+    <line x1="272" y1="504" x2="272" y2="552" stroke="#EDF1F7"/>
+    <text x="300" y="518" font-size="11" fill="#8497AF">CHECK-OUT</text>
+    <text x="300" y="544" font-size="15" font-weight="600" fill="#1E293B">16 Jul</text>
+    <line x1="468" y1="504" x2="468" y2="552" stroke="#EDF1F7"/>
+    <text x="496" y="518" font-size="11" fill="#8497AF">HÓSPEDES</text>
+    <text x="496" y="544" font-size="15" font-weight="600" fill="#1E293B">2 adultos</text>
+    <rect x="1000" y="504" width="184" height="48" rx="12" fill="#285992"/>
+    <text x="1092" y="534" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Ver disponibilidade</text>
+  </g>
+
+  <!-- Room cards -->
+  <text x="72" y="616" font-size="20" font-weight="700" fill="#15304F">Nossas acomodações</text>
+  <g>
+    <rect x="72" y="640" width="356" height="132" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <rect x="72" y="640" width="356" height="76" rx="14" fill="#DCE6F3"/>
+    <path d="M72 700l52-40 44 30 40-26 76 52h-212z" fill="#B7C9DF"/>
+    <text x="92" y="740" font-size="14" font-weight="600" fill="#1E293B">Suíte Vista Mar</text>
+    <text x="92" y="760" font-size="12" fill="#7A8BA3">a partir de R$ 940</text>
+
+    <rect x="462" y="640" width="356" height="132" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <rect x="462" y="640" width="356" height="76" rx="14" fill="#D9E7DC"/>
+    <path d="M462 700l52-40 44 30 40-26 76 52h-212z" fill="#B4CDBA"/>
+    <text x="482" y="740" font-size="14" font-weight="600" fill="#1E293B">Chalé Jardim</text>
+    <text x="482" y="760" font-size="12" fill="#7A8BA3">a partir de R$ 780</text>
+
+    <rect x="852" y="640" width="356" height="132" rx="14" fill="#FFFFFF" stroke="#E4EAF2"/>
+    <rect x="852" y="640" width="356" height="76" rx="14" fill="#EFE2CE"/>
+    <path d="M852 700l52-40 44 30 40-26 76 52h-212z" fill="#DCC9A9"/>
+    <text x="872" y="740" font-size="14" font-weight="600" fill="#1E293B">Apto Família</text>
+    <text x="872" y="760" font-size="12" fill="#7A8BA3">a partir de R$ 690</text>
+  </g>
+</svg>

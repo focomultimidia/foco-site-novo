@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, useInView } from "framer-motion";
 import { StaggerSection, StaggerItem } from "./motion-primitives";
 import type { JourneyPillar } from "../types";
@@ -31,7 +32,7 @@ const JOURNEY_PILLARS: JourneyPillar[] = [
     headline: ["Um motor invisível", "no coração", "do seu hotel."],
     body:     "Enquanto você recebe hóspedes, nossa plataforma redistribui tarifas, captura reservas em tempo real e sincroniza todos os canais. PMS, Channel Manager, Motor de Reservas, CRM e Software de Pagamentos não são produtos separados — são uma arquitetura única que converte visitantes em hóspedes e hóspedes em receita recorrente.",
     quote:    "Mais reservas, mais produtividade, menos fricção operacional.",
-    accent:   "#c9972a",
+    accent:   "#9a7318",
   },
 ];
 
@@ -58,7 +59,7 @@ const CANVAS_STATES: CanvasState[] = [
     outer: { w: 168, h: 168, br: "12px", bg: "transparent",           shadow: "0 0 0 1.5px rgba(201,151,42,0.35)", rot: 45 },
     inner: { w: 104, h: 104, br: "6px",  bg: "rgba(201,151,42,0.07)", shadow: "0 0 0 1px rgba(201,151,42,0.18)",   rot: 45 },
     ring:  { r: 0, op: 0, dash: "0" },
-    accent: "#c9972a",
+    accent: "#9a7318",
   },
 ];
 
@@ -140,7 +141,7 @@ function PillarBlock({
     <div ref={ref} className="py-32 lg:py-36 lg:pl-12">
       <motion.div animate={{ opacity: isActive ? 1 : 0.20 }} transition={{ duration: 0.5, ease: "easeOut" }}>
         <div className="flex items-center gap-3 mb-6">
-          <span className="text-[10px] font-bold tracking-[0.20em] uppercase text-slate-400">{pillar.eyebrow}</span>
+          <span className="text-[10px] font-bold tracking-[0.20em] uppercase text-slate-500">{pillar.eyebrow}</span>
           <div className="h-px w-8 rounded-full" style={{ backgroundColor: `${pillar.accent}55` }} />
           <span className="text-[10px] font-bold tracking-[0.10em] uppercase" style={{ color: pillar.accent }}>{pillar.tag}</span>
         </div>
@@ -164,13 +165,11 @@ export function ManifestoSection() {
   const onActivate = useCallback((i: number) => setActivePillar(i), []);
 
   return (
-    <section className="bg-white">
+    <section className="bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-32 pb-12 text-center">
         <StaggerSection>
           <StaggerItem>
-            <span className="inline-block px-3 py-1 text-xs font-semibold tracking-widest text-[#285992] uppercase bg-[#285992]/8 rounded-full mb-5">
-              Manifesto Foco
-            </span>
+            <SectionEyebrow>Manifesto Foco</SectionEyebrow>
           </StaggerItem>
           <StaggerItem>
             <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-none max-w-2xl mx-auto">

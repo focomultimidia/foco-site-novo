@@ -155,10 +155,8 @@ function PorQueContratarSection() {
         }
       `}</style>
 
-      <section className="relative py-24 bg-white overflow-hidden">
+      <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
         {/* Top-edge hairline separator */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-slate-200/70 to-transparent" />
-
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* ── Header (original content) ──────────────────────────────── */}
@@ -278,7 +276,7 @@ function PorQueContratarSection() {
                       {/* Glassmorphic icon container */}
                       <div
                         className="
-                          w-12 h-12 rounded-2xl
+                          w-12 h-12 rounded-3xl
                           flex items-center justify-center
                           mb-5 flex-shrink-0
                           border border-white/20

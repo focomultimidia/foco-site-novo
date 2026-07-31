@@ -31,14 +31,11 @@ export interface BaseInternalHeroProps {
   /** Tailwind classes injected into the description <p>. Falls back to the default muted style. */
   descriptionClassName?: string;
   primaryCTA?: { label: string; href?: string; onClick?: () => void };
-  secondaryCTA?: { label: string; href?: string; onClick?: () => void };
   /** Extra content rendered inside the CTA row (buttons, badges, etc.). */
   children?: React.ReactNode;
   /** Trust-badge labels rendered below the CTAs. Defaults to the standard three items. */
   trustItems?: string[];
   slides: HeroSlide[];
-  /** Injected background layer (color + effects). Fills the hero absolutely behind all content. */
-  background?: React.ReactNode;
 }
 
 // ── Internal constants ────────────────────────────────────────────────────────
@@ -155,7 +152,7 @@ function BorderBeam({
           <svg aria-hidden="true" className={svgBase} style={{ zIndex: 30, filter: "blur(9px)" }}>
             <motion.path
               d={d} fill="none"
-              stroke="rgba(200,225,255,0.20)" strokeWidth={14} strokeLinecap="round"
+              stroke="rgba(66,122,185,0.30)" strokeWidth={14} strokeLinecap="round"
               strokeDasharray={bloomArr}
               style={{ strokeDashoffset: bloomSdo }}
             />
@@ -165,7 +162,7 @@ function BorderBeam({
           <svg aria-hidden="true" className={svgBase} style={{ zIndex: 31, filter: "blur(3.5px)" }}>
             <motion.path
               d={d} fill="none"
-              stroke="rgba(220,240,255,0.55)" strokeWidth={5} strokeLinecap="round"
+              stroke="rgba(40,89,146,0.55)" strokeWidth={5} strokeLinecap="round"
               strokeDasharray={midArr}
               style={{ strokeDashoffset: midSdo }}
             />
@@ -175,11 +172,11 @@ function BorderBeam({
           <svg aria-hidden="true" className={svgBase} style={{ zIndex: 32 }}>
             <path
               d={d} fill="none"
-              stroke="rgba(255,255,255,0.12)" strokeWidth={1}
+              stroke="rgba(19,40,64,0.10)" strokeWidth={1}
             />
             <motion.path
               d={d} fill="none"
-              stroke="rgba(255,255,255,0.95)" strokeWidth={1.5} strokeLinecap="round"
+              stroke="rgba(40,89,146,0.95)" strokeWidth={1.5} strokeLinecap="round"
               strokeDasharray={headArr}
               style={{ strokeDashoffset: headSdo }}
             />
@@ -232,11 +229,9 @@ function BaseInternalHero({
   description,
   descriptionClassName,
   primaryCTA,
-  secondaryCTA,
   children,
   trustItems = TRUST_ITEMS,
   slides,
-  background,
 }: BaseInternalHeroProps) {
   const [slide, setSlide] = useState(0);
   const sectionRef   = useRef<HTMLElement>(null);
@@ -274,12 +269,9 @@ function BaseInternalHero({
       data-hero="section"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative min-h-[90vh] flex items-center overflow-hidden"
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#f4f7fb]"
     >
-      {/* ── Background (injected by each page) ───────────────────────────── */}
-      <div data-hero="bg" aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
-        {background}
-      </div>
+      {/* Sem camadas de fundo: o hero usa apenas a cor da superfície (#f4f7fb). */}
 
       {/* ── Content ────────────────────────────────────────────────────────── */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-36 pb-20">
@@ -287,16 +279,18 @@ function BaseInternalHero({
 
           {/* ── LEFT ─────────────────────────────────────────────────────── */}
           <div data-hero="content">
+            {/* Eyebrow — mono uppercase: mesmo registro de "sistema" da Home,
+                não de banner de marketing. */}
             {badgeText && (
               <div
                 data-hero="badge"
-                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#285992]/25 bg-white/60 backdrop-blur-sm shadow-sm"
+                className="inline-flex items-center gap-2.5 border border-[#285992]/20 text-[#285992] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6"
               >
-                <span className="relative flex h-2 w-2 shrink-0">
+                <span className="relative flex h-1.5 w-1.5 shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#285992] opacity-70" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#285992]" />
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#285992]" />
                 </span>
-                <span className="text-[#244248] text-sm font-medium tracking-wide">{badgeText}</span>
+                {badgeText}
               </div>
             )}
 
@@ -326,11 +320,6 @@ function BaseInternalHero({
               {primaryCTA && (
                 <HeroButton onClick={primaryCTA.onClick} href={primaryCTA.href}>
                   {primaryCTA.label}
-                </HeroButton>
-              )}
-              {secondaryCTA && (
-                <HeroButton variant="secondary" onClick={secondaryCTA.onClick} href={secondaryCTA.href}>
-                  {secondaryCTA.label}
                 </HeroButton>
               )}
             </div>
@@ -367,8 +356,8 @@ function BaseInternalHero({
                   {/* BorderBeam wraps the entire browser mockup */}
                   <BorderBeam radius={16} className="w-full">
                     <div
-                      className="w-full bg-white rounded-2xl overflow-hidden"
-                      style={{ boxShadow: "0 32px 72px rgba(36,66,72,0.18), 0 4px 16px rgba(0,0,0,0.07)" }}
+                      className="w-full bg-white rounded-3xl overflow-hidden"
+                      style={{ boxShadow: "0 40px 80px -32px rgba(19,40,64,0.34), 0 4px 16px rgba(19,40,64,0.08)" }}
                     >
                       {/* Safari-style chrome */}
                       <div className="flex items-center gap-3 px-4 py-2.5 bg-[#f5f5f7] border-b border-gray-200/80">
@@ -406,6 +395,10 @@ function BaseInternalHero({
                             key={`browser-${slide}`}
                             src={slides[slide].desktopImage}
                             alt={slides[slide].alt}
+                            width={1280}
+                            height={800}
+                            fetchPriority={slide === 0 ? "high" : undefined}
+                            decoding="async"
                             initial={{ opacity: 0, scale: 1.04 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.97 }}
@@ -450,7 +443,7 @@ function BaseInternalHero({
                   <BorderBeam radius={26} minDelay={0.4} maxDelay={1.6}>
                     <div
                       className="bg-[#fbfbfb] rounded-[26px] p-[4px]"
-                      style={{ boxShadow: "0 24px 56px rgba(0,0,0,0.38), 0 0 0 1px rgba(255,255,255,0.07)" }}
+                      style={{ boxShadow: "0 30px 60px -24px rgba(19,40,64,0.42), 0 0 0 1px rgba(19,40,64,0.08)" }}
                     >
                       <div
                         className="relative bg-white rounded-[22px] overflow-hidden"
@@ -464,6 +457,9 @@ function BaseInternalHero({
                             key={`mobile-${slide}`}
                             src={slides[slide].mobileImage}
                             alt={slides[slide].alt}
+                            width={600}
+                            height={1098}
+                            decoding="async"
                             initial={{ opacity: 0, x: 8 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -8 }}

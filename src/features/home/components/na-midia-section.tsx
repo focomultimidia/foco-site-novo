@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Newspaper, ChevronLeft, ChevronRight } from "lucide-react";
 import type { ArtigoMidia } from "../types";
@@ -38,9 +39,9 @@ function getRole(i: number, center: number, total: number): Role {
 
 // ── Image mapping ─────────────────────────────────────────────────────────────
 const IMAGES: Record<string, string> = {
-  "1": "/assets/imgs/na-midia/materia-1.jpg",
-  "2": "/assets/imgs/na-midia/materia-2.jpg",
-  "3": "/assets/imgs/na-midia/materia-3.jpg",
+  "1": "/assets/imgs/na-midia/materia-1.webp",
+  "2": "/assets/imgs/na-midia/materia-2.webp",
+  "3": "/assets/imgs/na-midia/materia-3.webp",
 };
 
 // ── Article card ──────────────────────────────────────────────────────────────
@@ -66,6 +67,10 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
         <img
           src={IMAGES[artigo.id] ?? IMAGES["1"]}
           alt={artigo.titulo}
+          width={600}
+          height={400}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           style={{
             transform: isCenter ? "scale(1.04)" : "scale(1)",
@@ -90,7 +95,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
         {/* Publication row — desktop only */}
         <div className="hidden md:flex items-center gap-3 mb-6">
           <div
-            className="w-10 h-10 rounded-2xl flex items-center justify-center flex-shrink-0"
+            className="w-10 h-10 rounded-3xl flex items-center justify-center flex-shrink-0"
             style={{ background: "linear-gradient(135deg,#e8f0fb,#d1e2f8)" }}
           >
             <Newspaper className="w-4 h-4 text-blue-600" />
@@ -99,7 +104,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
             <p className="text-sm font-semibold text-gray-900 leading-tight">
               {artigo.publicacao}
             </p>
-            <p className="text-xs text-gray-400 mt-0.5">{artigo.data}</p>
+            <p className="text-xs text-gray-500 mt-0.5">{artigo.data}</p>
           </div>
         </div>
 
@@ -145,7 +150,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
   const next = () => setCenter(c => (c + 1) % total);
 
   return (
-    <section className="py-20 bg-white overflow-hidden">
+    <section className="py-20 bg-[#f4f7fb] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
@@ -156,10 +161,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Newspaper className="w-4 h-4" />
-            <span>Na mídia</span>
-          </div>
+          <SectionEyebrow>Na mídia</SectionEyebrow>
 
           <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Reconhecidos pela{" "}

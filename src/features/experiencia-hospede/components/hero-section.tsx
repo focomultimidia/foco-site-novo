@@ -3,8 +3,27 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HeroButton } from "@/features/shared/components/hero-button";
-import { InternalHeroBackground } from "@/features/shared/components/internal-hero-background";
 import type { HeroData } from "../types";
+
+// ── Título ────────────────────────────────────────────────────────────────────
+
+function buildTitle(raw: string) {
+  const kw = "Excepcional";
+  const idx = raw.indexOf(kw);
+  if (idx === -1) return raw;
+  return (
+    <>
+      {raw.slice(0, idx)}
+      <span
+        className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
+        style={{ textDecorationLine: "underline", textDecorationColor: "#fccc30", textDecorationThickness: "3px", textUnderlineOffset: "6px" }}
+      >
+        {kw}
+      </span>
+      {raw.slice(idx + kw.length)}
+    </>
+  );
+}
 
 // ── Products ──────────────────────────────────────────────────────────────────
 // Each produto owns its image pool, autoplay interval and initial slide.
@@ -17,9 +36,9 @@ const PRODUTOS_HERO = [
     interval: 3000,
     startSlide: 0,
     slides: [
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.jpg", alt: "Cardápio Digital - Menu principal" },
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.jpg",  alt: "Cardápio Digital - Escolhendo item" },
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital2.png",  alt: "Cardápio Digital - Acompanhamento de pedido" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.webp", alt: "Cardápio Digital - Menu principal" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.webp",  alt: "Cardápio Digital - Escolhendo item" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital2.webp",  alt: "Cardápio Digital - Acompanhamento de pedido" },
     ],
   },
   {
@@ -28,9 +47,9 @@ const PRODUTOS_HERO = [
     interval: 3500,
     startSlide: 0,
     slides: [
-      { src: "/assets/imgs/experiencia-do-hospede/app-hospede.jpg",    alt: "Foco Pass - App do Hóspede" },
-      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.jpg",      alt: "Foco Pass - Atrações do hotel" },
-      { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.png",      alt: "Foco Pass - Programação do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",    alt: "Foco Pass - App do Hóspede" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp",      alt: "Foco Pass - Atrações do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp",      alt: "Foco Pass - Programação do hotel" },
 
     ],
   },
@@ -40,9 +59,9 @@ const PRODUTOS_HERO = [
     interval: 4000,
     startSlide: 0,
     slides: [
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.png", alt: "Motor de Reservas – Busca" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.png", alt: "Motor de Reservas – Quarto" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.png", alt: "Motor de Reservas – Confirmação" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.webp", alt: "Motor de Reservas – Busca" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.webp", alt: "Motor de Reservas – Quarto" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.webp", alt: "Motor de Reservas – Confirmação" },
     ],
   },
 ] as const;
@@ -99,10 +118,12 @@ function PhoneMockup({
   slides,
   interval,
   startSlide,
+  priority = false,
 }: {
   slides: readonly { src: string; alt: string }[];
   interval: number;
   startSlide: number;
+  priority?: boolean;
 }) {
   const [slideIdx, setSlideIdx] = useState(startSlide % slides.length);
 
@@ -134,6 +155,8 @@ function PhoneMockup({
             key={slideIdx}
             src={slide.src}
             alt={slide.alt}
+            fetchPriority={priority && slideIdx === startSlide ? "high" : undefined}
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-top"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -167,12 +190,7 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-
-      {/* Background */}
-      <div aria-hidden="true" className="absolute inset-0 z-0 pointer-events-none">
-        <InternalHeroBackground imageSrc="/assets/imgs/hero/bkg.png" />
-      </div>
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#f4f7fb]">
 
       {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-36 pb-20">
@@ -184,19 +202,17 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
-            {/* Animated-ping badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#285992]/25 bg-white/60 backdrop-blur-sm shadow-sm">
-              <span className="relative flex h-2 w-2 shrink-0">
+            {/* Eyebrow — mono uppercase */}
+            <div className="inline-flex items-center gap-2.5 border border-[#285992]/20 text-[#285992] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6">
+              <span className="relative flex h-1.5 w-1.5 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#285992] opacity-70" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#285992]" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#285992]" />
               </span>
-              <span className="text-[#244248] text-sm font-medium tracking-wide">
-                {data.subtitulo}
-              </span>
+              {data.subtitulo}
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#244248] mb-4 leading-tight tracking-tight">
-              {data.titulo}
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#244248] mb-4 leading-tight tracking-tight">
+              {buildTitle(data.titulo)}
             </h1>
 
             <p className="text-lg text-[#244248]/75 mb-8 leading-relaxed max-w-xl">
@@ -278,6 +294,7 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
                         slides={phone.slides}
                         interval={phone.interval}
                         startSlide={phone.startSlide}
+                        priority={phone.id === centerPhone}
                       />
                     </motion.div>
                   </motion.div>

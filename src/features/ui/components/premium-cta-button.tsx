@@ -156,10 +156,10 @@ function PremiumCTAButton({
               onClick={onClick}
               className="group relative z-[1] flex items-center gap-2.5 px-7 py-3.5 rounded-full font-display font-medium tracking-tight text-sm text-white/90 cursor-pointer select-none overflow-hidden"
               style={{
-                // Fundo navy gradiente — funciona sobre fundo escuro E sobre
-                // o header branco flutuante
+                // Fundo navy gradiente (cor da marca #285992) — funciona sobre
+                // fundo escuro E sobre o header branco flutuante
                 background:
-                  "linear-gradient(145deg, rgba(30,58,95,0.96) 0%, rgba(20,44,80,0.98) 100%)",
+                  "linear-gradient(145deg, rgba(40,89,146,0.96) 0%, rgba(29,64,105,0.98) 100%)",
                 backdropFilter:       "blur(14px)",
                 WebkitBackdropFilter: "blur(14px)",
                 // Glow multicamadas em repouso

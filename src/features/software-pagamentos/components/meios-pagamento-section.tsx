@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 // ── Data ──────────────────────────────────────────────────────────────────────
 // Add/remove payment gateways here. Paths resolve from /public.
 const MEIOS_PAGAMENTO = [
-  { nome: "Sicredi",     logo: "/assets/imgs/integracoes/gateway-de-pagamento/sicred.png"     },
-  { nome: "PagSeguro",   logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagseguro.png"   },
-  { nome: "Cielo",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/cielo.png"       },
-  { nome: "Rede",        logo: "/assets/imgs/integracoes/gateway-de-pagamento/rede.png"        },
-  { nome: "Stone",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/stone.png"       },
-  { nome: "Sipag",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/sipag.png"       },
-  { nome: "GetNet",      logo: "/assets/imgs/integracoes/gateway-de-pagamento/getnet.png"      },
-  { nome: "PayZen",    logo: "/assets/imgs/integracoes/gateway-de-pagamento/payzen.png"    },
-  { nome: "Pagarme",logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagarme.png" },
+  { nome: "Sicredi",     logo: "/assets/imgs/integracoes/gateway-de-pagamento/sicred.webp"     },
+  { nome: "PagSeguro",   logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagseguro.webp"   },
+  { nome: "Cielo",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/cielo.webp"       },
+  { nome: "Rede",        logo: "/assets/imgs/integracoes/gateway-de-pagamento/rede.webp"        },
+  { nome: "Stone",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/stone.webp"       },
+  { nome: "Sipag",       logo: "/assets/imgs/integracoes/gateway-de-pagamento/sipag.webp"       },
+  { nome: "GetNet",      logo: "/assets/imgs/integracoes/gateway-de-pagamento/getnet.webp"      },
+  { nome: "PayZen",    logo: "/assets/imgs/integracoes/gateway-de-pagamento/payzen.webp"    },
+  { nome: "Pagarme",logo: "/assets/imgs/integracoes/gateway-de-pagamento/pagarme.webp" },
 ];
 
 // ── Section ───────────────────────────────────────────────────────────────────
@@ -23,7 +23,7 @@ function MeiosPagamentoSection() {
   const logosDuplicados = [...MEIOS_PAGAMENTO, ...MEIOS_PAGAMENTO];
 
   return (
-    <section className="py-20 bg-gray-50 overflow-hidden">
+    <section className="py-20 bg-[#f4f7fb] overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header (original text — unchanged) ────────────────────────── */}
@@ -86,6 +86,10 @@ function MeiosPagamentoSection() {
                   <img
                     src={meio.logo}
                     alt={meio.nome}
+                    width={228}
+                    height={80}
+                    loading="lazy"
+                    decoding="async"
                     className="max-h-full max-w-full object-contain grayscale opacity-50 transition-all duration-400 group-hover:grayscale-0 group-hover:opacity-100"
                   />
                 </div>
