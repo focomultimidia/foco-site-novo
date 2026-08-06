@@ -128,7 +128,7 @@ function CardapioDigitalSection() {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-14 max-w-5xl mx-auto"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Cardápio Digital</span> para
             hotéis, pousadas e resorts
           </h2>

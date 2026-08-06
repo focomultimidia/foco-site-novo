@@ -6,7 +6,7 @@ const channelManagerData: ChannelManagerData = {
     subtitulo: "Sincronização em Tempo Real",
     descricao:
       "Conecte seu hotel aos principais OTAs e metasearch engines do mundo. Sincronização automática de tarifas, disponibilidade e reservas em tempo real.",
-    ctaPrimario: "Conectar Canais",
+    ctaPrimario: "Quero me conectar com +850 canais",
     ctaSecundario: "Ver Demonstração",
     imagemUrl:
       "/assets/imgs/channel-manager/img-hero.webp",

@@ -36,7 +36,7 @@ function LeadCaptureCTA({
           <SectionEyebrow className="mb-7">{badge}</SectionEyebrow>
 
           {/* Title */}
-          <h2 className="font-display text-4xl sm:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-5">
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#132840] leading-none tracking-tighter antialiased mb-5">
             {title}
           </h2>
 

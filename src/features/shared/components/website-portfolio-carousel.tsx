@@ -150,7 +150,7 @@ function WebsitePortfolioCarousel() {
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#132840] leading-none tracking-tighter antialiased mb-4">
             Sites de alta performance para{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">vendas diretas</span>
           </h2>

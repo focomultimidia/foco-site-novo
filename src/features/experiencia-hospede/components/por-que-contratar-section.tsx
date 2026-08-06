@@ -161,7 +161,7 @@ function PorQueContratarSection() {
 
           {/* ── Header (original content) ──────────────────────────────── */}
           <div ref={headerRef} className="text-center mb-14 max-w-3xl mx-auto">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
+            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
               Por que contratar o{" "}
               <span
                 style={{
@@ -303,7 +303,7 @@ function PorQueContratarSection() {
                         />
                       </div>
 
-                      <h3 className="font-display font-bold text-white text-[1.3rem] mb-2.5 leading-snug tracking-tight">
+                      <h3 className="font-display font-semibold text-white text-[1.3rem] mb-2.5 leading-snug tracking-tight">
                         {b.titulo}
                       </h3>
                       <p className="font-sans font-normal text-blue-100/90 text-[0.9rem] leading-relaxed">

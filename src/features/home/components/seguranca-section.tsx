@@ -71,10 +71,10 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
           >
             <SectionEyebrow>Segurança &amp; Compliance</SectionEyebrow>
 
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-5">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#132840] leading-none tracking-tighter antialiased mb-5">
               Sua operação protegida por
               <br />
-              <span className="bg-gradient-to-r from-[#285992] to-[#0e7490] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
                 tecnologia de classe mundial
               </span>
             </h2>

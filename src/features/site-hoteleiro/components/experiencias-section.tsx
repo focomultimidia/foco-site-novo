@@ -1,299 +1,311 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import {
+  Tag,
+  UserPlus,
+  Palette,
+  Zap,
+  Rocket,
+  Image as ImageIcon,
+  type LucideIcon,
+} from "lucide-react";
 
-// ── Data (original — unchanged) ───────────────────────────────────────────────
-const EXPERIENCIAS = [
-  {
-    titulo: "Design que converte",
-    descricao:
-      "Design intuitivo e velocidade de carregamento transformam visitantes em hóspedes antes mesmo de qualquer clique.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
-  },
-  {
-    titulo: "Gatilhos de reserva",
-    descricao:
-      "Site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede direto à reserva.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
-  },
-  {
-    titulo: "Landing pages de impacto",
-    descricao:
-      "Páginas dedicadas para pacotes, promoções ou eventos, com acesso direto ao motor de reservas.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
-  },
+// ── Data ────────────────────────────────────────────────────────────────────
+// `imagem` fica vazia de propósito — o espaço já está desenhado no layout
+// abaixo; basta preencher com o caminho real depois.
+interface Experiencia {
+  titulo: string;
+  descricao: string;
+  icon: LucideIcon;
+  imagem?: string;
+}
+
+const EXPERIENCIAS: Experiencia[] = [
   {
     titulo: "Pacotes em destaque",
     descricao:
       "Venda mais com pacotes e promoções posicionados estrategicamente na capa do site.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
+    icon: Tag,
   },
   {
     titulo: "Captação de leads",
     descricao:
       "Capture clientes interessados com formulários personalizados integrados à operação do hotel.",
-    imagem: "/assets/imgs/site-hoteleiro/experiencias/modelo-site.webp",
+    icon: UserPlus,
   },
-] as const;
+  {
+    titulo: "Design que converte",
+    descricao:
+      "Design intuitivo e velocidade de carregamento transformam visitantes em hóspedes antes mesmo de qualquer clique.",
+    icon: Palette,
+  },
+  {
+    titulo: "Gatilhos de reserva",
+    descricao:
+      "Site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede direto à reserva.",
+    icon: Zap,
+  },
+  {
+    titulo: "Landing pages de impacto",
+    descricao:
+      "Páginas dedicadas para pacotes, promoções ou eventos, com acesso direto ao motor de reservas.",
+    icon: Rocket,
+  },
+];
+
+// Function-form variants — necessário para AnimatePresence mode="popLayout" não
+// deixar nós fantasmas ao trocar de categoria rapidamente (padrão já validado no projeto).
+const descVariants = {
+  initial: () => ({ opacity: 0, y: 8 }),
+  animate: () => ({ opacity: 1, y: 0 }),
+  exit: () => ({ opacity: 0, y: -8 }),
+};
+
+interface FrameConfig {
+  left: string;
+  top: string;
+  width: string;
+  height: string;
+  rotate: number;
+  z: number;
+}
+
+// ── Palco (centro) — para onde a imagem da categoria ativa viaja ────────────
+const CENTER_DESKTOP: FrameConfig = { left: "24%", top: "8%", width: "46%", height: "72%", rotate: 0, z: 30 };
+const CENTER_MOBILE: FrameConfig = { left: "13%", top: "6%", width: "74%", height: "56%", rotate: 0, z: 30 };
+
+// ── Casas fixas — cada categoria tem a sua; a inclinação sutil e o
+// posicionamento assimétrico dão o ar de "fotografias espalhadas" que se
+// alinham perfeitamente ao chegar ao centro.
+const HOME_DESKTOP: FrameConfig[] = [
+  { left: "-3%", top: "2%", width: "23%", height: "34%", rotate: -3, z: 20 },
+  { left: "-1%", top: "44%", width: "20%", height: "60%", rotate: 2.5, z: 15 },
+  { left: "75%", top: "0%", width: "24%", height: "22%", rotate: 3, z: 22 },
+  { left: "77%", top: "26%", width: "22%", height: "34%", rotate: -2, z: 18 },
+  { left: "27%", top: "84%", width: "22%", height: "20%", rotate: 1.8, z: 12 },
+];
+
+const HOME_MOBILE: FrameConfig[] = [
+  { left: "-5%", top: "0%", width: "34%", height: "20%", rotate: -3, z: 20 },
+  { left: "-3%", top: "62%", width: "32%", height: "30%", rotate: 2.5, z: 15 },
+  { left: "68%", top: "2%", width: "34%", height: "18%", rotate: 3, z: 22 },
+  { left: "70%", top: "40%", width: "30%", height: "24%", rotate: -2, z: 18 },
+  { left: "30%", top: "84%", width: "34%", height: "16%", rotate: 1.8, z: 12 },
+];
+
+function ImageFrame({
+  item,
+  index,
+  isActive,
+  frame,
+  onSelect,
+}: {
+  item: Experiencia;
+  index: number;
+  isActive: boolean;
+  frame: FrameConfig;
+  onSelect: () => void;
+}) {
+  return (
+    <motion.div
+      layout
+      layoutId={`experiencia-frame-${index}`}
+      onClick={onSelect}
+      className="absolute rounded-2xl overflow-hidden"
+      // left/top/width/height ficam no style "cru" — é a mudança nesses
+      // valores entre renders que o `layout` detecta e transforma numa
+      // animação suave (FLIP), em vez de deixar o Framer tentar animar o
+      // CSS diretamente (que entraria em conflito com o próprio `layout`).
+      style={{ left: frame.left, top: frame.top, width: frame.width, height: frame.height, zIndex: isActive ? 30 : frame.z }}
+      animate={{
+        rotate: frame.rotate,
+        boxShadow: isActive
+          ? "0 30px 60px -20px rgba(15,23,42,0.30), 0 8px 20px -8px rgba(15,23,42,0.14)"
+          : "0 16px 32px -14px rgba(15,23,42,0.20)",
+      }}
+      transition={{ type: "spring", stiffness: 220, damping: 28, mass: 0.9 }}
+    >
+      <button
+        type="button"
+        disabled={isActive}
+        aria-label={isActive ? undefined : `Destacar ${item.titulo}`}
+        aria-hidden={isActive}
+        tabIndex={isActive ? -1 : 0}
+        className={`w-full h-full ${isActive ? "cursor-default" : "cursor-pointer"}`}
+      >
+        {item.imagem ? (
+          <img src={item.imagem} alt={item.titulo} className="w-full h-full object-cover" loading="lazy" decoding="async" />
+        ) : (
+          // Placeholder — some ao adicionar `imagem` no item correspondente em EXPERIENCIAS.
+          <div
+            className="w-full h-full flex flex-col items-center justify-center gap-1.5 bg-white/70 border-2 border-dashed transition-opacity duration-300"
+            style={{ borderColor: "rgba(40,89,146,0.22)" }}
+          >
+            <ImageIcon
+              className={isActive ? "w-7 h-7 lg:w-8 lg:h-8" : "w-4 h-4 lg:w-5 lg:h-5"}
+              style={{ color: "rgba(40,89,146,0.35)" }}
+              strokeWidth={1.5}
+            />
+            <span
+              className={`font-medium text-center px-1 ${isActive ? "text-[11px] lg:text-xs" : "text-[9px] lg:text-[10px]"}`}
+              style={{ color: "rgba(40,89,146,0.4)" }}
+            >
+              {item.titulo}
+            </span>
+          </div>
+        )}
+      </button>
+    </motion.div>
+  );
+}
+
+// Renderiza os 5 frames para um dado breakpoint — cada categoria mantém sua
+// própria casa fixa; a ativa "viaja" até o centro por cima das demais.
+function Collage({ activeIndex, onSelect, center, homes }: {
+  activeIndex: number;
+  onSelect: (i: number) => void;
+  center: FrameConfig;
+  homes: FrameConfig[];
+}) {
+  return (
+    <>
+      {EXPERIENCIAS.map((item, i) => (
+        <ImageFrame
+          key={item.titulo}
+          item={item}
+          index={i}
+          isActive={i === activeIndex}
+          frame={i === activeIndex ? center : homes[i]}
+          onSelect={() => onSelect(i)}
+        />
+      ))}
+    </>
+  );
+}
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function ExperienciasSection() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [loopKey, setLoopKey] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  // Start/stop autoplay based on viewport visibility.
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  // Autoplay — only runs while the section is visible.
-  useEffect(() => {
-    if (!isVisible) return;
-    const id = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % EXPERIENCIAS.length);
-    }, 3500);
-    return () => clearInterval(id);
-  }, [loopKey, isVisible]);
-
-  const handleSelect = (i: number) => {
-    setActiveIndex(i);
-    setLoopKey(k => k + 1);
-  };
-
-  const activeItem = EXPERIENCIAS[activeIndex];
+  const active = EXPERIENCIAS[activeIndex];
 
   return (
-    <>
-      {/*
-        experiencias-water-breathe — slow opacity pulse on the ripple overlay.
-        Scoped name avoids collision with the identical animation in reserva-section.
-      */}
-      <style>{`
-        @keyframes experiencias-water-breathe {
-          0%, 100% { opacity: 0.10; }
-          50%       { opacity: 0.18; }
-        }
-        .experiencias-water-overlay {
-          animation: experiencias-water-breathe 8s ease-in-out infinite;
-        }
-      `}</style>
-
-    <section ref={sectionRef} className="py-24 bg-[#f4f7fb]">
+    <section className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ── Header (original content) ──────────────────────────────────── */}
+        {/* ── Header ──────────────────────────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: 24, filter: "blur(10px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-14 max-w-3xl mx-auto"
+          className="text-center mb-10 max-w-3xl mx-auto"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-5">
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               Experiências incríveis
             </span>{" "}
             para que os visitantes não abandonem seu site
           </h2>
+          <p className="text-[#1e3a5f]/70 text-lg leading-relaxed">
+            Cada visitante que sai sem reservar é uma venda perdida. Nosso design converte
+            atenção em reserva — com pacotes em destaque, gatilhos estratégicos e páginas
+            feitas para vender antes do primeiro clique.
+          </p>
         </motion.div>
 
-        {/* ── Smart TV Container ──────────────────────────────────────────── */}
+        {/* ── Botões (abas) — ficam acima das imagens ────────────────────── */}
+        <div className="flex flex-wrap justify-center gap-2.5 mb-6">
+          {EXPERIENCIAS.map((item, i) => {
+            const isActive = i === activeIndex;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.titulo}
+                type="button"
+                onClick={() => setActiveIndex(i)}
+                aria-pressed={isActive}
+                className={`relative flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
+                  isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"
+                }`}
+              >
+                {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
+                    usada no RecursosGridSection: o Framer Motion anima
+                    posição e largura sozinho quando o elemento "pula" de
+                    um botão para o outro. */}
+                {isActive && (
+                  <motion.span
+                    layoutId="experiencias-tab-indicator"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                  <Icon className="w-4 h-4 shrink-0" strokeWidth={2} />
+                  {item.titulo}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Descrição da categoria ativa */}
+        <div className="min-h-[3rem] flex items-start justify-center mb-8">
+          <AnimatePresence mode="popLayout">
+            <motion.p
+              key={activeIndex}
+              custom={null}
+              variants={descVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              transition={{ duration: 0.3 }}
+              className="text-center text-[#1e3a5f]/60 max-w-xl mx-auto text-base"
+            >
+              {active.descricao}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+
+        {/* ── Colagem — a imagem da categoria ativa viaja até o centro ────
+            Cada categoria tem uma casa fixa; ao ser selecionada, sua imagem
+            desliza (spring) até o palco central enquanto a anterior volta
+            para a sua própria casa. Espaços sem imagem real mostram um
+            placeholder — preencher `imagem` no item correspondente depois. */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative rounded-[40px] shadow-[40px] overflow-hidden"
+          className="relative mx-auto max-w-[1100px] rounded-[32px] overflow-hidden"
           style={{
-            background: "linear-gradient(150deg, #285992 0%, #427ab9 50%, #285992 100%)",
+            backgroundColor: "#eef2f9",
+            backgroundImage: "radial-gradient(rgba(40,89,146,0.16) 1px, transparent 1px)",
+            backgroundSize: "22px 22px",
           }}
         >
-          {/*
-            Water ripple overlay — covers the entire Smart TV container.
-            Two feTurbulence layers (big rolling waves + fine capillaries) produce
-            white pixels whose alpha is derived from the noise channel.
-            mix-blend-mode:overlay blends caustic highlights into the blue gradient
-            without obscuring the menu or display content beneath.
-          */}
-          <svg
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            className="experiencias-water-overlay pointer-events-none absolute inset-0 w-full h-full"
-            style={{ zIndex: 50, mixBlendMode: "overlay" }}
-          >
-            <defs>
-              <filter
-                id="experiencias-water"
-                x="0%" y="0%" width="100%" height="100%"
-                colorInterpolationFilters="sRGB"
-              >
-                <feTurbulence type="turbulence"   baseFrequency="0.012 0.022" numOctaves="2" seed="7"  result="bigWaves"    />
-                <feColorMatrix in="bigWaves"    type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.65 0 0 0 0" result="bigLayer"   />
-                <feTurbulence type="fractalNoise" baseFrequency="0.07 0.11"   numOctaves="3" seed="23" result="smallRipples" />
-                <feColorMatrix in="smallRipples" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0.28 0 0 0 0" result="smallLayer" />
-                <feMerge>
-                  <feMergeNode in="bigLayer"   />
-                  <feMergeNode in="smallLayer" />
-                </feMerge>
-              </filter>
-            </defs>
-            <rect width="100%" height="100%" filter="url(#experiencias-water)" />
-          </svg>
+          {/* Glow suave central — reforça o palco onde a imagem ativa pousa */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: "radial-gradient(ellipse 60% 55% at 50% 45%, rgba(66,122,185,0.14), transparent 70%)" }}
+          />
 
-          <div className="flex flex-col lg:flex-row">
-
-            {/* ── Left: Menu (40%) ──────────────────────────────────────── */}
-            <div className="lg:w-2/5 p-6 lg:p-10 border-b lg:border-b-0 lg:border-r border-white/5">
-
-              {/* Mobile: horizontal scroll tabs — text only, no icons */}
-              <div
-                className="flex lg:hidden gap-2 pb-1 overflow-x-auto"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
-              >
-                {EXPERIENCIAS.map((item, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSelect(i)}
-                    className="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold border transition-all duration-300"
-                    style={
-                      activeIndex === i
-                        ? { background: "rgba(59,130,246,0.18)", borderColor: "rgba(96,165,250,0.45)", color: "#93c5fd" }
-                        : { background: "rgba(255,255,255,0.05)", borderColor: "rgba(255,255,255,0.1)", color: "rgba(148,163,184,0.5)" }
-                    }
-                  >
-                    {item.titulo}
-                  </button>
-                ))}
-              </div>
-
-              {/* Desktop: vertical menu with sliding indicator — text only, no icons */}
-              <div className="hidden lg:flex flex-col gap-2">
-                {EXPERIENCIAS.map((item, i) => {
-                  const isActive = activeIndex === i;
-                  return (
-                    <motion.button
-                      key={i}
-                      onClick={() => handleSelect(i)}
-                      className="relative flex items-center gap-3 text-left w-full rounded-xl px-4 py-4"
-                      whileHover={{ x: isActive ? 0 : 3 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      {/* Sliding glassmorphism highlight */}
-                      {isActive && (
-                        <motion.div
-                          layoutId="experiencias-highlight"
-                          className="absolute inset-0 rounded-xl border border-white/20"
-                          style={{
-                            background: "rgba(255,255,255,0.06)",
-                            backdropFilter: "blur(12px)",
-                          }}
-                          transition={{ type: "spring", stiffness: 380, damping: 36 }}
-                        />
-                      )}
-
-                      {/* Vertical bar — slides between items via layoutId */}
-                      <div className="relative flex-shrink-0 w-[2px] self-stretch rounded-full bg-white/20">
-                        {isActive && (
-                          <motion.div
-                            layoutId="experiencias-bar"
-                            className="absolute inset-0 rounded-full bg-white"
-                            transition={{ type: "spring", stiffness: 380, damping: 36 }}
-                          />
-                        )}
-                      </div>
-
-                      {/* Title only */}
-                      <span
-                        className="relative z-10 block font-display font-normal text-[1.2rem] tracking-tight leading-snug transition-colors duration-200"
-                        style={{
-                          color: isActive ? "white" : "rgba(255,255,255,0.60)",
-                        }}
-                      >
-                        {item.titulo}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-              {/* Dot progress indicators (desktop) */}
-              <div className="hidden lg:flex items-center gap-2 mt-6">
-                {EXPERIENCIAS.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSelect(i)}
-                    className="h-[2px] rounded-full transition-all duration-300"
-                    style={{
-                      width: activeIndex === i ? 20 : 8,
-                      background: activeIndex === i ? "#60a5fa" : "rgba(255,255,255,0.12)",
-                    }}
-                  />
-                ))}
-              </div>
+          <LayoutGroup id="experiencias-collage-desktop">
+            <div className="relative hidden lg:block aspect-[2/1]">
+              <Collage activeIndex={activeIndex} onSelect={setActiveIndex} center={CENTER_DESKTOP} homes={HOME_DESKTOP} />
             </div>
+          </LayoutGroup>
 
-            {/* ── Right: Display (60%) ──────────────────────────────────── */}
-            <div className="relative lg:w-3/5 aspect-[4/3] lg:aspect-auto lg:min-h-[460px]">
-
-              {/* Ambient glow */}
-              <div
-                className="absolute inset-0 pointer-events-none"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,89,146,0.22), transparent 75%)",
-                }}
-              />
-
-              {/* Animated panel: title + description + image */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, scale: 1.05, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
-                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 lg:p-10"
-                >
-                  <div className="text-center">
-                    <h3
-                      className="font-display font-bold text-white text-xl lg:text-3xl tracking-tight leading-tight mb-2"
-                      style={{ textShadow: "0 2px 16px rgba(0,0,0,0.18)" }}
-                    >
-                      {activeItem.titulo}
-                    </h3>
-                    <p className="text-white/70 font-normal text-base leading-relaxed max-w-md mx-auto">
-                      {activeItem.descricao}
-                    </p>
-                  </div>
-
-                  <img
-                    src={activeItem.imagem}
-                    alt={activeItem.titulo}
-                    width={640}
-                    height={440}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
-                  />
-                </motion.div>
-              </AnimatePresence>
+          <LayoutGroup id="experiencias-collage-mobile">
+            <div className="relative lg:hidden aspect-[4/5] sm:aspect-[3/2]">
+              <Collage activeIndex={activeIndex} onSelect={setActiveIndex} center={CENTER_MOBILE} homes={HOME_MOBILE} />
             </div>
-
-          </div>
+          </LayoutGroup>
         </motion.div>
+
       </div>
     </section>
-    </>
   );
 }
 

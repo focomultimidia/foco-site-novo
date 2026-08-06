@@ -299,7 +299,7 @@ function NumerosSection(_props: NumerosSectionProps) {
           {/* ── Header ──────────────────────────────────────────────────── */}
           <div ref={headerRef} className="text-center mb-12">
             <SectionEyebrow>Números inquestionáveis</SectionEyebrow>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
+            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
               Nossos{" "}
               <span
                 style={{

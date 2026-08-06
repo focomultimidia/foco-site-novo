@@ -28,7 +28,7 @@ function CertificationsRow({
   columns = 4,
 }: CertificationsRowProps) {
   const getIcon = (iconType?: string) => {
-    const iconClass = "w-12 h-12 text-[#0e7490]";
+    const iconClass = "w-12 h-12 text-[#285992]";
     switch (iconType) {
       case "shield":
         return <Shield className={iconClass} />;

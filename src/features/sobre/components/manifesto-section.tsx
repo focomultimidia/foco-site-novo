@@ -145,7 +145,7 @@ function PillarBlock({
           <div className="h-px w-8 rounded-full" style={{ backgroundColor: `${pillar.accent}55` }} />
           <span className="text-[10px] font-bold tracking-[0.10em] uppercase" style={{ color: pillar.accent }}>{pillar.tag}</span>
         </div>
-        <h3 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-[1.05] mb-7">
+        <h3 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] tracking-tighter leading-[1.05] mb-7">
           {pillar.headline.map((line, i) => <span key={i} className="block">{line}</span>)}
         </h3>
         <p className="text-slate-500 text-base lg:text-lg leading-relaxed max-w-lg mb-8">{pillar.body}</p>
@@ -172,7 +172,7 @@ export function ManifestoSection() {
             <SectionEyebrow>Manifesto Foco</SectionEyebrow>
           </StaggerItem>
           <StaggerItem>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-none max-w-2xl mx-auto">
+            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] tracking-tighter leading-none max-w-2xl mx-auto">
               Três convicções que definem{" "}
               <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
                 como operamos.

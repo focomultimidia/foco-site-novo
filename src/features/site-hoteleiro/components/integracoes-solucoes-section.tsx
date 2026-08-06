@@ -196,7 +196,7 @@ function Card({ logo, titulo, descricao }: CardProps) {
                 />
               </motion.div>
 
-              <h3 className="font-display font-bold text-[#1e293b] text-[1rem] mb-2 leading-snug tracking-tight">
+              <h3 className="font-display font-semibold text-[#1e293b] text-[1rem] mb-2 leading-snug tracking-tight">
                 {titulo}
               </h3>
               <p className="font-sans font-normal text-[#475569] text-sm leading-relaxed">
@@ -224,7 +224,7 @@ function IntegracoesSolucoesSection() {
           transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16 max-w-3xl mx-auto"
         >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] leading-none tracking-tighter antialiased mb-4">
             Integração com soluções que{" "}
             <span className="bg-gradient-to-r from-[#285992] to-[#427ab9] bg-clip-text text-transparent">
               potencializam vendas e reservas

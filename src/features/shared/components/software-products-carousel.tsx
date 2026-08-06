@@ -73,7 +73,7 @@ function ProductScene({ produto }: { produto: ProdutoItem }) {
                    shadow-[0_2px_6px_-2px_rgba(15,40,80,0.12),0_16px_28px_-14px_rgba(15,40,80,0.32)]
                    transition-transform duration-500 ease-out group-hover:-translate-y-1"
       >
-        <img src={produto.screenshot} alt="" loading="lazy" className="block w-full" />
+        <img src={produto.screenshot} alt={`Captura de tela do produto ${produto.titulo.split(":")[0]}`} loading="lazy" className="block w-full" />
       </div>
     </div>
   );
@@ -184,7 +184,7 @@ function SoftwareProductsCarousel() {
     <section className="overflow-hidden bg-[#f4f7fb] py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <h2 className="font-display mb-4 text-4xl font-medium leading-none tracking-tighter text-[#1e3a5f] antialiased sm:text-5xl">
+          <h2 className="font-display mb-4 text-4xl font-semibold leading-none tracking-tighter text-[#1e3a5f] antialiased sm:text-5xl">
             Sistema para hotéis e pousadas{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               aprovado por 97%

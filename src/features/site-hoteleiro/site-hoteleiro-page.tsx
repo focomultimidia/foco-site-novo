@@ -11,11 +11,9 @@ import {
   IntegracoesSolucoesSection,
 } from "./components";
 import { EventosSection } from "@/features/home/components/eventos-section";
-import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
-import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
-import { SoftwareProductsCarousel, TrustedLogosMarquee } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { Spinner } from "@/components/ui/spinner";
@@ -87,20 +85,17 @@ function SiteHoteleiroPage() {
       {/* Seção 6: Reserva */}
       <ReservaSection />
 
-      {/* Prova Social 2: Vídeos */}
-      <VideoTestimonialsCarousel
-        items={videosData}
-        title="Veja quem já transformou sua presença digital"
-        subtitle="Depoimentos em vídeo de clientes que aumentaram suas reservas diretas"
+      {/* Prova Social 2+3: Mural de depoimentos (texto + vídeo, unificados) */}
+      <WallOfLoveSection
+        depoimentos={depoimentos}
+        videos={videosData}
         badge="Depoimentos"
-        slidesToShow={3}
+        title="Um mural de resultados reais"
+        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco aumentou suas reservas diretas."
       />
 
       {/* Seção 7: Integrações com soluções */}
       <IntegracoesSolucoesSection />
-
-      {/* Prova Social 3: Aprovação 97% */}
-      <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />

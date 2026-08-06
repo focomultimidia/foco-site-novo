@@ -18,7 +18,7 @@ export function CTASection() {
             >
               <Award className="w-7 h-7 text-[#285992]" />
             </motion.div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#132840] leading-none tracking-tighter mb-6 max-w-3xl mx-auto">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#132840] leading-none tracking-tighter mb-6 max-w-3xl mx-auto">
               Pronto para transformar a gestão do seu hotel?
             </h2>
             <p className="text-[#4c5c73] text-lg max-w-xl mx-auto mb-12 leading-relaxed">

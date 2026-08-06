@@ -173,7 +173,7 @@ export function SectionHeader({
         <SectionEyebrow>{badge}</SectionEyebrow>
       </StaggerItem>
       <StaggerItem>
-        <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-none max-w-3xl mx-auto mb-5">
+        <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] tracking-tighter leading-none max-w-3xl mx-auto mb-5">
           {title}{" "}
           {titleHighlight && (
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">

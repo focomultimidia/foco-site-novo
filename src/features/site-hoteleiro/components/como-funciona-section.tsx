@@ -44,7 +44,7 @@ function ComoFuncionaSection({ passos }: ComoFuncionaSectionProps) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="text-center"
             >
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1E3A5F] to-[#00BCD4] flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#1E3A5F] to-[#285992] flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl font-bold text-white">{passo.numero}</span>
               </div>
               <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{passo.titulo}</h3>

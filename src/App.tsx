@@ -9,6 +9,7 @@ import { SoftwarePagamentosPage } from './features/software-pagamentos/software-
 import { IntegracoesHoteleirasPage } from './features/integracoes-hoteleiras/integracoes-hoteleiras-page';
 import { CrmHoteleiroPage } from './features/crm-hoteleiro/crm-hoteleiro-page';
 import { SobrePage } from './features/sobre/sobre-page';
+import { NotFoundPage } from './features/ui/not-found-page';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './core/api/query-client';
 import { MainLayout } from './features/ui/components/main-layout';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/integracoes-hoteleiras" element={<IntegracoesHoteleirasPage />} />
             <Route path="/crm-hoteleiro" element={<CrmHoteleiroPage />} />
             <Route path="/sobre" element={<SobrePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
       </QueryClientProvider>

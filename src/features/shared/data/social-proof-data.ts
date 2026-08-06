@@ -61,36 +61,6 @@ const eventos: Evento[] = [
       "Na Expotel, lançamos nosso CRM hoteleiro com notificações via WhatsApp, otimizando o relacionamento com hóspedes e impulsionando vendas diretas.",
     link: "#",
   },
-  {
-    id: "4",
-    tag: "Destaque",
-    data: "Setembro 2025",
-    local: "São Paulo, SP",
-    titulo: "Ecossistema completo da Foco em destaque na Equipotel 2025",
-    descricao:
-      "Apresentamos nossa plataforma integrada com site, motor de reservas, PMS, channel e CRM — unindo gestão e vendas em um só lugar.",
-    link: "#",
-  },
-  {
-    id: "5",
-    tag: "",
-    data: "Outubro 2025",
-    local: "Gramado, RS",
-    titulo: "Foco conectando inovação e gestão no encontro da hotelaria do Sul",
-    descricao:
-      "Estivemos presentes com nossas soluções integradas para reservas, gestão operacional e melhoria da experiência do hóspede, em um dos eventos mais estratégicos do setor.",
-    link: "#",
-  },
-  {
-    id: "6",
-    tag: "",
-    data: "Novembro 2025",
-    local: "São Paulo, SP",
-    titulo: "CRM da Foco em destaque na principal feira da hotelaria nacional",
-    descricao:
-      "Na Expotel, lançamos nosso CRM hoteleiro com notificações via WhatsApp, otimizando o relacionamento com hóspedes e impulsionando vendas diretas.",
-    link: "#",
-  },
 ];
 
 const depoimentos: Depoimento[] = [
@@ -133,14 +103,6 @@ const depoimentos: Depoimento[] = [
     autor: "Éder",
     cargo: "Conde Hotel",
     avatar: "E",
-  },
-  {
-    id: "6",
-    texto:
-      "Estou feliz e muito satisfeita com a Foco Multimídia. Somos uma pousada pequena e familiar e o Channel Manager simplificou muito o nosso trabalho. A empresa está disponível para atender às nossas dúvidas e problemas a qualquer dia e horário e, por esse motivos, além de ser muito grata por trabalhar com vocês, eu indico a Foco de olhos fechados.",
-    autor: "Gabriela",
-    cargo: "Pousada Michele",
-    avatar: "G",
   },
   {
     id: "7",

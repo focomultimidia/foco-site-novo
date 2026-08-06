@@ -289,7 +289,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
           className="text-center mb-12"
         >
           <SectionEyebrow>Foco para todos</SectionEyebrow>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             Não importa o{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               tamanho da sua propriedade
@@ -302,7 +302,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
         {/* ── Desktop: Horizontal Accordion ───────────────────────────── */}
         <motion.div
           className="hidden md:flex flex-row gap-1.5 rounded-3xl overflow-hidden"
-          style={{ height: "520px" }}
+          style={{ height: "430px" }}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

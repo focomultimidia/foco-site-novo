@@ -109,7 +109,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="font-display text-xl font-bold text-gray-900 leading-snug tracking-tight mb-3 line-clamp-2">
+        <h3 className="font-display text-xl font-semibold text-gray-900 leading-snug tracking-tight mb-3 line-clamp-2">
           {artigo.titulo}
         </h3>
 
@@ -163,7 +163,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
         >
           <SectionEyebrow>Na mídia</SectionEyebrow>
 
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Reconhecidos pela{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               mídia

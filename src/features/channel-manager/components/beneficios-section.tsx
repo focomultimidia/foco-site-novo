@@ -19,7 +19,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] mb-4">
             Benefícios Comprovados
           </h2>
           <p className="text-lg text-slate-500 max-w-2xl mx-auto">

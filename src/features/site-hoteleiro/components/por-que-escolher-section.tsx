@@ -52,13 +52,13 @@ const BENEFICIOS = [
 ] as const;
 
 // Sticky-stack recipe (same technique contiant.com uses on its "01/02/03"
-// module): each card is `position: sticky` inside ONE shared tall container,
-// with an increasing `top` offset. As the page scrolls, each card catches
-// its own offset in turn and holds there — frozen — while the next card
-// slides up from below and settles just over it, peeking the previous
-// card's top edge. Pure CSS; no scroll-linked JS, no jank.
+// module): each card is `position: sticky` inside ONE shared tall container.
+// As the page scrolls, each card catches the SAME `top` offset in turn and
+// holds there — frozen — while the next card slides up from below and
+// settles exactly over it, covering it completely (z-index crescente, sem
+// stagger no `top` — sobreposição total, não um leque com as bordas
+// anteriores à mostra). Pure CSS; no scroll-linked JS, no jank.
 const BASE_TOP = 96; // clears the fixed header
-const STAGGER = 30; // px revealed of each earlier card once the next stacks on top
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueEscolherSection() {
@@ -67,7 +67,7 @@ function PorQueEscolherSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14 max-w-2xl mx-auto">
           <SectionEyebrow className="justify-center">Por que a Foco</SectionEyebrow>
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-[#1e293b] leading-tight tracking-tight mb-3">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold text-[#1e293b] leading-tight tracking-tight mb-3">
             Seis motivos para escolher a{" "}
             <span
               style={{
@@ -93,7 +93,7 @@ function PorQueEscolherSection() {
               <div
                 key={beneficio.titulo}
                 className="sticky mb-6 sm:mb-8"
-                style={{ top: BASE_TOP + i * STAGGER, zIndex: i + 1 }}
+                style={{ top: BASE_TOP, zIndex: i + 1 }}
               >
                 <div
                   className={`flex flex-col sm:h-[280px] ${

@@ -25,7 +25,6 @@ function buildTitle(raw: string) {
       {raw.slice(0, idx)}
       <span
         className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
-        style={{ textDecorationLine: "underline", textDecorationColor: "#fccc30", textDecorationThickness: "3px", textUnderlineOffset: "6px" }}
       >
         {raw.slice(idx, idx + kw.length)}
       </span>
@@ -39,9 +38,7 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
     <BaseInternalHero
       badgeText={data.subtitulo}
       title={buildTitle(data.titulo)}
-      titleClassName="font-display text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#1a3a45] mb-4 leading-tight tracking-tight"
       description={data.descricao}
-      descriptionClassName="text-lg text-[#244248]/70 mb-8 leading-relaxed max-w-xl"
       primaryCTA={{ label: data.ctaPrimario, onClick: onCtaClick }}
       slides={SLIDES}
     />

@@ -1,304 +1,315 @@
 "use client";
 
+import { useState } from "react";
 import {
-  motion,
-  useMotionValue,
-  useMotionTemplate,
-  useSpring,
-  useAnimation,
-  type Variants,
-} from "framer-motion";
-import {
+  Zap,
+  ShieldCheck,
+  Compass,
+  Radar,
   Bed,
   Tag,
-  Image,
+  LayoutTemplate,
   Star,
   Building,
-  Newspaper,
   Award,
-  LayoutTemplate,
+  Image,
   Calendar,
+  Newspaper,
   MessageCircle,
   FormInput,
   Bot,
+  Check,
 } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-const RECURSOS = [
+// ── Data — 4 pilares por resultado de negócio, não 12 features soltas ────────
+const PILARES = [
   {
-    icon: Bed,
-    titulo: "Acomodações com Detalhes",
-    descricao:
-      "Exiba fotos, descrições, preços e diferenciais de cada tipo de quarto.",
+    id: "conversao",
+    tabLabel: "Vender mais rápido",
+    nome: "Conversão Imediata",
+    icon: Zap,
+    descricaoPre: "Cada quarto e cada oferta aparecem como um convite à reserva — não como uma ficha técnica. O visitante decide ",
+    keyword: "em segundos",
+    descricaoPos: ", sem abrir uma aba pra comparar em outro site.",
+    itens: [
+      { icon: Bed, titulo: "Acomodações com detalhes", descricao: "Fotos, descrições, preços e diferenciais de cada tipo de quarto." },
+      { icon: Tag, titulo: "Pacotes e promoções", descricao: "Ofertas sazonais ou personalizadas para aumentar suas vendas diretas." },
+      { icon: LayoutTemplate, titulo: "Banners promocionais", descricao: "Ofertas e eventos em destaque com banners estratégicos no site." },
+    ],
   },
   {
-    icon: Tag,
-    titulo: "Pacotes e Promoções",
-    descricao:
-      "Crie ofertas sazonais ou personalizadas e aumente suas vendas diretas.",
+    id: "autoridade",
+    tabLabel: "Ganhar confiança",
+    nome: "Prova Social & Autoridade",
+    icon: ShieldCheck,
+    descricaoPre: "A confiança que normalmente nasce na recepção, aqui acontece ",
+    keyword: "antes do check-in",
+    descricaoPos: ". Avaliações reais, sua história e reconhecimentos do setor apagam a última dúvida do hóspede.",
+    itens: [
+      { icon: Star, titulo: "Depoimentos e avaliações", descricao: "A opinião de hóspedes reais, gerando mais confiança no seu hotel." },
+      { icon: Building, titulo: "Página institucional", descricao: "A história do seu hotel, reforçando sua credibilidade com visitantes." },
+      { icon: Award, titulo: "Prêmios e certificações", descricao: "Selos de qualidade que comprovam sua excelência no setor." },
+    ],
   },
   {
-    icon: Image,
-    titulo: "Galeria de Fotos e Vídeos",
-    descricao:
-      "Encante seus visitantes com imagens e vídeos profissionais do hotel.",
+    id: "navegacao",
+    tabLabel: "Manter o visitante",
+    nome: "Experiência de Navegação",
+    icon: Compass,
+    descricaoPre: "Mídia profissional, ocasiões especiais e novidades dão vontade de explorar — e ",
+    keyword: "de voltar",
+    descricaoPos: ". O visitante fica na página em vez de fechar a aba.",
+    itens: [
+      { icon: Image, titulo: "Galeria de fotos e vídeos", descricao: "Imagens e vídeos profissionais que encantam seus visitantes." },
+      { icon: Calendar, titulo: "Eventos e datas especiais", descricao: "Páginas dedicadas para eventos, casamentos ou pacotes temáticos." },
+      { icon: Newspaper, titulo: "Notícias e atualizações", descricao: "Eventos, ações especiais e novidades que atraem mais tráfego." },
+    ],
   },
   {
-    icon: Star,
-    titulo: "Depoimentos e Avaliações",
-    descricao:
-      "Mostre a opinião de hóspedes reais e gere mais confiança no seu hotel.",
-  },
-  {
-    icon: Building,
-    titulo: "Página Institucional",
-    descricao:
-      "Conte a história do seu hotel e reforce sua credibilidade com visitantes.",
-  },
-  {
-    icon: Newspaper,
-    titulo: "Notícias e Atualizações",
-    descricao:
-      "Divulgue eventos, ações especiais e novidades para atrair mais tráfego.",
-  },
-  {
-    icon: Award,
-    titulo: "Prêmios e Certificações",
-    descricao:
-      "Destaque selos de qualidade que comprovam sua excelência no setor.",
-  },
-  {
-    icon: LayoutTemplate,
-    titulo: "Banners Promocionais",
-    descricao:
-      "Promova ofertas e eventos com banners estratégicos no seu site.",
-  },
-  {
-    icon: Calendar,
-    titulo: "Eventos e Datas Especiais",
-    descricao:
-      "Crie páginas dedicadas para eventos, casamentos ou pacotes temáticos.",
-  },
-  {
-    icon: MessageCircle,
-    titulo: "Integração com WhatsApp",
-    descricao:
-      "Permita que o hóspede tire dúvidas e reserve direto pelo WhatsApp.",
-  },
-  {
-    icon: FormInput,
-    titulo: "Formulários de Contato Rápido",
-    descricao:
-      "Capte leads e reservas com formulários simples e intuitivos.",
-  },
-  {
-    icon: Bot,
-    titulo: "Chatbot Inteligente Integrado",
-    descricao:
-      "Atenda visitantes automaticamente e aumente suas chances de conversão.",
+    id: "captura",
+    tabLabel: "Nunca perder um lead",
+    nome: "Captura Inteligente",
+    icon: Radar,
+    descricaoPre: "WhatsApp, formulário e chatbot cobrem o momento exato em que a dúvida vira intenção de compra. Nenhum visitante sai ",
+    keyword: "sem deixar rastro",
+    descricaoPos: ".",
+    itens: [
+      { icon: MessageCircle, titulo: "Integração com WhatsApp", descricao: "O hóspede tira dúvidas e reserva direto pelo WhatsApp." },
+      { icon: FormInput, titulo: "Formulários de contato rápido", descricao: "Captação de leads e reservas com formulários simples e intuitivos." },
+      { icon: Bot, titulo: "Chatbot inteligente", descricao: "Atendimento automático que aumenta suas chances de conversão." },
+    ],
   },
 ] as const;
 
-// ── Animation variants ────────────────────────────────────────────────────────
-const staggerContainer: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.04 },
-  },
-};
-
-const cardReveal: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: 24, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const cardVariants: Variants = {
-  rest: {
-    boxShadow:
-      "0 1px 3px rgba(0,0,0,0.06), " +
-      "0 4px 12px rgba(0,0,0,0.05), " +
-      "0 8px 24px rgba(0,0,0,0.04), " +
-      "0 20px 40px rgba(0,0,0,0.02)",
-  },
-  hover: {
-    boxShadow:
-      "0 4px 8px rgba(0,0,0,0.08), " +
-      "0 12px 28px rgba(0,0,0,0.07), " +
-      "0 24px 52px rgba(0,0,0,0.05), " +
-      "0 40px 80px rgba(0,0,0,0.03)",
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
-
-const iconVariants: Variants = {
-  rest: { y: 0, scale: 1, rotate: 0, transition: { rotate: { duration: 0 } } },
-  hover: {
-    y: -2,
-    scale: 1.1,
-    rotate: 360,
-    transition: {
-      type: "spring",
-      stiffness: 460,
-      damping: 14,
-      rotate: { duration: 0.55, ease: [0.4, 0, 0.2, 1], type: "tween" },
-    },
-  },
-};
-
-// ── Card ──────────────────────────────────────────────────────────────────────
-interface CardProps {
-  icon: React.ElementType;
-  titulo: string;
-  descricao: string;
+// ── Gold underline — mesmo traço desenhado à mão da hero da Home ────────────
+function GoldUnderline({ children, active }: { children: React.ReactNode; active: boolean }) {
+  const reducedMotion = useReducedMotion();
+  return (
+    <span className="relative inline-block whitespace-nowrap text-[#1e3a5f]">
+      {children}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 320 14"
+        preserveAspectRatio="none"
+        className="absolute left-0 -bottom-1 w-full h-[0.8rem] pointer-events-none"
+        fill="none"
+      >
+        <motion.path
+          d="M 4 10 C 60 4, 150 3, 230 6 C 270 7.5, 300 9, 316 8"
+          stroke="#fccc30"
+          strokeWidth={4}
+          strokeLinecap="round"
+          initial={false}
+          animate={
+            reducedMotion
+              ? { pathLength: 1, opacity: 0.9 }
+              : active
+              ? { pathLength: 1, opacity: 0.9 }
+              : { pathLength: 0, opacity: 0 }
+          }
+          transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
+        />
+      </svg>
+    </span>
+  );
 }
 
-function Card({ icon: Icon, titulo, descricao }: CardProps) {
-  const mx = useMotionValue(-999);
-  const my = useMotionValue(-999);
-  const innerSpotlight = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, rgba(40,89,146,0.05), transparent 70%)`;
-  const borderSpotlight = useMotionTemplate`radial-gradient(180px circle at ${mx}px ${my}px, rgba(40,89,146,0.24), transparent 65%)`;
+// ── Transição direcional — o painel chega de fora do palco e ganha foco
+// conforme se aproxima do centro. x/scale rodam em spring — mesma física da
+// pílula das abas. A opacidade entra rápido (pra não competir visualmente
+// com o deslize) e o blur é discreto — o movimento lateral é o protagonista,
+// não o fade. `variants` + `custom` no AnimatePresence (em vez de props
+// diretas) é o que garante que o elemento que está saindo sempre saiba pra
+// que lado ir mesmo depois que o pai já re-renderizou com a nova direção —
+// testado: com props diretas + mode="popLayout" os painéis antigos ficavam
+// presos no DOM (nunca desmontavam) neste ambiente.
+const panelVariants = {
+  enter: (dir: number) => ({ opacity: 0, x: dir * 160, scale: 0.93, filter: "blur(6px)" }),
+  center: { opacity: 1, x: 0, scale: 1, filter: "blur(0px)" },
+  exit: (dir: number) => ({ opacity: 0, x: dir * -160, scale: 0.93, filter: "blur(6px)" }),
+};
 
-  const rotateX = useSpring(0, { stiffness: 280, damping: 30 });
-  const rotateY = useSpring(0, { stiffness: 280, damping: 30 });
-  const glare = useAnimation();
+const panelTransition = {
+  x:       { type: "spring" as const, stiffness: 240, damping: 26, mass: 1 },
+  scale:   { type: "spring" as const, stiffness: 240, damping: 26, mass: 1 },
+  opacity: { duration: 0.2, ease: "easeOut" as const },
+  filter:  { duration: 0.3, ease: "easeOut" as const },
+};
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    mx.set(x);
-    my.set(y);
-    rotateY.set(((x - r.width / 2) / (r.width / 2)) * 4);
-    rotateX.set(((r.height / 2 - y) / (r.height / 2)) * 4);
-  };
+const listStagger = {
+  center: { transition: { staggerChildren: 0.07, delayChildren: 0.12 } },
+};
 
-  const onMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-    mx.set(-999);
-    my.set(-999);
-  };
+const listItemVariants = {
+  enter: { opacity: 0, y: 14 },
+  center: { opacity: 1, y: 0 },
+};
 
-  const onHoverStart = () => {
-    glare.set({ x: "-130%" });
-    glare.start({
-      x: "130%",
-      transition: { duration: 0.46, ease: [0.4, 0, 0.2, 1] },
-    });
-  };
+// ── Stage — o painel grande que troca de conteúdo por aba ────────────────────
+function Stage({ activeIndex, direction }: { activeIndex: number; direction: number }) {
+  const reducedMotion = useReducedMotion();
+  const p = PILARES[activeIndex];
+  const Icon = p.icon;
 
   return (
-    <motion.div variants={cardReveal} className="h-full">
-      <motion.div
-        className="relative h-full rounded-3xl transform-gpu"
-        style={{ rotateX, rotateY, transformPerspective: 900 }}
-        variants={cardVariants}
-        initial="rest"
-        whileHover="hover"
-        animate="rest"
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-        onHoverStart={onHoverStart}
-      >
-        <div
-          className="relative h-full rounded-3xl p-[1px]"
-          style={{ background: "rgba(0,0,0,0.05)" }}
-        >
-          <motion.div
-            className="absolute inset-0 rounded-3xl"
-            style={{ background: borderSpotlight }}
-            aria-hidden="true"
+    <div className="relative rounded-[36px] p-[5px] bg-gradient-to-br from-white/75 via-white/25 to-white/[0.03]
+                     shadow-[0_8px_20px_-14px_rgba(15,40,80,0.20),0_34px_70px_-34px_rgba(15,40,80,0.42)]">
+      <div className="relative overflow-hidden rounded-[31px] bg-white/45 backdrop-blur-2xl ring-1 ring-inset ring-white/60 p-8 sm:p-10">
+
+        {/* Receding grid floor — mesma assinatura do ProductCard */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 [perspective:420px] opacity-[0.5]">
+          <div
+            className="absolute inset-0 origin-bottom [transform:rotateX(74deg)]"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, rgba(40,89,146,0.16) 1px, transparent 1px)," +
+                "linear-gradient(to bottom, rgba(40,89,146,0.16) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+              WebkitMaskImage: "linear-gradient(to top, #000 5%, transparent 65%)",
+              maskImage: "linear-gradient(to top, #000 5%, transparent 65%)",
+            }}
           />
-
-          <div className="relative h-full rounded-[15px] bg-white overflow-hidden p-5">
-            <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{ background: innerSpotlight }}
-              aria-hidden="true"
-            />
-
-            <div
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-[15px]"
-              aria-hidden="true"
-            >
-              <motion.div
-                animate={glare}
-                initial={{ x: "-130%" }}
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.65) 50%, transparent 80%)",
-                  willChange: "transform",
-                }}
-              />
-            </div>
-
-            <div className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-slate-200/60 to-transparent" />
-
-            <div className="relative z-10 h-full flex flex-col">
-              <motion.div
-                variants={iconVariants}
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#285992] to-[#427ab9] flex items-center justify-center mb-4 flex-shrink-0"
-                style={{ boxShadow: "0 4px 12px rgba(40,89,146,0.28)" }}
-              >
-                <Icon className="w-5 h-5 text-white" strokeWidth={1.7} />
-              </motion.div>
-
-              <h3 className="font-display font-bold text-[#0f172a] text-[0.875rem] mb-2 leading-snug tracking-tight">
-                {titulo}
-              </h3>
-              <p className="font-sans font-normal text-[#64748b] text-xs leading-relaxed">
-                {descricao}
-              </p>
-            </div>
-          </div>
         </div>
-      </motion.div>
-    </motion.div>
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
+
+        {/* Só o painel ativo fica montado — troca real de conteúdo, não um
+            crossfade de 4 nós empilhados. O overflow-hidden some com o
+            excesso durante a entrada/saída, como se o conteúdo chegasse de
+            trás da moldura em vez de simplesmente aparecer. */}
+        <div className="relative z-10 min-h-[340px] overflow-hidden">
+          <AnimatePresence mode="popLayout" custom={direction} initial={false}>
+            <motion.div
+              key={p.id}
+              custom={direction}
+              variants={reducedMotion ? undefined : panelVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={panelTransition}
+              className="grid sm:grid-cols-[1fr_auto] gap-8 items-center"
+            >
+              {/* Texto do pilar */}
+              <div>
+                <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#285992]">
+                  Pilar {String(activeIndex + 1).padStart(2, "0")}
+                </span>
+                <div className="flex items-center gap-3 mt-3 mb-4">
+                  <motion.div
+                    initial={reducedMotion ? false : { scale: 0.6, rotate: -30, opacity: 0 }}
+                    animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
+                    className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#1e3a5f] to-[#285992] flex items-center justify-center flex-shrink-0"
+                  >
+                    <Icon className="w-5 h-5 text-white" strokeWidth={1.8} />
+                  </motion.div>
+                  <h3 className="font-display text-2xl sm:text-[1.75rem] font-semibold text-[#1e293b] tracking-tight">
+                    {p.nome}
+                  </h3>
+                </div>
+                <p className="text-[15px] leading-relaxed text-slate-600 max-w-lg">
+                  {p.descricaoPre}
+                  <GoldUnderline active>{p.keyword}</GoldUnderline>
+                  {p.descricaoPos}
+                </p>
+              </div>
+
+              {/* Sub-itens — escalonam entrando atrás do texto */}
+              <motion.ul
+                variants={reducedMotion ? undefined : listStagger}
+                className="flex flex-col gap-3 sm:min-w-[260px]"
+              >
+                {p.itens.map((item) => {
+                  const ItemIcon = item.icon;
+                  return (
+                    <motion.li
+                      key={item.titulo}
+                      variants={reducedMotion ? undefined : listItemVariants}
+                      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className="rounded-2xl bg-white/90 border border-slate-200/80 px-4 py-3"
+                    >
+                      <div className="flex items-center gap-3 mb-1">
+                        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#285992]/[0.08]">
+                          <ItemIcon className="h-4 w-4 text-[#285992]" strokeWidth={1.8} />
+                        </span>
+                        <span className="text-[13px] font-semibold text-slate-800 flex-1">
+                          {item.titulo}
+                        </span>
+                        <Check className="h-3.5 w-3.5 text-[#285992]/50 flex-shrink-0" strokeWidth={3} />
+                      </div>
+                      <p className="text-[12px] leading-relaxed text-slate-500 pl-11">
+                        {item.descricao}
+                      </p>
+                    </motion.li>
+                  );
+                })}
+              </motion.ul>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </div>
   );
 }
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function RecursosGridSection() {
+  const [[activeIndex, direction], setActive] = useState<[number, number]>([0, 0]);
+
+  const goTo = (i: number) => {
+    if (i === activeIndex) return;
+    setActive([i, i > activeIndex ? 1 : -1]);
+  };
+
   return (
     <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-14 max-w-4xl mx-auto"
-        >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative max-w-5xl">
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <SectionEyebrow className="justify-center">Recursos que convertem</SectionEyebrow>
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
-              Recursos essenciais
+              Um site que vende por você,
             </span>{" "}
-            de um site hoteleiro que converte visitantes em hóspedes
+            quarto por quarto
           </h2>
-          <p className="font-sans font-normal text-[#64748b] text-lg leading-relaxed max-w-3xl mx-auto">
-            A Foco oferece recursos práticos, integrados e pensados para destacar
-            sua estrutura, engajar visitantes e gerar reservas diretas, sem comissões.
+          <p className="font-sans font-normal text-[#64748b] text-lg leading-relaxed">
+            Não é uma lista de funcionalidades — é a arquitetura completa que transforma
+            curiosidade em reserva confirmada, sem depender de comissão de terceiros.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {RECURSOS.map((r, i) => (
-            <Card key={i} {...r} />
-          ))}
-        </motion.div>
+        {/* Abas por objetivo */}
+        <div className="flex flex-wrap justify-center gap-2.5 mb-8">
+          {PILARES.map((p, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <button
+                key={p.id}
+                onClick={() => goTo(i)}
+                aria-pressed={isActive}
+                className={`relative rounded-full px-5 py-2.5 text-[13px] font-semibold bg-white ring-1 transition-colors duration-300
+                           ${isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"}`}
+              >
+                {/* Pílula que desliza entre as abas — layoutId faz o Framer
+                    animar posição e largura sozinho quando o elemento "pula"
+                    de um botão pro outro. */}
+                {isActive && (
+                  <motion.span
+                    layoutId="recursos-tab-indicator"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                  />
+                )}
+                <span className={`relative z-10 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                  {p.tabLabel}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <Stage activeIndex={activeIndex} direction={direction} />
       </div>
     </section>
   );

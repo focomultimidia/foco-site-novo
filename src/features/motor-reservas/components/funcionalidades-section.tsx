@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useMotionValue,
@@ -18,6 +19,7 @@ import {
   Search,
   CreditCard,
 } from "lucide-react";
+import { useFuncionalidadesScroll } from "../hooks/use-funcionalidades-scroll";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 const FUNCIONALIDADES = [
@@ -252,10 +254,10 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
                 <Icon className="w-5 h-5 text-white" strokeWidth={1.7} />
               </motion.div>
 
-              <h3 className="font-display font-bold text-[#0f172a] text-[0.875rem] mb-2 leading-snug tracking-tight">
+              <h3 className="font-display font-semibold text-[#0f172a] text-[1.2rem] mb-2 leading-snug tracking-tight">
                 {titulo}
               </h3>
-              <p className="font-sans font-normal text-[#64748b] text-xs leading-relaxed">
+              <p className="font-sans font-normal text-[#64748b] text-sm leading-relaxed">
                 {descricao}
               </p>
             </div>
@@ -266,44 +268,102 @@ function Card({ icon: Icon, titulo, descricao }: CardProps) {
   );
 }
 
+const HEADER_TEXT = (
+  <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased">
+    Funcionalidades que aumentam sua{" "}
+    <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+      produtividade
+    </span>{" "}
+    e geram mais reservas diretas
+  </h2>
+);
+
 // ── Section ───────────────────────────────────────────────────────────────────
 function FuncionalidadesSection() {
+  // Pin + scroll horizontal só em desktop largo + sem reduced-motion — mesmo
+  // critério usado pela EventosSection (ver use-funcionalidades-scroll.ts).
+  const [useHorizontalScroll, setUseHorizontalScroll] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  useEffect(() => {
+    const widthMq = window.matchMedia("(min-width: 1024px)");
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setUseHorizontalScroll(widthMq.matches && !motionMq.matches);
+    update();
+    widthMq.addEventListener("change", update);
+    motionMq.addEventListener("change", update);
+    return () => {
+      widthMq.removeEventListener("change", update);
+      motionMq.removeEventListener("change", update);
+    };
+  }, []);
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  useFuncionalidadesScroll(useHorizontalScroll, sectionRef, trackRef);
+
   return (
-    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
-      {/* Hairline top separator */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <>
+      {/* ── Desktop — pin + trilho horizontal (efeito steno.ai, igual à
+          EventosSection) ──────────────────────────────────────────────── */}
+      {useHorizontalScroll && (
+        <section ref={sectionRef} className="relative h-screen overflow-hidden bg-[#f4f7fb] flex flex-col">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 lg:pt-32 relative z-10 shrink-0">
+            <div className="text-center max-w-3xl mx-auto">{HEADER_TEXT}</div>
+          </div>
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-14 max-w-3xl mx-auto"
-        >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased">
-            Funcionalidades que aumentam sua{" "}
-            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
-              produtividade
-            </span>{" "}
-            e geram mais reservas diretas
-          </h2>
-        </motion.div>
+          {/* Trilho — largura soma sozinha pelo conteúdo (flex-shrink-0 nos
+              cards), o hook mede `track.scrollWidth` de verdade e mapeia o
+              scroll 1:1 pro `x` (ver use-funcionalidades-scroll.ts). */}
+          <div className="relative flex-1">
+            <div
+              ref={trackRef}
+              className="absolute top-1/2 -translate-y-1/2 left-0 flex items-stretch gap-5 xl:gap-6 pl-[6vw] pr-[6vw] will-change-transform"
+            >
+              {FUNCIONALIDADES.map((f, i) => (
+                <div key={i} className="w-[270px] sm:w-[290px] xl:w-[310px] h-[300px] flex-shrink-0">
+                  <Card {...f} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
-        {/* 4 × 2 Staggered Grid */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {FUNCIONALIDADES.map((f, i) => (
-            <Card key={i} {...f} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
+      {/* ── Mobile / tablet / reduced-motion — grid estático empilhado,
+          idêntico ao que já existia (pin horizontal não tem um fallback
+          estático razoável). ────────────────────────────────────────────── */}
+      {!useHorizontalScroll && (
+        <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <motion.div
+              initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center mb-14 max-w-3xl mx-auto"
+            >
+              {HEADER_TEXT}
+            </motion.div>
+
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              {FUNCIONALIDADES.map((f, i) => (
+                <Card key={i} {...f} />
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 

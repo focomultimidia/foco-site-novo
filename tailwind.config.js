@@ -7,8 +7,10 @@ module.exports = {
       fontFamily: {
         // Sans (corpo): Inter — legibilidade em todos os tamanhos
         sans:    ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "sans-serif"],
-        // Display (títulos H1/H2): Space Grotesk — impacto visual, tracking-tighter
-        display: ["Space Grotesk", "ui-sans-serif", "sans-serif"],
+        // Display (títulos H1/H2): General Sans — mesmo DNA da Inter (corpo),
+        // peso 700 real disponível (Space Grotesk nunca carregava o 700 de
+        // verdade). Ver comparação tipográfica aprovada ("Premium").
+        display: ["General Sans", "ui-sans-serif", "sans-serif"],
         // Mono (labels, números, códigos): JetBrains Mono — espaçamento uniforme
         mono:    ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"],
       },

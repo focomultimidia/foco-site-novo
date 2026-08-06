@@ -1,14 +1,11 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import {
-  motion,
-  useMotionValue,
-  useMotionTemplate,
-  useSpring,
-  useAnimation,
-  type Variants,
-} from "framer-motion";
-import {
+  LogIn,
+  Compass,
+  Wallet,
   Star,
   CheckCircle,
   QrCode,
@@ -21,262 +18,227 @@ import {
   Receipt,
   MessageCircle,
   MapPin,
+  ImagePlus,
 } from "lucide-react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 
-// ── Data ─────────────────────────────────────────────────────────────────────
-const RECURSOS = [
+// ── Data — 12 recursos (textos originais, intactos) organizados pela
+// jornada do hóspede: chegada → estadia → saída. ──────────────────────────
+const FASES = [
   {
-    icon: Star,
-    titulo: "Avaliações",
-    descricao:
-      "Sua opinião é valiosa! Compartilhe sua experiência de forma rápida e ajude-nos a tornar sua próxima estadia ainda melhor.",
+    id: "chegada",
+    nome: "Chegada Express",
+    icon: LogIn,
+    tela: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",
+    descricaoPre: "Tudo que remove atrito ",
+    keyword: "antes da mala chegar no quarto",
+    descricaoPos: ".",
+    itens: [
+      { icon: MapPin, titulo: "Como chegar", descricao: "Rota fácil e sem erro. Acesse o mapa e as direções detalhadas para chegar ao hotel de forma rápida." },
+      { icon: CheckCircle, titulo: "Check-in online", descricao: "Agilidade total! Faça seu check-in antes mesmo de chegar ao hotel e vá direto para o seu quarto, sem filas na recepção." },
+      { icon: Wifi, titulo: "Wifi", descricao: "Conecte-se em segundos. Obtenha a senha e as instruções de acesso à nossa rede Wi-Fi de alta velocidade." },
+      { icon: Building, titulo: "Sobre o hotel", descricao: "Nossa história e missão. Conheça a filosofia do hotel e o compromisso que temos em tornar sua estadia inesquecível." },
+    ],
   },
   {
-    icon: CheckCircle,
-    titulo: "Check-in online",
-    descricao:
-      "Agilidade total! Faça seu check-in antes mesmo de chegar ao hotel e vá direto para o seu quarto, sem filas na recepção.",
+    id: "experiencia",
+    nome: "Experiência & Lazer",
+    icon: Compass,
+    tela: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp",
+    descricaoPre: "O celular vira ",
+    keyword: "concierge de bolso",
+    descricaoPos: " durante toda a estadia.",
+    itens: [
+      { icon: Utensils, titulo: "Cardápio digital", descricao: "Acesse o menu completo do restaurante e serviço de quarto diretamente do seu celular. Faça seu pedido com facilidade." },
+      { icon: Sparkles, titulo: "Comodidades do hotel", descricao: "Conheça todos os serviços e facilidades que o hotel oferece. Saiba horários de funcionamento e regras de uso em um só lugar." },
+      { icon: Calendar, titulo: "Programação do hotel", descricao: "Não perca nada! Fique por dentro de todos os eventos, atividades e horários de lazer que o hotel preparou." },
+      { icon: Bell, titulo: "Push interativo", descricao: "Aplicativo com alerta de toda a programação de entretenimento do seu hotel e destino." },
+      { icon: MessageCircle, titulo: "Integração via WhatsApp", descricao: "Fale diretamente com a recepção ou serviço de quarto para tirar dúvidas ou fazer pedidos de forma rápida." },
+    ],
   },
   {
-    icon: QrCode,
-    titulo: "Pagamento de contas (PIX)",
-    descricao:
-      "Pague sua conta de forma instantânea e segura. Encerre seu consumo e faça o check-out com a rapidez do PIX.",
-  },
-  {
-    icon: Utensils,
-    titulo: "Cardápio digital",
-    descricao:
-      "Acesse o menu completo do restaurante e serviço de quarto diretamente do seu celular. Faça seu pedido com facilidade.",
-  },
-  {
-    icon: Sparkles,
-    titulo: "Comodidades do hotel",
-    descricao:
-      "Conheça todos os serviços e facilidades que o hotel oferece. Saiba horários de funcionamento e regras de uso em um só lugar.",
-  },
-  {
-    icon: Building,
-    titulo: "Sobre o hotel",
-    descricao:
-      "Nossa história e missão. Conheça a filosofia do hotel e o compromisso que temos em tornar sua estadia inesquecível.",
-  },
-  {
-    icon: Calendar,
-    titulo: "Programação do hotel",
-    descricao:
-      "Não perca nada! Fique por dentro de todos os eventos, atividades e horários de lazer que o hotel preparou.",
-  },
-  {
-    icon: Wifi,
-    titulo: "Wifi",
-    descricao:
-      "Conecte-se em segundos. Obtenha a senha e as instruções de acesso à nossa rede Wi-Fi de alta velocidade.",
-  },
-  {
-    icon: Bell,
-    titulo: "Push interativo",
-    descricao:
-      "Aplicativo com alerta de toda a programação de entretenimento do seu hotel e destino.",
-  },
-  {
-    icon: Receipt,
-    titulo: "Acompanhamento de consumo",
-    descricao:
-      "Transparência total! Visualize em tempo real todos os seus gastos no hotel, evitando surpresas no check-out.",
-  },
-  {
-    icon: MessageCircle,
-    titulo: "Integração via WhatsApp",
-    descricao:
-      "Fale diretamente com a recepção ou serviço de quarto para tirar dúvidas ou fazer pedidos de forma rápida.",
-  },
-  {
-    icon: MapPin,
-    titulo: "Como chegar",
-    descricao:
-      "Rota fácil e sem erro. Acesse o mapa e as direções detalhadas para chegar ao hotel de forma rápida.",
+    id: "saida",
+    nome: "Controle & Saída",
+    icon: Wallet,
+    tela: null,
+    descricaoPre: "Transparência que fecha o ciclo ",
+    keyword: "sem surpresa",
+    descricaoPos: " no check-out.",
+    itens: [
+      { icon: Receipt, titulo: "Acompanhamento de consumo", descricao: "Transparência total! Visualize em tempo real todos os seus gastos no hotel, evitando surpresas no check-out." },
+      { icon: QrCode, titulo: "Pagamento de contas (PIX)", descricao: "Pague sua conta de forma instantânea e segura. Encerre seu consumo e faça o check-out com a rapidez do PIX." },
+      { icon: Star, titulo: "Avaliações", descricao: "Sua opinião é valiosa! Compartilhe sua experiência de forma rápida e ajude-nos a tornar sua próxima estadia ainda melhor." },
+    ],
   },
 ] as const;
 
-// ── Animation variants ────────────────────────────────────────────────────────
-const staggerContainer: Variants = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.06, delayChildren: 0.04 },
-  },
-};
+// A tela (celular) fica fixa; só os cards de fase rolam por trás dela — mesmo
+// mecanismo do ProdutosSection na Home (product-showcase.tsx: stage fixo +
+// conteúdo em fluxo normal, sincronizado por scrollspy).
+const PHONE_TOP = 140;
 
-const cardReveal: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: 24, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
-
-const cardVariants: Variants = {
-  rest: {
-    boxShadow:
-      "0 1px 3px rgba(0,0,0,0.06), " +
-      "0 4px 12px rgba(0,0,0,0.05), " +
-      "0 8px 24px rgba(0,0,0,0.04), " +
-      "0 20px 40px rgba(0,0,0,0.02)",
-  },
-  hover: {
-    boxShadow:
-      "0 4px 8px rgba(0,0,0,0.08), " +
-      "0 12px 28px rgba(0,0,0,0.07), " +
-      "0 24px 52px rgba(0,0,0,0.05), " +
-      "0 40px 80px rgba(0,0,0,0.03)",
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
-
-const iconVariants: Variants = {
-  rest: { y: 0, scale: 1, rotate: 0, transition: { rotate: { duration: 0 } } },
-  hover: {
-    y: -2,
-    scale: 1.1,
-    rotate: 360,
-    transition: {
-      type: "spring",
-      stiffness: 460,
-      damping: 14,
-      rotate: { duration: 0.55, ease: [0.4, 0, 0.2, 1], type: "tween" },
-    },
-  },
-};
-
-// ── Card ──────────────────────────────────────────────────────────────────────
-interface CardProps {
-  icon: React.ElementType;
-  titulo: string;
-  descricao: string;
+// ── Gold underline — mesmo traço desenhado à mão da hero da Home ────────────
+function GoldUnderline({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="relative inline-block whitespace-nowrap text-[#1e3a5f]">
+      {children}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 320 14"
+        preserveAspectRatio="none"
+        className="absolute left-0 -bottom-1 w-full h-[0.8rem] pointer-events-none"
+        fill="none"
+      >
+        <motion.path
+          d="M 4 10 C 60 4, 150 3, 230 6 C 270 7.5, 300 9, 316 8"
+          stroke="#fccc30"
+          strokeWidth={4}
+          strokeLinecap="round"
+          initial={false}
+          animate={{ pathLength: 1, opacity: 0.9 }}
+          transition={{ duration: 0.6, ease: [0.65, 0, 0.35, 1] }}
+        />
+      </svg>
+    </span>
+  );
 }
 
-function Card({ icon: Icon, titulo, descricao }: CardProps) {
-  const mx = useMotionValue(-999);
-  const my = useMotionValue(-999);
-  const innerSpotlight = useMotionTemplate`radial-gradient(260px circle at ${mx}px ${my}px, rgba(40,89,146,0.05), transparent 70%)`;
-  const borderSpotlight = useMotionTemplate`radial-gradient(180px circle at ${mx}px ${my}px, rgba(40,89,146,0.24), transparent 65%)`;
-
-  const rotateX = useSpring(0, { stiffness: 280, damping: 30 });
-  const rotateY = useSpring(0, { stiffness: 280, damping: 30 });
-  const glare = useAnimation();
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    mx.set(x);
-    my.set(y);
-    rotateY.set(((x - r.width / 2) / (r.width / 2)) * 4);
-    rotateX.set(((r.height / 2 - y) / (r.height / 2)) * 4);
-  };
-
-  const onMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-    mx.set(-999);
-    my.set(-999);
-  };
-
-  const onHoverStart = () => {
-    glare.set({ x: "-130%" });
-    glare.start({
-      x: "130%",
-      transition: { duration: 0.46, ease: [0.4, 0, 0.2, 1] },
-    });
-  };
-
+// ── Phone chrome — mesma moldura da hero desta página, reaproveitada ────────
+function PhoneScreen({ fase, active }: { fase: (typeof FASES)[number]; active: boolean }) {
   return (
-    <motion.div variants={cardReveal} className="h-full">
-      <motion.div
-        className="relative h-full rounded-3xl transform-gpu"
-        style={{ rotateX, rotateY, transformPerspective: 900 }}
-        variants={cardVariants}
-        initial="rest"
-        whileHover="hover"
-        animate="rest"
-        onMouseMove={onMouseMove}
-        onMouseLeave={onMouseLeave}
-        onHoverStart={onHoverStart}
-      >
-        <div
-          className="relative h-full rounded-3xl p-[1px]"
-          style={{ background: "rgba(0,0,0,0.05)" }}
-        >
-          <motion.div
-            className="absolute inset-0 rounded-3xl"
-            style={{ background: borderSpotlight }}
-            aria-hidden="true"
-          />
-
-          <div className="relative h-full rounded-[15px] bg-white overflow-hidden p-5">
-            <motion.div
-              className="pointer-events-none absolute inset-0"
-              style={{ background: innerSpotlight }}
-              aria-hidden="true"
-            />
-
-            <div
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-[15px]"
-              aria-hidden="true"
-            >
-              <motion.div
-                animate={glare}
-                initial={{ x: "-130%" }}
-                className="absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(45deg, transparent 20%, rgba(255,255,255,0.65) 50%, transparent 80%)",
-                  willChange: "transform",
-                }}
-              />
-            </div>
-
-            <div className="pointer-events-none absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-slate-200/60 to-transparent" />
-
-            <div className="relative z-10 h-full flex flex-col">
-              <motion.div
-                variants={iconVariants}
-                className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#285992] to-[#427ab9] flex items-center justify-center mb-4 flex-shrink-0"
-                style={{ boxShadow: "0 4px 12px rgba(40,89,146,0.28)" }}
-              >
-                <Icon className="w-5 h-5 text-white" strokeWidth={1.7} />
-              </motion.div>
-
-              <h3 className="font-display font-bold text-[#0f172a] text-[0.875rem] mb-2 leading-snug tracking-tight">
-                {titulo}
-              </h3>
-              <p className="font-sans font-normal text-[#64748b] text-xs leading-relaxed">
-                {descricao}
-              </p>
-            </div>
-          </div>
+    <div
+      aria-hidden={!active}
+      className={`absolute inset-0 transition-opacity duration-500 ease-out ${active ? "opacity-100" : "opacity-0"}`}
+    >
+      {fase.tela ? (
+        <img src={fase.tela} alt={`Tela do app do hóspede — ${fase.nome}`} className="absolute inset-0 w-full h-full object-cover object-top" />
+      ) : (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#f4f7fb] to-white">
+          <ImagePlus className="w-6 h-6 text-slate-300" strokeWidth={1.6} />
+          <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-300">Tela em breve</span>
         </div>
-      </motion.div>
+      )}
+    </div>
+  );
+}
+
+function PhoneStage({ activePhase }: { activePhase: number }) {
+  const reducedMotion = useReducedMotion();
+  return (
+    <motion.div
+      animate={reducedMotion ? undefined : { y: [0, -10, 0] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      className="relative bg-[#fbfbfb] rounded-[38px] p-[6px] w-[260px]"
+      style={{ boxShadow: "0 30px 60px -20px rgba(15,40,80,0.45), 0 0 0 1px rgba(255,255,255,0.4)" }}
+    >
+      <div className="relative bg-white rounded-[32px] overflow-hidden" style={{ aspectRatio: "9/19.5" }}>
+        <div className="absolute top-2.5 left-1/2 -translate-x-1/2 z-20 w-16 h-[16px] bg-[#1c1c1e] rounded-full" />
+        {FASES.map((fase, i) => (
+          <PhoneScreen key={fase.id} fase={fase} active={i === activePhase} />
+        ))}
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-24 h-[4px] bg-black/20 rounded-full z-10" />
+      </div>
     </motion.div>
+  );
+}
+
+// ── Card de fase — rola em fluxo normal atrás do celular fixo ────────────────
+function PhaseCard({ fase, index }: { fase: (typeof FASES)[number]; index: number }) {
+  const Icon = fase.icon;
+  return (
+    <div className="rounded-[28px] bg-white border border-slate-200/80 shadow-[0_18px_40px_-16px_rgba(15,40,80,0.16)] p-6 sm:p-7 w-full">
+      {/* Tela — só no mobile/tablet, onde o celular fixo não aparece */}
+      <div className="lg:hidden mb-5 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
+        {fase.tela ? (
+          <img src={fase.tela} alt={`Tela do app do hóspede — ${fase.nome}`} loading="lazy" className="block w-full aspect-[16/10] object-cover object-top" />
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-1.5 aspect-[16/10] bg-gradient-to-br from-[#f4f7fb] to-white">
+            <ImagePlus className="w-5 h-5 text-slate-300" strokeWidth={1.6} />
+            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-300">Tela em breve</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#1e3a5f] to-[#285992] flex items-center justify-center flex-shrink-0">
+          <Icon className="w-4.5 h-4.5 text-white" strokeWidth={1.8} />
+        </div>
+        <span className="font-mono text-[10px] uppercase tracking-[0.28em] text-[#285992]">
+          Fase {String(index + 1).padStart(2, "0")}
+        </span>
+      </div>
+      <h3 className="font-display text-xl sm:text-2xl font-semibold text-[#1e293b] tracking-tight mb-2">
+        {fase.nome}
+      </h3>
+      <p className="text-[14px] leading-relaxed text-slate-600 mb-5">
+        {fase.descricaoPre}
+        <GoldUnderline>{fase.keyword}</GoldUnderline>
+        {fase.descricaoPos}
+      </p>
+
+      <ul className="grid sm:grid-cols-2 gap-2.5">
+        {fase.itens.map((item) => {
+          const ItemIcon = item.icon;
+          return (
+            <li key={item.titulo} className="rounded-xl bg-[#f4f7fb] border border-slate-200/70 px-3.5 py-3">
+              <div className="flex items-center gap-2.5 mb-1">
+                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#285992]/[0.08]">
+                  <ItemIcon className="h-3.5 w-3.5 text-[#285992]" strokeWidth={1.8} />
+                </span>
+                <span className="text-[12.5px] font-semibold text-slate-800">
+                  {item.titulo}
+                </span>
+              </div>
+              <p className="text-[11.5px] leading-relaxed text-slate-500">
+                {item.descricao}
+              </p>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function RecursosSection() {
+  const [activePhase, setActivePhase] = useState(0);
+  const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    // Scrollspy: qual card está mais perto do centro vertical da tela vence.
+    // Mesmo princípio do IntersectionObserver central usado no
+    // ProdutosSection da Home, só que via listener de scroll direto — nesta
+    // stack, esse cálculo se mostrou o único confiável e verificável.
+    function handleScroll() {
+      const viewportCenter = window.innerHeight / 2;
+      let best = 0;
+      let bestDistance = Infinity;
+      blockRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(cardCenter - viewportCenter);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          best = i;
+        }
+      });
+      setActivePhase(best);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Sem overflow-hidden: qualquer ancestral com overflow != visible quebra
+  // position:sticky no celular à direita.
   return (
-    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div
-          initial={{ opacity: 0, y: 28, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-14 max-w-3xl mx-auto"
-        >
-          <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
+    <section className="relative py-24 bg-[#f4f7fb]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative max-w-6xl">
+        <div className="text-center mb-14 max-w-3xl mx-auto">
+          <SectionEyebrow className="justify-center">A jornada do hóspede</SectionEyebrow>
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased mb-3">
             Confira alguns recursos do mais inovador{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               aplicativo de hospedagem
@@ -286,19 +248,27 @@ function RecursosSection() {
             Do check-in online ao pagamento via PIX: a tecnologia que coloca o controle
             da estadia na palma da mão do seu hóspede.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {RECURSOS.map((r, i) => (
-            <Card key={i} {...r} />
-          ))}
-        </motion.div>
+        <div className="grid lg:grid-cols-[1fr_300px] gap-12 lg:gap-16 items-start">
+          {/* Fases — rolam normalmente, o celular ao lado é que fica parado */}
+          <div className="flex flex-col">
+            {FASES.map((fase, i) => (
+              <div
+                key={fase.id}
+                ref={(el) => { blockRefs.current[i] = el; }}
+                className="lg:min-h-[110vh] flex items-center py-10 lg:py-0"
+              >
+                <PhaseCard fase={fase} index={i} />
+              </div>
+            ))}
+          </div>
+
+          {/* Celular fixo — a tela troca conforme a fase mais próxima do centro */}
+          <div className="hidden lg:flex sticky justify-center" style={{ top: PHONE_TOP }}>
+            <PhoneStage activePhase={activePhase} />
+          </div>
+        </div>
       </div>
     </section>
   );

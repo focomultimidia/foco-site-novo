@@ -71,6 +71,8 @@ export interface VideoDepoimento {
   youtubeId: string;
   author: string;
   hotel: string;
+  /** Dado de sucesso escaneável (ex.: "+42% ocupação"). Opcional — só exibido quando fornecido. */
+  stat?: string;
 }
 
 export interface Diferencial {

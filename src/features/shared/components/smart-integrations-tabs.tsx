@@ -194,6 +194,7 @@ function LogoCarousel({ logos, inView }: { logos: Logo[]; inView: boolean }) {
 function SmartIntegrationsTabs() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const [activeTab, setActiveTab] = useState(tabsData[0].id);
 
   return (
     <section ref={sectionRef} className="py-20 bg-[#f4f7fb]">
@@ -207,26 +208,40 @@ function SmartIntegrationsTabs() {
           className="text-center mb-10"
         >
           <SectionEyebrow>Nossas integrações</SectionEyebrow>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Integrações</span> que conectam todo o <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">ecossistema hoteleiro</span>
           </h2>
         </motion.div>
 
         {/* Tabs */}
-        <Tabs defaultValue="canais" className="w-full">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Tab Navigation — 2×2 grid on mobile, pill row on desktop */}
           <div className="mb-8 md:flex md:justify-center">
             <TabsList className="grid grid-cols-2 w-full rounded-3xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 bg-slate-100 border border-slate-200">
               {tabsData.map((tab) => {
                 const Icon = tab.icon;
+                const isActive = tab.id === activeTab;
                 return (
                   <TabsTrigger
                     key={tab.id}
                     value={tab.id}
-                    className="flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-xl md:rounded-full md:px-5 md:py-2.5 md:whitespace-nowrap data-[state=active]:bg-[#1e3a5f] data-[state=active]:text-white data-[state=active]:shadow-sm"
+                    className="relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-xl md:rounded-full md:px-5 md:py-2.5 md:whitespace-nowrap"
                   >
-                    <Icon className="w-4 h-4 shrink-0" />
-                    {tab.label}
+                    {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
+                        usada no RecursosGridSection: o Framer Motion anima
+                        posição e largura sozinho quando o elemento "pula" de
+                        um botão para o outro. */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="integracoes-tab-indicator"
+                        className="absolute inset-0 rounded-xl md:rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                      <Icon className="w-4 h-4 shrink-0" />
+                      {tab.label}
+                    </span>
                   </TabsTrigger>
                 );
               })}

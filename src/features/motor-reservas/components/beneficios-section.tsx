@@ -45,8 +45,8 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="flex gap-4"
             >
-              <div className="w-8 h-8 rounded-full bg-[#00BCD4]/10 flex items-center justify-center shrink-0 mt-1">
-                <Check className="w-4 h-4 text-[#0e7490]" />
+              <div className="w-8 h-8 rounded-full bg-[#285992]/10 flex items-center justify-center shrink-0 mt-1">
+                <Check className="w-4 h-4 text-[#285992]" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#1E3A5F] mb-1">{beneficio.titulo}</h3>

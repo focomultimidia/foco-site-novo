@@ -46,8 +46,8 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
             <div className="space-y-6">
               {beneficios.map((beneficio) => (
                 <div key={beneficio.id} className="flex gap-4">
-                  <div className="w-8 h-8 rounded-full bg-[#00BCD4]/10 flex items-center justify-center shrink-0 mt-1">
-                    <Check className="w-4 h-4 text-[#0e7490]" />
+                  <div className="w-8 h-8 rounded-full bg-[#285992]/10 flex items-center justify-center shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-[#285992]" />
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1E3A5F] mb-1">{beneficio.titulo}</h3>
@@ -75,7 +75,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
               >
-                <p className="text-4xl font-bold text-[#0e7490] mb-1">{beneficio.estatistica}</p>
+                <p className="text-4xl font-bold text-[#285992] mb-1">{beneficio.estatistica}</p>
                 <p className="text-sm text-slate-500">{beneficio.estatisticaLabel}</p>
               </motion.div>
             ))}

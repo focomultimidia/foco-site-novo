@@ -13,10 +13,8 @@ import { GenericInfoSection } from "@/features/shared/components/generic-info-se
 import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home
-import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
-import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
 import { NumerosSection } from "@/features/home/components/numeros-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
@@ -84,13 +82,13 @@ function MotorReservasPage() {
       {/* Section 5: Funcionalidades */}
       <FuncionalidadesSection />
 
-      {/* Prova Social: Vídeos */}
-      <VideoTestimonialsCarousel
-        items={videosData}
-        title="Veja quem já transformou suas vendas"
-        subtitle="Depoimentos em vídeo de clientes que aumentaram suas reservas diretas"
+      {/* Prova Social: Mural de depoimentos (texto + vídeo, unificados) */}
+      <WallOfLoveSection
+        depoimentos={depoimentos}
+        videos={videosData}
         badge="Depoimentos"
-        slidesToShow={3}
+        title="Um mural de resultados reais"
+        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco aumentou suas reservas diretas."
       />
 
       {/* Section 6: Aumente as reservas diretas */}
@@ -107,9 +105,6 @@ function MotorReservasPage() {
 
       {/* Section 9: Integrações Inteligentes */}
       <SmartIntegrationsTabs />
-
-      {/* Prova Social: Aprovação 97% - Depoimentos */}
-      <DepoimentosSection depoimentos={depoimentos} />
 
       {/* Prova Social: Na Mídia */}
       <NaMidiaSection artigos={artigosMidia} />

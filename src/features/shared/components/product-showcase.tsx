@@ -2,15 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
+  AnimatePresence,
   motion,
   useInView,
   useMotionValue,
   useReducedMotion,
-  useScroll,
   useSpring,
   useTransform,
 } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight, Check, Smartphone } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -29,13 +29,21 @@ export type { ProdutoItem as ProdutoData };
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
+// `titulo` is authored as "Nome do produto: resto da frase". Splitting it
+// lets the name read as the heading and the rest as a quieter subtitle.
+function splitTitulo(titulo: string): { nome: string; subtitulo: string } {
+  const idx = titulo.indexOf(":");
+  if (idx === -1) return { nome: titulo, subtitulo: "" };
+  return { nome: titulo.slice(0, idx).trim(), subtitulo: titulo.slice(idx + 1).trim() };
+}
+
 // ── Section header ────────────────────────────────────────────────────────────
 
 function ShowcaseHeader({ animate }: { animate: boolean }) {
   const content = (
     <div className="text-center mb-16 lg:mb-20">
       <SectionEyebrow>A plataforma</SectionEyebrow>
-      <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-medium text-[#1e3a5f] leading-[1.05] tracking-tighter antialiased mb-5 max-w-3xl mx-auto">
+      <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold text-[#1e3a5f] leading-[1.05] tracking-tighter antialiased mb-5 max-w-3xl mx-auto">
         Sistema para hotéis e pousadas{" "}
         <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
           aprovado por 97%
@@ -270,50 +278,524 @@ function GridView() {
 }
 
 // ── StackView ─────────────────────────────────────────────────────────────────
-// Same sticky-stack recipe used in the site-hoteleiro "por que escolher"
-// section (and, before that, reverse-engineered from contiant.com's own
-// "01/02/03" module): each card is `position: sticky` inside one shared tall
-// container, with an increasing `top` offset. As the page scrolls, each card
-// catches its own offset in turn and holds there while the next slides up
-// from below and settles just over it. The sticky mechanics stay pure CSS;
-// only the fade-in as each card approaches its resting spot is scroll-linked
-// (via each card's own useScroll progress), so it fades in right as it
-// starts covering the one beneath it.
-const STACK_BASE_TOP = 96; // clears the fixed header
-const STACK_STAGGER = 0; // 0 = full overlap — each card fully covers the previous one
+// Stripe checkout-page recipe: ONE stage stays pinned on the right (same
+// glass-shell treatment as ProductCard's stage), while plain content scrolls
+// on the left. Whichever left block is passing through the viewport's
+// vertical centre is "active" — an IntersectionObserver tracks that (no
+// continuous scroll-linked value, just a discrete index), and the pinned
+// stage cross-fades its screenshot to match via a plain CSS opacity
+// transition. Native scroll throughout; nothing here fights position:sticky.
+const STAGE_TOP = 112; // clears the fixed header with room to breathe
 
-function StackCard({ produto, index }: { produto: ProdutoItem; index: number }) {
-  const wrapRef = useRef<HTMLDivElement>(null);
+function StagePanel({ activeIndex }: { activeIndex: number }) {
+  const stageRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: wrapRef,
-    // 0 as the card's top crosses the bottom of the viewport (just entering
-    // from below), 1 once it reaches the top of the viewport.
-    offset: ["start end", "start start"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 1], [0, 1], { clamp: true });
+
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 110, damping: 20, mass: 0.5 });
+  const sy = useSpring(py, { stiffness: 110, damping: 20, mass: 0.5 });
+  const rotateY = useTransform(sx, [-1, 1], [8, -8]);
+  const rotateX = useTransform(sy, [-1, 1], [-6, 6]);
+
+  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduceMotion) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set(((e.clientX - r.left) / r.width - 0.5) * 2);
+    py.set(((e.clientY - r.top) / r.height - 0.5) * 2);
+  };
+  const handleLeave = () => { px.set(0); py.set(0); };
+
+  const activeProduct = PRODUTOS_DATA[activeIndex];
 
   return (
-    <motion.div
-      ref={wrapRef}
-      className="sticky mb-8 sm:mb-10 sm:h-[400px]"
+    <div className="hidden lg:flex sticky h-[560px] items-center justify-center" style={{ top: STAGE_TOP }}>
+      {/* Brilho colorido — combina com o produto ativo, reforça a ligação
+          visual com o trilho da coluna de texto (mesmo accent). */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 blur-3xl -z-10"
+        style={{
+          background: `radial-gradient(ellipse 60% 55% at 50% 50%, ${activeProduct.accent}2e, transparent 70%)`,
+          transition: "background 0.6s ease",
+        }}
+      />
+
+      <motion.div
+        ref={stageRef}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+        className="relative w-full [perspective:1600px]"
+        style={reduceMotion ? undefined : { rotateX, rotateY }}
+      >
+        {/* Transição premium entre telas — em vez de um crossfade plano, a
+            tela que entra desliza + escala + desfoca até o foco (e a que sai
+            faz o inverso), com `variants` em função + `popLayout` (não
+            "wait") para nunca travar nem empilhar nós ao trocar rápido. */}
+        <AnimatePresence mode="popLayout" custom={activeIndex}>
+          <motion.div
+            key={activeProduct.id}
+            custom={activeIndex}
+            variants={
+              reduceMotion
+                ? undefined
+                : {
+                    initial: () => ({ opacity: 0, y: 20, scale: 0.97, filter: "blur(10px)" }),
+                    animate: () => ({ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }),
+                    exit: () => ({ opacity: 0, y: -20, scale: 0.97, filter: "blur(10px)" }),
+                  }
+            }
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            transition={{ duration: 0.55, ease: EASE }}
+            className="relative"
+          >
+            {/* Produtos com `mockups` (3 telas de celular) trocam o palco
+                inteiro — nada de screenshot desktop + 1 celular flutuando,
+                só os 3 mockups lado a lado (ver TriplePhoneStage). Os demais
+                mantêm o tratamento original. */}
+            {activeProduct.mockups && activeProduct.mockups.length >= 3 ? (
+              <TriplePhoneStage mockups={activeProduct.mockups} />
+            ) : (
+              <>
+                {/* Tela desktop — o overflow-hidden fica só aqui (não no
+                    wrapper), para o mockup mobile poder "flutuar" para fora
+                    do canto sem ser cortado. */}
+                <div
+                  className="overflow-hidden rounded-xl ring-1 ring-slate-900/10
+                             shadow-[0_8px_20px_-14px_rgba(15,40,80,0.20),0_34px_70px_-34px_rgba(15,40,80,0.42)]"
+                >
+                  <img
+                    src={activeProduct.screenshot}
+                    alt={`Captura de tela do produto ${splitTitulo(activeProduct.titulo).nome}`}
+                    loading={activeIndex === 0 ? "eager" : "lazy"}
+                    className="block w-full max-h-[520px] object-contain"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/35 mix-blend-overlay" />
+                </div>
+
+                <PhoneMockup
+                  screenshot={activeProduct.mobileScreenshot}
+                  label={activeProduct.numero}
+                  alt={`Tela mobile do produto ${splitTitulo(activeProduct.titulo).nome}`}
+                />
+              </>
+            )}
+          </motion.div>
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+}
+
+// ── TriplePhoneStage ──────────────────────────────────────────────────────────
+// Substitui o par screenshot+PhoneMockup quando o produto define `mockups`
+// (3 telas) — celular central em primeiro plano, os das laterais um pouco
+// menores atrás dele. Sem blur nos três (pedido explícito: "totalmente
+// nítidos" — a versão anterior desfocava as laterais, imitando a hero de
+// /experiencia-do-hospede, mas aqui as 3 telas precisam ser lidas com
+// clareza, não sugeridas). A diferença de plano vem só de escala + z-index
+// + uma leve opacidade (0.88, não os 0.5 de antes). Estático (sem autoplay
+// por celular nem clique pra trazer um lateral pro centro, ao contrário
+// daquela hero) — é um card secundário do showcase, a versão interativa
+// completa já existe na página do produto.
+function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+  const ROLES = [
+    { x: -194, scale: 0.86, opacity: 0.88, z: 10 },
+    { x: 0,    scale: 1,    opacity: 1,    z: 30 },
+    { x: 194,  scale: 0.86, opacity: 0.88, z: 10 },
+  ] as const;
+
+  return (
+    <div className="relative h-[540px] flex items-center justify-center">
+      {ROLES.map((role, i) => {
+        const mock = mockups[i];
+        if (!mock) return null;
+        return (
+          <div
+            key={i}
+            className="absolute w-[224px]"
+            style={{
+              transform: `translateX(${role.x}px) scale(${role.scale})`,
+              opacity: role.opacity,
+              zIndex: role.z,
+            }}
+          >
+            <div
+              className="bg-white rounded-[24px] p-[4px]"
+              style={{
+                boxShadow: role.z === 30
+                  ? "0 24px 56px -12px rgba(15,40,80,0.45)"
+                  : "0 16px 32px -12px rgba(15,40,80,0.25)",
+              }}
+            >
+              <div
+                className="relative bg-white rounded-[20px] overflow-hidden ring-1 ring-slate-900/10"
+                style={{ aspectRatio: "9 / 19.5" }}
+              >
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-9 h-[9px] bg-[#1c1c1e] rounded-full" />
+                <img
+                  src={mock.src}
+                  alt={mock.alt}
+                  loading={i === 1 ? "eager" : "lazy"}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── PhoneMockup ───────────────────────────────────────────────────────────────
+// Silhueta minimalista (sem o clichê de moldura grossa estilo iPhone): borda
+// fina em gradiente de vidro, câmera em pílula discreta, tela com espaço
+// reservado para o print mobile de cada produto. Flutua sobre o canto
+// inferior esquerdo da tela desktop, reta na vertical (sem inclinação) —
+// reforça "funciona no computador e no bolso" sem precisar de texto
+// explicando isso.
+function PhoneMockup({ screenshot, label, alt }: { screenshot?: string; label: string; alt?: string }) {
+  return (
+    <div
+      className="absolute -bottom-8 -left-8 z-20 w-[32%] max-w-[128px]"
       style={{
-        top: STACK_BASE_TOP + index * STACK_STAGGER,
-        zIndex: index + 1,
-        opacity: reduceMotion ? 1 : opacity,
+        filter: "drop-shadow(0 16px 24px rgba(15,40,80,0.30))",
       }}
     >
-      <ProductCard produto={produto} index={index} />
-    </motion.div>
+      <div
+        className="rounded-[20px] p-[3px]"
+        style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.35))" }}
+      >
+        <div
+          className="relative overflow-hidden rounded-[17px] bg-white ring-1 ring-slate-900/10"
+          style={{ aspectRatio: "9 / 19.5" }}
+        >
+          {/* Câmera — pílula discreta, não um notch grande */}
+          <div className="absolute top-2 left-1/2 -translate-x-1/2 w-5 h-[5px] rounded-full bg-slate-900/70 z-10" />
+
+          {screenshot ? (
+            <img
+              src={screenshot}
+              alt={alt ?? `Print mobile do produto ${label}`}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+          ) : (
+            // Placeholder — some ao adicionar `mobileScreenshot` no produto
+            // correspondente em PRODUTOS_DATA.
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1 border-2 border-dashed"
+              style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
+            >
+              <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+              <span
+                className="text-[7px] font-semibold text-center leading-tight px-1"
+                style={{ color: "rgba(40,89,146,0.4)" }}
+              >
+                Print mobile {label}
+              </span>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScrollContentBlock({
+  produto,
+  active,
+  registerRef,
+}: {
+  produto:      ProdutoItem;
+  active:       boolean;
+  registerRef:  (el: HTMLDivElement | null) => void;
+}) {
+  const { Icone: Icon } = produto;
+  const { nome, subtitulo } = splitTitulo(produto.titulo);
+  const reducedMotion = useReducedMotion();
+  return (
+    <div
+      ref={registerRef}
+      className={`lg:min-h-[85vh] flex flex-col justify-center transition-opacity duration-500 py-14 lg:py-0 lg:pl-10 ${
+        active ? "lg:opacity-100" : "lg:opacity-40"
+      }`}
+    >
+      {/* Mobile/tablet fallback — there's no room for a pinned side stage
+          below lg, so each block carries its own screenshot inline. */}
+      <div className="lg:hidden mb-6 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
+        <img src={produto.screenshot} alt={`Captura de tela do produto ${nome}`} loading="lazy" className="block w-full" />
+      </div>
+
+      <div className="flex items-start gap-3 mb-5">
+        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-3xl
+                        bg-[#285992]/[0.08] ring-1 ring-inset ring-[#285992]/15">
+          <Icon className="h-5 w-5 text-[#285992]" />
+        </div>
+        <div>
+          <h3 className="font-display text-[22px] font-semibold leading-tight tracking-tight text-[#1e3a5f]">
+            <span className="relative inline-block whitespace-nowrap">
+              {nome}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 320 14"
+                preserveAspectRatio="none"
+                className="absolute left-0 -bottom-1.5 w-full h-[0.7rem] pointer-events-none"
+                fill="none"
+              >
+                <motion.path
+                  d="M 4 10 C 60 4, 150 3, 230 6 C 270 7.5, 300 9, 316 8"
+                  stroke="#fccc30"
+                  strokeWidth={4}
+                  strokeLinecap="round"
+                  initial={false}
+                  animate={
+                    reducedMotion
+                      ? { pathLength: 1, opacity: 0.9 }
+                      : active
+                      ? { pathLength: 1, opacity: 0.9 }
+                      : { pathLength: 0, opacity: 0 }
+                  }
+                  transition={{ duration: 0.7, ease: [0.65, 0, 0.35, 1] }}
+                />
+              </svg>
+            </span>
+          </h3>
+          {subtitulo && (
+            <p className="text-[13px] text-slate-400 font-medium leading-snug mt-1">
+              {subtitulo}
+            </p>
+          )}
+        </div>
+      </div>
+
+      <p className="text-[15px] leading-relaxed text-slate-600 mb-6 max-w-md">
+        {produto.descricao}
+      </p>
+
+      <ul className="flex flex-col gap-2.5 mb-7">
+        {produto.beneficios.map((b) => (
+          <li key={b} className="flex items-center gap-2.5">
+            <span
+              className="flex h-[18px] w-[18px] flex-shrink-0 items-center justify-center rounded-full"
+              style={{ backgroundColor: "#28599214" }}
+            >
+              <Check className="h-2.5 w-2.5 text-[#285992]" strokeWidth={3.5} />
+            </span>
+            <span className="text-[13px] font-medium text-slate-700">{b}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* CTA pill — mesmo disco circular de antes, agora com o texto do
+          botão ao lado, num card rounded-full. */}
+      <a
+        href={produto.link}
+        className="group/btn inline-flex w-fit items-center gap-3 rounded-full
+                   bg-[#1e3a5f] pl-1.5 pr-6 py-1.5
+                   transition-[background-color,transform] duration-300
+                   hover:scale-[1.02] hover:bg-[#285992]
+                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#285992] focus-visible:ring-offset-2
+                   motion-reduce:transition-none motion-reduce:hover:scale-100"
+      >
+        <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white/15">
+          <ArrowUpRight
+            className="h-4 w-4 text-white transition-transform duration-300
+                       group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5
+                       motion-reduce:transition-none"
+          />
+        </span>
+        <span className="text-white text-[13px] font-semibold leading-tight">
+          {produto.ctaLabel}
+        </span>
+      </a>
+    </div>
+  );
+}
+
+// Trilho vertical com "facho luminoso" — inspirado na linha conectora
+// sincronizada ao scroll do gladia.io: um trilho costura os 6 produtos, com
+// um ponto de luz que viaja exatamente na posição do scroll e nós que
+// acendem conforme são alcançados. Cor única (#d8dbdf, sem variar por
+// produto) de propósito — a versão anterior colorida pelo accent de cada
+// produto chamava atenção demais pra um elemento de apoio; o recurso
+// continua funcionando (trilho percorrido, nós, facho), só que discreto.
+const RAIL_COLOR = "#d8dbdf";
+
+function ProgressRail({
+  height,
+  progressY,
+  nodeYs,
+  activeIndex,
+}: {
+  height:      number;
+  progressY:   number;
+  nodeYs:      number[];
+  activeIndex: number;
+}) {
+  const reduceMotion = useReducedMotion();
+
+  if (height === 0) return null;
+
+  return (
+    <svg
+      aria-hidden="true"
+      className="hidden lg:block absolute left-0 top-0 pointer-events-none overflow-visible"
+      width={24}
+      height={height}
+    >
+      {/* Trilho base — sempre visível, sutil */}
+      <line x1={12} y1={0} x2={12} y2={height} stroke={RAIL_COLOR} strokeOpacity={0.6} strokeWidth={2} strokeLinecap="round" />
+
+      {/* Trilho percorrido — cresce com o scroll */}
+      <line
+        x1={12}
+        y1={0}
+        x2={12}
+        y2={progressY}
+        stroke={RAIL_COLOR}
+        strokeWidth={2}
+        strokeLinecap="round"
+      />
+
+      {/* Nós — um por produto, acende (preenche) ao ser alcançado */}
+      {nodeYs.map((y, i) => (
+        <circle
+          key={i}
+          cx={12}
+          cy={y}
+          r={i === activeIndex ? 6 : 4}
+          fill={i <= activeIndex ? RAIL_COLOR : "#f4f7fb"}
+          stroke={RAIL_COLOR}
+          strokeWidth={1.5}
+          style={{ transition: reduceMotion ? undefined : "r 0.4s ease, fill 0.4s ease" }}
+        />
+      ))}
+
+      {/* Facho luminoso — ponto de luz na posição exata do scroll */}
+      {!reduceMotion && (
+        <circle
+          cx={12}
+          cy={progressY}
+          r={5}
+          fill={RAIL_COLOR}
+          style={{ filter: `drop-shadow(0 0 6px ${RAIL_COLOR})` }}
+        />
+      )}
+    </svg>
   );
 }
 
 function StackView() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [railHeight, setRailHeight] = useState(0);
+  const [progressY, setProgressY] = useState(0);
+  const [nodeYs, setNodeYs] = useState<number[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const blockRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Progresso por scroll — leitura direta de getBoundingClientRect (mesma
+  // técnica já usada em outras seções do site), throttle por timestamp em
+  // vez de requestAnimationFrame. As posições dos nós só precisam ser
+  // remedidas no mount e no resize; o progresso é recalculado a cada scroll.
+  useEffect(() => {
+    let lastRun = 0;
+
+    const measureNodes = () => {
+      const containerEl = containerRef.current;
+      if (!containerEl) return;
+      const containerTop = containerEl.getBoundingClientRect().top + window.scrollY;
+      setNodeYs(
+        blockRefs.current.map((el) => {
+          if (!el) return 0;
+          const r = el.getBoundingClientRect();
+          return r.top + window.scrollY - containerTop + r.height / 2;
+        })
+      );
+    };
+
+    const computeProgress = () => {
+      const containerEl = containerRef.current;
+      if (!containerEl) return;
+      const rect = containerEl.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const currentY = Math.min(Math.max(vh / 2 - rect.top, 0), rect.height);
+      setRailHeight(rect.height);
+      setProgressY(currentY);
+
+      // Nearest node to the current scroll position wins "active".
+      const nodes = blockRefs.current.map((el) => {
+        if (!el || !containerRef.current) return 0;
+        const r = el.getBoundingClientRect();
+        const cRect = containerRef.current.getBoundingClientRect();
+        return r.top - cRect.top + r.height / 2;
+      });
+      let nearest = 0;
+      let nearestDist = Infinity;
+      nodes.forEach((y, i) => {
+        const d = Math.abs(y - currentY);
+        if (d < nearestDist) {
+          nearestDist = d;
+          nearest = i;
+        }
+      });
+      setActiveIndex(nearest);
+    };
+
+    const onScroll = () => {
+      const now = Date.now();
+      if (now - lastRun < 16) return;
+      lastRun = now;
+      computeProgress();
+    };
+    const onResize = () => {
+      measureNodes();
+      computeProgress();
+    };
+
+    measureNodes();
+    computeProgress();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+
+    // ResizeObserver (não só o resize da janela) pega qualquer mudança de
+    // altura do próprio contêiner — texto reformatando depois que a fonte
+    // customizada carrega, imagem carregando, etc. — situações em que os nós
+    // do trilho ficariam visualmente fora de posição sem isso.
+    let ro: ResizeObserver | undefined;
+    if (containerRef.current && typeof ResizeObserver !== "undefined") {
+      ro = new ResizeObserver(() => {
+        measureNodes();
+        computeProgress();
+      });
+      ro.observe(containerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+      ro?.disconnect();
+    };
+  }, []);
+
   return (
-    <div className="relative max-w-5xl mx-auto">
-      {PRODUTOS_DATA.map((p, i) => (
-        <StackCard key={p.id} produto={p} index={i} />
-      ))}
+    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+      <div ref={containerRef} className="relative flex flex-col">
+        <ProgressRail height={railHeight} progressY={progressY} nodeYs={nodeYs} activeIndex={activeIndex} />
+        {PRODUTOS_DATA.map((p, i) => (
+          <ScrollContentBlock
+            key={p.id}
+            produto={p}
+            active={i === activeIndex}
+            registerRef={(el) => { blockRefs.current[i] = el; }}
+          />
+        ))}
+      </div>
+
+      <StagePanel activeIndex={activeIndex} />
     </div>
   );
 }

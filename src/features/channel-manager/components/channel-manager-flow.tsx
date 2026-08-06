@@ -877,7 +877,7 @@ export function ChannelManagerFlow() {
             Sincronização em Tempo Real
           </p>
 
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#fff] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#fff] leading-none tracking-tighter antialiased mb-4">
             Conexão mais <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">premiada</span>{" "} do Brasil. Dados fluindo em <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">perfeita sincronia</span>{" "}
           </h2>
           <p className="text-gray-500 text-lg max-w-6xl mx-auto">

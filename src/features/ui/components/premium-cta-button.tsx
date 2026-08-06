@@ -154,7 +154,7 @@ function PremiumCTAButton({
             <motion.button
               type="button"
               onClick={onClick}
-              className="group relative z-[1] flex items-center gap-2.5 px-7 py-3.5 rounded-full font-display font-medium tracking-tight text-sm text-white/90 cursor-pointer select-none overflow-hidden"
+              className="group relative z-[1] flex items-center gap-2.5 px-7 py-3.5 rounded-full font-display font-medium tracking-tight text-sm text-white/90 cursor-pointer select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fccc30]/80"
               style={{
                 // Fundo navy gradiente (cor da marca #285992) — funciona sobre
                 // fundo escuro E sobre o header branco flutuante

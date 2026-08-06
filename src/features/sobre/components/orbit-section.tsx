@@ -157,7 +157,7 @@ export function OrbitSection() {
             <SectionEyebrow>Ecossistema Integrado</SectionEyebrow>
           </StaggerItem>
           <StaggerItem>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#1e293b] tracking-tighter leading-tight mb-5">
+            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] tracking-tighter leading-tight mb-5">
               Conectado com tudo que o seu hotel{" "}
               <span className="bg-gradient-to-r from-[#285992] to-[#427ab9] bg-clip-text text-transparent">já utiliza.</span>
             </h2>

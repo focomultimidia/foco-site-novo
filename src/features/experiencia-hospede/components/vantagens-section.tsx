@@ -213,7 +213,7 @@ function VantagensSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#132840] leading-none tracking-tighter antialiased mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#132840] leading-none tracking-tighter antialiased mb-2">
             <span className="text-[#285992]">Outras vantagens</span> em utilizar
             o aplicativo do hóspede
           </h2>

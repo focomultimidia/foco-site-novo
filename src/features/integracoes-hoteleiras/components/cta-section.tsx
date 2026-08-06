@@ -24,7 +24,7 @@ function CtaSection({ onCtaClick }: CtaSectionProps) {
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-medium text-[#132840] leading-tight tracking-tight mb-5">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-[2.75rem] font-semibold text-[#132840] leading-tight tracking-tight mb-5">
             Não encontrou a integração que precisa?
           </h2>
           <p className="text-lg text-[#4c5c73] leading-relaxed mb-9">

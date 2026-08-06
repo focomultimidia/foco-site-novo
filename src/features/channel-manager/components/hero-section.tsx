@@ -17,24 +17,25 @@
  * mesma técnica do resto do site: mantém a geometria dos cards e dos SVGs
  * perfeitamente alinhada em qualquer viewport.
  *
- * ── Cards à direita ──────────────────────────────────────────────────────────
- * O card de "sincronização concluída" fica ancorado por cima do card de
- * "reserva recebida", com uma sobreposição de ~20px no canto — não há um
- * traçado separado entre os dois porque a sobreposição já lê como conexão
- * direta; o selo com o ícone de refresh faz esse papel visualmente, sentado
- * bem na costura dos dois cards.
+ * ── Mockups à direita ────────────────────────────────────────────────────────
+ * Onde antes ficavam dois cards de UI (reserva recebida + sincronização), o
+ * facho fundido agora desemboca direto na borda esquerda de um mockup
+ * desktop (moldura de vidro, mesma linguagem da Home) com um mockup mobile
+ * flutuando por cima do canto superior direito — telas propositalmente
+ * vazias, com espaço reservado para os prints reais entrarem depois. Um
+ * brilho na borda esquerda do desktop marca o instante exato em que o facho
+ * "toca a tela", fechando a história: canais → fusão → hub → produto.
  */
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, RefreshCw } from "lucide-react";
-import { HeroButton } from "@/features/shared/components/hero-button";
-import { useInternalHeroGsap } from "@/features/shared/hooks/use-internal-hero-gsap";
+import { Check, Monitor, RefreshCw, Smartphone } from "lucide-react";
+import { GradientHero } from "@/features/shared/components/gradient-hero";
 import type { HeroData } from "../types";
 
 // ── Palco ─────────────────────────────────────────────────────────────────────
 
-const STAGE_W = 1180;
+const STAGE_W = 1520;
 const STAGE_H = 470;
 
 const CARD_W = 128;
@@ -70,22 +71,74 @@ const CHANNELS: Channel[] = [
 const LOGOS_RIGHT = 300 + CARD_W; // 428 — borda direita real da coluna wired
 
 // ── Traçados ──────────────────────────────────────────────────────────────────
-// Barramento vertical em x = 452→464, cantos arredondados, desembocando no
-// eixo e seguindo até o nó (x = 512).
+// Curva de fusão bem mais generosa (raio 28, era um cantinho de 12) — o
+// "bracket" arredondado que os dois fachos percorrem até virarem um só.
 
-const HUB_X = 560;
-const HUB_LEFT = HUB_X - NODE / 2;   // 512
-const HUB_RIGHT = HUB_X + NODE / 2;  // 608
+const HUB_X = 760;
+const HUB_LEFT = HUB_X - NODE / 2;   // 712
 
-const WIRE_IN_TOP = `M ${LOGOS_RIGHT} 168 H 452 Q 464 168 464 180 V ${AXIS} H ${HUB_LEFT}`;
-const WIRE_IN_BOT = `M ${LOGOS_RIGHT} 302 H 452 Q 464 302 464 290 V ${AXIS} H ${HUB_LEFT}`;
+// ── Mockups à direita ────────────────────────────────────────────────────────
+// Desktop centralizado no AXIS (o facho entra exatamente na sua borda
+// esquerda, no meio da altura) — mobile flutua sobrepondo o canto superior
+// direito, mesma relação espacial que os cards antigos tinham entre si.
 
-// ── Cards à direita ───────────────────────────────────────────────────────────
+const DESKTOP_MOCK = { x: 980,  y: AXIS - 121, w: 500, h: 342 }; // facho entra aqui
+const MOBILE_MOCK   = { x: 1285, y: AXIS - 230, w: 168, h: 315 }; // flutua por cima
 
-const CARD_A = { x: 700, y: 140, w: 260, h: 190 }; // "reserva recebida"
-const CARD_B = { x: 862, y: 25,  w: 224, h: 132 }; // "sincronização concluída" (sobrepõe o canto de A)
+const BUS_X = 580; // x do "tronco" onde as duas curvas se encontram
+const R = 28;       // raio de curvatura de cada bracket (cabe no vão vertical de 67px)
+const TOP_Y = 168;
+const BOT_Y = 302;
 
-const WIRE_OUT = `M ${HUB_RIGHT} ${AXIS} H ${CARD_A.x}`;
+// Um único traçado por facho — da coluna de canais, pela curva de fusão, por
+// baixo do hub (o quadrado do nó cobre visualmente esse trecho) e até a
+// borda esquerda do mockup desktop. Não existe um 3º traçado de saída: ao se
+// fundirem, os dois fachos já estão desenhando o resto do caminho juntos,
+// então nunca há "outro facho".
+const FULL_PATH_TOP =
+  `M ${LOGOS_RIGHT} ${TOP_Y} H ${BUS_X - R} ` +
+  `Q ${BUS_X} ${TOP_Y} ${BUS_X} ${TOP_Y + R} ` +
+  `V ${AXIS - R} ` +
+  `Q ${BUS_X} ${AXIS} ${BUS_X + R} ${AXIS} ` +
+  `H ${DESKTOP_MOCK.x}`;
+
+const FULL_PATH_BOT =
+  `M ${LOGOS_RIGHT} ${BOT_Y} H ${BUS_X - R} ` +
+  `Q ${BUS_X} ${BOT_Y} ${BUS_X} ${BOT_Y - R} ` +
+  `V ${AXIS + R} ` +
+  `Q ${BUS_X} ${AXIS} ${BUS_X + R} ${AXIS} ` +
+  `H ${DESKTOP_MOCK.x}`;
+
+// Fração do comprimento do traçado onde o facho fundido cruza o centro do
+// hub (logo) — usada só para cronometrar o reflexo do Hub (glint) com a
+// chegada real do facho, calculada a partir dos mesmos segmentos acima.
+const SEG_STRAIGHT_IN = BUS_X - R - LOGOS_RIGHT;
+const SEG_CURVE = (Math.PI / 2) * R;
+const SEG_VERTICAL = (AXIS - R) - (TOP_Y + R);
+const SEG_TO_CARD = DESKTOP_MOCK.x - (BUS_X + R);
+const PATH_TOTAL = SEG_STRAIGHT_IN + SEG_CURVE + SEG_VERTICAL + SEG_CURVE + SEG_TO_CARD;
+const MERGE_FRACTION = (SEG_STRAIGHT_IN + SEG_CURVE + SEG_VERTICAL + SEG_CURVE) / PATH_TOTAL;
+const HUB_CENTER_FRACTION = MERGE_FRACTION + (HUB_X - (BUS_X + R)) / PATH_TOTAL;
+
+// Duração do ciclo do facho e os MESMOS pontos tempo↔distância do
+// @keyframes cm-flow-merge (em index.css — precisam ficar idênticos aos de
+// lá) — usados aqui só para calcular em que INSTANTE (não fração de
+// distância) o facho realmente cruza o hub, e disparar o glint nesse exato
+// momento.
+const FLOW_DURATION = 2.6;
+const MERGE_KEYFRAME_STOPS: Array<[time: number, dist: number]> = [
+  [0, 0], [0.10, 0.02], [0.30, 0.07], [0.45, 0.15], [0.52, 0.25],
+  [0.58, 0.373], [0.68, 0.55], [0.80, 0.75], [0.92, 0.92], [1, 1],
+];
+function distanceFractionToTimeFraction(dist: number): number {
+  for (let i = 0; i < MERGE_KEYFRAME_STOPS.length - 1; i++) {
+    const [t0, d0] = MERGE_KEYFRAME_STOPS[i];
+    const [t1, d1] = MERGE_KEYFRAME_STOPS[i + 1];
+    if (dist <= d1) return t0 + ((dist - d0) / (d1 - d0)) * (t1 - t0);
+  }
+  return 1;
+}
+const HUB_GLINT_DELAY = FLOW_DURATION * distanceFractionToTimeFraction(HUB_CENTER_FRACTION);
 
 // ── useStageScale / useIsDesktop ─────────────────────────────────────────────
 // Mede o contêiner e devolve o fator de escala (nunca amplia além de 1:1).
@@ -136,45 +189,29 @@ function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
 }
 
 // ── FlowLine ──────────────────────────────────────────────────────────────────
-// Hairline estática + pulso em duas camadas (bloom desfocado + cabeça nítida).
+// Hairline estática + um único traço nítido pulsando (sem bloom/glow).
 // `pathLength={1}` normaliza o comprimento, então o dasharray trabalha em
 // fração do caminho e o mesmo componente serve para traçados diferentes.
+//
+// Sincronismo: os 2 traçados (FULL_PATH_TOP/BOT, cada um já indo até o card)
+// usam o MESMO `cm-flow-merge`, mesma duração, delay 0 — como os dois
+// desenham exatamente o mesmo trecho final (a curva de fusão os leva ao
+// mesmo ponto, e dali em diante o "H" é idêntico nos dois), eles não só
+// chegam juntos: passam a se sobrepor pixel a pixel no resto do percurso,
+// lendo como um único facho — nunca existe um terceiro traçado de saída.
 
-function FlowLine({
-  d,
-  delay,
-  duration = 2.6,
-  animated,
-}: {
-  d: string;
-  delay: number;
-  duration?: number;
-  animated: boolean;
-}) {
-  const pulseStyle = (blur?: number): React.CSSProperties => ({
-    animation: `cm-flow-pulse ${duration}s linear ${delay}s infinite`,
-    ...(blur ? { filter: `blur(${blur}px)`, opacity: 0.55 } : null),
-  });
-
+function FlowLine({ d, animated }: { d: string; animated: boolean }) {
   return (
     <>
       <path d={d} fill="none" stroke="rgba(19,40,64,0.12)" strokeWidth={1} strokeLinecap="round" />
 
       {animated && (
-        <>
-          <path
-            d={d} fill="none" pathLength={1}
-            stroke="url(#cmFlow)" strokeWidth={7} strokeLinecap="round"
-            strokeDasharray="0.14 0.86"
-            style={pulseStyle(6)}
-          />
-          <path
-            d={d} fill="none" pathLength={1}
-            stroke="url(#cmFlow)" strokeWidth={1.75} strokeLinecap="round"
-            strokeDasharray="0.085 0.915"
-            style={pulseStyle()}
-          />
-        </>
+        <path
+          d={d} fill="none" pathLength={1}
+          stroke="url(#cmFlow)" strokeWidth={2} strokeLinecap="round"
+          strokeDasharray="0.1 0.9"
+          style={{ animation: `cm-flow-merge ${FLOW_DURATION}s linear infinite` }}
+        />
       )}
     </>
   );
@@ -213,6 +250,12 @@ function ChannelCard({ ch, index, animated }: { ch: Channel; index: number; anim
 }
 
 // ── Hub ───────────────────────────────────────────────────────────────────────
+// Reflexo premium: um brilho branco translúcido varre o CARD INTEIRO (fundo
+// escuro + logo), não só o círculo — o overflow-hidden fica no card externo,
+// e o glint é o último irmão dentro dele, por cima de tudo. Sincronizado com
+// HUB_GLINT_DELAY (calculado a partir do keyframe do próprio facho), então o
+// "toque" acontece exatamente quando o facho fundido cruza o hub — não é um
+// pulso ambiente independente.
 
 function Hub({ animated }: { animated: boolean }) {
   return (
@@ -223,16 +266,8 @@ function Hub({ animated }: { animated: boolean }) {
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.7, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
     >
-      {animated && (
-        <motion.span
-          aria-hidden="true"
-          className="absolute inset-0 rounded-[26px] bg-[#285992]"
-          animate={{ scale: [1, 1.5], opacity: [0.16, 0] }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeOut" }}
-        />
-      )}
       <div
-        className="relative w-full h-full rounded-[24px] flex items-center justify-center"
+        className="relative w-full h-full rounded-[24px] flex items-center justify-center overflow-hidden"
         style={{
           background: "linear-gradient(150deg, #1e3a5f 0%, #132840 100%)",
           boxShadow: "0 18px 44px -14px rgba(19,40,64,0.55), inset 0 1px 0 rgba(255,255,255,0.10)",
@@ -251,77 +286,108 @@ function Hub({ animated }: { animated: boolean }) {
             className="w-[36px] h-[36px] object-contain"
           />
         </div>
+
+        {animated && (
+          <span
+            aria-hidden="true"
+            className="absolute inset-y-[-40%] w-[55%] pointer-events-none z-10"
+            style={{
+              background:
+                "linear-gradient(105deg, transparent 10%, rgba(255,255,255,0) 35%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0) 65%, transparent 90%)",
+              animation: `cm-hub-glint ${FLOW_DURATION}s linear ${HUB_GLINT_DELAY}s infinite`,
+            }}
+          />
+        )}
       </div>
     </motion.div>
   );
 }
 
-// ── RightCards ────────────────────────────────────────────────────────────────
-// Card A: reserva recebida de um canal. Card B: confirmação de sincronização,
-// ancorado por cima do canto superior direito de A.
+// ── DeviceMockups ────────────────────────────────────────────────────────────
+// Onde antes ficavam dois cards de UI: um mockup desktop (moldura de vidro,
+// mesma linguagem da Home) recebendo o facho na borda esquerda, com um
+// mockup mobile flutuando sobre o canto superior direito. Telas vazias de
+// propósito — espaço reservado para os prints reais entrarem depois.
 
-function RightCards({ animated }: { animated: boolean }) {
+function DeviceMockups({ animated }: { animated: boolean }) {
   return (
     <>
+      {/* ── Desktop ──────────────────────────────────────────────────────── */}
       <motion.div
-        className="absolute z-10 rounded-3xl bg-white overflow-hidden"
-        style={{
-          left: CARD_A.x, top: CARD_A.y, width: CARD_A.w, height: CARD_A.h,
-          boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 30px 60px -24px rgba(19,40,64,0.28)",
-          border: "1px solid rgba(19,40,64,0.05)",
-        }}
+        className="absolute z-10"
+        style={{ left: DESKTOP_MOCK.x, top: DESKTOP_MOCK.y, width: DESKTOP_MOCK.w, height: DESKTOP_MOCK.h }}
         initial={animated ? { opacity: 0, x: 24, scale: 0.96 } : false}
         animate={{ opacity: 1, x: 0, scale: 1 }}
         transition={{ duration: 0.65, delay: 0.78, ease: [0.22, 1, 0.36, 1] }}
       >
-        <img
-          src="/assets/imgs/home/hotel.webp"
-          alt="Quarto Superior"
-          width={900}
-          height={900}
-          decoding="async"
-          className="w-full h-[92px] object-cover"
-        />
-        <div className="px-4 pt-2.5 pb-3.5">
-          <div className="flex items-center justify-between">
-            <span className="text-[13px] text-[#244248]/55">Quarto Superior</span>
-            <span className="text-[11px] font-medium text-[#244248]/40">Booking.com</span>
+        <div
+          className="relative w-full h-full rounded-[20px] overflow-hidden bg-white"
+          style={{
+            boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 30px 60px -24px rgba(19,40,64,0.28)",
+            border: "1px solid rgba(19,40,64,0.06)",
+          }}
+        >
+          {/* Barra de janela — três pontinhos, mesmo registro "browser" do resto do site */}
+          <div className="h-7 flex items-center gap-1.5 px-3.5 bg-[#f5f5f7] border-b border-black/[0.04]">
+            <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+            <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
+            <span className="w-2 h-2 rounded-full bg-[#28c840]" />
           </div>
-          <div className="mt-0.5 text-[1.35rem] font-bold text-[#1a3a45] tracking-tight">
-            € 320<span className="text-[#244248]/40 text-base font-medium">,00</span>
-          </div>
+
           <div
-            className="mt-2.5 h-8 rounded-full flex items-center justify-center gap-1.5 text-[11px] font-semibold text-white tracking-wide"
-            style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #285992 100%)" }}
+            className="absolute inset-x-0 bottom-0 top-7 flex flex-col items-center justify-center gap-2 border-2 border-dashed"
+            style={{ borderColor: "rgba(40,89,146,0.2)", background: "rgba(40,89,146,0.04)" }}
           >
-            SINCRONIZAR AGORA
+            <Monitor className="w-6 h-6" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+            <span className="text-[10.5px] font-medium px-6 text-center leading-snug" style={{ color: "rgba(40,89,146,0.45)" }}>
+              Print do painel aqui
+            </span>
           </div>
+
+          {/* Brilho de chegada — acende na borda esquerda no instante exato em
+              que o facho fundido termina o percurso ali (delay 0: o traçado
+              alcança essa borda em t=100%, que é o mesmo instante que t=0% do
+              próximo ciclo). */}
+          {animated && (
+            <span
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-[3px] pointer-events-none"
+              style={{
+                background: "linear-gradient(180deg, transparent, #3a7bd5, transparent)",
+                animation: `cm-screen-arrive ${FLOW_DURATION}s linear infinite`,
+              }}
+            />
+          )}
         </div>
       </motion.div>
 
+      {/* ── Mobile — flutua sobre o canto superior direito do desktop ─────── */}
       <motion.div
-        className="absolute z-20 rounded-3xl bg-white flex flex-col items-center text-center px-4 py-4"
-        style={{
-          left: CARD_B.x, top: CARD_B.y, width: CARD_B.w, height: CARD_B.h,
-          boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 20px 44px -16px rgba(19,40,64,0.30)",
-          border: "1px solid rgba(19,40,64,0.05)",
-        }}
+        className="absolute z-20"
+        style={{ left: MOBILE_MOCK.x, top: MOBILE_MOCK.y, width: MOBILE_MOCK.w, height: MOBILE_MOCK.h }}
         initial={animated ? { opacity: 0, y: -16, scale: 0.94 } : false}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, delay: 1.05, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className="w-11 h-11 rounded-full flex items-center justify-center shrink-0"
-          style={{ background: "rgba(58,123,213,0.10)", boxShadow: "inset 0 0 0 1px rgba(58,123,213,0.18)" }}
+          className="w-full h-full rounded-[24px] p-[3px]"
+          style={{
+            background: "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.45))",
+            boxShadow: "0 20px 44px -16px rgba(19,40,64,0.38)",
+          }}
         >
-          <Check className="w-5 h-5 text-[#285992]" strokeWidth={2.5} />
-        </div>
-        <p className="mt-2 text-[13px] font-semibold text-[#1a3a45] leading-snug">
-          Sincronização<br />concluída
-        </p>
-        <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f4f7fb] text-[10.5px] text-[#244248]/60">
-          <RefreshCw className="w-3 h-3 text-[#3a7bd5]" strokeWidth={2.25} />
-          Ativo em +450 canais
+          <div className="relative w-full h-full rounded-[21px] overflow-hidden bg-white ring-1 ring-black/5">
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-7 h-[6px] rounded-full bg-black/70 z-10" />
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 border-2 border-dashed"
+              style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
+            >
+              <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+              <span className="text-[8px] font-medium text-center px-1.5 leading-snug" style={{ color: "rgba(40,89,146,0.45)" }}>
+                Print mobile
+              </span>
+            </div>
+          </div>
         </div>
       </motion.div>
     </>
@@ -366,9 +432,8 @@ function Stage({
             </linearGradient>
           </defs>
 
-          <FlowLine d={WIRE_IN_TOP} delay={0}    animated={animated} />
-          <FlowLine d={WIRE_IN_BOT} delay={0.85} animated={animated} />
-          <FlowLine d={WIRE_OUT}    delay={1.7}  duration={1.1} animated={animated} />
+          <FlowLine d={FULL_PATH_TOP} animated={animated} />
+          <FlowLine d={FULL_PATH_BOT} animated={animated} />
         </svg>
 
         {CHANNELS.map((ch, i) => (
@@ -376,7 +441,7 @@ function Stage({
         ))}
 
         <Hub animated={animated} />
-        <RightCards animated={animated} />
+        <DeviceMockups animated={animated} />
       </div>
     </div>
   );
@@ -537,7 +602,6 @@ function buildTitle(raw: string) {
       {raw.slice(0, idx)}
       <span
         className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
-        style={{ textDecorationLine: "underline", textDecorationColor: "#fccc30", textDecorationThickness: "3px", textUnderlineOffset: "6px" }}
       >
         {kw}
       </span>
@@ -554,55 +618,31 @@ interface HeroSectionProps {
 }
 
 function HeroSection({ data, onCtaClick }: HeroSectionProps) {
-  const sectionRef = useRef<HTMLElement>(null);
   const stageWrapRef = useRef<HTMLDivElement>(null);
   const scale = useStageScale(stageWrapRef);
   const reduced = useReducedMotion();
   const animated = !reduced;
   const isDesktop = useIsDesktop();
 
-  useInternalHeroGsap(sectionRef);
-
   return (
-    <section
-      ref={sectionRef}
-      data-hero="section"
-      className="relative overflow-hidden bg-[#f4f7fb] pt-28 pb-14 lg:pt-32 lg:pb-16"
+    // ── Tudo dentro da mesma faixa degradê — resumo + diagrama integrados,
+    // igual à Home (texto e mockup compartilham a mesma faixa azul). O CTA
+    // vem depois, cavalgando a borda inferior da faixa. ────────────────────
+    <GradientHero
+      eyebrow={data.subtitulo}
+      title={buildTitle(data.titulo)}
+      subtitle={data.descricao}
+      ctaLabel={data.ctaPrimario}
+      onCtaClick={onCtaClick}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-[1180px] mx-auto">
-
-          {/* ── Título + resumo + CTA — centralizados ─────────────────────────── */}
-          <div className="max-w-2xl mx-auto text-center">
-            <h1
-              data-hero="title"
-              className="font-display text-4xl sm:text-5xl lg:text-[3.75rem] font-bold text-[#1a3a45] leading-[1.06] tracking-tight"
-            >
-              {buildTitle(data.titulo)}
-            </h1>
-            <p
-              data-hero="description"
-              className="mt-5 text-base lg:text-lg text-[#244248]/70 leading-relaxed max-w-xl mx-auto"
-            >
-              {data.descricao}
-            </p>
-            <div data-hero="cta" className="mt-8 flex justify-center">
-              <HeroButton onClick={onCtaClick}>{data.ctaPrimario}</HeroButton>
-            </div>
-          </div>
-
-          {/* ── Diagrama ──────────────────────────────────────────────────────── */}
-          <div className="relative mt-16 lg:mt-20">
-            {isDesktop ? (
-              <Stage animated={animated} scale={scale} wrapRef={stageWrapRef} />
-            ) : (
-              <MobileFlow animated={animated} />
-            )}
-          </div>
-
-        </div>
+      <div>
+        {isDesktop ? (
+          <Stage animated={animated} scale={scale} wrapRef={stageWrapRef} />
+        ) : (
+          <MobileFlow animated={animated} />
+        )}
       </div>
-    </section>
+    </GradientHero>
   );
 }
 

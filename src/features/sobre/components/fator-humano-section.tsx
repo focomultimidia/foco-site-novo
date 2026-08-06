@@ -239,7 +239,7 @@ function CultureSection() {
           <span className="block text-[10px] font-bold tracking-[0.15em] uppercase text-[#0f766e] mb-4">Cultura e Time</span>
         </StaggerItem>
         <StaggerItem>
-          <h3 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] tracking-tight leading-tight mb-5">
+          <h3 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] tracking-tight leading-tight mb-5">
             Construído por quem<br className="hidden sm:block" /> ama o que faz.
           </h3>
         </StaggerItem>
@@ -295,7 +295,7 @@ function FeatureRow({ eyebrow, title, body, icon: Icon, accentColor, visual }: {
             <Icon className="w-5 h-5" />
           </div>
           <span className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-4" style={{ color: accentColor }}>{eyebrow}</span>
-          <h3 className="font-display text-3xl sm:text-4xl font-bold text-[#1e293b] tracking-tight leading-tight mb-5">{title}</h3>
+          <h3 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] tracking-tight leading-tight mb-5">{title}</h3>
           <p className="text-slate-500 leading-relaxed text-base">{body}</p>
         </StaggerItem>
         <StaggerItem>{visual}</StaggerItem>

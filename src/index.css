@@ -1,7 +1,46 @@
-/* Design System typography — Inter + Space Grotesk + JetBrains Mono
+/* Design System typography — Inter + General Sans + JetBrains Mono
    display=swap: previne FOIT (flash of invisible text).
-   Pesos alinhados ao design_system.html: 300-600 para display e sans, 400-500 mono. */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap');
+   General Sans (display, títulos) — trocada de Space Grotesk, ver
+   comparação tipográfica aprovada ("Premium"). Pesos 400-700 cobrem todo
+   uso de font-display no site (medium/semibold/bold). Auto-hospedada em
+   /public/assets/fonts (não vem mais do CDN da Fontshare): confirmado que
+   o import externo falhava silenciosamente pro usuário mesmo local e com
+   hard refresh, caindo no fallback do sistema sem erro nenhum — Google
+   Fonts (Inter/JetBrains Mono) continua via CDN por ser mais confiável. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@font-face {
+  font-family: 'General Sans';
+  src: url('/assets/fonts/general-sans/GeneralSans-400.woff2') format('woff2'),
+       url('/assets/fonts/general-sans/GeneralSans-400.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/assets/fonts/general-sans/GeneralSans-500.woff2') format('woff2'),
+       url('/assets/fonts/general-sans/GeneralSans-500.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/assets/fonts/general-sans/GeneralSans-600.woff2') format('woff2'),
+       url('/assets/fonts/general-sans/GeneralSans-600.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/assets/fonts/general-sans/GeneralSans-700.woff2') format('woff2'),
+       url('/assets/fonts/general-sans/GeneralSans-700.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -149,4 +188,58 @@
 @keyframes cm-flow-pulse {
   from { stroke-dashoffset: 0; }
   to   { stroke-dashoffset: -1; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PULSO DE FUSÃO — traçado único dos 2 fachos de entrada do Channel Manager
+   (percorre a curva de fusão + atravessa o hub + segue até o card, tudo num
+   só <path> por facho — não existe um 3º traçado de saída separado).
+
+   Muitos paradas (10), interpoladas em LINHA RETA (a própria animação é
+   aplicada com `linear` no componente) — de propósito: a primeira versão
+   usava cubic-bezier por trecho, e cada bezier desacelera até quase zero
+   perto das suas próprias pontas. Empilhar dois trechos que desaceleram no
+   mesmo ponto (início do loop, e o fim da rajada bem no encontro dos
+   fachos) somava uma "parada" visível nos dois lugares. Com paradas retas
+   eu controlo a velocidade (Δdistância/Δtempo) direto pelos números, sem
+   nenhuma curva escondida derrapando pra zero:
+     0%→45%   : desliza devagar, mas nunca para (segue sempre em frente).
+     45%→58%  : rajada — acelera bruscamente bem na curva de fusão.
+     58%→68%  : mantém a velocidade alta logo depois do encontro (sem
+                desacelerar ali — é exatamente onde a pausa acontecia).
+     68%→100% : desacelera aos poucos até voltar ao ritmo do início,
+                fechando o loop sem soluço.
+   ────────────────────────────────────────────────────────────────────────── */
+@keyframes cm-flow-merge {
+  0%   { stroke-dashoffset: 0; }
+  10%  { stroke-dashoffset: -0.02; }
+  30%  { stroke-dashoffset: -0.07; }
+  45%  { stroke-dashoffset: -0.15; }
+  52%  { stroke-dashoffset: -0.25; }
+  58%  { stroke-dashoffset: -0.373; }
+  68%  { stroke-dashoffset: -0.55; }
+  80%  { stroke-dashoffset: -0.75; }
+  92%  { stroke-dashoffset: -0.92; }
+  100% { stroke-dashoffset: -1; }
+}
+
+/* Reflexo premium — brilho branco translúcido que varre o CARD INTEIRO do
+   hub (fundo escuro + logo), não só o círculo, no instante em que o facho
+   fundido cruza o hub (delay calibrado a partir do keyframe acima). */
+@keyframes cm-hub-glint {
+  0%   { transform: translateX(-140%) rotate(18deg); opacity: 0; }
+  3%   { opacity: 1; }
+  9%   { transform: translateX(140%) rotate(18deg); opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* Brilho de chegada na borda esquerda do mockup desktop — o facho fundido
+   alcança essa borda exatamente em t=100% (= t=0% do próximo ciclo, já que
+   o loop é infinito), então este keyframe acende bem no início/fim, sem
+   precisar de nenhum delay calculado. */
+@keyframes cm-screen-arrive {
+  0%   { opacity: 0; transform: scaleY(0.4); }
+  4%   { opacity: 1; transform: scaleY(1); }
+  14%  { opacity: 0; transform: scaleY(0.4); }
+  100% { opacity: 0; }
 }

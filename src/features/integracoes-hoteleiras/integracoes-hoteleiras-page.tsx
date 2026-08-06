@@ -8,11 +8,9 @@ import {
 } from "./components";
 
 // Provas Sociais importadas da Home e UI
-import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
-import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 
 import { Spinner } from "@/components/ui/spinner";
@@ -66,16 +64,13 @@ function IntegracoesHoteleirasPage() {
       {/* Section 3: PMS's Integrados */}
       <PmsIntegradosSection />
 
-      {/* Prova Social: Depoimentos (Aprovação 97%) */}
-      <DepoimentosSection depoimentos={depoimentos} />
-
-      {/* Prova Social: Vídeos */}
-      <VideoTestimonialsCarousel
-        items={videosData}
-        title="Veja quem já transformou sua operação com integrações"
-        subtitle="Depoimentos em vídeo de clientes que conectaram seus sistemas com a Foco"
+      {/* Prova Social: Mural de depoimentos (texto + vídeo, unificados) */}
+      <WallOfLoveSection
+        depoimentos={depoimentos}
+        videos={videosData}
         badge="Depoimentos"
-        slidesToShow={3}
+        title="Um mural de resultados reais"
+        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco conectou seus sistemas."
       />
 
       {/* Prova Social: Na Mídia */}

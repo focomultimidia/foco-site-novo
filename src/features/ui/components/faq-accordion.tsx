@@ -54,7 +54,7 @@ function FAQAccordion({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4"
+              className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4"
             >
               {title}
             </motion.h2>
@@ -98,7 +98,7 @@ function FAQAccordion({
                   value={item.id}
                   className="bg-white rounded-lg border border-gray-200 px-6 data-[state=open]:shadow-md transition-shadow"
                 >
-                  <AccordionTrigger className="text-left text-[#1E3A5F] font-semibold hover:text-[#0e7490] hover:no-underline py-4">
+                  <AccordionTrigger className="text-left text-[#1E3A5F] font-semibold hover:text-[#285992] hover:no-underline py-4">
                     {item.question}
                   </AccordionTrigger>
                   <AccordionContent className="text-gray-600 pb-4">

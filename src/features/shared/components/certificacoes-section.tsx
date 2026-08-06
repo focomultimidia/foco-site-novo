@@ -165,7 +165,7 @@ function CertificacoesSection({
           className="text-center mb-16"
         >
           <SectionEyebrow>Certificações e parcerias</SectionEyebrow>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
             Certificações que garantem{" "}
             <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
               excelência e confiança

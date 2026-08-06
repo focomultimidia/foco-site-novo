@@ -178,7 +178,7 @@ function VantagensSection() {
 
           {/* ── Header ──────────────────────────────────────────────────── */}
           <div ref={headerRef} className="text-center mb-14 max-w-5xl mx-auto">
-            <h2 className="font-display text-4xl sm:text-5xl font-bold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
+            <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#0f172a] leading-none tracking-tighter antialiased mb-4">
               Confira recursos exclusivos do nosso{" "}
               <span
                 style={{
@@ -263,7 +263,7 @@ function VantagensSection() {
                         />
                       </div>
 
-                      <h3 className="font-display font-bold text-white text-[1.3rem] mb-2.5 leading-snug tracking-tight">
+                      <h3 className="font-display font-semibold text-white text-[1.3rem] mb-2.5 leading-snug tracking-tight">
                         {v.titulo}
                       </h3>
                       <p className="font-sans font-normal text-blue-100/90 text-[0.9rem] leading-relaxed">

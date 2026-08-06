@@ -56,8 +56,8 @@ function RecursosSection({ recursos }: RecursosSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-gray-50 rounded-xl p-6 hover:shadow-lg transition-shadow"
               >
-                <div className="w-12 h-12 rounded-lg bg-[#00BCD4]/10 flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-[#0e7490]" />
+                <div className="w-12 h-12 rounded-lg bg-[#285992]/10 flex items-center justify-center mb-4">
+                  <Icon className="w-6 h-6 text-[#285992]" />
                 </div>
                 <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{recurso.titulo}</h3>
                 <p className="text-sm text-slate-500">{recurso.descricao}</p>

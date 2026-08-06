@@ -83,14 +83,14 @@ function Footer() {
             <div className="space-y-3">
               <a
                 href="tel:+551140028822"
-                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#00BCD4] transition-colors"
+                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#fccc30] transition-colors"
               >
                 <Phone className="w-4 h-4" />
                 <span>4002-8822</span>
               </a>
               <a
                 href="mailto:contato@focotec.com.br"
-                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#00BCD4] transition-colors"
+                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#fccc30] transition-colors"
               >
                 <Mail className="w-4 h-4" />
                 <span>contato@focotec.com.br</span>
@@ -115,7 +115,7 @@ function Footer() {
                   <li key={link.label}>
                     <Link
                       to={link.href}
-                      className="text-sm text-white/70 hover:text-[#00BCD4] transition-colors"
+                      className="text-sm text-white/70 hover:text-[#fccc30] transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -142,7 +142,7 @@ function Footer() {
                 <a
                   key={social.label}
                   href={social.href}
-                  className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-[#00BCD4] hover:text-white transition-all"
+                  className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-white/70 hover:bg-[#fccc30] hover:text-[#1E3A5F] transition-all"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
@@ -152,13 +152,13 @@ function Footer() {
 
             {/* Legal Links */}
             <div className="flex items-center gap-4 text-sm text-white/60">
-              <Link to="#" className="hover:text-[#00BCD4] transition-colors">
+              <Link to="#" className="hover:text-[#fccc30] transition-colors">
                 Privacidade
               </Link>
-              <Link to="#" className="hover:text-[#00BCD4] transition-colors">
+              <Link to="#" className="hover:text-[#fccc30] transition-colors">
                 Termos
               </Link>
-              <Link to="#" className="hover:text-[#00BCD4] transition-colors">
+              <Link to="#" className="hover:text-[#fccc30] transition-colors">
                 Cookies
               </Link>
             </div>

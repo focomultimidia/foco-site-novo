@@ -11,11 +11,9 @@ import { GenericInfoSection } from "@/features/shared/components/generic-info-se
 import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home e UI
-import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
-import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
@@ -75,16 +73,13 @@ function SoftwarePagamentosPage() {
       {/* Section 5: Vantagens do FocoPay */}
       <VantagensSection />
 
-      {/* Prova Social: Depoimentos (Aprovação 97%) */}
-      <DepoimentosSection depoimentos={depoimentos} />
-
-      {/* Prova Social: Vídeos */}
-      <VideoTestimonialsCarousel
-        items={videosData}
-        title="Veja quem já transformou sua gestão financeira"
-        subtitle="Depoimentos em vídeo de clientes que automatizaram seus pagamentos com o Foco Pay"
+      {/* Prova Social: Mural de depoimentos (texto + vídeo, unificados) */}
+      <WallOfLoveSection
+        depoimentos={depoimentos}
+        videos={videosData}
         badge="Depoimentos"
-        slidesToShow={3}
+        title="Um mural de resultados reais"
+        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco automatizou seus pagamentos."
       />
 
       {/* Prova Social: Na Mídia */}

@@ -14,7 +14,7 @@ function OQueESection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-medium text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             O que é um <span className="text-[#5E35B1]">CRM para hotéis</span> e pousadas?
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">

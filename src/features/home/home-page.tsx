@@ -10,31 +10,46 @@ import {
 } from "./components";
 import { EventosSection } from "@/features/home/components/eventos-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
-import { DepoimentosSection } from "@/features/home/components/depoimentos-section";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { PageLoader } from "@/components/ui/page-loader";
-import { ErrorMessage } from "@/components/ui/error-message";
 import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
-import { TrustedLogosMarquee, SmartIntegrationsTabs, CertificacoesSection } from "@/features/shared/components";
-import { VideoTestimonialsCarousel } from "@/features/ui/components/video-testimonials-carousel";
+import { TrustedLogosMarquee, SmartIntegrationsTabs, CertificacoesSection, WallOfLoveSection } from "@/features/shared/components";
 import { eventos, depoimentos, numeros, videosData, artigosMidia } from "@/features/shared/data/social-proof-data";
+import { Spinner } from "@/components/ui/spinner";
+import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
 
 export function HomePage() {
   const { data, isLoading, isError, refetch } = useHomePage();
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
 
   if (isLoading) {
-    return <PageLoader />;
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner className="w-12 h-12" />
+      </div>
+    );
   }
 
   if (isError || !data) {
     return (
-      <ErrorMessage
-        title="Erro ao carregar página"
-        message="Não foi possível carregar o conteúdo. Tente novamente."
-        onRetry={refetch}
-      />
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <Empty className="text-center">
+          <EmptyHeader>
+            <EmptyTitle>Erro ao carregar dados</EmptyTitle>
+            <EmptyDescription>
+              Não foi possível carregar o conteúdo da página. Tente novamente.
+            </EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button onClick={() => refetch()} variant="outline" className="rounded-full px-6">
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Tentar novamente
+            </Button>
+          </EmptyContent>
+        </Empty>
+      </div>
     );
   }
 
@@ -49,24 +64,22 @@ export function HomePage() {
 
       <TrustedLogosMarquee />
 
-      <NaMidiaSection artigos={artigosMidia} />
-
       <DoresSection dores={data.dores} />
-
-      <EventosSection eventos={eventos} />
 
       <SmartIntegrationsTabs />
 
-      <DepoimentosSection depoimentos={depoimentos} />
+      <EventosSection eventos={eventos} />
+
+      <NaMidiaSection artigos={artigosMidia} />
 
       <DiferenciaisSection diferenciais={data.diferenciais} />
 
-      <VideoTestimonialsCarousel
-        items={videosData}
-        title="Veja quem já transformou sua gestão hoteleira"
-        subtitle="Depoimentos em vídeo de clientes que revolucionaram a gestão do seu hotel com a Foco Tecnologia"
+      <WallOfLoveSection
+        depoimentos={depoimentos}
+        videos={videosData}
         badge="Depoimentos"
-        slidesToShow={3}
+        title="Um mural de resultados reais"
+        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco revolucionou a gestão do seu hotel."
       />
       <SegurancaSection certificacoes={data.certificacoes} />
 
