@@ -61,14 +61,6 @@ function cardKey(card: Card): string {
   return card.kind === "text" ? `t-${card.data.id}` : `v-${card.data.id}`;
 }
 
-// Destaca a abertura do depoimento (até a 1ª pontuação, num intervalo
-// razoável) — mesmo efeito editorial da referência ("I LOVE Testimonial...").
-function splitHighlight(texto: string): { lead: string; rest: string } {
-  const match = texto.match(/^.{15,70}?[.!?]/);
-  const lead = match ? match[0] : texto.slice(0, Math.min(48, texto.length));
-  return { lead, rest: texto.slice(lead.length) };
-}
-
 // ── Colunas por breakpoint ────────────────────────────────────────────────────
 // Detectado via matchMedia (só recalcula em resize/rotação, nunca ao
 // adicionar cartões) — evita que o corte CSS `columns-*` reflua e embaralhe
@@ -107,7 +99,6 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
   const spotlight = useMotionTemplate`radial-gradient(280px circle at ${mx}px ${my}px, rgba(40,89,146,0.06), transparent 70%)`;
   const rotateX = useSpring(0, { stiffness: 260, damping: 28 });
   const rotateY = useSpring(0, { stiffness: 260, damping: 28 });
-  const { lead, rest } = splitHighlight(dep.texto);
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -128,7 +119,7 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
 
   return (
     <motion.div
-      className="relative rounded-3xl bg-white p-7 transform-gpu"
+      className="relative rounded-3xl bg-white p-7 transform-gpu overflow-hidden"
       style={{
         rotateX,
         rotateY,
@@ -142,6 +133,44 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
     >
       <motion.div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ background: spotlight }} />
 
+      {/* Aspas de fundo — marca d'água em duas camadas (eco tipográfico), não
+          o ícone de "quote" óbvio: sangra pelo canto, quase invisível, só
+          registra como textura ao olhar de novo. */}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute select-none font-display font-bold"
+        style={{
+          top: "-3.6rem",
+          left: "-2.1rem",
+          fontSize: "9.5rem",
+          lineHeight: 1,
+          color: "#1e3a5f",
+          opacity: 0.045,
+          transform: "rotate(-11deg) scale(1.15)",
+          WebkitMaskImage: "radial-gradient(60% 60% at 32% 30%, black 35%, transparent 80%)",
+          maskImage: "radial-gradient(60% 60% at 32% 30%, black 35%, transparent 80%)",
+        }}
+      >
+        &rdquo;
+      </span>
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute select-none font-display font-bold"
+        style={{
+          top: "-2.1rem",
+          left: "0.6rem",
+          fontSize: "9.5rem",
+          lineHeight: 1,
+          color: "#1e3a5f",
+          opacity: 0.028,
+          transform: "rotate(6deg) scale(0.82)",
+          WebkitMaskImage: "radial-gradient(60% 60% at 32% 30%, black 35%, transparent 80%)",
+          maskImage: "radial-gradient(60% 60% at 32% 30%, black 35%, transparent 80%)",
+        }}
+      >
+        &rdquo;
+      </span>
+
       <div className="relative z-10">
         <div className="flex gap-0.5 mb-5">
           {Array.from({ length: 5 }).map((_, si) => (
@@ -150,13 +179,7 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
         </div>
 
         <p className="text-[15px] leading-relaxed text-slate-700">
-          <span
-            className="font-semibold rounded px-1 py-0.5 -mx-1"
-            style={{ background: "rgba(252,204,48,0.22)", color: "#1e3a5f" }}
-          >
-            {lead}
-          </span>
-          {rest}
+          {dep.texto}
         </p>
 
         <div className="h-px bg-gradient-to-r from-[#285992]/10 via-[#285992]/5 to-transparent my-6" />

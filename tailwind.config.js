@@ -108,6 +108,25 @@ module.exports = {
           from: { transform: "rotate(0deg)" },
           to: { transform: "rotate(-360deg)" },
         },
+        // Manchas de aurora do fundo da hero da home — cada uma com seu
+        // próprio raio/direção, pra nunca repetir a mesma combinação.
+        "aurora-a": {
+          "0%, 100%": { transform: "translate(0,0) scale(1)" },
+          "50%": { transform: "translate(60px, 40px) scale(1.15)" },
+        },
+        "aurora-b": {
+          "0%, 100%": { transform: "translate(0,0) scale(1)" },
+          "50%": { transform: "translate(-50px, -30px) scale(1.1)" },
+        },
+        "aurora-c": {
+          "0%, 100%": { transform: "translate(0,0) scale(1)" },
+          "50%": { transform: "translate(-30px, 50px) scale(0.9)" },
+        },
+        // Flutuação idle dos badges de estatística da hero da home.
+        "badge-float": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-7px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +136,10 @@ module.exports = {
         "spin-slower": "spin-slower 30s linear infinite",
         "spin-reverse-slow": "spin-reverse-slow 25s linear infinite",
         "counter-spin": "counter-spin 20s linear infinite",
+        "aurora-a": "aurora-a 16s ease-in-out infinite",
+        "aurora-b": "aurora-b 20s ease-in-out infinite",
+        "aurora-c": "aurora-c 13s ease-in-out infinite",
+        "badge-float": "badge-float 4.5s ease-in-out infinite",
       },
     },
   },

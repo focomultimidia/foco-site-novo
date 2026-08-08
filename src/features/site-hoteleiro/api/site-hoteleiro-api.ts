@@ -4,7 +4,7 @@ const siteHoteleiroData: SiteHoteleiroData = {
   hero: {
     titulo: "Site hoteleiro que converte visitantes em hóspedes",
     subtitulo: "Sites para hotéis, pousadas e aluguel por temporada",
-    descricao: "Website profissional para hotéis, pousadas e aluguel por temporada. Tenha um site moderno, responsivo e otimizado para SEO, 100% modular e editável. Reduza sua dependência de OTAs e aumente sua margem de lucro.",
+    descricao: "Tenha um site moderno, responsivo e otimizado para SEO, 100% modular e editável. Reduza sua dependência de OTAs e aumente sua margem de lucro.",
     ctaPrimario: "Garantir meu 1º mês grátis",
     ctaSecundario: "Ver Templates",
     imagemUrl: "/assets/imgs/site-hoteleiro/img-hero.webp",

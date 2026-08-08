@@ -203,7 +203,7 @@ function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
 function FlowLine({ d, animated }: { d: string; animated: boolean }) {
   return (
     <>
-      <path d={d} fill="none" stroke="rgba(19,40,64,0.12)" strokeWidth={1} strokeLinecap="round" />
+      <path d={d} fill="none" stroke="#23446c" strokeWidth={1} strokeLinecap="round" />
 
       {animated && (
         <path
@@ -480,7 +480,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
       </div>
 
       <svg aria-hidden="true" width="2" height="40" viewBox="0 0 2 40" className="my-1">
-        <line x1="1" y1="0" x2="1" y2="40" stroke="rgba(19,40,64,0.12)" strokeWidth={1} />
+        <line x1="1" y1="0" x2="1" y2="40" stroke="#23446c" strokeWidth={1} />
         {animated && (
           <line
             x1="1" y1="0" x2="1" y2="40"
@@ -511,7 +511,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
       </div>
 
       <svg aria-hidden="true" width="2" height="40" viewBox="0 0 2 40" className="my-1">
-        <line x1="1" y1="0" x2="1" y2="40" stroke="rgba(19,40,64,0.12)" strokeWidth={1} />
+        <line x1="1" y1="0" x2="1" y2="40" stroke="#23446c" strokeWidth={1} />
         {animated && (
           <line
             x1="1" y1="0" x2="1" y2="40"
@@ -601,7 +601,7 @@ function buildTitle(raw: string) {
     <>
       {raw.slice(0, idx)}
       <span
-        className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
+        className="text-transparent bg-clip-text bg-gradient-to-r from-[#427ab9] to-[#8bc4f7]"
       >
         {kw}
       </span>

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  AnimatePresence,
   motion,
   useMotionValue,
   useReducedMotion,
@@ -18,8 +17,7 @@ import {
   Smartphone,
 } from "lucide-react";
 import type { HeroData } from "../types";
-import { useHeroScrollytelling } from "../hooks/use-hero-scrollytelling";
-import { HERO_SCALE_CSS, computeHeroScale, fluidRem, fluidPx } from "../lib/hero-scale";
+import { HERO_SCALE_CSS, fluidRem, fluidPx } from "@/features/shared/lib/hero-scale";
 
 // ── Entry easing ──────────────────────────────────────────────────────────────
 
@@ -32,27 +30,16 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 //    da borda do mockup — multiplicado por `--hero-scale` no próprio
 //    HeroStatBadge, então continua proporcional ao tamanho real do mockup em
 //    qualquer largura (era um `-left-9`/`-right-10` fixo antes, por isso
-//    invadia o conteúdo do mockup quando ele encolhia em telas menores).
-//    `key` identifica o badge pro GSAP (ver data-badge em HeroStatBadge). ───
+//    invadia o conteúdo do mockup quando ele encolhia em telas menores). ───
 
 const STATS = [
-  { key: "clientes",   icon: Users,        value: "+2.500", label: "Clientes ativos",       delay: 0.9, topPct: 6,  side: "left"  as const, offsetRem: 2.25 },
-  { key: "transacoes", icon: TrendingUp,   value: "+1B",    label: "Transações/ano",         delay: 1.0, topPct: 26, side: "right" as const, offsetRem: 2.5  },
-  { key: "anos",       icon: Calendar,     value: "+18",    label: "Anos de experiência",    delay: 1.1, topPct: 46, side: "left"  as const, offsetRem: 2.25 },
+  { key: "clientes",   icon: Users,        value: "+18", label: "Anos de experiência",       delay: 0.8, topPct: -14,  side: "left"  as const, offsetRem: 1.25, floatDelay: 0    },
+  { key: "transacoes", icon: TrendingUp,   value: "+1B",    label: "Transações/ano",         delay: 1.0, topPct: 106, side: "right" as const, offsetRem: 0.5,  floatDelay: 0.7  },
+  { key: "anos",       icon: Calendar,     value: "+2.500",    label: "Clientes ativos",    delay: 1.2, topPct: 46, side: "left"  as const, offsetRem: 9, floatDelay: 1.4  },
 ] as const;
 
-// ── Slides do mockup — desktop e celular, 3 etapas cada, narrativamente
-//    pareados (ex.: a etapa 0 mostra o ecossistema no desktop e o check-in
-//    digital no celular — a mesma "história" em duas telas). As etapas 2 e 3
-//    do desktop usam ilustrações de produto que já existiam no repo (as
-//    mesmas do site em /produtos), escolhidas só pra preencher o espaço até
-//    as telas reais serem fotografadas — não são screenshots reais do
-//    produto, por isso optei por essas peças abstratas/wireframe (mesmo
-//    estilo, cores da marca) em vez de recortar um screenshot de OUTRA
-//    função do sistema e rotular errado. `objectPosition` desloca o corte
-//    do `object-cover` pra longe de elementos (ex.: o celular sobreposto em
-//    motor-de-reservas.webp) que ficariam cortados de forma estranha no
-//    box quase quadrado do mockup. ──────────────────────────────────────
+// ── Imagem única do mockup — desktop e celular, sem troca/transição (pedido
+//    explícito: um print fixo em cada tela, nada de carrossel ou scrollytelling). ──
 
 interface SlideDef {
   src?: string;
@@ -60,47 +47,18 @@ interface SlideDef {
   objectPosition?: string;
 }
 
-const DESKTOP_SLIDES: SlideDef[] = [
-  {
-    src: "/assets/imgs/home/extranet.png",
-    alt: "Ecossistema Foco Tecnologia conectando sistemas de gestão hoteleira em uma única plataforma",
-  },
-  {
-    src: "/assets/imgs/produtos/motor-de-reservas.webp",
-    alt: "Painel de reservas em tempo real",
-    objectPosition: "22% center",
-  },
-  {
-    src: "/assets/imgs/produtos/pms-integracoes.webp",
-    alt: "Relatórios e indicadores de performance",
-  },
-];
-
-// As 3 telas do FocoPass (app real do hóspede) já existiam no repo, em
-// 600×1300 — bate quase exato com o "9 / 19.5" do mockup do celular (0.4615
-// nos dois), então o object-cover não corta praticamente nada. Escolhidas
-// pelo assunto mais próximo do alt de cada etapa (a 1ª já tem "Faça o
-// check-in online" na tela; a 2ª tem ícones de despertador/notificação; a
-// 3ª é a única sobrando) — mesmo critério do desktop: preencher com algo
-// real e da marca em vez de um recorte de outra tela rotulado errado.
-const MOBILE_SLIDES: SlideDef[] = [
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp", alt: "Check-in digital do hóspede" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp", alt: "Notificação de nova reserva em tempo real" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "Indicador de ocupação no bolso" },
-];
-
-// Sem `custom` real para diferenciar (todas as trocas são um crossfade simples),
-// mas a assinatura em função + a prop `custom` no AnimatePresence e no elemento
-// evitam o freeze de saída do Framer neste projeto (ver convenção do repo).
-const slideVariants = {
-  enter: (_custom: number) => ({ opacity: 0, filter: "blur(10px)" }),
-  center: (_custom: number) => ({ opacity: 1, filter: "blur(0px)" }),
-  exit: (_custom: number) => ({ opacity: 0, filter: "blur(10px)" }),
+const DESKTOP_SLIDE: SlideDef = {
+  src: "/assets/imgs/home/dashboard.png",
+  alt: "Ecossistema Foco Tecnologia conectando sistemas de gestão hoteleira em uma única plataforma",
 };
 
-// ── SlideVisual — imagem real ou placeholder tracejado, reaproveitado tanto
-//    pelas camadas empilhadas do scrollytelling quanto pelo carrossel de
-//    fallback. ─────────────────────────────────────────────────────────────
+const MOBILE_SLIDE: SlideDef = {
+  src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",
+  alt: "Check-in digital do hóspede",
+};
+
+// ── SlideVisual — imagem real ou placeholder tracejado, usado pelos mockups
+//    desktop e mobile. ────────────────────────────────────────────────────
 
 function SlideVisual({ src, alt, eager, icon, iconClassName, labelClassName, objectPosition }: {
   src?: string;
@@ -148,36 +106,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
 
-  // ── Scrollytelling só roda em desktop largo + movimento permitido — pin de
-  //    scroll em touch tende a brigar com o gesto de rolagem do usuário.
-  //    Abaixo disso, cai pro carrossel simples (crossfade + auto-troca) que
-  //    já existia antes desta feature. Calculado no mount (SPA, sem SSR —
-  //    `window` já existe no primeiro render) e reavaliado se a viewport
-  //    cruzar o breakpoint (resize, rotação de tablet). ─────────────────────
-  const [canScrollytell, setCanScrollytell] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(min-width: 1024px)").matches &&
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-  useEffect(() => {
-    const widthMq = window.matchMedia("(min-width: 1024px)");
-    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setCanScrollytell(widthMq.matches && !motionMq.matches);
-    update();
-    widthMq.addEventListener("change", update);
-    motionMq.addEventListener("change", update);
-    return () => {
-      widthMq.removeEventListener("change", update);
-      motionMq.removeEventListener("change", update);
-    };
-  }, []);
-
-  // ── Layout esquerda/direita (texto+badges+cta | mockups) só a partir de
-  //    lg — independente de `canScrollytell`, que também exige "sem
-  //    reduced-motion". Um usuário com reduced-motion numa tela larga ainda
-  //    deve ver o layout em coluna dupla (é estrutura, não animação); só a
-  //    troca de imagem (Iris Reveal) é que não roda pra ele. ───────────────
+  // ── Layout esquerda/direita (texto+badges+cta | mockups) só a partir de lg. ──
   const [isWideLayout, setIsWideLayout] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches,
   );
@@ -189,31 +118,8 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
     return () => mq.removeEventListener("change", update);
   }, []);
 
-  // Mesma curva de `--hero-scale` (CSS), como número — o GSAP não pode
-  // multiplicar um tween por uma string de clamp(), e ler o valor computado
-  // da variável CSS de volta não funciona (ver comentário em lib/hero-scale.ts).
-  // Calculado direto no corpo do componente (não precisa de useState/effect
-  // dedicados): só é lido UMA VEZ, dentro do useLayoutEffect do hook, no
-  // mount — não precisa reagir a cada pixel de resize.
-  const heroScale = computeHeroScale(typeof window !== "undefined" ? window.innerWidth : 1920);
-  useHeroScrollytelling(sectionRef, { steps: DESKTOP_SLIDES.length, heroScale });
-
-  // Alternância das imagens do mockup — só usada no carrossel de fallback
-  // (!canScrollytell). No modo scrollytelling as 3 camadas ficam sempre
-  // montadas e o GSAP controla qual está visível.
-  const [activeSlide, setActiveSlide] = useState(0);
-  useEffect(() => {
-    if (canScrollytell || reducedMotion || DESKTOP_SLIDES.length <= 1) return;
-    const id = setTimeout(() => {
-      setActiveSlide((i) => (i + 1) % DESKTOP_SLIDES.length);
-    }, 4500);
-    return () => clearTimeout(id);
-  }, [activeSlide, reducedMotion, canScrollytell]);
-  const currentSlide = DESKTOP_SLIDES[activeSlide];
-
   // Tilt 3D sutil ao mouse — mesma técnica já usada no ProductShowcase.
-  // Desligado no modo scrollytelling: o tilt por mouse e o pin por scroll
-  // competindo pela atenção do usuário no mesmo elemento é ruído, não polish.
+  // Só em desktop (mousemove não faz sentido em touch) e sem reduced-motion.
   const px = useMotionValue(0);
   const py = useMotionValue(0);
   const sx = useSpring(px, { stiffness: 100, damping: 20, mass: 0.6 });
@@ -222,7 +128,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
   const rotateX = useTransform(sy, [-1, 1], [-3, 3]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (reducedMotion || canScrollytell) return;
+    if (reducedMotion || !isWideLayout) return;
     const r = e.currentTarget.getBoundingClientRect();
     px.set(((e.clientX - r.left) / r.width - 0.5) * 2);
     py.set(((e.clientY - r.top) / r.height - 0.5) * 2);
@@ -237,24 +143,22 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
   // um ponto DIFERENTE de onde o H1 travava (1280px), e essa diferença é
   // que causava a desarmonia entre 1366 e 1920 vista nos prints.
   //
-  // Em telas largas, o palco é ancorado por `position:absolute` com
-  // `bottom` NEGATIVO — o mockup sempre nasce 100px abaixo da borda da
-  // seção, cortado pelo overflow-hidden dela, não importa a altura da
-  // viewport. É isso que dá o efeito "saindo de dentro do limite da seção"
-  // em vez de flutuar inteiro com uma borda/gap visível embaixo.
+  // Sempre `position: relative` — nada de ancorar no `bottom` da seção pra
+  // cortar a base do mockup (pedido explícito: mockup inteiro, sem corte).
+  // Fica em fluxo normal dentro do palco (`flex items-center justify-center`
+  // no wrapper), centralizado horizontal e verticalmente na coluna da
+  // direita — mesmo tratamento simples que a coluna de texto já tem.
   const mockupStageStyle: React.CSSProperties = isWideLayout
     ? {
-        position: "absolute",
-        right: "clamp(8px, 2.5vw, 48px)",
-        bottom: -100,
+        position: "relative",
         width: fluidPx(660),
-        aspectRatio: "900 / 816",
+        aspectRatio: "16 / 10",
         height: "auto",
       }
     : {
         position: "relative",
         width: "min(78vw, 440px)",
-        aspectRatio: "900 / 816",
+        aspectRatio: "16 / 10",
         height: "auto",
       };
 
@@ -262,18 +166,36 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
     <section
       ref={sectionRef}
       data-hero="section"
-      className="relative h-dvh min-h-[600px] overflow-hidden bg-[#f4f7fb] grid grid-rows-[auto_minmax(0,1fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
+      className="relative h-dvh min-h-[600px] overflow-hidden bg-[#10233d] grid grid-rows-[auto_minmax(0,1fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
       style={{ "--hero-scale": HERO_SCALE_CSS } as React.CSSProperties}
     >
-      {/* Fundo — full-bleed nos 100dvh inteiros. */}
+      {/* Fundo — aurora azul em deriva lenta (operação 24h, nunca "desligada"),
+          3 manchas com raio/direção próprios pra combinação nunca se repetir
+          exatamente. `motion-safe:` respeita prefers-reduced-motion sozinho
+          (sem precisar do `reducedMotion` do Framer aqui — são só CSS
+          keyframes, ver tailwind.config.js). */}
+      <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(50px)", opacity: 0.85 }}>
+        <div
+          className="absolute w-[480px] h-[480px] -left-20 -top-16 rounded-full motion-safe:animate-aurora-a"
+          style={{ background: "radial-gradient(circle, rgba(66,122,185,0.65), transparent 70%)" }}
+        />
+        <div
+          className="absolute w-[520px] h-[520px] -right-32 -bottom-36 rounded-full motion-safe:animate-aurora-b"
+          style={{ background: "radial-gradient(circle, rgba(30,58,95,0.55), transparent 70%)" }}
+        />
+        <div
+          className="absolute w-[380px] h-[380px] right-[10%] -top-20 rounded-full motion-safe:animate-aurora-c"
+          style={{ background: "radial-gradient(circle, rgba(40,89,146,0.55), transparent 70%)" }}
+        />
+      </div>
+      {/* Grão sutil — quebra a chapadura do gradiente, não repaint-a
+          (elemento fixo, não rola). */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 pointer-events-none opacity-[0.05] mix-blend-overlay"
         style={{
-          background:
-            "radial-gradient(ellipse 55% 45% at 76% 62%, rgba(252,204,48,0.16), transparent 62%)," +
-            "radial-gradient(ellipse 60% 50% at 50% -6%, rgba(255,255,255,0.92), transparent 85%)," +
-            "linear-gradient(165deg, #eef5ff 0%, #cfe4fb 32%, #9dcdf3 66%, #5599d6 100%)",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
 
@@ -286,9 +208,9 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-          className="inline-flex items-center gap-2.5 border border-[#132840]/15 bg-white/40 backdrop-blur-sm text-[#1e3a5f] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em]"
+          className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em]"
         >
-          <span className="w-1.5 h-1.5 bg-[#1e3a5f] rounded-full animate-pulse" />
+          <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
           Ecossistema completo para hotelaria
         </motion.div>
 
@@ -296,11 +218,11 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
           animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
           transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
-          style={isWideLayout ? { fontSize: fluidRem(3.4) } : undefined}
-          className="font-display font-bold text-4xl sm:text-5xl text-[#132840] leading-[1.08] tracking-tighter antialiased"
+          style={isWideLayout ? { fontSize: fluidRem(3.8) } : undefined}
+          className="font-display font-bold text-4xl sm:text-5xl text-white leading-[1.18] antialiased"
         >
           Tecnologia hoteleira integrada em uma{" "}
-          <span className="relative inline-block text-[#1e3a5f] whitespace-nowrap">
+          <span className="relative inline-block text-white whitespace-nowrap">
             única plataforma.
             <svg
               aria-hidden="true"
@@ -327,7 +249,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
           transition={{ duration: 0.85, delay: 0.44, ease: EASE }}
           style={isWideLayout ? { fontSize: fluidRem(1.125) } : undefined}
-          className="text-[#1e3a5f]/70 text-base sm:text-lg font-light leading-relaxed max-w-lg lg:max-w-md"
+          className="text-white/70 text-base sm:text-lg font-light leading-relaxed max-w-lg lg:max-w-md"
         >
           Para hotéis e pousadas que querem vender mais, gastar menos e ter
           controle total da operação.
@@ -340,7 +262,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         >
           <button
             onClick={onCtaClick}
-            className="group inline-flex items-center gap-2 bg-[#132840] text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#132840]/25 hover:shadow-[#132840]/40 hover:-translate-y-0.5"
+            className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
           >
             Demonstração grátis
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -348,13 +270,13 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         </motion.div>
       </div>
 
-      {/* ── Coluna direita — palco dos mockups. Em telas estreitas fica contido
-          e centralizado (cabe inteiro na faixa flexível abaixo do texto,
-          como sempre foi). A partir de lg, `mockupStageStyle` assume a
-          posição inteira via `position:absolute` (a coluna só precisa ser o
-          contexto de posicionamento — `lg:h-full` garante que o `bottom`
-          negativo ancore contra a borda da PRÓPRIA seção, não algo menor).
-          `min-w-0` é defensivo: evita que o item estoure a coluna. ───────── */}
+      {/* ── Coluna direita — palco dos mockups. Sempre em fluxo normal,
+          centralizado pelo `flex items-center justify-center` do wrapper —
+          em qualquer largura, o mockup inteiro (sem corte) fica centralizado
+          na coluna, tanto na horizontal quanto na vertical. `lg:h-full` dá
+          altura de sobra pro `justify-center` centralizar verticalmente
+          contra a seção inteira. `min-w-0` é defensivo: evita que o item
+          estoure a coluna. ─────────────────────────────────────────────── */}
       <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex items-center justify-center px-4 lg:px-0 pb-6 lg:pb-0">
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
@@ -367,83 +289,60 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
             ref={mockupRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            // Classes Tailwind fixas (`rounded-t-[24px] sm:rounded-t-[32px]
-            // p-2 sm:p-2.5`) continuam como fallback pra mobile/tablet — só
+            // Classes Tailwind fixas (`rounded-[24px] sm:rounded-[32px]
+            // p-3 sm:p-4`) continuam como fallback pra mobile/tablet — só
             // sobrescritas por `style` a partir de `isWideLayout`, onde viram
             // fluidas via `fluidPx(N)` (mesma `--hero-scale` do H1/mockup/
             // badges). `style` sempre vence `className` na cascata, então em
             // desktop essas classes nunca chegam a se aplicar de fato.
-            className="relative h-full rounded-t-[24px] sm:rounded-t-[32px] p-2 sm:p-2.5 [perspective:1600px]"
+            // Cantos e borda completos nos 4 lados (mockup inteiro, sem
+            // corte na base). Vidro fosco escuro — mesmo tratamento visual
+            // dos badges (fundo translúcido + blur + borda clara fina) — com
+            // borda e respiro (bezel) bem maiores que antes, pedido explícito.
+            className="relative h-full rounded-[24px] sm:rounded-[32px] p-3 sm:p-4 [perspective:1600px]"
             style={{
-              background: "rgba(255,255,255,0.32)",
-              backdropFilter: "blur(22px)",
-              WebkitBackdropFilter: "blur(22px)",
-              border: isWideLayout ? `${fluidPx(1)} solid rgba(255,255,255,0.55)` : "1px solid rgba(255,255,255,0.55)",
-              borderBottom: "none",
-              boxShadow: "0 30px 70px -20px rgba(15,40,80,0.35)",
+              background: "rgba(16,35,61,0.55)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
+              border: isWideLayout ? `${fluidPx(2)} solid rgba(255,255,255,0.22)` : "2px solid rgba(255,255,255,0.22)",
+              boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12), 0 30px 70px -20px rgba(0,0,0,0.5)",
               ...(isWideLayout ? {
-                borderTopLeftRadius: fluidPx(32),
-                borderTopRightRadius: fluidPx(32),
-                padding: fluidPx(10),
+                borderRadius: fluidPx(32),
+                padding: fluidPx(16),
               } : {}),
             }}
           >
             <motion.div
               style={{
-                ...(reducedMotion || canScrollytell ? {} : { rotateX, rotateY }),
-                ...(isWideLayout ? { borderTopLeftRadius: fluidPx(24), borderTopRightRadius: fluidPx(24) } : {}),
+                ...(reducedMotion || !isWideLayout ? {} : { rotateX, rotateY }),
+                ...(isWideLayout ? { borderRadius: fluidPx(22) } : {}),
               }}
-              className="relative h-full rounded-t-[18px] sm:rounded-t-[24px] overflow-hidden bg-white ring-1 ring-white/40 [transform-style:preserve-3d]"
+              className="relative h-full rounded-[18px] sm:rounded-[22px] overflow-hidden bg-[#10233d]/30 ring-1 ring-white/15 [transform-style:preserve-3d]"
             >
-              <div className="relative w-full h-full" style={{ aspectRatio: "900 / 816" }}>
-                {canScrollytell ? (
-                  <>
-                    {DESKTOP_SLIDES.map((slide, i) => (
-                      <div key={i} data-mockup="desktop-step" className="absolute inset-0">
-                        <SlideVisual
-                          src={slide.src}
-                          alt={slide.alt}
-                          eager={i === 0}
-                          objectPosition={slide.objectPosition}
-                          iconClassName="w-7 h-7"
-                          labelClassName="text-xs font-medium px-6 text-center"
-                        />
-                      </div>
-                    ))}
-                  </>
-                ) : (
-                  <AnimatePresence mode="popLayout" custom={activeSlide}>
-                    <motion.div
-                      key={activeSlide}
-                      custom={activeSlide}
-                      variants={slideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{ duration: 0.7, ease: EASE }}
-                      className="absolute inset-0"
-                    >
-                      <SlideVisual
-                        src={currentSlide.src}
-                        alt={currentSlide.alt}
-                        eager={activeSlide === 0}
-                        objectPosition={currentSlide.objectPosition}
-                        iconClassName="w-7 h-7"
-                        labelClassName="text-xs font-medium px-6 text-center"
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                )}
+              {/* Reflexo diagonal — sugere superfície de vidro sobre a tela. */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 z-10 pointer-events-none"
+                style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.22), transparent 40%)" }}
+              />
+              <div className="relative w-full h-full" style={{ aspectRatio: "16 / 10" }}>
+                <SlideVisual
+                  src={DESKTOP_SLIDE.src}
+                  alt={DESKTOP_SLIDE.alt}
+                  eager
+                  objectPosition={DESKTOP_SLIDE.objectPosition}
+                  iconClassName="w-7 h-7"
+                  labelClassName="text-xs font-medium px-6 text-center"
+                />
               </div>
 
             </motion.div>
 
-            <HeroMobileMockup canScrollytell={canScrollytell} isWideLayout={isWideLayout} />
+            <HeroMobileMockup isWideLayout={isWideLayout} />
 
-            {STATS.map(({ key, icon, value, label, delay, topPct, side, offsetRem }) => (
+            {STATS.map(({ key, icon, value, label, delay, topPct, side, offsetRem, floatDelay }) => (
               <HeroStatBadge
                 key={key}
-                badgeKey={key}
                 icon={icon}
                 value={value}
                 label={label}
@@ -451,6 +350,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
                 topPct={topPct}
                 side={side}
                 offsetRem={offsetRem}
+                floatDelay={floatDelay}
               />
             ))}
           </div>
@@ -463,8 +363,11 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
 // ── HeroStatBadge ─────────────────────────────────────────────────────────────
 // Três camadas de responsabilidade, cada uma dona só de uma coisa:
 //   1. motion.div (externo) — posição (top/left/right) + entrada (Framer).
-//   2. div[data-badge] (interno) — flutuação idle (GSAP, só no modo
-//      scrollytelling). GSAP e Framer nunca disputam a mesma propriedade.
+//   2. div com `animate-badge-float` (interno) — flutuação idle contínua,
+//      via CSS puro (não Framer — Framer e uma animação CSS não devem
+//      disputar `transform` no mesmo nó), defasada por badge via
+//      `animationDelay`. `motion-safe:` já respeita prefers-reduced-motion
+//      sozinho, sem precisar do `reducedMotion` do Framer aqui.
 //   3. Todo tamanho (padding, ícone, fonte) e o deslocamento lateral
 //      (`side`/`offsetRem`) multiplicam `var(--hero-scale)` — a mesma
 //      variável do H1/subtítulo/mockup — em vez de saltar em `sm:`/`lg:`.
@@ -473,16 +376,16 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
 //      na mesma proporção.
 
 function HeroStatBadge({
-  icon: Icon, value, label, delay, badgeKey, topPct, side, offsetRem,
+  icon: Icon, value, label, delay, topPct, side, offsetRem, floatDelay,
 }: {
   icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   value: string;
   label: string;
   delay: number;
-  badgeKey: string;
   topPct: number;
   side: "left" | "right";
   offsetRem: number;
+  floatDelay: number;
 }) {
   const positionStyle = {
     top: `${topPct}%`,
@@ -497,30 +400,31 @@ function HeroStatBadge({
       className="absolute z-20"
       style={positionStyle}
     >
-      <div
-        data-badge={badgeKey}
-        className="flex items-center bg-white/85 backdrop-blur-md border border-white/70 rounded-2xl shadow-[0_16px_32px_-16px_rgba(15,40,80,0.4)]"
-        style={{
-          gap: fluidRem(0.6),
-          paddingLeft: fluidRem(0.5),
-          paddingRight: fluidRem(0.9),
-          paddingTop: fluidRem(0.5),
-          paddingBottom: fluidRem(0.5),
-        }}
-      >
+      <div className="motion-safe:animate-badge-float" style={{ animationDelay: `${floatDelay}s` }}>
         <div
-          className="rounded-lg flex items-center justify-center flex-shrink-0"
+          className="flex items-center bg-[#10233d]/55 backdrop-blur-md border border-white/15 rounded-2xl shadow-[0_16px_32px_-16px_rgba(0,0,0,0.5)]"
           style={{
-            width: fluidRem(2.25),
-            height: fluidRem(2.25),
-            background: "linear-gradient(135deg,#285992,#427ab9)",
+            gap: fluidRem(0.6),
+            paddingLeft: fluidRem(0.5),
+            paddingRight: fluidRem(0.9),
+            paddingTop: fluidRem(0.5),
+            paddingBottom: fluidRem(0.5),
           }}
         >
-          <Icon style={{ width: fluidRem(1), height: fluidRem(1) }} className="text-white" />
-        </div>
-        <div className="text-left whitespace-nowrap">
-          <div style={{ fontSize: fluidRem(1) }} className="text-[#1e3a5f] font-bold leading-none">{value}</div>
-          <div style={{ fontSize: fluidRem(0.75), marginTop: fluidRem(0.125) }} className="text-slate-500">{label}</div>
+          <div
+            className="rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{
+              width: fluidRem(2.25),
+              height: fluidRem(2.25),
+              background: "linear-gradient(135deg,#285992,#427ab9)",
+            }}
+          >
+            <Icon style={{ width: fluidRem(1), height: fluidRem(1) }} className="text-white" />
+          </div>
+          <div className="text-left whitespace-nowrap">
+            <div style={{ fontSize: fluidRem(1) }} className="text-white font-bold leading-none">{value}</div>
+            <div style={{ fontSize: fluidRem(0.75), marginTop: fluidRem(0.125) }} className="text-white/55">{label}</div>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -529,10 +433,7 @@ function HeroStatBadge({
 
 // ── HeroMobileMockup ──────────────────────────────────────────────────────────
 // Silhueta de celular reta (sem inclinação) apoiada no canto superior direito
-// do mockup desktop. No modo scrollytelling, empilha as mesmas 3 etapas do
-// desktop (data-mockup="mobile-step"), trocadas com 0.12s de atraso em
-// relação ao desktop via "Iris Reveal" (ver use-hero-scrollytelling.ts). Fora
-// desse modo, mantém o placeholder único estático que já existia.
+// do mockup desktop, com uma única imagem fixa (sem troca/transição).
 // Deslocamento reduzido de propósito (era -top-20/-right-14) — grudava no
 // botão do header e ficava colado na borda direita da viewport.
 //
@@ -543,7 +444,7 @@ function HeroStatBadge({
 // no mesmo tamanho em px absoluto em QUALQUER largura de tela ≥1024px (não
 // tinha nem breakpoint pra essas duas propriedades), então desproporcionava
 // conforme o resto do hero (texto, mockup desktop, badges) crescia fluido.
-function HeroMobileMockup({ canScrollytell, isWideLayout }: { canScrollytell: boolean; isWideLayout: boolean }) {
+function HeroMobileMockup({ isWideLayout }: { isWideLayout: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24, scale: 0.85 }}
@@ -551,22 +452,28 @@ function HeroMobileMockup({ canScrollytell, isWideLayout }: { canScrollytell: bo
       transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
       className="absolute -top-6 -right-2 sm:-top-8 sm:-right-4 lg:-top-10 lg:-right-6 z-20 w-[160px] sm:w-[175px] lg:w-[220px]"
       style={{
-        filter: "drop-shadow(0 22px 34px rgba(15,40,80,0.32))",
+        filter: "drop-shadow(0 22px 34px rgba(0,0,0,0.45))",
         ...(isWideLayout ? { width: fluidPx(220), top: fluidPx(-40), right: fluidPx(-24) } : {}),
       }}
     >
+      {/* Mesmo vidro fosco escuro do mockup desktop e dos badges, bezel
+          maior que antes (era p-1/fluidPx(4)) — pedido explícito. */}
       <div
-        className="rounded-[30px] p-1"
+        className="rounded-[30px] p-2"
         style={{
-          background: "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.35))",
-          ...(isWideLayout ? { borderRadius: fluidPx(30), padding: fluidPx(4) } : {}),
+          background: "rgba(16,35,61,0.55)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          border: "2px solid rgba(255,255,255,0.22)",
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.12)",
+          ...(isWideLayout ? { borderRadius: fluidPx(30), padding: fluidPx(8) } : {}),
         }}
       >
         <div
-          className="relative overflow-hidden rounded-[26px] bg-white ring-1 ring-slate-900/10"
+          className="relative overflow-hidden rounded-[22px] bg-[#10233d]/30 ring-1 ring-white/15"
           style={{
             aspectRatio: "9 / 19.5",
-            ...(isWideLayout ? { borderRadius: fluidPx(26) } : {}),
+            ...(isWideLayout ? { borderRadius: fluidPx(22) } : {}),
           }}
         >
           <div
@@ -574,29 +481,13 @@ function HeroMobileMockup({ canScrollytell, isWideLayout }: { canScrollytell: bo
             style={isWideLayout ? { top: fluidPx(12), width: fluidPx(32), height: fluidPx(7) } : undefined}
           />
 
-          {canScrollytell ? (
-            <>
-              {MOBILE_SLIDES.map((slide, i) => (
-                <div key={i} data-mockup="mobile-step" className="absolute inset-0">
-                  <SlideVisual
-                    src={slide.src}
-                    alt={slide.alt}
-                    eager={i === 0}
-                    icon={Smartphone}
-                    iconClassName="w-6 h-6"
-                    labelClassName="text-[10px] font-medium text-center px-2"
-                  />
-                </div>
-              ))}
-            </>
-          ) : (
-            <SlideVisual
-              alt="Print mobile"
-              icon={Smartphone}
-              iconClassName="w-6 h-6"
-              labelClassName="text-[10px] font-medium text-center px-2"
-            />
-          )}
+          <SlideVisual
+            src={MOBILE_SLIDE.src}
+            alt={MOBILE_SLIDE.alt}
+            icon={Smartphone}
+            iconClassName="w-6 h-6"
+            labelClassName="text-[10px] font-medium text-center px-2"
+          />
         </div>
       </div>
     </motion.div>

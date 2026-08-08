@@ -309,7 +309,7 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
   const activeProduct = PRODUTOS_DATA[activeIndex];
 
   return (
-    <div className="hidden lg:flex sticky h-[560px] items-center justify-center" style={{ top: STAGE_TOP }}>
+    <div className="hidden lg:flex sticky h-[580px] items-center justify-center" style={{ top: STAGE_TOP }}>
       {/* Brilho colorido — combina com o produto ativo, reforça a ligação
           visual com o trilho da coluna de texto (mesmo accent). */}
       <div
@@ -402,20 +402,20 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
 // completa já existe na página do produto.
 function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
   const ROLES = [
-    { x: -194, scale: 0.86, opacity: 0.88, z: 10 },
+    { x: -215, scale: 0.86, opacity: 0.88, z: 10 },
     { x: 0,    scale: 1,    opacity: 1,    z: 30 },
-    { x: 194,  scale: 0.86, opacity: 0.88, z: 10 },
+    { x: 215,  scale: 0.86, opacity: 0.88, z: 10 },
   ] as const;
 
   return (
-    <div className="relative h-[540px] flex items-center justify-center">
+    <div className="relative h-[580px] flex items-center justify-center">
       {ROLES.map((role, i) => {
         const mock = mockups[i];
         if (!mock) return null;
         return (
           <div
             key={i}
-            className="absolute w-[224px]"
+            className="absolute w-[248px]"
             style={{
               transform: `translateX(${role.x}px) scale(${role.scale})`,
               opacity: role.opacity,
@@ -460,7 +460,7 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
 function PhoneMockup({ screenshot, label, alt }: { screenshot?: string; label: string; alt?: string }) {
   return (
     <div
-      className="absolute -bottom-8 -left-8 z-20 w-[32%] max-w-[128px]"
+      className="absolute -bottom-8 -left-8 z-20 w-[35%] max-w-[142px]"
       style={{
         filter: "drop-shadow(0 16px 24px rgba(15,40,80,0.30))",
       }}

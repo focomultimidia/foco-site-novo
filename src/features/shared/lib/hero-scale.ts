@@ -1,18 +1,10 @@
 // ── Escala fluida do Hero ("--hero-scale") ───────────────────────────────────
-// Fonte única de verdade pra escala fluida da Home — usada tanto pela versão
-// CSS (multiplicada em font-size/largura/padding via `calc(...*var(--hero-scale))`
-// em hero-section.tsx) quanto pela versão numérica em JS (usada pelo GSAP em
-// use-hero-scrollytelling.ts, onde uma string CSS não serve — precisa de um
-// número pra multiplicar direto num valor de tween). As duas têm que vir da
-// MESMA fórmula, senão a animação (JS) e o layout (CSS) descolam.
-//
-// Por que não ler o valor computado da variável CSS em vez de duplicar a
-// fórmula em JS: `getComputedStyle(el).getPropertyValue('--hero-scale')`
-// retorna a STRING do clamp() literal, não o número resolvido — custom
-// properties não registradas (`@property`) não são pré-computadas pelo
-// browser. Testado e confirmado neste projeto. Duplicar a fórmula (com os
-// mesmos 3 números) é mais simples e mais robusto do que registrar a
-// propriedade via `CSS.registerProperty()` só pra poder lê-la de volta.
+// Fonte única de verdade pra escala fluida das heros no estilo Home — usada
+// tanto pela versão CSS (multiplicada em font-size/largura/padding via
+// `calc(...*var(--hero-scale))`) quanto por qualquer versão numérica em JS
+// que precise da mesma curva (ex.: um tween). Compartilhada entre a hero da
+// Home e a `HomeStyleHero` (heros internas com o mesmo visual) — as duas
+// precisam vir da MESMA fórmula, senão a escala descola entre elas.
 
 export const HERO_SCALE_MIN_VW = 1366; // âncora: menor notebook testado
 export const HERO_SCALE_MAX_VW = 1920; // âncora: monitor widescreen testado

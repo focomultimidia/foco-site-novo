@@ -1,26 +1,7 @@
 "use client";
 
-import { GradientHero } from "@/features/shared/components/gradient-hero";
+import { HomeStyleHero } from "@/features/shared/components/home-style-hero";
 import type { HeroData } from "../types";
-
-// ── Título ────────────────────────────────────────────────────────────────────
-
-function buildTitle(raw: string) {
-  const kw = "Hoteleiras";
-  const idx = raw.indexOf(kw);
-  if (idx === -1) return raw;
-  return (
-    <>
-      {raw.slice(0, idx)}
-      <span
-        className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
-      >
-        {kw}
-      </span>
-      {raw.slice(idx + kw.length)}
-    </>
-  );
-}
 
 interface HeroSectionProps {
   data: HeroData;
@@ -29,13 +10,13 @@ interface HeroSectionProps {
 
 function HeroSection({ data, onCtaClick }: HeroSectionProps) {
   return (
-    <GradientHero
+    <HomeStyleHero
       eyebrow={data.subtitulo}
-      title={buildTitle(data.titulo)}
+      title={data.titulo}
       subtitle={data.descricao}
       ctaLabel={data.ctaPrimario}
       onCtaClick={onCtaClick}
-      slides={[{ desktopSrc: data.imagemUrl, alt: "Integrações Hoteleiras" }]}
+      desktopImage={{ src: data.imagemUrl, alt: "Integrações Hoteleiras" }}
     />
   );
 }

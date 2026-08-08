@@ -20,13 +20,18 @@ import { ArrowRight, Image as ImageIcon, Smartphone } from "lucide-react";
 // bottom margin relative to ITS OWN height — so the crop/phone/badges stay
 // safe regardless of how long a given page's title/subtitle is. Don't port
 // this back onto the Home hero; it's already verified with its own approach.
+//
+// Only consumer today is /channel-manager — recolored to match Home's exact
+// palette (navy base, blue aurora undertone, gold accent, white text/CTA)
+// instead of the earlier light sky-blue theme. Same 3-layer gradient recipe
+// as before (2 radials + 1 linear base), just Home's color stops.
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 const GRADIENT_BACKGROUND =
-  "radial-gradient(ellipse 55% 45% at 76% 62%, rgba(252,204,48,0.16), transparent 62%)," +
-  "radial-gradient(ellipse 60% 50% at 50% -6%, rgba(255,255,255,0.92), transparent 55%)," +
-  "linear-gradient(165deg, #eef5ff 0%, #cfe4fb 32%, #9dcdf3 66%, #5599d6 100%)";
+  "radial-gradient(ellipse 55% 45% at 76% 62%, rgba(252,204,48,0.12), transparent 62%)," +
+  "radial-gradient(ellipse 60% 50% at 20% -6%, rgba(66,122,185,0.38), transparent 55%)," +
+  "linear-gradient(165deg, #1e3a5f 0%, #16304f 32%, #132840 66%, #10233d 100%)";
 
 export interface GradientHeroSlide {
   /** Omit to render a dashed "leave space" placeholder instead. */
@@ -113,7 +118,7 @@ function GradientHero({
   const handleMouseLeave = () => { px.set(0); py.set(0); };
 
   return (
-    <section className="relative bg-[#f4f7fb] pb-10 sm:pb-14 lg:pb-16">
+    <section className="relative bg-[#10233d] pb-10 sm:pb-14 lg:pb-16">
       <div
         className="relative overflow-hidden w-full"
         style={{ background: GRADIENT_BACKGROUND }}
@@ -125,9 +130,9 @@ function GradientHero({
                 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
-                className="inline-flex items-center gap-2.5 border border-[#132840]/15 bg-white/40 backdrop-blur-sm text-[#1e3a5f] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6"
+                className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6"
               >
-                <span className="w-1.5 h-1.5 bg-[#1e3a5f] rounded-full animate-pulse" />
+                <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
                 {eyebrow}
               </motion.div>
             )}
@@ -136,7 +141,7 @@ function GradientHero({
               initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
-              className="font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] text-[#132840] mb-4 leading-[1.08] tracking-tighter antialiased"
+              className="font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] text-white mb-4 leading-[1.08] tracking-tighter antialiased"
             >
               {title}
             </motion.h1>
@@ -146,7 +151,7 @@ function GradientHero({
                 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.85, delay: 0.44, ease: EASE }}
-                className="text-[#1e3a5f]/70 text-base sm:text-lg font-light leading-relaxed max-w-lg mx-auto"
+                className="text-white/70 text-base sm:text-lg font-light leading-relaxed max-w-lg mx-auto"
               >
                 {subtitle}
               </motion.p>
@@ -299,7 +304,7 @@ function GradientHero({
               <a
                 href={ctaHref}
                 onClick={onCtaClick}
-                className="group inline-flex items-center gap-2 bg-[#132840] text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#132840]/25 hover:shadow-[#132840]/40 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
               >
                 {ctaLabel}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -308,7 +313,7 @@ function GradientHero({
               <button
                 type="button"
                 onClick={onCtaClick}
-                className="group inline-flex items-center gap-2 bg-[#132840] text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#132840]/25 hover:shadow-[#132840]/40 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
               >
                 {ctaLabel}
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />

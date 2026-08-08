@@ -2,28 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { HeroButton } from "@/features/shared/components/hero-button";
+import { HomeStyleHero } from "@/features/shared/components/home-style-hero";
 import type { HeroData } from "../types";
-
-// ── Título ────────────────────────────────────────────────────────────────────
-
-function buildTitle(raw: string) {
-  const kw = "Excepcional";
-  const idx = raw.indexOf(kw);
-  if (idx === -1) return raw;
-  return (
-    <>
-      {raw.slice(0, idx)}
-      <span
-        className="text-transparent bg-clip-text bg-gradient-to-r from-[#285992] to-[#3a7bd5]"
-        style={{ textDecorationLine: "underline", textDecorationColor: "#fccc30", textDecorationThickness: "3px", textUnderlineOffset: "6px" }}
-      >
-        {kw}
-      </span>
-      {raw.slice(idx + kw.length)}
-    </>
-  );
-}
 
 // ── Products ──────────────────────────────────────────────────────────────────
 // Each produto owns its image pool, autoplay interval and initial slide.
@@ -172,13 +152,9 @@ function PhoneMockup({
   );
 }
 
-// ── Section ───────────────────────────────────────────────────────────────────
-interface HeroSectionProps {
-  data: HeroData;
-  onCtaClick?: () => void;
-}
+// ── SpatialCarousel — mesmos 3 celulares, mecânica intocada. ─────────────────
 
-function HeroSection({ data, onCtaClick }: HeroSectionProps) {
+function SpatialCarousel() {
   // centerPhone tracks which phone (0|1|2) is currently in the center position.
   const [centerPhone, setCenterPhone] = useState(1);
 
@@ -190,122 +166,98 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#f4f7fb]">
+    <div className="hidden lg:flex items-center justify-center">
+      {/*
+        Fixed container — phones are absolutely positioned inside.
+        All three motion.divs start at top:0 left:0 and are moved into
+        position via Framer Motion's x/y/scale/opacity/filter animations.
+      */}
+      <div className="relative" style={{ width: 620, height: 520 }}>
 
-      {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-36 pb-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        {PRODUTOS_HERO.map(phone => {
+          const role   = getRole(phone.id);
+          const cfg    = ROLE_CFG[role];
+          const isCenter = role === "center";
 
-          {/* ── Left: text (original content — unchanged) ───────────────── */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {/* Eyebrow — mono uppercase */}
-            <div className="inline-flex items-center gap-2.5 border border-[#285992]/20 text-[#285992] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6">
-              <span className="relative flex h-1.5 w-1.5 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#285992] opacity-70" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#285992]" />
-              </span>
-              {data.subtitulo}
-            </div>
-
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#244248] mb-4 leading-tight tracking-tight">
-              {buildTitle(data.titulo)}
-            </h1>
-
-            <p className="text-lg text-[#244248]/75 mb-8 leading-relaxed max-w-xl">
-              {data.descricao}
-            </p>
-
-            <HeroButton onClick={onCtaClick}>
-              {data.ctaPrimario}
-            </HeroButton>
-          </motion.div>
-
-          {/* ── Right: spatial carousel (desktop only) ───────────────────── */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:flex items-center justify-center"
-          >
-            {/*
-              Fixed container — phones are absolutely positioned inside.
-              All three motion.divs start at top:0 left:0 and are moved into
-              position via Framer Motion's x/y/scale/opacity/filter animations.
-            */}
-            <div className="relative" style={{ width: 620, height: 520 }}>
-
-              {PRODUTOS_HERO.map(phone => {
-                const role   = getRole(phone.id);
-                const cfg    = ROLE_CFG[role];
-                const isCenter = role === "center";
-
-                return (
-                  <motion.div
-                    key={phone.id}
-                    /*
-                      initial matches animate on first render → no entrance animation
-                      for the phones themselves (parent already fades in the whole group).
-                    */
-                    initial={{
-                      x: cfg.x, y: cfg.y, scale: cfg.scale,
-                      opacity: cfg.opacity, filter: cfg.filter,
-                    }}
-                    animate={{
-                      x: cfg.x, y: cfg.y, scale: cfg.scale,
-                      opacity: cfg.opacity, filter: cfg.filter,
-                    }}
-                    transition={{
-                      // Spring for position/scale — snappy but smooth
-                      type:      "spring",
-                      stiffness: 260,
-                      damping:   28,
-                      // Faster linear fade for opacity + filter
-                      opacity: { type: "tween", duration: 0.28 },
-                      filter:  { type: "tween", duration: 0.32 },
-                    }}
-                    onClick={() => !isCenter && setCenterPhone(phone.id)}
-                    style={{
-                      position:        "absolute",
-                      width:           PHONE_W,
-                      top:             0,
-                      left:            0,
-                      zIndex:          cfg.zIndex, // immediate — keeps new center on top
-                      cursor:          cfg.cursor,
-                      transformOrigin: "center center",
-                    }}
-                  >
-                    {/*
-                      Inner motion.div handles the vertical float for the center phone.
-                      It resets to y:0 when the phone moves to a side position.
-                    */}
-                    <motion.div
-                      animate={isCenter ? { y: [0, -10, 0] } : { y: 0 }}
-                      transition={
-                        isCenter
-                          ? { duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
-                          : { type: "tween", duration: 0.4 }
-                      }
-                    >
-                      <PhoneMockup
-                        slides={phone.slides}
-                        interval={phone.interval}
-                        startSlide={phone.startSlide}
-                        priority={phone.id === centerPhone}
-                      />
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
-            </div>
-          </motion.div>
-
-        </div>
+          return (
+            <motion.div
+              key={phone.id}
+              /*
+                initial matches animate on first render → no entrance animation
+                for the phones themselves (parent already fades in the whole group).
+              */
+              initial={{
+                x: cfg.x, y: cfg.y, scale: cfg.scale,
+                opacity: cfg.opacity, filter: cfg.filter,
+              }}
+              animate={{
+                x: cfg.x, y: cfg.y, scale: cfg.scale,
+                opacity: cfg.opacity, filter: cfg.filter,
+              }}
+              transition={{
+                // Spring for position/scale — snappy but smooth
+                type:      "spring",
+                stiffness: 260,
+                damping:   28,
+                // Faster linear fade for opacity + filter
+                opacity: { type: "tween", duration: 0.28 },
+                filter:  { type: "tween", duration: 0.32 },
+              }}
+              onClick={() => !isCenter && setCenterPhone(phone.id)}
+              style={{
+                position:        "absolute",
+                width:           PHONE_W,
+                top:             0,
+                left:            0,
+                zIndex:          cfg.zIndex, // immediate — keeps new center on top
+                cursor:          cfg.cursor,
+                transformOrigin: "center center",
+              }}
+            >
+              {/*
+                Inner motion.div handles the vertical float for the center phone.
+                It resets to y:0 when the phone moves to a side position.
+              */}
+              <motion.div
+                animate={isCenter ? { y: [0, -10, 0] } : { y: 0 }}
+                transition={
+                  isCenter
+                    ? { duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+                    : { type: "tween", duration: 0.4 }
+                }
+              >
+                <PhoneMockup
+                  slides={phone.slides}
+                  interval={phone.interval}
+                  startSlide={phone.startSlide}
+                  priority={phone.id === centerPhone}
+                />
+              </motion.div>
+            </motion.div>
+          );
+        })}
       </div>
-    </section>
+    </div>
+  );
+}
+
+// ── Section ───────────────────────────────────────────────────────────────────
+interface HeroSectionProps {
+  data: HeroData;
+  onCtaClick?: () => void;
+}
+
+function HeroSection({ data, onCtaClick }: HeroSectionProps) {
+  return (
+    <HomeStyleHero
+      eyebrow={data.subtitulo}
+      title={data.titulo}
+      subtitle={data.descricao}
+      ctaLabel={data.ctaPrimario}
+      onCtaClick={onCtaClick}
+    >
+      <SpatialCarousel />
+    </HomeStyleHero>
   );
 }
 

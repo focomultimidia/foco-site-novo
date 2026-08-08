@@ -84,6 +84,25 @@ const navLinksBefore = [
   { label: "Quem somos", href: "/sobre"},
 ];
 
+// Páginas com a hero no mesmo fundo navy escuro (aurora) da Home — ver
+// HomeStyleHero (e, para /channel-manager, GradientHero recolorida no mesmo
+// padrão). O header, que por padrão assume fundo claro por baixo (texto/
+// logo escuros, transparente até rolar), precisa da variante clara nelas
+// enquanto ainda não rolou, senão logo/texto ficam ilegíveis sobre o navy.
+// Fora dessa lista (hero clara, ex.: sobre), ou já rolado (pill branca
+// flutuante), continua exatamente como sempre foi.
+const DARK_HERO_ROUTES = new Set([
+  "/",
+  "/site-hoteleiro",
+  "/motor-de-reservas",
+  "/gestao-hoteleira",
+  "/software-de-pagamentos",
+  "/integracoes-hoteleiras",
+  "/crm-hoteleiro",
+  "/experiencia-do-hospede",
+  "/channel-manager",
+]);
+
 const navLinksAfter = [
   { label: "Marketing",        href: "/marketing" },
   { label: "Blog",             href: "/blog"      },
@@ -188,6 +207,16 @@ function Header() {
     isActiveRoute(location.pathname, s.href)
   );
 
+  const isTransparentDark = DARK_HERO_ROUTES.has(location.pathname) && !isScrolled;
+
+  // Cor do texto/sublinhado do nav — única fonte pros 3 pontos que repetem
+  // esse padrão (navLinksBefore, botão Softwares, navLinksAfter).
+  const navTextClass = (active: boolean) =>
+    active
+      ? isTransparentDark ? "text-[#fccc30]" : "text-blue-600"
+      : isTransparentDark ? "text-white/90 hover:text-white" : "text-[#244248] hover:text-blue-600";
+  const navUnderlineClass = isTransparentDark ? "bg-[#fccc30]" : "bg-blue-600";
+
   const closeMobile = () => {
     setIsMobileOpen(false);
     setIsMobileSoftwaresOpen(false);
@@ -253,7 +282,7 @@ function Header() {
                 width={147}
                 height={55}
                 decoding="async"
-                className="w-auto"
+                className={`w-auto transition-[filter] duration-300 ${isTransparentDark ? "brightness-0 invert" : ""}`}
                 animate={{ height: isScrolled ? 40 : 50 }}
                 transition={CARD_TRANSITION}
               />
@@ -265,15 +294,11 @@ function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
-                    isActiveRoute(location.pathname, item.href)
-                      ? "text-blue-600"
-                      : "text-[#244248] hover:text-blue-600"
-                  }`}
+                  className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${navTextClass(isActiveRoute(location.pathname, item.href))}`}
                 >
                   {item.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 bg-blue-600 ${
+                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 ${navUnderlineClass} ${
                       isActiveRoute(location.pathname, item.href)
                         ? "w-full"
                         : "w-0 group-hover:w-full"
@@ -297,9 +322,7 @@ function Header() {
                   aria-expanded={isMegamenuOpen}
                   aria-haspopup="true"
                   onClick={() => setIsMegamenuOpen((v) => !v)}
-                  className={`relative flex items-center gap-1 px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
-                    softwaresActive ? "text-blue-600" : "text-[#244248] hover:text-blue-600"
-                  }`}
+                  className={`relative flex items-center gap-1 px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${navTextClass(softwaresActive)}`}
                 >
                   Softwares hoteleiro
                   <ChevronDown
@@ -308,7 +331,7 @@ function Header() {
                     }`}
                   />
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 bg-blue-600 ${
+                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 ${navUnderlineClass} ${
                       softwaresActive ? "w-full" : "w-0 group-hover:w-full"
                     }`}
                   />
@@ -362,15 +385,11 @@ function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${
-                    isActiveRoute(location.pathname, item.href)
-                      ? "text-blue-600"
-                      : "text-[#244248] hover:text-blue-600"
-                  }`}
+                  className={`relative px-1 py-1 font-normal text-xs uppercase tracking-widest antialiased transition-colors duration-300 group ${navTextClass(isActiveRoute(location.pathname, item.href))}`}
                 >
                   {item.label}
                   <span
-                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 bg-blue-600 ${
+                    className={`absolute bottom-0 left-0 h-[2px] rounded-full transition-all duration-300 ${navUnderlineClass} ${
                       isActiveRoute(location.pathname, item.href)
                         ? "w-full"
                         : "w-0 group-hover:w-full"
@@ -387,7 +406,7 @@ function Header() {
 
             {/* Mobile hamburger */}
             <button
-              className="lg:hidden p-2 rounded-md transition-colors duration-300 text-gray-700 hover:bg-gray-100/60"
+              className={`lg:hidden p-2 rounded-md transition-colors duration-300 ${isTransparentDark ? "text-white hover:bg-white/10" : "text-gray-700 hover:bg-gray-100/60"}`}
               onClick={() => setIsMobileOpen(true)}
               aria-label="Abrir menu"
             >
