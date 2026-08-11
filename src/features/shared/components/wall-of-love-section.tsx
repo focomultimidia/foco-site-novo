@@ -371,7 +371,6 @@ function WallOfLoveSection({
   const allCards = buildWall(depoimentos, videos);
   const hasMore = allCards.length > maxCards;
   const compactCards = allCards.slice(0, maxCards);
-  const hiddenCount = allCards.length - maxCards;
 
   // ESC fecha o que estiver "por cima": primeiro o vídeo, depois a galeria.
   // Trava o scroll do body sempre que qualquer uma das duas camadas está aberta.
@@ -434,13 +433,7 @@ function WallOfLoveSection({
                 style={{ borderColor: "rgba(40,89,146,0.25)", color: "#1e3a5f" }}
               >
                 <Sparkles className="w-4 h-4" style={{ color: "#fccc30" }} strokeWidth={2} />
-                Ver todos os {allCards.length} depoimentos
-                <span
-                  className="text-xs font-bold rounded-full px-2 py-0.5"
-                  style={{ background: "rgba(40,89,146,0.08)" }}
-                >
-                  +{hiddenCount}
-                </span>
+                Ver mais depoimentos
               </motion.button>
             </div>
           )}

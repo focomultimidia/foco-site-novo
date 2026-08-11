@@ -272,7 +272,7 @@ function PorQueSection() {
                 src={VIDEO_SRC}
                 muted
                 playsInline
-                preload="auto"
+                preload="metadata"
                 onEnded={() => setIsVideoEnded(true)}
                 className="absolute inset-0 w-full h-full object-contain block"
               />

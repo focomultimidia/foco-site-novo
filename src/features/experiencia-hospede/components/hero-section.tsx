@@ -166,7 +166,11 @@ function SpatialCarousel() {
   };
 
   return (
-    <div className="hidden lg:flex items-center justify-center">
+    // `mt-16 xl:mt-20` — a coluna do palco (HomeStyleHero) centraliza este
+    // grupo na altura toda da hero; sem essa margem o topo dos celulares
+    // ficava a só ~45px do menu. Empurra o grupo pra baixo, dando folga
+    // parecida com a usada em outros palcos fixos do site (~110px).
+    <div className="hidden lg:flex items-center justify-center mt-16 xl:mt-20">
       {/*
         Fixed container — phones are absolutely positioned inside.
         All three motion.divs start at top:0 left:0 and are moved into

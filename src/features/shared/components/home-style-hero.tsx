@@ -188,10 +188,31 @@ function HomeStyleHero({
     ? { position: "relative", width: fluidPx(660), aspectRatio: "16 / 10", height: "auto" }
     : { position: "relative", width: "min(78vw, 440px)", aspectRatio: "16 / 10", height: "auto" };
 
+  // CTA renderizado em UM só lugar por vez: dentro da coluna de texto em
+  // desktop (ordem original), depois da imagem/mockup em mobile (pedido
+  // explícito — antes o CTA vinha antes da imagem no fluxo, e os badges
+  // flutuantes com offset negativo (`-top-14` etc.) podiam invadir visualmente
+  // o espaço do botão logo acima). Extraído uma vez pra não duplicar o JSX.
+  const ctaButton = ctaLabel ? (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.58, ease: EASE }}
+    >
+      <button
+        onClick={onCtaClick}
+        className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
+      >
+        {ctaLabel}
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+      </button>
+    </motion.div>
+  ) : null;
+
   return (
     <section
       data-hero="section"
-      className="relative h-dvh min-h-[600px] overflow-hidden bg-[#10233d] grid grid-rows-[auto_minmax(0,1fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
+      className="relative min-h-dvh lg:h-dvh min-h-[600px] overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
       style={{ "--hero-scale": HERO_SCALE_CSS } as React.CSSProperties}
     >
       {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas da Home. */}
@@ -219,8 +240,11 @@ function HomeStyleHero({
         }}
       />
 
-      {/* ── Coluna esquerda — eyebrow, título, subtítulo e CTA. ─────────────── */}
-      <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left justify-center gap-4 lg:gap-6 px-4 sm:px-6 lg:pl-16 xl:pl-24 lg:pr-6 pt-20 sm:pt-24 lg:pt-0 max-w-xl lg:max-w-none mx-auto lg:mx-0">
+      {/* ── Coluna esquerda — eyebrow, título, subtítulo (CTA só aqui em
+          desktop — ver `ctaButton` abaixo). `pt-24 sm:pt-28` — margem um
+          pouco maior entre o menu e a badge/eyebrow em mobile (pedido
+          explícito, era pt-20/pt-24). ────────────────────────────────── */}
+      <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left justify-center gap-4 lg:gap-6 px-4 sm:px-6 lg:pl-16 xl:pl-24 lg:pr-6 pt-24 sm:pt-28 lg:pt-0 pb-8 lg:pb-0 max-w-xl lg:max-w-none mx-auto lg:mx-0">
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -251,26 +275,18 @@ function HomeStyleHero({
           {subtitle}
         </motion.p>
 
-        {ctaLabel && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.58, ease: EASE }}
-          >
-            <button
-              onClick={onCtaClick}
-              className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
-            >
-              {ctaLabel}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
-          </motion.div>
-        )}
+        {isWideLayout && ctaButton}
       </div>
 
       {/* ── Coluna direita — palco do mockup, mesma composição da Home; ou um
-          visual customizado da própria página (`children`), quando presente. ── */}
-      <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex items-center justify-center px-4 lg:px-0 pb-6 lg:pb-0">
+          visual customizado da própria página (`children`), quando presente.
+          Em mobile virou `flex-col` pra empilhar mockup → badges → CTA, nessa
+          ordem — antes o CTA vinha lá na coluna de texto (acima da imagem) e
+          os badges eram chips flutuantes sobre o mockup; os dois pedidos
+          explícitos ("botão abaixo das imagens", "badges abaixo da imagem
+          principal") viram esse empilhamento. Em desktop (`lg:`) volta a ser
+          o palco centralizado de sempre, sem essa pilha extra. ──────────── */}
+      <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex flex-col items-center justify-center gap-7 lg:gap-0 px-4 lg:px-0 pb-10 lg:pb-0">
         {children ? (
           children
         ) : (
@@ -321,7 +337,10 @@ function HomeStyleHero({
 
               <HeroMobileMockup isWideLayout={isWideLayout} src={mobileImage?.src} alt={mobileImage?.alt ?? desktopImage?.alt ?? ""} />
 
-              {badges.slice(0, 3).map((badge, i) => (
+              {/* Chips flutuantes sobre o mockup — só em desktop, onde há
+                  espaço de sobra ao redor do palco. Em mobile eles migram
+                  pra baixo da imagem (ver bloco logo após este `motion.div`). */}
+              {isWideLayout && badges.slice(0, 3).map((badge, i) => (
                 <HeroBadgeChip
                   key={badge.label}
                   icon={badge.icon}
@@ -332,8 +351,48 @@ function HomeStyleHero({
             </div>
           </motion.div>
         )}
+
+        {/* ── Mobile — badges em linha (não mais flutuando sobre a imagem) e
+            CTA, nessa ordem, sempre DEPOIS da imagem/mockup acima. ───────── */}
+        {!isWideLayout && (badges.length > 0 || ctaButton) && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75, ease: EASE }}
+            className="flex flex-col items-center gap-5 w-full"
+          >
+            {badges.length > 0 && (
+              <div className="flex flex-wrap items-center justify-center gap-2.5">
+                {badges.slice(0, 3).map((badge) => (
+                  <MobileHeroBadgeChip key={badge.label} icon={badge.icon} label={badge.label} />
+                ))}
+              </div>
+            )}
+            {ctaButton}
+          </motion.div>
+        )}
       </div>
     </section>
+  );
+}
+
+// ── MobileHeroBadgeChip — mesma pill visual do HeroBadgeChip, mas em fluxo
+//    normal (sem `position:absolute`/offsets do `--hero-scale`) — usada só
+//    abaixo da imagem em mobile, onde os badges não flutuam mais sobre o
+//    mockup. Tamanho fixo (não fluido): em mobile a largura da viewport já
+//    não varia o suficiente pra justificar o cálculo de `--hero-scale`. ────
+
+function MobileHeroBadgeChip({ icon: Icon, label }: HomeStyleHeroBadge) {
+  return (
+    <div className="flex items-center gap-2 bg-white/8 backdrop-blur-md border border-white/15 rounded-full pl-2 pr-3.5 py-2">
+      <div
+        className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
+        style={{ background: "linear-gradient(135deg,#285992,#427ab9)" }}
+      >
+        <Icon className="w-3.5 h-3.5 text-white" />
+      </div>
+      <span className="text-white text-xs font-semibold whitespace-nowrap">{label}</span>
+    </div>
   );
 }
 

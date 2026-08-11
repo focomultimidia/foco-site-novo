@@ -32,12 +32,30 @@ function FAQAccordion({
   badge,
   showContactButton = true,
 }: FAQAccordionProps) {
+  // Extraído pra renderizar em DOIS lugares: dentro da coluna esquerda
+  // sticky (desktop, posição original) e depois do acordeão inteiro
+  // (mobile — pedido explícito: "o botão deve ficar no final do módulo",
+  // antes ele vinha antes do acordeão por herdar a ordem da coluna
+  // esquerda). `hidden lg:block` / `lg:hidden` garantem que só UMA das
+  // duas cópias fica visível por vez — nada de duplicar o botão na tela.
+  const contactCta = showContactButton ? (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+    >
+      <p className="text-gray-600 mb-4">Ainda tem dúvidas?</p>
+      <PremiumCTAButton label="Falar com especialista" icon={MessageCircle} />
+    </motion.div>
+  ) : null;
+
   return (
     <section className="py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-10 lg:gap-12 items-start">
 
-          {/* Left: badge, title, subtitle, CTA */}
+          {/* Left: badge, title, subtitle, CTA (CTA só aqui em desktop) */}
           <div className="lg:sticky lg:top-24">
             {badge && (
               <motion.div
@@ -70,18 +88,7 @@ function FAQAccordion({
               </motion.p>
             )}
 
-            {showContactButton && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-8"
-              >
-                <p className="text-gray-600 mb-4">Ainda tem dúvidas?</p>
-                <PremiumCTAButton label="Falar com especialista" icon={MessageCircle} />
-              </motion.div>
-            )}
+            {contactCta && <div className="hidden lg:block mt-8">{contactCta}</div>}
           </div>
 
           {/* Right: Accordion */}
@@ -107,6 +114,9 @@ function FAQAccordion({
                 </AccordionItem>
               ))}
             </Accordion>
+
+            {/* Mobile — botão vem DEPOIS do acordeão inteiro, no final do módulo. */}
+            {contactCta && <div className="lg:hidden mt-8">{contactCta}</div>}
           </motion.div>
 
         </div>

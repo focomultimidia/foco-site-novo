@@ -581,7 +581,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
             <p className="text-[13px] font-semibold text-[#1a3a45] leading-snug">Sincronização concluída</p>
             <div className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-[#244248]/55">
               <RefreshCw className="w-3 h-3 text-[#3a7bd5]" strokeWidth={2.25} />
-              Ativo em +450 canais
+              Ativo em +850 canais
             </div>
           </div>
         </motion.div>

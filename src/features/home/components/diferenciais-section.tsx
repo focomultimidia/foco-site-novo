@@ -171,6 +171,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
               className="absolute inset-0 w-full h-full object-cover"
               muted
               playsInline
+              preload="metadata"
               src="/assets/videos/home/video-section-pq-foco.mp4"
             />
             <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-100/60 to-transparent pointer-events-none z-10" />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useScrollPinScale } from "@/features/shared/hooks/use-scroll-pin-scale";
 import {
   Boxes,
   LayoutGrid,
@@ -11,6 +12,8 @@ import {
   Monitor,
   CreditCard,
 } from "lucide-react";
+
+const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
 // ── Data (original — unchanged) ───────────────────────────────────────────────
 const recursos = [
@@ -71,6 +74,30 @@ function CardapioDigitalSection() {
   const [loopKey, setLoopKey] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-Triggered Scale (pin): mesmo efeito do OtheoAiTeaserSection
+  // (home) — só desktop largo + sem reduced-motion; no resto, cai no
+  // fade+slide-up simples que já existia (ver `!canPinScroll` abaixo).
+  const [canPinScroll, setCanPinScroll] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  useEffect(() => {
+    const widthMq = window.matchMedia("(min-width: 1024px)");
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setCanPinScroll(widthMq.matches && !motionMq.matches);
+    update();
+    widthMq.addEventListener("change", update);
+    motionMq.addEventListener("change", update);
+    return () => {
+      widthMq.removeEventListener("change", update);
+      motionMq.removeEventListener("change", update);
+    };
+  }, []);
+  useScrollPinScale(canPinScroll, sectionRef, cardRef);
 
   // Start/stop autoplay based on viewport visibility.
   useEffect(() => {
@@ -138,13 +165,23 @@ function CardapioDigitalSection() {
         </motion.div>
 
         {/* ════════════════════════════════════════════════════════════════
-            Smart TV Container — cloned from experiencias-section.tsx
+            Smart TV Container — cloned from experiencias-section.tsx.
+            Em desktop largo, o GSAP (useScrollPinScale) manipula
+            scale/opacity/y/blur direto no nó via `cardRef`, travando a
+            seção no topo da tela enquanto o card materializa
+            (Scroll-Triggered Scale, mesmo efeito do OtheoAiTeaserSection)
+            — por isso nenhum `initial`/`whileInView` do Framer é passado
+            nesse caso. No fallback (mobile/reduced-motion), volta a ser o
+            fade+slide-up simples de sempre.
         ════════════════════════════════════════════════════════════════ */}
         <motion.div
-          initial={{ opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          ref={cardRef}
+          {...(!canPinScroll && {
+            initial: { opacity: 0, y: 32 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            transition: { duration: 0.8, ease: EASE },
+          })}
           className="relative rounded-3xl shadow-2xl overflow-hidden"
           style={{
             background:

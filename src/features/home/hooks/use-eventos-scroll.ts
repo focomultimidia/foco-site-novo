@@ -31,6 +31,22 @@
  *   estático): recalcula a largura real do trilho a cada resize — sem
  *   isso, se o usuário redimensionar a janela com a página já rolada, a
  *   distância do pin ficaria presa na medida antiga.
+ *
+ * TRILHA-RÉGUA (novo)
+ *   `total` é o número de eventos. O progresso do scrub (0→1) é dividido
+ *   em `total` fatias IGUAIS — `Math.floor(progress * total)` — pra
+ *   decidir qual evento está "ativo" na timeline visual (ver TimelineRail
+ *   em eventos-section.tsx). Essa é uma mudança deliberada em relação a
+ *   uma 1ª versão que tentava achar o card mais próximo do centro da
+ *   viewport via `offsetLeft`: matematicamente correta, mas o resultado
+ *   real dependia da largura exata de cada card/gap/padding, e uma
+ *   `transition` do tipo `spring` na cápsula flutuante não tinha tempo de
+ *   assentar antes do scroll pinado acabar — na prática, o 3º evento mal
+ *   aparecia antes da seção despinar. Fatias iguais garantem que cada
+ *   evento recebe exatamente `1/total` do scroll pinado, sempre.
+ *   `onActiveChange` só dispara quando o índice realmente muda (dedupe
+ *   via closure), pra não gerar um re-render do React a cada frame do
+ *   scrub.
  */
 
 import { useLayoutEffect, type RefObject } from "react";
@@ -44,14 +60,18 @@ export function useEventosScroll(
   sectionRef: RefObject<HTMLElement | null>,
   trackRef: RefObject<HTMLDivElement | null>,
   textRef: RefObject<HTMLDivElement | null>,
+  total: number,
+  onActiveChange: (index: number) => void,
 ) {
   useLayoutEffect(() => {
-    if (!enabled) return;
+    if (!enabled || total <= 0) return;
 
     const section = sectionRef.current;
     const track = trackRef.current;
     const text = textRef.current;
     if (!section || !track || !text) return;
+
+    let lastActive = -1;
 
     const ctx = gsap.context(() => {
       const getDistance = () => Math.max(0, track.scrollWidth - window.innerWidth);
@@ -65,6 +85,13 @@ export function useEventosScroll(
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const idx = Math.min(total - 1, Math.floor(self.progress * total));
+            if (idx !== lastActive) {
+              lastActive = idx;
+              onActiveChange(idx);
+            }
+          },
         },
       });
 
@@ -73,5 +100,5 @@ export function useEventosScroll(
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [enabled]);
+  }, [enabled, total]);
 }

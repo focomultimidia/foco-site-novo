@@ -37,7 +37,7 @@ const softwaresSubmenu = [
   },
   {
     label: "Channel Manager",
-    description: "Sincronize +450 canais em tempo real",
+    description: "Sincronize +850 canais em tempo real",
     href: "/channel-manager",
     icon: LayoutGrid,
     iconClass: "bg-violet-50 text-violet-600",

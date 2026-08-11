@@ -3,7 +3,10 @@ import { useHomePage } from "./hooks/use-home-page";
 import {
   HeroSection,
   ProdutosSection,
-  DoresSection,
+  //DoresSection,
+  DoresDiagnosticoSection,
+  OtheoAiTeaserSection,
+  ParceirosEliteSection,
   DiferenciaisSection,
   SegurancaSection,
   TiposPropriedadeSection,
@@ -64,9 +67,15 @@ export function HomePage() {
 
       <TrustedLogosMarquee />
 
-      <DoresSection dores={data.dores} />
+      <OtheoAiTeaserSection />
 
       <SmartIntegrationsTabs />
+
+      {/*<DoresSection dores={data.dores} />*/}
+
+      {/* Módulo novo, em comparação com o DoresSection acima — remover um dos
+          dois assim que a escolha final for feita. */}
+      <DoresDiagnosticoSection dores={data.dores} onCtaClick={() => setIsLeadModalOpen(true)} />
 
       <EventosSection eventos={eventos} />
 
@@ -84,6 +93,8 @@ export function HomePage() {
       <SegurancaSection certificacoes={data.certificacoes} />
 
       <CertificacoesSection />
+
+      <ParceirosEliteSection />
 
       <TiposPropriedadeSection tipos={data.tiposPropriedade} />
 

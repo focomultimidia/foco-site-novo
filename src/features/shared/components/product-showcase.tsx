@@ -435,10 +435,25 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
                 style={{ aspectRatio: "9 / 19.5" }}
               >
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-9 h-[9px] bg-[#1c1c1e] rounded-full" />
+                {/*
+                  `loading="lazy"` nas duas telas laterais nunca chegava a
+                  disparar: elas nascem dentro de um `motion.div` (a) montado
+                  dinamicamente via `AnimatePresence` (troca a cada produto
+                  ativo) e (b) com `position:absolute` + `transform:
+                  translateX()` — o heurístico de lazy-load do browser calcula
+                  distância até o viewport pela caixa de layout ANTES da
+                  transform, e nesse combo específico nunca conclui que a
+                  imagem está visível. Resultado: as 2 telas de fora ficavam
+                  permanentemente em branco, mesmo com o arquivo existindo e
+                  a tela realmente na tela. Confirmado forçando `eager` via
+                  DOM — carregam na hora. Como são só 3 imagens pequenas,
+                  carregadas apenas quando este produto específico fica
+                  ativo, `eager` nas 3 é o fix seguro (não um workaround).
+                */}
                 <img
                   src={mock.src}
                   alt={mock.alt}
-                  loading={i === 1 ? "eager" : "lazy"}
+                  loading="eager"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
@@ -446,6 +461,40 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ── MobileTripleMockup ───────────────────────────────────────────────────────
+// Versão compacta do TriplePhoneStage pra telas < lg — mesmos 3 prints, mas
+// lado a lado sem sobreposição (o layout absoluto/escalado do desktop não
+// cabe na largura de um card mobile). Usada só por produtos com `mockups`
+// (hoje, só Experiência do Hóspede) — os demais produtos continuam com a
+// captura única acima do título, inalterados.
+function MobileTripleMockup({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+  return (
+    <div className="lg:hidden flex items-end justify-center gap-3 mb-6">
+      {mockups.map((mock, i) => (
+        <div key={i} className="w-[30%] max-w-[112px]">
+          <div
+            className="bg-white rounded-[16px] p-[3px]"
+            style={{ boxShadow: "0 14px 30px -12px rgba(15,40,80,0.35)" }}
+          >
+            <div
+              className="relative overflow-hidden rounded-[13px] bg-white ring-1 ring-slate-900/10"
+              style={{ aspectRatio: "9 / 19.5" }}
+            >
+              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 z-10 w-6 h-[6px] rounded-full bg-[#1c1c1e]" />
+              <img
+                src={mock.src}
+                alt={mock.alt}
+                loading="eager"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -517,6 +566,7 @@ function ScrollContentBlock({
   const { Icone: Icon } = produto;
   const { nome, subtitulo } = splitTitulo(produto.titulo);
   const reducedMotion = useReducedMotion();
+  const hasMockups = !!produto.mockups && produto.mockups.length >= 3;
   return (
     <div
       ref={registerRef}
@@ -524,12 +574,6 @@ function ScrollContentBlock({
         active ? "lg:opacity-100" : "lg:opacity-40"
       }`}
     >
-      {/* Mobile/tablet fallback — there's no room for a pinned side stage
-          below lg, so each block carries its own screenshot inline. */}
-      <div className="lg:hidden mb-6 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
-        <img src={produto.screenshot} alt={`Captura de tela do produto ${nome}`} loading="lazy" className="block w-full" />
-      </div>
-
       <div className="flex items-start gap-3 mb-5">
         <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-3xl
                         bg-[#285992]/[0.08] ring-1 ring-inset ring-[#285992]/15">
@@ -571,6 +615,20 @@ function ScrollContentBlock({
           )}
         </div>
       </div>
+
+      {/* Mobile/tablet fallback — there's no room for a pinned side stage
+          below lg, so each block carries its own screenshot(s) inline,
+          sempre abaixo do título/subtítulo (mesmo tratamento pedido pro
+          item Experiência do Hóspede, agora estendido a todos os produtos).
+          `mockups` (hoje só Experiência do Hóspede) mostra as 3 telas reais
+          lado a lado; os demais mostram a captura única. */}
+      {hasMockups && produto.mockups ? (
+        <MobileTripleMockup mockups={produto.mockups} />
+      ) : (
+        <div className="lg:hidden mb-6 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
+          <img src={produto.screenshot} alt={`Captura de tela do produto ${nome}`} loading="lazy" className="block w-full" />
+        </div>
+      )}
 
       <p className="text-[15px] leading-relaxed text-slate-600 mb-6 max-w-md">
         {produto.descricao}

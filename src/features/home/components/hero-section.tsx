@@ -162,11 +162,31 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         height: "auto",
       };
 
+  // CTA extraído — renderizado em UM só lugar por vez: dentro da coluna de
+  // texto em desktop (ordem original), depois do mockup em mobile (pedido
+  // explícito — a imagem ficava por cima do botão, e os badges flutuantes
+  // com offset negativo podiam invadir visualmente o espaço logo acima).
+  const ctaButton = (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.58, ease: EASE }}
+    >
+      <button
+        onClick={onCtaClick}
+        className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
+      >
+        Demonstração grátis
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+      </button>
+    </motion.div>
+  );
+
   return (
     <section
       ref={sectionRef}
       data-hero="section"
-      className="relative h-dvh min-h-[600px] overflow-hidden bg-[#10233d] grid grid-rows-[auto_minmax(0,1fr)] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
+      className="relative min-h-dvh lg:h-dvh min-h-[600px] overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
       style={{ "--hero-scale": HERO_SCALE_CSS } as React.CSSProperties}
     >
       {/* Fundo — aurora azul em deriva lenta (operação 24h, nunca "desligada"),
@@ -199,11 +219,13 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         }}
       />
 
-      {/* ── Coluna esquerda — eyebrow, título, subtítulo, badges e CTA, todos
-          juntos no mesmo bloco. Centralizado em telas estreitas (empilha
-          acima do mockup); alinhado à esquerda e centralizado verticalmente
-          a partir de lg (vira a coluna da esquerda de um layout partido). ── */}
-      <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left justify-center gap-4 lg:gap-6 px-4 sm:px-6 lg:pl-16 xl:pl-24 lg:pr-6 pt-20 sm:pt-24 lg:pt-0 max-w-xl lg:max-w-none mx-auto lg:mx-0">
+      {/* ── Coluna esquerda — eyebrow, título e subtítulo (CTA só aqui em
+          desktop — ver `ctaButton` acima). Centralizado em telas estreitas
+          (empilha acima do mockup); alinhado à esquerda e centralizado
+          verticalmente a partir de lg (vira a coluna da esquerda de um
+          layout partido). `pt-24 sm:pt-28` — margem um pouco maior entre o
+          menu e a badge/eyebrow em mobile (pedido explícito, era pt-20/24). ── */}
+      <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left justify-center gap-4 lg:gap-6 px-4 sm:px-6 lg:pl-16 xl:pl-24 lg:pr-6 pt-24 sm:pt-28 lg:pt-0 pb-8 lg:pb-0 max-w-xl lg:max-w-none mx-auto lg:mx-0">
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
           animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
@@ -255,19 +277,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           controle total da operação.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.58, ease: EASE }}
-        >
-          <button
-            onClick={onCtaClick}
-            className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/30 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
-          >
-            Demonstração grátis
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-          </button>
-        </motion.div>
+        {isWideLayout && ctaButton}
       </div>
 
       {/* ── Coluna direita — palco dos mockups. Sempre em fluxo normal,
@@ -276,8 +286,10 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           na coluna, tanto na horizontal quanto na vertical. `lg:h-full` dá
           altura de sobra pro `justify-center` centralizar verticalmente
           contra a seção inteira. `min-w-0` é defensivo: evita que o item
-          estoure a coluna. ─────────────────────────────────────────────── */}
-      <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex items-center justify-center px-4 lg:px-0 pb-6 lg:pb-0">
+          estoure a coluna. Em mobile virou `flex-col` pra empilhar
+          mockup → badges → CTA (pedido explícito: botão e badges saíram de
+          cima/sobre a imagem e foram pra baixo dela). ────────────────────── */}
+      <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex flex-col items-center justify-center gap-7 lg:gap-0 px-4 lg:px-0 pb-10 lg:pb-0">
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
           animate={{ opacity: 1, y: 0,  scale: 1 }}
@@ -340,7 +352,10 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
 
             <HeroMobileMockup isWideLayout={isWideLayout} />
 
-            {STATS.map(({ key, icon, value, label, delay, topPct, side, offsetRem, floatDelay }) => (
+            {/* Badges flutuantes sobre o mockup — só em desktop, onde há
+                espaço de sobra ao redor do palco. Em mobile migram pra baixo
+                da imagem (ver bloco logo após este `motion.div`). */}
+            {isWideLayout && STATS.map(({ key, icon, value, label, delay, topPct, side, offsetRem, floatDelay }) => (
               <HeroStatBadge
                 key={key}
                 icon={icon}
@@ -355,6 +370,24 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
             ))}
           </div>
         </motion.div>
+
+        {/* ── Mobile — badges em linha (não mais flutuando sobre a imagem) e
+            CTA, nessa ordem, sempre DEPOIS do mockup acima. ─────────────── */}
+        {!isWideLayout && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.75, ease: EASE }}
+            className="flex flex-col items-center gap-5 w-full"
+          >
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              {STATS.map(({ key, icon, value, label }) => (
+                <MobileHeroStatBadge key={key} icon={icon} value={value} label={label} />
+              ))}
+            </div>
+            {ctaButton}
+          </motion.div>
+        )}
       </div>
     </section>
   );
@@ -428,6 +461,36 @@ function HeroStatBadge({
         </div>
       </div>
     </motion.div>
+  );
+}
+
+// ── MobileHeroStatBadge — mesma pill de duas linhas (valor + label) do
+//    HeroStatBadge, mas em fluxo normal (sem `position:absolute`, sem
+//    flutuação idle) — usada só abaixo do mockup em mobile, onde os stats
+//    não flutuam mais sobre a imagem. Tamanho fixo, não fluido via
+//    `--hero-scale`: em mobile a largura da viewport não varia o bastante
+//    pra justificar o cálculo. ──────────────────────────────────────────────
+
+function MobileHeroStatBadge({
+  icon: Icon, value, label,
+}: {
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  value: string;
+  label: string;
+}) {
+  return (
+    <div className="flex items-center gap-2.5 bg-white/8 backdrop-blur-md border border-white/15 rounded-2xl pl-2 pr-3.5 py-2">
+      <div
+        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+        style={{ background: "linear-gradient(135deg,#285992,#427ab9)" }}
+      >
+        <Icon className="w-4 h-4 text-white" />
+      </div>
+      <div className="text-left whitespace-nowrap">
+        <div className="text-white font-bold text-sm leading-none">{value}</div>
+        <div className="text-white/55 text-[11px] mt-0.5">{label}</div>
+      </div>
+    </div>
   );
 }
 

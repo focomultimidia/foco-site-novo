@@ -7,7 +7,6 @@ import {
   TrendingUp,
   Shield,
   Building,
-  ImagePlus,
 } from "lucide-react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 
@@ -18,36 +17,42 @@ const BENEFICIOS = [
     titulo: "Site 100% integrado com o motor de reservas",
     descricao:
       "Eliminamos distrações como links externos e abas múltiplas. O hóspede navega com foco e reserva com rapidez.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/motor-integrado.png",
   },
   {
     icon: Search,
     titulo: "SEO e indexação orgânica no Google",
     descricao:
       "Seu site aparece nas buscas certas, com performance técnica e conteúdo otimizado para ranquear.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/seo.png",
   },
   {
     icon: Palette,
     titulo: "Layouts personalizados com a cara do seu hotel",
     descricao:
       "Escolha um layout exclusivo que valorize sua marca e reflita a experiência que você oferece.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/layouts-personalizados.png",
   },
   {
     icon: TrendingUp,
     titulo: "Páginas de vendas com foco em conversão",
     descricao:
       "Criamos fluxos de navegação que conduzem o hóspede direto às promoções e pacotes ideais.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/vendas-conversao.png",
   },
   {
     icon: Shield,
     titulo: "Performance, velocidade e segurança",
     descricao:
       "Seu site carrega em segundos e oferece uma jornada confiável, com os padrões mais avançados da web.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/velocidade.png",
   },
   {
     icon: Building,
     titulo: "Tecnologia feita para o setor hoteleiro",
     descricao:
       "Mais que uma agência, somos especialistas em soluções digitais para hotéis, pousadas e resorts.",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/tecnologia-hotelaria.png",
   },
 ] as const;
 
@@ -102,11 +107,14 @@ function PorQueEscolherSection() {
                 >
                   {/* ── Image slot — full-bleed to the card's own edge ─────── */}
                   <div className="relative sm:w-[42%] sm:h-full shrink-0">
-                    <div className="aspect-[16/10] sm:aspect-auto sm:h-full min-h-[160px] w-full bg-gradient-to-br from-[#f4f7fb] to-white border-b sm:border-b-0 border-dashed border-slate-300 flex flex-col items-center justify-center gap-2">
-                      <ImagePlus className="w-6 h-6 text-slate-300" strokeWidth={1.6} />
-                      <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300">
-                        Imagem
-                      </span>
+                    <div className="aspect-[16/10] sm:aspect-auto sm:h-full min-h-[160px] w-full overflow-hidden">
+                      <img
+                        src={beneficio.imagem}
+                        alt={beneficio.titulo}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <span className="absolute top-4 left-4 font-mono text-[11px] font-semibold tracking-widest text-white bg-[#285992] rounded-full w-8 h-8 flex items-center justify-center shadow-sm">
                       {String(i + 1).padStart(2, "0")}
