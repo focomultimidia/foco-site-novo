@@ -600,15 +600,20 @@ function buildTitle(raw: string) {
   return (
     <>
       {raw.slice(0, idx)}
-      <span
-        className="text-transparent bg-clip-text bg-gradient-to-r from-[#427ab9] to-[#8bc4f7]"
-      >
+              <span
+                style={{
+                  background: "linear-gradient(90deg,#fccc30,#ffe08a,#fccc30)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
         {kw}
       </span>
       {raw.slice(idx + kw.length)}
     </>
   );
 }
+
 
 // ── Section ───────────────────────────────────────────────────────────────────
 

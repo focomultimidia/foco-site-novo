@@ -12,9 +12,9 @@ import {
   LayoutGrid,
   Monitor,
   CreditCard,
-  Users,
   Smartphone,
   Link2,
+  Bot,
 } from "lucide-react";
 import { PremiumCTAButton } from "./premium-cta-button";
 
@@ -64,12 +64,19 @@ const softwaresSubmenu = [
     iconClass: "bg-pink-50 text-pink-600",
   },
   {
+    label: "Otheo IA",
+    description: "Inteligência Artificial no comando da sua operação",
+    href: "/otheo-ai",
+    icon: Bot,
+    iconClass: "bg-amber-50 text-amber-600",
+  },
+  /*{
     label: "CRM Hoteleiro",
     description: "Relacionamento e fidelização de hóspedes",
     href: "/crm-hoteleiro",
     icon: Users,
     iconClass: "bg-amber-50 text-amber-600",
-  },
+  },*/
   {
     label: "Integrações Hoteleiras",
     description: "Conecte seu hotel ao ecossistema digital",
@@ -98,14 +105,15 @@ const DARK_HERO_ROUTES = new Set([
   "/gestao-hoteleira",
   "/software-de-pagamentos",
   "/integracoes-hoteleiras",
-  "/crm-hoteleiro",
+  //"/crm-hoteleiro",
   "/experiencia-do-hospede",
   "/channel-manager",
+  "/otheo-ai",
 ]);
 
 const navLinksAfter = [
   { label: "Marketing",        href: "/marketing" },
-  { label: "Blog",             href: "/blog"      },
+  { label: "Blog",             href: "https://blog.focomultimidia.com" },
   { label: "Seja um parceiro", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
 ];
 

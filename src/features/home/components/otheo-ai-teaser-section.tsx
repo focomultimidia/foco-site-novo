@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, MessageSquareText, Zap, ShieldCheck, ImagePlus } from "lucide-react";
+import { ArrowRight, MessageSquareText, Zap, ShieldCheck } from "lucide-react";
 import { useScrollPinScale } from "@/features/shared/hooks/use-scroll-pin-scale";
 import { useInViewOnce } from "@/features/shared/hooks/use-in-view-once";
 
@@ -219,7 +219,7 @@ function OtheoAiTeaserSection() {
               </p>
 
               <Link
-                to="/"
+                to="/otheo-ai"
                 className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/25 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
               >
                 Quero saber como funciona
@@ -250,18 +250,39 @@ function OtheoAiTeaserSection() {
                 style={{ background: "radial-gradient(circle, rgba(252,204,48,0.35), transparent 70%)" }}
               />
 
+              {/* Moldura de vidro fosco escuro — mesma família visual do
+                  mockup mobile da hero (HeroMobileMockup em hero-section.tsx),
+                  aqui sem a complexidade de `fluidPx`/`isWideLayout` porque
+                  esta seção não escala fluida como a hero. Proporção real do
+                  print (738×1456, medida do arquivo) em vez do 9:19.5
+                  chutado do placeholder anterior — `object-cover` já não
+                  cortaria nada mesmo, mas a proporção exata evita qualquer
+                  distorção. Sem "notch" sintético: o print já é uma tela
+                  cheia (barra de status própria bem no topo), um entalhe
+                  desenhado por cima colidiria com o cabeçalho "Hotel
+                  Village..." que começa bem perto da borda. */}
               <div
-                className="relative z-10 w-[190px] sm:w-[220px] lg:w-[240px] aspect-[9/19.5] rounded-[30px] border-2 border-dashed border-[#285992]/30 backdrop-blur-sm flex flex-col items-center justify-center gap-3 px-4 text-center shadow-[0_24px_60px_-24px_rgba(15,40,80,0.3)]"
-                style={{ background: "rgba(255,255,255,0.94)" }}
+                className="relative z-10 w-[190px] sm:w-[220px] lg:w-[240px] rounded-[30px] p-2"
+                style={{
+                  background: "rgba(16,35,61,0.55)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "2px solid rgba(255,255,255,0.22)",
+                  boxShadow: "0 24px 60px -24px rgba(15,40,80,0.5), inset 0 1px 0 rgba(255,255,255,0.12)",
+                }}
               >
-                <span className="absolute top-3 left-1/2 -translate-x-1/2 w-7 h-1.5 rounded-full" style={{ background: "rgba(40,89,146,0.15)" }} />
-                <ImagePlus className="w-6 h-6 text-[#285992]/40" strokeWidth={1.6} />
-                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#285992]/50">
-                  Imagem em breve
-                </span>
-                <span className="text-slate-400 text-[11px] leading-relaxed">
-                  Print mobile do Otheo AI na extranet
-                </span>
+                <div
+                  className="relative overflow-hidden rounded-[22px] ring-1 ring-white/15"
+                  style={{ aspectRatio: "738 / 1456" }}
+                >
+                  <img
+                    src="/assets/imgs/home/otheoai/chat-ia.jpg"
+                    alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
               </div>
 
               {CAPACIDADES.map(({ Icon, label, className, floatDelay }) => (

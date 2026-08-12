@@ -25,8 +25,8 @@ interface PosConfig {
 // Opacity & filter get a quick tween so they don't overshoot.
 const POS: Record<Role, PosConfig> = {
   center: { x: 0,    rotateY: 0,   scale: 1,    opacity: 1,    zIndex: 30 },
-  left:   { x: -410, rotateY: 30,  scale: 0.82, opacity: 0.55, zIndex: 10 },
-  right:  { x: 410,  rotateY: -30, scale: 0.82, opacity: 0.55, zIndex: 10 },
+  left:   { x: -410, rotateY: 30,  scale: 0.82, opacity: 0.8, zIndex: 10 },
+  right:  { x: 410,  rotateY: -30, scale: 0.82, opacity: 0.8, zIndex: 10 },
 };
 
 const SPRING = { type: "spring", stiffness: 280, damping: 32 } as const;
@@ -104,7 +104,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
             <p className="text-sm font-semibold text-gray-900 leading-tight">
               {artigo.publicacao}
             </p>
-            <p className="text-xs text-gray-500 mt-0.5">{artigo.data}</p>
+            <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>
           </div>
         </div>
 
@@ -117,7 +117,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
         <div className="h-px bg-gradient-to-r from-[#285992]/15 via-[#285992]/8 to-transparent mb-4" />
 
         {/* Excerpt */}
-        <p className="text-gray-500 text-sm leading-relaxed line-clamp-4 flex-1 mb-6">
+        <p className="text-gray-700 text-sm leading-relaxed line-clamp-4 flex-1 mb-6">
           {artigo.descricao}
         </p>
 
@@ -126,7 +126,8 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           href={artigo.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 hover:text-blue-700 group w-fit"
+          tabIndex={isCenter ? undefined : -1}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-800 hover:text-blue-900 group w-fit"
           onClick={e => e.stopPropagation()}
         >
           Ler artigo completo
@@ -201,6 +202,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             <motion.div
               key={artigo.id}
               className="absolute top-0 left-1/2"
+              aria-hidden={role !== "center"}
               style={{
                 width: CARD_W,
                 height: CARD_H,
@@ -267,13 +269,17 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
               key={idx}
               onClick={() => setCenter(idx)}
               aria-label={`Slide ${idx + 1}`}
-              className={[
-                "h-2 rounded-full transition-all duration-300 cursor-pointer",
-                idx === center
-                  ? "w-6 bg-blue-600"
-                  : "w-2 bg-gray-300 hover:bg-gray-400",
-              ].join(" ")}
-            />
+              className="group flex items-center justify-center w-6 h-6 cursor-pointer"
+            >
+              <span
+                className={[
+                  "h-2 rounded-full transition-all duration-300",
+                  idx === center
+                    ? "w-6 bg-blue-600"
+                    : "w-2 bg-gray-300 group-hover:bg-gray-400",
+                ].join(" ")}
+              />
+            </button>
           ))}
         </div>
 

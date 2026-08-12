@@ -2,7 +2,7 @@ import type { ExperienciaHospedeData } from "../types";
 
 const experienciaHospedeData: ExperienciaHospedeData = {
   hero: {
-    titulo: "Experiência do Hóspede Excepcional",
+    titulo: "Experiência do hóspede excepcional",
     subtitulo: "Do Pré-Check-in ao Pós-Estadia",
     descricao:
       "Crie experiências memoráveis em cada etapa da jornada do hóspede. Comunicação personalizada, check-in digital, concierge virtual e muito mais.",

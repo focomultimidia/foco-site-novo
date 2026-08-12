@@ -1,7 +1,8 @@
 "use client";
 
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Linkedin, Instagram, Facebook, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Linkedin, Instagram, Facebook, Youtube, Twitter } from "lucide-react";
+import { useCookieConsent } from "@/features/cookie-consent";
 
 interface FooterLink {
   label: string;
@@ -23,16 +24,16 @@ const footerSections: FooterSection[] = [
       { label: "Gestão Hoteleira (PMS)", href: "/gestao-hoteleira" },
       { label: "Experiência do Hóspede", href: "/experiencia-do-hospede" },
       { label: "Software de Pagamentos", href: "/software-de-pagamentos" },
-      { label: "CRM Hoteleiro", href: "/crm-hoteleiro" },
+      { label: "Integrações Hoteleiras", href: "/integracoes-hoteleiras" },
+      { label: "Otheo IA", href: "/otheo-ai" },
+      //{ label: "CRM Hoteleiro", href: "/crm-hoteleiro" },
     ],
   },
   {
     title: "Empresa",
     links: [
       { label: "Sobre Nós", href: "/sobre" },
-      { label: "Carreiras", href: "#" },
-      { label: "Blog", href: "#" },
-      { label: "Eventos", href: "#" },
+      { label: "Blog", href: "https://blog.focomultimidia.com" },
       { label: "Parceiros", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
     ],
   },
@@ -40,22 +41,24 @@ const footerSections: FooterSection[] = [
     title: "Suporte",
     links: [
       { label: "Central de Ajuda", href: "#" },
-      { label: "Documentação", href: "#" },
       { label: "Treinamentos", href: "#" },
-      { label: "Status", href: "#" },
-      { label: "Contato", href: "#" },
+      { label: "Widgets", href: "https://widgets.motor-reservas.com.br/" },
     ],
   },
 ];
 
 const socialLinks = [
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Linkedin, href: "https://br.linkedin.com/company/focotecnologiaemarketing", label: "LinkedIn" },
+  { icon: Instagram, href: "https://www.instagram.com/focomultimidia/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/focotecnologiaemarketing/", label: "Facebook" },
+  { icon: Youtube, href: "https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q", label: "YouTube" },
+  { icon: Twitter, href: "https://twitter.com/FocoMultimidia_", label: "Twitter" },
+
 ];
 
 function Footer() {
+  const { openPanel } = useCookieConsent();
+
   return (
     <footer className="bg-[#1E3A5F] text-white">
       {/* Main Footer */}
@@ -152,15 +155,16 @@ function Footer() {
 
             {/* Legal Links */}
             <div className="flex items-center gap-4 text-sm text-white/60">
-              <Link to="#" className="hover:text-[#fccc30] transition-colors">
+              <Link to="/politica-de-privacidade" className="hover:text-[#fccc30] transition-colors">
                 Privacidade
               </Link>
-              <Link to="#" className="hover:text-[#fccc30] transition-colors">
-                Termos
-              </Link>
-              <Link to="#" className="hover:text-[#fccc30] transition-colors">
+              <button
+                type="button"
+                onClick={() => openPanel("detalhado")}
+                className="hover:text-[#fccc30] transition-colors"
+              >
                 Cookies
-              </Link>
+              </button>
             </div>
           </div>
         </div>

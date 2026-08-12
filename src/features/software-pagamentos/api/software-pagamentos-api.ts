@@ -2,7 +2,7 @@ import type { SoftwarePagamentosData } from "../types";
 
 const softwarePagamentosData: SoftwarePagamentosData = {
   hero: {
-    titulo: "Software de Pagamentos Integrado",
+    titulo: "Software de pagamentos integrado",
     subtitulo: "Pagamentos Simplificados",
     descricao:
       "Processe pagamentos de forma segura e integrada. Múltiplas formas de pagamento, split de pagamentos, conciliação automática e total conformidade com regulamentações.",

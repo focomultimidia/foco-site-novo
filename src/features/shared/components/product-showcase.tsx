@@ -309,7 +309,7 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
   const activeProduct = PRODUTOS_DATA[activeIndex];
 
   return (
-    <div className="hidden lg:flex sticky h-[580px] items-center justify-center" style={{ top: STAGE_TOP }}>
+    <div className="hidden lg:flex sticky h-[500px] items-center justify-center" style={{ top: STAGE_TOP }}>
       {/* Brilho colorido — combina com o produto ativo, reforça a ligação
           visual com o trilho da coluna de texto (mesmo accent). */}
       <div
@@ -370,7 +370,7 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
                     src={activeProduct.screenshot}
                     alt={`Captura de tela do produto ${splitTitulo(activeProduct.titulo).nome}`}
                     loading={activeIndex === 0 ? "eager" : "lazy"}
-                    className="block w-full max-h-[520px] object-contain"
+                    className="block w-full max-h-[450px] object-contain"
                   />
                   <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/35 mix-blend-overlay" />
                 </div>
@@ -402,20 +402,20 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
 // completa já existe na página do produto.
 function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
   const ROLES = [
-    { x: -215, scale: 0.86, opacity: 0.88, z: 10 },
+    { x: -186, scale: 0.86, opacity: 0.88, z: 10 },
     { x: 0,    scale: 1,    opacity: 1,    z: 30 },
-    { x: 215,  scale: 0.86, opacity: 0.88, z: 10 },
+    { x: 186,  scale: 0.86, opacity: 0.88, z: 10 },
   ] as const;
 
   return (
-    <div className="relative h-[580px] flex items-center justify-center">
+    <div className="relative h-[500px] flex items-center justify-center">
       {ROLES.map((role, i) => {
         const mock = mockups[i];
         if (!mock) return null;
         return (
           <div
             key={i}
-            className="absolute w-[248px]"
+            className="absolute w-[214px]"
             style={{
               transform: `translateX(${role.x}px) scale(${role.scale})`,
               opacity: role.opacity,
@@ -509,7 +509,7 @@ function MobileTripleMockup({ mockups }: { mockups: readonly { src: string; alt:
 function PhoneMockup({ screenshot, label, alt }: { screenshot?: string; label: string; alt?: string }) {
   return (
     <div
-      className="absolute -bottom-8 -left-8 z-20 w-[35%] max-w-[142px]"
+      className="absolute -bottom-7 -left-7 z-20 w-[35%] max-w-[122px]"
       style={{
         filter: "drop-shadow(0 16px 24px rgba(15,40,80,0.30))",
       }}
@@ -542,7 +542,7 @@ function PhoneMockup({ screenshot, label, alt }: { screenshot?: string; label: s
               <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
               <span
                 className="text-[7px] font-semibold text-center leading-tight px-1"
-                style={{ color: "rgba(40,89,146,0.4)" }}
+                style={{ color: "#285992" }}
               >
                 Print mobile {label}
               </span>
@@ -570,13 +570,14 @@ function ScrollContentBlock({
   return (
     <div
       ref={registerRef}
-      className={`lg:min-h-[85vh] flex flex-col justify-center transition-opacity duration-500 py-14 lg:py-0 lg:pl-10 ${
-        active ? "lg:opacity-100" : "lg:opacity-40"
-      }`}
+      className="lg:min-h-[85vh] flex flex-col justify-center py-14 lg:py-0 lg:pl-10"
     >
       <div className="flex items-start gap-3 mb-5">
-        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-3xl
-                        bg-[#285992]/[0.08] ring-1 ring-inset ring-[#285992]/15">
+        <div
+          className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-3xl
+                      bg-[#285992]/[0.08] ring-1 ring-inset ring-[#285992]/15
+                      transition-opacity duration-500 ${active ? "lg:opacity-100" : "lg:opacity-40"}`}
+        >
           <Icon className="h-5 w-5 text-[#285992]" />
         </div>
         <div>
@@ -609,7 +610,7 @@ function ScrollContentBlock({
             </span>
           </h3>
           {subtitulo && (
-            <p className="text-[13px] text-slate-400 font-medium leading-snug mt-1">
+            <p className="text-[13px] text-slate-600 font-medium leading-snug mt-1">
               {subtitulo}
             </p>
           )}

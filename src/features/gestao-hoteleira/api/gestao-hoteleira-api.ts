@@ -2,7 +2,7 @@ import type { GestaoHoteleiraData } from "../types";
 
 const gestaoHoteleiraData: GestaoHoteleiraData = {
   hero: {
-    titulo: "Gestão Hoteleira Completa",
+    titulo: "Gestão hoteleira completa",
     subtitulo: "PMS - Property Management System",
     descricao:
       "Controle total da sua operação hoteleira em uma única plataforma. Do check-in ao check-out, financeiro, housekeeping e muito mais.",

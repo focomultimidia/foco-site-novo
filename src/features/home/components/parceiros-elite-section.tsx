@@ -1,35 +1,97 @@
 "use client";
 
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { Handshake, Award } from "lucide-react";
+import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { useParceirosEliteScroll } from "../hooks/use-parceiros-elite-scroll";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 // Logos em `public/assets/imgs/parceiros-elite/` — parceiros estratégicos do
 // ecossistema Foco (pagamentos, distribuição, atendimento, consultoria...).
-// Nome exibido no rótulo de cada tile vem do próprio arquivo, sem categorizar
-// o parceiro (evita afirmar algo sobre a natureza da parceria que não foi
-// confirmado).
+// Axé Benefícios fica sempre em primeiro (pedido explícito), o resto segue a
+// ordem em que foi cadastrado.
 
 interface Parceiro {
   id: string;
   nome: string;
   logo: string;
+  resumo: string;
 }
 
 const parceiros: Parceiro[] = [
-  { id: "asksuite",          nome: "Asksuite",          logo: "/assets/imgs/parceiros-elite/asksuite.webp" },
-  { id: "b2breservas",       nome: "B2B Reservas",       logo: "/assets/imgs/parceiros-elite/b2breservas.webp" },
-  { id: "decolar",           nome: "Decolar",            logo: "/assets/imgs/parceiros-elite/decolar.webp" },
-  { id: "expedia",           nome: "Expedia",            logo: "/assets/imgs/parceiros-elite/expedia.webp" },
-  { id: "hotei-rev",         nome: "Hotei Rev",          logo: "/assets/imgs/parceiros-elite/hotei-rev.webp" },
-  { id: "registrou-marcas",  nome: "Registrou Marcas",   logo: "/assets/imgs/parceiros-elite/registrou-marcas.webp" },
-  { id: "reprotel",          nome: "Reprotel",           logo: "/assets/imgs/parceiros-elite/reprotel.webp" },
-  { id: "stone",             nome: "Stone",              logo: "/assets/imgs/parceiros-elite/stone.webp" },
-  { id: "storm",             nome: "Storm",              logo: "/assets/imgs/parceiros-elite/storm.webp" },
-  { id: "tribuzana",         nome: "Tribuzana",          logo: "/assets/imgs/parceiros-elite/tribuzana.webp" },
-  { id: "viver-de-pousada",  nome: "Viver de Pousada",   logo: "/assets/imgs/parceiros-elite/viver-de-pousada.webp" },
+  {
+    id: "axe-beneficios", nome: "Axé Benefícios",
+    logo: "/assets/imgs/parceiros-elite/logo-axe-beneficios.svg",
+    resumo: "Solução de saúde corporativa com telemedicina 24h, psicologia e TotalPass para colaboradores, com implementação rápida e sem burocracia.",
+  },
+  {
+    id: "asksuite", nome: "Asksuite",
+    logo: "/assets/imgs/parceiros-elite/asksuite.svg",
+    resumo: "Chatbot e plataforma de atendimento multicanal (WhatsApp, redes sociais, site) focado em automatizar e aumentar as reservas diretas dos hotéis.",
+  },
+  {
+    id: "b2breservas", nome: "B2B Reservas",
+    logo: "/assets/imgs/parceiros-elite/b2breservas.svg",
+    resumo: "A B2B Reservas conecta hotéis e pousadas a centenas de agências e operadoras, ampliando vendas e fortalecendo a distribuição hoteleira.",
+  },
+  {
+    id: "decolar", nome: "Decolar",
+    logo: "/assets/imgs/parceiros-elite/decolar.svg",
+    resumo: "Cadastre seu hotel com suporte da Foco, ganhe comissão especial e destaque sua propriedade na Decolar.com com voucher exclusivo.",
+  },
+  {
+    id: "expedia", nome: "Expedia",
+    logo: "/assets/imgs/parceiros-elite/expedia.svg",
+    resumo: "Cadastre seu hotel com o apoio da Foco, aproveite comissionamento reduzido por 180 dias e acesse a distribuição global e B2B do Expedia.",
+  },
+  {
+    id: "hotei-rev", nome: "Hotel Rev",
+    logo: "/assets/imgs/parceiros-elite/hotei-rev.svg",
+    resumo: "Consultoria e administração de vendas com estratégias de RM, marketing e inovação que aumentam receita, ocupação e vendas diretas.",
+  },
+  {
+    id: "registrou-marcas", nome: "Registrou Marcas",
+    logo: "/assets/imgs/parceiros-elite/registroumarcas.svg",
+    resumo: "Ter CNPJ, site, domínio ou conta na Booking.com não protege o nome do seu hotel. A única forma de garantir exclusividade legal sobre a sua marca é registrando no INPI.",
+  },
+  {
+    id: "reprotel", nome: "Reprotel",
+    logo: "/assets/imgs/parceiros-elite/reprotel.svg",
+    resumo: "Reprotel oferece sistemas completos para hotéis e pousadas, integrando reservas, finanças e canais de venda para mais eficiência, economia e resultados.",
+  },
+  {
+    id: "stone", nome: "Stone",
+    logo: "/assets/imgs/parceiros-elite/stone.svg",
+    resumo: "Transforme a experiência de pagamento do seu hóspede com Pix, cartão e maquininhas integrados ao sistema Foco, sem complicação.",
+  },
+  {
+    id: "storm", nome: "Storm",
+    logo: "/assets/imgs/parceiros-elite/storm.svg",
+    resumo: "Na Storm, unimos branding estratégico e identidade visual para posicionar sua empresa com autoridade e atrair clientes certos.",
+  },
+  {
+    id: "tribuzana", nome: "Tribuzana",
+    logo: "/assets/imgs/parceiros-elite/tribuzana.svg",
+    resumo: "Autoridade no segmento, há mais de 10 anos ao lado dos hoteleiros com soluções que unem estratégia e tecnologia para transformar meios de hospedagem.",
+  },
+  {
+    id: "viver-de-pousada", nome: "Viver de Pousada",
+    logo: "/assets/imgs/parceiros-elite/viver-de-pousada.webp",
+    resumo: "O Viver de Pousada desenvolve consultorias, mentorias e treinamentos personalizados para seu hotel ou pousada lucrar o ano todo.",
+  },
 ];
 
-// ── Variants ──────────────────────────────────────────────────────────────────
+// Esteira do desktop precisa de uma lista DUPLICADA — mesma técnica do
+// TrustedLogosMarquee (loop sem-costura: metade 1 e metade 2 são idênticas,
+// então o salto do fim pro começo é imperceptível).
+const parceirosLoop = [...parceiros, ...parceiros];
+
+// Altura COMPARTILHADA entre o card principal e os cards de logo — pedido
+// explícito ("mesma altura"). Um único ponto de ajuste pros dois.
+const CARD_HEIGHT = "h-[300px] lg:h-[320px]";
+
+// ── Variants (fallback mobile/reduced-motion) ───────────────────────────────
 
 const gridVariants = {
   hidden:  {},
@@ -47,30 +109,29 @@ const tileVariants = {
 };
 
 // ── PartnerTile ───────────────────────────────────────────────────────────────
-// Logo em silhueta branca por padrão (filtro monocromático) — unifica o
-// "ruído" de 11 paletas de marca bem diferentes num mesmo painel escuro — e
-// revela a cor real no hover, como um selo que "acende" ao ser tocado.
-
+// Card branco sólido, SEM sombra (pedido explícito — plano, só a borda
+// marca o contorno) — a logo fica sempre com suas cores originais (sem
+// silhueta/hover), o card branco já basta pra unificar as 11 paletas de
+// marca diferentes num mesmo painel. Mesma altura do EliteBadgeCard
+// (CARD_HEIGHT) e mesma "família" visual (rounded-3xl, borda) — os dois
+// conjuntos lado a lado devem ler como membros do mesmo grupo, só que um é
+// o destaque (escuro) e os outros o coro (branco). Sem motion próprio:
+// no desktop vive dentro da esteira controlada por GSAP (ver
+// use-parceiros-elite-scroll.ts), no fallback mobile quem anima é o
+// `motion.div` pai (gridVariants/tileVariants).
 function PartnerTile({ parceiro }: { parceiro: Parceiro }) {
   return (
-    <motion.div
-      variants={tileVariants}
-      className="group relative flex w-[152px] sm:w-[172px] flex-shrink-0 flex-col items-center justify-between gap-3 rounded-2xl border border-white/10 px-5 py-5 h-[136px] cursor-default transition-colors duration-300 hover:border-[#fccc30]/40"
-      style={{
-        background: "rgba(16,35,61,0.55)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
-      }}
+    <div
+      className={`group relative flex w-[220px] lg:w-[240px] flex-shrink-0 flex-col rounded-3xl border border-slate-100 bg-white px-6 py-6 cursor-default transition-colors duration-300 hover:border-[#fccc30]/50 ${CARD_HEIGHT}`}
     >
       {/* Glow dourado sutil ao hover */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ boxShadow: "0 0 0 1px rgba(252,204,48,0.12), 0 16px 40px -18px rgba(252,204,48,0.35)" }}
+        className="pointer-events-none absolute inset-0 rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{ boxShadow: "0 0 0 1px rgba(252,204,48,0.25), 0 16px 40px -18px rgba(252,204,48,0.35)" }}
       />
 
-      <div className="flex flex-1 items-center justify-center">
+      <div className="flex items-center justify-center h-12 mb-5">
         <img
           src={parceiro.logo}
           alt={parceiro.nome}
@@ -78,88 +139,235 @@ function PartnerTile({ parceiro }: { parceiro: Parceiro }) {
           height={80}
           loading="lazy"
           decoding="async"
-          className="max-h-9 sm:max-h-10 max-w-[110px] sm:max-w-[124px] object-contain opacity-70 transition-all duration-300 group-hover:opacity-100"
-          style={{ filter: "grayscale(1) brightness(0) invert(1)" }}
-          onMouseEnter={(e) => { e.currentTarget.style.filter = "none"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.filter = "grayscale(1) brightness(0) invert(1)"; }}
+          className="max-h-10 max-w-[150px] object-contain"
         />
       </div>
 
-      <div className="h-px w-8 bg-white/15 transition-colors duration-300 group-hover:bg-[#fccc30]/40" />
+      <div className="h-px w-8 bg-slate-200 transition-colors duration-300 group-hover:bg-[#fccc30]/60 mb-4" />
 
-      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-white/40 transition-colors duration-300 group-hover:text-[#fccc30]/90">
+      <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-[#285992] mb-2.5">
         {parceiro.nome}
       </span>
-    </motion.div>
+
+      <p className="text-slate-500 text-[12.5px] leading-relaxed line-clamp-6">
+        {parceiro.resumo}
+      </p>
+    </div>
   );
 }
+
+// ── EliteBadgeCard ────────────────────────────────────────────────────────────
+// O selo "Foco Elite Partner" — card principal do efeito. No desktop, o
+// `ref` é o alvo direto do GSAP (use-parceiros-elite-scroll.ts: `x`, opacity,
+// scale, y são todos manipulados nele); no fallback mobile, entra sozinho
+// via `whileInView` (ver bloco `!usePinnedElite` abaixo). Por isso NENHUM
+// estilo de posicionamento (absolute/left/top) vive aqui dentro — quem
+// posiciona é sempre o chamador, via `className`. Conteúdo interno em
+// `h-full flex-col justify-between` pra se espalhar bem na altura
+// compartilhada com PartnerTile (ver CARD_HEIGHT), em vez de ficar
+// encolhido no topo de um card mais alto que o necessário.
+const EliteBadgeCard = forwardRef<HTMLDivElement, { className?: string }>(
+  function EliteBadgeCard({ className = "" }, ref) {
+    return (
+      <div
+        ref={ref}
+        className={`relative overflow-hidden rounded-[28px] border border-white/10 will-change-transform ${className}`}
+        style={{
+          background: "linear-gradient(155deg, #1c3c5e 0%, #0d1d33 100%)",
+          boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(252,204,48,0.14)",
+        }}
+      >
+        {/* Halo dourado no canto — mesmo vocabulário da aurora do painel */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(252,204,48,0.28), transparent 70%)" }}
+        />
+
+        <div className="relative z-10 h-full flex flex-col justify-between gap-5 p-6 lg:p-7">
+          {/* Logo real do selo — já contém o wordmark "Foco Elite Partner",
+              por isso não repetimos o nome em texto aqui embaixo (era
+              redundante com um <h3> antes desta logo existir). */}
+          <img
+            src="/assets/imgs/parceiros-elite/logo-foco-elite-partner.svg"
+            alt="Foco Elite Partner"
+            width={289}
+            height={101}
+            className="w-full h-auto object-contain"
+          />
+
+          <div>
+            <p className="text-white/55 text-[13px] leading-relaxed">
+              Programa de parceria estratégica do ecossistema Foco — o selo que
+              reúne as integrações mais testadas e confiáveis da plataforma.
+            </p>
+          </div>
+
+          <div>
+            <div className="h-px bg-white/10 mb-4" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Handshake className="w-4 h-4 text-[#fccc30]" strokeWidth={1.8} />
+                <span className="text-white/70 text-xs font-medium">
+                  {parceiros.length} integrações parceiras
+                </span>
+              </div>
+              <Award className="w-5 h-5 text-[#fccc30]/70" strokeWidth={1.6} />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  },
+);
 
 // ── ParceirosEliteSection ───────────────────────────────────────────────────
 
 function ParceirosEliteSection() {
+  // Pin + parallax só em desktop largo + sem reduced-motion — mesmo critério
+  // de `canScrollytell`/`useHorizontalScroll` já usado na hero e em
+  // EventosSection. Fora dessa condição, a seção nem monta a variante
+  // pinada (ver comentário em use-eventos-scroll.ts sobre por que isso não
+  // pode ser só `display:none`: o GSAP mede a largura real da esteira pra
+  // calcular a distância do pin, e um elemento oculto mede 0).
+  const [usePinnedElite, setUsePinnedElite] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  useEffect(() => {
+    const widthMq = window.matchMedia("(min-width: 1024px)");
+    const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setUsePinnedElite(widthMq.matches && !motionMq.matches);
+    update();
+    widthMq.addEventListener("change", update);
+    motionMq.addEventListener("change", update);
+    return () => {
+      widthMq.removeEventListener("change", update);
+      motionMq.removeEventListener("change", update);
+    };
+  }, []);
+
+  const sectionRef    = useRef<HTMLElement>(null);
+  const mainCardRef   = useRef<HTMLDivElement>(null);
+  const logosWrapRef  = useRef<HTMLDivElement>(null);
+  const logosTrackRef = useRef<HTMLDivElement>(null);
+
+  useParceirosEliteScroll(usePinnedElite, sectionRef, mainCardRef, logosWrapRef, logosTrackRef);
+
   return (
-    <section className="relative py-24 sm:py-28 overflow-hidden bg-[#10233d]">
-      {/* Aurora — mesmo vocabulário visual da hero, bem mais discreta aqui
-          (opacidade baixa, só pra tirar a chapadura do azul sólido). */}
-      <div aria-hidden="true" className="absolute -inset-[10%] -z-0 overflow-hidden" style={{ filter: "blur(60px)", opacity: 0.5 }}>
-        <div
-          className="absolute w-[420px] h-[420px] -left-24 top-1/3 rounded-full motion-safe:animate-aurora-a"
-          style={{ background: "radial-gradient(circle, rgba(66,122,185,0.55), transparent 70%)" }}
-        />
-        <div
-          className="absolute w-[380px] h-[380px] -right-20 -bottom-24 rounded-full motion-safe:animate-aurora-c"
-          style={{ background: "radial-gradient(circle, rgba(252,204,48,0.14), transparent 70%)" }}
-        />
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-      />
+    <>
+      {/* ── Desktop — pin + card deslizando + esteira em loop infinito ──── */}
+      {usePinnedElite && (
+        <section ref={sectionRef} className="relative h-screen overflow-hidden bg-[#f4f7fb]">
+          <div className="relative z-10 h-full flex flex-col justify-center">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-4"
+              >
+                <SectionEyebrow>Parceiros elite</SectionEyebrow>
+                <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
+                  Ao lado de quem é{" "}
+                  <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+                    referência no mercado
+                  </span>
+                </h2>
+                <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                  Construímos nosso ecossistema ao lado de parceiros estratégicos,
+                  altamente engajados — cada logo abaixo é uma integração testada,
+                  aprovada e em uso todos os dias pelos nossos clientes.
+                </p>
+              </motion.div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6">
-            <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full" />
-            Parceiros elite
-          </span>
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-white leading-none tracking-tighter antialiased mb-4">
-            Ao lado de quem é{" "}
-            <span className="bg-gradient-to-r from-[#fccc30] via-[#ffe28a] to-[#fccc30] bg-clip-text text-transparent">
-              referência no mercado
-            </span>
-          </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed">
-            Construímos nosso ecossistema ao lado de parceiros estratégicos,
-            altamente engajados. Cada parceiro representa uma integração
-            testada, aprovada e em uso todos os dias pelos nossos clientes.
-          </p>
-        </motion.div>
+              {/* Palco do efeito — card principal + esteira, ambos centralizados
+                  verticalmente e posicionados via `absolute` (o GSAP manipula
+                  `x`/opacity/scale diretamente nos nós via ref). */}
+              <div className={`relative mt-14 lg:mt-16 ${CARD_HEIGHT}`}>
+                <div
+                  ref={logosWrapRef}
+                  className="absolute left-[188px] lg:left-[210px] right-0 top-0 bottom-0 z-10 overflow-hidden"
+                >
+                  <div ref={logosTrackRef} className={`flex items-stretch gap-4 lg:gap-5 w-max will-change-transform ${CARD_HEIGHT}`}>
+                    {parceirosLoop.map((parceiro, i) => (
+                      <PartnerTile key={`${parceiro.id}-${i}`} parceiro={parceiro} />
+                    ))}
+                  </div>
 
-        {/* Painel de logos */}
-        <motion.div
-          className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-5"
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-        >
-          {parceiros.map((parceiro) => (
-            <PartnerTile key={parceiro.id} parceiro={parceiro} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
+                  {/* Fade só na borda de saída (direita) — na borda de entrada
+                      (onde as logos emergem de trás do card) NÃO existe fade
+                      nenhum, pedido explícito: a revelação ali é só o
+                      `overflow-hidden` cortando quem ainda não "chegou". */}
+                  <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#f4f7fb] to-transparent" />
+                </div>
+
+                <EliteBadgeCard
+                  ref={mainCardRef}
+                  className={`absolute left-0 top-0 z-30 w-[300px] lg:w-[328px] ${CARD_HEIGHT}`}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── Mobile / tablet / reduced-motion — selo estático + grid com
+          stagger reveal (o mesmo efeito que a seção sempre teve). ────────── */}
+      {!usePinnedElite && (
+        <section className="relative py-24 sm:py-28 overflow-hidden bg-[#f4f7fb]">
+          <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-12"
+            >
+              <SectionEyebrow>Parceiros elite</SectionEyebrow>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
+                Ao lado de quem é{" "}
+                <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
+                  referência no mercado
+                </span>
+              </h2>
+              <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                Construímos nosso ecossistema ao lado de parceiros estratégicos,
+                altamente engajados. Cada parceiro representa uma integração
+                testada, aprovada e em uso todos os dias pelos nossos clientes.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20, scale: 0.92 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="flex justify-center mb-10"
+            >
+              <EliteBadgeCard className="w-full max-w-[360px] h-[300px]" />
+            </motion.div>
+
+            <motion.div
+              className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-5"
+              variants={gridVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+            >
+              {parceiros.map((parceiro) => (
+                <motion.div key={parceiro.id} variants={tileVariants}>
+                  <PartnerTile parceiro={parceiro} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }
 

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://focomultimidia.com/sitemap.xml

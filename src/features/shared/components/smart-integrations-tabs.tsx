@@ -252,7 +252,7 @@ function SmartIntegrationsTabs() {
           {tabsData.map((tab) => (
             <TabsContent key={tab.id} value={tab.id} className="mt-0">
               {/* Description */}
-              <p className="text-center text-gray-500 mb-8 max-w-xl mx-auto text-base">
+              <p className="text-center text-gray-600 mb-8 max-w-xl mx-auto text-base">
                 {tab.description}
               </p>
 

@@ -1,0 +1,20 @@
+# Foco Tecnologia
+
+> Ecossistema completo de tecnologia hoteleira: Site Hoteleiro, Motor de Reservas, Channel Manager, Gestão Hoteleira (PMS), Software de Pagamentos, CRM Hoteleiro e Experiência do Hóspede, tudo integrado em uma única plataforma.
+
+A Foco Tecnologia é líder em software para hotelaria no Brasil, atendendo mais de 2.500 hotéis e pousadas com uma plataforma que integra reservas, distribuição, gestão operacional, pagamentos e relacionamento com o hóspede.
+
+## Produtos
+
+- [Site Hoteleiro](https://focomultimidia.com/site-hoteleiro): Sites de alta conversão com motor de reservas integrado.
+- [Motor de Reservas](https://focomultimidia.com/motor-de-reservas): Reservas diretas sem comissão de OTAs.
+- [Channel Manager](https://focomultimidia.com/channel-manager): Distribuição para mais de 800 canais de venda.
+- [Gestão Hoteleira (PMS)](https://focomultimidia.com/gestao-hoteleira): Sistema de gestão hoteleira com integração nativa.
+- [Software de Pagamentos](https://focomultimidia.com/software-de-pagamentos): Automação de cobranças e conciliação financeira.
+- [Experiência do Hóspede](https://focomultimidia.com/experiencia-do-hospede): FocoPass, o concierge digital do hóspede.
+
+## Empresa
+
+- [Sobre Nós](https://focomultimidia.com/sobre): História e valores da Foco Tecnologia.
+- [Marketing](https://focomultimidia.com/marketing): Serviços de marketing digital para hotelaria.
+- [Blog](https://focomultimidia.com/blog): Conteúdo sobre gestão e tecnologia hoteleira.

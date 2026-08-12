@@ -100,7 +100,7 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
       </div>
 
       <div className="flex-1 min-w-0 flex flex-col justify-center p-4 sm:p-5 xl:p-6">
-        <span className="flex items-center gap-1 text-[11px] font-medium text-slate-400 mb-1.5">
+        <span className="flex items-center gap-1 text-[11px] font-medium text-slate-600 mb-1.5">
           <MapPin className="w-3 h-3 flex-shrink-0" />
           {evento.local}
         </span>
@@ -139,7 +139,14 @@ function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex
   const activePct = total > 0 ? ((activeIndex + 0.5) / total) * 100 : 0;
 
   return (
-    <div className="absolute inset-x-0 bottom-[20%] xl:bottom-[22%] z-20 px-[10vw] xl:px-[12vw] pointer-events-none">
+    // `top: calc(<centro do trilho de cards> + <metade da altura do card> + <espaço fixo>)`
+    // em vez de `bottom-X%`: com duas âncoras percentuais independentes (cards em
+    // `top-%`, régua em `bottom-%`), a distância entre elas cresce junto com a altura
+    // da viewport (a altura do card é fixa em px, mas o `bottom-%` não sabe disso) —
+    // em telas mais altas a régua ficava bem longe dos cards. Ancorando a régua a uma
+    // distância FIXA (em px) do centro do trilho de cards, o espaço entre o card e a
+    // cápsula fica constante em qualquer altura de tela.
+    <div className="absolute inset-x-0 top-[calc(38%+214px)] xl:top-[calc(40%+228px)] z-20 px-[10vw] xl:px-[12vw] pointer-events-none">
       <div className="relative h-px w-full bg-[#285992]/15">
         {/* Trecho já "percorrido" da linha — cresce até a estação ativa */}
         <motion.div
@@ -162,7 +169,7 @@ function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex
             >
               <span
                 className="font-mono text-[10px] mb-2 transition-colors duration-300"
-                style={{ color: isActive ? "#fccc30" : "rgba(40,89,146,0.35)" }}
+                style={{ color: isActive ? "#1e3a5f" : "#285992" }}
               >
                 0{i + 1}
               </span>
@@ -183,7 +190,7 @@ function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex
 
               <span
                 className="mt-2.5 font-mono text-[10px] uppercase tracking-wide whitespace-nowrap transition-colors duration-300"
-                style={{ color: isActive ? "#285992" : "rgba(40,89,146,0.4)" }}
+                style={{ color: isActive ? "#1e3a5f" : "#285992" }}
               >
                 {evento.data}
               </span>
@@ -319,7 +326,10 @@ function EventosSection({ eventos }: EventosSectionProps) {
                 feiras de hotelaria
               </span>
             </h2>
-
+            <p className="text-slate-600 text-base leading-relaxed max-w-md">
+              Grandes redes e pousadas independentes confiam na Foco — acompanhe
+              onde estivemos e onde vamos estar em seguida.
+            </p>
           </div>
 
           {/* Trilho — `pl-[44%]` empurra o 1º card pra começar logo depois da
