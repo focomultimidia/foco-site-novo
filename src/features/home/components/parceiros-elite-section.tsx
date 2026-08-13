@@ -171,48 +171,56 @@ const EliteBadgeCard = forwardRef<HTMLDivElement, { className?: string }>(
     return (
       <div
         ref={ref}
-        className={`relative overflow-hidden rounded-[28px] border border-white/10 will-change-transform ${className}`}
-        style={{
-          background: "linear-gradient(155deg, #1c3c5e 0%, #0d1d33 100%)",
-          boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(252,204,48,0.14)",
-        }}
+        className={`relative rounded-[28px] will-change-transform ${className}`}
+        style={{ boxShadow: "0 30px 70px -20px rgba(0,0,0,0.55), 0 0 0 1px rgba(252,204,48,0.14)" }}
       >
-        {/* Halo dourado no canto — mesmo vocabulário da aurora do painel */}
+        {/* Camada de recorte separada da camada da sombra: o halo dourado
+            precisa de `overflow-hidden` pra ser cortado pelos cantos
+            arredondados, mas se esse corte vivesse no MESMO elemento do
+            `boxShadow` do wrapper acima, ele cortaria a própria sombra
+            externa do card junto (overflow:hidden recorta toda a pintura
+            do elemento, sombra inclusa) — era a causa da sombra "cortada". */}
         <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl"
-          style={{ background: "radial-gradient(circle, rgba(252,204,48,0.28), transparent 70%)" }}
-        />
-
-        <div className="relative z-10 h-full flex flex-col justify-between gap-5 p-6 lg:p-7">
-          {/* Logo real do selo — já contém o wordmark "Foco Elite Partner",
-              por isso não repetimos o nome em texto aqui embaixo (era
-              redundante com um <h3> antes desta logo existir). */}
-          <img
-            src="/assets/imgs/parceiros-elite/logo-foco-elite-partner.svg"
-            alt="Foco Elite Partner"
-            width={289}
-            height={101}
-            className="w-full h-auto object-contain"
+          className="relative h-full w-full overflow-hidden rounded-[28px] border border-white/10"
+          style={{ background: "linear-gradient(155deg, #1c3c5e 0%, #0d1d33 100%)" }}
+        >
+          {/* Halo dourado no canto — mesmo vocabulário da aurora do painel */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl"
+            style={{ background: "radial-gradient(circle, rgba(252,204,48,0.28), transparent 70%)" }}
           />
 
-          <div>
-            <p className="text-white/55 text-[13px] leading-relaxed">
-              Programa de parceria estratégica do ecossistema Foco — o selo que
-              reúne as integrações mais testadas e confiáveis da plataforma.
-            </p>
-          </div>
+          <div className="relative z-10 h-full flex flex-col justify-between gap-5 p-6 lg:p-7">
+            {/* Logo real do selo — já contém o wordmark "Foco Elite Partner",
+                por isso não repetimos o nome em texto aqui embaixo (era
+                redundante com um <h3> antes desta logo existir). */}
+            <img
+              src="/assets/imgs/parceiros-elite/logo-foco-elite-partner.svg"
+              alt="Foco Elite Partner"
+              width={289}
+              height={101}
+              className="w-full h-auto object-contain"
+            />
 
-          <div>
-            <div className="h-px bg-white/10 mb-4" />
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Handshake className="w-4 h-4 text-[#fccc30]" strokeWidth={1.8} />
-                <span className="text-white/70 text-xs font-medium">
-                  {parceiros.length} integrações parceiras
-                </span>
+            <div>
+              <p className="text-white/55 text-[13px] leading-relaxed">
+                Programa de parceria estratégica do ecossistema Foco — o selo que
+                reúne as integrações mais testadas e confiáveis da plataforma.
+              </p>
+            </div>
+
+            <div>
+              <div className="h-px bg-white/10 mb-4" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <Handshake className="w-4 h-4 text-[#fccc30]" strokeWidth={1.8} />
+                  <span className="text-white/70 text-xs font-medium">
+                    {parceiros.length} integrações parceiras
+                  </span>
+                </div>
+                <Award className="w-5 h-5 text-[#fccc30]/70" strokeWidth={1.6} />
               </div>
-              <Award className="w-5 h-5 text-[#fccc30]/70" strokeWidth={1.6} />
             </div>
           </div>
         </div>

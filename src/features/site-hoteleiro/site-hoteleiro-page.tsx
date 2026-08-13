@@ -13,7 +13,7 @@ import {
 import { EventosSection } from "@/features/home/components/eventos-section";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { Spinner } from "@/components/ui/spinner";
@@ -58,6 +58,13 @@ function SiteHoteleiroPage() {
     <div className="space-y-0">
       {/* Hero Section */}
       <HeroSection data={data.hero} />
+
+      {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="baixa-ocupacao"
+        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
+        backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
+      />
 
       {/* Section 1: Modelos de sites */}
       <WebsitePortfolioCarousel />

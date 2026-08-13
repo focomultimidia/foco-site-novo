@@ -33,7 +33,7 @@ const stepVariants = {
  */
 function OcupacaoSection() {
   return (
-    <section className="py-24 lg:py-28 bg-white">
+    <section className="py-24 lg:py-28 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <motion.div

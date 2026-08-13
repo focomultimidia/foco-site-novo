@@ -14,7 +14,7 @@ import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 
 // Provas Sociais importadas da Home
 import { NumerosSection } from "@/features/home/components/numeros-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
@@ -69,6 +69,13 @@ function MotorReservasPage() {
 
       {/* Section 2: O que é um motor de reservas */}
       <GenericInfoSection {...INFO_SECTIONS.motorReservas} imageSide="right" />
+
+      {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="baixa-ocupacao"
+        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
+        backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
+      />
 
       {/* Prova Social: Cases de sucesso */}
       <TrustedLogosMarquee />

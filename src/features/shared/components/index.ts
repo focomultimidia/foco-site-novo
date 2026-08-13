@@ -16,3 +16,4 @@ export type { GradientHeroProps, GradientHeroSlide, GradientHeroBadge } from "./
 export { CertificacoesSection } from "./certificacoes-section";
 export type { CertificacoesSectionProps } from "./certificacoes-section";
 export { WallOfLoveSection } from "./wall-of-love-section";
+export { DorParallaxSection } from "./dor-parallax-section";

@@ -1,5 +1,5 @@
 import { HeroSection } from "./components/hero-section";
-import { ProblemaSection } from "./components/problema-section";
+import { ProblemaParallaxSection } from "./components/problema-parallax-section";
 import { PilaresSection } from "./components/pilares-section";
 import { OcupacaoSection } from "./components/ocupacao-section";
 import { DisponibilidadeVendasSection } from "./components/disponibilidade-vendas-section";
@@ -16,13 +16,13 @@ import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
  * destaque explícito (ocupação, disponibilidade, tarifas), cada um com sua
  * própria demonstração de chat. Mobile/voz fecha a parte de produto antes
  * do acesso (extranet/app) e do manifesto. Todas as seções de corpo em
- * `#f4f7fb`/branco alternado — só a hero foge do padrão claro do site.
+ * `#f4f7fb` — só a hero foge do padrão claro do site.
  */
 function OtheoAiPage() {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <ProblemaSection />
+      <ProblemaParallaxSection />
       <PilaresSection />
       <OcupacaoSection />
       <DisponibilidadeVendasSection />

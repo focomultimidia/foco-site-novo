@@ -15,7 +15,7 @@ import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 // Provas Sociais importadas da Home e UI
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
@@ -66,6 +66,13 @@ function ExperienciaHospedePage() {
 
       {/* Section 2: O que é um motor de reservas */}
       <GenericInfoSection {...INFO_SECTIONS.experienciaHospede} imageSide="right" />
+
+      {/* Diagnóstico: experiência ruim do hóspede (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="experiencia-ruim"
+        backgroundImage="/assets/imgs/experiencia-do-hospede/dor.jpg"
+        backgroundAlt="Família insatisfeita chegando ao hotel com malas, recepcionista ao fundo"
+      />
 
       {/* Section 3: Recursos */}
       <RecursosSection />

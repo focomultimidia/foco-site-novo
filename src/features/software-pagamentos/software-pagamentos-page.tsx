@@ -13,7 +13,7 @@ import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 // Provas Sociais importadas da Home e UI
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
@@ -63,6 +63,13 @@ function SoftwarePagamentosPage() {
 
       {/* Section 2: O que é o Foco Pay */}
       <GenericInfoSection {...INFO_SECTIONS.softwarePagamentos} imageSide="right" />
+
+      {/* Diagnóstico: prejuízos na gestão (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="prejuizos"
+        backgroundImage="/assets/imgs/gestao-hoteleira-pms/dor.jpg"
+        backgroundAlt="Hoteleiro estressado diante de um relatório financeiro com prejuízo operacional"
+      />
 
       {/* Section 3: Meios de Pagamento */}
       <MeiosPagamentoSection />

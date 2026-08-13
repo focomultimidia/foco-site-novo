@@ -14,7 +14,7 @@ import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 // Provas Sociais importadas da Home e UI
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
@@ -65,6 +65,13 @@ function ChannelManagerPage() {
 
       {/* Section 2: O que é um gestor de canais */}
       <GenericInfoSection {...INFO_SECTIONS.channelManager} imageSide="right" />
+
+      {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="baixa-ocupacao"
+        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
+        backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
+      />
 
       {/* Section 3: Fluxo de sincronização */}
       {/*<ChannelManagerFlow />*/}

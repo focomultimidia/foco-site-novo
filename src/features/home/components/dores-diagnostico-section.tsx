@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   AnimatePresence,
   motion,
@@ -50,6 +51,7 @@ interface DorConfig {
   solucaoIcons: IconType[];
   ctaTexto: string;
   ctaBotao: string;
+  ctaLink: string;
 }
 
 const DOR_CONFIG: Record<string, DorConfig> = {
@@ -62,6 +64,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     solucaoIcons: [Globe, Layout, Target, Zap],
     ctaTexto: "Quer atrair mais hóspedes e aumentar as suas reservas?",
     ctaBotao: "Quero atrair mais hóspedes",
+    ctaLink: "/motor-de-reservas",
   },
   prejuizos: {
     Icon: AlertTriangle,
@@ -72,6 +75,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     solucaoIcons: [Cloud, CreditCard, Headset, Plug],
     ctaTexto: "Quer parar de ter prejuízos e começar a obter lucros com seu estabelecimento?",
     ctaBotao: "Quero obter lucros",
+    ctaLink: "/gestao-hoteleira",
   },
   "experiencia-ruim": {
     Icon: Frown,
@@ -82,6 +86,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     solucaoIcons: [Star, Smartphone, MessageCircle, Percent],
     ctaTexto: "Quer melhorar a experiência do seu hóspede e aumentar sua reputação online?",
     ctaBotao: "Quero aumentar a reputação do meu hotel",
+    ctaLink: "/experiencia-do-hospede",
   },
 };
 
@@ -221,11 +226,9 @@ function DiagnosticoVisual({ dor, index }: { dor: DorSolucao; index: number }) {
 function DiagnosticoConteudo({
   dor,
   index,
-  onCtaClick,
 }: {
   dor: DorSolucao;
   index: number;
-  onCtaClick?: () => void;
 }) {
   const cfg = DOR_CONFIG[dor.id];
 
@@ -293,13 +296,13 @@ function DiagnosticoConteudo({
         <p className="text-white/75 text-sm sm:text-base font-medium flex-1 text-center sm:text-left">
           {cfg.ctaTexto}
         </p>
-        <button
-          onClick={onCtaClick}
+        <Link
+          to={cfg.ctaLink}
           className="group shrink-0 inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-lg shadow-[#fccc30]/20 hover:shadow-[#fccc30]/40 hover:-translate-y-0.5"
         >
           {cfg.ctaBotao}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-        </button>
+        </Link>
       </motion.div>
     </div>
   );
@@ -318,13 +321,11 @@ function MobileDiagnosticoAccordionItem({
   index,
   isOpen,
   onToggle,
-  onCtaClick,
 }: {
   dor: DorSolucao;
   index: number;
   isOpen: boolean;
   onToggle: () => void;
-  onCtaClick?: () => void;
 }) {
   const cfg = DOR_CONFIG[dor.id];
   if (!cfg) return null;
@@ -395,7 +396,7 @@ function MobileDiagnosticoAccordionItem({
             style={{ overflow: "hidden" }}
           >
             <div className="px-4 pb-6 pt-1">
-              <DiagnosticoConteudo dor={dor} index={index} onCtaClick={onCtaClick} />
+              <DiagnosticoConteudo dor={dor} index={index} />
               <div className="mt-7">
                 <DiagnosticoVisual dor={dor} index={index} />
               </div>
@@ -410,7 +411,6 @@ function MobileDiagnosticoAccordionItem({
 // ── Section ───────────────────────────────────────────────────────────────────
 interface DoresDiagnosticoSectionProps {
   dores: DorSolucao[];
-  onCtaClick?: () => void;
 }
 
 const panelVariants = {
@@ -419,7 +419,7 @@ const panelVariants = {
   exit: () => ({ opacity: 0, y: -14, filter: "blur(8px)" }),
 };
 
-function DoresDiagnosticoSection({ dores, onCtaClick }: DoresDiagnosticoSectionProps) {
+function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
   const [activeId, setActiveId] = useState<string>(dores[0]?.id ?? "");
   const activeIndex = Math.max(0, dores.findIndex(d => d.id === activeId));
   const dor = dores[activeIndex] ?? dores[0];
@@ -590,7 +590,7 @@ function DoresDiagnosticoSection({ dores, onCtaClick }: DoresDiagnosticoSectionP
               className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-center"
             >
               <DiagnosticoVisual dor={dor} index={activeIndex} />
-              <DiagnosticoConteudo dor={dor} index={activeIndex} onCtaClick={onCtaClick} />
+              <DiagnosticoConteudo dor={dor} index={activeIndex} />
             </motion.div>
           </AnimatePresence>
           </div>
@@ -605,7 +605,6 @@ function DoresDiagnosticoSection({ dores, onCtaClick }: DoresDiagnosticoSectionP
                 index={i}
                 isOpen={activeId === d.id}
                 onToggle={() => setActiveId(prev => (prev === d.id ? "" : d.id))}
-                onCtaClick={onCtaClick}
               />
             ))}
           </div>

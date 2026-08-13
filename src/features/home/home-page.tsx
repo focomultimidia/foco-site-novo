@@ -75,7 +75,7 @@ export function HomePage() {
 
       {/* Módulo novo, em comparação com o DoresSection acima — remover um dos
           dois assim que a escolha final for feita. */}
-      <DoresDiagnosticoSection dores={data.dores} onCtaClick={() => setIsLeadModalOpen(true)} />
+      <DoresDiagnosticoSection dores={data.dores} />
 
       <EventosSection eventos={eventos} />
 

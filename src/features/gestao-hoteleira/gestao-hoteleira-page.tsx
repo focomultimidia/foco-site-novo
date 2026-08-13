@@ -12,7 +12,7 @@ import { INFO_SECTIONS } from "@/features/shared/content/info-sections";
 // Provas Sociais importadas da Home e UI
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection } from "@/features/shared/components";
+import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 
@@ -63,6 +63,13 @@ function GestaoHoteleiraPage() {
 
       {/* Section 2: O que é um sistema PMS */}
       <GenericInfoSection {...INFO_SECTIONS.gestaoHoteleira} imageSide="right" />
+
+      {/* Diagnóstico: prejuízos na gestão (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="prejuizos"
+        backgroundImage="/assets/imgs/gestao-hoteleira-pms/dor.jpg"
+        backgroundAlt="Hoteleiro estressado diante de um relatório financeiro com prejuízo operacional"
+      />
 
       {/* Section 3: Recursos do PMS */}
       <RecursosSection />
