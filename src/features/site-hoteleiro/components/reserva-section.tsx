@@ -12,14 +12,14 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const PASSOS = [
   {
     numero: "01",
-    titulo: "Recuperação automática de reservas não concluídas",
+    titulo: "Recuperação automática de reservas",
     descricao:
       "Envie lembretes por e-mail e WhatsApp para retomar o contato com hóspedes que iniciaram a reserva, mas não finalizaram.",
     imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
   },
   {
     numero: "02",
-    titulo: "Reserva finalizada em menos de 1 minuto",
+    titulo: "Reserva finalizada em segundos",
     descricao:
       "Com a integração total entre site e motor, seu hóspede conclui a reserva de forma simples e imediata.",
     imagem: "/assets/imgs/site-hoteleiro/finalizar-reserva/modelo-site.webp",
@@ -47,6 +47,16 @@ function ReservaSection() {
   const [isVisible, setIsVisible]     = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const tabsScrollRef = useRef<HTMLDivElement>(null);
+
+  // As abas (mobile) rolam sozinhas pra manter a aba ativa sempre visível —
+  // essencial aqui porque a seção troca de item sozinha (autoplay), então
+  // sem isso a aba ativa saía de cena e o usuário via só abas "mortas".
+  useEffect(() => {
+    const container = tabsScrollRef.current;
+    const activeTab = container?.children[activeIndex] as HTMLElement | undefined;
+    activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [activeIndex]);
 
   // Scroll-Triggered Scale (pin): mesmo efeito do OtheoAiTeaserSection
   // (home) — só desktop largo + sem reduced-motion; no resto, cai no
@@ -200,9 +210,10 @@ function ReservaSection() {
             {/* ── Left (DOM) / Right (visual desktop): Menu (40%) ──────────── */}
             <div className="lg:w-2/5 p-6 lg:p-10 border-b lg:border-b-0 lg:border-l border-white/5">
 
-              {/* Mobile: horizontal scroll tabs */}
+              {/* Mobile: horizontal scroll tabs — rola sozinha atrás da aba ativa (ver useEffect acima) */}
               <div
-                className="flex lg:hidden gap-2 pb-1 overflow-x-auto"
+                ref={tabsScrollRef}
+                className="flex lg:hidden gap-2 pb-3 overflow-x-auto scroll-smooth"
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
               >
                 {PASSOS.map((item, i) => (
@@ -299,12 +310,21 @@ function ReservaSection() {
               </div>
             </div>
 
-            {/* ── Right (DOM) / Left (visual desktop): Display (60%) ────────── */}
-            <div className="relative lg:w-3/5 aspect-[4/3] lg:aspect-auto lg:min-h-[460px]">
+            {/* ── Right (DOM) / Left (visual desktop): Display (60%) ────────
+                Sem `aspect-[4/3]` fixo no mobile: essa caixa de proporção
+                rígida era a causa raiz de tudo (imagem "w-full" mas
+                comprimida pelo `object-contain` dentro de uma altura curta
+                demais pro conteúdo, título quase colado nas abas, imagem
+                quase colada na borda). Em telas grandes nada muda — o
+                painel volta a ser absoluto (`lg:absolute lg:inset-0`)
+                dentro do `lg:min-h-[460px]` de sempre. No mobile ele cresce
+                naturalmente com o conteúdo. ─────────────────────────────── */}
+            <div className="relative lg:w-3/5 lg:aspect-auto lg:min-h-[460px]">
 
-              {/* Ambient glow */}
+              {/* Ambient glow — só em telas grandes (dependia da caixa de
+                  altura fixa que não existe mais no mobile). */}
               <div
-                className="absolute inset-0 pointer-events-none"
+                className="hidden lg:block absolute inset-0 pointer-events-none"
                 style={{
                   background:
                     "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(40,89,146,0.22), transparent 75%)",
@@ -319,7 +339,7 @@ function ReservaSection() {
                   animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
                   exit={{ opacity: 0, scale: 0.96, filter: "blur(6px)" }}
                   transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 lg:p-10"
+                  className="relative lg:absolute lg:inset-0 flex flex-col items-center justify-center gap-5 p-6 pb-9 lg:p-10"
                 >
                   <div className="text-center">
                     <h3
@@ -340,7 +360,7 @@ function ReservaSection() {
                     height={440}
                     loading="lazy"
                     decoding="async"
-                    className="w-full max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
+                    className="w-full lg:max-h-[55%] object-contain rounded-xl drop-shadow-2xl flex-shrink-0"
                   />
                 </motion.div>
               </AnimatePresence>

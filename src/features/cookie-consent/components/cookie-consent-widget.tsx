@@ -52,7 +52,6 @@ function CookieConsentWidget() {
     consent,
     isPanelOpen,
     panelView,
-    openPanel,
     closePanel,
     setPanelView,
     acceptAll,
@@ -255,35 +254,6 @@ function CookieConsentWidget() {
               </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Ícone permanente de reabertura — só existe depois que o visitante
-          já decidiu alguma coisa (antes disso, o próprio cartão está na
-          tela). Fica sempre acessível, sem precisar caçar um link no
-          rodapé pra mudar de ideia. */}
-      <AnimatePresence>
-        {!isPanelOpen && jaDecidiu && (
-          <motion.button
-            key="cookie-reopen"
-            type="button"
-            initial={{ opacity: 0, scale: 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            onClick={() => openPanel("detalhado")}
-            aria-label="Preferências de cookies"
-            className="fixed z-[70] bottom-5 left-5 w-11 h-11 rounded-full flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
-            style={{
-              background: "rgba(16,35,61,0.85)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              border: "1px solid rgba(255,255,255,0.15)",
-              boxShadow: "0 8px 24px -8px rgba(0,0,0,0.4)",
-            }}
-          >
-            <Cookie className="w-[18px] h-[18px] text-[#fccc30]" strokeWidth={1.8} />
-          </motion.button>
         )}
       </AnimatePresence>
     </>

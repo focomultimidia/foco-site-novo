@@ -396,9 +396,9 @@ function MobileDiagnosticoAccordionItem({
             style={{ overflow: "hidden" }}
           >
             <div className="px-4 pb-6 pt-1">
-              <DiagnosticoConteudo dor={dor} index={index} />
+              <DiagnosticoVisual dor={dor} index={index} />
               <div className="mt-7">
-                <DiagnosticoVisual dor={dor} index={index} />
+                <DiagnosticoConteudo dor={dor} index={index} />
               </div>
             </div>
           </motion.div>

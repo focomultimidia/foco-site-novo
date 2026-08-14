@@ -72,8 +72,14 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
             <SectionEyebrow>Segurança &amp; Compliance</SectionEyebrow>
 
             <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#132840] leading-none tracking-tighter antialiased mb-5">
-              Sua operação protegida por
-              <br />
+              Sua operação protegida por{" "}
+              {/* Quebra forçada só a partir de `lg`, onde a coluna vira
+                  estreita (3.5/10 do grid) e a composição em 2 linhas foi
+                  desenhada pra ali. Abaixo disso o texto já ocupa a largura
+                  cheia e quebra sozinho — o `<br/>` fixo isolava um "por"
+                  solto numa linha própria no mobile (pedido explícito pra
+                  remover). */}
+              <br className="hidden lg:block" />
               <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
                 tecnologia de classe mundial
               </span>

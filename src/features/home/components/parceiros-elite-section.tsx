@@ -91,23 +91,6 @@ const parceirosLoop = [...parceiros, ...parceiros];
 // explícito ("mesma altura"). Um único ponto de ajuste pros dois.
 const CARD_HEIGHT = "h-[300px] lg:h-[320px]";
 
-// ── Variants (fallback mobile/reduced-motion) ───────────────────────────────
-
-const gridVariants = {
-  hidden:  {},
-  visible: { transition: { staggerChildren: 0.055 } },
-};
-
-const tileVariants = {
-  hidden:  { opacity: 0, y: 18, filter: "blur(6px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-  },
-};
-
 // ── PartnerTile ───────────────────────────────────────────────────────────────
 // Card branco sólido, SEM sombra (pedido explícito — plano, só a borda
 // marca o contorno) — a logo fica sempre com suas cores originais (sem
@@ -115,10 +98,10 @@ const tileVariants = {
 // marca diferentes num mesmo painel. Mesma altura do EliteBadgeCard
 // (CARD_HEIGHT) e mesma "família" visual (rounded-3xl, borda) — os dois
 // conjuntos lado a lado devem ler como membros do mesmo grupo, só que um é
-// o destaque (escuro) e os outros o coro (branco). Sem motion próprio:
-// no desktop vive dentro da esteira controlada por GSAP (ver
-// use-parceiros-elite-scroll.ts), no fallback mobile quem anima é o
-// `motion.div` pai (gridVariants/tileVariants).
+// o destaque (escuro) e os outros o coro (branco). Sem motion próprio: no
+// desktop vive dentro da esteira controlada por GSAP (ver
+// use-parceiros-elite-scroll.ts), no mobile vive dentro da esteira CSS/
+// Framer em loop infinito (ver ParceirosEliteSection).
 function PartnerTile({ parceiro }: { parceiro: Parceiro }) {
   return (
     <div
@@ -359,19 +342,27 @@ function ParceirosEliteSection() {
               <EliteBadgeCard className="w-full max-w-[360px] h-[300px]" />
             </motion.div>
 
-            <motion.div
-              className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-5"
-              variants={gridVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-            >
-              {parceiros.map((parceiro) => (
-                <motion.div key={parceiro.id} variants={tileVariants}>
-                  <PartnerTile parceiro={parceiro} />
+            {/* Esteira em loop infinito — mesma técnica do TrustedLogosMarquee
+                (animate x: 0% → -50% em loop linear, sobre uma lista
+                DUPLICADA, então o salto do fim pro começo é imperceptível).
+                Substituiu o grid `flex-wrap` estático (pedido explícito):
+                12 cards de 220px empilhados um por linha exigia rolar a
+                seção inteira só pra ver os parceiros. */}
+            <div className="relative -mx-4 sm:mx-0">
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-16 bg-gradient-to-r from-[#f4f7fb] to-transparent" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 sm:w-16 bg-gradient-to-l from-[#f4f7fb] to-transparent" />
+              <div className="flex overflow-hidden px-4 sm:px-0">
+                <motion.div
+                  className={`flex items-stretch gap-4 sm:gap-5 ${CARD_HEIGHT}`}
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 32, ease: "linear" } }}
+                >
+                  {parceirosLoop.map((parceiro, i) => (
+                    <PartnerTile key={`mobile-${parceiro.id}-${i}`} parceiro={parceiro} />
+                  ))}
                 </motion.div>
-              ))}
-            </motion.div>
+              </div>
+            </div>
           </div>
         </section>
       )}

@@ -335,7 +335,13 @@ function HomeStyleHero({
                 </div>
               </motion.div>
 
-              <HeroMobileMockup isWideLayout={isWideLayout} src={mobileImage?.src} alt={mobileImage?.alt ?? desktopImage?.alt ?? ""} />
+              {/* Só em desktop — no mobile essa silhueta de celular (alta,
+                  9:19.5) transbordava pra baixo do palco raso (16:10) e
+                  sobrepunha o CTA logo abaixo (pedido explícito pra
+                  remover). */}
+              {isWideLayout && (
+                <HeroMobileMockup isWideLayout={isWideLayout} src={mobileImage?.src} alt={mobileImage?.alt ?? desktopImage?.alt ?? ""} />
+              )}
 
               {/* Chips flutuantes sobre o mockup — só em desktop, onde há
                   espaço de sobra ao redor do palco. Em mobile eles migram
@@ -352,22 +358,16 @@ function HomeStyleHero({
           </motion.div>
         )}
 
-        {/* ── Mobile — badges em linha (não mais flutuando sobre a imagem) e
-            CTA, nessa ordem, sempre DEPOIS da imagem/mockup acima. ───────── */}
-        {!isWideLayout && (badges.length > 0 || ctaButton) && (
+        {/* ── Mobile — só o CTA, sempre DEPOIS da imagem/mockup acima. Os
+            badges de confiança saíram daqui (pedido explícito): no mobile
+            eles apareciam sobre/colados na borda do mockup. ─────────────── */}
+        {!isWideLayout && ctaButton && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.75, ease: EASE }}
             className="flex flex-col items-center gap-5 w-full"
           >
-            {badges.length > 0 && (
-              <div className="flex flex-wrap items-center justify-center gap-2.5">
-                {badges.slice(0, 3).map((badge) => (
-                  <MobileHeroBadgeChip key={badge.label} icon={badge.icon} label={badge.label} />
-                ))}
-              </div>
-            )}
             {ctaButton}
           </motion.div>
         )}
@@ -376,25 +376,6 @@ function HomeStyleHero({
   );
 }
 
-// ── MobileHeroBadgeChip — mesma pill visual do HeroBadgeChip, mas em fluxo
-//    normal (sem `position:absolute`/offsets do `--hero-scale`) — usada só
-//    abaixo da imagem em mobile, onde os badges não flutuam mais sobre o
-//    mockup. Tamanho fixo (não fluido): em mobile a largura da viewport já
-//    não varia o suficiente pra justificar o cálculo de `--hero-scale`. ────
-
-function MobileHeroBadgeChip({ icon: Icon, label }: HomeStyleHeroBadge) {
-  return (
-    <div className="flex items-center gap-2 bg-white/8 backdrop-blur-md border border-white/15 rounded-full pl-2 pr-3.5 py-2">
-      <div
-        className="w-6 h-6 rounded-md flex items-center justify-center flex-shrink-0"
-        style={{ background: "linear-gradient(135deg,#285992,#427ab9)" }}
-      >
-        <Icon className="w-3.5 h-3.5 text-white" />
-      </div>
-      <span className="text-white text-xs font-semibold whitespace-nowrap">{label}</span>
-    </div>
-  );
-}
 
 // ── HeroBadgeChip — mesmas 3 camadas de responsabilidade da Home (posição via
 //    motion.div externo, flutuação idle via CSS puro, tamanho fluido via

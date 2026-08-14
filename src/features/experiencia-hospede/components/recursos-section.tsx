@@ -147,18 +147,6 @@ function PhaseCard({ fase, index }: { fase: (typeof FASES)[number]; index: numbe
   const Icon = fase.icon;
   return (
     <div className="rounded-[28px] bg-white border border-slate-200/80 shadow-[0_18px_40px_-16px_rgba(15,40,80,0.16)] p-6 sm:p-7 w-full">
-      {/* Tela — só no mobile/tablet, onde o celular fixo não aparece */}
-      <div className="lg:hidden mb-5 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
-        {fase.tela ? (
-          <img src={fase.tela} alt={`Tela do app do hóspede — ${fase.nome}`} loading="lazy" className="block w-full aspect-[16/10] object-cover object-top" />
-        ) : (
-          <div className="flex flex-col items-center justify-center gap-1.5 aspect-[16/10] bg-gradient-to-br from-[#f4f7fb] to-white">
-            <ImagePlus className="w-5 h-5 text-slate-300" strokeWidth={1.6} />
-            <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-slate-300">Tela em breve</span>
-          </div>
-        )}
-      </div>
-
       <div className="flex items-center gap-3 mb-3">
         <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#1e3a5f] to-[#285992] flex items-center justify-center flex-shrink-0">
           <Icon className="w-4.5 h-4.5 text-white" strokeWidth={1.8} />

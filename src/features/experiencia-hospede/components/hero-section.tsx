@@ -152,9 +152,12 @@ function PhoneMockup({
   );
 }
 
-// ── SpatialCarousel — mesmos 3 celulares, mecânica intocada. ─────────────────
-
-function SpatialCarousel() {
+// ── PhoneStage — os 3 celulares, mecânica intocada. Extraído do antigo
+// `SpatialCarousel` pra poder ser reaproveitado tal e qual em dois
+// contextos: tamanho natural (620×520) no desktop, e encolhido via
+// `transform: scale()` no mobile/tablet (ver `SpatialCarousel` abaixo) —
+// sem duplicar a lógica espacial (posições, mola, clique-pra-centralizar). ──
+function PhoneStage() {
   // centerPhone tracks which phone (0|1|2) is currently in the center position.
   const [centerPhone, setCenterPhone] = useState(1);
 
@@ -166,82 +169,126 @@ function SpatialCarousel() {
   };
 
   return (
-    // `mt-16 xl:mt-20` — a coluna do palco (HomeStyleHero) centraliza este
-    // grupo na altura toda da hero; sem essa margem o topo dos celulares
-    // ficava a só ~45px do menu. Empurra o grupo pra baixo, dando folga
-    // parecida com a usada em outros palcos fixos do site (~110px).
-    <div className="hidden lg:flex items-center justify-center mt-16 xl:mt-20">
-      {/*
-        Fixed container — phones are absolutely positioned inside.
-        All three motion.divs start at top:0 left:0 and are moved into
-        position via Framer Motion's x/y/scale/opacity/filter animations.
-      */}
-      <div className="relative" style={{ width: 620, height: 520 }}>
+    // Fixed container — phones are absolutely positioned inside.
+    // All three motion.divs start at top:0 left:0 and are moved into
+    // position via Framer Motion's x/y/scale/opacity/filter animations.
+    <div className="relative" style={{ width: 620, height: 520 }}>
+      {PRODUTOS_HERO.map(phone => {
+        const role   = getRole(phone.id);
+        const cfg    = ROLE_CFG[role];
+        const isCenter = role === "center";
 
-        {PRODUTOS_HERO.map(phone => {
-          const role   = getRole(phone.id);
-          const cfg    = ROLE_CFG[role];
-          const isCenter = role === "center";
-
-          return (
+        return (
+          <motion.div
+            key={phone.id}
+            /*
+              initial matches animate on first render → no entrance animation
+              for the phones themselves (parent already fades in the whole group).
+            */
+            initial={{
+              x: cfg.x, y: cfg.y, scale: cfg.scale,
+              opacity: cfg.opacity, filter: cfg.filter,
+            }}
+            animate={{
+              x: cfg.x, y: cfg.y, scale: cfg.scale,
+              opacity: cfg.opacity, filter: cfg.filter,
+            }}
+            transition={{
+              // Spring for position/scale — snappy but smooth
+              type:      "spring",
+              stiffness: 260,
+              damping:   28,
+              // Faster linear fade for opacity + filter
+              opacity: { type: "tween", duration: 0.28 },
+              filter:  { type: "tween", duration: 0.32 },
+            }}
+            onClick={() => !isCenter && setCenterPhone(phone.id)}
+            style={{
+              position:        "absolute",
+              width:           PHONE_W,
+              top:             0,
+              left:            0,
+              zIndex:          cfg.zIndex, // immediate — keeps new center on top
+              cursor:          cfg.cursor,
+              transformOrigin: "center center",
+            }}
+          >
+            {/*
+              Inner motion.div handles the vertical float for the center phone.
+              It resets to y:0 when the phone moves to a side position.
+            */}
             <motion.div
-              key={phone.id}
-              /*
-                initial matches animate on first render → no entrance animation
-                for the phones themselves (parent already fades in the whole group).
-              */
-              initial={{
-                x: cfg.x, y: cfg.y, scale: cfg.scale,
-                opacity: cfg.opacity, filter: cfg.filter,
-              }}
-              animate={{
-                x: cfg.x, y: cfg.y, scale: cfg.scale,
-                opacity: cfg.opacity, filter: cfg.filter,
-              }}
-              transition={{
-                // Spring for position/scale — snappy but smooth
-                type:      "spring",
-                stiffness: 260,
-                damping:   28,
-                // Faster linear fade for opacity + filter
-                opacity: { type: "tween", duration: 0.28 },
-                filter:  { type: "tween", duration: 0.32 },
-              }}
-              onClick={() => !isCenter && setCenterPhone(phone.id)}
-              style={{
-                position:        "absolute",
-                width:           PHONE_W,
-                top:             0,
-                left:            0,
-                zIndex:          cfg.zIndex, // immediate — keeps new center on top
-                cursor:          cfg.cursor,
-                transformOrigin: "center center",
-              }}
+              animate={isCenter ? { y: [0, -10, 0] } : { y: 0 }}
+              transition={
+                isCenter
+                  ? { duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+                  : { type: "tween", duration: 0.4 }
+              }
             >
-              {/*
-                Inner motion.div handles the vertical float for the center phone.
-                It resets to y:0 when the phone moves to a side position.
-              */}
-              <motion.div
-                animate={isCenter ? { y: [0, -10, 0] } : { y: 0 }}
-                transition={
-                  isCenter
-                    ? { duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
-                    : { type: "tween", duration: 0.4 }
-                }
-              >
-                <PhoneMockup
-                  slides={phone.slides}
-                  interval={phone.interval}
-                  startSlide={phone.startSlide}
-                  priority={phone.id === centerPhone}
-                />
-              </motion.div>
+              <PhoneMockup
+                slides={phone.slides}
+                interval={phone.interval}
+                startSlide={phone.startSlide}
+                priority={phone.id === centerPhone}
+              />
             </motion.div>
-          );
-        })}
-      </div>
+          </motion.div>
+        );
+      })}
     </div>
+  );
+}
+
+// ── useMobileStageScale — o palco dos 3 celulares é uma caixa de pixel FIXO
+// (620×520, ver PhoneStage) — no mobile precisa encolher pra caber na
+// largura disponível (`px-4` da HomeStyleHero: viewport - 32px). `--hero-
+// scale` do resto do site não serve aqui: aquela curva é ancorada entre
+// 1366–1920px (só desktop), nunca chega perto do que uma tela de 375px
+// precisa. `Math.min(1, ...)`: em telas largas o palco já cabe inteiro, sem
+// encolher. ───────────────────────────────────────────────────────────────
+function useMobileStageScale() {
+  const [scale, setScale] = useState(() =>
+    typeof window === "undefined" ? 1 : Math.min(1, (window.innerWidth - 32) / 620),
+  );
+  useEffect(() => {
+    function update() {
+      setScale(Math.min(1, (window.innerWidth - 32) / 620));
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return scale;
+}
+
+// ── SpatialCarousel — os mesmos 3 celulares em todas as larguras (pedido
+// explícito: nada de versão simplificada no mobile). Em `lg+` o palco
+// aparece no tamanho natural; abaixo disso, o MESMO `PhoneStage` é
+// encolhido via `transform: scale()` — o wrapper externo já nasce com o
+// tamanho FINAL (620/520 × escala) pra o resto do layout reservar o espaço
+// certo, enquanto o miolo interno mantém 620×520 reais (a lógica espacial
+// de posição/mola não muda em nada, só o resultado final fica menor). ──────
+function SpatialCarousel() {
+  const scale = useMobileStageScale();
+
+  return (
+    <>
+      <div className="hidden lg:flex items-center justify-center mt-16 xl:mt-20">
+        <PhoneStage />
+      </div>
+
+      <div
+        className="relative lg:hidden"
+        style={{ width: 620 * scale, height: 520 * scale }}
+      >
+        <div
+          className="absolute top-0 left-0"
+          style={{ width: 620, height: 520, transform: `scale(${scale})`, transformOrigin: "top left" }}
+        >
+          <PhoneStage />
+        </div>
+      </div>
+    </>
   );
 }
 

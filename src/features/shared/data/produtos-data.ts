@@ -5,6 +5,7 @@ import {
   Monitor,
   CreditCard,
   Smartphone,
+  Bot,
 } from "lucide-react";
 import type React from "react";
 
@@ -146,5 +147,29 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     bkgImagem: "/assets/imgs/experiencia-do-hospede/bkg-accordion.webp",
     accent: "#fb7185",
     overlay: "from-rose-950/85 to-rose-900/25",
+  },
+  {
+    id: "7", numero: "07",
+    titulo: "Otheo AI: Seu copiloto de IA na operação do hotel",
+    descricao: "Abra vendas, feche check-ins, consulte reservas ou gerencie bloqueios, tudo em português, com um comando. O Otheo AI entende sua operação e executa por você.",
+    beneficios: ["Comandos em português", "Executa na hora", "Sem sair da extranet"],
+    link: "/otheo-ai",
+    ctaLabel: "Quero saber como funciona",
+    Icone: Bot,
+    imagem: "/assets/imgs/home/otheoai/chat-ia.jpg",
+    // Mesmo print real usado no mockup da hero de /otheo-ai e no
+    // OtheoAiTeaserSection — não existe (ainda) um dashboard desktop do
+    // Otheo AI, só a tela de chat (retrato). Os 3 componentes que
+    // realmente renderizam isso hoje (StagePanel, ScrollContentBlock
+    // mobile, SoftwareProductsCarousel) já lidam bem com uma imagem em pé
+    // (contain/crop pelo topo), sem quebrar layout.
+    screenshot: "/assets/imgs/home/otheoai/chat-ia.jpg",
+    // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
+    // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro
+    // resolvendo por voz no carro) em vez de cair no fallback pro
+    // screenshot de chat (que ficaria ruim esticado como plano de fundo).
+    bkgImagem: "/assets/imgs/otheo-ai/hoteleiro-uber.jpg",
+    accent: "#fccc30",
+    overlay: "from-yellow-950/85 to-yellow-900/25",
   },
 ];

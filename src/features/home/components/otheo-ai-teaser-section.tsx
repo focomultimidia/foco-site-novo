@@ -181,7 +181,7 @@ function OtheoAiTeaserSection() {
                 de classes de opacidade arbitrária; border com opacidade
                 continua OK como classe (esse core plugin não tem esse
                 bug). ──────────────────────────────────────────────────── */}
-            <div className="text-center lg:text-left order-2 lg:order-1 max-w-md lg:max-w-[320px] xl:max-w-[360px] mx-auto lg:mx-0 shrink-0">
+            <div className="text-center lg:text-left order-1 lg:order-1 max-w-md lg:max-w-[320px] xl:max-w-[360px] mx-auto lg:mx-0 shrink-0">
               <span
                 className="inline-flex items-center gap-2.5 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-5"
                 style={{ border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.08)" }}
@@ -243,7 +243,7 @@ function OtheoAiTeaserSection() {
                 que corre atrás do card inteiro, então esse recorte fica
                 "vazio" (pronto pra receber a imagem) em vez de deixar o
                 vídeo aparecer por trás dele. ─────────────────────────── */}
-            <div className="relative order-1 lg:order-3 flex items-center justify-center shrink-0 h-[300px] sm:h-[360px] lg:h-[400px] mx-auto lg:mx-0">
+            <div className="relative order-2 lg:order-3 flex items-center justify-center shrink-0 h-[300px] sm:h-[360px] lg:h-[400px] mx-auto lg:mx-0">
               <div
                 aria-hidden="true"
                 className="otheo-halo absolute w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] lg:w-[300px] lg:h-[300px] rounded-full blur-3xl"

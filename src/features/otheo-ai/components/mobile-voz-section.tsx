@@ -76,13 +76,12 @@ function MobileVozSection() {
           <div className="grid md:grid-cols-2 gap-2 sm:gap-2.5">
             {/* ── Painel esquerdo — a pergunta, feita de verdade, no trânsito ── */}
             <div className="relative overflow-hidden rounded-[26px] sm:rounded-[32px] min-h-[340px] sm:min-h-[400px] md:min-h-0 md:h-full">
-              <motion.div
-                initial={{ clipPath: "inset(0 100% 0 0)" }}
-                whileInView={{ clipPath: "inset(0 0% 0 0)" }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1, ease: EASE }}
-                className="absolute inset-0"
-              >
+              {/* Sem reveal via `clip-path`/`whileInView` de propósito — a
+                  visibilidade da foto nunca deve depender de uma animação
+                  disparar (mesmo princípio da ProblemaParallaxSection). Se
+                  o observer não disparar por qualquer motivo, a foto some
+                  por completo em vez de ficar só parada. */}
+              <div className="absolute inset-0">
                 <img
                   src="/assets/imgs/otheo-ai/hoteleiro-uber.jpg"
                   alt="Hoteleiro no banco de trás de um carro, à noite, perguntando algo por voz no celular"
@@ -99,7 +98,7 @@ function MobileVozSection() {
                   }}
                 />
                 <div aria-hidden="true" className="absolute inset-0 mix-blend-multiply" style={{ background: "rgba(16,35,61,0.14)" }} />
-              </motion.div>
+              </div>
 
               {/* Selo "ouvindo" — mic com anel pulsante + equalizador, no
                   canto onde o degradê escurece mais a base da foto. */}

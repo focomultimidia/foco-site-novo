@@ -350,7 +350,11 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
 
             </motion.div>
 
-            <HeroMobileMockup isWideLayout={isWideLayout} />
+            {/* Só em desktop — no mobile essa silhueta de celular (alta,
+                9:19.5) transbordava pra baixo do palco raso (16:10) e
+                sobrepunha o CTA logo abaixo (pedido explícito pra
+                remover). */}
+            {isWideLayout && <HeroMobileMockup isWideLayout={isWideLayout} />}
 
             {/* Badges flutuantes sobre o mockup — só em desktop, onde há
                 espaço de sobra ao redor do palco. Em mobile migram pra baixo
@@ -371,8 +375,9 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           </div>
         </motion.div>
 
-        {/* ── Mobile — badges em linha (não mais flutuando sobre a imagem) e
-            CTA, nessa ordem, sempre DEPOIS do mockup acima. ─────────────── */}
+        {/* ── Mobile — só o CTA, sempre DEPOIS do mockup acima. Os stats
+            saíram daqui (pedido explícito): no mobile eles apareciam sobre/
+            colados na borda do mockup. ────────────────────────────────── */}
         {!isWideLayout && (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -380,11 +385,6 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
             transition={{ duration: 0.6, delay: 0.75, ease: EASE }}
             className="flex flex-col items-center gap-5 w-full"
           >
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              {STATS.map(({ key, icon, value, label }) => (
-                <MobileHeroStatBadge key={key} icon={icon} value={value} label={label} />
-              ))}
-            </div>
             {ctaButton}
           </motion.div>
         )}
@@ -461,36 +461,6 @@ function HeroStatBadge({
         </div>
       </div>
     </motion.div>
-  );
-}
-
-// ── MobileHeroStatBadge — mesma pill de duas linhas (valor + label) do
-//    HeroStatBadge, mas em fluxo normal (sem `position:absolute`, sem
-//    flutuação idle) — usada só abaixo do mockup em mobile, onde os stats
-//    não flutuam mais sobre a imagem. Tamanho fixo, não fluido via
-//    `--hero-scale`: em mobile a largura da viewport não varia o bastante
-//    pra justificar o cálculo. ──────────────────────────────────────────────
-
-function MobileHeroStatBadge({
-  icon: Icon, value, label,
-}: {
-  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
-  value: string;
-  label: string;
-}) {
-  return (
-    <div className="flex items-center gap-2.5 bg-white/8 backdrop-blur-md border border-white/15 rounded-2xl pl-2 pr-3.5 py-2">
-      <div
-        className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-        style={{ background: "linear-gradient(135deg,#285992,#427ab9)" }}
-      >
-        <Icon className="w-4 h-4 text-white" />
-      </div>
-      <div className="text-left whitespace-nowrap">
-        <div className="text-white font-bold text-sm leading-none">{value}</div>
-        <div className="text-white/55 text-[11px] mt-0.5">{label}</div>
-      </div>
-    </div>
   );
 }
 

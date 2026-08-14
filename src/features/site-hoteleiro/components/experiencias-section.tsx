@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import {
   Tag,
@@ -189,6 +189,16 @@ function Collage({ activeIndex, onSelect, center, homes }: {
 function ExperienciasSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const active = EXPERIENCIAS[activeIndex];
+  const tabsScrollRef = useRef<HTMLDivElement>(null);
+
+  // Mobile: abas em rolagem horizontal (ver className abaixo) — sem isso,
+  // trocar pra uma aba fora da faixa visível deixava ela cortada na borda
+  // da tela. Rola sozinha atrás da aba ativa a cada troca.
+  useEffect(() => {
+    const container = tabsScrollRef.current;
+    const activeTab = container?.children[activeIndex] as HTMLElement | undefined;
+    activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [activeIndex]);
 
   return (
     <section className="py-24 bg-[#f4f7fb]">
@@ -215,8 +225,16 @@ function ExperienciasSection() {
           </p>
         </motion.div>
 
-        {/* ── Botões (abas) — ficam acima das imagens ────────────────────── */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-6">
+        {/* ── Botões (abas) — ficam acima das imagens. No mobile viram uma
+            fileira horizontal rolável (lado a lado, ver useEffect acima)
+            em vez de empilhar em várias linhas (`flex-wrap`); a partir de
+            `lg` volta a ser o layout original, centralizado e quebrando
+            linha livremente. ─────────────────────────────────────────── */}
+        <div
+          ref={tabsScrollRef}
+          className="flex flex-nowrap lg:flex-wrap overflow-x-auto lg:overflow-visible justify-start lg:justify-center gap-2.5 mb-6 pb-2 lg:pb-0 scroll-smooth"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
+        >
           {EXPERIENCIAS.map((item, i) => {
             const isActive = i === activeIndex;
             const Icon = item.icon;
@@ -226,7 +244,7 @@ function ExperienciasSection() {
                 type="button"
                 onClick={() => setActiveIndex(i)}
                 aria-pressed={isActive}
-                className={`relative flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
+                className={`relative flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
                   isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"
                 }`}
               >

@@ -15,14 +15,17 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
  * (hero-section.tsx da home) e no OtheoAiTeaserSection — aqui ela vira a
  * peça central, não um acessório no canto.
  *
- * Pilha de texto contida em 3 elementos (título, subtítulo, CTA) — sem
- * eyebrow, sem tagline secundária, sem badge de status. O título já
- * carrega a categoria ("copiloto de IA"), então um rótulo em cima seria
- * redundante.
+ * Badge acima do título reaproveita o mesmo texto/selo do
+ * OtheoAiTeaserSection (home) — quem clica no teaser e chega aqui vê o
+ * mesmo carimbo "Novidade", reforçando que é a mesma coisa. `pt-24 sm:pt-28
+ * lg:pt-32` (era pt-16/20, curto demais): o header é `fixed` e mede ~90px
+ * de altura parado no topo — com menos que isso o menu ficava colado ou
+ * sobrepondo o badge/título (mesmo valor já usado em sobre/hero-section.tsx,
+ * outra hero sem `min-h-dvh`).
  */
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-[#10233d] pt-16 sm:pt-20 pb-20 sm:pb-24">
+    <section className="relative overflow-hidden bg-[#10233d] pt-24 sm:pt-28 lg:pt-32 pb-20 sm:pb-24">
       {/* Vídeo do Theo — textura ambiente, não protagonista. Opacidade e
           escurecimento fortes de propósito: é o mesmo asset do teaser da
           home, mas aqui ele é pano de fundo pro mockup real, não o próprio
@@ -65,8 +68,15 @@ function HeroSection() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: EASE }}
-            className="text-center lg:text-left order-2 lg:order-1"
+            className="text-center lg:text-left order-1 lg:order-1"
           >
+            <span
+              className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6"
+            >
+              <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
+              Novidade · Inteligência Artificial
+            </span>
+
             <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold text-white tracking-tighter leading-[1.05] mb-6">
               O hotel inteiro,{" "}
               <span className="bg-gradient-to-r from-[#fccc30] via-[#ffe28a] to-[#fccc30] bg-clip-text text-transparent">
@@ -91,7 +101,7 @@ function HeroSection() {
             initial={{ opacity: 0, scale: 0.92, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-            className="relative order-1 lg:order-2 flex items-center justify-center"
+            className="relative order-2 lg:order-2 flex items-center justify-center"
           >
             {/* Halo pulsante atrás do mockup — mesma técnica do teaser
                 (otheo-ai-teaser-section.tsx), reaproveitada aqui como peça
@@ -108,53 +118,102 @@ function HeroSection() {
               }
             `}</style>
 
-            {/* Moldura de vidro fosco escuro — mesma família visual do
-                HeroMobileMockup (home) e do OtheoAiTeaserSection, agora em
-                tamanho de protagonista. */}
-            <div
-              className="relative z-10 w-[220px] sm:w-[260px] lg:w-[280px] rounded-[36px] p-2.5"
-              style={{
-                background: "rgba(16,35,61,0.55)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-                border: "2px solid rgba(255,255,255,0.22)",
-                boxShadow: "0 30px 80px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12)",
-              }}
-            >
-              <div
-                className="relative overflow-hidden rounded-[26px] ring-1 ring-white/15"
-                style={{ aspectRatio: "738 / 1456" }}
-              >
-                <img
-                  src="/assets/imgs/home/otheoai/chat-ia.jpg"
-                  alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Chip de estado — semântico (o produto está ativo/pronto),
-                não decorativo; único badge flutuante da hero. */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7, ease: EASE }}
-              className="absolute -bottom-3 sm:bottom-2 left-1/2 -translate-x-1/2 lg:left-auto lg:-right-6 lg:translate-x-0 z-20 motion-safe:animate-badge-float"
-            >
-              <div
-                className="flex items-center gap-2 rounded-full pl-2.5 pr-4 py-2 whitespace-nowrap"
+            {/* Wrapper "justo" — ao contrário do palco (`stage`) acima, que
+                é item de grid e se ESTICA pra preencher a coluna
+                (0.9fr, bem mais largo que os 220-280px do mockup), este
+                `div` comum não estica: encolhe exatamente do tamanho do
+                mockup grande, seu único filho em fluxo normal. É essa
+                caixa justa — não a coluna larga — que serve de referência
+                pro `left`/`top` do mockup pequeno e pro `right`/`bottom` do
+                chip logo abaixo; sem ela, os dois calculavam a posição a
+                partir da borda da coluna (bem mais longe do mockup do que
+                parece) em vez da borda real do mockup. */}
+            <div className="relative">
+              {/* Segundo mockup, menor, atrás do principal — mesma moldura
+                  de vidro fosco, agora ~78% do tamanho (era 68%, pedido pra
+                  aumentar um pouco) e CENTRALIZADO no mesmo eixo horizontal
+                  do mockup grande (`left` = metade da diferença de largura
+                  entre os dois — não é mais um deslocamento lateral). `z-0`
+                  (o mockup grande logo abaixo é `z-10`) garante que ele
+                  fique por trás; como agora "espia" por baixo em vez de
+                  pelo lado, o `top` empurra ele pra baixo o suficiente pra
+                  sobrar uma fatia visível sob a borda do mockup grande. */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.9, delay: 0.05, ease: EASE }}
+                className="absolute z-0 w-[175px] sm:w-[205px] lg:w-[220px] rounded-[30px] p-2 left-[23px] sm:left-[28px] lg:left-[30px] top-[184px] sm:top-[218px] lg:top-[238px]"
                 style={{
-                  background: "rgba(16,35,61,0.75)",
-                  backdropFilter: "blur(12px)",
-                  border: "1px solid rgba(255,255,255,0.18)",
+                  background: "rgba(16,35,61,0.55)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "2px solid rgba(255,255,255,0.18)",
+                  boxShadow: "0 24px 60px -20px rgba(0,0,0,0.55)",
                 }}
               >
-                <span className="w-6 h-6 rounded-full bg-[#fccc30]/15 flex items-center justify-center flex-shrink-0">
-                  <Sparkles className="w-3 h-3 text-[#fccc30]" strokeWidth={2} />
-                </span>
-                <span className="text-white text-xs font-medium">Pronto para ajudar, em português</span>
+                <div
+                  className="relative overflow-hidden rounded-[22px] ring-1 ring-white/15"
+                  style={{ aspectRatio: "738 / 1456" }}
+                >
+                  <img
+                    src="/assets/imgs/otheo-ai/mockup.png"
+                    alt="Otheo AI listando reservas com check-in hoje, direto no chat"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Moldura de vidro fosco escuro — mesma família visual do
+                  HeroMobileMockup (home) e do OtheoAiTeaserSection, agora em
+                  tamanho de protagonista. */}
+              <div
+                className="relative z-10 w-[220px] sm:w-[260px] lg:w-[280px] rounded-[36px] p-2.5"
+                style={{
+                  background: "rgba(16,35,61,0.55)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
+                  border: "2px solid rgba(255,255,255,0.22)",
+                  boxShadow: "0 30px 80px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12)",
+                }}
+              >
+                <div
+                  className="relative overflow-hidden rounded-[26px] ring-1 ring-white/15"
+                  style={{ aspectRatio: "738 / 1456" }}
+                >
+                  <img
+                    src="/assets/imgs/home/otheoai/chat-ia.jpg"
+                    alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </div>
               </div>
-            </motion.div>
+
+              {/* Chip de estado — semântico (o produto está ativo/pronto),
+                  não decorativo; único badge flutuante da hero. Só em
+                  desktop: no mobile ele flutuava sobre/por cima do mockup e
+                  ficava cortado na borda da tela (pedido explícito pra
+                  remover). */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7, ease: EASE }}
+                className="hidden lg:block absolute lg:bottom-2 lg:left-auto lg:-right-6 lg:translate-x-0 z-20 motion-safe:animate-badge-float"
+              >
+                <div
+                  className="flex items-center gap-2 rounded-full pl-2.5 pr-4 py-2 whitespace-nowrap"
+                  style={{
+                    background: "rgba(16,35,61,0.75)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255,255,255,0.18)",
+                  }}
+                >
+                  <span className="w-6 h-6 rounded-full bg-[#fccc30]/15 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-3 h-3 text-[#fccc30]" strokeWidth={2} />
+                  </span>
+                  <span className="text-white text-xs font-medium">Pronto para ajudar, em português</span>
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
