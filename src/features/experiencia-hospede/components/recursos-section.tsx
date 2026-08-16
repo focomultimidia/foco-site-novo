@@ -111,7 +111,7 @@ function PhoneScreen({ fase, active }: { fase: (typeof FASES)[number]; active: b
       className={`absolute inset-0 transition-opacity duration-500 ease-out ${active ? "opacity-100" : "opacity-0"}`}
     >
       {fase.tela ? (
-        <img src={fase.tela} alt={`Tela do app do hóspede — ${fase.nome}`} className="absolute inset-0 w-full h-full object-cover object-top" />
+        <img src={fase.tela} alt={`Tela do app do hóspede: ${fase.nome}`} className="absolute inset-0 w-full h-full object-cover object-top" />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-gradient-to-br from-[#f4f7fb] to-white">
           <ImagePlus className="w-6 h-6 text-slate-300" strokeWidth={1.6} />

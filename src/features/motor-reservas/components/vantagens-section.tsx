@@ -23,13 +23,13 @@ const VANTAGENS = [
     icon: TrendingUp,
     titulo: "Aumenta suas reservas diretas",
     descricao:
-      "Com o motor de reservas, o seu site será um dos principais vendedores do hotel, gerando reservas 24 horas por dia — 100% online e sem comissões de OTA.",
+      "Com o motor de reservas, o seu site será um dos principais vendedores do hotel, gerando reservas 24 horas por dia, 100% online e sem comissões de OTA.",
   },
   {
     icon: Clock,
     titulo: "Mais agilidade nas reservas",
     descricao:
-      "Hóspedes escolhem data e acomodação e finalizam em segundos — o processo mais ágil entre todos os canais de venda.",
+      "Hóspedes escolhem data e acomodação e finalizam em segundos, o processo mais ágil entre todos os canais de venda.",
   },
   {
     icon: DollarSign,
@@ -41,7 +41,7 @@ const VANTAGENS = [
     icon: Lock,
     titulo: "Ambiente corporativo B2B",
     descricao:
-      "Portal dedicado para empresas e agências de viagens com tarifas e comissões exclusivas — sem custo por reserva.",
+      "Portal dedicado para empresas e agências de viagens com tarifas e comissões exclusivas, sem custo por reserva.",
   },
   {
     icon: CreditCard,

@@ -1,6 +1,29 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { OrbitDiagram, type OrbitPartner } from "@/features/shared/components/orbit-diagram";
+
+// Mesmo componente do /sobre e do DiferenciaisSection da home, mas com os
+// parceiros da PRÓPRIA página (ver PmsIntegradosSection logo abaixo) em vez
+// das OTAs de canal — um representante de cada categoria não-PMS no anel
+// interno (a "espinha" das 4 abas: marketing, canal de vendas, chatbot,
+// adquirentes), o resto no anel externo. Ângulos do externo deslocados 45°
+// em relação ao interno de propósito, pra não empilhar radialmente com o
+// anel de dentro (ver Spoke em orbit-diagram.tsx — os raios-guia seguem
+// esses mesmos ângulos).
+const INTEGRACOES_INNER: OrbitPartner[] = [
+  { id: "tribuzana",    label: "Tribuzana",    logo: "/assets/imgs/parceiros-elite/icones-parceiros/tribuzana.svg", angle: 0   },
+  { id: "silbeck",      label: "Silbeck",      logo: "/assets/imgs/parceiros-elite/icones-parceiros/silbeck.svg",  angle: 90  },
+  { id: "asksuite",     label: "Asksuite",     logo: "/assets/imgs/parceiros-elite/icones-parceiros/asksuite.svg",  angle: 180 },
+  { id: "stone",        label: "Stone",        logo: "/assets/imgs/parceiros-elite/icones-parceiros/stone.svg",    angle: 270 },
+];
+
+const INTEGRACOES_OUTER: OrbitPartner[] = [
+  { id: "reprotel", label: "Reprotel", logo: "/assets/imgs/parceiros-elite/icones-parceiros/reprotel.svg", angle: 45  },
+  { id: "decolar",  label: "Decolar",  logo: "/assets/imgs/channel-manager/icones-canais/decolar.svg",     angle: 135 },
+  { id: "hmax",     label: "HMAX",     logo: "/assets/imgs/parceiros-elite/icones-parceiros/hmax.svg",     angle: 225 },
+  { id: "expedia",  label: "Expedia",  logo: "/assets/imgs/channel-manager/icones-canais/expedia.svg",     angle: 315 },
+];
 
 function ImportanciaSection() {
   return (
@@ -52,25 +75,15 @@ function ImportanciaSection() {
             </p>
           </motion.div>
 
-          {/* Right Column - Image */}
+          {/* Right Column - Orbit Diagram (parceiros da própria página) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            className="relative flex items-center justify-center py-8 lg:py-0"
           >
-            <div className="relative w-full aspect-[4/3] bg-white rounded-3xl overflow-hidden flex items-center justify-center">
-              <img
-                src="/assets/imgs/integracoes-hoteleiras/integracoes-hoteleiras.webp"
-                alt="Integração de Sistemas"
-                width={760}
-                height={521}
-                loading="lazy"
-                decoding="async"
-                className="max-w-full max-h-full object-contain"
-              />
-            </div>
+            <OrbitDiagram innerPartners={INTEGRACOES_INNER} outerPartners={INTEGRACOES_OUTER} />
           </motion.div>
         </div>
       </div>

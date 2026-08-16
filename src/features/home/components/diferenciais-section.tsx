@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { OrbitDiagram } from "@/features/shared/components/orbit-diagram";
 import { motion } from "framer-motion";
 import {
   Award,
@@ -93,29 +93,8 @@ function GlassCard({ diferencial, colorIdx, delay, alignRight = false }: GlassCa
 // ── Section ───────────────────────────────────────────────────────────────────
 
 function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
-  const left     = diferenciais.slice(0, 4);
-  const right    = diferenciais.slice(4, 8);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.currentTime = 0;
-          video.play();
-        } else {
-          video.pause();
-        }
-      },
-      { threshold: 0.2 },
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
+  const left  = diferenciais.slice(0, 4);
+  const right = diferenciais.slice(4, 8);
 
   return (
     <section className="py-24 bg-[#f4f7fb]">
@@ -158,24 +137,17 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             ))}
           </div>
 
-          {/* Center column — video | mobile: visible block between title and cards (order-1) */}
+          {/* Center column — animação do orbit (mesma do OrbitSection em
+              /sobre, só a peça visual, sem a metade de texto/copy daquela
+              seção) no lugar do vídeo | mobile: order-1 */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative order-1 lg:order-none aspect-video lg:aspect-auto rounded-3xl overflow-hidden shadow-xl shadow-slate-900/10"
+            className="relative order-1 lg:order-none flex items-center justify-center py-8 lg:py-0"
           >
-            <video
-              ref={videoRef}
-              className="absolute inset-0 w-full h-full object-cover"
-              muted
-              playsInline
-              preload="metadata"
-              src="/assets/videos/home/video-section-pq-foco.mp4"
-            />
-            <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-slate-100/60 to-transparent pointer-events-none z-10" />
-            <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-100/60 to-transparent pointer-events-none z-10" />
+            <OrbitDiagram />
           </motion.div>
 
           {/* Right column — cards 5–8 | mobile: order-3 */}

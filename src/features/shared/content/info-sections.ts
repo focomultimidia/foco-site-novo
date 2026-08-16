@@ -12,7 +12,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Ao automatizar essa distribuição, o channel manager elimina o risco de overbooking, garante a precisão dos dados e maximiza a ocupação com eficiência.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
-    imageAlt:  "Channel Manager — Gestor de Canais",
+    imageAlt:  "Channel Manager: Gestor de Canais",
   },
 
   motorReservas: {
@@ -23,7 +23,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Ao centralizar a gestão hoteleira e oferecer disponibilidade 24/7, o motor de reservas eleva a lucratividade do seu negócio, promovendo a independência das OTAs e simplificando toda a jornada de compra do seu cliente com agilidade e segurança.",
     ],
     imagePath: "/assets/imgs/motor-de-reservas/motor-de-reservas.webp",
-    imageAlt:  "Motor de Reservas — Mockup",
+    imageAlt:  "Motor de Reservas: Mockup",
   },
 
   gestaoHoteleira: {
@@ -34,18 +34,18 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Com o PMS integrado ao Channel Manager e ao Motor de Reservas, todas as informações fluem em tempo real, eliminando retrabalho manual e garantindo dados sempre precisos.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
-    imageAlt:  "Gestão Hoteleira PMS — Mockup",
+    imageAlt:  "Gestão Hoteleira PMS: Mockup",
   },
 
   crmHoteleiro: {
     title:          "O que é um CRM hoteleiro?",
     titleHighlight: "CRM hoteleiro",
     description: [
-      "O CRM (Customer Relationship Management) hoteleiro é a plataforma que centraliza o histórico de relacionamento com cada hóspede — preferências, estadias anteriores, comunicações — permitindo campanhas segmentadas e experiências hiperpersonalizadas.",
+      "O CRM (Customer Relationship Management) hoteleiro é a plataforma que centraliza o histórico de relacionamento com cada hóspede (preferências, estadias anteriores, comunicações), permitindo campanhas segmentadas e experiências hiperpersonalizadas.",
       "Integrado ao PMS, o CRM transforma dados operacionais em estratégia de fidelização, aumentando o RevPAR e reduzindo o custo de aquisição de clientes.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
-    imageAlt:  "CRM Hoteleiro — Mockup",
+    imageAlt:  "CRM Hoteleiro: Mockup",
   },
 
   softwarePagamentos: {
@@ -56,7 +56,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Com conciliação automática e antecipação de recebíveis, o hotel mantém o fluxo de caixa saudável sem depender de planilhas manuais.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
-    imageAlt:  "Software de Pagamentos — Mockup",
+    imageAlt:  "Software de Pagamentos: Mockup",
   },
 
   experienciaHospede: {
@@ -68,7 +68,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Transforme a estadia em uma experiência completa, fidelize seu cliente e veja a satisfação refletida nas suas avaliações.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
-    imageAlt:  "Experiência do hóspede - Foco Pass — Mockup",
+    imageAlt:  "Experiência do hóspede - Foco Pass: Mockup",
   },
 
 };

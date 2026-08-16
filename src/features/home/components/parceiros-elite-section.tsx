@@ -188,7 +188,7 @@ const EliteBadgeCard = forwardRef<HTMLDivElement, { className?: string }>(
 
             <div>
               <p className="text-white/55 text-[13px] leading-relaxed">
-                Programa de parceria estratégica do ecossistema Foco — o selo que
+                Programa de parceria estratégica do ecossistema Foco: o selo que
                 reúne as integrações mais testadas e confiáveis da plataforma.
               </p>
             </div>
@@ -270,7 +270,7 @@ function ParceirosEliteSection() {
                 </h2>
                 <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
                   Construímos nosso ecossistema ao lado de parceiros estratégicos,
-                  altamente engajados — cada logo abaixo é uma integração testada,
+                  altamente engajados: cada logo abaixo é uma integração testada,
                   aprovada e em uso todos os dias pelos nossos clientes.
                 </p>
               </motion.div>

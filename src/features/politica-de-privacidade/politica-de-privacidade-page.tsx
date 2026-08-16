@@ -55,7 +55,7 @@ function PoliticaDePrivacidadePage() {
             Política de Privacidade de Dados
           </h1>
           <p className="text-slate-500 text-base sm:text-lg leading-relaxed mb-6">
-            Como coletamos, usamos e protegemos as suas informações — em conformidade com a Lei
+            Como coletamos, usamos e protegemos as suas informações, em conformidade com a Lei
             Geral de Proteção de Dados (LGPD).
           </p>
           <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide text-[#285992] bg-[#285992]/8 border border-[#285992]/15 rounded-full px-4 py-2">

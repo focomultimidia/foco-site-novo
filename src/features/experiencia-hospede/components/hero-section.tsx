@@ -39,9 +39,9 @@ const PRODUTOS_HERO = [
     interval: 4000,
     startSlide: 0,
     slides: [
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.webp", alt: "Motor de Reservas – Busca" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.webp", alt: "Motor de Reservas – Quarto" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.webp", alt: "Motor de Reservas – Confirmação" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.webp", alt: "Motor de Reservas: Busca" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.webp", alt: "Motor de Reservas: Quarto" },
+      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.webp", alt: "Motor de Reservas: Confirmação" },
     ],
   },
 ] as const;

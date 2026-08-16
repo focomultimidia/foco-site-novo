@@ -38,7 +38,7 @@ const eventos: Evento[] = [
     local: "São Paulo, SP",
     titulo: "Ecossistema completo da Foco em destaque na Equipotel 2025",
     descricao:
-      "Apresentamos nossa plataforma integrada com site, motor de reservas, PMS, channel e CRM — unindo gestão e vendas em um só lugar.",
+      "Apresentamos nossa plataforma integrada com site, motor de reservas, PMS, channel e CRM, unindo gestão e vendas em um só lugar.",
     link: "#",
   },
   {

@@ -11,6 +11,7 @@ import {
   Image as ImageIcon,
   type LucideIcon,
 } from "lucide-react";
+import { StickyTabsList } from "@/features/shared/components/sticky-tabs-list";
 
 // ── Data ────────────────────────────────────────────────────────────────────
 // `imagem` fica vazia de propósito — o espaço já está desenhado no layout
@@ -220,7 +221,7 @@ function ExperienciasSection() {
           </h2>
           <p className="text-[#1e3a5f]/70 text-lg leading-relaxed">
             Cada visitante que sai sem reservar é uma venda perdida. Nosso design converte
-            atenção em reserva — com pacotes em destaque, gatilhos estratégicos e páginas
+            atenção em reserva, com pacotes em destaque, gatilhos estratégicos e páginas
             feitas para vender antes do primeiro clique.
           </p>
         </motion.div>
@@ -229,44 +230,58 @@ function ExperienciasSection() {
             fileira horizontal rolável (lado a lado, ver useEffect acima)
             em vez de empilhar em várias linhas (`flex-wrap`); a partir de
             `lg` volta a ser o layout original, centralizado e quebrando
-            linha livremente. ─────────────────────────────────────────── */}
-        <div
-          ref={tabsScrollRef}
-          className="flex flex-nowrap lg:flex-wrap overflow-x-auto lg:overflow-visible justify-start lg:justify-center gap-2.5 mb-6 pb-2 lg:pb-0 scroll-smooth"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
-        >
-          {EXPERIENCIAS.map((item, i) => {
-            const isActive = i === activeIndex;
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.titulo}
-                type="button"
-                onClick={() => setActiveIndex(i)}
-                aria-pressed={isActive}
-                className={`relative flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
-                  isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"
-                }`}
+            linha livremente. Sticky logo abaixo do header — ver
+            StickyTabsList. Como aqui não existe uma "pílula" única
+            agrupando os botões (cada um já é branco e independente), o
+            tratamento de "grudado" vira um fundo em vidro fosco por trás
+            de toda a fileira, não em cada botão. ───────────────────── */}
+        <StickyTabsList className="mb-6" activeValue={activeIndex}>
+          {(isStuck) => (
+            <div
+              className={`transition-all duration-300 rounded-[20px] ${
+                isStuck ? "bg-white/70 backdrop-blur-xl shadow-lg shadow-slate-900/10 py-2.5 px-2.5 -mx-2.5" : ""
+              }`}
+            >
+              <div
+                ref={tabsScrollRef}
+                className="flex flex-nowrap lg:flex-wrap overflow-x-auto lg:overflow-visible justify-start lg:justify-center gap-2.5 pb-2 lg:pb-0 scroll-smooth"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none" } as React.CSSProperties}
               >
-                {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
-                    usada no RecursosGridSection: o Framer Motion anima
-                    posição e largura sozinho quando o elemento "pula" de
-                    um botão para o outro. */}
-                {isActive && (
-                  <motion.span
-                    layoutId="experiencias-tab-indicator"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
-                )}
-                <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
-                  <Icon className="w-4 h-4 shrink-0" strokeWidth={2} />
-                  {item.titulo}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                {EXPERIENCIAS.map((item, i) => {
+                  const isActive = i === activeIndex;
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.titulo}
+                      type="button"
+                      onClick={() => setActiveIndex(i)}
+                      aria-pressed={isActive}
+                      className={`relative flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
+                        isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"
+                      }`}
+                    >
+                      {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
+                          usada no RecursosGridSection: o Framer Motion anima
+                          posição e largura sozinho quando o elemento "pula" de
+                          um botão para o outro. */}
+                      {isActive && (
+                        <motion.span
+                          layoutId="experiencias-tab-indicator"
+                          className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                          transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                      <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                        <Icon className="w-4 h-4 shrink-0" strokeWidth={2} />
+                        {item.titulo}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </StickyTabsList>
 
         {/* Descrição da categoria ativa */}
         <div className="min-h-[3rem] flex items-start justify-center mb-8">

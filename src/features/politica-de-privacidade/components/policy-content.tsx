@@ -115,7 +115,7 @@ function PolicyContent() {
         <div>
           <SubHeading>Informações fornecidas por você</SubHeading>
           <p>
-            Coletamos informações de identificação pessoal – como nome/razão social, CPF/CNPJ,
+            Coletamos informações de identificação pessoal, como nome/razão social, CPF/CNPJ,
             RG/CNH, endereço, telefone, endereço de e-mail, cargo e empresa que trabalha, selfie,
             além de informações bancárias como dados de cartão de crédito, banco, número da
             agência e da conta corrente. Eventualmente, a solicitação de algumas informações pode
@@ -250,7 +250,7 @@ function PolicyContent() {
       <PolicySection id="compartilhamento" numero={n("compartilhamento")} titulo="Compartilhamento de dados">
         <p>
           Ao concordar com esta política, você autoriza expressamente o compartilhamento de
-          algumas das suas informações com terceiros – nossos parceiros – a fim de que seja
+          algumas das suas informações com terceiros (nossos parceiros) a fim de que seja
           possível prestar os serviços contratados.
         </p>
         <p>
@@ -354,8 +354,7 @@ function PolicyContent() {
             >
               Lei nº 13.709/2018
               <ExternalLink className="w-3 h-3" strokeWidth={2} />
-            </a>{" "}
-            – Lei Geral de Proteção de Dados (LGPD)
+            </a>, a Lei Geral de Proteção de Dados (LGPD)
           </span>
         </p>
       </PolicySection>

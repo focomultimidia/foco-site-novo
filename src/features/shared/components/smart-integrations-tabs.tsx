@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { Globe, Building2, CreditCard, TrendingUp } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { StickyTabsList } from "@/features/shared/components/sticky-tabs-list";
 import {
   Carousel,
   CarouselContent,
@@ -215,38 +216,47 @@ function SmartIntegrationsTabs() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          {/* Tab Navigation — 2×2 grid on mobile, pill row on desktop */}
-          <div className="mb-8 md:flex md:justify-center">
-            <TabsList className="grid grid-cols-2 w-full rounded-3xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 bg-slate-100 border border-slate-200">
-              {tabsData.map((tab) => {
-                const Icon = tab.icon;
-                const isActive = tab.id === activeTab;
-                return (
-                  <TabsTrigger
-                    key={tab.id}
-                    value={tab.id}
-                    className="relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-xl md:rounded-full md:px-5 md:py-2.5 md:whitespace-nowrap"
-                  >
-                    {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
-                        usada no RecursosGridSection: o Framer Motion anima
-                        posição e largura sozinho quando o elemento "pula" de
-                        um botão para o outro. */}
-                    {isActive && (
-                      <motion.span
-                        layoutId="integracoes-tab-indicator"
-                        className="absolute inset-0 rounded-xl md:rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
-                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                      />
-                    )}
-                    <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
-                      <Icon className="w-4 h-4 shrink-0" />
-                      {tab.label}
-                    </span>
-                  </TabsTrigger>
-                );
-              })}
-            </TabsList>
-          </div>
+          {/* Tab Navigation — 2×2 grid on mobile, pill row on desktop.
+              Sticky logo abaixo do header — ver StickyTabsList. */}
+          <StickyTabsList className="mb-8 md:flex md:justify-center" activeValue={activeTab}>
+            {(isStuck) => (
+              <TabsList
+                className={`grid grid-cols-2 w-full rounded-3xl md:inline-flex md:flex-nowrap md:w-auto md:rounded-full md:min-w-max h-auto gap-1 p-1.5 border transition-all duration-300 ${
+                  isStuck
+                    ? "bg-white/75 backdrop-blur-xl border-white/60 shadow-xl shadow-slate-900/10"
+                    : "bg-slate-100 border-slate-200"
+                }`}
+              >
+                {tabsData.map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = tab.id === activeTab;
+                  return (
+                    <TabsTrigger
+                      key={tab.id}
+                      value={tab.id}
+                      className="relative flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium rounded-xl md:rounded-full md:px-5 md:py-2.5 md:whitespace-nowrap"
+                    >
+                      {/* Pílula que desliza entre as abas — mesma técnica (layoutId)
+                          usada no RecursosGridSection: o Framer Motion anima
+                          posição e largura sozinho quando o elemento "pula" de
+                          um botão para o outro. */}
+                      {isActive && (
+                        <motion.span
+                          layoutId="integracoes-tab-indicator"
+                          className="absolute inset-0 rounded-xl md:rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                          transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        />
+                      )}
+                      <span className={`relative z-10 flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                        <Icon className="w-4 h-4 shrink-0" />
+                        {tab.label}
+                      </span>
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
+            )}
+          </StickyTabsList>
 
           {/* Tab Contents */}
           {tabsData.map((tab) => (

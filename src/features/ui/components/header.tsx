@@ -162,6 +162,7 @@ function Header() {
   const [isMegamenuOpen,        setIsMegamenuOpen]        = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location   = useLocation();
+  const headerRef  = useRef<HTMLElement | null>(null);
   const megamenuButtonRef  = useRef<HTMLButtonElement | null>(null);
   const mobileOverlayRef   = useRef<HTMLDivElement | null>(null);
   const mobileCloseButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -171,6 +172,24 @@ function Header() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Publica a altura real do header como variável CSS — qualquer elemento
+  // sticky no site (ex.: barras de abas) usa `var(--header-height)` pra se
+  // colar logo abaixo dele, sem precisar de um número mágico hardcoded.
+  // ResizeObserver (não só o `isScrolled`) porque o header anima altura
+  // via Framer (pill flutuante encolhendo), então o valor acompanha a
+  // transição ao vivo em vez de pular direto pro estado final.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const publish = () => {
+      document.documentElement.style.setProperty("--header-height", `${el.offsetHeight}px`);
+    };
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -264,7 +283,7 @@ function Header() {
   }, [isMobileOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50">
       <div
         className={`container mx-auto transition-[padding] duration-[450ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] ${
           isScrolled ? "px-4 sm:px-6 lg:px-8 pt-[14px]" : ""

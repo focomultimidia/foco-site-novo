@@ -18,11 +18,10 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 import type { ProdutoItem } from "@/features/shared/data/produtos-data";
 
@@ -214,24 +213,16 @@ function SoftwareProductsCarousel() {
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          <div className="hidden lg:block">
-            <CarouselPrevious className="-left-12 top-1/2 -translate-y-1/2 border-slate-200 bg-white text-[#1e3a5f] hover:border-slate-300 hover:bg-slate-50" />
-            <CarouselNext className="-right-12 top-1/2 -translate-y-1/2 border-slate-200 bg-white text-[#1e3a5f] hover:border-slate-300 hover:bg-slate-50" />
-          </div>
         </Carousel>
 
-        <div className="mt-9 flex justify-center gap-2">
-          {Array.from({ length: count }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => scrollTo(i)}
-              aria-label={`Ir para slide ${i + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                i === current ? "w-8 bg-[#285992]" : "w-2.5 bg-slate-300 hover:bg-slate-400"
-              }`}
-            />
-          ))}
+        <div className="mt-9 flex justify-center">
+          <CarouselControls
+            count={count}
+            current={current}
+            onPrev={() => api?.scrollPrev()}
+            onNext={() => api?.scrollNext()}
+            onSelect={scrollTo}
+          />
         </div>
       </div>
     </section>

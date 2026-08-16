@@ -72,7 +72,7 @@ function CrmHoteleiroPage() {
         videos={videosData}
         badge="Depoimentos"
         title="Um mural de resultados reais"
-        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco aumentou a retenção de hóspedes."
+        subtitle="Cada card aqui é um hoteleiro de verdade, contando como a Foco aumentou a retenção de hóspedes."
       />
 
       {/* Prova Social: Na Mídia */}

@@ -93,7 +93,7 @@ const motorReservasData: MotorReservasData = {
     {
       id: "5",
       pergunta: "O motor aceita quais formas de pagamento?",
-      resposta: "Pix com confirmação automática, cartões de crédito e links de pagamento via WhatsApp ou e-mail — tudo seguro e integrado.",
+      resposta: "Pix com confirmação automática, cartões de crédito e links de pagamento via WhatsApp ou e-mail, tudo seguro e integrado.",
     },
     {
       id: "6",

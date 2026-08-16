@@ -54,10 +54,10 @@ type RecursoItem = typeof recursos[0];
 // ── Phone slides ──────────────────────────────────────────────────────────────
 // Channel-manager app screenshots cycling inside the phone frame.
 const PHONE_SLIDES = [
-  { src: "/assets/imgs/shared/site1.webp", alt: "Channel Manager – Calendário" },
-  { src: "/assets/imgs/shared/site2.webp", alt: "Channel Manager – Reservas"  },
-  { src: "/assets/imgs/shared/site3.webp", alt: "Channel Manager – Tarifas"   },
-  { src: "/assets/imgs/shared/site4.webp", alt: "Channel Manager – Dashboard"  },
+  { src: "/assets/imgs/shared/site1.webp", alt: "Channel Manager: Calendário" },
+  { src: "/assets/imgs/shared/site2.webp", alt: "Channel Manager: Reservas"  },
+  { src: "/assets/imgs/shared/site3.webp", alt: "Channel Manager: Tarifas"   },
+  { src: "/assets/imgs/shared/site4.webp", alt: "Channel Manager: Dashboard"  },
 ] as const;
 
 const PHONE_INTERVAL = 3000;

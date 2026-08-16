@@ -56,9 +56,9 @@ type VantagemItem = {
 // ── Phone slides ──────────────────────────────────────────────────────────────
 // App do Hóspede screens — matches the section's theme.
 const PHONE_SLIDES = [
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",  alt: "Foco Pass – Home" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "Foco Pass – Atrações" },
-  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp", alt: "Foco Pass – Programação" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",  alt: "Foco Pass: Home" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "Foco Pass: Atrações" },
+  { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp", alt: "Foco Pass: Programação" },
 ] as const;
 
 const PHONE_INTERVAL = 3200; // ms between slides

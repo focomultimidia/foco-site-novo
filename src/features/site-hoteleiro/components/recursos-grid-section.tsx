@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { StickyTabsList } from "@/features/shared/components/sticky-tabs-list";
 
 // ── Data — 4 pilares por resultado de negócio, não 12 features soltas ────────
 const PILARES = [
@@ -30,7 +31,7 @@ const PILARES = [
     tabLabel: "Vender mais rápido",
     nome: "Conversão Imediata",
     icon: Zap,
-    descricaoPre: "Cada quarto e cada oferta aparecem como um convite à reserva — não como uma ficha técnica. O visitante decide ",
+    descricaoPre: "Cada quarto e cada oferta aparecem como um convite à reserva, não como uma ficha técnica. O visitante decide ",
     keyword: "em segundos",
     descricaoPos: ", sem abrir uma aba pra comparar em outro site.",
     itens: [
@@ -58,7 +59,7 @@ const PILARES = [
     tabLabel: "Manter o visitante",
     nome: "Experiência de Navegação",
     icon: Compass,
-    descricaoPre: "Mídia profissional, ocasiões especiais e novidades dão vontade de explorar — e ",
+    descricaoPre: "Mídia profissional, ocasiões especiais e novidades dão vontade de explorar e ",
     keyword: "de voltar",
     descricaoPos: ". O visitante fica na página em vez de fechar a aba.",
     itens: [
@@ -263,7 +264,7 @@ function RecursosGridSection() {
   };
 
   return (
-    <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
+    <section className="relative py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative max-w-5xl">
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <SectionEyebrow className="justify-center">Recursos que convertem</SectionEyebrow>
@@ -274,40 +275,51 @@ function RecursosGridSection() {
             quarto por quarto
           </h2>
           <p className="font-sans font-normal text-[#64748b] text-lg leading-relaxed">
-            Não é uma lista de funcionalidades — é a arquitetura completa que transforma
+            Não é uma lista de funcionalidades: é a arquitetura completa que transforma
             curiosidade em reserva confirmada, sem depender de comissão de terceiros.
           </p>
         </div>
 
-        {/* Abas por objetivo */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-8">
-          {PILARES.map((p, i) => {
-            const isActive = i === activeIndex;
-            return (
-              <button
-                key={p.id}
-                onClick={() => goTo(i)}
-                aria-pressed={isActive}
-                className={`relative rounded-full px-5 py-2.5 text-[13px] font-semibold bg-white ring-1 transition-colors duration-300
-                           ${isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"}`}
-              >
-                {/* Pílula que desliza entre as abas — layoutId faz o Framer
-                    animar posição e largura sozinho quando o elemento "pula"
-                    de um botão pro outro. */}
-                {isActive && (
-                  <motion.span
-                    layoutId="recursos-tab-indicator"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
-                    transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
-                )}
-                <span className={`relative z-10 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
-                  {p.tabLabel}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {/* Abas por objetivo — sticky logo abaixo do header (ver
+            StickyTabsList). Sem uma "pílula" única agrupando os botões
+            (cada um já é branco e independente), o tratamento de "grudado"
+            vira um fundo em vidro fosco por trás de toda a fileira. */}
+        <StickyTabsList className="mb-8" activeValue={activeIndex}>
+          {(isStuck) => (
+            <div
+              className={`transition-all duration-300 rounded-[24px] flex flex-wrap justify-center gap-2.5 ${
+                isStuck ? "bg-white/70 backdrop-blur-xl shadow-lg shadow-slate-900/10 py-2.5 px-3 -mx-3" : ""
+              }`}
+            >
+              {PILARES.map((p, i) => {
+                const isActive = i === activeIndex;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => goTo(i)}
+                    aria-pressed={isActive}
+                    className={`relative rounded-full px-5 py-2.5 text-[13px] font-semibold bg-white ring-1 transition-colors duration-300
+                               ${isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"}`}
+                  >
+                    {/* Pílula que desliza entre as abas — layoutId faz o Framer
+                        animar posição e largura sozinho quando o elemento "pula"
+                        de um botão pro outro. */}
+                    {isActive && (
+                      <motion.span
+                        layoutId="recursos-tab-indicator"
+                        className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a5f] to-[#285992] shadow-md shadow-[#285992]/25"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className={`relative z-10 transition-colors duration-300 ${isActive ? "text-white" : "text-slate-600 hover:text-[#285992]"}`}>
+                      {p.tabLabel}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </StickyTabsList>
 
         <Stage activeIndex={activeIndex} direction={direction} />
       </div>

@@ -30,7 +30,7 @@ const CULTURE_PILLARS: CulturePillarData[] = [
   },
   {
     id: "growth", icon: TrendingUp, title: "Crescimento Real",
-    desc: "Plano de carreira concreto para cada colaborador — não apenas para seniores.",
+    desc: "Plano de carreira concreto para cada colaborador, não apenas para seniores.",
     color: "#0f766e", iconHover: { y: -3, scale: 1.1 }, floatY: [-3, 6], floatDur: 4.9, gridClass: "lg:mt-7",
   },
   {

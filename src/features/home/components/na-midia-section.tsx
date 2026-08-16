@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Newspaper, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Newspaper } from "lucide-react";
 import type { ArtigoMidia } from "../types";
 
 // ── 3D position system ────────────────────────────────────────────────────────
@@ -254,42 +255,15 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
       </div>
 
       {/* ── Navigation ───────────────────────────────────────────────── */}
-      <div className="flex items-center justify-center gap-5 mt-10">
-        <button
-          onClick={prev}
-          aria-label="Anterior"
-          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-sm cursor-pointer"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-
-        <div className="flex items-center gap-2">
-          {artigos.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setCenter(idx)}
-              aria-label={`Slide ${idx + 1}`}
-              className="group flex items-center justify-center w-6 h-6 cursor-pointer"
-            >
-              <span
-                className={[
-                  "h-2 rounded-full transition-all duration-300",
-                  idx === center
-                    ? "w-6 bg-blue-600"
-                    : "w-2 bg-gray-300 group-hover:bg-gray-400",
-                ].join(" ")}
-              />
-            </button>
-          ))}
-        </div>
-
-        <button
-          onClick={next}
-          aria-label="Próximo"
-          className="w-10 h-10 rounded-full border border-gray-200 bg-white flex items-center justify-center text-gray-500 hover:bg-gray-50 hover:border-gray-300 transition-colors shadow-sm cursor-pointer"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+      <div className="flex justify-center mt-10">
+        <CarouselControls
+          count={total}
+          current={center}
+          onPrev={prev}
+          onNext={next}
+          onSelect={setCenter}
+          labelItem={(i) => `Slide ${i + 1}`}
+        />
       </div>
     </section>
   );

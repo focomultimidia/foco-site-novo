@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AnimatePresence,
@@ -32,6 +32,7 @@ import {
   Plus,
 } from "lucide-react";
 import type { DorSolucao } from "../types";
+import { StickyTabsList } from "@/features/shared/components/sticky-tabs-list";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 
@@ -331,6 +332,47 @@ function MobileDiagnosticoAccordionItem({
   if (!cfg) return null;
   const Icon = cfg.Icon;
 
+  // Equivalente mobile do scroll-pro-topo do StickyTabsList (desktop): não
+  // existe uma barra sticky aqui, o próprio item é o "cabeçalho" da aba,
+  // então rolar ele pra logo abaixo do header fixo já deixa o conteúdo que
+  // acabou de abrir visível desde o início. Só ao ABRIR (não ao fechar) e
+  // só se já rolado além do ponto confortável — mesma regra "só sobe" do
+  // desktop.
+  //
+  // Diferença importante em relação ao desktop: aqui abrir um item também
+  // FECHA o anteriormente aberto, e os dois animam altura (spring) ao
+  // mesmo tempo — medir a posição imediatamente pegaria o layout no meio
+  // da animação (o vizinho de cima ainda não terminou de encolher). Por
+  // isso o pequeno atraso: dá tempo da altura assentar antes de calcular o
+  // alvo do scroll, senão a página rola pro lugar errado.
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const didMount = useRef(false);
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+    if (!isOpen) return;
+
+    const timer = setTimeout(() => {
+      const el = buttonRef.current;
+      // offsetParent null = escondido via `display:none` (`lg:hidden` no
+      // desktop) — a variante desktop compartilha o mesmo `activeId` e
+      // dispararia isso mesmo invisível, virando um scroll fantasma. Ver
+      // mesma checagem em StickyTabsList.
+      if (!el || el.offsetParent === null) return;
+
+      const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 88;
+      const target = el.getBoundingClientRect().top + window.scrollY - offset - 14;
+      if (window.scrollY - target < 40) return;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: Math.max(target, 0), behavior: prefersReducedMotion ? "auto" : "smooth" });
+    }, 380);
+
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
   return (
     <div
       className="rounded-2xl border overflow-hidden transition-colors duration-300"
@@ -340,6 +382,7 @@ function MobileDiagnosticoAccordionItem({
       }}
     >
       <button
+        ref={buttonRef}
         onClick={onToggle}
         aria-expanded={isOpen}
         className="w-full flex items-center gap-3 p-4"
@@ -451,21 +494,30 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
         .dores-diag-grid { animation: dores-diag-grid-pan 7s linear infinite; }
       `}</style>
 
-      <section className="relative py-24 md:py-32 overflow-hidden bg-[#0b1a2e]">
-        {/* Aurora azul em deriva lenta — mesmas keyframes do hero da home. */}
-        <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(60px)", opacity: 0.7 }}>
-          <div
-            className="absolute w-[460px] h-[460px] -left-24 top-0 rounded-full motion-safe:animate-aurora-a"
-            style={{ background: "radial-gradient(circle, rgba(66,122,185,0.55), transparent 70%)" }}
-          />
-          <div
-            className="absolute w-[520px] h-[520px] -right-32 bottom-0 rounded-full motion-safe:animate-aurora-b"
-            style={{ background: "radial-gradient(circle, rgba(30,58,95,0.55), transparent 70%)" }}
-          />
-          <div
-            className="absolute w-[360px] h-[360px] left-[35%] -bottom-24 rounded-full motion-safe:animate-aurora-c"
-            style={{ background: "radial-gradient(circle, rgba(40,89,146,0.45), transparent 70%)" }}
-          />
+      <section className="relative py-24 md:py-32 bg-[#0b1a2e]">
+        {/* Aurora azul em deriva lenta — mesmas keyframes do hero da home.
+            `overflow-hidden` mora neste wrapper (recortado exatamente nos
+            limites da seção via `inset-0`), não na <section> — a seção
+            precisa ficar "aberta" pra `position: sticky` da barra de abas
+            funcionar (overflow-hidden num ancestral quebra o range de
+            sticky). O blob em si ainda pode "vazar" 10% pra fora do seu
+            próprio raio via -inset-[10%], só que agora recortado por este
+            wrapper em vez da seção inteira. */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -inset-[10%] overflow-hidden" style={{ filter: "blur(60px)", opacity: 0.7 }}>
+            <div
+              className="absolute w-[460px] h-[460px] -left-24 top-0 rounded-full motion-safe:animate-aurora-a"
+              style={{ background: "radial-gradient(circle, rgba(66,122,185,0.55), transparent 70%)" }}
+            />
+            <div
+              className="absolute w-[520px] h-[520px] -right-32 bottom-0 rounded-full motion-safe:animate-aurora-b"
+              style={{ background: "radial-gradient(circle, rgba(30,58,95,0.55), transparent 70%)" }}
+            />
+            <div
+              className="absolute w-[360px] h-[360px] left-[35%] -bottom-24 rounded-full motion-safe:animate-aurora-c"
+              style={{ background: "radial-gradient(circle, rgba(40,89,146,0.45), transparent 70%)" }}
+            />
+          </div>
         </div>
 
         {/* Grão sutil */}
@@ -512,14 +564,21 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
 
           {/* ── Desktop (lg+) — seletor de 3 cartões + painel único ao lado.
               Abaixo de lg vira o acordeão logo mais abaixo (ver
-              `MobileDiagnosticoAccordionItem`) — os dois nunca coexistem. ── */}
+              `MobileDiagnosticoAccordionItem`) — os dois nunca coexistem.
+              Sticky logo abaixo do header — ver StickyTabsList; aqui em
+              vidro fosco ESCURO (não branco) pra combinar com o fundo
+              navy #0b1a2e da seção. ────────────────────────────────── */}
           <div className="hidden lg:block">
+          <StickyTabsList className="mb-12 sm:mb-16" activeValue={activeId}>
+            {(isStuck) => (
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto mb-12 sm:mb-16"
+            className={`grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl mx-auto rounded-[28px] transition-all duration-300 ${
+              isStuck ? "bg-[#0b1a2e]/75 backdrop-blur-xl ring-1 ring-white/10 shadow-xl shadow-black/40 p-3 -m-3" : ""
+            }`}
           >
             {dores.map((d, i) => {
               const cfg = DOR_CONFIG[d.id];
@@ -576,6 +635,8 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
               );
             })}
           </motion.div>
+            )}
+          </StickyTabsList>
 
           {/* Painel de diagnóstico ativo */}
           <AnimatePresence mode="popLayout" custom={activeIndex}>

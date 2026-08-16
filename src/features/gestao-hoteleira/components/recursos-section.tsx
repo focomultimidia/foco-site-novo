@@ -53,14 +53,14 @@ const PILARES = [
     tabLabel: "Recepção & Experiência",
     nome: "Recepção & Experiência",
     icon: UserCheck,
-    descricaoPre: "Elimine fila, retrabalho manual e falha de comunicação — o hóspede ",
+    descricaoPre: "Elimine fila, retrabalho manual e falha de comunicação: o hóspede ",
     keyword: "sente a diferença",
     descricaoPos: " do check-in ao check-out.",
     itens: [
       { icon: CheckSquare, titulo: "Check-in online", descricao: "Evite filas na recepção e aumente a satisfação do hóspede com check-in 100% online." },
       { icon: ShoppingCart, titulo: "PDV hoteleiro", descricao: "Ponto de Venda integrado para registrar o consumo de hóspedes direto na conta da reserva." },
       { icon: FileCheck, titulo: "Ficha FNRH", descricao: "Geração automática da Ficha Nacional de Registro de Hóspedes com base nos dados do check-in." },
-      { icon: Utensils, titulo: "Controle de pensões", descricao: "Gestão automatizada dos planos de refeição — garante que o hóspede receba o serviço contratado." },
+      { icon: Utensils, titulo: "Controle de pensões", descricao: "Gestão automatizada dos planos de refeição, garantindo que o hóspede receba o serviço contratado." },
       { icon: Search, titulo: "Achados e perdidos", descricao: "Registro de itens encontrados na propriedade, facilitando a localização e devolução ao hóspede." },
       { icon: UserCircle, titulo: "Gestão do hóspede", descricao: "Cadastro completo e centralizado de todos os hóspedes, com histórico, preferências e CRM integrado." },
     ],
@@ -70,11 +70,11 @@ const PILARES = [
     tabLabel: "Vendas & Distribuição",
     nome: "Vendas & Distribuição",
     icon: Handshake,
-    descricaoPre: "Do primeiro orçamento ao contrato B2B fechado — cada oportunidade formalizada ",
+    descricaoPre: "Do primeiro orçamento ao contrato B2B fechado, cada oportunidade formalizada ",
     keyword: "em minutos, não em dias",
     descricaoPos: ".",
     itens: [
-      { icon: DollarSign, titulo: "Disponibilidade e tarifário", descricao: "Preço e inventário centralizados — ajuste tarifas, abra/feche vendas e aplique restrições de forma ágil." },
+      { icon: DollarSign, titulo: "Disponibilidade e tarifário", descricao: "Preço e inventário centralizados: ajuste tarifas, abra/feche vendas e aplique restrições de forma ágil." },
       { icon: FileText, titulo: "Gestão de orçamentos", descricao: "Orçamentos recebidos via telefone, e-mail, redes sociais e WhatsApp, com CRM integrado." },
       { icon: Users, titulo: "Orçamentos individuais e grupos", descricao: "Criação rápida de orçamentos para hóspedes individuais ou grandes grupos, com link de pagamento seguro." },
       { icon: Briefcase, titulo: "Gestão B2B", descricao: "Gerencie empresas e operadoras dentro do PMS, com reservas, formas de pagamento e comissões." },
@@ -86,13 +86,13 @@ const PILARES = [
     tabLabel: "Financeiro & Estratégia",
     nome: "Financeiro & Estratégia",
     icon: LineChart,
-    descricaoPre: "Decisão baseada em dado, não em intuição — cada tendência visível ",
+    descricaoPre: "Decisão baseada em dado, não em intuição: cada tendência visível ",
     keyword: "antes de virar problema",
     descricaoPos: ".",
     itens: [
       { icon: BarChart3, titulo: "Relatórios e dashboards", descricao: "Relatórios financeiros, operacionais e de ocupação que transformam dado bruto em insight estratégico." },
       { icon: CreditCard, titulo: "Integração via PIX e máquina Stone", descricao: "Integração direta com PIX e máquinas de cartão, agilizando a cobrança no check-out." },
-      { icon: History, titulo: "Histórico de reservas", descricao: "Arquivo digital de todas as reservas passadas — essencial para auditorias e análise de tendências." },
+      { icon: History, titulo: "Histórico de reservas", descricao: "Arquivo digital de todas as reservas passadas, essencial para auditorias e análise de tendências." },
       { icon: LayoutDashboard, titulo: "Dashboard por usuário", descricao: "Painel de controle personalizado com métricas e tarefas relevantes para cada colaborador." },
     ],
   },
@@ -246,7 +246,7 @@ function RecursosSection() {
           </h2>
           <p className="font-sans font-normal text-[#64748b] text-lg leading-relaxed">
             Da governança ao financeiro, um único sistema substitui planilha, papel e
-            retrabalho — para você operar com a precisão de uma rede internacional.
+            retrabalho, para você operar com a precisão de uma rede internacional.
           </p>
         </div>
 
@@ -333,7 +333,7 @@ function Console({
         <span className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e]" />
         <span className="w-3.5 h-3.5 rounded-full bg-[#28c840]" />
         <span className="flex-1 text-center font-mono text-[12px] text-slate-400">
-          Foco PMS — Painel de Recursos
+          Foco PMS: Painel de Recursos
         </span>
         <span className="flex items-center gap-1.5">
           <span className="relative flex h-2 w-2">

@@ -82,6 +82,12 @@
     --input: 213 28% 87%;
     --ring: 212 57% 36.5%;
     --radius: 0.5rem;
+
+    /* Altura ao vivo do <header> fixo (Header publica via ResizeObserver —
+       ver header.tsx), consumida por qualquer elemento sticky que precise
+       ficar colado logo abaixo dele (ex.: barras de abas). O valor aqui é
+       só o fallback pro instante antes do JS medir pela primeira vez. */
+    --header-height: 88px;
   }
 
   .dark {

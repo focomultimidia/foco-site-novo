@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './core/api/query-client';
 import { MainLayout } from './features/ui/components/main-layout';
+import { ScrollToTop } from './features/ui/components/scroll-to-top';
 import { Spinner } from './components/ui/spinner';
 import { CookieConsentProvider, CookieConsentWidget } from './features/cookie-consent';
 
@@ -42,6 +43,7 @@ function RouteFallback() {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <QueryClientProvider client={queryClient}>
         <CookieConsentProvider>
           <Suspense fallback={<RouteFallback />}>

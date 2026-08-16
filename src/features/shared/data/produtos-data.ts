@@ -35,11 +35,13 @@ export interface ProdutoItem {
    */
   mobileScreenshot?: string;
   /**
-   * Quando presente (3 itens), substitui TODO o palco desktop do StagePanel
-   * (screenshot + mockup mobile único) por 3 mockups de celular lado a lado
-   * — o mesmo tratamento visual da hero de /experiencia-do-hospede (central
-   * nítido, laterais menores/desfocados). Usado quando o produto não tem
-   * uma "tela desktop" de verdade (ex.: Experiência do Hóspede, 100% app).
+   * Quando presente, substitui TODO o palco (desktop e mobile) pelo
+   * tratamento de celulares empilhados/sobrepostos (moldura branca, escala e
+   * opacidade menores nos de trás) em vez de screenshot + mockup mobile
+   * único. 3 itens = trio (TriplePhoneStage/central em destaque, laterais
+   * atrás — ex.: Experiência do Hóspede, 100% app, sem "tela desktop" de
+   * verdade). 2 itens = dupla (DuoPhoneStage — ex.: Otheo AI, cujas 2 telas
+   * reais não sustentam um 3º mockup sem repetir imagem).
    */
   mockups?: readonly { src: string; alt: string }[];
   bkgImagem?:  string; // optional hero/lifestyle image used as accordion background
@@ -60,6 +62,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Globe,
     imagem: "/assets/imgs/produtos/channel-manager.png",
     screenshot: "/assets/imgs/produtos/channel-manager.png",
+    mobileScreenshot: "/assets/imgs/home/produtos/mobile-channel-manager.png",
     bkgImagem: "/assets/imgs/channel-manager/bkg-accordion.webp",
     accent: "#60a5fa",
     overlay: "from-blue-950/85 to-blue-900/25",
@@ -141,8 +144,8 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     screenshot: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp",
     mockups: [
       { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.webp", alt: "Cardápio digital do hotel" },
-      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "App do hóspede — atrações do hotel" },
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.webp", alt: "Cardápio digital — detalhe do item" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "App do hóspede: atrações do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.webp", alt: "Cardápio digital: detalhe do item" },
     ],
     bkgImagem: "/assets/imgs/experiencia-do-hospede/bkg-accordion.webp",
     accent: "#fb7185",
@@ -164,6 +167,17 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // mobile, SoftwareProductsCarousel) já lidam bem com uma imagem em pé
     // (contain/crop pelo topo), sem quebrar layout.
     screenshot: "/assets/imgs/home/otheoai/chat-ia.jpg",
+    // Mesma estrutura de mockups empilhados/sobrepostos da Experiência do
+    // Hóspede (DuoPhoneStage no desktop, mesmos celulares brancos do
+    // TriplePhoneStage), só que com 2 telas em vez de 3 — o Otheo AI só tem
+    // 2 telas reais hoje (chat e lista de reservas), sem uma 3ª pra repetir
+    // o trio sem duplicar imagem. Ordem importa: o primeiro item vai pro
+    // celular de trás (menor/atrás), o segundo pro da frente (grande,
+    // destaque) — ver DuoPhoneStage em product-showcase.tsx.
+    mockups: [
+      { src: "/assets/imgs/otheo-ai/mockup.png", alt: "Otheo AI listando reservas com check-in hoje, direto no chat" },
+      { src: "/assets/imgs/home/otheoai/chat-ia.jpg", alt: "Otheo AI respondendo um comando na extranet do hotel, via chat" },
+    ],
     // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
     // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro
     // resolvendo por voz no carro) em vez de cair no fallback pro

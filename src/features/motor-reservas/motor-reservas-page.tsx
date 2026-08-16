@@ -95,7 +95,7 @@ function MotorReservasPage() {
         videos={videosData}
         badge="Depoimentos"
         title="Um mural de resultados reais"
-        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco aumentou suas reservas diretas."
+        subtitle="Cada card aqui é um hoteleiro de verdade, contando como a Foco aumentou suas reservas diretas."
       />
 
       {/* Section 6: Aumente as reservas diretas */}

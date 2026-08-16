@@ -130,19 +130,28 @@ function HeroSection() {
                 parece) em vez da borda real do mockup. */}
             <div className="relative">
               {/* Segundo mockup, menor, atrás do principal — mesma moldura
-                  de vidro fosco, agora ~78% do tamanho (era 68%, pedido pra
-                  aumentar um pouco) e CENTRALIZADO no mesmo eixo horizontal
-                  do mockup grande (`left` = metade da diferença de largura
-                  entre os dois — não é mais um deslocamento lateral). `z-0`
+                  de vidro fosco, ~78% do tamanho do mockup grande. `z-0`
                   (o mockup grande logo abaixo é `z-10`) garante que ele
-                  fique por trás; como agora "espia" por baixo em vez de
-                  pelo lado, o `top` empurra ele pra baixo o suficiente pra
-                  sobrar uma fatia visível sob a borda do mockup grande. */}
+                  fique por trás; `left` negativo o empurra pra fora da
+                  borda esquerda do mockup grande, então ele espia PELO LADO
+                  (não por baixo) — o `top` só desce um pouco a partir do
+                  centro vertical, pra dar profundidade sem virar um
+                  peek embaixo. A sobreposição (em sm/lg, ~20% da largura
+                  deste mockup) vem do `ml` no mockup grande logo abaixo —
+                  ele empurra pra direita sem mexer no `left` daqui, e como
+                  o wrapper "justo" encolhe pro tamanho do grande (único
+                  filho em fluxo), a borda direita dele — e o chip que se
+                  ancora nela — andam junto. No mobile (`base`, sem prefixo)
+                  `left`/`ml` são menores de propósito — os valores calibrados
+                  pro desktop deixavam a dupla larga demais pra caber num
+                  viewport de ~375px, com o mockup pequeno "colado"/cortado na
+                  borda esquerda da tela; aqui a prioridade é a dupla caber
+                  centralizada com folga, não bater os mesmos 20%. */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.9, delay: 0.05, ease: EASE }}
-                className="absolute z-0 w-[175px] sm:w-[205px] lg:w-[220px] rounded-[30px] p-2 left-[23px] sm:left-[28px] lg:left-[30px] top-[184px] sm:top-[218px] lg:top-[238px]"
+                className="absolute z-0 w-[175px] sm:w-[205px] lg:w-[220px] rounded-[30px] p-2 -left-4 sm:-left-20 lg:-left-24 top-8 sm:top-10 lg:top-12"
                 style={{
                   background: "rgba(16,35,61,0.55)",
                   backdropFilter: "blur(16px)",
@@ -167,7 +176,7 @@ function HeroSection() {
                   HeroMobileMockup (home) e do OtheoAiTeaserSection, agora em
                   tamanho de protagonista. */}
               <div
-                className="relative z-10 w-[220px] sm:w-[260px] lg:w-[280px] rounded-[36px] p-2.5"
+                className="relative z-10 w-[220px] sm:w-[260px] lg:w-[280px] rounded-[36px] p-2.5 ml-20 sm:ml-[84px] lg:ml-[80px]"
                 style={{
                   background: "rgba(16,35,61,0.55)",
                   backdropFilter: "blur(16px)",

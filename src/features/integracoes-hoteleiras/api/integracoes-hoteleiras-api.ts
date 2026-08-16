@@ -156,4 +156,26 @@ async function fetchIntegracoesHoteleirasData(): Promise<IntegracoesHoteleirasDa
   return integracoesHoteleirasData;
 }
 
-export { fetchIntegracoesHoteleirasData };
+// ── Orçamento por PMS ─────────────────────────────────────────────────────────
+
+interface PmsOrcamentoPayload {
+  pmsId:          string;
+  pmsNome:        string;
+  nome:           string;
+  email:          string;
+  telefone:       string;
+  estabelecimento: string;
+  clienteFoco:    boolean;
+}
+
+// Mock — segue o mesmo padrão de fetchIntegracoesHoteleirasData acima (todo o
+// backend do site ainda é simulado). pmsId já vai junto no payload pra deixar
+// pronta a integração real com o CRM assim que o endpoint existir.
+async function submitPmsOrcamento(payload: PmsOrcamentoPayload): Promise<{ success: true }> {
+  await new Promise((resolve) => setTimeout(resolve, 900));
+  console.info("[integracoes-hoteleiras] Solicitação de orçamento (mock):", payload);
+  return { success: true };
+}
+
+export { fetchIntegracoesHoteleirasData, submitPmsOrcamento };
+export type { PmsOrcamentoPayload };

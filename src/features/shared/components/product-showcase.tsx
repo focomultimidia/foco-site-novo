@@ -15,12 +15,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 import type { ProdutoItem } from "@/features/shared/data/produtos-data";
 
@@ -351,35 +350,49 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
             transition={{ duration: 0.55, ease: EASE }}
             className="relative"
           >
-            {/* Produtos com `mockups` (3 telas de celular) trocam o palco
-                inteiro — nada de screenshot desktop + 1 celular flutuando,
-                só os 3 mockups lado a lado (ver TriplePhoneStage). Os demais
-                mantêm o tratamento original. */}
+            {/* Produtos com `mockups` trocam o palco inteiro — nada de
+                screenshot desktop + 1 celular flutuando, só celulares
+                empilhados/sobrepostos com a mesma moldura branca. 3 itens =
+                trio (TriplePhoneStage, central em destaque + 2 laterais
+                atrás — ex.: Experiência do Hóspede). 2 itens = dupla
+                (DuoPhoneStage, mesma estrutura de sobreposição do trio, só
+                que recentrada pra 2 — ex.: Otheo AI, que só tem 2 telas
+                reais). Os demais mantêm o tratamento original. */}
             {activeProduct.mockups && activeProduct.mockups.length >= 3 ? (
               <TriplePhoneStage mockups={activeProduct.mockups} />
+            ) : activeProduct.mockups && activeProduct.mockups.length === 2 ? (
+              <DuoPhoneStage mockups={activeProduct.mockups} />
             ) : (
               <>
-                {/* Tela desktop — o overflow-hidden fica só aqui (não no
-                    wrapper), para o mockup mobile poder "flutuar" para fora
-                    do canto sem ser cortado. */}
-                <div
-                  className="overflow-hidden rounded-xl ring-1 ring-slate-900/10
-                             shadow-[0_8px_20px_-14px_rgba(15,40,80,0.20),0_34px_70px_-34px_rgba(15,40,80,0.42)]"
-                >
-                  <img
-                    src={activeProduct.screenshot}
-                    alt={`Captura de tela do produto ${splitTitulo(activeProduct.titulo).nome}`}
-                    loading={activeIndex === 0 ? "eager" : "lazy"}
-                    className="block w-full max-h-[450px] object-contain"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/35 mix-blend-overlay" />
-                </div>
+                {/* Wrapper "w-fit" — em telas grandes a coluna do grid fica
+                    bem mais larga que os 450px de altura da screenshot;
+                    sem isso a caixa esticava até a largura da coluna e
+                    sobrava vidro vazio nas laterais do mockup (object-contain
+                    fazendo letterbox). Aqui a caixa acompanha o tamanho real
+                    da imagem e fica centralizada. */}
+                <div className="relative w-fit mx-auto">
+                  {/* Tela desktop — o overflow-hidden fica só aqui (não no
+                      wrapper), para o mockup mobile poder "flutuar" para fora
+                      do canto sem ser cortado. */}
+                  <div
+                    className="overflow-hidden rounded-xl ring-1 ring-slate-900/10
+                               shadow-[0_8px_20px_-14px_rgba(15,40,80,0.20),0_34px_70px_-34px_rgba(15,40,80,0.42)]"
+                  >
+                    <img
+                      src={activeProduct.screenshot}
+                      alt={`Captura de tela do produto ${splitTitulo(activeProduct.titulo).nome}`}
+                      loading={activeIndex === 0 ? "eager" : "lazy"}
+                      className="block h-auto max-h-[450px] w-auto max-w-full"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/35 mix-blend-overlay" />
+                  </div>
 
-                <PhoneMockup
-                  screenshot={activeProduct.mobileScreenshot}
-                  label={activeProduct.numero}
-                  alt={`Tela mobile do produto ${splitTitulo(activeProduct.titulo).nome}`}
-                />
+                  <PhoneMockup
+                    screenshot={activeProduct.mobileScreenshot}
+                    label={activeProduct.numero}
+                    alt={`Tela mobile do produto ${splitTitulo(activeProduct.titulo).nome}`}
+                  />
+                </div>
               </>
             )}
           </motion.div>
@@ -465,13 +478,74 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
   );
 }
 
-// ── MobileTripleMockup ───────────────────────────────────────────────────────
-// Versão compacta do TriplePhoneStage pra telas < lg — mesmos 3 prints, mas
-// lado a lado sem sobreposição (o layout absoluto/escalado do desktop não
-// cabe na largura de um card mobile). Usada só por produtos com `mockups`
-// (hoje, só Experiência do Hóspede) — os demais produtos continuam com a
-// captura única acima do título, inalterados.
-function MobileTripleMockup({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+// ── DuoPhoneStage ────────────────────────────────────────────────────────────
+// Mesma estrutura de sobreposição do TriplePhoneStage logo acima — moldura
+// branca idêntica, mesmo espaçamento de 186px entre celulares vizinhos,
+// mesma escala (0.86) e opacidade (0.88) pro que fica atrás — só que
+// recentrada pra 2 celulares em vez de 3 (`x: ∓93` em vez de `-186/0/186`,
+// senão a dupla nascia deslocada pra esquerda dentro da caixa). Usada
+// quando `mockups` tem exatamente 2 itens (hoje só Otheo AI, que só tem 2
+// telas reais e não sustentaria um trio sem repetir imagem).
+// `mockups[0]` vai pro celular de trás (menor, atrás), `mockups[1]` pro da
+// frente (grande, em destaque) — mesma convenção de ordem do
+// TriplePhoneStage (laterais primeiro, central por último).
+function DuoPhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+  const ROLES = [
+    { x: -93, scale: 0.86, opacity: 0.88, z: 10 },
+    { x: 93,  scale: 1,    opacity: 1,    z: 30 },
+  ] as const;
+
+  return (
+    <div className="relative h-[500px] flex items-center justify-center">
+      {ROLES.map((role, i) => {
+        const mock = mockups[i];
+        if (!mock) return null;
+        return (
+          <div
+            key={i}
+            className="absolute w-[214px]"
+            style={{
+              transform: `translateX(${role.x}px) scale(${role.scale})`,
+              opacity: role.opacity,
+              zIndex: role.z,
+            }}
+          >
+            <div
+              className="bg-white rounded-[24px] p-[4px]"
+              style={{
+                boxShadow: role.z === 30
+                  ? "0 24px 56px -12px rgba(15,40,80,0.45)"
+                  : "0 16px 32px -12px rgba(15,40,80,0.25)",
+              }}
+            >
+              <div
+                className="relative bg-white rounded-[20px] overflow-hidden ring-1 ring-slate-900/10"
+                style={{ aspectRatio: "9 / 19.5" }}
+              >
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-9 h-[9px] bg-[#1c1c1e] rounded-full" />
+                <img
+                  src={mock.src}
+                  alt={mock.alt}
+                  loading="eager"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── MobileStackedMockups ─────────────────────────────────────────────────────
+// Versão compacta do TriplePhoneStage/DuoPhoneStage pra telas < lg — mesmos
+// prints (2 ou 3), mas lado a lado sem sobreposição (o layout
+// absoluto/escalado do desktop não cabe na largura de um card mobile).
+// Genérico por comprimento do array — hoje serve tanto o trio da
+// Experiência do Hóspede quanto a dupla do Otheo AI. Os demais produtos
+// continuam com a captura única acima do título, inalterados.
+function MobileStackedMockups({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
   return (
     <div className="lg:hidden flex items-end justify-center gap-3 mb-6">
       {mockups.map((mock, i) => (
@@ -509,7 +583,7 @@ function MobileTripleMockup({ mockups }: { mockups: readonly { src: string; alt:
 function PhoneMockup({ screenshot, label, alt }: { screenshot?: string; label: string; alt?: string }) {
   return (
     <div
-      className="absolute -bottom-7 -left-7 z-20 w-[35%] max-w-[122px]"
+      className="absolute -bottom-8 -left-8 z-20 w-[44%] max-w-[160px]"
       style={{
         filter: "drop-shadow(0 16px 24px rgba(15,40,80,0.30))",
       }}
@@ -566,7 +640,7 @@ function ScrollContentBlock({
   const { Icone: Icon } = produto;
   const { nome, subtitulo } = splitTitulo(produto.titulo);
   const reducedMotion = useReducedMotion();
-  const hasMockups = !!produto.mockups && produto.mockups.length >= 3;
+  const hasMockups = !!produto.mockups && produto.mockups.length >= 2;
   return (
     <div
       ref={registerRef}
@@ -621,10 +695,10 @@ function ScrollContentBlock({
           below lg, so each block carries its own screenshot(s) inline,
           sempre abaixo do título/subtítulo (mesmo tratamento pedido pro
           item Experiência do Hóspede, agora estendido a todos os produtos).
-          `mockups` (hoje só Experiência do Hóspede) mostra as 3 telas reais
-          lado a lado; os demais mostram a captura única. */}
+          `mockups` (Experiência do Hóspede com 3, Otheo AI com 2) mostra as
+          telas reais lado a lado; os demais mostram a captura única. */}
       {hasMockups && produto.mockups ? (
-        <MobileTripleMockup mockups={produto.mockups} />
+        <MobileStackedMockups mockups={produto.mockups} />
       ) : (
         <div className="lg:hidden mb-6 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
           <img src={produto.screenshot} alt={`Captura de tela do produto ${nome}`} loading="lazy" className="block w-full" />
@@ -890,24 +964,16 @@ function CarouselView() {
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <div className="hidden lg:block">
-          <CarouselPrevious className="-left-12 top-1/2 -translate-y-1/2 border-slate-200 bg-white text-[#1e3a5f] hover:bg-slate-50 hover:border-slate-300" />
-          <CarouselNext    className="-right-12 top-1/2 -translate-y-1/2 border-slate-200 bg-white text-[#1e3a5f] hover:bg-slate-50 hover:border-slate-300" />
-        </div>
       </Carousel>
 
-      <div className="mt-10 flex justify-center gap-2">
-        {Array.from({ length: count }).map((_, i) => (
-          <button
-            key={i}
-            onClick={() => scrollTo(i)}
-            aria-label={`Ir para slide ${i + 1}`}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              i === current ? "w-8 bg-[#285992]" : "w-2.5 bg-slate-300 hover:bg-slate-400"
-            }`}
-          />
-        ))}
+      <div className="mt-10 flex justify-center">
+        <CarouselControls
+          count={count}
+          current={current}
+          onPrev={() => api?.scrollPrev()}
+          onNext={() => api?.scrollNext()}
+          onSelect={scrollTo}
+        />
       </div>
     </>
   );

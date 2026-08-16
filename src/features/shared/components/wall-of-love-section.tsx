@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import {
   motion,
   AnimatePresence,
   useMotionValue,
   useMotionTemplate,
   useSpring,
+  useReducedMotion,
 } from "framer-motion";
 import { Play, Star, BadgeCheck, X, Sparkles } from "lucide-react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
+import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import type { Depoimento, VideoDepoimento } from "@/features/home/types";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -93,12 +95,36 @@ function distributeColumns<T>(items: T[], columnCount: number): T[][] {
 }
 
 // ── Cartão de texto — spotlight + tilt 3D (mesma técnica já usada no site) ───
-function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => void }) {
+function TextCard({
+  dep,
+  onHover,
+  compact = false,
+}: {
+  dep:      Depoimento;
+  onHover:  (h: boolean) => void;
+  /** Trunca a citação (com fade, não corte seco) — usado só pelo
+      TestimonialCarousel, cujos slots têm altura fixa (o texto completo
+      continua na galeria "ver mais"). */
+  compact?: boolean;
+}) {
   const mx = useMotionValue(-999);
   const my = useMotionValue(-999);
   const spotlight = useMotionTemplate`radial-gradient(280px circle at ${mx}px ${my}px, rgba(40,89,146,0.06), transparent 70%)`;
   const rotateX = useSpring(0, { stiffness: 260, damping: 28 });
   const rotateY = useSpring(0, { stiffness: 260, damping: 28 });
+
+  // Detecta se o `line-clamp` está de fato cortando ALGUMA coisa (em vez de
+  // assumir por contagem de caracteres, frágil e diferente por breakpoint) —
+  // só aí o degradê de esmaecimento entra; um depoimento curto, que já cabe
+  // inteiro, não ganha um fade artificial no fim de uma frase completa.
+  const quoteRef = useRef<HTMLParagraphElement>(null);
+  const [isTruncated, setIsTruncated] = useState(false);
+  useLayoutEffect(() => {
+    if (!compact) return;
+    const el = quoteRef.current;
+    if (!el) return;
+    setIsTruncated(el.scrollHeight - el.clientHeight > 1);
+  }, [compact, dep.texto]);
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -119,7 +145,7 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
 
   return (
     <motion.div
-      className="relative rounded-3xl bg-white p-7 transform-gpu overflow-hidden"
+      className={`relative rounded-3xl bg-white p-7 transform-gpu overflow-hidden ${compact ? "h-full flex flex-col" : ""}`}
       style={{
         rotateX,
         rotateY,
@@ -171,16 +197,27 @@ function TextCard({ dep, onHover }: { dep: Depoimento; onHover: (h: boolean) => 
         &rdquo;
       </span>
 
-      <div className="relative z-10">
+      <div className={`relative z-10 ${compact ? "h-full flex flex-col" : ""}`}>
         <div className="flex gap-0.5 mb-5">
           {Array.from({ length: 5 }).map((_, si) => (
             <Star key={si} className="w-3.5 h-3.5 text-[#fccc30] fill-[#fccc30]" strokeWidth={0} />
           ))}
         </div>
 
-        <p className="text-[15px] leading-relaxed text-slate-700">
-          {dep.texto}
-        </p>
+        <div className={compact ? "relative flex-1 min-h-0" : undefined}>
+          <p
+            ref={quoteRef}
+            className={`leading-relaxed text-slate-700 ${compact ? "text-[13px] line-clamp-[9] h-full" : "text-[15px]"}`}
+          >
+            {dep.texto}
+          </p>
+          {compact && isTruncated && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-white via-white/80 to-transparent"
+            />
+          )}
+        </div>
 
         <div className="h-px bg-gradient-to-r from-[#285992]/10 via-[#285992]/5 to-transparent my-6" />
 
@@ -209,10 +246,16 @@ function VideoCard({
   item,
   onHover,
   onOpen,
+  fixedHeight,
 }: {
   item: VideoDepoimento;
   onHover: (h: boolean) => void;
   onOpen: () => void;
+  /** Substitui o `aspect-[4/5]` por uma altura fixa em px — usado só pelo
+      TestimonialCarousel, onde o card de vídeo precisa bater com a mesma
+      altura do card de texto ao lado (o "ver mais" mantém o aspect-ratio
+      original). */
+  fixedHeight?: number;
 }) {
   return (
     <button
@@ -223,7 +266,7 @@ function VideoCard({
       className="group relative w-full text-left rounded-3xl overflow-hidden bg-black"
       style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 12px 28px rgba(15,23,42,0.14)" }}
     >
-      <div className="relative aspect-[4/5]">
+      <div className={`relative ${fixedHeight ? "" : "aspect-[4/5]"}`} style={fixedHeight ? { height: fixedHeight } : undefined}>
         <img
           src={`https://img.youtube.com/vi/${item.youtubeId}/hqdefault.jpg`}
           alt={item.title}
@@ -355,12 +398,254 @@ function MasonryWall({
   );
 }
 
+// ── TestimonialCarousel — roda giratória, sempre em movimento visível ───────
+// Todos os cards ficam SEMPRE montados (nunca entram/saem do DOM — evita
+// qualquer travamento de entrada/saída) e só a posição (`x`), escala e
+// opacidade de CADA UM mudam a cada passo, animadas por `transform`
+// (translateX + scale), não por `width`/layout — largura via CSS força
+// reflow a cada frame, é isso que fazia o passo anterior parecer brusco.
+// Central fica maior — mais largo E mais alto, via `scale` — e os vizinhos
+// ficam visivelmente menores/mais transparentes conforme a distância do
+// centro, com uma pista bem tênue dos que estão duas posições longe (mesma
+// sensação de "roda" contínua da referência). `spring` (não tween linear)
+// dá o assentamento com uma pontinha de inércia real — movimento discreto
+// (troca de `activeIndex`), mas com peso físico. Autoplay (pausa no hover)
+// + navegação manual (setas e pontos) sempre disponível.
+interface CarouselMetrics {
+  cardWidth:     number;
+  cardHeight:    number;
+  /** Espaço fixo entre a BORDA de um card e a borda do vizinho — não entre
+      centros. Como cada papel (central/lateral/pista) tem uma largura
+      diferente, um espaçamento de centro-a-centro fixo (o `step` antigo)
+      deixa o vão maior conforme os cards encolhem; este é o que garante
+      vão igual em toda a fileira, do centro até a pista mais distante. */
+  gap:           number;
+  centerScale:   number;
+  /** Escala vertical do central, separada da horizontal — pedido explícito
+      pra abaixar só a altura sem mexer na largura já calibrada. */
+  centerScaleY:  number;
+  sideScale:     number;
+  stageHeight:   number;
+  showSides:     boolean;
+}
+
+// Altura dos cards aumentada (360→420 no lg, e proporcional nos outros
+// breakpoints) — dá mais linhas de respiro pro depoimento antes do
+// `line-clamp` entrar, junto com o corte em 9 linhas (era 5) no TextCard.
+const METRICS_LG   = { cardWidth: 280, cardHeight: 420, gap: 24, centerScale: 1.15, centerScaleY: 1.07, sideScale: 0.8, stageHeight: 490, showSides: true };
+const METRICS_SM   = { cardWidth: 380, cardHeight: 390, gap: 24, centerScale: 1,    centerScaleY: 1,    sideScale: 1,   stageHeight: 410, showSides: false };
+const METRICS_BASE = { cardWidth: 270, cardHeight: 390, gap: 24, centerScale: 1,    centerScaleY: 1,    sideScale: 1,   stageHeight: 410, showSides: false };
+
+function metricsForViewport(): CarouselMetrics {
+  if (typeof window === "undefined") return METRICS_LG;
+  if (window.matchMedia("(min-width: 1024px)").matches) return METRICS_LG;
+  if (window.matchMedia("(min-width: 640px)").matches) return METRICS_SM;
+  return METRICS_BASE;
+}
+
+function useCarouselMetrics(): CarouselMetrics {
+  // Inicializa o `useState` já lendo o breakpoint real (função lazy, roda só
+  // na primeira renderização) em vez de assumir desktop e corrigir depois —
+  // essa correção tardia mexeria na prop `animate` dos cards (largura/escala
+  // são valores animados, não CSS estático), disparando uma transição
+  // inteira só pra chegar no tamanho que já devia estar certo de cara.
+  const [metrics, setMetrics] = useState<CarouselMetrics>(metricsForViewport);
+  useEffect(() => {
+    const mqLg = window.matchMedia("(min-width: 1024px)");
+    const mqSm = window.matchMedia("(min-width: 640px)");
+    const update = () => setMetrics(metricsForViewport());
+    mqLg.addEventListener("change", update);
+    mqSm.addEventListener("change", update);
+    return () => {
+      mqLg.removeEventListener("change", update);
+      mqSm.removeEventListener("change", update);
+    };
+  }, []);
+  return metrics;
+}
+
+function mod(n: number, m: number): number {
+  return ((n % m) + m) % m;
+}
+
+// Distância assinada mais curta de `index` até `active`, considerando o
+// array circular — garante que cada card sempre pega o caminho mais curto
+// pra virar central, nunca dá a volta inteira por engano.
+function wrapDistance(index: number, active: number, total: number): number {
+  const half = total / 2;
+  let d = (index - active) % total;
+  if (d > half) d -= total;
+  if (d < -half) d += total;
+  return d;
+}
+
+const CARD_SPRING = { type: "spring" as const, stiffness: 260, damping: 26, mass: 0.9 };
+
+// Largura (em px) do card num papel — mesma fórmula de escala usada pro
+// `scale` visual, só que aplicada à largura real, pra poder somar bordas.
+function widthForAbsOffset(absOffset: number, metrics: CarouselMetrics): number {
+  if (!metrics.showSides) return metrics.cardWidth;
+  if (absOffset === 0) return metrics.cardWidth * metrics.centerScale;
+  const scale = Math.max(0.5, metrics.sideScale - (absOffset - 1) * 0.18);
+  return metrics.cardWidth * scale;
+}
+
+// Posição X somando borda-a-borda (metade da largura de cada vizinho + o
+// `gap` fixo) em vez de `offset * step` — é isso que mantém o mesmo vão
+// visual do centro até a pista mais distante, independente de quanto cada
+// papel encolhe.
+function xForOffset(offset: number, metrics: CarouselMetrics): number {
+  const absOffset = Math.abs(offset);
+  if (absOffset === 0) return 0;
+  let x = 0;
+  for (let i = 1; i <= absOffset; i++) {
+    x += widthForAbsOffset(i - 1, metrics) / 2 + metrics.gap + widthForAbsOffset(i, metrics) / 2;
+  }
+  return offset < 0 ? -x : x;
+}
+
+function CarouselCard({
+  card,
+  offset,
+  metrics,
+  onOpenVideo,
+}: {
+  card:         Card;
+  offset:       number;
+  metrics:      CarouselMetrics;
+  onOpenVideo:  (v: VideoDepoimento) => void;
+}) {
+  const abs = Math.abs(offset);
+  const isCenter = offset === 0;
+  const scaleX = !metrics.showSides
+    ? (isCenter ? 1 : 0.92)
+    : isCenter
+    ? metrics.centerScale
+    : Math.max(0.5, metrics.sideScale - (abs - 1) * 0.18);
+  // Só o central desacopla scaleY de scaleX (altura menor que a largura
+  // sugeriria); os demais papéis continuam com escala uniforme.
+  const scaleY = isCenter && metrics.showSides ? metrics.centerScaleY : scaleX;
+  const opacity = !metrics.showSides
+    ? (isCenter ? 1 : 0)
+    : abs === 0 || abs === 1
+    ? 1
+    : abs === 2
+    ? 0.3
+    : 0;
+  const noop = () => {};
+  const target = { x: xForOffset(offset, metrics), scaleX, scaleY, opacity, zIndex: 100 - abs * 10 };
+
+  return (
+    <motion.div
+      className="absolute top-1/2 left-1/2"
+      style={{
+        width: metrics.cardWidth,
+        height: metrics.cardHeight,
+        marginLeft: -metrics.cardWidth / 2,
+        marginTop: -metrics.cardHeight / 2,
+        willChange: "transform, opacity",
+      }}
+      initial={target}
+      animate={target}
+      transition={{ x: CARD_SPRING, scaleX: CARD_SPRING, scaleY: CARD_SPRING, opacity: { duration: 0.35, ease: "easeOut" }, zIndex: { duration: 0 } }}
+    >
+      {card.kind === "text" ? (
+        <TextCard dep={card.data} compact onHover={noop} />
+      ) : (
+        <VideoCard item={card.data} onHover={noop} onOpen={() => onOpenVideo(card.data)} fixedHeight={metrics.cardHeight} />
+      )}
+    </motion.div>
+  );
+}
+
+// Card vira central a cada ~4s — devagar o bastante pra dar tempo de ler,
+// rápido o bastante pra nunca parecer parado.
+const AUTOPLAY_DELAY = 4000;
+
+function TestimonialCarousel({
+  cards,
+  onOpenVideo,
+}: {
+  cards:        Card[];
+  onOpenVideo:  (v: VideoDepoimento) => void;
+}) {
+  const metrics = useCarouselMetrics();
+  const reduceMotion = useReducedMotion();
+  const total = cards.length;
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goTo = (next: number) => setActiveIndex(mod(next, total));
+
+  // Autoplay em loop infinito — nunca pausa (nem no hover: "os depoimentos
+  // devem sempre ficar passando", pedido explícito), só o `mod` faz o
+  // índice dar a volta sem fim. Índice puro, não usa o Carousel/Embla do
+  // resto do site porque o card central precisa ficar maior que os das
+  // pontas em largura E altura, um layout que o `basis-*` do Embla não
+  // expressa.
+  useEffect(() => {
+    if (reduceMotion || total <= 1) return;
+    const id = setInterval(() => {
+      setActiveIndex((i) => mod(i + 1, total));
+    }, AUTOPLAY_DELAY);
+    return () => clearInterval(id);
+  }, [reduceMotion, total]);
+
+  if (total === 0) return null;
+
+  return (
+    <div>
+      {/* `isolate` — cria um contexto de empilhamento próprio pro palco. Sem
+          isso, o z-index alto dos cards (até 100, pra dar profundidade entre
+          eles) "vazava" pra fora e competia com elementos fixos da página
+          (o header usa z-50) — ao rolar a seção pra perto do topo, o card
+          central ficava por cima do menu. Isolado, esses z-index só valem
+          ENTRE os cards; o palco em si empilha normal (z automático) com o
+          resto da página. */}
+      <div
+        className="relative isolate w-full overflow-hidden"
+        style={{
+          height: metrics.stageHeight,
+          ...(metrics.showSides
+            ? {
+                WebkitMaskImage: "linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%)",
+                maskImage: "linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%)",
+              }
+            : {}),
+        }}
+      >
+        {cards.map((card, i) => (
+          <CarouselCard
+            key={cardKey(card)}
+            card={card}
+            offset={reduceMotion ? (i === activeIndex ? 0 : 1) : wrapDistance(i, activeIndex, total)}
+            metrics={metrics}
+            onOpenVideo={onOpenVideo}
+          />
+        ))}
+      </div>
+
+      <div className="flex justify-center mt-9">
+        <CarouselControls
+          count={total}
+          current={activeIndex}
+          onPrev={() => goTo(activeIndex - 1)}
+          onNext={() => goTo(activeIndex + 1)}
+          onSelect={goTo}
+          labelPrev="Depoimento anterior"
+          labelNext="Próximo depoimento"
+          labelItem={(i) => `Ir para depoimento ${i + 1}`}
+        />
+      </div>
+    </div>
+  );
+}
+
 // ── Section ───────────────────────────────────────────────────────────────────
 function WallOfLoveSection({
   depoimentos,
   videos,
   title = "Um mural de resultados reais",
-  subtitle = "Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco mudou a forma de vender e gerir sua propriedade.",
+  subtitle = "Cada card aqui é um hoteleiro de verdade, contando como a Foco mudou a forma de vender e gerir sua propriedade.",
   badge = "Depoimentos",
   maxCards = 9,
 }: WallOfLoveSectionProps) {
@@ -415,8 +700,9 @@ function WallOfLoveSection({
             <p className="text-slate-500 text-lg leading-relaxed">{subtitle}</p>
           </motion.div>
 
-          {/* Mural compacto — colunas estáveis (nunca reflui quando a galeria abre/fecha) */}
-          <MasonryWall cards={compactCards} columnCount={columnCount} onOpenVideo={setSelectedVideo} />
+          {/* Mural compacto — coverflow contínuo (o card em evidência no centro,
+              os vizinhos espiando pelas pontas), sempre em movimento. */}
+          <TestimonialCarousel cards={compactCards} onOpenVideo={setSelectedVideo} />
 
           {/* Este botão É a galeria — mesmo layoutId nos dois, o Framer Motion
               "morfa" o pequeno pill até virar o painel de tela cheia, em vez de
@@ -538,7 +824,7 @@ function WallOfLoveSection({
               <div className="mt-4 text-center">
                 <p className="text-white font-medium text-sm">{selectedVideo.title}</p>
                 <p className="text-white/50 text-xs mt-0.5">
-                  {selectedVideo.author} — {selectedVideo.hotel}
+                  {selectedVideo.author}, {selectedVideo.hotel}
                 </p>
               </div>
             </motion.div>

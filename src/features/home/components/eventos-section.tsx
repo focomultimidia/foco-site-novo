@@ -327,7 +327,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
               </span>
             </h2>
             <p className="text-slate-600 text-base leading-relaxed max-w-md">
-              Grandes redes e pousadas independentes confiam na Foco — acompanhe
+              Grandes redes e pousadas independentes confiam na Foco: acompanhe
               onde estivemos e onde vamos estar em seguida.
             </p>
           </div>

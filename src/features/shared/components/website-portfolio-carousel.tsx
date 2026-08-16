@@ -1,8 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { ExternalLink } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -10,6 +9,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { CarouselControls } from "@/features/shared/components/carousel-controls";
 
 interface WebsiteTemplate {
   id: string;
@@ -56,77 +56,6 @@ const TEMPLATES: WebsiteTemplate[] = [
     previewUrl: "#",
   },
 ];
-
-// Variants defined outside the component to prevent recreation on each render
-const btnVariants = {
-  idle: {
-    scale: 1,
-    background: "#ffffff",
-    boxShadow: "0 1px 2px rgba(19,40,64,0.05), 0 12px 28px -16px rgba(19,40,64,0.28)",
-  },
-  hover: {
-    scale: 1.12,
-    background: "#f4f7fb",
-    boxShadow: "0 4px 10px rgba(19,40,64,0.08), 0 16px 36px -16px rgba(19,40,64,0.34)",
-  },
-  tap: {
-    scale: 0.90,
-    background: "#eef2f7",
-    boxShadow: "0 2px 8px rgba(19,40,64,0.12)",
-  },
-};
-
-const glowVariants = {
-  idle: { opacity: 0, scale: 0.6 },
-  hover: { opacity: 1, scale: 1 },
-  tap: { opacity: 0.4, scale: 0.9 },
-};
-
-function NavButton({
-  direction,
-  onClick,
-}: {
-  direction: "prev" | "next";
-  onClick: () => void;
-}) {
-  const Icon = direction === "prev" ? ChevronLeft : ChevronRight;
-  const side = direction === "prev" ? "-left-6" : "-right-6";
-
-  return (
-    <motion.button
-      onClick={onClick}
-      aria-label={direction === "prev" ? "Slide anterior" : "Próximo slide"}
-      // top-[38%] em vez de top-1/2: centraliza o botão na imagem do card, não
-      // na altura total do item (que inclui a legenda abaixo da imagem).
-      // O -50% de recentragem vai no `style.y`, não numa classe -translate-y:
-      // o Framer Motion já controla `transform` por causa do `scale` do
-      // btnVariants, e uma classe Tailwind de transform seria descartada.
-      className={`absolute top-[38%] ${side} hidden lg:flex items-center justify-center w-12 h-12 rounded-full z-20 overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#285992]/40`}
-      style={{ y: "-50%", border: "1px solid rgba(19,40,64,0.09)" }}
-      variants={btnVariants}
-      initial="idle"
-      whileHover="hover"
-      whileTap="tap"
-      transition={{ type: "spring", stiffness: 380, damping: 22 }}
-    >
-      {/* Radial glow that sweeps in on hover */}
-      <motion.span
-        aria-hidden="true"
-        className="absolute inset-0 rounded-full"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(40,89,146,0.14), transparent 68%)",
-        }}
-        variants={glowVariants}
-        transition={{ duration: 0.28, ease: "easeOut" }}
-      />
-      <Icon
-        className="w-5 h-5 text-[#285992] relative z-10"
-        strokeWidth={1.5}
-      />
-    </motion.button>
-  );
-}
 
 function WebsitePortfolioCarousel() {
   const [api, setApi] = useState<CarouselApi>();
@@ -232,26 +161,18 @@ function WebsitePortfolioCarousel() {
               </CarouselItem>
             ))}
           </CarouselContent>
-
-          {/* Custom glassmorphic nav buttons — desktop only */}
-          <NavButton direction="prev" onClick={() => api?.scrollPrev()} />
-          <NavButton direction="next" onClick={() => api?.scrollNext()} />
         </Carousel>
 
-        {/* Dots indicator */}
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: count }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => scrollTo(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                current === index
-                  ? "bg-[#285992] w-8"
-                  : "w-2.5 bg-[#285992]/25 hover:bg-[#285992]/50"
-              }`}
-              aria-label={`Ir para slide ${index + 1}`}
-            />
-          ))}
+        <div className="flex justify-center mt-8">
+          <CarouselControls
+            count={count}
+            current={current}
+            onPrev={() => api?.scrollPrev()}
+            onNext={() => api?.scrollNext()}
+            onSelect={scrollTo}
+            labelPrev="Slide anterior"
+            labelNext="Próximo slide"
+          />
         </div>
 
       </div>

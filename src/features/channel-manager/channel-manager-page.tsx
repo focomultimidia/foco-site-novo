@@ -94,7 +94,7 @@ function ChannelManagerPage() {
         videos={videosData}
         badge="Depoimentos"
         title="Um mural de resultados reais"
-        subtitle="Cada card aqui é um hoteleiro de verdade — em texto ou em vídeo — contando como a Foco eliminou o overbooking e aumentou a ocupação."
+        subtitle="Cada card aqui é um hoteleiro de verdade, contando como a Foco eliminou o overbooking e aumentou a ocupação."
       />
 
       {/* Prova Social: Na Mídia */}

@@ -160,7 +160,7 @@ export function BentoNetworkSection() {
           badge="A Rede Foco"
           title="Os números que definem"
           titleHighlight="nossa autoridade."
-          subtitle="16 anos de mercado, +1.300 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos — são compromissos."
+          subtitle="16 anos de mercado, +1.300 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos, são compromissos."
         />
 
         <motion.div
