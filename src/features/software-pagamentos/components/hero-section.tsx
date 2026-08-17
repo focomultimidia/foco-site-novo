@@ -9,8 +9,8 @@ interface HeroSectionProps {
   onCtaClick?: () => void;
 }
 
-const DESKTOP_IMAGE = { src: "/assets/imgs/shared/1.webp", alt: "Busca de disponibilidade" };
-const MOBILE_IMAGE = { src: "/assets/imgs/shared/site1.webp", alt: "Busca de disponibilidade" };
+const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/focopay.png", alt: "Software de Pagamentos" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-focopay.png", alt: "Software de Pagamentos no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },
@@ -28,6 +28,7 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
       onCtaClick={onCtaClick}
       desktopImage={DESKTOP_IMAGE}
       mobileImage={MOBILE_IMAGE}
+      desktopAspectRatio="815 / 584"
       badges={TRUST_BADGES}
     />
   );

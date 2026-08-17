@@ -39,7 +39,7 @@ function ImportanciaSection() {
         >
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-2">
             A importância estratégica da{" "}
-            <span className="text-[#455A64]">integração de sistemas</span> para o
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">integração de sistemas</span> para o
             hoteleiro
           </h2>
           <p className="text-gray-500 text-lg max-w-3xl mx-auto">

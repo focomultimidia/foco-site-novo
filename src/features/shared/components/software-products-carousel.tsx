@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { CarouselControls } from "@/features/shared/components/carousel-controls";
+import { BetaBadge } from "@/features/shared/components/beta-badge";
 import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 import type { ProdutoItem } from "@/features/shared/data/produtos-data";
 
@@ -35,14 +36,109 @@ const TINT_TO = "#F9FBFE";
 const ACCENT = "#285992";
 const ACCENT_SOFT = "#427AB9";
 
+// ── StackedMockupsPreview ────────────────────────────────────────────────────
+// Versão compacta do TriplePhoneStage/DuoPhoneStage de product-showcase.tsx —
+// mesmas imagens de `produto.mockups`, mesma moldura de vidro branca e
+// sobreposição por escala/z-index (celular central maior e na frente,
+// laterais um pouco menores e atrás). Em porcentagem do card em vez de px
+// fixo, porque este carrossel usa cards de largura bem variável (full no
+// mobile, 1/4 no desktop) — px fixo do componente original ficaria minúsculo
+// num card mobile full-bleed. Ancorado no topo do palco, como o screenshot
+// único dos outros produtos, pro corte do overflow-hidden ficar consistente
+// entre os cards.
+function StackedMockupsPreview({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+  const roles = mockups.length === 2
+    ? ([
+        { leftPct: 34, scale: 0.86, opacity: 0.88, z: 10 },
+        { leftPct: 66, scale: 1,    opacity: 1,    z: 30 },
+      ] as const)
+    : ([
+        { leftPct: 24, scale: 0.84, opacity: 0.86, z: 10 },
+        { leftPct: 50, scale: 1,    opacity: 1,    z: 30 },
+        { leftPct: 76, scale: 0.84, opacity: 0.86, z: 10 },
+      ] as const);
+
+  return (
+    <div className="absolute inset-x-0 top-3 bottom-0 transition-transform duration-500 ease-out group-hover:-translate-y-1">
+      {roles.map((role, i) => {
+        const mock = mockups[i];
+        if (!mock) return null;
+        return (
+          <div
+            key={i}
+            className="absolute top-0 w-[32%] max-w-[92px]"
+            style={{
+              left: `${role.leftPct}%`,
+              transform: `translateX(-50%) scale(${role.scale})`,
+              transformOrigin: "top center",
+              opacity: role.opacity,
+              zIndex: role.z,
+            }}
+          >
+            <div
+              className="bg-white rounded-[12px] p-[2.5px]"
+              style={{
+                boxShadow: role.z === 30
+                  ? "0 12px 26px -10px rgba(15,40,80,0.42)"
+                  : "0 8px 18px -8px rgba(15,40,80,0.24)",
+              }}
+            >
+              <div
+                className="relative bg-white rounded-[9px] overflow-hidden ring-1 ring-slate-900/10"
+                style={{ aspectRatio: "9 / 19.5" }}
+              >
+                <div className="absolute top-1 left-1/2 -translate-x-1/2 z-20 w-4 h-[4px] bg-[#1c1c1e] rounded-full" />
+                <img
+                  src={mock.src}
+                  alt={mock.alt}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 // ── Scene ─────────────────────────────────────────────────────────────────────
 
 function ProductScene({ produto }: { produto: ProdutoItem }) {
+  const hasMockups = !!produto.mockups && produto.mockups.length > 0;
+
+  // Experiência do Hóspede e Otheo AI: mesmos celulares empilhados do
+  // showcase da home (StackedMockupsPreview), soltos sobre um fundo liso —
+  // igual à apresentação de produtos-section.tsx, sem o tint/halo/anéis
+  // abaixo (pensados pra dar profundidade a UMA captura de tela única, não
+  // a um trio/dupla de celulares que já tem sua própria moldura de vidro).
+  if (hasMockups) {
+    return (
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[20px] bg-[#f4f7fb]">
+        {produto.beta && (
+          <div className="absolute top-2.5 right-2.5 z-20">
+            <BetaBadge />
+          </div>
+        )}
+        <StackedMockupsPreview mockups={produto.mockups!} />
+      </div>
+    );
+  }
+
   return (
     <div
       className="relative aspect-[16/10] overflow-hidden rounded-[20px]"
       style={{ background: `linear-gradient(to bottom, ${TINT_FROM}, ${TINT_VIA} 55%, ${TINT_TO})` }}
     >
+      {/* Selo Beta — canto do palco, não disputa espaço com o título (que já
+          é uma frase longa nesses cards estreitos). */}
+      {produto.beta && (
+        <div className="absolute top-2.5 right-2.5 z-20">
+          <BetaBadge />
+        </div>
+      )}
+
       {/* Halo — light pooling behind the screen */}
       <div
         aria-hidden="true"
@@ -62,10 +158,10 @@ function ProductScene({ produto }: { produto: ProdutoItem }) {
         ))}
       </div>
 
-      {/* The same product mockup used on the home cards, anchored to the bottom
-          so it rises into frame and crops — the panel shows the top of the
-          screen rather than a shrunken whole. Nothing here animates its own
-          entrance; the card's reveal covers it. */}
+      {/* Captura de tela desktop única, anchorada no topo pra rise into
+          frame; o overflow-hidden do palco corta o resto, então o painel
+          mostra o topo da tela, não uma miniatura inteira encolhida. Nada
+          aqui anima a própria entrada; o reveal do card cobre isso. */}
       <div
         className="absolute inset-x-3.5 top-4 overflow-hidden rounded-t-[9px]
                    ring-1 ring-slate-900/10

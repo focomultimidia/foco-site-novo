@@ -1,10 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mic } from "lucide-react";
+import { Mic, Send } from "lucide-react";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-const BARRAS = [0, 1, 2, 3, 4, 5, 6];
 const MIC_BARRAS = [0, 1, 2, 3, 4];
 
 /**
@@ -73,7 +72,7 @@ function MobileVozSection() {
             boxShadow: "0 40px 100px -24px rgba(15,40,80,0.45), 0 0 0 1px rgba(252,204,48,0.14)",
           }}
         >
-          <div className="grid md:grid-cols-2 gap-2 sm:gap-2.5">
+          <div className="grid md:grid-cols-2 gap-2 sm:gap-2.5 md:h-[560px]">
             {/* ── Painel esquerdo — a pergunta, feita de verdade, no trânsito ── */}
             <div className="relative overflow-hidden rounded-[26px] sm:rounded-[32px] min-h-[340px] sm:min-h-[400px] md:min-h-0 md:h-full">
               {/* Sem reveal via `clip-path`/`whileInView` de propósito — a
@@ -136,7 +135,7 @@ function MobileVozSection() {
             {/* ── Painel direito — o mockup de sempre, agora com um palco:
                 halo dourado atrás + textura de ruído. ─────────────────── */}
             <div
-              className="relative flex items-center justify-center overflow-hidden rounded-[26px] sm:rounded-[32px] py-10 px-6 sm:py-12"
+              className="relative flex items-center justify-center overflow-hidden rounded-[26px] sm:rounded-[32px]"
               style={{ background: "linear-gradient(155deg, #14263f 0%, #0a1626 100%)" }}
             >
               <div
@@ -158,34 +157,107 @@ function MobileVozSection() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-                className="relative z-10 mx-auto w-[210px] sm:w-[230px] rounded-[36px] p-2.5"
+                className="relative z-10 w-full h-full rounded-[36px] p-2.5"
                 style={{
                   background: "rgba(16,35,61,0.9)",
                   boxShadow: "0 30px 80px -20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)",
                   border: "2px solid rgba(255,255,255,0.14)",
                 }}
               >
-                <div className="rounded-[26px] px-5 py-8" style={{ background: "linear-gradient(155deg, #1c3c5e 0%, #0d1d33 100%)" }}>
-                  <div className="flex items-end justify-center gap-1.5 h-10 mb-7">
-                    {BARRAS.map((i) => (
-                      <span
-                        key={i}
-                        style={{ animationDelay: `${i * 0.12}s` }}
-                        className="w-1.5 h-full rounded-full bg-[#fccc30] origin-bottom motion-safe:animate-[otheo-wave_1.2s_ease-in-out_infinite]"
-                      />
-                    ))}
+                <div className="h-full flex flex-col rounded-[26px] overflow-hidden" style={{ background: "linear-gradient(155deg, #1c3c5e 0%, #0d1d33 100%)" }}>
+                  {/* Cabeçalho — a mesma logo (svg) usada na home, no
+                      OtheoAiTeaserSection, em vez do ícone genérico + nome
+                      digitado. Mesma técnica de tingimento branco (a arte
+                      original é escura, pensada pra fundo claro). */}
+                  <div className="flex-shrink-0 flex items-center px-4 pt-4 pb-3 border-b border-white/10">
+                    <img
+                      src="/assets/imgs/home/logotheoai.svg"
+                      alt="Otheo AI"
+                      className="h-4 w-auto"
+                      style={{ filter: "brightness(0) invert(1)" }}
+                    />
                   </div>
 
-                  <div className="space-y-2.5">
-                    <div className="rounded-2xl bg-white/10 border border-white/10 px-4 py-3 ml-6">
-                      <p className="text-white/80 text-xs leading-relaxed">
-                        "tá vendo quantas reservas eu tenho pra sexta?"
-                      </p>
+                  {/* Mensagens — uma pequena conversa de verdade sobre o
+                      dia a dia do hotel (reservas, check-in, manutenção),
+                      não uma pergunta isolada — mesmo alinhamento real de
+                      chat (pergunta à direita, resposta à esquerda),
+                      ocupando o espaço vazio da tela como no app de verdade
+                      em vez de um bloco compacto. Temas diferentes dos já
+                      cobertos em OcupacaoSection/TarifasSection/
+                      DisponibilidadeVendasSection, pra não repetir o mesmo
+                      exemplo em duas seções da página. */}
+                  <div className="flex-1 min-h-0 overflow-y-auto px-4 py-4 space-y-2.5">
+                    <div className="flex justify-end">
+                      <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-white/10 border border-white/10 px-4 py-3">
+                        <p className="text-white/80 text-xs leading-relaxed">
+                          "tá vendo quantas reservas eu tenho pra sexta?"
+                        </p>
+                      </div>
                     </div>
-                    <div className="rounded-2xl bg-[#fccc30]/10 border border-[#fccc30]/25 px-4 py-3 mr-6">
-                      <p className="text-[#fccc30] text-xs leading-relaxed font-medium">
-                        8 reservas confirmadas pra sexta.
-                      </p>
+                    <div className="flex justify-start">
+                      <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#fccc30]/10 border border-[#fccc30]/25 px-4 py-3">
+                        <p className="text-[#fccc30] text-xs leading-relaxed font-medium">
+                          8 reservas confirmadas pra sexta.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-white/10 border border-white/10 px-4 py-3">
+                        <p className="text-white/80 text-xs leading-relaxed">
+                          "e quantos já fizeram check-in hoje?"
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#fccc30]/10 border border-[#fccc30]/25 px-4 py-3">
+                        <p className="text-[#fccc30] text-xs leading-relaxed font-medium">
+                          9 já chegaram, faltam 3 com chegada prevista até as 18h.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="max-w-[85%] rounded-2xl rounded-tr-sm bg-white/10 border border-white/10 px-4 py-3">
+                        <p className="text-white/80 text-xs leading-relaxed">
+                          "algum quarto com manutenção pendente?"
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-start">
+                      <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-[#fccc30]/10 border border-[#fccc30]/25 px-4 py-3">
+                        <p className="text-[#fccc30] text-xs leading-relaxed font-medium">
+                          Só o 204, chuveiro com vazamento. Já acionei a manutenção.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Campo de digitar — espaço pra digitar, mic pra falar
+                      (com o mesmo pulso sutil do selo "Ouvindo" à esquerda,
+                      em vez do equalizador grande de antes) e botão de
+                      enviar, igual ao app de verdade. */}
+                  <div className="flex-shrink-0 px-3 pb-4 pt-1">
+                    <div
+                      className="flex items-center gap-2 rounded-full pl-4 pr-1.5 py-1.5"
+                      style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.14)" }}
+                    >
+                      <span className="flex-1 text-white/35 text-[11px] truncate">Digite sua mensagem...</span>
+                      <span
+                        className="relative flex items-center justify-center w-6 h-6 rounded-full flex-shrink-0"
+                        style={{ background: "rgba(255,255,255,0.08)" }}
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="absolute -inset-1 rounded-full border border-[#fccc30]/40 motion-safe:animate-[mobile-voz-mic-pulse_2s_ease-out_infinite]"
+                        />
+                        <Mic className="w-3 h-3 text-white/70 relative" strokeWidth={2} />
+                      </span>
+                      <span
+                        className="flex items-center justify-center w-7 h-7 rounded-full flex-shrink-0"
+                        style={{ background: "linear-gradient(135deg,#285992,#427ab9)" }}
+                      >
+                        <Send className="w-3 h-3 text-white" strokeWidth={2} />
+                      </span>
                     </div>
                   </div>
                 </div>

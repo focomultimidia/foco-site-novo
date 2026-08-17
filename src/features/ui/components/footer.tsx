@@ -25,7 +25,7 @@ const footerSections: FooterSection[] = [
       { label: "Experiência do Hóspede", href: "/experiencia-do-hospede" },
       { label: "Software de Pagamentos", href: "/software-de-pagamentos" },
       { label: "Integrações Hoteleiras", href: "/integracoes-hoteleiras" },
-      { label: "Otheo IA", href: "/otheo-ai" },
+      { label: "Otheo AI", href: "/otheo-ai" },
       //{ label: "CRM Hoteleiro", href: "/crm-hoteleiro" },
     ],
   },

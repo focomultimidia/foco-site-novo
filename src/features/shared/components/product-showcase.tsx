@@ -20,6 +20,7 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { CarouselControls } from "@/features/shared/components/carousel-controls";
+import { BetaBadge } from "@/features/shared/components/beta-badge";
 import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 import type { ProdutoItem } from "@/features/shared/data/produtos-data";
 
@@ -655,7 +656,7 @@ function ScrollContentBlock({
           <Icon className="h-5 w-5 text-[#285992]" />
         </div>
         <div>
-          <h3 className="font-display text-[22px] font-semibold leading-tight tracking-tight text-[#1e3a5f]">
+          <h3 className="font-display text-[22px] font-semibold leading-tight tracking-tight text-[#1e3a5f] flex items-center gap-2.5">
             <span className="relative inline-block whitespace-nowrap">
               {nome}
               <svg
@@ -682,6 +683,7 @@ function ScrollContentBlock({
                 />
               </svg>
             </span>
+            {produto.beta && <BetaBadge />}
           </h3>
           {subtitulo && (
             <p className="text-[13px] text-slate-600 font-medium leading-snug mt-1">

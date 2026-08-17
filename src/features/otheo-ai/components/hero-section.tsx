@@ -195,6 +195,40 @@ function HeroSection() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
+
+                {/* Selo Beta — mesmo vidro fosco + borda fina + pontinho
+                    pulsante das outras chips premium desta hero (ver o chip
+                    "Pronto para ajudar" logo abaixo, e o LiveDot de
+                    PilaresSection) em vez de um adesivo dourado sólido —
+                    fica no MESMO vocabulário visual do resto do site em vez
+                    de introduzir um material novo. Mesmo tratamento
+                    replicado no OtheoAiTeaserSection (home), de propósito —
+                    quem vê o teaser e chega aqui reconhece o mesmo selo. */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.92 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+                  className="absolute z-20 -top-3 -right-3 sm:-top-4 sm:-right-4 motion-safe:animate-badge-float"
+                >
+                  <div
+                    className="flex items-center gap-2 rounded-full pl-2.5 pr-3.5 py-2 whitespace-nowrap"
+                    style={{
+                      background: "rgba(16,35,61,0.75)",
+                      backdropFilter: "blur(14px)",
+                      WebkitBackdropFilter: "blur(14px)",
+                      border: "1px solid rgba(252,204,48,0.4)",
+                      boxShadow: "0 16px 40px -16px rgba(0,0,0,0.55), 0 0 20px -4px rgba(252,204,48,0.25)",
+                    }}
+                  >
+                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                      <span aria-hidden="true" className="absolute inline-flex h-full w-full rounded-full opacity-75 motion-safe:animate-ping" style={{ background: "#fccc30" }} />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "#fccc30" }} />
+                    </span>
+                    <span className="text-[#fccc30] text-[10px] font-mono font-semibold uppercase tracking-[0.16em]">
+                      Beta
+                    </span>
+                  </div>
+                </motion.div>
               </div>
 
               {/* Chip de estado — semântico (o produto está ativo/pronto),

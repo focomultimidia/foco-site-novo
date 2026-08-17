@@ -283,6 +283,40 @@ function OtheoAiTeaserSection() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                 </div>
+
+                {/* Selo Beta — mesmo vidro fosco + borda fina + pontinho
+                    pulsante das chips CAPACIDADES logo abaixo e do LiveDot
+                    de PilaresSection, em vez de um adesivo dourado sólido —
+                    fica no mesmo vocabulário visual do resto do site.
+                    Tratamento idêntico ao da hero de /otheo-ai, de
+                    propósito: quem vê o teaser aqui e depois abre a página
+                    reconhece o mesmo selo. */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.92 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
+                  className="absolute z-20 -top-2.5 -right-2.5 sm:-top-3 sm:-right-3 motion-safe:animate-badge-float"
+                >
+                  <div
+                    className="flex items-center gap-2 rounded-full pl-2.5 pr-3.5 py-2 whitespace-nowrap"
+                    style={{
+                      background: "rgba(16,35,61,0.75)",
+                      backdropFilter: "blur(14px)",
+                      WebkitBackdropFilter: "blur(14px)",
+                      border: "1px solid rgba(252,204,48,0.4)",
+                      boxShadow: "0 16px 40px -16px rgba(0,0,0,0.55), 0 0 20px -4px rgba(252,204,48,0.25)",
+                    }}
+                  >
+                    <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+                      <span aria-hidden="true" className="absolute inline-flex h-full w-full rounded-full opacity-75 motion-safe:animate-ping" style={{ background: "#fccc30" }} />
+                      <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ background: "#fccc30" }} />
+                    </span>
+                    <span className="text-[#fccc30] text-[10px] font-mono font-semibold uppercase tracking-[0.16em]">
+                      Beta
+                    </span>
+                  </div>
+                </motion.div>
               </div>
 
               {CAPACIDADES.map(({ Icon, label, className, floatDelay }) => (

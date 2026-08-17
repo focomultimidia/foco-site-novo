@@ -17,10 +17,21 @@ import {
   Bot,
 } from "lucide-react";
 import { PremiumCTAButton } from "./premium-cta-button";
+import { BetaBadge } from "@/features/shared/components/beta-badge";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const softwaresSubmenu = [
+interface SoftwareMenuItem {
+  label: string;
+  description: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  iconClass: string;
+  /** Produto em fase Beta — mostra o selo "Beta" ao lado do nome no menu. */
+  beta?: boolean;
+}
+
+const softwaresSubmenu: SoftwareMenuItem[] = [
   {
     label: "Site Hoteleiro",
     description: "Presença digital profissional para o seu hotel",
@@ -64,11 +75,12 @@ const softwaresSubmenu = [
     iconClass: "bg-pink-50 text-pink-600",
   },
   {
-    label: "Otheo IA",
+    label: "Otheo AI",
     description: "Inteligência Artificial no comando da sua operação",
     href: "/otheo-ai",
     icon: Bot,
     iconClass: "bg-amber-50 text-amber-600",
+    beta: true,
   },
   /*{
     label: "CRM Hoteleiro",
@@ -391,8 +403,9 @@ function Header() {
                                   <Icon className="w-[18px] h-[18px]" />
                                 </div>
                                 <div className="min-w-0 pt-0.5">
-                                  <p className="font-display font-medium text-sm tracking-tight text-slate-800 group-hover/card:text-blue-600 transition-colors leading-snug">
+                                  <p className="flex items-center gap-2 font-display font-medium text-sm tracking-tight text-slate-800 group-hover/card:text-blue-600 transition-colors leading-snug">
                                     {item.label}
+                                    {item.beta && <BetaBadge />}
                                   </p>
                                   <p className="text-sm text-slate-500 mt-0.5 leading-snug">
                                     {item.description}
@@ -536,7 +549,10 @@ function Header() {
                               >
                                 <Icon className="w-4 h-4" />
                               </div>
-                              {item.label}
+                              <span className="flex items-center gap-2">
+                                {item.label}
+                                {item.beta && <BetaBadge />}
+                              </span>
                             </Link>
                           );
                         })}

@@ -51,6 +51,10 @@ export interface HomeStyleHeroProps {
   onCtaClick?: () => void;
   desktopImage?: HomeStyleHeroImage;
   mobileImage?: HomeStyleHeroImage;
+  /** Proporção (CSS aspect-ratio) do palco/imagem desktop — default "16 / 10". Ajuste para bater com as dimensões reais de `desktopImage`, evitando corte via object-cover. */
+  desktopAspectRatio?: string;
+  /** Proporção (CSS aspect-ratio) do mockup mobile flutuante — default "9 / 19.5". Ajuste para bater com as dimensões reais de `mobileImage`. */
+  mobileAspectRatio?: string;
   /** Até 3 — mesmo tratamento visual dos stat-badges da Home. */
   badges?: HomeStyleHeroBadge[];
   /**
@@ -151,6 +155,8 @@ function HomeStyleHero({
   onCtaClick,
   desktopImage,
   mobileImage,
+  desktopAspectRatio = "16 / 10",
+  mobileAspectRatio = "9 / 19.5",
   badges = [],
   children,
 }: HomeStyleHeroProps) {
@@ -185,8 +191,8 @@ function HomeStyleHero({
   const handleMouseLeave = () => { px.set(0); py.set(0); };
 
   const mockupStageStyle: React.CSSProperties = isWideLayout
-    ? { position: "relative", width: fluidPx(660), aspectRatio: "16 / 10", height: "auto" }
-    : { position: "relative", width: "min(78vw, 440px)", aspectRatio: "16 / 10", height: "auto" };
+    ? { position: "relative", width: fluidPx(660), aspectRatio: desktopAspectRatio, height: "auto" }
+    : { position: "relative", width: "min(78vw, 440px)", aspectRatio: desktopAspectRatio, height: "auto" };
 
   // CTA renderizado em UM só lugar por vez: dentro da coluna de texto em
   // desktop (ordem original), depois da imagem/mockup em mobile (pedido
@@ -324,7 +330,7 @@ function HomeStyleHero({
                   className="absolute inset-0 z-10 pointer-events-none"
                   style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.22), transparent 40%)" }}
                 />
-                <div className="relative w-full h-full" style={{ aspectRatio: "16 / 10" }}>
+                <div className="relative w-full h-full" style={{ aspectRatio: desktopAspectRatio }}>
                   <SlideVisual
                     src={desktopImage?.src}
                     alt={desktopImage?.alt ?? ""}
@@ -340,7 +346,12 @@ function HomeStyleHero({
                   sobrepunha o CTA logo abaixo (pedido explícito pra
                   remover). */}
               {isWideLayout && (
-                <HeroMobileMockup isWideLayout={isWideLayout} src={mobileImage?.src} alt={mobileImage?.alt ?? desktopImage?.alt ?? ""} />
+                <HeroMobileMockup
+                  isWideLayout={isWideLayout}
+                  src={mobileImage?.src}
+                  alt={mobileImage?.alt ?? desktopImage?.alt ?? ""}
+                  aspectRatio={mobileAspectRatio}
+                />
               )}
 
               {/* Chips flutuantes sobre o mockup — só em desktop, onde há
@@ -436,7 +447,7 @@ function HeroBadgeChip({
 
 // ── HeroMobileMockup — mesma silhueta e vidro fosco da Home. ─────────────────
 
-function HeroMobileMockup({ isWideLayout, src, alt }: { isWideLayout: boolean; src?: string; alt: string }) {
+function HeroMobileMockup({ isWideLayout, src, alt, aspectRatio }: { isWideLayout: boolean; src?: string; alt: string; aspectRatio: string }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 24, scale: 0.85 }}
@@ -461,7 +472,7 @@ function HeroMobileMockup({ isWideLayout, src, alt }: { isWideLayout: boolean; s
       >
         <div
           className="relative overflow-hidden rounded-[22px] bg-[#10233d]/30 ring-1 ring-white/15"
-          style={{ aspectRatio: "9 / 19.5", ...(isWideLayout ? { borderRadius: fluidPx(22) } : {}) }}
+          style={{ aspectRatio, ...(isWideLayout ? { borderRadius: fluidPx(22) } : {}) }}
         >
           <div
             className="absolute top-3 left-1/2 -translate-x-1/2 w-8 h-[7px] rounded-full bg-slate-900/70 z-10"

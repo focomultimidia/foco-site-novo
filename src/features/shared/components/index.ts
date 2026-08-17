@@ -17,3 +17,4 @@ export { CertificacoesSection } from "./certificacoes-section";
 export type { CertificacoesSectionProps } from "./certificacoes-section";
 export { WallOfLoveSection } from "./wall-of-love-section";
 export { DorParallaxSection } from "./dor-parallax-section";
+export { BetaBadge } from "./beta-badge";

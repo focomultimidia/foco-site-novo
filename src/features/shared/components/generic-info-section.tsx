@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Monitor, Smartphone } from "lucide-react";
+import { Monitor } from "lucide-react";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -32,39 +32,31 @@ export interface GenericInfoSectionProps {
    *  /experiencia-do-hospede; default false preserva as outras como estão. */
   imageRounded?: boolean;
   /**
-   * Troca a imagem única por um mockup desktop + mobile sobrepondo o
-   * desktop (mesmo padrão visual do `PhoneMockup` em product-showcase.tsx).
-   * Opt-in porque é um componente compartilhado por várias páginas — pedido
-   * só pra /software-de-pagamentos; default false preserva as outras.
+   * Troca a imagem única por um mockup desktop (mesmo padrão visual do
+   * frame de screenshot em product-showcase.tsx). Opt-in porque é um
+   * componente compartilhado por várias páginas — pedido só pra
+   * /software-de-pagamentos; default false preserva as outras.
    * `imagePath`/`imageAlt` são ignorados nesse modo.
    */
   showMockup?: boolean;
   /** Screenshot do mockup desktop. Se ausente, mostra um placeholder tracejado. */
   desktopMockupSrc?: string;
   desktopMockupAlt?: string;
-  /** Screenshot do mockup mobile. Se ausente, mostra um placeholder tracejado. */
-  mobileMockupSrc?: string;
-  mobileMockupAlt?: string;
 }
 
-// ── Mockup (desktop + mobile sobreposto) ────────────────────────────────────────
-// Mesmo padrão visual do PhoneMockup em product-showcase.tsx: moldura de
-// vidro, ring, sombra, e placeholder tracejado quando não há imagem ainda.
+// ── Mockup (desktop) ─────────────────────────────────────────────────────────
+// Mesmo padrão visual do frame de screenshot em product-showcase.tsx: moldura
+// de vidro, ring, sombra, e placeholder tracejado quando não há imagem ainda.
 
-function DesktopMobileMockup({
+function DesktopMockup({
   desktopSrc,
   desktopAlt,
-  mobileSrc,
-  mobileAlt,
 }: {
   desktopSrc?: string;
   desktopAlt: string;
-  mobileSrc?: string;
-  mobileAlt: string;
 }) {
   return (
     <div className="relative mx-auto w-full max-w-[560px]">
-      {/* Desktop frame */}
       <div
         className="overflow-hidden rounded-xl ring-1 ring-slate-900/10
                    shadow-[0_8px_20px_-14px_rgba(15,40,80,0.20),0_34px_70px_-34px_rgba(15,40,80,0.42)]"
@@ -93,43 +85,6 @@ function DesktopMobileMockup({
             </span>
           </div>
         )}
-      </div>
-
-      {/* Mobile mockup — sobrepõe o canto inferior esquerdo do desktop */}
-      <div
-        className="absolute -bottom-8 -left-8 z-20 w-[38%] max-w-[170px]"
-        style={{ filter: "drop-shadow(0 16px 24px rgba(15,40,80,0.30))" }}
-      >
-        <div
-          className="rounded-[20px] p-[3px]"
-          style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.35))" }}
-        >
-          <div
-            className="relative overflow-hidden rounded-[17px] bg-white ring-1 ring-slate-900/10"
-            style={{ aspectRatio: "9 / 19.5" }}
-          >
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 w-5 h-[5px] rounded-full bg-slate-900/70 z-10" />
-            {mobileSrc ? (
-              <img
-                src={mobileSrc}
-                alt={mobileAlt}
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <div
-                className="absolute inset-0 flex flex-col items-center justify-center gap-1 border-2 border-dashed"
-                style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
-              >
-                <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
-                <span className="text-[7px] font-semibold text-center leading-tight px-1" style={{ color: "#285992" }}>
-                  Print mobile
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -163,8 +118,6 @@ function GenericInfoSection({
   showMockup = false,
   desktopMockupSrc,
   desktopMockupAlt,
-  mobileMockupSrc,
-  mobileMockupAlt,
 }: GenericInfoSectionProps) {
 
   // When the image is on the left, the text column shifts right (and vice-versa).
@@ -219,11 +172,9 @@ function GenericInfoSection({
             className={`flex items-center justify-center ${imageOrder}`}
           >
             {showMockup ? (
-              <DesktopMobileMockup
+              <DesktopMockup
                 desktopSrc={desktopMockupSrc}
                 desktopAlt={desktopMockupAlt ?? imageAlt}
-                mobileSrc={mobileMockupSrc}
-                mobileAlt={mobileMockupAlt ?? imageAlt}
               />
             ) : (
               <img

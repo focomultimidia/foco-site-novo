@@ -152,13 +152,13 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
     ? {
         position: "relative",
         width: fluidPx(660),
-        aspectRatio: "16 / 10",
+        aspectRatio: "815 / 584",
         height: "auto",
       }
     : {
         position: "relative",
         width: "min(78vw, 440px)",
-        aspectRatio: "16 / 10",
+        aspectRatio: "815 / 584",
         height: "auto",
       };
 
@@ -337,7 +337,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.22), transparent 40%)" }}
               />
-              <div className="relative w-full h-full" style={{ aspectRatio: "16 / 10" }}>
+              <div className="relative w-full h-full" style={{ aspectRatio: "815 / 584" }}>
                 <SlideVisual
                   src={DESKTOP_SLIDE.src}
                   alt={DESKTOP_SLIDE.alt}

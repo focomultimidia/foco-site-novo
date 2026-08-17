@@ -67,7 +67,6 @@ function SoftwarePagamentosPage() {
         imageSide="right"
         showMockup
         desktopMockupSrc="/assets/imgs/software-de-pagamento/transacoes.png"
-        mobileMockupSrc="/assets/imgs/software-de-pagamento/mobile-agendamento.png"
       />
 
       {/* Diagnóstico: prejuízos na gestão (mesmo cenário da home) */}

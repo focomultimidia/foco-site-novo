@@ -23,15 +23,14 @@ import { ArrowRight, Image as ImageIcon, Smartphone } from "lucide-react";
 //
 // Only consumer today is /channel-manager — recolored to match Home's exact
 // palette (navy base, blue aurora undertone, gold accent, white text/CTA)
-// instead of the earlier light sky-blue theme. Same 3-layer gradient recipe
-// as before (2 radials + 1 linear base), just Home's color stops.
+// instead of the earlier light sky-blue theme. Background is now the EXACT
+// same treatment as every other hero on the site (bg-[#10233d] + 3 animated
+// aurora blobs + grain), not its own gradient recipe — see the `aria-hidden`
+// blocks rendered at the top of the section below, copied verbatim from
+// home-style-hero.tsx/home's hero-section.tsx so every hero background is
+// pixel-identical.
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
-
-const GRADIENT_BACKGROUND =
-  "radial-gradient(ellipse 55% 45% at 76% 62%, rgba(252,204,48,0.12), transparent 62%)," +
-  "radial-gradient(ellipse 60% 50% at 20% -6%, rgba(66,122,185,0.38), transparent 55%)," +
-  "linear-gradient(165deg, #1e3a5f 0%, #16304f 32%, #132840 66%, #10233d 100%)";
 
 export interface GradientHeroSlide {
   /** Omit to render a dashed "leave space" placeholder instead. */
@@ -119,10 +118,34 @@ function GradientHero({
 
   return (
     <section className="relative bg-[#10233d] pb-10 sm:pb-14 lg:pb-16">
+      {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas de todas as
+          outras heroes do site (Home, HomeStyleHero). */}
+      <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(50px)", opacity: 0.85 }}>
+        <div
+          className="absolute w-[480px] h-[480px] -left-20 -top-16 rounded-full motion-safe:animate-aurora-a"
+          style={{ background: "radial-gradient(circle, rgba(66,122,185,0.65), transparent 70%)" }}
+        />
+        <div
+          className="absolute w-[520px] h-[520px] -right-32 -bottom-36 rounded-full motion-safe:animate-aurora-b"
+          style={{ background: "radial-gradient(circle, rgba(30,58,95,0.55), transparent 70%)" }}
+        />
+        <div
+          className="absolute w-[380px] h-[380px] right-[10%] -top-20 rounded-full motion-safe:animate-aurora-c"
+          style={{ background: "radial-gradient(circle, rgba(40,89,146,0.55), transparent 70%)" }}
+        />
+      </div>
+      {/* Grão sutil — quebra a chapadura do gradiente, mesmo tratamento das
+          outras heroes. */}
       <div
-        className="relative overflow-hidden w-full"
-        style={{ background: GRADIENT_BACKGROUND }}
-      >
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 pointer-events-none opacity-[0.05] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+        }}
+      />
+
+      <div className="relative overflow-hidden w-full">
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-10 sm:pb-12 lg:pb-14">
           <div className="text-center max-w-3xl mx-auto">
             {eyebrow && (

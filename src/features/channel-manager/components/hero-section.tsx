@@ -29,7 +29,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Check, Monitor, RefreshCw, Smartphone } from "lucide-react";
 import { GradientHero } from "@/features/shared/components/gradient-hero";
 import type { HeroData } from "../types";
 
@@ -65,8 +64,14 @@ const CHANNELS: Channel[] = [
   { src: "/assets/imgs/integracoes/canais/decolar.webp",       alt: "Decolar",       x: 150, cy: 235 },
   { src: "/assets/imgs/integracoes/canais/agoda.webp",         alt: "Agoda",         x: 150, cy: 408 },
   { src: "/assets/imgs/integracoes/canais/google-hoteis.webp", alt: "Google Hotéis", x: 300, cy: 168, wired: true },
-  { src: "/assets/imgs/integracoes/canais/cvc.webp",           alt: "CVC",           x: 300, cy: 302, wired: true },
+  { src: "/assets/imgs/integracoes/canais/trivago.svg",        alt: "Trivago",       x: 300, cy: 302, wired: true },
 ];
+
+// Versão mobile — mesmos canais, só 6 (não 7): a grade 2×N do MobileFlow
+// fica com uma linha órfã sobrando com um número ímpar. Cai o Google Hotéis
+// (metabusca, não é bem um "canal de vendas" como os outros 6), mantendo o
+// Trivago recém-adicionado visível também no mobile.
+const MOBILE_CHANNELS: Channel[] = CHANNELS.filter((ch) => ch.alt !== "Google Hotéis");
 
 const LOGOS_RIGHT = 300 + CARD_W; // 428 — borda direita real da coluna wired
 
@@ -334,14 +339,13 @@ function DeviceMockups({ animated }: { animated: boolean }) {
             <span className="w-2 h-2 rounded-full bg-[#28c840]" />
           </div>
 
-          <div
-            className="absolute inset-x-0 bottom-0 top-7 flex flex-col items-center justify-center gap-2 border-2 border-dashed"
-            style={{ borderColor: "rgba(40,89,146,0.2)", background: "rgba(40,89,146,0.04)" }}
-          >
-            <Monitor className="w-6 h-6" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
-            <span className="text-[10.5px] font-medium px-6 text-center leading-snug" style={{ color: "rgba(40,89,146,0.45)" }}>
-              Print do painel aqui
-            </span>
+          <div className="absolute inset-x-0 bottom-0 top-7 overflow-hidden">
+            <img
+              src="/assets/imgs/produtos/channel-manager.png"
+              alt="Captura de tela do Channel Manager"
+              decoding="async"
+              className="w-full h-full object-cover object-top"
+            />
           </div>
 
           {/* Brilho de chegada — acende na borda esquerda no instante exato em
@@ -378,15 +382,12 @@ function DeviceMockups({ animated }: { animated: boolean }) {
         >
           <div className="relative w-full h-full rounded-[21px] overflow-hidden bg-white ring-1 ring-black/5">
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-7 h-[6px] rounded-full bg-black/70 z-10" />
-            <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 border-2 border-dashed"
-              style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
-            >
-              <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
-              <span className="text-[8px] font-medium text-center px-1.5 leading-snug" style={{ color: "rgba(40,89,146,0.45)" }}>
-                Print mobile
-              </span>
-            </div>
+            <img
+              src="/assets/imgs/home/produtos/mobile-channel-manager.png"
+              alt="Tela mobile do Channel Manager"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
           </div>
         </div>
       </motion.div>
@@ -456,7 +457,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
   return (
     <div className="flex flex-col items-center">
       <div className="grid grid-cols-2 gap-2.5 w-full max-w-[300px]">
-        {CHANNELS.map((ch, i) => (
+        {MOBILE_CHANNELS.map((ch, i) => (
           <motion.div
             key={ch.alt}
             className="rounded-xl bg-white flex flex-col items-center justify-center gap-1.5 py-3.5"
@@ -522,66 +523,57 @@ function MobileFlow({ animated }: { animated: boolean }) {
         )}
       </svg>
 
-      <div className="w-full max-w-[300px] flex flex-col gap-3">
+      {/* Mesmos 2 mockups (desktop + mobile flutuando) da versão desktop —
+          antes esse trecho mostrava 2 cards de UI genéricos (reserva +
+          sincronização), sem relação com as imagens reais do produto. */}
+      <div className="relative w-full max-w-[300px] mt-1">
         <motion.div
-          className="rounded-3xl bg-white overflow-hidden"
+          className="relative rounded-[20px] overflow-hidden bg-white"
           style={{
-            boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 24px 50px -22px rgba(19,40,64,0.26)",
-            border: "1px solid rgba(19,40,64,0.05)",
+            boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 30px 60px -24px rgba(19,40,64,0.28)",
+            border: "1px solid rgba(19,40,64,0.06)",
           }}
           initial={animated ? { opacity: 0, y: 12 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <img
-            src="/assets/imgs/home/hotel.webp"
-            alt="Quarto Superior"
-            width={900}
-            height={900}
-            loading="lazy"
-            decoding="async"
-            className="w-full h-[90px] object-cover"
-          />
-          <div className="px-4 pt-2.5 pb-3.5">
-            <div className="flex items-center justify-between">
-              <span className="text-[13px] text-[#244248]/55">Quarto Superior</span>
-              <span className="text-[11px] font-medium text-[#244248]/40">Booking.com</span>
-            </div>
-            <div className="mt-0.5 text-[1.3rem] font-bold text-[#1a3a45] tracking-tight">
-              € 320<span className="text-[#244248]/40 text-base font-medium">,00</span>
-            </div>
-            <div
-              className="mt-2.5 h-8 rounded-full flex items-center justify-center gap-1.5 text-[11px] font-semibold text-white tracking-wide"
-              style={{ background: "linear-gradient(135deg, #1e3a5f 0%, #285992 100%)" }}
-            >
-              SINCRONIZAR AGORA
-            </div>
+          <div className="h-7 flex items-center gap-1.5 px-3.5 bg-[#f5f5f7] border-b border-black/[0.04]">
+            <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+            <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
+            <span className="w-2 h-2 rounded-full bg-[#28c840]" />
           </div>
+          <img
+            src="/assets/imgs/produtos/channel-manager.png"
+            alt="Captura de tela do Channel Manager"
+            decoding="async"
+            className="w-full h-auto object-cover object-top"
+          />
         </motion.div>
 
         <motion.div
-          className="rounded-3xl bg-white flex items-center gap-3 px-4 py-3.5"
-          style={{
-            boxShadow: "0 1px 2px rgba(19,40,64,0.04), 0 20px 44px -16px rgba(19,40,64,0.30)",
-            border: "1px solid rgba(19,40,64,0.05)",
-          }}
-          initial={animated ? { opacity: 0, y: 12 } : false}
-          whileInView={{ opacity: 1, y: 0 }}
+          className="absolute -top-5 -right-4 z-20 w-[96px]"
+          style={{ filter: "drop-shadow(0 16px 28px rgba(19,40,64,0.35))" }}
+          initial={animated ? { opacity: 0, y: -14, scale: 0.92 } : false}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
         >
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-            style={{ background: "rgba(58,123,213,0.10)", boxShadow: "inset 0 0 0 1px rgba(58,123,213,0.18)" }}
+            className="rounded-[20px] p-[3px]"
+            style={{ background: "linear-gradient(160deg, rgba(255,255,255,0.95), rgba(255,255,255,0.45))" }}
           >
-            <Check className="w-5 h-5 text-[#285992]" strokeWidth={2.5} />
-          </div>
-          <div>
-            <p className="text-[13px] font-semibold text-[#1a3a45] leading-snug">Sincronização concluída</p>
-            <div className="mt-1 inline-flex items-center gap-1.5 text-[11px] text-[#244248]/55">
-              <RefreshCw className="w-3 h-3 text-[#3a7bd5]" strokeWidth={2.25} />
-              Ativo em +850 canais
+            <div
+              className="relative overflow-hidden rounded-[17px] bg-white ring-1 ring-black/5"
+              style={{ aspectRatio: "9 / 19.5" }}
+            >
+              <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-5 h-[5px] rounded-full bg-black/70 z-10" />
+              <img
+                src="/assets/imgs/home/produtos/mobile-channel-manager.png"
+                alt="Tela mobile do Channel Manager"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
             </div>
           </div>
         </motion.div>

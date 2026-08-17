@@ -47,6 +47,8 @@ export interface ProdutoItem {
   bkgImagem?:  string; // optional hero/lifestyle image used as accordion background
   accent:      string;
   overlay:     string;
+  /** Produto em fase Beta — mostra o selo "Beta" nas chamadas (cards, menu). */
+  beta?:       boolean;
 }
 
 // ── Data — single source of truth ─────────────────────────────────────────────
@@ -77,6 +79,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Calendar,
     imagem: "/assets/imgs/produtos/motor-de-reservas.webp",
     screenshot: "/assets/imgs/produtos/motor-de-reservas.webp",
+    mobileScreenshot: "/assets/imgs/produtos/motor-mobile.jpg",
     bkgImagem: "/assets/imgs/motor-de-reservas/bkg-accordion.webp",
     accent: "#34d399",
     overlay: "from-emerald-950/85 to-emerald-900/25",
@@ -91,6 +94,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: LayoutGrid,
     imagem: "/assets/imgs/produtos/mapa.png",
     screenshot: "/assets/imgs/produtos/mapa.png",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-mapa-uh.png",
     bkgImagem: "/assets/imgs/gestao-hoteleira-pms/bkg-accordion.webp",
     accent: "#a78bfa",
     overlay: "from-violet-950/85 to-violet-900/25",
@@ -104,7 +108,8 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     ctaLabel: "Quero um site que vende de verdade",
     Icone: Monitor,
     imagem: "/assets/imgs/produtos/site-hoteleiro.webp",
-    screenshot: "/assets/imgs/produtos/site-hoteleiro.webp",
+    screenshot: "/assets/imgs/produtos/site-hoteleiro.jpg",
+    mobileScreenshot: "/assets/imgs/produtos/site-mobile.jpg",
     bkgImagem: "/assets/imgs/site-hoteleiro/bkg-accordion.webp",
     accent: "#fbbf24",
     overlay: "from-amber-950/85 to-amber-900/25",
@@ -119,6 +124,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: CreditCard,
     imagem: "/assets/imgs/produtos/focopay.png",
     screenshot: "/assets/imgs/produtos/focopay.png",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.png",
     bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.webp",
     accent: "#22d3ee",
     overlay: "from-cyan-950/85 to-cyan-900/25",
@@ -185,5 +191,6 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     bkgImagem: "/assets/imgs/otheo-ai/hoteleiro-uber.jpg",
     accent: "#fccc30",
     overlay: "from-yellow-950/85 to-yellow-900/25",
+    beta: true,
   },
 ];
