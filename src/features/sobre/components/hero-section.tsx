@@ -26,7 +26,7 @@ export function HeroSection() {
         >
           <span className="inline-flex items-center gap-2.5 border border-[#132840]/15 bg-white/40 backdrop-blur-sm text-[#1e3a5f] px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em]">
             <span className="w-1.5 h-1.5 bg-[#1e3a5f] rounded-full animate-pulse" />
-            Empresa Brasileira · 16 anos transformando a hotelaria
+            Empresa Brasileira · +20 anos transformando a hotelaria
           </span>
         </motion.div>
 
@@ -50,7 +50,7 @@ export function HeroSection() {
           transition={{ duration: 0.65, delay: 0.44 }}
           className="text-[#1e3a5f]/70 text-lg sm:text-xl font-light text-center max-w-2xl mx-auto leading-relaxed mb-0"
         >
-          Há 16 anos, combinamos tecnologia de ponta com a paixão de entender cada detalhe do
+          Há +20 anos, combinamos tecnologia de ponta com a paixão de entender cada detalhe do
           negócio hoteleiro. Mais reservas, menos fricção e uma gestão que realmente liberta.
         </motion.p>
 

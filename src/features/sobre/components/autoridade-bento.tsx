@@ -160,7 +160,7 @@ export function BentoNetworkSection() {
           badge="A Rede Foco"
           title="Os números que definem"
           titleHighlight="nossa autoridade."
-          subtitle="16 anos de mercado, +2.800 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos, são compromissos."
+          subtitle="+20 anos de mercado, +2.800 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos, são compromissos."
         />
 
         <motion.div
@@ -186,7 +186,7 @@ export function BentoNetworkSection() {
                 </span>
               </div>
               <div className="font-display text-[5.5rem] sm:text-[6.5rem] font-bold text-slate-900 leading-none tracking-tighter">
-                <AnimatedCounter value={1300} prefix="+" />
+                <AnimatedCounter value={2800} prefix="+" />
               </div>
             </div>
             <div className="relative z-10">
@@ -195,7 +195,7 @@ export function BentoNetworkSection() {
             </div>
           </BentoCard>
 
-          {/* 16 Anos */}
+          {/* +20 Anos */}
           <BentoCard className="min-h-[300px] p-8 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-3 mb-6">
@@ -207,7 +207,7 @@ export function BentoNetworkSection() {
                 </span>
               </div>
               <div className="font-display text-[5.5rem] font-bold text-slate-900 leading-none tracking-tighter">
-                <AnimatedCounter value={16} />
+                <AnimatedCounter value={20} prefix="+" />
               </div>
               <p className="text-base font-semibold text-slate-800 mt-2 mb-0.5">Anos de inovação</p>
               <p className="text-sm text-slate-500">ininterrupta em hotelaria</p>
