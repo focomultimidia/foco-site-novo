@@ -160,7 +160,7 @@ export function BentoNetworkSection() {
           badge="A Rede Foco"
           title="Os números que definem"
           titleHighlight="nossa autoridade."
-          subtitle="16 anos de mercado, +1.300 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos, são compromissos."
+          subtitle="16 anos de mercado, +2.800 estabelecimentos ativos e suporte que nunca dorme. Esses não são marcos, são compromissos."
         />
 
         <motion.div
@@ -170,7 +170,7 @@ export function BentoNetworkSection() {
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
         >
-          {/* +1.300 — anchor card */}
+          {/* +2.800 — anchor card */}
           <BentoCard
             className="md:col-span-2 min-h-[300px] p-8 lg:p-10 flex flex-col justify-between"
             onMouseNorm={(nx, ny) => { dotX.set((nx - 0.5) * 18); dotY.set((ny - 0.5) * 10); }}

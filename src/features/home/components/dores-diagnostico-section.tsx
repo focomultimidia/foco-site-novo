@@ -61,7 +61,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     kicker: "Ocupação & Reservas",
     imagem: "/assets/imgs/home/dores/hotel-vazio.jpg",
     imagemAlt: "Hotel com piscina buscando aumentar sua taxa de ocupação",
-    stat: { Icon: Globe, value: "+800", label: "canais conectados" },
+    stat: { Icon: Globe, value: "+850", label: "canais conectados" },
     solucaoIcons: [Globe, Layout, Target, Zap],
     ctaTexto: "Quer atrair mais hóspedes e aumentar as suas reservas?",
     ctaBotao: "Quero atrair mais hóspedes",

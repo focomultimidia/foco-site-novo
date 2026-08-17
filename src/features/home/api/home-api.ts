@@ -105,7 +105,7 @@ const homeData: HomeData = {
       id: "canais",
       nome: "Canais",
       descricao:
-        "Conecte-se a +800 canais de vendas com o nosso Channel Manager, garantindo mais visibilidade e menos overbooking.",
+        "Conecte-se a +850 canais de vendas com o nosso Channel Manager, garantindo mais visibilidade e menos overbooking.",
     },
     {
       id: "pms",
@@ -138,7 +138,7 @@ const homeData: HomeData = {
     {
       id: "2",
       icone: "Globe",
-      titulo: "+800 Canais Conectados",
+      titulo: "+850 Canais Conectados",
       descricao:
         "Mais de 800 canais de vendas conectados (Booking, Decolar, Expedia, Airbnb, E-HTL e muitos outros).",
     },

@@ -37,7 +37,7 @@ export function HeroSection() {
             <span
               className="bg-gradient-to-r from-[#1e3a5f] via-[#285992] to-[#427ab9] bg-clip-text text-transparent"
             >
-              1.300 hotéis
+              2.800 hotéis
             </span>{" "}
             de sucesso.
           </LineReveal>
