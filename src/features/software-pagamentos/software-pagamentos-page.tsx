@@ -62,7 +62,13 @@ function SoftwarePagamentosPage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é o Foco Pay */}
-      <GenericInfoSection {...INFO_SECTIONS.softwarePagamentos} imageSide="right" />
+      <GenericInfoSection
+        {...INFO_SECTIONS.softwarePagamentos}
+        imageSide="right"
+        showMockup
+        desktopMockupSrc="/assets/imgs/software-de-pagamento/transacoes.png"
+        mobileMockupSrc="/assets/imgs/software-de-pagamento/mobile-agendamento.png"
+      />
 
       {/* Diagnóstico: prejuízos na gestão (mesmo cenário da home) */}
       <DorParallaxSection

@@ -50,7 +50,7 @@ export function OrbitSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="flex items-center justify-center"
         >
-          <OrbitDiagram />
+          <OrbitDiagram showConnections innerDurationSec={12} outerDurationSec={50} />
         </motion.div>
       </div>
     </Section>

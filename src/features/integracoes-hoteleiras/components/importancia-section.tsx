@@ -28,7 +28,7 @@ const INTEGRACOES_OUTER: OrbitPartner[] = [
 function ImportanciaSection() {
   return (
     <section className="py-24 bg-[#f4f7fb]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -83,7 +83,13 @@ function ImportanciaSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative flex items-center justify-center py-8 lg:py-0"
           >
-            <OrbitDiagram innerPartners={INTEGRACOES_INNER} outerPartners={INTEGRACOES_OUTER} />
+            <OrbitDiagram
+              innerPartners={INTEGRACOES_INNER}
+              outerPartners={INTEGRACOES_OUTER}
+              showConnections
+              innerDurationSec={12}
+              outerDurationSec={50}
+            />
           </motion.div>
         </div>
       </div>

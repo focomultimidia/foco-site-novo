@@ -47,7 +47,7 @@ const CARD_SHADOW =
 
 // ── Media ─────────────────────────────────────────────────────────────────────
 const VIDEO_SRC = "/assets/videos/software-de-pagamento/tablet.mp4";
-const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.webp";
+const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.png";
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueSection() {
@@ -274,7 +274,7 @@ function PorQueSection() {
                 playsInline
                 preload="metadata"
                 onEnded={() => setIsVideoEnded(true)}
-                className="absolute inset-0 w-full h-full object-contain block"
+                className="absolute inset-0 w-full h-full object-contain block mix-blend-multiply"
               />
 
               {/*

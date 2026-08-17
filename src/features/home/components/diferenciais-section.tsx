@@ -147,7 +147,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-1 lg:order-none flex items-center justify-center py-8 lg:py-0"
           >
-            <OrbitDiagram />
+            <OrbitDiagram showConnections innerDurationSec={12} outerDurationSec={50} />
           </motion.div>
 
           {/* Right column — cards 5–8 | mobile: order-3 */}

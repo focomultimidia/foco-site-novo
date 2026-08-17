@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useTransform, useSpring, animate } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, useMotionValue, useTransform, useSpring, useAnimationFrame, animate } from "framer-motion";
 
 // ── OrbitDiagram ──────────────────────────────────────────────────────────────
 // Extraído do OrbitSection (/sobre) pra ser reaproveitado onde só a animação
@@ -46,13 +46,18 @@ const DEFAULT_OUTER_PARTNERS: OrbitPartner[] = [
 // raio que segue o ângulo REAL dele (não uma linha-guia fixa). Ao tirar o
 // mouse, ele retoma de onde parou, na velocidade vigente do anel.
 function OrbitItem({
-  radiusPx, startAngle, durationSec, entranceDelay, children,
+  radiusPx, startAngle, durationSec, entranceDelay, children, nodeRef,
 }: {
   radiusPx:      number;
   startAngle:    number;
   durationSec:   number;
   entranceDelay: number;
   children:      React.ReactNode;
+  /** Ref opcional pro nó posicionado (o motion.div com x/y) — usado pelo
+   *  ConnectionLines pra ler a posição real do badge a cada frame e
+   *  desenhar as linhas de conexão sem precisar saber COMO o badge se
+   *  move por dentro (funciona com qualquer implementação de animação). */
+  nodeRef?:      React.Ref<HTMLDivElement>;
 }) {
   const angle = useMotionValue(startAngle);
   const x = useTransform(angle, a => Math.cos((a * Math.PI) / 180) * radiusPx);
@@ -94,6 +99,7 @@ function OrbitItem({
         transition={{ duration: 0.25 }}
       />
       <motion.div
+        ref={nodeRef}
         className="absolute top-1/2 left-1/2"
         style={{ x, y, translateX: "-50%", translateY: "-50%", zIndex: itemHovered ? 40 : 15 }}
         initial={{ opacity: 0, scale: 0.3 }}
@@ -206,20 +212,172 @@ function Spoke({ angle, length, visible }: { angle: number; length: number; visi
   );
 }
 
+// ── ConnectionLines ───────────────────────────────────────────────────────────
+// Rede fixa de linhas finas cinza-claro (opt-in via `showConnections`):
+// cada badge tem exatamente 3 conexões — 1 raio até o centro + 2 até os
+// vizinhos angularmente mais próximos no OUTRO anel (par calculado uma vez
+// a partir do ângulo NOMINAL de cada parceiro, não da posição girando).
+// Como interno e externo giram em velocidades diferentes, esses pares
+// ficam fixos mas as linhas vão esticando/torcendo continuamente conforme
+// os dois anéis saem de fase — um efeito tipo espirógrafo, não um contorno
+// estático (o óbvio que dava pra fazer aqui). A posição real de cada ponta
+// é lida via getBoundingClientRect a cada frame (não motion values
+// internos do OrbitItem), então funciona não importa como o badge se move
+// por dentro.
+interface ConnectionRef { current: HTMLDivElement | null; }
+
+function ConnectionLines({
+  containerRef, edges, spokeTargets,
+}: {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  edges:        { fromRef: ConnectionRef; toRef: ConnectionRef }[];
+  spokeTargets: ConnectionRef[];
+}) {
+  const edgeLineRefs  = useRef<(SVGLineElement | null)[]>([]);
+  const spokeLineRefs = useRef<(SVGLineElement | null)[]>([]);
+
+  // Sem `size` fixo: o container é responsivo (420px mobile / 480px lg+,
+  // ver OrbitDiagram), então o centro/coordenadas vêm da largura REAL lida
+  // a cada frame — sem viewBox no <svg>, 1 unidade = 1px do próprio
+  // tamanho renderizado (que acompanha o container via `inset-0 w-full
+  // h-full`), então bate certinho em qualquer breakpoint.
+  const updateLines = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const center = { x: rect.width / 2, y: rect.height / 2 };
+
+    const posOf = (node: HTMLDivElement | null) => {
+      if (!node) return null;
+      const r = node.getBoundingClientRect();
+      return { x: center.x + (r.left + r.width / 2 - cx), y: center.y + (r.top + r.height / 2 - cy) };
+    };
+
+    edges.forEach((edge, i) => {
+      const line = edgeLineRefs.current[i];
+      const a = posOf(edge.fromRef.current);
+      const b = posOf(edge.toRef.current);
+      if (!line || !a || !b) return;
+      line.setAttribute("x1", String(a.x));
+      line.setAttribute("y1", String(a.y));
+      line.setAttribute("x2", String(b.x));
+      line.setAttribute("y2", String(b.y));
+    });
+
+    spokeTargets.forEach((ref, i) => {
+      const line = spokeLineRefs.current[i];
+      const p = posOf(ref.current);
+      if (!line || !p) return;
+      line.setAttribute("x1", String(center.x));
+      line.setAttribute("y1", String(center.y));
+      line.setAttribute("x2", String(p.x));
+      line.setAttribute("y2", String(p.y));
+    });
+  };
+
+  // Posiciona certo já no primeiro paint (útil também porque o rAF do
+  // useAnimationFrame abaixo só entra em ação a partir do segundo frame).
+  useEffect(updateLines);
+  useAnimationFrame(updateLines);
+
+  return (
+    <svg aria-hidden="true" className="absolute inset-0 w-full h-full pointer-events-none">
+      {edges.map((_, i) => (
+        <line
+          key={`edge-${i}`}
+          ref={(el) => { edgeLineRefs.current[i] = el; }}
+          stroke="#94a3b8" strokeWidth={1} strokeLinecap="round" opacity={0.28}
+        />
+      ))}
+      {spokeTargets.map((_, i) => (
+        <line
+          key={`spoke-${i}`}
+          ref={(el) => { spokeLineRefs.current[i] = el; }}
+          stroke="#94a3b8" strokeWidth={1} strokeLinecap="round" opacity={0.22}
+        />
+      ))}
+    </svg>
+  );
+}
+
 // ── OrbitDiagram ──────────────────────────────────────────────────────────────
 
 interface OrbitDiagramProps {
-  innerPartners?: OrbitPartner[];
-  outerPartners?: OrbitPartner[];
+  innerPartners?:   OrbitPartner[];
+  outerPartners?:   OrbitPartner[];
+  /** Liga a corrente de linhas cinza-claro entre os badges (ver
+   *  ConnectionLines): cada logo do anel externo liga com a logo mais
+   *  próxima do anel interno, que liga com o centro. Funciona com qualquer
+   *  contagem em cada anel (cada externo só busca SEU vizinho mais
+   *  próximo — se um interno acabar recebendo mais de uma conexão porque
+   *  os anéis não têm a mesma quantidade, tudo bem, a árvore continua
+   *  válida); usado em /sobre, DiferenciaisSection (home) e
+   *  ImportanciaSection (/integracoes-hoteleiras). Opt-in mesmo assim
+   *  (default false) por ser um adorno visual, não parte do diagrama em
+   *  si. */
+  showConnections?: boolean;
+  /** Duração de uma volta completa (parado, em segundos) de cada anel —
+   *  default = valores originais (10/sobre e DiferenciaisSection não
+   *  passam essas props, então continuam exatamente como sempre foram).
+   *  Todas as logos do MESMO anel sempre giram juntas (mantêm a distância
+   *  fixa entre si) — só o anel INTEIRO pode ter velocidade própria, nunca
+   *  uma logo isolada, pra nunca esbarrar numa vizinha do mesmo raio. */
+  innerDurationSec?: number;
+  outerDurationSec?: number;
+}
+
+// Contração no hover — mesma proporção que o diagrama sempre teve (10/24 e
+// 14/36), só reaplicada em cima de qualquer duração base agora configurável.
+const HOVER_SPEEDUP_INNER = 10 / 24;
+const HOVER_SPEEDUP_OUTER = 14 / 36;
+
+// Distância angular mínima entre dois ângulos (0–360, contorna a volta).
+function angularDistance(a: number, b: number) {
+  const diff = Math.abs(a - b) % 360;
+  return diff > 180 ? 360 - diff : diff;
+}
+
+// Vizinho mais próximo em `candidates`, com desempate CIRCULAR consistente
+// (sempre prefere quem vem "antes" no sentido horário, não a ordem crua do
+// array) — necessário porque o anel externo é desalinhado 45° do interno
+// de propósito (ver INTEGRACOES_OUTER), então toda logo externa fica
+// EXATAMENTE empatada entre duas internas. Sem esse desempate circular,
+// `Array.prototype.sort` (estável) resolve os empates pela ordem do array,
+// o que quebra exatamente no par que cruza a fronteira 360°→0°, deixando
+// uma conexão "torta" no meio de um padrão que devia ser uniforme.
+function nearestByAngle<T extends { angle: number }>(fromAngle: number, candidates: T[]): T {
+  let best = candidates[0];
+  let bestDist = angularDistance(fromAngle, best.angle);
+  for (let i = 1; i < candidates.length; i++) {
+    const candidate = candidates[i];
+    const dist = angularDistance(fromAngle, candidate.angle);
+    const isCloser = dist < bestDist - 0.01;
+    const isTie     = Math.abs(dist - bestDist) <= 0.01;
+    if (isCloser || (isTie && clockwiseOffset(fromAngle, candidate.angle) < clockwiseOffset(fromAngle, best.angle))) {
+      best = candidate;
+      bestDist = dist;
+    }
+  }
+  return best;
+}
+
+// Quanto girar no sentido horário a partir de `to` pra chegar em `from` (0–360).
+function clockwiseOffset(from: number, to: number) {
+  return (from - to + 360) % 360;
 }
 
 function OrbitDiagram({
-  innerPartners = DEFAULT_INNER_PARTNERS,
-  outerPartners = DEFAULT_OUTER_PARTNERS,
+  innerPartners    = DEFAULT_INNER_PARTNERS,
+  outerPartners    = DEFAULT_OUTER_PARTNERS,
+  showConnections  = false,
+  innerDurationSec = 24,
+  outerDurationSec = 36,
 }: OrbitDiagramProps) {
   const [hovered, setHovered] = useState(false);
-  const innerDur   = hovered ? 10 : 24;
-  const outerDur   = hovered ? 14 : 36;
+  const innerDur   = hovered ? innerDurationSec * HOVER_SPEEDUP_INNER : innerDurationSec;
+  const outerDur   = hovered ? outerDurationSec * HOVER_SPEEDUP_OUTER : outerDurationSec;
   const cometInnerDur = innerDur * 0.4;
   const cometOuterDur = outerDur * 0.4;
   // Fluxo do traço tracejado — mais rápido que os cometas (que já são mais
@@ -231,12 +389,51 @@ function OrbitDiagram({
 
   useEffect(() => { glowOpacity.set(hovered ? 1 : 0); }, [hovered, glowOpacity]);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Refs pro nó posicionado de cada badge (pro ConnectionLines ler a
+  // posição real a cada frame) — Map porque a lista de parceiros é
+  // dinâmica (props), então não dá pra usar useRef por item.
+  const innerNodeRefs = useRef<Map<string, ConnectionRef>>(new Map());
+  const outerNodeRefs = useRef<Map<string, ConnectionRef>>(new Map());
+  const refFor = (store: React.RefObject<Map<string, ConnectionRef>>, id: string): ConnectionRef => {
+    if (!store.current.has(id)) store.current.set(id, { current: null });
+    return store.current.get(id)!;
+  };
+
+  // Corrente, não malha: cada logo do anel MAIOR (outer) liga só com a logo
+  // mais próxima do anel do MEIO (inner), que por sua vez liga com o
+  // centro — 1 elo outer→inner + 1 elo inner→centro por "raio" do
+  // diagrama, sempre a mesma dinâmica pra todas. O outer NUNCA liga direto
+  // no centro (só chega lá passando pela inner); por isso o spoke pro
+  // centro sai só das inner partners, não de todo mundo.
+  const { connectionEdges, spokeTargets } = useMemo(() => {
+    if (!showConnections) return { connectionEdges: [], spokeTargets: [] };
+
+    const edges = outerPartners.map((outer) => {
+      const nearestInner = nearestByAngle(outer.angle, innerPartners);
+      return {
+        fromRef: refFor(outerNodeRefs, outer.id),
+        toRef:   refFor(innerNodeRefs, nearestInner.id),
+      };
+    });
+
+    const targets = innerPartners.map((p) => refFor(innerNodeRefs, p.id));
+
+    return { connectionEdges: edges, spokeTargets: targets };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showConnections, innerPartners, outerPartners]);
+
   return (
     <div
+      ref={containerRef}
       className="relative w-[420px] h-[420px] lg:w-[480px] lg:h-[480px] shrink-0"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {showConnections && (
+        <ConnectionLines containerRef={containerRef} edges={connectionEdges} spokeTargets={spokeTargets} />
+      )}
       {/* Anel externo com raio 190 (o mesmo da órbita externa). Ver
           comentário do OrbitRing acima — trocado do `border-dashed`
           estático por uma pista de energia escoando, cor por anel (marinho
@@ -283,7 +480,8 @@ function OrbitDiagram({
 
       {/* Inner orbit */}
       {innerPartners.map((p, i) => (
-        <OrbitItem key={p.id} radiusPx={110} startAngle={p.angle} durationSec={innerDur} entranceDelay={0.1 + i * 0.08}>
+        <OrbitItem key={p.id} radiusPx={110} startAngle={p.angle} durationSec={innerDur} entranceDelay={0.1 + i * 0.08}
+          nodeRef={showConnections ? (el) => { refFor(innerNodeRefs, p.id).current = el; } : undefined}>
           <motion.div className="w-14 h-14 rounded-full flex items-center justify-center p-2"
             style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.95)", boxShadow: "0 8px 32px rgba(30,58,95,0.07)" }}
             animate={hovered ? { boxShadow: "0 12px 40px rgba(40,89,146,0.14), 0 0 0 1.5px rgba(40,89,146,0.22)" } : {}}
@@ -298,7 +496,8 @@ function OrbitDiagram({
           órbita interna (badge branco + logo), já que agora as duas mostram
           o mesmo tipo de coisa. */}
       {outerPartners.map((p, i) => (
-        <OrbitItem key={p.id} radiusPx={190} startAngle={p.angle} durationSec={outerDur} entranceDelay={0.45 + i * 0.07}>
+        <OrbitItem key={p.id} radiusPx={190} startAngle={p.angle} durationSec={outerDur} entranceDelay={0.45 + i * 0.07}
+          nodeRef={showConnections ? (el) => { refFor(outerNodeRefs, p.id).current = el; } : undefined}>
           <motion.div className="w-14 h-14 rounded-full flex items-center justify-center p-2"
             style={{ background: "rgba(255,255,255,0.88)", backdropFilter: "blur(12px)", border: "1px solid rgba(255,255,255,0.95)", boxShadow: "0 8px 32px rgba(30,58,95,0.07)" }}
             animate={hovered ? { boxShadow: "0 12px 40px rgba(40,89,146,0.14), 0 0 0 1.5px rgba(40,89,146,0.22)" } : {}}

@@ -49,11 +49,12 @@ interface DorParallaxSectionProps {
  * DorParallaxSection — o mesmo cenário de dor da home (DoresDiagnosticoSection),
  * agora como uma seção única dentro da página de produto que resolve aquela
  * dor especificamente. Visual herdado da ProblemaParallaxSection (otheo-ai):
- * foto em palco cheio com parallax de verdade, gradiente cinematográfico,
- * cartões de vidro (blur + transparência) flutuando por cima — mas aqui o
- * conteúdo é mais denso (título + parágrafo + 4 soluções), então em vez de
- * UM cartão ancorado à esquerda, a "moldura de vidro" se abre pra receber a
- * grade inteira.
+ * foto em palco cheio com parallax de verdade, cartões de vidro (blur +
+ * transparência) flutuando por cima — sem gradiente/vinheta/grão sobre a
+ * imagem (removidos a pedido explícito: o fundo fica no estado original da
+ * foto). Aqui o conteúdo é mais denso (título + parágrafo + 4 soluções),
+ * então em vez de UM cartão ancorado à esquerda, a "moldura de vidro" se
+ * abre pra receber a grade inteira.
  *
  * Cartões de solução viram link SOMENTE quando: (a) têm um `link` real na
  * origem (DORES_DATA), (b) esse link não é "#" (placeholder, ver "Atrair
@@ -103,31 +104,6 @@ function DorParallaxSection({ dorId, backgroundImage, backgroundAlt }: DorParall
             />
           </motion.div>
 
-          {/* Gradiente cinematográfico — a foto respira no topo (onde não
-              há texto) e escurece progressivamente até a base, onde vivem
-              título e cartões. */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(10,22,38,0.32) 0%, rgba(10,22,38,0.55) 30%, rgba(10,22,38,0.88) 68%, rgba(10,22,38,0.96) 100%)",
-            }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, transparent 0%, rgba(10,22,38,0.35) 100%)" }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none opacity-[0.05] mix-blend-overlay"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            }}
-          />
-
           {/* Conteúdo */}
           <div className="relative z-10 px-6 sm:px-10 lg:px-16 xl:px-20 py-14 sm:py-16 lg:py-20">
             <motion.div
@@ -147,7 +123,7 @@ function DorParallaxSection({ dorId, backgroundImage, backgroundAlt }: DorParall
               <h2 className="font-display font-semibold text-3xl sm:text-4xl lg:text-[2.5rem] text-white leading-[1.1] tracking-tight antialiased mb-4">
                 {dor.titulo}
               </h2>
-              <p className="text-white/65 text-base sm:text-lg leading-relaxed">
+              <p className="text-white text-base sm:text-lg leading-relaxed">
                 {dor.descricao}
               </p>
             </motion.div>

@@ -307,12 +307,11 @@ interface PmsCardProps {
   pms:              PmsItem;
   index:            number;
   isHovered:        boolean;
-  isBlurred:        boolean;
   onEnter:          () => void;
   onSolicitar:      () => void;
 }
 
-function PmsCard({ pms, index, isHovered, isBlurred, onEnter, onSolicitar }: PmsCardProps) {
+function PmsCard({ pms, index, isHovered, onEnter, onSolicitar }: PmsCardProps) {
   return (
     // Outer div: scroll entrance animation
     <motion.div
@@ -326,12 +325,11 @@ function PmsCard({ pms, index, isHovered, isBlurred, onEnter, onSolicitar }: Pms
         delay:     (index % 4) * 0.06,
       }}
     >
-      {/* Inner div: sibling focus/blur state */}
+      {/* Inner div: hover lift do próprio card (o blur nos outros cards ao
+          lado — sibling focus/blur — foi removido a pedido explícito). */}
       <motion.div
         onMouseEnter={onEnter}
         animate={{
-          opacity:   isBlurred ? 0.42 : 1,
-          filter:    isBlurred ? "blur(2px)" : "blur(0px)",
           scale:     isHovered ? 1.02  : 1,
           boxShadow: isHovered
             ? "0 16px 48px rgba(30,58,95,0.13), 0 4px 12px rgba(30,58,95,0.06)"
@@ -472,7 +470,6 @@ function PmsIntegradosSection() {
                     pms={pms}
                     index={index}
                     isHovered={hoveredIndex === index}
-                    isBlurred={hoveredIndex !== null && hoveredIndex !== index}
                     onEnter={() => setHoveredIndex(index)}
                     onSolicitar={() => setActivePms(pms)}
                   />

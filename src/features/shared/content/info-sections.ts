@@ -67,7 +67,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
       "Para o hóspede, o Foco Pass é sinônimo de comodidade incomparável. Através do nosso aplicativo de hospedagem, ele tem acesso a uma jornada fluida e, o melhor de tudo, a descontos exclusivos e curados em bares, restaurantes, receptivos e ingressos no destino.",
       "Transforme a estadia em uma experiência completa, fidelize seu cliente e veja a satisfação refletida nas suas avaliações.",
     ],
-    imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
+    imagePath: "/assets/imgs/experiencia-do-hospede/app.jpg",
     imageAlt:  "Experiência do hóspede - Foco Pass: Mockup",
   },
 

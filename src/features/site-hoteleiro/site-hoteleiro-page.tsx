@@ -59,13 +59,6 @@ function SiteHoteleiroPage() {
       {/* Hero Section */}
       <HeroSection data={data.hero} />
 
-      {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
-      <DorParallaxSection
-        dorId="baixa-ocupacao"
-        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
-        backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
-      />
-
       {/* Section 1: Modelos de sites */}
       <WebsitePortfolioCarousel />
 
@@ -79,6 +72,13 @@ function SiteHoteleiroPage() {
 
       {/* Seção 4: Recursos */}
       <RecursosGridSection />
+
+      {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
+      <DorParallaxSection
+        dorId="baixa-ocupacao"
+        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
+        backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
+      />
 
       {/* Bloco de Autoridade e Confiança */}
       <NumerosSection numeros={numeros} />
