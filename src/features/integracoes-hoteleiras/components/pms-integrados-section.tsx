@@ -15,7 +15,7 @@ const pmsIntegrados = [
     nome: "Plus",
     logo: "/assets/imgs/integracoes/pms/plus.webp",
     descricao:
-      "Sistema de gestão hoteleira em nuvem desenvolvido pela Foco Tecnologia, para pequenos hoteleiros. Integrado ao motor de reservas e ao gestor de canais, os clientes terão a tranquilidade de disponibilizar 100% das suas ocupações para vendas em mais de 800 canais integrados, sem overbookings.",
+      "Sistema de gestão hoteleira em nuvem desenvolvido pela Foco Tecnologia, para pequenos hoteleiros. Integrado ao motor de reservas e ao gestor de canais, os clientes terão a tranquilidade de disponibilizar 100% das suas ocupações para vendas em Mais de 850 canais integrados, sem overbookings.",
   },
   {
     id: "adm",

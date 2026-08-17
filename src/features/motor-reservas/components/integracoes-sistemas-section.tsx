@@ -8,7 +8,7 @@ const integracoes = [
     icon: Network,
     titulo: "GESTOR DE CANAIS",
     descricao:
-      "Aumente a distribuição do seu hotel conectando o motor de reservas a mais de 800 canais de vendas.",
+      "Aumente a distribuição do seu hotel conectando o motor de reservas a Mais de 850 canais de vendas.",
   },
   {
     icon: Building2,

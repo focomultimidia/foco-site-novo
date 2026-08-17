@@ -111,7 +111,7 @@ function ChannelManagerPage() {
       <FAQAccordion
         items={[
           { id: "1", question: "O que é um Channel Manager?", answer: "Um Channel Manager (ou Gestor de Canais) é um software que sincroniza automaticamente as reservas, disponibilidade e tarifas do seu hotel em todos os canais de vendas conectados, eliminando o risco de overbooking." },
-          { id: "2", question: "Com quantos canais o Channel Manager da Foco integra?", answer: "Nosso Channel Manager integra com mais de 800 canais de vendas, incluindo as principais OTAs globais e regionais, GDS, canais corporativos e o motor de reservas do seu site." },
+          { id: "2", question: "Com quantos canais o Channel Manager da Foco integra?", answer: "Nosso Channel Manager integra com Mais de 850 canais de vendas, incluindo as principais OTAs globais e regionais, GDS, canais corporativos e o motor de reservas do seu site." },
           { id: "3", question: "Posso automatizar o pagamento das reservas do gestor de canais?", answer: "Através do sistema Foco Pay, todas as reservas do Gestor de canais e Motor de reservas podem ser cobradas automaticamente pelo robô, de acordo com configurações pré determinadas para cada canal, política ou tipo de cartão de crédito." },
           { id: "4", question: "O Channel Manager integra com meu PMS?", answer: "Sim, oferecemos integração two-way com os principais PMS do mercado brasileiro, garantindo sincronização completa de reservas, cancelamentos e alterações." },
           { id: "5", question: "Posso gerenciar pelo celular?", answer: "Sim! Nosso aplicativo mobile permite que você gerencie tarifas, disponibilidade, reservas e visualize relatórios de qualquer lugar, a qualquer momento." },
