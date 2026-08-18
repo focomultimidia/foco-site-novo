@@ -65,7 +65,7 @@ function ExperienciaHospedePage() {
       <HeroSection data={data.hero} />
 
       {/* Section 2: O que é um motor de reservas */}
-      <GenericInfoSection {...INFO_SECTIONS.experienciaHospede} imageSide="right" imageRounded />
+      <GenericInfoSection {...INFO_SECTIONS.experienciaHospede} imageSide="right" imageRounded imageBelowTitleOnMobile />
 
       {/* Diagnóstico: experiência ruim do hóspede (mesmo cenário da home) */}
       <DorParallaxSection

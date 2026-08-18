@@ -189,7 +189,10 @@ function Collage({ activeIndex, onSelect, center, homes }: {
 // ── Section ───────────────────────────────────────────────────────────────────
 function ExperienciasSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [loopKey, setLoopKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const active = EXPERIENCIAS[activeIndex];
+  const sectionRef = useRef<HTMLElement>(null);
   const tabsScrollRef = useRef<HTMLDivElement>(null);
 
   // Mobile: abas em rolagem horizontal (ver className abaixo) — sem isso,
@@ -201,8 +204,36 @@ function ExperienciasSection() {
     activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
   }, [activeIndex]);
 
+  // Start/stop autoplay based on viewport visibility — mesmo padrão do
+  // ReservaSection/CardapioDigitalSection.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay — só roda enquanto a seção está visível; troca manual reinicia
+  // a contagem (loopKey), mas o ciclo nunca fica parado.
+  useEffect(() => {
+    if (!isVisible) return;
+    const id = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % EXPERIENCIAS.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [loopKey, isVisible]);
+
+  const handleSelect = (i: number) => {
+    setActiveIndex(i);
+    setLoopKey(k => k + 1);
+  };
+
   return (
-    <section className="py-24 bg-[#f4f7fb]">
+    <section ref={sectionRef} className="py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Header ──────────────────────────────────────────────────── */}
@@ -254,7 +285,7 @@ function ExperienciasSection() {
                     <button
                       key={item.titulo}
                       type="button"
-                      onClick={() => setActiveIndex(i)}
+                      onClick={() => handleSelect(i)}
                       aria-pressed={isActive}
                       className={`relative flex flex-shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold bg-white ring-1 transition-colors duration-300 ${
                         isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"
@@ -326,13 +357,13 @@ function ExperienciasSection() {
 
           <LayoutGroup id="experiencias-collage-desktop">
             <div className="relative hidden lg:block aspect-[2/1]">
-              <Collage activeIndex={activeIndex} onSelect={setActiveIndex} center={CENTER_DESKTOP} homes={HOME_DESKTOP} />
+              <Collage activeIndex={activeIndex} onSelect={handleSelect} center={CENTER_DESKTOP} homes={HOME_DESKTOP} />
             </div>
           </LayoutGroup>
 
           <LayoutGroup id="experiencias-collage-mobile">
             <div className="relative lg:hidden aspect-[4/5] sm:aspect-[3/2]">
-              <Collage activeIndex={activeIndex} onSelect={setActiveIndex} center={CENTER_MOBILE} homes={HOME_MOBILE} />
+              <Collage activeIndex={activeIndex} onSelect={handleSelect} center={CENTER_MOBILE} homes={HOME_MOBILE} />
             </div>
           </LayoutGroup>
         </motion.div>

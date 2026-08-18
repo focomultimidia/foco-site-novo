@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Zap,
   ShieldCheck,
@@ -257,14 +257,43 @@ function Stage({ activeIndex, direction }: { activeIndex: number; direction: num
 // ── Section ───────────────────────────────────────────────────────────────────
 function RecursosGridSection() {
   const [[activeIndex, direction], setActive] = useState<[number, number]>([0, 0]);
+  const [loopKey, setLoopKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const goTo = (i: number) => {
     if (i === activeIndex) return;
     setActive([i, i > activeIndex ? 1 : -1]);
   };
 
+  const handleSelect = (i: number) => {
+    goTo(i);
+    setLoopKey(k => k + 1);
+  };
+
+  // Start/stop autoplay based on viewport visibility — mesmo padrão do
+  // ReservaSection/CardapioDigitalSection.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    const id = setInterval(() => {
+      setActive(([current]) => [(current + 1) % PILARES.length, 1]);
+    }, 5000);
+    return () => clearInterval(id);
+  }, [loopKey, isVisible]);
+
   return (
-    <section className="relative py-24 bg-[#f4f7fb]">
+    <section ref={sectionRef} className="relative py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative max-w-5xl">
         <div className="text-center mb-12 max-w-3xl mx-auto">
           <SectionEyebrow className="justify-center">Recursos que convertem</SectionEyebrow>
@@ -296,7 +325,7 @@ function RecursosGridSection() {
                 return (
                   <button
                     key={p.id}
-                    onClick={() => goTo(i)}
+                    onClick={() => handleSelect(i)}
                     aria-pressed={isActive}
                     className={`relative rounded-full px-5 py-2.5 text-[13px] font-semibold bg-white ring-1 transition-colors duration-300
                                ${isActive ? "ring-transparent" : "ring-slate-200 hover:ring-[#285992]/30"}`}

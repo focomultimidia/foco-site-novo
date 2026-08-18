@@ -186,7 +186,11 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
     <section
       ref={sectionRef}
       data-hero="section"
-      className="relative min-h-dvh lg:h-dvh min-h-[600px] overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
+      // Sem min-height forçada no mobile — a seção passou a exigir uma altura
+      // mínima igual à tela inteira mesmo quando o conteúdo real é bem mais
+      // curto, criando um scroll "preso" (muito espaço morto pra rolar antes
+      // da seção seguinte aparecer). Em lg+ mantém a trava de sempre.
+      className="relative lg:min-h-[600px] lg:h-dvh overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
       style={{ "--hero-scale": HERO_SCALE_CSS } as React.CSSProperties}
     >
       {/* Fundo — aurora azul em deriva lenta (operação 24h, nunca "desligada"),

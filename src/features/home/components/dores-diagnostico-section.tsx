@@ -464,8 +464,37 @@ const panelVariants = {
 
 function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
   const [activeId, setActiveId] = useState<string>(dores[0]?.id ?? "");
+  const [loopKey, setLoopKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const activeIndex = Math.max(0, dores.findIndex(d => d.id === activeId));
   const dor = dores[activeIndex] ?? dores[0];
+
+  // Start/stop autoplay based on viewport visibility — mesmo padrão do
+  // ReservaSection/CardapioDigitalSection. O mesmo `activeId` alimenta o
+  // seletor de 3 cards (desktop) e o acordeão (mobile), então um único
+  // ciclo mantém as duas variantes sempre em movimento.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible || dores.length === 0) return;
+    const id = setInterval(() => {
+      setActiveId(prev => {
+        const idx = dores.findIndex(d => d.id === prev);
+        return dores[(idx + 1) % dores.length]?.id ?? dores[0].id;
+      });
+    }, 5000);
+    return () => clearInterval(id);
+  }, [loopKey, isVisible, dores]);
 
   if (!dor) return null;
 
@@ -494,7 +523,7 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
         .dores-diag-grid { animation: dores-diag-grid-pan 7s linear infinite; }
       `}</style>
 
-      <section className="relative py-24 md:py-32 bg-[#0b1a2e]">
+      <section ref={sectionRef} className="relative py-24 md:py-32 bg-[#0b1a2e]">
         {/* Aurora azul em deriva lenta — mesmas keyframes do hero da home.
             `overflow-hidden` mora neste wrapper (recortado exatamente nos
             limites da seção via `inset-0`), não na <section> — a seção
@@ -589,7 +618,10 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
               return (
                 <button
                   key={d.id}
-                  onClick={() => setActiveId(d.id)}
+                  onClick={() => {
+                    setActiveId(d.id);
+                    setLoopKey(k => k + 1);
+                  }}
                   aria-pressed={isActive}
                   className="group relative text-left rounded-2xl p-4 sm:p-5 border transition-colors duration-300 overflow-hidden"
                   style={{
@@ -665,7 +697,10 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
                 dor={d}
                 index={i}
                 isOpen={activeId === d.id}
-                onToggle={() => setActiveId(prev => (prev === d.id ? "" : d.id))}
+                onToggle={() => {
+                  setActiveId(prev => (prev === d.id ? "" : d.id));
+                  setLoopKey(k => k + 1);
+                }}
               />
             ))}
           </div>

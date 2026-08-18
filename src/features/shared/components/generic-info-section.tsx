@@ -42,6 +42,14 @@ export interface GenericInfoSectionProps {
   /** Screenshot do mockup desktop. Se ausente, mostra um placeholder tracejado. */
   desktopMockupSrc?: string;
   desktopMockupAlt?: string;
+  /**
+   * No mobile, empurra a imagem pra logo abaixo do título (antes dos
+   * parágrafos de descrição) em vez de depois deles. Opt-in porque esse
+   * componente é compartilhado por várias páginas — pedido só pra
+   * /experiencia-do-hospede; default false preserva as outras como estão.
+   * Não afeta o layout em lg+ (colunas texto/imagem lado a lado, como sempre).
+   */
+  imageBelowTitleOnMobile?: boolean;
 }
 
 // ── Mockup (desktop) ─────────────────────────────────────────────────────────
@@ -118,12 +126,21 @@ function GenericInfoSection({
   showMockup = false,
   desktopMockupSrc,
   desktopMockupAlt,
+  imageBelowTitleOnMobile = false,
 }: GenericInfoSectionProps) {
 
   // When the image is on the left, the text column shifts right (and vice-versa).
   // `order-*` is applied at the lg breakpoint so mobile always stacks text first.
   const textOrder  = imageSide === "left"  ? "lg:order-2" : "lg:order-1";
   const imageOrder = imageSide === "left"  ? "lg:order-1" : "lg:order-2";
+
+  // Posicionamento em lg+: título e parágrafos sempre juntos na MESMA coluna
+  // (texto), a imagem na outra — colocados explicitamente via linha/coluna do
+  // grid (em vez de só `order`) porque título e parágrafos viram itens irmãos
+  // separados do grid nesse modo (não mais um único bloco de texto), pra
+  // permitir reordenar só a imagem entre eles no mobile sem quebrar lg+.
+  const desktopTitleCol = imageSide === "left" ? "lg:col-start-2" : "lg:col-start-1";
+  const desktopImageCol = imageSide === "left" ? "lg:col-start-1" : "lg:col-start-2";
 
   // Entry animations follow the reading direction of each column.
   const textXFrom  = imageSide === "left"  ?  40 : -40;
@@ -134,59 +151,120 @@ function GenericInfoSection({
     ? description
     : [description];
 
+  const image = showMockup ? (
+    <DesktopMockup
+      desktopSrc={desktopMockupSrc}
+      desktopAlt={desktopMockupAlt ?? imageAlt}
+    />
+  ) : (
+    <img
+      src={imagePath}
+      alt={imageAlt}
+      width={898}
+      height={664}
+      loading="lazy"
+      decoding="async"
+      className={`w-full h-auto object-contain ${imageRounded ? "rounded-3xl" : ""}`}
+    />
+  );
+
+  // `imageBelowTitleOnMobile` muda a ESTRUTURA do grid (título/imagem/
+  // descrição viram 3 irmãos em vez de 2), então em vez de tentar unificar
+  // num só JSX flexível o bastante pra cobrir os dois casos (arriscando
+  // mexer no espaçamento das páginas que não pediram a mudança), o branch
+  // default abaixo fica byte-a-byte igual ao componente original.
+  if (!imageBelowTitleOnMobile) {
+    return (
+      <section className={`py-24 lg:py-24 ${background} ${className}`}>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
+
+            {/* ── Text column ─────────────────────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, x: textXFrom }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25, margin: "-80px" }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              className={`space-y-5 ${textOrder}`}
+            >
+              <h2
+                className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold text-[#1e3a5f] tracking-tight mb-2"
+                style={{ lineHeight: 1.15 }}
+              >
+                {buildTitle(title, titleHighlight)}
+              </h2>
+
+              {paragraphs.map((p, i) => (
+                <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
+                  {p}
+                </p>
+              ))}
+            </motion.div>
+
+            {/* ── Image column ─────────────────────────────────────────── */}
+            <motion.div
+              initial={{ opacity: 0, x: imageXFrom }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25, margin: "-80px" }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              className={`flex items-center justify-center ${imageOrder}`}
+            >
+              {image}
+            </motion.div>
+
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // ── Título → imagem → descrição no mobile (pedido só pra
+  //    /experiencia-do-hospede); em lg+ volta ao layout de 2 colunas de sempre. ──
   return (
     <section className={`py-24 lg:py-24 ${background} ${className}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
+        <div className="grid lg:grid-cols-2 gap-5 lg:gap-6 lg:items-center">
 
-          {/* ── Text column ─────────────────────────────────────────── */}
+          {/* ── Title ───────────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: textXFrom }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25, margin: "-80px" }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className={`space-y-5 ${textOrder}`}
+            className={`order-1 ${desktopTitleCol} lg:row-start-1 ${textOrder}`}
           >
-            {/* Title — Space Grotesk, tight tracking */}
             <h2
-              className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold text-[#1e3a5f] tracking-tight mb-2"
+              className="font-display text-3xl sm:text-4xl lg:text-[2.85rem] font-bold text-[#1e3a5f] tracking-tight"
               style={{ lineHeight: 1.15 }}
             >
               {buildTitle(title, titleHighlight)}
             </h2>
-
-            {/* Body paragraphs — Inter, relaxed leading */}
-            {paragraphs.map((p, i) => (
-              <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
-                {p}
-              </p>
-            ))}
           </motion.div>
 
-          {/* ── Image column ─────────────────────────────────────────── */}
+          {/* ── Image ───────────────────────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, x: imageXFrom }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25, margin: "-80px" }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className={`flex items-center justify-center ${imageOrder}`}
+            className={`order-2 ${desktopImageCol} lg:row-start-1 lg:row-span-2 flex items-center justify-center ${imageOrder}`}
           >
-            {showMockup ? (
-              <DesktopMockup
-                desktopSrc={desktopMockupSrc}
-                desktopAlt={desktopMockupAlt ?? imageAlt}
-              />
-            ) : (
-              <img
-                src={imagePath}
-                alt={imageAlt}
-                width={898}
-                height={664}
-                loading="lazy"
-                decoding="async"
-                className={`w-full h-auto object-contain ${imageRounded ? "rounded-3xl" : ""}`}
-              />
-            )}
+            {image}
+          </motion.div>
+
+          {/* ── Description ─────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, x: textXFrom }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.25, margin: "-80px" }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className={`order-3 ${desktopTitleCol} lg:row-start-2 space-y-5 ${textOrder}`}
+          >
+            {paragraphs.map((p, i) => (
+              <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
+                {p}
+              </p>
+            ))}
           </motion.div>
 
         </div>

@@ -383,9 +383,39 @@ function PmsIntegradosSection() {
   const [activeTab, setActiveTab] = useState(categorias[0].id);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activePms, setActivePms] = useState<PmsItem | null>(null);
+  const [loopKey, setLoopKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Start/stop autoplay based on viewport visibility — mesmo padrão do
+  // ReservaSection/CardapioDigitalSection.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  // Autoplay — só roda enquanto a seção está visível; troca manual reinicia
+  // a contagem (loopKey), mas o ciclo nunca fica parado.
+  useEffect(() => {
+    if (!isVisible) return;
+    const id = setInterval(() => {
+      setActiveTab(prev => {
+        const idx = categorias.findIndex(c => c.id === prev);
+        return categorias[(idx + 1) % categorias.length].id;
+      });
+      setHoveredIndex(null);
+    }, 4500);
+    return () => clearInterval(id);
+  }, [loopKey, isVisible]);
 
   return (
-    <section className="relative py-24 bg-[#f4f7fb]">
+    <section ref={sectionRef} className="relative py-24 bg-[#f4f7fb]">
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -415,6 +445,7 @@ function PmsIntegradosSection() {
           onValueChange={(v) => {
             setActiveTab(v);
             setHoveredIndex(null);
+            setLoopKey(k => k + 1);
           }}
           className="w-full"
         >

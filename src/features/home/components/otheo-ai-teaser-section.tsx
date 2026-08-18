@@ -85,6 +85,22 @@ function OtheoAiTeaserSection() {
           50%      { transform: scale(1.15); opacity: 0.85; }
         }
         .otheo-halo { animation: otheo-halo-pulse 4s ease-in-out infinite; }
+
+        /* Card do resumo — só no mobile/tablet, mesmo vidro fosco da badge
+           "Novidade · Inteligência Artificial" (border + background sutis
+           em rgba), pra dar mais contraste/legibilidade ao parágrafo por
+           cima do vídeo. Em lg+ o texto já tem espaço de sobra ao lado do
+           mockup e volta a ficar solto, sem o card. */
+        .otheo-summary-card {
+          border: 1px solid rgba(255,255,255,0.18);
+          background: rgba(255,255,255,0.08);
+        }
+        @media (min-width: 1024px) {
+          .otheo-summary-card {
+            border: none;
+            background: transparent;
+          }
+        }
       `}</style>
 
       {/*
@@ -198,7 +214,7 @@ function OtheoAiTeaserSection() {
               <img
                 src="/assets/imgs/home/logotheoai.svg"
                 alt="Otheo AI"
-                className="h-8 sm:h-9 w-auto mb-7"
+                className="h-8 sm:h-9 w-auto mb-7 mx-auto lg:mx-0"
                 style={{ filter: "brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0,0,0,0.35))" }}
               />
 
@@ -209,14 +225,16 @@ function OtheoAiTeaserSection() {
                 Seu copiloto de IA na operação do hotel.
               </h2>
 
-              <p
-                className="text-base sm:text-lg leading-relaxed mb-9"
-                style={{ color: "rgba(255,255,255,0.92)", textShadow: "0 1px 14px rgba(0,0,0,0.55)" }}
-              >
-                Abra vendas, feche check-ins, consulte reservas ou gerencie bloqueios,
-                tudo em português, com um comando. O Otheo AI entende sua operação e
-                executa por você.
-              </p>
+              <div className="otheo-summary-card backdrop-blur-sm rounded-2xl px-5 py-4 lg:px-0 lg:py-0 lg:backdrop-blur-none mb-9">
+                <p
+                  className="text-base sm:text-lg leading-relaxed"
+                  style={{ color: "rgba(255,255,255,0.92)", textShadow: "0 1px 14px rgba(0,0,0,0.55)" }}
+                >
+                  Abra vendas, feche check-ins, consulte reservas ou gerencie bloqueios,
+                  tudo em português, com um comando. O Otheo AI entende sua operação e
+                  executa por você.
+                </p>
+              </div>
 
               <Link
                 to="/otheo-ai"

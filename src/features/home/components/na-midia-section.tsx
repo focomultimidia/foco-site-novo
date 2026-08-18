@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { CarouselControls } from "@/features/shared/components/carousel-controls";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { ArrowRight, Newspaper } from "lucide-react";
 import type { ArtigoMidia } from "../types";
 
@@ -139,6 +139,13 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
   );
 }
 
+// ── Swipe (mobile) ───────────────────────────────────────────────────────────
+// Mesmo par de limiares (offset OU velocidade) usado nos outros carrosséis de
+// arrastar do site — cobre tanto o gesto lento e longo quanto o "flick" rápido
+// e curto.
+const SWIPE_OFFSET_THRESHOLD = 60;
+const SWIPE_VELOCITY_THRESHOLD = 400;
+
 // ── Section ───────────────────────────────────────────────────────────────────
 interface NaMidiaSectionProps {
   artigos: ArtigoMidia[];
@@ -150,6 +157,18 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
 
   const prev = () => setCenter(c => (c - 1 + total) % total);
   const next = () => setCenter(c => (c + 1) % total);
+
+  // Arrasta o dedo, não o card em si (dragConstraints trava em 0, dragElastic
+  // só dá uma "borrachinha" — mesma técnica já usada nos carrosséis de swipe
+  // do site): o gesto só decide a direção, quem anima a troca continua sendo
+  // o AnimatePresence de sempre.
+  function handleDragEnd(_event: unknown, info: PanInfo) {
+    if (info.offset.x < -SWIPE_OFFSET_THRESHOLD || info.velocity.x < -SWIPE_VELOCITY_THRESHOLD) {
+      next();
+    } else if (info.offset.x > SWIPE_OFFSET_THRESHOLD || info.velocity.x > SWIPE_VELOCITY_THRESHOLD) {
+      prev();
+    }
+  }
 
   return (
     <section className="py-20 bg-[#f4f7fb] overflow-hidden">
@@ -248,6 +267,12 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -30 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="touch-pan-y"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.12}
+            dragMomentum={false}
+            onDragEnd={handleDragEnd}
           >
             <ArticleCard artigo={artigos[center]} isCenter />
           </motion.div>

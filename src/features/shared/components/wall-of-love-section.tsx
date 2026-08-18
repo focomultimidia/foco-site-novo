@@ -8,6 +8,7 @@ import {
   useMotionTemplate,
   useSpring,
   useReducedMotion,
+  type PanInfo,
 } from "framer-motion";
 import { Play, Star, BadgeCheck, X, Sparkles } from "lucide-react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
@@ -562,6 +563,12 @@ function CarouselCard({
 // rápido o bastante pra nunca parecer parado.
 const AUTOPLAY_DELAY = 4000;
 
+// Mesmo par de limiares (offset OU velocidade) usado nos outros carrosséis de
+// arrastar do site — cobre tanto o gesto lento e longo quanto o "flick"
+// rápido e curto.
+const SWIPE_OFFSET_THRESHOLD = 60;
+const SWIPE_VELOCITY_THRESHOLD = 400;
+
 function TestimonialCarousel({
   cards,
   onOpenVideo,
@@ -582,13 +589,34 @@ function TestimonialCarousel({
   // resto do site porque o card central precisa ficar maior que os das
   // pontas em largura E altura, um layout que o `basis-*` do Embla não
   // expressa.
+  //
+  // Exceção única: enquanto o usuário está com o dedo no palco (arrastando),
+  // o autoplay pausa — sem isso, o avanço automático brigaria com o próprio
+  // gesto de swipe (o card trocaria sozinho no meio do arrasto).
+  const isDraggingRef = useRef(false);
   useEffect(() => {
     if (reduceMotion || total <= 1) return;
     const id = setInterval(() => {
+      if (isDraggingRef.current) return;
       setActiveIndex((i) => mod(i + 1, total));
     }, AUTOPLAY_DELAY);
     return () => clearInterval(id);
   }, [reduceMotion, total]);
+
+  // Swipe (mobile/tablet — abaixo de lg, onde `metrics.showSides` é false e só
+  // o card central aparece). Mesmo par de limiares (offset OU velocidade) dos
+  // outros carrosséis de arrastar do site.
+  function handleDragStart() {
+    isDraggingRef.current = true;
+  }
+  function handleDragEnd(_event: unknown, info: PanInfo) {
+    isDraggingRef.current = false;
+    if (info.offset.x < -SWIPE_OFFSET_THRESHOLD || info.velocity.x < -SWIPE_VELOCITY_THRESHOLD) {
+      goTo(activeIndex + 1);
+    } else if (info.offset.x > SWIPE_OFFSET_THRESHOLD || info.velocity.x > SWIPE_VELOCITY_THRESHOLD) {
+      goTo(activeIndex - 1);
+    }
+  }
 
   if (total === 0) return null;
 
@@ -601,8 +629,8 @@ function TestimonialCarousel({
           central ficava por cima do menu. Isolado, esses z-index só valem
           ENTRE os cards; o palco em si empilha normal (z automático) com o
           resto da página. */}
-      <div
-        className="relative isolate w-full overflow-hidden"
+      <motion.div
+        className="relative isolate w-full overflow-hidden touch-pan-y"
         style={{
           height: metrics.stageHeight,
           ...(metrics.showSides
@@ -612,6 +640,14 @@ function TestimonialCarousel({
               }
             : {}),
         }}
+        // Swipe só abaixo de lg (`!metrics.showSides`) — em desktop os cards
+        // laterais já são clicáveis, arrastar ali competiria com esse gesto.
+        drag={!metrics.showSides ? "x" : false}
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.15}
+        dragMomentum={false}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
       >
         {cards.map((card, i) => (
           <CarouselCard
@@ -622,7 +658,7 @@ function TestimonialCarousel({
             onOpenVideo={onOpenVideo}
           />
         ))}
-      </div>
+      </motion.div>
 
       <div className="flex justify-center mt-9">
         <CarouselControls
