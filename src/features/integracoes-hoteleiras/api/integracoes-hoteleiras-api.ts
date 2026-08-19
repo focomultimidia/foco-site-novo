@@ -152,7 +152,6 @@ const integracoesHoteleirasData: IntegracoesHoteleirasData = {
 };
 
 async function fetchIntegracoesHoteleirasData(): Promise<IntegracoesHoteleirasData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return integracoesHoteleirasData;
 }
 

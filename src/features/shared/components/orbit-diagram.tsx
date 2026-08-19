@@ -236,12 +236,33 @@ function ConnectionLines({
   const edgeLineRefs  = useRef<(SVGLineElement | null)[]>([]);
   const spokeLineRefs = useRef<(SVGLineElement | null)[]>([]);
 
+  // Fora da viewport, o `updateLines` também pausa — medido com trace de
+  // performance: sem isso, `useAnimationFrame` chama `getBoundingClientRect`
+  // em ~9 nós TODO FRAME, pra sempre, mesmo com o diagrama rolado bem longe
+  // da tela. Como isso lê geometria logo depois que os outros motion values
+  // do mesmo componente (ângulos dos badges, glow) já escreveram no style
+  // no mesmo frame, força um reflow síncrono a cada leitura — medido: 3,671ms
+  // de forced reflow só deste componente sob throttling pesado. Mesmo padrão
+  // de correção já aplicado no autoplay do WallOfLoveSection.
+  const isVisibleRef = useRef(false);
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [containerRef]);
+
   // Sem `size` fixo: o container é responsivo (420px mobile / 480px lg+,
   // ver OrbitDiagram), então o centro/coordenadas vêm da largura REAL lida
   // a cada frame — sem viewBox no <svg>, 1 unidade = 1px do próprio
   // tamanho renderizado (que acompanha o container via `inset-0 w-full
   // h-full`), então bate certinho em qualquer breakpoint.
   const updateLines = () => {
+    if (!isVisibleRef.current) return;
     const container = containerRef.current;
     if (!container) return;
     const rect = container.getBoundingClientRect();

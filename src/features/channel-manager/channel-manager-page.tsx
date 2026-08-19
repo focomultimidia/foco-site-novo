@@ -69,7 +69,7 @@ function ChannelManagerPage() {
       {/* Diagnóstico: baixa ocupação (mesmo cenário da home) */}
       <DorParallaxSection
         dorId="baixa-ocupacao"
-        backgroundImage="/assets/imgs/motor-de-reservas/dor.jpg"
+        backgroundImage="/assets/imgs/motor-de-reservas/dor.webp"
         backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
       />
 

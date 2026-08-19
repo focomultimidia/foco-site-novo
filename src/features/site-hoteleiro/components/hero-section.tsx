@@ -9,8 +9,8 @@ interface HeroSectionProps {
   onCtaClick?: () => void;
 }
 
-const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/site-hoteleiro.jpg", alt: "Site Hoteleiro" };
-const MOBILE_IMAGE = { src: "/assets/imgs/produtos/site-mobile.jpg", alt: "Site Hoteleiro no mobile" };
+const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/site-hoteleiro.webp", alt: "Site Hoteleiro" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/site-mobile.webp", alt: "Site Hoteleiro no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },

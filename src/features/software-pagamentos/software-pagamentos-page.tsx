@@ -66,13 +66,13 @@ function SoftwarePagamentosPage() {
         {...INFO_SECTIONS.softwarePagamentos}
         imageSide="right"
         showMockup
-        desktopMockupSrc="/assets/imgs/software-de-pagamento/transacoes.png"
+        desktopMockupSrc="/assets/imgs/software-de-pagamento/transacoes.webp"
       />
 
       {/* Diagnóstico: prejuízos na gestão (mesmo cenário da home) */}
       <DorParallaxSection
         dorId="prejuizos"
-        backgroundImage="/assets/imgs/gestao-hoteleira-pms/dor.jpg"
+        backgroundImage="/assets/imgs/gestao-hoteleira-pms/dor.webp"
         backgroundAlt="Hoteleiro estressado diante de um relatório financeiro com prejuízo operacional"
       />
 

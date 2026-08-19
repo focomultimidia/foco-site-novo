@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/motor-de-reservas.webp", alt: "Motor de Reservas" };
-const MOBILE_IMAGE = { src: "/assets/imgs/produtos/motor-mobile.jpg", alt: "Motor de Reservas no mobile" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/motor-mobile.webp", alt: "Motor de Reservas no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },

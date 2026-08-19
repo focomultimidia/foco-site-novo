@@ -121,7 +121,6 @@ const crmHoteleiroData: CrmHoteleiroData = {
 };
 
 async function fetchCrmHoteleiroData(): Promise<CrmHoteleiroData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return crmHoteleiroData;
 }
 

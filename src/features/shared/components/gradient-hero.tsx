@@ -161,7 +161,10 @@ function GradientHero({
             )}
 
             <motion.h1
-              initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+              // É o LCP da página (channel-manager) — não pode nascer com
+              // opacity:0, senão o paint fica refém da animação. Mesmo ajuste
+              // do hero-section.tsx da home / home-style-hero.tsx.
+              initial={false}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
               className="font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] text-white mb-4 leading-[1.08] tracking-tighter antialiased"

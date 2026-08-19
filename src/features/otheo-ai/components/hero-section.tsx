@@ -165,7 +165,7 @@ function HeroSection() {
                   style={{ aspectRatio: "738 / 1456" }}
                 >
                   <img
-                    src="/assets/imgs/otheo-ai/mockup.png"
+                    src="/assets/imgs/otheo-ai/mockup.webp"
                     alt="Otheo AI listando reservas com check-in hoje, direto no chat"
                     className="absolute inset-0 w-full h-full object-cover"
                   />
@@ -190,7 +190,7 @@ function HeroSection() {
                   style={{ aspectRatio: "738 / 1456" }}
                 >
                   <img
-                    src="/assets/imgs/home/otheoai/chat-ia.jpg"
+                    src="/assets/imgs/home/otheoai/chat-ia.webp"
                     alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
                     className="absolute inset-0 w-full h-full object-cover"
                   />

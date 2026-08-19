@@ -124,7 +124,6 @@ const motorReservasData: MotorReservasData = {
 };
 
 async function fetchMotorReservasData(): Promise<MotorReservasData> {
-  await new Promise((resolve) => setTimeout(resolve, 500));
   return motorReservasData;
 }
 

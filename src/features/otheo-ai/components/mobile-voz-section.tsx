@@ -82,7 +82,7 @@ function MobileVozSection() {
                   por completo em vez de ficar só parada. */}
               <div className="absolute inset-0">
                 <img
-                  src="/assets/imgs/otheo-ai/hoteleiro-uber.jpg"
+                  src="/assets/imgs/otheo-ai/hoteleiro-uber.webp"
                   alt="Hoteleiro no banco de trás de um carro, à noite, perguntando algo por voz no celular"
                   loading="lazy"
                   decoding="async"

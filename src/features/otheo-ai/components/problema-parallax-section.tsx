@@ -52,7 +52,7 @@ function ProblemaParallaxSection() {
               em opacidade total; só a posição (`y`) reage ao scroll. */}
           <motion.div style={{ y }} className="absolute -top-[10%] left-0 right-0 h-[120%]">
             <img
-              src="/assets/imgs/otheo-ai/bkg-hoteleiro-cansado.jpg"
+              src="/assets/imgs/otheo-ai/bkg-hoteleiro-cansado.webp"
               alt="Hoteleiro cansado, de madrugada, consultando sistemas do hotel em dois notebooks"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover object-[62%_34%]"

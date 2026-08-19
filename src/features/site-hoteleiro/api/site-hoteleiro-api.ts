@@ -121,7 +121,6 @@ const siteHoteleiroData: SiteHoteleiroData = {
 };
 
 async function fetchSiteHoteleiroData(): Promise<SiteHoteleiroData> {
-  await new Promise((resolve) => setTimeout(resolve, 500));
   return siteHoteleiroData;
 }
 

@@ -266,7 +266,11 @@ function HomeStyleHero({
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+          // É o LCP de cada página que usa este hero compartilhado — não pode
+          // nascer com opacity:0, senão o paint fica refém da animação (até
+          // 1,3s de atraso: duration 1.0 + delay 0.3, somado ao tempo real de
+          // mount). Mesmo ajuste do hero-section.tsx da home.
+          initial={false}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
           style={isWideLayout ? { fontSize: fluidRem(3.8) } : undefined}

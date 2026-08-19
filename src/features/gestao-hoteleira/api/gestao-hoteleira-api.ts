@@ -163,7 +163,6 @@ const gestaoHoteleiraData: GestaoHoteleiraData = {
 };
 
 async function fetchGestaoHoteleiraData(): Promise<GestaoHoteleiraData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return gestaoHoteleiraData;
 }
 

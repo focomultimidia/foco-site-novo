@@ -62,9 +62,9 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/channel-manager",
     ctaLabel: "Quero vender em +850 canais",
     Icone: Globe,
-    imagem: "/assets/imgs/produtos/channel-manager.png",
-    screenshot: "/assets/imgs/produtos/channel-manager.png",
-    mobileScreenshot: "/assets/imgs/home/produtos/mobile-channel-manager.png",
+    imagem: "/assets/imgs/produtos/channel-manager.webp",
+    screenshot: "/assets/imgs/produtos/channel-manager.webp",
+    mobileScreenshot: "/assets/imgs/home/produtos/mobile-channel-manager.webp",
     bkgImagem: "/assets/imgs/channel-manager/bkg-accordion.webp",
     accent: "#60a5fa",
     overlay: "from-blue-950/85 to-blue-900/25",
@@ -79,7 +79,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Calendar,
     imagem: "/assets/imgs/produtos/motor-de-reservas.webp",
     screenshot: "/assets/imgs/produtos/motor-de-reservas.webp",
-    mobileScreenshot: "/assets/imgs/produtos/motor-mobile.jpg",
+    mobileScreenshot: "/assets/imgs/produtos/motor-mobile.webp",
     bkgImagem: "/assets/imgs/motor-de-reservas/bkg-accordion.webp",
     accent: "#34d399",
     overlay: "from-emerald-950/85 to-emerald-900/25",
@@ -92,9 +92,9 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/gestao-hoteleira",
     ctaLabel: "Automatizar minha operação agora",
     Icone: LayoutGrid,
-    imagem: "/assets/imgs/produtos/mapa.png",
-    screenshot: "/assets/imgs/produtos/mapa.png",
-    mobileScreenshot: "/assets/imgs/produtos/mobile-mapa-uh.png",
+    imagem: "/assets/imgs/produtos/mapa.webp",
+    screenshot: "/assets/imgs/produtos/mapa.webp",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-mapa-uh.webp",
     bkgImagem: "/assets/imgs/gestao-hoteleira-pms/bkg-accordion.webp",
     accent: "#a78bfa",
     overlay: "from-violet-950/85 to-violet-900/25",
@@ -108,8 +108,8 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     ctaLabel: "Quero um site que vende de verdade",
     Icone: Monitor,
     imagem: "/assets/imgs/produtos/site-hoteleiro.webp",
-    screenshot: "/assets/imgs/produtos/site-hoteleiro.jpg",
-    mobileScreenshot: "/assets/imgs/produtos/site-mobile.jpg",
+    screenshot: "/assets/imgs/produtos/site-hoteleiro.webp",
+    mobileScreenshot: "/assets/imgs/produtos/site-mobile.webp",
     bkgImagem: "/assets/imgs/site-hoteleiro/bkg-accordion.webp",
     accent: "#fbbf24",
     overlay: "from-amber-950/85 to-amber-900/25",
@@ -122,9 +122,9 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/software-de-pagamentos",
     ctaLabel: "Automatizar cobranças e zerar calotes",
     Icone: CreditCard,
-    imagem: "/assets/imgs/produtos/focopay.png",
-    screenshot: "/assets/imgs/produtos/focopay.png",
-    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.png",
+    imagem: "/assets/imgs/produtos/focopay.webp",
+    screenshot: "/assets/imgs/produtos/focopay.webp",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.webp",
     bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.webp",
     accent: "#22d3ee",
     overlay: "from-cyan-950/85 to-cyan-900/25",
@@ -165,14 +165,14 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     link: "/otheo-ai",
     ctaLabel: "Quero saber como funciona",
     Icone: Bot,
-    imagem: "/assets/imgs/home/otheoai/chat-ia.jpg",
+    imagem: "/assets/imgs/home/otheoai/chat-ia.webp",
     // Mesmo print real usado no mockup da hero de /otheo-ai e no
     // OtheoAiTeaserSection — não existe (ainda) um dashboard desktop do
     // Otheo AI, só a tela de chat (retrato). Os 3 componentes que
     // realmente renderizam isso hoje (StagePanel, ScrollContentBlock
     // mobile, SoftwareProductsCarousel) já lidam bem com uma imagem em pé
     // (contain/crop pelo topo), sem quebrar layout.
-    screenshot: "/assets/imgs/home/otheoai/chat-ia.jpg",
+    screenshot: "/assets/imgs/home/otheoai/chat-ia.webp",
     // Mesma estrutura de mockups empilhados/sobrepostos da Experiência do
     // Hóspede (DuoPhoneStage no desktop, mesmos celulares brancos do
     // TriplePhoneStage), só que com 2 telas em vez de 3 — o Otheo AI só tem
@@ -181,14 +181,14 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // celular de trás (menor/atrás), o segundo pro da frente (grande,
     // destaque) — ver DuoPhoneStage em product-showcase.tsx.
     mockups: [
-      { src: "/assets/imgs/otheo-ai/mockup.png", alt: "Otheo AI listando reservas com check-in hoje, direto no chat" },
-      { src: "/assets/imgs/home/otheoai/chat-ia.jpg", alt: "Otheo AI respondendo um comando na extranet do hotel, via chat" },
+      { src: "/assets/imgs/otheo-ai/mockup.webp", alt: "Otheo AI listando reservas com check-in hoje, direto no chat" },
+      { src: "/assets/imgs/home/otheoai/chat-ia.webp", alt: "Otheo AI respondendo um comando na extranet do hotel, via chat" },
     ],
     // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
     // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro
     // resolvendo por voz no carro) em vez de cair no fallback pro
     // screenshot de chat (que ficaria ruim esticado como plano de fundo).
-    bkgImagem: "/assets/imgs/otheo-ai/hoteleiro-uber.jpg",
+    bkgImagem: "/assets/imgs/otheo-ai/hoteleiro-uber.webp",
     accent: "#fccc30",
     overlay: "from-yellow-950/85 to-yellow-900/25",
     beta: true,

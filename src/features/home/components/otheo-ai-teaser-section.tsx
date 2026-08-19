@@ -294,7 +294,7 @@ function OtheoAiTeaserSection() {
                   style={{ aspectRatio: "738 / 1456" }}
                 >
                   <img
-                    src="/assets/imgs/home/otheoai/chat-ia.jpg"
+                    src="/assets/imgs/home/otheoai/chat-ia.webp"
                     alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
                     loading="lazy"
                     decoding="async"

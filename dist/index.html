@@ -7,6 +7,33 @@
     <meta name="description" content="Ecossistema completo de tecnologia hoteleira: Site Hoteleiro, Motor de Reservas, Channel Manager, Gestão Hoteleira (PMS), Software de Pagamentos, CRM Hoteleiro e Experiência do Hóspede, tudo integrado em uma única plataforma." />
     <link rel="icon" type="image/webp" href="./assets/imgs/logo/foco.webp" />
 
+    <!-- Preload da imagem do mockup da hero (LCP da home) — medido com trace
+         de performance: sob throttling pesado, o elemento de LCP (a <img>
+         do mockup, não o H1) só entra no DOM depois que o bundle JS baixa,
+         faz parse e o React monta o componente — o "preload scanner" do
+         navegador nunca vê essa URL no HTML bruto, então o pedido de rede
+         só começa aos ~12s (medido: 11.897ms de "Load delay" isolado, de um
+         LCP total de 14.465ms). Como é uma SPA sem SSR/prerender por rota
+         (um único index.html pra todas as rotas), um <link rel=preload>
+         estático aqui preloadaria essa imagem em TODAS as páginas — por
+         isso o script só injeta o link quando a rota atual é a home,
+         rodando síncrono durante o parse do HTML (antes do bundle
+         carregar), bem cedo o bastante pro navegador começar o fetch em
+         paralelo com o JS. -->
+    <script>
+    (function () {
+      if (location.pathname === '/') {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = '/assets/imgs/home/dashboard.webp';
+        link.type = 'image/webp';
+        link.fetchPriority = 'high';
+        document.head.appendChild(link);
+      }
+    })();
+    </script>
+
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Foco Tecnologia" />
@@ -22,15 +49,61 @@
     <meta name="twitter:description" content="Ecossistema completo de tecnologia hoteleira: Site Hoteleiro, Motor de Reservas, Channel Manager, Gestão Hoteleira (PMS), Software de Pagamentos, CRM Hoteleiro e Experiência do Hóspede, tudo integrado em uma única plataforma." />
     <meta name="twitter:image" content="https://focomultimidia.com/og-image.jpg" />
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-ND5D5HX');</script>
+    <!-- Google Tag Manager — carregamento adiado de propósito.
+         Medido com trace de performance: o container GTM-ND5D5HX dispara
+         mais de 30 tags de terceiros no carregamento (2 propriedades GA4,
+         Universal Analytics legado, Facebook Pixel, LinkedIn Insight 2x,
+         Bing Ads, vários pixels do Google Ads, Neurolead) — juntos, competem
+         pela thread principal bem na janela crítica do LCP. Não dá pra podar
+         tags daqui (isso mora na UI do GTM, não no código), então a saída é
+         não competir com o carregamento crítico da página.
+
+         Tentativa 1 (histórico): disparar no evento `load` — não resolveu,
+         porque `load` também fica refém do mesmo congestionamento (sob
+         throttling pesado, só dispara depois de ~19s).
+         Tentativa 2 (histórico): `requestIdleCallback` — pior ainda: medido
+         com trace sob throttling de 4x CPU, o GTM carregava praticamente
+         JUNTO com o bundle principal (~1-2s), não depois de 5s como o
+         `timeout` sugeria. Causa raiz: `requestIdleCallback` dispara em
+         QUALQUER intervalo ocioso, e sob carga pesada a thread tem VÁRIOS
+         intervalos curtos entre uma long task e outra — cada um já conta
+         como "ocioso" o bastante pra disparar o callback, então na prática
+         ele quase nunca espera o `timeout` de verdade.
+         Tentativa 3 (atual): `setTimeout` puro — diferente de
+         `requestIdleCallback`, `setTimeout` tem garantia de atraso MÍNIMO
+         (só executa depois que o tempo do relógio passou, não aproveita
+         brechas ociosas pra disparar cedo). Continua disparando também na
+         primeira interação do usuário (scroll, clique, tecla, toque), o que
+         vier primeiro. `dataLayer` já nasce pronto pra qualquer push futuro
+         não se perder enquanto o GTM ainda não carregou. -->
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    (function () {
+      var GTM_ID = 'GTM-ND5D5HX';
+      var loaded = false;
+      var events = ['scroll', 'mousemove', 'keydown', 'touchstart', 'click'];
+
+      function loadGTM() {
+        if (loaded) return;
+        loaded = true;
+        events.forEach(function (evt) { window.removeEventListener(evt, loadGTM); });
+        clearTimeout(fallbackTimer);
+
+        window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = document.getElementsByTagName('script')[0];
+        var j = document.createElement('script');
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+        f.parentNode.insertBefore(j, f);
+      }
+
+      events.forEach(function (evt) { window.addEventListener(evt, loadGTM, { passive: true }); });
+      var fallbackTimer = setTimeout(loadGTM, 5000);
+    })();
+    </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="./assets/index-BGjmK_kt.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D-ooTyC2.css">
+    <script type="module" crossorigin src="./assets/index-P1nBIGiq.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CWQO9SGs.css">
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

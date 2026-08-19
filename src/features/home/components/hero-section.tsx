@@ -48,7 +48,7 @@ interface SlideDef {
 }
 
 const DESKTOP_SLIDE: SlideDef = {
-  src: "/assets/imgs/home/dashboard.png",
+  src: "/assets/imgs/home/dashboard.webp",
   alt: "Ecossistema Foco Tecnologia conectando sistemas de gestão hoteleira em uma única plataforma",
 };
 
@@ -241,7 +241,10 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30, filter: "blur(14px)" }}
+          // É o LCP da home (medido com trace de performance) — não pode nascer
+          // com opacity:0, senão o paint fica refém da animação (até 1,3s de
+          // atraso: duration 1.0 + delay 0.3, somado ao tempo real de mount).
+          initial={false}
           animate={{ opacity: 1, y: 0,  filter: "blur(0px)" }}
           transition={{ duration: 1.0, delay: 0.3, ease: EASE }}
           style={isWideLayout ? { fontSize: fluidRem(3.8) } : undefined}

@@ -59,7 +59,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
   "baixa-ocupacao": {
     Icon: TrendingDown,
     kicker: "Ocupação & Reservas",
-    imagem: "/assets/imgs/home/dores/hotel-vazio.jpg",
+    imagem: "/assets/imgs/home/dores/hotel-vazio.webp",
     imagemAlt: "Hotel com piscina buscando aumentar sua taxa de ocupação",
     stat: { Icon: Globe, value: "+850", label: "canais conectados" },
     solucaoIcons: [Globe, Layout, Target, Zap],
@@ -70,7 +70,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
   prejuizos: {
     Icon: AlertTriangle,
     kicker: "Gestão & Prejuízos",
-    imagem: "/assets/imgs/home/dores/prejuizo.jpg",
+    imagem: "/assets/imgs/home/dores/prejuizo.webp",
     imagemAlt: "Painel de gestão hoteleira Foco centralizando reservas e financeiro",
     stat: { Icon: Cloud, value: "100%", label: "PMS em nuvem" },
     solucaoIcons: [Cloud, CreditCard, Headset, Plug],
@@ -81,7 +81,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
   "experiencia-ruim": {
     Icon: Frown,
     kicker: "Experiência do Hóspede",
-    imagem: "/assets/imgs/home/dores/hospedes-insatisfeitos.jpg",
+    imagem: "/assets/imgs/home/dores/hospedes-insatisfeitos.webp",
     imagemAlt: "Aplicativo de hotel Foco Pass para check-in antecipado do hóspede",
     stat: { Icon: Smartphone, value: "100%", label: "check-in digital" },
     solucaoIcons: [Star, Smartphone, MessageCircle, Percent],

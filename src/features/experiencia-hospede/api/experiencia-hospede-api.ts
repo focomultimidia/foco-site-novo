@@ -127,7 +127,6 @@ const experienciaHospedeData: ExperienciaHospedeData = {
 };
 
 async function fetchExperienciaHospedeData(): Promise<ExperienciaHospedeData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return experienciaHospedeData;
 }
 

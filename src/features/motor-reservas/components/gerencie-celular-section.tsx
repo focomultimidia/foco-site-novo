@@ -16,10 +16,10 @@ import {
 
 // Mobile screenshots cycling on the central phone
 const SLIDES = [
-  "/assets/imgs/channel-manager/aplicativo-hotel/calendario.png",
-  "/assets/imgs/channel-manager/aplicativo-hotel/mapa.png",
-  "/assets/imgs/channel-manager/aplicativo-hotel/multiplus-envios.png",
-  "/assets/imgs/channel-manager/aplicativo-hotel/dashboard.png",
+  "/assets/imgs/channel-manager/aplicativo-hotel/calendario.webp",
+  "/assets/imgs/channel-manager/aplicativo-hotel/mapa.webp",
+  "/assets/imgs/channel-manager/aplicativo-hotel/multiplus-envios.webp",
+  "/assets/imgs/channel-manager/aplicativo-hotel/dashboard.webp",
 ];
 
 // Original text list preserved exactly, icons mapped per meaning
@@ -151,7 +151,7 @@ function PhoneTrio() {
           transition={{ duration: 5.9, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
           style={{ rotate: -11 }}
         >
-          <PhoneShell image="/assets/imgs/channel-manager/aplicativo-hotel/multiplus-envios.png" size="sm" />
+          <PhoneShell image="/assets/imgs/channel-manager/aplicativo-hotel/multiplus-envios.webp" size="sm" />
         </motion.div>
       </motion.div>
 
@@ -186,7 +186,7 @@ function PhoneTrio() {
           transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.7 }}
           style={{ rotate: 11 }}
         >
-          <PhoneShell image="/assets/imgs/channel-manager/aplicativo-hotel/mapa.png" size="sm" />
+          <PhoneShell image="/assets/imgs/channel-manager/aplicativo-hotel/mapa.webp" size="sm" />
         </motion.div>
       </motion.div>
 

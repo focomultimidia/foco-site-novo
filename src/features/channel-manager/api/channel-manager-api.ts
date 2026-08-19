@@ -96,7 +96,6 @@ const channelManagerData: ChannelManagerData = {
 };
 
 async function fetchChannelManagerData(): Promise<ChannelManagerData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return channelManagerData;
 }
 

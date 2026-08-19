@@ -70,7 +70,7 @@ function ExperienciaHospedePage() {
       {/* Diagnóstico: experiência ruim do hóspede (mesmo cenário da home) */}
       <DorParallaxSection
         dorId="experiencia-ruim"
-        backgroundImage="/assets/imgs/experiencia-do-hospede/dor.jpg"
+        backgroundImage="/assets/imgs/experiencia-do-hospede/dor.webp"
         backgroundAlt="Família insatisfeita chegando ao hotel com malas, recepcionista ao fundo"
       />
 

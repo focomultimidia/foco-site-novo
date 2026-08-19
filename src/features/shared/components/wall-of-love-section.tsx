@@ -594,10 +594,31 @@ function TestimonialCarousel({
   // o autoplay pausa — sem isso, o avanço automático brigaria com o próprio
   // gesto de swipe (o card trocaria sozinho no meio do arrasto).
   const isDraggingRef = useRef(false);
+
+  // Fora da viewport, o autoplay também pausa — o usuário não está vendo
+  // (não é o "nunca pausa" do hover, que é sobre estar OLHANDO e mesmo assim
+  // continuar), mas cada tick ainda dispara toda a física de spring (`x`,
+  // `scaleX`, `scaleY`, `opacity`) dos cards, mesmo invisível. Medido em
+  // isolamento: essa seção sozinha responde por ~28% do tempo de bloqueio da
+  // thread principal sob throttling — boa parte disso é o carrossel girando
+  // sem ninguém olhar, rolado bem abaixo da dobra.
+  const stageRef = useRef<HTMLDivElement>(null);
+  const isVisibleRef = useRef(false);
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { isVisibleRef.current = entry.isIntersecting; },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     if (reduceMotion || total <= 1) return;
     const id = setInterval(() => {
-      if (isDraggingRef.current) return;
+      if (isDraggingRef.current || !isVisibleRef.current) return;
       setActiveIndex((i) => mod(i + 1, total));
     }, AUTOPLAY_DELAY);
     return () => clearInterval(id);
@@ -630,6 +651,7 @@ function TestimonialCarousel({
           ENTRE os cards; o palco em si empilha normal (z automático) com o
           resto da página. */}
       <motion.div
+        ref={stageRef}
         className="relative isolate w-full overflow-hidden touch-pan-y"
         style={{
           height: metrics.stageHeight,

@@ -121,7 +121,6 @@ const softwarePagamentosData: SoftwarePagamentosData = {
 };
 
 async function fetchSoftwarePagamentosData(): Promise<SoftwarePagamentosData> {
-  await new Promise((resolve) => setTimeout(resolve, 800));
   return softwarePagamentosData;
 }
 

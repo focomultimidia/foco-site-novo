@@ -47,7 +47,7 @@ const CARD_SHADOW =
 
 // ── Media ─────────────────────────────────────────────────────────────────────
 const VIDEO_SRC = "/assets/videos/software-de-pagamento/tablet.mp4";
-const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.png";
+const IMAGE_SRC = "/assets/imgs/software-de-pagamento/software-de-pagamento.webp";
 
 // ── Section ───────────────────────────────────────────────────────────────────
 function PorQueSection() {

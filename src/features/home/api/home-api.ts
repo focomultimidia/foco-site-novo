@@ -297,7 +297,6 @@ const homeData: HomeData = {
 };
 
 async function fetchHomeData(): Promise<HomeData> {
-  await new Promise((resolve) => setTimeout(resolve, 600));
   return homeData;
 }
 

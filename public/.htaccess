@@ -1,0 +1,53 @@
+# ── Cache — resolve o audit "Use ciclos de vida eficientes de cache" do
+#    PageSpeed Insights (1.822 KiB de economia estimada, TTL "None" em
+#    praticamente todo asset próprio). Nada disso existia antes: sem
+#    Cache-Control, o navegador rebaixa a revalidação de tudo a cada visita.
+#
+#    O Vite já cuida do cache-busting sozinho — cada build gera nomes com
+#    hash de conteúdo (ex.: index-C2nDYNuk.js). Um arquivo com hash NUNCA
+#    muda de conteúdo sob o mesmo nome (se o conteúdo mudar, o hash muda
+#    junto), então pode ficar em cache pelo máximo período com "immutable"
+#    sem risco de servir versão desatualizada. O único arquivo que NÃO pode
+#    cachear assim é o index.html raiz — ele referencia os hashes atuais, e
+#    precisa ser revalidado a cada deploy.
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Assets com hash no nome (JS/CSS/imagens/fontes de build) — 1 ano, immutable.
+  <FilesMatch "\.(js|css|woff2?|ttf|eot)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  <FilesMatch "\.(jpg|jpeg|png|webp|gif|svg|ico)$">
+    ExpiresDefault "access plus 1 year"
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # HTML — sempre revalidado (referencia os hashes da build atual).
+  <FilesMatch "\.html$">
+    ExpiresDefault "access plus 0 seconds"
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+
+  # robots.txt / sitemap.xml — podem mudar, cache curto é suficiente.
+  <FilesMatch "\.(txt|xml)$">
+    ExpiresDefault "access plus 1 hour"
+  </FilesMatch>
+</IfModule>
+
+# ── Compressão — reduz o peso de transferência de texto (JS/CSS/HTML/SVG). ──
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+
+# ── SPA fallback — todas as rotas do React Router caem no mesmo index.html
+#    (sem isso, recarregar/entrar direto em /channel-manager etc. dá 404 no
+#    Apache, que tenta achar um arquivo real com esse nome). ──────────────
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>

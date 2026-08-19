@@ -50,7 +50,10 @@ export function LineReveal({ children, delay = 0 }: { children: React.ReactNode;
     <span className="block overflow-hidden">
       <motion.span
         className="block"
-        initial={{ y: "108%", opacity: 0 }}
+        // Único uso hoje é o H1 da hero de /sobre-nos (o LCP da página) — não
+        // pode nascer clipado/opacity:0, senão o paint fica refém da
+        // animação. Mesmo ajuste aplicado aos outros heroes do site.
+        initial={false}
         animate={{ y: "0%", opacity: 1 }}
         transition={{ duration: 0.84, delay, ease: [0.16, 1, 0.3, 1] }}
       >

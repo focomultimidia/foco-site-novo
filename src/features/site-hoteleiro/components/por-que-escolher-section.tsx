@@ -17,35 +17,35 @@ const BENEFICIOS = [
     titulo: "Site 100% integrado com o motor de reservas",
     descricao:
       "Eliminamos distrações como links externos e abas múltiplas. O hóspede navega com foco e reserva com rapidez.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/motor-integrado.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/motor-integrado.webp",
   },
   {
     icon: Search,
     titulo: "SEO e indexação orgânica no Google",
     descricao:
       "Seu site aparece nas buscas certas, com performance técnica e conteúdo otimizado para ranquear.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/seo.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/seo.webp",
   },
   {
     icon: Palette,
     titulo: "Layouts personalizados com a cara do seu hotel",
     descricao:
       "Escolha um layout exclusivo que valorize sua marca e reflita a experiência que você oferece.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/layouts-personalizados.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/layouts-personalizados.webp",
   },
   {
     icon: TrendingUp,
     titulo: "Páginas de vendas com foco em conversão",
     descricao:
       "Criamos fluxos de navegação que conduzem o hóspede direto às promoções e pacotes ideais.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/vendas-conversao.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/vendas-conversao.webp",
   },
   {
     icon: Shield,
     titulo: "Performance, velocidade e segurança",
     descricao:
       "Seu site carrega em segundos e oferece uma jornada confiável, com os padrões mais avançados da web.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/velocidade.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/velocidade.webp",
   },
   {
     icon: Building,

@@ -341,7 +341,7 @@ function DeviceMockups({ animated }: { animated: boolean }) {
 
           <div className="absolute inset-x-0 bottom-0 top-7 overflow-hidden">
             <img
-              src="/assets/imgs/produtos/channel-manager.png"
+              src="/assets/imgs/produtos/channel-manager.webp"
               alt="Captura de tela do Channel Manager"
               decoding="async"
               className="w-full h-full object-cover object-top"
@@ -383,7 +383,7 @@ function DeviceMockups({ animated }: { animated: boolean }) {
           <div className="relative w-full h-full rounded-[21px] overflow-hidden bg-white ring-1 ring-black/5">
             <div className="absolute top-2 left-1/2 -translate-x-1/2 w-7 h-[6px] rounded-full bg-black/70 z-10" />
             <img
-              src="/assets/imgs/home/produtos/mobile-channel-manager.png"
+              src="/assets/imgs/home/produtos/mobile-channel-manager.webp"
               alt="Tela mobile do Channel Manager"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover"
@@ -544,7 +544,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
             <span className="w-2 h-2 rounded-full bg-[#28c840]" />
           </div>
           <img
-            src="/assets/imgs/produtos/channel-manager.png"
+            src="/assets/imgs/produtos/channel-manager.webp"
             alt="Captura de tela do Channel Manager"
             decoding="async"
             className="w-full h-auto object-cover object-top"
@@ -569,7 +569,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
             >
               <div className="absolute top-1.5 left-1/2 -translate-x-1/2 w-5 h-[5px] rounded-full bg-black/70 z-10" />
               <img
-                src="/assets/imgs/home/produtos/mobile-channel-manager.png"
+                src="/assets/imgs/home/produtos/mobile-channel-manager.webp"
                 alt="Tela mobile do Channel Manager"
                 decoding="async"
                 className="absolute inset-0 w-full h-full object-cover"

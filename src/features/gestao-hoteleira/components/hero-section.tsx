@@ -9,8 +9,8 @@ interface HeroSectionProps {
   onCtaClick?: () => void;
 }
 
-const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/mapa.png", alt: "PMS e Integrações" };
-const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-mapa-uh.png", alt: "PMS e Integrações no mobile" };
+const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/mapa.webp", alt: "PMS e Integrações" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-mapa-uh.webp", alt: "PMS e Integrações no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },

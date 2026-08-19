@@ -9,8 +9,8 @@ interface HeroSectionProps {
   onCtaClick?: () => void;
 }
 
-const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/focopay.png", alt: "Software de Pagamentos" };
-const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-focopay.png", alt: "Software de Pagamentos no mobile" };
+const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/focopay.webp", alt: "Software de Pagamentos" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-focopay.webp", alt: "Software de Pagamentos no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },
