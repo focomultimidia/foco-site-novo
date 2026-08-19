@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ExternalLink } from "lucide-react";
 import {
   Carousel,
@@ -54,6 +54,8 @@ function WebsitePortfolioCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!api) return;
@@ -62,12 +64,34 @@ function WebsitePortfolioCarousel() {
     api.on("select", () => setCurrent(api.selectedScrollSnap()));
   }, [api]);
 
+  // Autoplay do Embla pausa fora da viewport — mesmo padrão já usado no
+  // WallOfLoveSection/ExperienciasSection/RecursosGridSection: sem isso, o
+  // plugin Autoplay do embla-carousel roda pra sempre em background (timer +
+  // scroll animado a cada 4s), mesmo com o carrossel rolado bem longe da tela.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const autoplay = api?.plugins()?.autoplay;
+    if (!autoplay) return;
+    if (isVisible) autoplay.play();
+    else autoplay.stop();
+  }, [api, isVisible]);
+
   const scrollTo = useCallback((index: number) => api?.scrollTo(index), [api]);
 
   return (
     // O PNG de fundo saiu: a superfície é #f4f7fb e os modelos de site
     // passam a ser as únicas peças com imagem — sem competição visual.
-    <section className="py-20 relative flex overflow-hidden bg-[#f4f7fb]">
+    <section ref={sectionRef} className="py-20 relative flex overflow-hidden bg-[#f4f7fb]">
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

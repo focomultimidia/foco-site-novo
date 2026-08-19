@@ -26,6 +26,7 @@ const IntegracoesHoteleirasPage = lazy(() => import('./features/integracoes-hote
 const CrmHoteleiroPage = lazy(() => import('./features/crm-hoteleiro/crm-hoteleiro-page').then((m) => ({ default: m.CrmHoteleiroPage })));
 const OtheoAiPage = lazy(() => import('./features/otheo-ai/otheo-ai-page').then((m) => ({ default: m.OtheoAiPage })));
 const SobrePage = lazy(() => import('./features/sobre/sobre-page').then((m) => ({ default: m.SobrePage })));
+const MarketingParaHoteisPage = lazy(() => import('./features/marketing-para-hoteis/marketing-para-hoteis-page').then((m) => ({ default: m.MarketingParaHoteisPage })));
 const PoliticaDePrivacidadePage = lazy(() => import('./features/politica-de-privacidade/politica-de-privacidade-page').then((m) => ({ default: m.PoliticaDePrivacidadePage })));
 const NotFoundPage = lazy(() => import('./features/ui/not-found-page').then((m) => ({ default: m.NotFoundPage })));
 
@@ -60,6 +61,7 @@ function App() {
                 <Route path="/crm-hoteleiro" element={<CrmHoteleiroPage />} />
                 <Route path="/otheo-ai" element={<OtheoAiPage />} />
                 <Route path="/sobre" element={<SobrePage />} />
+                <Route path="/marketing-para-hoteis" element={<MarketingParaHoteisPage />} />
                 <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidadePage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>

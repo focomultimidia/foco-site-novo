@@ -11,7 +11,7 @@
  * picture, so nothing here can drift out of sync with the copy.
  */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
 import {
@@ -263,6 +263,8 @@ function SoftwareProductsCarousel() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (!api) return;
@@ -271,12 +273,34 @@ function SoftwareProductsCarousel() {
     api.on("select", () => setCurrent(api.selectedScrollSnap()));
   }, [api]);
 
+  // Autoplay do Embla pausa fora da viewport — mesmo padrão já usado no
+  // WallOfLoveSection/WebsitePortfolioCarousel: sem isso, o plugin Autoplay
+  // roda pra sempre em background, mesmo com o carrossel rolado bem longe
+  // da tela.
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const autoplay = api?.plugins()?.autoplay;
+    if (!autoplay) return;
+    if (isVisible) autoplay.play();
+    else autoplay.stop();
+  }, [api, isVisible]);
+
   const scrollTo = useCallback((i: number) => api?.scrollTo(i), [api]);
 
   return (
     // overflow-hidden lets the carousel viewport below expand past the
     // container's gutter without adding a horizontal scrollbar to the page.
-    <section className="overflow-hidden bg-[#f4f7fb] py-20 lg:py-24">
+    <section ref={sectionRef} className="overflow-hidden bg-[#f4f7fb] py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="font-display mb-4 text-4xl font-semibold leading-none tracking-tighter text-[#1e3a5f] antialiased sm:text-5xl">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useSiteHoteleiroPage } from "./hooks/use-site-hoteleiro-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   RecursosGridSection,
@@ -23,6 +24,13 @@ import { RefreshCw } from "lucide-react";
 import { eventos, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
 function SiteHoteleiroPage() {
+  useSeo({
+    title: "Site Hoteleiro que Converte Visitantes em Reservas",
+    description:
+      "Site moderno, responsivo e otimizado para SEO, 100% editável. Reduza a dependência de OTAs e aumente sua margem com reservas diretas.",
+    path: "/site-hoteleiro",
+  });
+
   const { data, isLoading, error, refetch } = useSiteHoteleiroPage();
 
   if (isLoading) {

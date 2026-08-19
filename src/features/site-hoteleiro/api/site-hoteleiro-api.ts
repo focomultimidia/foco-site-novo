@@ -117,6 +117,11 @@ const siteHoteleiroData: SiteHoteleiroData = {
       pergunta: "Como funciona a integração com o motor de reservas?",
       resposta: "A integração é nativa e automática. Assim que você configura seus quartos e tarifas, o motor de reservas já aparece no site.",
     },
+    {
+      id: "5",
+      pergunta: "\"Website hotel\" e site hoteleiro são a mesma coisa?",
+      resposta: "Sim, é o mesmo conceito: um site (website) desenvolvido especificamente para hotéis e pousadas venderem hospedagem direto pro hóspede, sem depender de comissão de OTA.",
+    },
   ],
 };
 

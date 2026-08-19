@@ -41,6 +41,26 @@
   AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
 </IfModule>
 
+# ── Redirects 301 do site antigo (URLs .html) pras rotas do site novo ──────
+#    Preserva o ranking já conquistado nessas páginas no Google — sem isso,
+#    no dia da troca elas passam a devolver 404 e a autoridade acumulada se
+#    perde em vez de ser transferida pro slug novo. Precisa vir ANTES do
+#    bloco de SPA fallback abaixo: mod_alias resolve na entrada da request,
+#    então tanto faz a ordem entre os dois módulos, mas manter os redirects
+#    301 agrupados e comentados aqui facilita auditar o mapeamento inteiro
+#    de uma vez (ver plano de ação de conteúdo/SEO para o raciocínio por
+#    trás de cada destino).
+<IfModule mod_alias.c>
+  Redirect 301 /software-gestao-hoteleira-pms.html /gestao-hoteleira
+  Redirect 301 /motor-de-reservas.html /motor-de-reservas
+  Redirect 301 /gestor-de-canais-channel-manager.html /channel-manager
+  Redirect 301 /reviews-satisfacao-hotel-experiencia-hospede-nps.html /experiencia-do-hospede
+  Redirect 301 /focopay-pagamentos-automatico-de-reservas-para-hoteis.html /software-de-pagamentos
+  Redirect 301 /aplicativo-de-hospedagem-focopass.html /experiencia-do-hospede
+  Redirect 301 /site-hotel.html /site-hoteleiro
+  Redirect 301 /marketing-para-hoteis.html /marketing-para-hoteis
+</IfModule>
+
 # ── SPA fallback — todas as rotas do React Router caem no mesmo index.html
 #    (sem isso, recarregar/entrar direto em /channel-manager etc. dá 404 no
 #    Apache, que tenta achar um arquivo real com esse nome). ──────────────

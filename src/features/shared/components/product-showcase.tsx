@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -11,15 +11,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { ArrowUpRight, Check, Smartphone } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
-import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import { BetaBadge } from "@/features/shared/components/beta-badge";
 import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 import type { ProdutoItem } from "@/features/shared/data/produtos-data";
@@ -39,9 +31,15 @@ function splitTitulo(titulo: string): { nome: string; subtitulo: string } {
 
 // ── Section header ────────────────────────────────────────────────────────────
 
-function ShowcaseHeader({ animate }: { animate: boolean }) {
-  const content = (
-    <div className="text-center mb-16 lg:mb-20">
+function ShowcaseHeader() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: EASE }}
+      className="text-center mb-16 lg:mb-20"
+    >
       <SectionEyebrow>A plataforma</SectionEyebrow>
       <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-semibold text-[#1e3a5f] leading-[1.05] tracking-tighter antialiased mb-5 max-w-3xl mx-auto">
         Sistema para hotéis e pousadas{" "}
@@ -54,19 +52,6 @@ function ShowcaseHeader({ animate }: { animate: boolean }) {
         Da reserva à gestão financeira, nossa plataforma reúne produtos inovadores
         para otimizar cada detalhe do seu hotel ou pousada
       </p>
-    </div>
-  );
-
-  if (!animate) return content;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, ease: EASE }}
-    >
-      {content}
     </motion.div>
   );
 }
@@ -935,59 +920,13 @@ function StackView() {
   );
 }
 
-// ── CarouselView ──────────────────────────────────────────────────────────────
-
-function CarouselView() {
-  const [api, setApi]         = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const [count, setCount]     = useState(0);
-
-  useEffect(() => {
-    if (!api) return;
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => setCurrent(api.selectedScrollSnap()));
-  }, [api]);
-
-  const scrollTo = useCallback((i: number) => api?.scrollTo(i), [api]);
-
-  return (
-    <>
-      <Carousel
-        setApi={setApi}
-        opts={{ align: "start", loop: true }}
-        plugins={[Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true })]}
-        className="w-full"
-      >
-        <CarouselContent className="-ml-4">
-          {PRODUTOS_DATA.map((p, i) => (
-            <CarouselItem key={p.id} className="pl-4 basis-full lg:basis-1/2">
-              <ProductCard produto={p} index={i} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-
-      <div className="mt-10 flex justify-center">
-        <CarouselControls
-          count={count}
-          current={current}
-          onPrev={() => api?.scrollPrev()}
-          onNext={() => api?.scrollNext()}
-          onSelect={scrollTo}
-        />
-      </div>
-    </>
-  );
-}
-
 // ── ProductShowcase ───────────────────────────────────────────────────────────
 
 export interface ProductShowcaseProps {
-  viewMode?: "grid" | "carousel" | "stack";
+  viewMode?: "grid" | "stack";
 }
 
-function ProductShowcase({ viewMode = "carousel" }: ProductShowcaseProps) {
+function ProductShowcase({ viewMode = "grid" }: ProductShowcaseProps) {
   return (
     // #F4F7FB is the canvas colour of the product mockups, so the screens sit
     // on the same field as the page and read as part of it.
@@ -995,10 +934,9 @@ function ProductShowcase({ viewMode = "carousel" }: ProductShowcaseProps) {
     // visible breaks position:sticky on the cards below.
     <section className={`relative bg-[#f4f7fb] py-24 lg:py-32 ${viewMode === "stack" ? "" : "overflow-hidden"}`}>
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <ShowcaseHeader animate={viewMode !== "carousel"} />
+        <ShowcaseHeader />
         {viewMode === "grid" && <GridView />}
         {viewMode === "stack" && <StackView />}
-        {viewMode === "carousel" && <CarouselView />}
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHomePage } from "./hooks/use-home-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   ProdutosSection,
@@ -24,6 +25,13 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 export function HomePage() {
+  useSeo({
+    title: "Sistema para Hotéis e Pousadas | Foco Tecnologia",
+    description:
+      "Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.",
+    path: "/",
+  });
+
   const { data, isLoading, isError, refetch } = useHomePage();
   const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useExperienciaHospedePage } from "./hooks/use-experiencia-hospede-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   RecursosSection,
@@ -28,6 +29,13 @@ import { artigosMidia, depoimentos, numeros, videosData } from "@/features/share
 
 
 function ExperienciaHospedePage() {
+  useSeo({
+    title: "Aplicativo de Hospedagem e Experiência do Hóspede | Foco",
+    description:
+      "Aplicativo de hospedagem com check-in digital, comunicação personalizada e concierge virtual do pré-check-in ao pós-estadia. Monitore a satisfação do hóspede.",
+    path: "/experiencia-do-hospede",
+  });
+
   const { data, isLoading, isError, refetch } = useExperienciaHospedePage();
 
   if (isLoading) {
@@ -116,6 +124,7 @@ function ExperienciaHospedePage() {
           { id: "3", question: "Quais são os descontos disponíveis?", answer: "O Foco Pass oferece descontos exclusivos em restaurantes, passeios turísticos, transfers, ingressos para atrações e espetáculos nos principais destinos do Brasil." },
           { id: "4", question: "O cardápio digital funciona para room service?", answer: "Sim! O hóspede pode acessar o cardápio completo do restaurante e do room service pelo aplicativo, fazer pedidos e receber no conforto do quarto." },
           { id: "5", question: "O Foco Pass é seguro?", answer: "Sim, o sistema possui total segurança para garantir que apenas o hóspede registrado tenha acesso ao aplicativo durante sua estadia." },
+          { id: "6", question: "Qual o melhor aplicativo de hospedagem para hotéis e pousadas?", answer: "O melhor aplicativo de hospedagem é o que une check-in digital, comunicação por WhatsApp, cardápio e concierge virtual num só lugar — exatamente o que o Foco Pass entrega, já integrado ao PMS e ao motor de reservas do seu hotel ou pousada." },
         ]}
         title="Dúvidas Frequentes"
         subtitle="Tire suas dúvidas sobre o Foco Pass"

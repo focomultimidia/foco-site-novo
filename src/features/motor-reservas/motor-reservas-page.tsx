@@ -1,6 +1,7 @@
 "use client";
 
 import { useMotorReservasPage } from "./hooks/use-motor-reservas-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   VantagensSection,
@@ -31,6 +32,13 @@ import { artigosMidia, depoimentos, numeros, videosData } from "@/features/share
 
 
 function MotorReservasPage() {
+  useSeo({
+    title: "Motor de Reservas para Hotéis sem Comissão | Foco",
+    description:
+      "Motor de reservas com alta conversão: checkout simples, PIX e cartão integrados, comparador de preços e venda direta sem comissão de OTAs.",
+    path: "/motor-de-reservas",
+  });
+
   const { data, isLoading, isError, refetch } = useMotorReservasPage();
 
   if (isLoading) {

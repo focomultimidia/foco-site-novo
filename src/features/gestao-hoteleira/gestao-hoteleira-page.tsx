@@ -1,6 +1,7 @@
 "use client";
 
 import { useGestaoHoteleiraPage } from "./hooks/use-gestao-hoteleira-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   RecursosSection,
@@ -25,6 +26,13 @@ import { artigosMidia, depoimentos, numeros, videosData } from "@/features/share
 
 
 function GestaoHoteleiraPage() {
+  useSeo({
+    title: "Sistema de Gestão Hoteleira (PMS) | Foco Tecnologia",
+    description:
+      "PMS para hotéis e pousadas com controle total da operação: check-in, check-out, financeiro e housekeeping integrados em uma única plataforma na nuvem.",
+    path: "/gestao-hoteleira",
+  });
+
   const { data, isLoading, isError, refetch } = useGestaoHoteleiraPage();
 
   if (isLoading) {
@@ -103,7 +111,9 @@ function GestaoHoteleiraPage() {
       <FAQAccordion
         items={[
           { id: "1", question: "O que é um PMS (Property Management System)?", answer: "Um PMS é um sistema de gestão hoteleira que centraliza todas as operações do hotel, incluindo reservas, check-in/check-out, controle financeiro, governança e muito mais em uma única plataforma." },
-          { id: "2", question: "O PMS da Foco é adequado para qual tipo de propriedade?", answer: "Nosso PMS é ideal para hotéis, pousadas, resorts, hostels e qualquer tipo de propriedade hoteleira que precise de uma gestão integrada e eficiente." },
+          { id: "2", question: "O PMS da Foco é adequado para qual tipo de propriedade?", answer: "Nosso PMS é ideal para hotéis, pousadas, resorts, hostels, flats e apart-hotéis e qualquer tipo de propriedade hoteleira que precise de uma gestão integrada e eficiente." },
+          { id: "7", question: "O PMS da Foco é o mesmo tipo de sistema que um Property Management System internacional?", answer: "Sim. Property Management System, Hotel Management System e Hotel Management Software são os nomes usados no mercado internacional para o mesmo tipo de sistema que a Foco oferece: uma plataforma única para gestão de reservas, tarifas, check-in/check-out e financeiro do seu hotel, pousada ou rede." },
+          { id: "6", question: "PMS, programa de gestão e software de gestão hoteleira são a mesma coisa?", answer: "São nomes diferentes para o mesmo tipo de sistema. Hoteleiros e donos de pousada costumam pesquisar por \"programa para hotel\", \"programa para pousada\" ou \"sistema PMS\" — na Foco, é a mesma plataforma de gestão hoteleira, que centraliza reservas, tarifas, check-in/check-out e financeiro, seja para hotel, pousada, resort ou hostel." },
           { id: "3", question: "O sistema funciona na nuvem?", answer: "Sim! O PMS da Foco é 100% baseado em nuvem, permitindo acesso de qualquer lugar e a qualquer momento, com total segurança dos seus dados." },
           { id: "4", question: "O PMS integra com outros sistemas?", answer: "Sim, oferecemos integração com Channel Manager, Motor de Reservas, sistemas de pagamento, contabilidade e muitos outros parceiros do ecossistema hoteleiro." },
           { id: "5", question: "Como funciona o suporte técnico?", answer: "Oferecemos suporte técnico 24/7 via chat, e-mail e telefone, além de uma base de conhecimento completa e treinamentos para sua equipe." },

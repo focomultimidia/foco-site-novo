@@ -1,6 +1,7 @@
 "use client";
 
 import { useChannelManagerPage } from "./hooks/use-channel-manager-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   VantagensSection,
@@ -26,6 +27,13 @@ import { RefreshCw } from "lucide-react";
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
 function ChannelManagerPage() {
+  useSeo({
+    title: "Channel Manager Hoteleiro | +850 Canais | Foco Tecnologia",
+    description:
+      "Conecte seu hotel a mais de 850 OTAs e metasearch engines com sincronização automática de tarifas, disponibilidade e reservas em tempo real.",
+    path: "/channel-manager",
+  });
+
   const { data, isLoading, isError, refetch } = useChannelManagerPage();
 
   if (isLoading) {

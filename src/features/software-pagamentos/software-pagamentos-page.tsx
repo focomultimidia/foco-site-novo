@@ -1,6 +1,7 @@
 "use client";
 
 import { useSoftwarePagamentosPage } from "./hooks/use-software-pagamentos-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   MeiosPagamentoSection,
@@ -25,6 +26,13 @@ import { RefreshCw } from "lucide-react";
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
 function SoftwarePagamentosPage() {
+  useSeo({
+    title: "Software de Pagamentos para Hotéis | Foco Tecnologia",
+    description:
+      "Processe pagamentos de reservas com segurança: múltiplas formas de pagamento, split automático, conciliação e conformidade com PCI DSS.",
+    path: "/software-de-pagamentos",
+  });
+
   const { data, isLoading, isError, refetch } = useSoftwarePagamentosPage();
 
   if (isLoading) {

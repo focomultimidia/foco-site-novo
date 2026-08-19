@@ -32,6 +32,7 @@ export const INFO_SECTIONS: Record<string, SectionContent> = {
     description: [
       "Um Property Management System (PMS) é o software operacional responsável por centralizar e automatizar as principais rotinas do hotel: check-in/check-out, gestão de quartos, reservas, tarifação e relatórios financeiros.",
       "Com o PMS integrado ao Channel Manager e ao Motor de Reservas, todas as informações fluem em tempo real, eliminando retrabalho manual e garantindo dados sempre precisos.",
+      "É comum hoteleiros e donos de pousada procurarem por \"programa de gestão para hotel\" ou \"programa de gestão para pousada\" — é o mesmo sistema, só com outro nome. Seja PMS, programa ou software de gestão hoteleira, a função é a mesma: profissionalizar a operação do check-in ao fechamento de caixa, num único hotel PMS acessível de qualquer lugar.",
     ],
     imagePath: "/assets/imgs/channel-manager/channel-manager.webp",
     imageAlt:  "Gestão Hoteleira PMS: Mockup",

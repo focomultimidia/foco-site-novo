@@ -121,10 +121,11 @@ const DARK_HERO_ROUTES = new Set([
   "/experiencia-do-hospede",
   "/channel-manager",
   "/otheo-ai",
+  "/marketing-para-hoteis",
 ]);
 
 const navLinksAfter = [
-  { label: "Marketing",        href: "/marketing" },
+  { label: "Marketing",        href: "/marketing-para-hoteis" },
   { label: "Blog",             href: "https://blog.focomultimidia.com" },
   { label: "Seja um parceiro", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
 ];

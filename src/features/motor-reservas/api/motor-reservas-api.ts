@@ -102,6 +102,11 @@ const motorReservasData: MotorReservasData = {
     },
     {
       id: "7",
+      pergunta: "O motor de reservas da Foco é o mesmo que um \"hotel booking engine\"?",
+      resposta: "Sim — Booking Engine (ou Hotel Booking Engine) é o termo usado internacionalmente para motor de reservas: o sistema que permite reservas diretas, com pagamento online e confirmação imediata, direto no site do hotel ou pousada.",
+    },
+    {
+      id: "7",
       pergunta: "É possível oferecer promoções, pacotes e cupons?",
       resposta: "Sim. Você pode criar tarifas promocionais, pacotes temáticos, landing pages e ofertas com descontos por pagamento.",
     },

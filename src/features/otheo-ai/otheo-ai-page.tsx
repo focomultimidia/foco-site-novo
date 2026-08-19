@@ -1,4 +1,5 @@
 import { HeroSection } from "./components/hero-section";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import { ProblemaParallaxSection } from "./components/problema-parallax-section";
 import { PilaresSection } from "./components/pilares-section";
 import { OcupacaoSection } from "./components/ocupacao-section";
@@ -19,6 +20,13 @@ import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
  * `#f4f7fb` — só a hero foge do padrão claro do site.
  */
 function OtheoAiPage() {
+  useSeo({
+    title: "Otheo AI: Assistente com Inteligência Artificial | Foco",
+    description:
+      "Otheo é o copiloto de IA da Foco: responde sobre ocupação, disponibilidade e tarifas em segundos, liberando sua equipe para atender o hóspede.",
+    path: "/otheo-ai",
+  });
+
   return (
     <div className="min-h-screen">
       <HeroSection />

@@ -5,6 +5,7 @@ import { ArrowUp, ShieldCheck } from "lucide-react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { PolicyToc } from "./components/policy-toc";
 import { PolicyContent } from "./components/policy-content";
+import { useSeo } from "@/features/shared/lib/use-seo";
 
 // ── PoliticaDePrivacidadePage ────────────────────────────────────────────
 // Página de conteúdo puro (sem hero de marketing, sem API/loading state) —
@@ -20,6 +21,13 @@ import { PolicyContent } from "./components/policy-content";
 // porque resolvem problemas diferentes (navegação com IntersectionObserver
 // vs. conteúdo estático) e cada um já passa de 100 linhas sozinho.
 function PoliticaDePrivacidadePage() {
+  useSeo({
+    title: "Política de Privacidade | Foco Tecnologia",
+    description:
+      "Como a Foco Tecnologia coleta, usa e protege os dados pessoais de clientes, hóspedes e visitantes em conformidade com a LGPD.",
+    path: "/politica-de-privacidade",
+  });
+
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {

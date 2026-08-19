@@ -10,7 +10,6 @@ export { IntegracoesSection } from "./integracoes-section";
 export { OrbitalAnimation } from "./orbital-animation";
 export { LogoTicker } from "./logo-ticker";
 export { DiferenciaisSection } from "./diferenciais-section";
-export { CasesSection } from "./cases-section";
 export { SegurancaSection } from "./seguranca-section";
 export { TiposPropriedadeSection } from "./tipos-propriedade-section";
 export { NumerosSection } from "./numeros-section";

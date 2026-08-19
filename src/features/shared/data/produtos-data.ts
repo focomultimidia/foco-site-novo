@@ -72,7 +72,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
   {
     id: "2", numero: "02",
     titulo: "Motor de Reservas: Retenha 100% do lucro das suas diárias",
-    descricao: "Chega de dividir seu faturamento com as OTAs. Nosso motor de reservas entrega uma jornada de compra fluida e sem atritos, projetada para maximizar a conversão de visitantes em hóspedes e garantir a independência financeira do seu hotel.",
+    descricao: "Chega de dividir seu faturamento com as OTAs. Nosso motor de reservas entrega uma jornada de compra fluida e sem atritos, projetada para maximizar a conversão de visitantes em hóspedes e garantir a independência financeira do seu hotel. É o sistema de reservas online que garante venda direta 24 horas por dia, sem taxa por reserva.",
     beneficios: ["Aumenta reservas diretas", "Independência das OTAs", "Tarifas dinâmicas"],
     link: "/motor-de-reservas",
     ctaLabel: "Quero reservas 100% sem comissão",
@@ -87,7 +87,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
   {
     id: "3", numero: "03",
     titulo: "PMS e Integrações: Centralize sua operação com integração nativa",
-    descricao: "Diga adeus ao retrabalho e às falhas operacionais. Os principais sistemas de gestão hoteleira do mercado integrados ao melhor motor de reservas e gestor de canais do Brasil.",
+    descricao: "Diga adeus ao retrabalho e às falhas operacionais. Os principais sistemas de gestão hoteleira do mercado integrados ao melhor motor de reservas e gestor de canais do Brasil. Um único painel de controle, hospedado em nuvem, para hotel, pousada ou rede — sem depender de planilha ou sistema paralelo.",
     beneficios: ["Gestão completa do hotel", "Otimização da governança", "Eliminação de Overbooking"],
     link: "/gestao-hoteleira",
     ctaLabel: "Automatizar minha operação agora",
@@ -102,7 +102,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
   {
     id: "4", numero: "04",
     titulo: "Site Hoteleiro: Seu melhor canal de vendas começa no seu site",
-    descricao: "Não tenha apenas um cartão de visitas na internet, tenha uma plataforma de alta conversão. Nossos sites são desenhados para capturar viajantes, transmitir autoridade e guiá-los direto para a reserva direta, eliminando taxas de terceiros.",
+    descricao: "Não tenha apenas um cartão de visitas na internet, tenha uma plataforma de alta conversão. Nossos sites são desenhados para capturar viajantes, transmitir autoridade e guiá-los direto para a reserva direta, eliminando taxas de terceiros. Um site de reservas completo para hotel, pousada ou temporada, com motor de reservas nativo.",
     beneficios: ["Motor de reservas integrado", "Personalização completa", "SEO 100%"],
     link: "/site-hoteleiro",
     ctaLabel: "Quero um site que vende de verdade",
@@ -132,7 +132,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
   {
     id: "6", numero: "06",
     titulo: "Experiência do Hóspede: FocoPass - O concierge digital que fideliza e gera receita",
-    descricao: "Leve a estada do seu hóspede para a era digital. Dê total autonomia ao cliente através de um app intuitivo enquanto economiza o tempo da sua equipe de recepção e acumula avaliações 5 estrelas na internet.",
+    descricao: "Leve a estada do seu hóspede para a era digital. Dê total autonomia ao cliente através de um app intuitivo enquanto economiza o tempo da sua equipe de recepção e acumula avaliações 5 estrelas na internet. Da comunicação por WhatsApp ao check-in digital, cada etapa da jornada acontece sem fricção.",
     beneficios: ["Gestão de avaliações", "Check-in online", "Cardápio digital do hotel"],
     link: "/experiencia-do-hospede",
     ctaLabel: "Oferecer o concierge digital",

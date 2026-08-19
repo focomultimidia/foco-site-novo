@@ -1,6 +1,7 @@
 "use client";
 
 import { useCrmHoteleiroPage } from "./hooks/use-crm-hoteleiro-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   RecursosSection,
@@ -24,6 +25,13 @@ import { artigosMidia, depoimentos, numeros, videosData } from "@/features/share
 
 
 function CrmHoteleiroPage() {
+  useSeo({
+    title: "CRM Hoteleiro: Fidelize e Aumente Reservas | Foco",
+    description:
+      "CRM desenvolvido para hotelaria: segmente hóspedes, automatize campanhas e aumente a recorrência de reservas diretas no seu hotel.",
+    path: "/crm-hoteleiro",
+  });
+
   const { data, isLoading, isError, refetch } = useCrmHoteleiroPage();
 
   if (isLoading) {

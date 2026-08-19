@@ -82,13 +82,6 @@ export interface Diferencial {
   descricao: string;
 }
 
-export interface Case {
-  id: string;
-  tipo: string;
-  titulo: string;
-  imagem: string;
-}
-
 export interface Certificacao {
   id: string;
   icone: string;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useIntegracoesHoteleirasPage } from "./hooks/use-integracoes-hoteleiras-page";
+import { useSeo } from "@/features/shared/lib/use-seo";
 import {
   HeroSection,
   ImportanciaSection,
@@ -22,6 +23,13 @@ import { artigosMidia, depoimentos, numeros, videosData } from "@/features/share
 
 
 function IntegracoesHoteleirasPage() {
+  useSeo({
+    title: "Integrações Hoteleiras: OTAs, Pagamentos e ERPs | Foco",
+    description:
+      "Conecte seu hotel às principais OTAs, gateways de pagamento e sistemas contábeis do mercado, tudo integrado em um único ecossistema de tecnologia hoteleira.",
+    path: "/integracoes-hoteleiras",
+  });
+
   const { data, isLoading, isError, refetch } = useIntegracoesHoteleirasPage();
 
   if (isLoading) {

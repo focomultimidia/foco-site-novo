@@ -6,8 +6,16 @@ import { HumanFactorSection }   from "./components/fator-humano-section";
 import { QuoteSection }         from "./components/quote-section";
 import { CTASection }           from "./components/cta-section";
 import { CertificacoesSection } from "@/features/shared/components";
+import { useSeo } from "@/features/shared/lib/use-seo";
 
 export function SobrePage() {
+  useSeo({
+    title: "Sobre a Foco Tecnologia | +20 Anos de Hotelaria",
+    description:
+      "Empresa brasileira que já atende mais de 2.800 hotéis, pousadas e temporadas com tecnologia feita para o dia a dia da hotelaria.",
+    path: "/sobre",
+  });
+
   return (
     <div className="min-h-screen bg-[#f4f7fb]">
       <HeroSection />
