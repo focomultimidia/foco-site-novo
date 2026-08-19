@@ -24,28 +24,28 @@ const TEMPLATES: WebsiteTemplate[] = [
     id: "1",
     nome: "Rede de Hotéis Flower",
     categoria: "Exemplo Portal de Rede",
-    imagemUrl: "/assets/imgs/shared/1.webp?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo-rede.webp",
     previewUrl: "https://rede.soufoco.com",
   },
   {
     id: "2",
     nome: "Foco Hotel Prime",
     categoria: "Exemplo Site 1",
-    imagemUrl: "/assets/imgs/shared/2.webp?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo1.webp",
     previewUrl: "https://modelo1.soufoco.com",
   },
   {
     id: "3",
     nome: "Foco Hotel Village",
     categoria: "Exemplo Site 2",
-    imagemUrl: "/assets/imgs/shared/3.webp?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo2.webp",
     previewUrl: "https://modelo2.soufoco.com",
   },
   {
     id: "4",
     nome: "Foco Hotel Beach",
     categoria: "Exemplo Site 3",
-    imagemUrl: "/assets/imgs/shared/4.webp?w=700&h=328&fit=crop",
+    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo3.webp",
     previewUrl: "https://modelo3.soufoco.com",
   },
 ];
@@ -141,12 +141,15 @@ function WebsitePortfolioCarousel() {
                 <div className="pt-4 pb-8">
                 <div className="group relative rounded-3xl paper paper-hover">
 
-                  <div className="relative overflow-hidden rounded-t-3xl aspect-[16/10]">
+                  {/* aspect-[815/584] = a proporção real dos screenshots (mesma
+                      usada nos mockups de hero do site) — antes forçava 16/10,
+                      cortando as bordas do print em vez de mostrar a página inteira. */}
+                  <div className="relative overflow-hidden rounded-t-3xl aspect-[815/584]">
                     <img
                       src={template.imagemUrl}
                       alt={template.nome}
-                      width={1280}
-                      height={800}
+                      width={815}
+                      height={584}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"

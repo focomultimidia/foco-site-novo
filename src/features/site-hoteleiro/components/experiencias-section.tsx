@@ -29,30 +29,35 @@ const EXPERIENCIAS: Experiencia[] = [
     descricao:
       "Venda mais com pacotes e promoções posicionados estrategicamente na capa do site.",
     icon: Tag,
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/pacotes.webp",
   },
   {
     titulo: "Captação de leads",
     descricao:
       "Capture clientes interessados com formulários personalizados integrados à operação do hotel.",
     icon: UserPlus,
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/leads.webp",
   },
   {
     titulo: "Design que converte",
     descricao:
       "Design intuitivo e velocidade de carregamento transformam visitantes em hóspedes antes mesmo de qualquer clique.",
     icon: Palette,
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/design-que-converte.webp",
   },
   {
     titulo: "Gatilhos de reserva",
     descricao:
       "Site otimizado para conversão, com gatilhos mentais e recursos que conduzem o hóspede direto à reserva.",
     icon: Zap,
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/gatilhos.webp",
   },
   {
     titulo: "Landing pages de impacto",
     descricao:
       "Páginas dedicadas para pacotes, promoções ou eventos, com acesso direto ao motor de reservas.",
     icon: Rocket,
+    imagem: "/assets/imgs/site-hoteleiro/experiencias/landing-pages.webp",
   },
 ];
 
