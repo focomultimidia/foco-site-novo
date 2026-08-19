@@ -20,33 +20,34 @@ interface WebsiteTemplate {
 }
 
 const TEMPLATES: WebsiteTemplate[] = [
+
   {
     id: "1",
-    nome: "Rede de Hotéis Flower",
-    categoria: "Exemplo Portal de Rede",
-    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo-rede.webp",
-    previewUrl: "https://rede.soufoco.com",
-  },
-  {
-    id: "2",
-    nome: "Foco Hotel Prime",
+    nome: "Canopy Stilt Lodge",
     categoria: "Exemplo Site 1",
     imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo1.webp",
     previewUrl: "https://modelo1.soufoco.com",
   },
   {
-    id: "3",
-    nome: "Foco Hotel Village",
+    id: "2",
+    nome: "Mata Refúgio Lodge e Selva",
     categoria: "Exemplo Site 2",
     imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo2.webp",
     previewUrl: "https://modelo2.soufoco.com",
   },
   {
-    id: "4",
-    nome: "Foco Hotel Beach",
+    id: "3",
+    nome: "Mirror Lake Retreat",
     categoria: "Exemplo Site 3",
     imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo3.webp",
     previewUrl: "https://modelo3.soufoco.com",
+  },
+  {
+    id: "4",
+    nome: "Rede Terra e Selva Collection",
+    categoria: "Exemplo Portal de Rede",
+    imagemUrl: "/assets/imgs/site-hoteleiro/modelos/modelo-rede.webp",
+    previewUrl: "https://rede.soufoco.com",
   },
 ];
 
