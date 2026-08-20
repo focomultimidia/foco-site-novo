@@ -67,7 +67,7 @@ function CarouselControls({
             onClick={() => onSelect(i)}
             aria-label={labelItem ? labelItem(i) : `Ir para o item ${i + 1}`}
             aria-current={i === current}
-            className="group flex items-center py-2.5"
+            className="group flex min-h-6 min-w-6 items-center justify-center"
           >
             <span
               className={`block h-[3px] rounded-full transition-[width,background-color] duration-500 ease-out ${

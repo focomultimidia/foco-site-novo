@@ -688,7 +688,15 @@ function ScrollContentBlock({
         <MobileStackedMockups mockups={produto.mockups} />
       ) : (
         <div className="lg:hidden mb-6 rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-[0_10px_30px_-12px_rgba(15,40,80,0.35)]">
-          <img src={produto.screenshot} alt={`Captura de tela do produto ${nome}`} loading="lazy" className="block w-full" />
+          <img
+            src={produto.screenshot}
+            alt={`Captura de tela do produto ${nome}`}
+            width={produto.screenshotWidth}
+            height={produto.screenshotHeight}
+            loading="lazy"
+            decoding="async"
+            className="block w-full"
+          />
         </div>
       )}
 

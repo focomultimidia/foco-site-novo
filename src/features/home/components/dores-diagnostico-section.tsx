@@ -400,7 +400,7 @@ function MobileDiagnosticoAccordionItem({
         <div className="flex-1 min-w-0 text-left">
           <div
             className="font-mono text-[10px] uppercase tracking-[0.16em] mb-0.5 transition-colors duration-300"
-            style={{ color: isOpen ? "#fccc30" : "rgba(255,255,255,0.35)" }}
+            style={{ color: isOpen ? "#fccc30" : "rgba(255,255,255,0.55)" }}
           >
             Cenário 0{index + 1}
           </div>
@@ -651,7 +651,7 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
                     <div className="min-w-0">
                       <div
                         className="font-mono text-[10px] uppercase tracking-[0.16em] mb-0.5 transition-colors duration-300"
-                        style={{ color: isActive ? "#fccc30" : "rgba(255,255,255,0.35)" }}
+                        style={{ color: isActive ? "#fccc30" : "rgba(255,255,255,0.55)" }}
                       >
                         Cenário 0{i + 1}
                       </div>

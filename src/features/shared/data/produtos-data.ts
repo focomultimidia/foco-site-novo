@@ -28,6 +28,18 @@ export interface ProdutoItem {
    */
   screenshot:  string;
   /**
+   * Dimensões reais do arquivo de `screenshot` — usadas como atributos
+   * `width`/`height` do `<img>` no fallback mobile (product-showcase.tsx /
+   * software-products-carousel.tsx), que renderiza em `w-full` sem altura
+   * fixa. Sem isso o navegador não reserva a altura correta antes da
+   * imagem carregar (CLS), e é exatamente o que o PageSpeed Insights
+   * reportou em "elementos de imagem não têm width/height explícitas".
+   * Opcional porque produtos com `mockups` (Experiência do Hóspede, Otheo
+   * AI) não passam por esse fallback.
+   */
+  screenshotWidth?:  number;
+  screenshotHeight?: number;
+  /**
    * Print mobile exibido no mockup de celular que flutua sobre o screenshot
    * desktop no StagePanel (ProdutosSection, viewMode="stack"). Opcional —
    * enquanto ausente, o mockup mostra um placeholder tracejado. Ignorado
@@ -64,6 +76,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Globe,
     imagem: "/assets/imgs/produtos/channel-manager.webp",
     screenshot: "/assets/imgs/produtos/channel-manager.webp",
+    screenshotWidth: 800, screenshotHeight: 600,
     mobileScreenshot: "/assets/imgs/home/produtos/mobile-channel-manager.webp",
     bkgImagem: "/assets/imgs/channel-manager/bkg-accordion.webp",
     accent: "#60a5fa",
@@ -79,6 +92,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Calendar,
     imagem: "/assets/imgs/produtos/motor-de-reservas.webp",
     screenshot: "/assets/imgs/produtos/motor-de-reservas.webp",
+    screenshotWidth: 815, screenshotHeight: 584,
     mobileScreenshot: "/assets/imgs/produtos/motor-mobile.webp",
     bkgImagem: "/assets/imgs/motor-de-reservas/bkg-accordion.webp",
     accent: "#34d399",
@@ -94,6 +108,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: LayoutGrid,
     imagem: "/assets/imgs/produtos/mapa.webp",
     screenshot: "/assets/imgs/produtos/mapa.webp",
+    screenshotWidth: 815, screenshotHeight: 584,
     mobileScreenshot: "/assets/imgs/produtos/mobile-mapa-uh.webp",
     bkgImagem: "/assets/imgs/gestao-hoteleira-pms/bkg-accordion.webp",
     accent: "#a78bfa",
@@ -109,6 +124,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: Monitor,
     imagem: "/assets/imgs/produtos/site-hoteleiro.webp",
     screenshot: "/assets/imgs/produtos/site-hoteleiro.webp",
+    screenshotWidth: 815, screenshotHeight: 584,
     mobileScreenshot: "/assets/imgs/produtos/site-mobile.webp",
     bkgImagem: "/assets/imgs/site-hoteleiro/bkg-accordion.webp",
     accent: "#fbbf24",
@@ -124,6 +140,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     Icone: CreditCard,
     imagem: "/assets/imgs/produtos/focopay.webp",
     screenshot: "/assets/imgs/produtos/focopay.webp",
+    screenshotWidth: 815, screenshotHeight: 584,
     mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.webp",
     bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.webp",
     accent: "#22d3ee",
