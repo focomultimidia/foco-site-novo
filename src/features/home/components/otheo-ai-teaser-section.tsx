@@ -214,6 +214,8 @@ function OtheoAiTeaserSection() {
               <img
                 src="/assets/imgs/home/logotheoai.svg"
                 alt="Otheo AI"
+                width={477}
+                height={93}
                 className="h-8 sm:h-9 w-auto mb-7 mx-auto lg:mx-0"
                 style={{ filter: "brightness(0) invert(1) drop-shadow(0 2px 10px rgba(0,0,0,0.35))" }}
               />
