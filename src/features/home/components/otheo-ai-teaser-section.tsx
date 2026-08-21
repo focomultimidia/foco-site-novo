@@ -224,7 +224,7 @@ function OtheoAiTeaserSection() {
                 className="font-display font-semibold text-4xl sm:text-5xl text-white leading-[1.08] tracking-tighter antialiased mb-5"
                 style={{ textShadow: "0 2px 20px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4)" }}
               >
-                Seu copiloto de IA na operação do hotel.
+                A inteligência que opera o seu hotel
               </h2>
 
               <div className="otheo-summary-card backdrop-blur-sm rounded-2xl px-5 py-4 lg:px-0 lg:py-0 lg:backdrop-blur-none mb-9">
@@ -232,9 +232,7 @@ function OtheoAiTeaserSection() {
                   className="text-base sm:text-lg leading-relaxed"
                   style={{ color: "rgba(255,255,255,0.92)", textShadow: "0 1px 14px rgba(0,0,0,0.55)" }}
                 >
-                  Abra vendas, feche check-ins, consulte reservas ou gerencie bloqueios,
-                  tudo em português, com um comando. O Otheo AI entende sua operação e
-                  executa por você.
+                  Esqueça cliques repetitivos. Mude tarifas, abra vendas, verifique check-ins, faça bloqueios e muito mais, apenas digitando ou falando. O Otheo AI assume a parte chata para você focar no que importa: o seu hóspede.
                 </p>
               </div>
 

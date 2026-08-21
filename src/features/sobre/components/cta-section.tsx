@@ -22,7 +22,7 @@ export function CTASection() {
               Pronto para transformar a gestão do seu hotel?
             </h2>
             <p className="text-[#4c5c73] text-lg max-w-xl mx-auto mb-12 leading-relaxed">
-              Junte-se aos mais de 2.800 estabelecimentos que já confiam na Foco Tecnologia para crescer com mais eficiência e menos estresse operacional.
+              Junte-se aos mais de 2.700 estabelecimentos que já confiam na Foco Tecnologia para crescer com mais eficiência e menos estresse operacional.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <MagneticButton>Solicitar demonstração gratuita</MagneticButton>

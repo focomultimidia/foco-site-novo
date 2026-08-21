@@ -4,15 +4,20 @@ import { useState } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { CarouselControls } from "@/features/shared/components/carousel-controls";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
-import { ArrowRight, Newspaper } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { ArtigoMidia } from "../types";
 
 // ── 3D position system ────────────────────────────────────────────────────────
 type Role = "center" | "left" | "right";
 
 // Fixed card dimensions — the perspective container uses these to size itself.
+// Card virou coluna única (logo/título/resumo em cima, imagem como faixa
+// horizontal embaixo — pedido explícito pra substituir o antigo layout
+// lado a lado). CARD_H passou a ser a soma do conteúdo empilhado nesse
+// formato mais compacto — não deriva mais da proporção da imagem (que
+// agora é só uma faixa `aspect-[3/1]`, não o card inteiro).
 const CARD_W = 700;
-const CARD_H = 440;
+const CARD_H = 580;
 
 interface PosConfig {
   x: number;
@@ -43,6 +48,17 @@ const IMAGES: Record<string, string> = {
   "1": "/assets/imgs/na-midia/materia-1.webp",
   "2": "/assets/imgs/na-midia/materia-2.webp",
   "3": "/assets/imgs/na-midia/materia-3.webp",
+  "4": "/assets/imgs/na-midia/materia-4.jpg",
+};
+
+// Logo real de cada veículo — substitui o ícone genérico de jornal (era o
+// mesmo ícone pra todas as publicações, não dizia nada sobre qual veículo é).
+// Chave é `artigo.publicacao` (ver social-proof-data.ts).
+const PUBLICACAO_LOGOS: Record<string, string> = {
+  "Valor Econômico": "/assets/imgs/na-midia/logos/valor-economico.svg",
+  "Terra": "/assets/imgs/na-midia/logos/terra.svg",
+  "Revista Hotéis": "/assets/imgs/na-midia/logos/revista-hoteis.png",
+  "O Globo": "/assets/imgs/na-midia/logos/oglobo.svg",
 };
 
 // ── Article card ──────────────────────────────────────────────────────────────
@@ -51,10 +67,18 @@ interface ArticleCardProps {
   isCenter: boolean;
 }
 
+// Card em coluna única (logo/título/resumo em cima, imagem como faixa
+// horizontal embaixo — substitui o antigo layout lado a lado, imagem numa
+// metade e texto na outra). O card continua no formato paisagem (CARD_W
+// bem maior que CARD_H): quem garante isso agora não é mais a proporção da
+// imagem (que dominava metade do card antes), e sim a imagem ter sido
+// reduzida a uma faixa curta (`aspect-[3/1]`) e o texto ter clamps mais
+// justos — o conteúdo é que se adequa ao formato horizontal, não o
+// contrário.
 function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
   return (
     <div
-      className="h-full rounded-3xl overflow-hidden grid md:grid-cols-2"
+      className="h-full rounded-3xl overflow-hidden flex flex-col p-6 lg:p-7"
       style={{
         background: "#ffffff",
         border: `1px solid ${isCenter ? "rgba(40,89,146,0.14)" : "rgba(0,0,0,0.06)"}`,
@@ -63,78 +87,70 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           : "0 2px 8px rgba(0,0,0,0.05)",
       }}
     >
-      {/* ── Image panel ───────────────────────────────────────────────── */}
-      <div className="relative h-48 md:h-full overflow-hidden">
+      {/* Publication row */}
+      <div className="flex items-center gap-3 mb-3">
+        <img
+          src={PUBLICACAO_LOGOS[artigo.publicacao]}
+          alt={artigo.publicacao}
+          className="h-7 w-auto max-w-[64px] object-contain flex-shrink-0"
+          loading="lazy"
+          decoding="async"
+        />
+        <div>
+          <p className="text-sm font-semibold text-gray-900 leading-tight">
+            {artigo.publicacao}
+          </p>
+          <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>
+        </div>
+      </div>
+
+      {/* Title */}
+      <h3 className="font-display text-lg lg:text-xl font-semibold text-gray-900 leading-snug tracking-tight mb-2 line-clamp-2">
+        {artigo.titulo}
+      </h3>
+
+      {/* Separator */}
+      <div className="h-px bg-gradient-to-r from-[#285992]/15 via-[#285992]/8 to-transparent mb-3" />
+
+      {/* Excerpt */}
+      <p className="text-gray-700 text-sm leading-relaxed line-clamp-2 mb-4">
+        {artigo.descricao}
+      </p>
+
+      {/* Imagem — faixa horizontal abaixo do resumo (pedido explícito), não
+          mais a captura de tela inteira em retrato: `object-position`
+          puxado pra baixo porque nas 3 capturas (materia-1/2/3.webp) a foto
+          da matéria fica na parte inferior da página, e é ela que precisa
+          aparecer nessa faixa curta — não o cabeçalho/texto do topo. */}
+      <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden">
         <img
           src={IMAGES[artigo.id] ?? IMAGES["1"]}
           alt={artigo.titulo}
-          width={600}
-          height={400}
+          width={1081}
+          height={1350}
           loading="lazy"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           style={{
+            objectPosition: "center 82%",
             transform: isCenter ? "scale(1.04)" : "scale(1)",
             transition: "transform 0.6s ease",
           }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0f1f3d]/65 via-[#0f1f3d]/15 to-transparent" />
-
-        {/* Mobile publication pill */}
-        <div className="absolute bottom-4 left-4 md:hidden">
-          <span className="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
-            <Newspaper className="w-3 h-3" />
-            {artigo.publicacao}
-          </span>
-        </div>
       </div>
 
-      {/* ── Content panel ─────────────────────────────────────────────── */}
-      <div className="p-7 flex flex-col">
-
-        {/* Publication row — desktop only */}
-        <div className="hidden md:flex items-center gap-3 mb-6">
-          <div
-            className="w-10 h-10 rounded-3xl flex items-center justify-center flex-shrink-0"
-            style={{ background: "linear-gradient(135deg,#e8f0fb,#d1e2f8)" }}
-          >
-            <Newspaper className="w-4 h-4 text-blue-600" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-gray-900 leading-tight">
-              {artigo.publicacao}
-            </p>
-            <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>
-          </div>
-        </div>
-
-        {/* Title */}
-        <h3 className="font-display text-xl font-semibold text-gray-900 leading-snug tracking-tight mb-3 line-clamp-2">
-          {artigo.titulo}
-        </h3>
-
-        {/* Separator */}
-        <div className="h-px bg-gradient-to-r from-[#285992]/15 via-[#285992]/8 to-transparent mb-4" />
-
-        {/* Excerpt */}
-        <p className="text-gray-700 text-sm leading-relaxed line-clamp-4 flex-1 mb-6">
-          {artigo.descricao}
-        </p>
-
-        {/* CTA */}
-        <a
-          href={artigo.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          tabIndex={isCenter ? undefined : -1}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-800 hover:text-blue-900 group w-fit"
-          onClick={e => e.stopPropagation()}
-        >
-          Ler artigo completo
-          <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-        </a>
-      </div>
+      {/* CTA */}
+      <a
+        href={artigo.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        tabIndex={isCenter ? undefined : -1}
+        className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-800 hover:text-blue-900 group w-fit mt-4"
+        onClick={e => e.stopPropagation()}
+      >
+        Ler artigo completo
+        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+      </a>
     </div>
   );
 }

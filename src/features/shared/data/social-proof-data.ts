@@ -2,6 +2,15 @@ import type { ArtigoMidia, Evento, Depoimento, Numero, VideoDepoimento } from "@
 
 const artigosMidia: ArtigoMidia[] = [
   {
+    id: "4",
+    publicacao: "O Globo",
+    data: "Agosto 2026",
+    titulo: "Robô-concierge com IA da Foco é destaque no Encatho 2026",
+    descricao:
+      "Foco Tecnologia participou do 37º Encatho & Exprotel, realizado de 11 a 13 de agosto em Florianópolis, e apresentou atualizações em seu sistema de gestão hoteleira, novos módulos operacionais e o pré-lançamento do Otheo AI, robô-concierge baseado em inteligência artificial para consultas e execução de tarefas no sistema.",
+    link: "https://oglobo.globo.com/patrocinado/dino/noticia/2026/08/13/roboconcierge-com-ia-da-foco-e-destaque-no-encatho-2026-1.ghtml",
+  },
+  {
     id: "1",
     publicacao: "Valor Econômico",
     data: "Setembro 2025",
@@ -33,7 +42,7 @@ const artigosMidia: ArtigoMidia[] = [
 const eventos: Evento[] = [
   {
     id: "1",
-    tag: "Destaque",
+    tag: "",
     data: "Setembro 2025",
     local: "São Paulo, SP",
     titulo: "Ecossistema completo da Foco em destaque na Equipotel 2025",
@@ -44,8 +53,8 @@ const eventos: Evento[] = [
   {
     id: "2",
     tag: "",
-    data: "Outubro 2025",
-    local: "Gramado, RS",
+    data: "Agosto 2025",
+    local: "Florianópolis, SC",
     titulo: "Foco conectando inovação e gestão no encontro da hotelaria do Sul",
     descricao:
       "Estivemos presentes com nossas soluções integradas para reservas, gestão operacional e melhoria da experiência do hóspede, em um dos eventos mais estratégicos do setor.",
@@ -54,11 +63,21 @@ const eventos: Evento[] = [
   {
     id: "3",
     tag: "",
-    data: "Novembro 2025",
+    data: "Abril 2025",
     local: "São Paulo, SP",
     titulo: "CRM da Foco em destaque na principal feira da hotelaria nacional",
     descricao:
       "Na Expotel, lançamos nosso CRM hoteleiro com notificações via WhatsApp, otimizando o relacionamento com hóspedes e impulsionando vendas diretas.",
+    link: "#",
+  },
+  {
+    id: "4",
+    tag: "Destaque",
+    data: "Agosto 2026",
+    local: "São Paulo, SP",
+    titulo: "A tecnologia que foi destaque no Encatho & Exprotel 2026",
+    descricao:
+      "No 37º Encatho, apresentamos o Otheo AI, robô-concierge com IA que revoluciona a gestão hoteleira, e novos módulos operacionais da Foco.",
     link: "#",
   },
 ];
@@ -117,10 +136,10 @@ const depoimentos: Depoimento[] = [
 
 const numeros: Numero[] = [
   { id: "1", valor: "20", sufixo: "", label: "anos de mercado" },
-  { id: "2", valor: "2800", sufixo: "", label: "clientes ativos" },
+  { id: "2", valor: "2700", sufixo: "", label: "clientes ativos" },
   { id: "3", valor: "120", sufixo: "", label: "colaboradores" },
-  { id: "4", valor: "5", sufixo: " bi", label: "transações/ano" },
-  { id: "5", valor: "850", sufixo: "", label: "integrações disponíveis" },
+  { id: "4", valor: "2", sufixo: " bi", label: "transações/ano" },
+  { id: "5", valor: "800", sufixo: "", label: "integrações disponíveis" },
   { id: "6", valor: "365", sufixo: " dias", label: "suporte disponível" },
 ];
 

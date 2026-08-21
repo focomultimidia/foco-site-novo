@@ -2,44 +2,33 @@
 
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, type Variants } from "framer-motion";
-import {
-  Shield,
-  Lock,
-  Database,
-  Cloud,
-  CreditCard,
-  ServerCrash,
-  ShieldCheck,
-  FileKey2,
-} from "lucide-react";
+import { Lock, Cloud, FileKey2 } from "lucide-react";
 import type { Certificacao } from "../types";
 
 interface SegurancaSectionProps {
   certificacoes: Certificacao[];
 }
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  Shield,
-  Lock,
-  Database,
-  Cloud,
-  CreditCard,
-  ServerCrash,
-  ShieldCheck,
-  FileKey2,
+// Logo real de cada certificação — substitui o ícone genérico do lucide.
+// Chave é `cert.id` (ver home-api.ts: 1=PCI, 2=LGPD, 3=SSL, 4=Data Encryption,
+// na mesma ordem dos arquivos em public/assets/imgs/seguranca/).
+const LOGO_MAP: Record<string, string> = {
+  "1": "/assets/imgs/seguranca/pci-dss.svg",
+  "2": "/assets/imgs/seguranca/lgpd.svg",
+  "3": "/assets/imgs/seguranca/ssl.svg",
+  "4": "/assets/imgs/seguranca/data-encryption.svg",
 };
 
 /**
- * Na versão escura, cor = decoração. Aqui ela ganha função:
- *   · `tint`  identifica o DOMÍNIO da certificação (dado, rede, infra, pagamento)
- *   · o selo "Ativo" é sempre esmeralda — status é sinal, não identidade.
- * Sem isso, quatro cores em cards brancos viraria confete.
+ * O trilho de cor na borda esquerda continua identificando o DOMÍNIO da
+ * certificação (dado, rede, infra, pagamento) — a logo real já faz esse
+ * papel também, mas o trilho reforça a leitura em varredura rápida.
  */
-const iconColors: Record<number, { bg: string; text: string; border: string; rail: string }> = {
-  0: { bg: "bg-[#285992]/8",  text: "text-[#285992]", border: "border-[#285992]/18", rail: "#285992" },
-  1: { bg: "bg-cyan-500/8",   text: "text-cyan-700",  border: "border-cyan-600/18",  rail: "#0e7490" },
-  2: { bg: "bg-violet-500/8", text: "text-violet-700", border: "border-violet-600/18", rail: "#6d28d9" },
-  3: { bg: "bg-amber-500/10", text: "text-amber-700", border: "border-amber-600/20",  rail: "#b45309" },
+const railColors: Record<number, string> = {
+  0: "#285992",
+  1: "#0e7490",
+  2: "#6d28d9",
+  3: "#b45309",
 };
 
 
@@ -100,8 +89,7 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
             className="grid grid-cols-2 gap-4"
           >
             {certificacoes.map((cert, index) => {
-              const Icon = iconMap[cert.icone] || Shield;
-              const color = iconColors[index % 4];
+              const rail = railColors[index % 4];
 
               return (
                 <motion.div
@@ -115,13 +103,24 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
                   <span
                     aria-hidden="true"
                     className="absolute left-0 top-0 bottom-0 w-[2px] opacity-45 group-hover:opacity-100 group-hover:w-[3px] transition-all duration-300"
-                    style={{ backgroundColor: color.rail }}
+                    style={{ backgroundColor: rail }}
                   />
 
-                  {/* Icon */}
-                  <div className={`w-11 h-11 rounded-xl border flex items-center justify-center flex-shrink-0 ${color.bg} ${color.border}`}>
-                    <Icon className={`w-5 h-5 ${color.text}`} />
-                  </div>
+                  {/* Logo — solta, sem caixa/fundo por baixo. `max-w-[130px]`
+                      (não 64px) porque duas das quatro logos são wordmarks
+                      bem mais largos que altos (LGPD ~2.6:1, SSL ~3:1) — um
+                      teto mais apertado cortava a largura antes da altura
+                      e essas duas ficavam visivelmente menores que as
+                      logos quadradas (PCI-DSS, Data Encryption) na mesma
+                      grade. Altura fixa consistente pra todas; a largura
+                      de cada uma varia com sua proporção real. */}
+                  <img
+                    src={LOGO_MAP[cert.id]}
+                    alt={cert.titulo}
+                    className="h-10 w-auto max-w-[130px] self-start object-contain object-left flex-shrink-0"
+                    loading="lazy"
+                    decoding="async"
+                  />
 
                   {/* Text */}
                   <div>

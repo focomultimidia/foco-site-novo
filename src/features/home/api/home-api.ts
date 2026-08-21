@@ -22,7 +22,7 @@ const homeData: HomeData = {
       numero: "01",
       titulo: "Channel Manager",
       descricao:
-        "Amplie a distribuição do seu hotel ou pousada para Mais de 850 canais de reservas online.",
+        "Amplie a distribuição do seu hotel ou pousada para Mais de 800 canais de reservas online.",
       beneficios: [
         "800+ canais conectados",
         "Reduz overbooking",
@@ -105,7 +105,7 @@ const homeData: HomeData = {
       id: "canais",
       nome: "Canais",
       descricao:
-        "Conecte-se a +850 canais de vendas com o nosso Channel Manager, garantindo mais visibilidade e menos overbooking.",
+        "Conecte-se a +800 canais de vendas com o nosso Channel Manager, garantindo mais visibilidade e menos overbooking.",
     },
     {
       id: "pms",
@@ -138,9 +138,9 @@ const homeData: HomeData = {
     {
       id: "2",
       icone: "Globe",
-      titulo: "+850 Canais Conectados",
+      titulo: "+800 canais Conectados",
       descricao:
-        "Mais de 850 canais de vendas conectados (Booking, Decolar, Expedia, Airbnb, E-HTL e muitos outros).",
+        "Mais de 800 canais de vendas conectados (Booking, Decolar, Expedia, Airbnb, E-HTL e muitos outros).",
     },
     {
       id: "3",
@@ -166,7 +166,7 @@ const homeData: HomeData = {
     {
       id: "6",
       icone: "Users",
-      titulo: "+2.500 Hoteleiros Satisfeitos",
+      titulo: "+2.700 Hoteleiros Satisfeitos",
       descricao:
         "Mais de 2.500 hoteleiros satisfeitos com as nossas soluções no Brasil.",
     },

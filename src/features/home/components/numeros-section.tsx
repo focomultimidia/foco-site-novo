@@ -41,7 +41,7 @@ const METRICAS = [
   },
   {
     icon: Users,
-    valor: 2800,
+    valor: 2700,
     sufixo: "",
     label: "clientes ativos",
     iconHoverType: "expand" as const,
@@ -55,14 +55,14 @@ const METRICAS = [
   },
   {
     icon: TrendingUp,
-    valor: 5,
+    valor: 2,
     sufixo: " bi",
     label: "transações/ano",
     iconHoverType: "lift" as const,
   },
   {
     icon: Link2,
-    valor: 850,
+    valor: 800,
     sufixo: "",
     label: "integrações disponíveis",
     iconHoverType: "spin" as const,

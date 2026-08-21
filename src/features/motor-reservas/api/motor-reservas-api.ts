@@ -88,7 +88,7 @@ const motorReservasData: MotorReservasData = {
     {
       id: "4",
       pergunta: "É possível usar o motor junto com o Channel Manager?",
-      resposta: "Sim. Com a integração Foco, você pode distribuir tarifas para Mais de 850 canais com sincronização automática.",
+      resposta: "Sim. Com a integração Foco, você pode distribuir tarifas para Mais de 800 canais com sincronização automática.",
     },
     {
       id: "5",

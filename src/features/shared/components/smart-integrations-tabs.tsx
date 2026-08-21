@@ -33,7 +33,7 @@ const tabsData: TabData[] = [
     label: "Canais",
     icon: Globe,
     description:
-      "Conecte-se a Mais de 850 canais de vendas, garantindo mais visibilidade e menos overbooking.",
+      "Conecte-se a Mais de 800 canais de vendas, garantindo mais visibilidade e menos overbooking.",
     logos: [
       { src: "/assets/imgs/integracoes/canais/booking.webp", alt: "Booking.com" },
       { src: "/assets/imgs/integracoes/canais/airbnb.webp", alt: "Airbnb" },

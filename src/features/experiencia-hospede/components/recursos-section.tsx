@@ -168,16 +168,16 @@ function PhaseCard({ fase, index }: { fase: (typeof FASES)[number]; index: numbe
         {fase.itens.map((item) => {
           const ItemIcon = item.icon;
           return (
-            <li key={item.titulo} className="rounded-xl bg-[#f4f7fb] border border-slate-200/70 px-3.5 py-3">
-              <div className="flex items-center gap-2.5 mb-1">
-                <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#285992]/[0.08]">
-                  <ItemIcon className="h-3.5 w-3.5 text-[#285992]" strokeWidth={1.8} />
+            <li key={item.titulo} className="rounded-xl bg-[#f4f7fb] border border-slate-200/70 px-3.5 py-3.5">
+              <div className="flex items-center gap-2.5 mb-1.5">
+                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#285992]/[0.08]">
+                  <ItemIcon className="h-[18px] w-[18px] text-[#285992]" strokeWidth={1.8} />
                 </span>
-                <span className="text-[12.5px] font-semibold text-slate-800">
+                <span className="text-[15px] font-semibold text-slate-800">
                   {item.titulo}
                 </span>
               </div>
-              <p className="text-[11.5px] leading-relaxed text-slate-500">
+              <p className="text-[14px] leading-relaxed text-slate-500">
                 {item.descricao}
               </p>
             </li>

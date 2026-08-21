@@ -36,6 +36,8 @@ interface PremiumCTAButtonProps {
   onClick?: () => void;
   className?: string;
   icon?: React.ComponentType<{ className?: string }>;
+  /** Paleta do botão — "blue" (padrão, navy da marca) ou "green" (WhatsApp). */
+  variant?: "blue" | "green";
 }
 
 // Raio do campo magnético (px a partir do centro do botão)
@@ -45,13 +47,39 @@ const MAGNETIC_STRENGTH = 0.28;
 // Duração de uma rotação completa do beam (ms)
 const BEAM_PERIOD_MS    = 3000;
 
+// Paleta por variante — mesmas camadas de efeito (beam, glow, shimmer),
+// só troca a cor. "green" usa o verde oficial do logo do WhatsApp
+// (#32d951) em vez do navy/azul da marca, com texto mais grosso e vívido.
+const VARIANT_STYLES = {
+  blue: {
+    background: "linear-gradient(145deg, rgba(40,89,146,0.96) 0%, rgba(29,64,105,0.98) 100%)",
+    shadowRest:
+      "0 0 20px rgba(37,99,235,0.22), 0 0 42px rgba(37,99,235,0.10), inset 0 1px 0 rgba(255,255,255,0.13), inset 0 -1px 0 rgba(0,0,0,0.16)",
+    shadowHover:
+      "0 0 28px rgba(37,99,235,0.50), 0 0 60px rgba(37,99,235,0.24), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -1px 0 rgba(0,0,0,0.16)",
+    beamMid: "rgba(96, 165, 250, 0.65)",
+    text: "font-medium text-white/90",
+  },
+  green: {
+    background: "linear-gradient(145deg, rgba(50,217,81,0.98) 0%, rgba(21,140,50,0.98) 100%)",
+    shadowRest:
+      "0 0 20px rgba(50,217,81,0.28), 0 0 42px rgba(50,217,81,0.14), inset 0 1px 0 rgba(255,255,255,0.13), inset 0 -1px 0 rgba(0,0,0,0.16)",
+    shadowHover:
+      "0 0 28px rgba(50,217,81,0.55), 0 0 60px rgba(50,217,81,0.28), inset 0 1px 0 rgba(255,255,255,0.20), inset 0 -1px 0 rgba(0,0,0,0.16)",
+    beamMid: "rgba(150, 245, 170, 0.75)",
+    text: "font-bold text-white",
+  },
+} as const;
+
 function PremiumCTAButton({
   label    = "Agendar uma demonstração",
   onClick,
   className,
   icon: Icon = ArrowRight,
+  variant  = "blue",
 }: PremiumCTAButtonProps) {
   const outerRef = useRef<HTMLDivElement>(null);
+  const palette = VARIANT_STYLES[variant];
 
   // ── Border beam ────────────────────────────────────────────────────────────
   // beamAngle é um MotionValue que aumenta a cada frame via useAnimationFrame.
@@ -63,9 +91,9 @@ function PremiumCTAButton({
     (a) =>
       `conic-gradient(from ${a}deg, ` +
       `transparent 0%, transparent 28%, ` +
-      `rgba(96, 165, 250, 0.65) 42%, ` +
+      `${palette.beamMid} 42%, ` +
       `rgba(255, 255, 255, 0.95) 50%, ` +
-      `rgba(96, 165, 250, 0.65) 58%, ` +
+      `${palette.beamMid} 58%, ` +
       `transparent 72%, transparent 100%)`
   );
 
@@ -154,30 +182,24 @@ function PremiumCTAButton({
             <motion.button
               type="button"
               onClick={onClick}
-              className="group relative z-[1] flex items-center gap-2.5 px-7 py-3.5 rounded-full font-display font-medium tracking-tight text-sm text-white/90 cursor-pointer select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fccc30]/80"
+              className={cn(
+                "group relative z-[1] flex items-center gap-2.5 px-7 py-3.5 rounded-full font-display tracking-tight text-sm cursor-pointer select-none overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#fccc30]/80",
+                palette.text
+              )}
               style={{
-                // Fundo navy gradiente (cor da marca #285992) — funciona sobre
+                // Fundo gradiente conforme a variante — funciona sobre
                 // fundo escuro E sobre o header branco flutuante
-                background:
-                  "linear-gradient(145deg, rgba(40,89,146,0.96) 0%, rgba(29,64,105,0.98) 100%)",
+                background: palette.background,
                 backdropFilter:       "blur(14px)",
                 WebkitBackdropFilter: "blur(14px)",
                 // Glow multicamadas em repouso
-                boxShadow:
-                  "0 0 20px rgba(37,99,235,0.22), " +
-                  "0 0 42px rgba(37,99,235,0.10), " +
-                  "inset 0 1px 0 rgba(255,255,255,0.13), " +
-                  "inset 0 -1px 0 rgba(0,0,0,0.16)",
+                boxShadow: palette.shadowRest,
                 willChange: "transform",
               }}
               whileHover={{
                 color: "rgba(255,255,255,1)",
                 // Glow mais intenso no hover
-                boxShadow:
-                  "0 0 28px rgba(37,99,235,0.50), " +
-                  "0 0 60px rgba(37,99,235,0.24), " +
-                  "inset 0 1px 0 rgba(255,255,255,0.20), " +
-                  "inset 0 -1px 0 rgba(0,0,0,0.16)",
+                boxShadow: palette.shadowHover,
               }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.18, ease: "easeOut" }}

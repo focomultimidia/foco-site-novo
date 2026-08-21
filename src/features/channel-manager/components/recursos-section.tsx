@@ -22,7 +22,7 @@ const RECURSOS = [
     icon: Calendar,
     titulo: "Único calendário",
     descricao:
-      "Em um único calendário, é possível alimentar tarifas, disponibilidade e restrições em mais de 850 canais.",
+      "Em um único calendário, é possível alimentar tarifas, disponibilidade e restrições em mais de 800 canais.",
   },
   {
     icon: Building2,

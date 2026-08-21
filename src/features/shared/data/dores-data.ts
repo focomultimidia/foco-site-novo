@@ -14,7 +14,7 @@ const DORES_DATA: DorSolucao[] = [
       {
         titulo: "Mais canais, mais reservas",
         descricao:
-          "Conecte-se a +850 canais de vendas com o nosso Channel manager, garantindo mais visibilidade e menos overbooking.",
+          "Conecte-se a +800 canais de vendas com o nosso Channel manager, garantindo mais visibilidade e menos overbooking.",
         link: "/channel-manager",
       },
       {

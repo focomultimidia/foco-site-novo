@@ -88,17 +88,17 @@ function SiteHoteleiroPage() {
         backgroundAlt="Lobby de hotel vazio à noite, recepcionista sozinha aguardando hóspedes"
       />
 
+      {/* Seção 5: Reserva */}
+      <ReservaSection />
+
       {/* Bloco de Autoridade e Confiança */}
       <NumerosSection numeros={numeros} />
 
-      {/* Seção 5: Vantagens */}
+      {/* Seção 6: Vantagens */}
       <VantagensSection />
 
       {/* Prova Social 1: Feiras */}
       <EventosSection eventos={eventos} />
-
-      {/* Seção 6: Reserva */}
-      <ReservaSection />
 
       {/* Prova Social 2+3: Mural de depoimentos (texto + vídeo, unificados) */}
       <WallOfLoveSection

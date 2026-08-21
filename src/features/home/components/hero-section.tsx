@@ -12,7 +12,7 @@ import {
   ArrowRight,
   Users,
   TrendingUp,
-  Calendar,
+  CheckCircle2,
   Image as ImageIcon,
   Smartphone,
 } from "lucide-react";
@@ -33,9 +33,18 @@ const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 //    invadia o conteúdo do mockup quando ele encolhia em telas menores). ───
 
 const STATS = [
-  { key: "clientes",   icon: Users,        value: "+18", label: "Anos de experiência",       delay: 0.8, topPct: -14,  side: "left"  as const, offsetRem: 1.25, floatDelay: 0    },
+  { key: "clientes",   icon: Users,        value: "+20", label: "Anos de experiência",       delay: 0.8, topPct: -14,  side: "left"  as const, offsetRem: 1.25, floatDelay: 0    },
   { key: "transacoes", icon: TrendingUp,   value: "+1B",    label: "Transações/ano",         delay: 1.0, topPct: 106, side: "right" as const, offsetRem: 0.5,  floatDelay: 0.7  },
-  { key: "anos",       icon: Calendar,     value: "+2.500",    label: "Clientes ativos",    delay: 1.2, topPct: 46, side: "left"  as const, offsetRem: 9, floatDelay: 1.4  },
+] as const;
+
+// ── Badges de confiança — linha compacta abaixo do CTA (substituiu o antigo
+//    badge flutuante "+2.700 Clientes ativos" sobre o mockup, pedido
+//    explícito). São só texto + ícone (sem número), por isso não usam o
+//    HeroStatBadge (que é value+label em duas linhas).
+const TRUST_BADGES = [
+  { icon: CheckCircle2, label: "Adesão gratuita" },
+  { icon: CheckCircle2, label: "Sem fidelidade" },
+  { icon: CheckCircle2, label: "Suporte humanizado" },
 ] as const;
 
 // ── Imagem única do mockup — desktop e celular, sem troca/transição (pedido
@@ -182,6 +191,25 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
     </motion.div>
   );
 
+  const trustBadgesRow = (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.68, ease: EASE }}
+      className="flex flex-wrap items-center gap-2.5 justify-center lg:justify-start"
+    >
+      {TRUST_BADGES.map(({ icon: Icon, label }) => (
+        <span
+          key={label}
+          className="inline-flex items-center gap-1.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white/85 px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap"
+        >
+          <Icon className="w-3.5 h-3.5 text-[#fccc30]" />
+          {label}
+        </span>
+      ))}
+    </motion.div>
+  );
+
   return (
     <section
       ref={sectionRef}
@@ -284,7 +312,12 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           controle total da operação.
         </motion.p>
 
-        {isWideLayout && ctaButton}
+        {isWideLayout && (
+          <div className="flex flex-col items-start gap-5">
+            {ctaButton}
+            {trustBadgesRow}
+          </div>
+        )}
       </div>
 
       {/* ── Coluna direita — palco dos mockups. Sempre em fluxo normal,
@@ -393,6 +426,7 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
             className="flex flex-col items-center gap-5 w-full"
           >
             {ctaButton}
+            {trustBadgesRow}
           </motion.div>
         )}
       </div>

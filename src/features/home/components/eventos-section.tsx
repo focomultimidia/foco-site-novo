@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion } from "framer-motion";
 import { ChevronDown, MapPin } from "lucide-react";
@@ -15,6 +15,7 @@ const EVENTO_IMAGES: Record<string, string> = {
   "1": "/assets/imgs/feiras-eventos/equipotel-2025.webp",
   "2": "/assets/imgs/feiras-eventos/expohotel-2025.webp",
   "3": "/assets/imgs/feiras-eventos/expohotel-2024.webp",
+  "4": "/assets/imgs/feiras-eventos/encatho2026.jpg",
 };
 
 // Logo do evento/feira — antes vivia no EventoInfoCard (card separado com
@@ -23,11 +24,30 @@ const EVENTO_IMAGES: Record<string, string> = {
 // mobile) — nunca mais duplicados dentro do card de conteúdo.
 const EVENTO_LOGOS: Record<string, string> = {
   "1": "/assets/imgs/feiras-eventos/equipotel.webp",
-  "2": "/assets/imgs/feiras-eventos/expotel.webp",
-  "3": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
+  "2": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
+  "3": "/assets/imgs/feiras-eventos/expotel.webp",
+  "4": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
 };
 
 const MOBILE_MAX = 4;
+
+// ── Ordenação cronológica — sempre do mais atual pro mais antigo,
+//    independente da ordem em que os eventos chegam de social-proof-data.ts
+//    (assim uma nova entrada nunca precisa ser reordenada manualmente no
+//    array de dados; basta ter o campo `data` no formato "Mês Ano"). ─────
+const MESES: Record<string, number> = {
+  janeiro: 0, fevereiro: 1, março: 2, abril: 3, maio: 4, junho: 5,
+  julho: 6, agosto: 7, setembro: 8, outubro: 9, novembro: 10, dezembro: 11,
+};
+
+function parseEventoData(data: string): number {
+  const [mes, ano] = data.trim().toLowerCase().split(/\s+/);
+  return new Date(parseInt(ano, 10) || 0, MESES[mes] ?? 0, 1).getTime();
+}
+
+function sortEventosDesc(eventos: Evento[]): Evento[] {
+  return [...eventos].sort((a, b) => parseEventoData(b.data) - parseEventoData(a.data));
+}
 
 // ── EventStatusDot — pulsa só nos eventos marcados como "Destaque". ───────
 function EventStatusDot() {
@@ -53,8 +73,8 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
         // `line-clamp`, então a altura precisa poder crescer conforme o
         // tamanho real de cada descrição (ver <p> mais abaixo).
         compact
-          ? "w-full min-h-[168px] sm:min-h-[184px]"
-          : "flex-shrink-0 w-[420px] sm:w-[460px] xl:w-[520px] min-h-[196px] xl:min-h-[212px]",
+          ? "w-full h-full min-h-[168px] sm:min-h-[184px]"
+          : "h-full flex-shrink-0 w-[420px] sm:w-[460px] xl:w-[520px] min-h-[196px] xl:min-h-[212px]",
       ].join(" ")}
     >
       {/*
@@ -100,6 +120,19 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
       </div>
 
       <div className="flex-1 min-w-0 flex flex-col justify-center p-4 sm:p-5 xl:p-6">
+        {/* Logo do evento/feira — movida da timeline pra dentro do próprio
+            card (pedido explícito), acima da linha da cidade. */}
+        {EVENTO_LOGOS[evento.id] && (
+          <img
+            src={EVENTO_LOGOS[evento.id]}
+            alt={`Logo do evento: ${evento.titulo}`}
+            width={90}
+            height={30}
+            loading="lazy"
+            decoding="async"
+            className="h-5 sm:h-6 w-auto max-w-[90px] object-contain mb-2"
+          />
+        )}
         <span className="flex items-center gap-1 text-[11px] font-medium text-slate-600 mb-1.5">
           <MapPin className="w-3 h-3 flex-shrink-0" />
           {evento.local}
@@ -117,25 +150,22 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
   );
 }
 
-// ── TimelineRail — o que substitui o antigo card de logo/data. Uma régua
-//    fixa na parte inferior da seção pinada (não se move com o trilho de
-//    cards), com uma estação por evento. `activeIndex` vem de
-//    useEventosScroll, que agora divide o scrub em `total` fatias IGUAIS
-//    — cada evento recebe exatamente 1/3 do scroll pinado, garantindo que
-//    os 3 sejam sempre alcançados (não dependia mais de medir a posição
-//    exata dos cards, ver comentário no hook).
+// ── TimelineRail — régua fixa na parte inferior da seção pinada (não se
+//    move com o trilho de cards), com uma estação por evento. `activeIndex`
+//    vem de useEventosScroll, que divide o scrub em `total` fatias IGUAIS —
+//    cada evento recebe exatamente 1/(N) do scroll pinado, garantindo que
+//    todos sejam sempre alcançados (não depende de medir a posição exata
+//    dos cards, ver comentário no hook).
 //
-//    Clareza em duas camadas, pra nenhuma informação depender só da
-//    animação: (1) a DATA de cada evento fica sempre visível, presa sob
-//    o próprio marcador — mesmo se o usuário rolar rápido demais pra ver
-//    a cápsula "pousar", as 3 datas já estão todas na tela o tempo
-//    inteiro; (2) a cápsula com logo é só o destaque do evento ativo,
-//    reforçando qual estação está em foco no momento. Transições viraram
-//    tween curto (0.3–0.35s) em vez de spring solto — o spring anterior
-//    (stiffness 120–140) não tinha tempo de assentar num scroll rápido. ──
+//    A DATA de cada evento fica sempre visível, presa sob o próprio
+//    marcador — nenhuma informação depende só da animação. A logo saiu
+//    daqui (antes vivia numa cápsula flutuante sobre a estação ativa) e
+//    foi pro card correspondente, acima da cidade — pedido explícito.
+//    Transições em tween curto (0.3–0.35s) em vez de spring solto — o
+//    spring anterior (stiffness 120–140) não tinha tempo de assentar num
+//    scroll rápido. ──
 function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex: number }) {
   const total = eventos.length;
-  const active = eventos[activeIndex];
   const activePct = total > 0 ? ((activeIndex + 0.5) / total) * 100 : 0;
 
   return (
@@ -197,58 +227,18 @@ function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex
             </div>
           );
         })}
-
-        {/* Cápsula viajante — logo do evento ativo, pousada sobre a estação */}
-        <motion.div
-          className="absolute -top-[76px] xl:-top-[82px] -translate-x-1/2"
-          animate={{ left: `${activePct}%` }}
-          transition={{ duration: 0.35, ease: EASE }}
-        >
-          {active && EVENTO_LOGOS[active.id] && (
-            <motion.div
-              key={active.id}
-              initial={{ opacity: 0, y: 10, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.35, ease: EASE }}
-              className="relative flex items-center bg-white rounded-2xl border border-slate-100 shadow-xl px-4 py-2.5"
-            >
-              <img
-                src={EVENTO_LOGOS[active.id]}
-                alt={`Logo do evento: ${active.titulo}`}
-                width={90}
-                height={30}
-                loading="lazy"
-                decoding="async"
-                className="h-6 w-auto max-w-[84px] object-contain"
-              />
-
-              {/* Ponteiro conectando a cápsula à estação abaixo */}
-              <span className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-3 h-3 bg-white border-r border-b border-slate-100 rotate-45" />
-            </motion.div>
-          )}
-        </motion.div>
       </div>
     </div>
   );
 }
 
-// ── Marcador vertical (mobile) — mesma dupla logo+data da cápsula do
-//    desktop, só que estática, empilhada ao lado de cada card na lista. ──
+// ── Marcador vertical (mobile) — data + conector estático, empilhado ao
+//    lado de cada card na lista. A logo saiu daqui (foi pro card, ver
+//    EventoCard) pra não duplicar a mesma informação duas vezes lado a
+//    lado. ──────────────────────────────────────────────────────────────
 function EventoMarcador({ evento, isLast }: { evento: Evento; isLast: boolean }) {
   return (
     <div className="relative z-10 flex-shrink-0 w-[64px] sm:w-[72px] flex flex-col items-center pt-1">
-      {EVENTO_LOGOS[evento.id] && (
-        <img
-          src={EVENTO_LOGOS[evento.id]}
-          alt=""
-          aria-hidden="true"
-          width={64}
-          height={24}
-          loading="lazy"
-          decoding="async"
-          className="h-5 w-auto max-w-full object-contain mb-1.5 grayscale opacity-70"
-        />
-      )}
       <span className="font-mono text-[8.5px] sm:text-[9px] uppercase tracking-wide text-[#285992] text-center leading-tight mb-2">
         {evento.data}
       </span>
@@ -291,8 +281,10 @@ function EventosSection({ eventos }: EventosSectionProps) {
   const trackRef   = useRef<HTMLDivElement>(null);
   const textRef    = useRef<HTMLDivElement>(null);
 
+  const sortedEventos = useMemo(() => sortEventosDesc(eventos), [eventos]);
+
   const [activeIndex, setActiveIndex] = useState(0);
-  const total = eventos.length;
+  const total = sortedEventos.length;
 
   useEventosScroll(
     useHorizontalScroll,
@@ -323,13 +315,9 @@ function EventosSection({ eventos }: EventosSectionProps) {
             <h2 className="font-display text-4xl xl:text-5xl font-semibold text-[#1e3a5f] leading-[1.05] tracking-tighter antialiased mb-4">
               Presente nas principais{" "}
               <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
-                feiras de hotelaria
+                feiras e eventos de hotelaria
               </span>
             </h2>
-            <p className="text-slate-600 text-base leading-relaxed max-w-md">
-              Grandes redes e pousadas independentes confiam na Foco: acompanhe
-              onde estivemos e onde vamos estar em seguida.
-            </p>
           </div>
 
           {/* Trilho — `pl-[44%]` empurra o 1º card pra começar logo depois da
@@ -338,16 +326,16 @@ function EventosSection({ eventos }: EventosSectionProps) {
               (flex + flex-shrink-0 nos cards). */}
           <div
             ref={trackRef}
-            className="absolute top-[38%] xl:top-[40%] -translate-y-1/2 left-0 flex items-center gap-8 xl:gap-12 pl-[44%] xl:pl-[40%] pr-[10vw] will-change-transform"
+            className="absolute top-[38%] xl:top-[40%] -translate-y-1/2 left-0 flex items-stretch gap-8 xl:gap-12 pl-[44%] xl:pl-[40%] pr-[10vw] will-change-transform"
           >
-            {eventos.map((evento) => (
+            {sortedEventos.map((evento) => (
               <div key={evento.id} className="flex-shrink-0">
                 <EventoCard evento={evento} />
               </div>
             ))}
           </div>
 
-          <TimelineRail eventos={eventos} activeIndex={activeIndex} />
+          <TimelineRail eventos={sortedEventos} activeIndex={activeIndex} />
         </section>
       )}
 
@@ -374,7 +362,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
             </motion.div>
 
             <div className="space-y-3">
-              {eventos.slice(0, showAll ? undefined : MOBILE_MAX).map((evento, i, arr) => (
+              {sortedEventos.slice(0, showAll ? undefined : MOBILE_MAX).map((evento, i, arr) => (
                 <motion.div
                   key={evento.id}
                   initial={{ opacity: 0, y: 16 }}

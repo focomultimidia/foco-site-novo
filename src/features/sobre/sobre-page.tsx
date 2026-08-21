@@ -12,7 +12,7 @@ export function SobrePage() {
   useSeo({
     title: "Sobre a Foco Tecnologia | +20 Anos de Hotelaria",
     description:
-      "Empresa brasileira que já atende mais de 2.800 hotéis, pousadas e temporadas com tecnologia feita para o dia a dia da hotelaria.",
+      "Empresa brasileira que já atende mais de 2.700 hotéis, pousadas e temporadas com tecnologia feita para o dia a dia da hotelaria.",
     path: "/sobre",
   });
 

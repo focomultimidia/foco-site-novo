@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Linkedin, Instagram, Facebook, Youtube, Twitter } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Youtube, Twitter } from "lucide-react";
 import { useCookieConsent } from "@/features/cookie-consent";
 
 interface FooterLink {
@@ -40,8 +40,6 @@ const footerSections: FooterSection[] = [
   {
     title: "Suporte",
     links: [
-      { label: "Central de Ajuda", href: "#" },
-      { label: "Treinamentos", href: "#" },
       { label: "Widgets", href: "https://widgets.motor-reservas.com.br/" },
     ],
   },
@@ -79,34 +77,8 @@ function Footer() {
             </Link>
             <p className="text-white/80 text-sm mb-6 max-w-sm">
               Líder em software para hotelaria no Brasil. Transformando a gestão hoteleira
-              com tecnologia inovadora desde 2008.
+              com tecnologia inovadora desde 2006.
             </p>
-
-            {/* Contact Info */}
-            <div className="space-y-3">
-              <a
-                href="tel:+551140028822"
-                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#fccc30] transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>4002-8822</span>
-              </a>
-              <a
-                href="mailto:contato@focotec.com.br"
-                className="flex items-center gap-3 text-sm text-white/80 hover:text-[#fccc30] transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                <span>contato@focotec.com.br</span>
-              </a>
-              <div className="flex items-start gap-3 text-sm text-white/80">
-                <MapPin className="w-4 h-4 mt-0.5" />
-                <span>
-                  Av. Paulista, 1000 - Sala 1501<br />
-                  Bela Vista, São Paulo - SP
-                </span>
-              </div>
-            </div>
-
           </div>
 
           {/* Link Columns */}

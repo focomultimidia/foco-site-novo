@@ -71,21 +71,21 @@ export function HomePage() {
         onCtaClick={() => setIsLeadModalOpen(true)}
       />
 
-      <ProdutosSection />
-
       <TrustedLogosMarquee />
 
       <OtheoAiTeaserSection />
 
+      <ProdutosSection />
+
       <SmartIntegrationsTabs />
+
+      <EventosSection eventos={eventos} />
 
       {/*<DoresSection dores={data.dores} />*/}
 
       {/* Módulo novo, em comparação com o DoresSection acima — remover um dos
           dois assim que a escolha final for feita. */}
       <DoresDiagnosticoSection dores={data.dores} />
-
-      <EventosSection eventos={eventos} />
 
       <NaMidiaSection artigos={artigosMidia} />
 

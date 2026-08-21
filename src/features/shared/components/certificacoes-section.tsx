@@ -25,7 +25,7 @@ const certificacoes = [
   },
   {
     id:       "stone",
-    logo:     "/assets/imgs/certificacoes/stone.webp",
+    logo:     "/assets/imgs/certificacoes/stone.png",
     titulo:   "Stone Master Partner",
     descricao:
       "Integramos a mais robusta plataforma financeira diretamente ao nosso ecossistema. Facilitamos a gestão do seu negócio com pagamentos rápidos, seguros e sem dor de cabeça.",

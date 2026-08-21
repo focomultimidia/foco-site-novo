@@ -159,7 +159,7 @@ function TrustedLogosMarquee() {
         >
           <SectionEyebrow>Cases</SectionEyebrow>
           <h2 className="font-display text-4xl sm:text-5xl lg:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
-            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">+2.500 hotéis</span> turbinaram seus resultados com a Foco
+            <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">+2.700 hotéis</span> turbinaram seus resultados com a Foco
           </h2>
           <p className="text-gray-500 mt-4 max-w-3xl mx-auto">
             Grandes redes e pousadas independentes confiam na Foco para impulsionar seus negócios

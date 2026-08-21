@@ -30,7 +30,7 @@ export function OrbitSection() {
               {[
                 "Sincronização em tempo real com as maiores OTAs do mundo",
                 "Pagamentos integrados com certificação PCI DSS nível 1",
-                "API aberta para conectar qualquer sistema do mercado",
+                "Conexão com os principais PMS's do mercado hoteleiro",
               ].map(item => (
                 <div key={item} className="flex items-start gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#285992]/10 text-[#285992] flex items-center justify-center shrink-0 mt-0.5">
