@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { HeroSection } from "./components/hero-section";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import { ProblemaParallaxSection } from "./components/problema-parallax-section";
@@ -10,6 +11,7 @@ import { AcessoSection } from "./components/onde-vive-section";
 import { ManifestoSection } from "./components/manifesto-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
 
 /**
  * OtheoAiPage — roteiro em 3 atos: problema (seis abas abertas) → como o
@@ -27,9 +29,11 @@ function OtheoAiPage() {
     path: "/otheo-ai",
   });
 
+  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
-      <HeroSection />
+      <HeroSection onCtaClick={() => setIsLeadModalOpen(true)} />
       <ProblemaParallaxSection />
       <PilaresSection />
       <OcupacaoSection />
@@ -94,6 +98,14 @@ function OtheoAiPage() {
         badge="Comece agora"
         title="Pronto para ter um copiloto de IA na sua operação?"
         subtitle="Solicite uma demonstração e veja o Otheo respondendo perguntas reais do seu hotel, ao vivo."
+      />
+
+      <LeadCaptureModal
+        isOpen={isLeadModalOpen}
+        onClose={() => setIsLeadModalOpen(false)}
+        title="Solicite uma Demonstração Grátis"
+        description="Preencha seus dados e nossa equipe entrará em contato para agendar uma demonstração personalizada do Otheo AI."
+        source="otheo-ai"
       />
     </div>
   );

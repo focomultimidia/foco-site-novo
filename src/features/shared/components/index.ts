@@ -18,3 +18,5 @@ export type { CertificacoesSectionProps } from "./certificacoes-section";
 export { WallOfLoveSection } from "./wall-of-love-section";
 export { DorParallaxSection } from "./dor-parallax-section";
 export { BetaBadge } from "./beta-badge";
+export { SpatialPhoneCarousel } from "./spatial-phone-carousel";
+export type { SpatialPhoneItem } from "./spatial-phone-carousel";

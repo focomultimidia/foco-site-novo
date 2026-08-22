@@ -173,9 +173,6 @@ function WebsitePortfolioCarousel() {
                     <span className="text-[11px] font-semibold uppercase tracking-widest text-blue-500">
                       {template.categoria}
                     </span>
-                    <h3 className="text-base font-bold text-[#1e3a5f] mt-1">
-                      {template.nome}
-                    </h3>
                   </div>
                 </div>
                 </div>

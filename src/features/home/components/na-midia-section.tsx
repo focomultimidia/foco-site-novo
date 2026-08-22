@@ -17,7 +17,7 @@ type Role = "center" | "left" | "right";
 // formato mais compacto — não deriva mais da proporção da imagem (que
 // agora é só uma faixa `aspect-[3/1]`, não o card inteiro).
 const CARD_W = 700;
-const CARD_H = 580;
+const CARD_H = 524;
 
 interface PosConfig {
   x: number;
@@ -88,7 +88,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
       }}
     >
       {/* Publication row */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center justify-between gap-3 mb-3">
         <img
           src={PUBLICACAO_LOGOS[artigo.publicacao]}
           alt={artigo.publicacao}
@@ -96,8 +96,8 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           loading="lazy"
           decoding="async"
         />
-        <div>
-          <p className="text-sm font-semibold text-gray-900 leading-tight">
+        <div className="text-right">
+          <p className="text-sm font-semibold text-gray-400 leading-tight">
             {artigo.publicacao}
           </p>
           <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>
@@ -122,7 +122,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           puxado pra baixo porque nas 3 capturas (materia-1/2/3.webp) a foto
           da matéria fica na parte inferior da página, e é ela que precisa
           aparecer nessa faixa curta — não o cabeçalho/texto do topo. */}
-      <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden">
+      <div className="relative w-full aspect-[2/0.85] rounded-xl overflow-hidden">
         <img
           src={IMAGES[artigo.id] ?? IMAGES["1"]}
           alt={artigo.titulo}

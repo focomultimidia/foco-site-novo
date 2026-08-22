@@ -51,11 +51,12 @@ export interface ProdutoItem {
    * tratamento de celulares empilhados/sobrepostos (moldura branca, escala e
    * opacidade menores nos de trás) em vez de screenshot + mockup mobile
    * único. 3 itens = trio (TriplePhoneStage/central em destaque, laterais
-   * atrás — ex.: Experiência do Hóspede, 100% app, sem "tela desktop" de
-   * verdade). 2 itens = dupla (DuoPhoneStage — ex.: Otheo AI, cujas 2 telas
-   * reais não sustentam um 3º mockup sem repetir imagem).
+   * atrás — ex.: Experiência do Hóspede, Otheo AI). 2 itens = dupla
+   * (DuoPhoneStage). `src` é opcional por item — sem ele, o celular mostra
+   * o mesmo placeholder tracejado de `mobileScreenshot` (reserva o espaço
+   * até a imagem real ser adicionada).
    */
-  mockups?: readonly { src: string; alt: string }[];
+  mockups?: readonly { src?: string; alt: string }[];
   bkgImagem?:  string; // optional hero/lifestyle image used as accordion background
   accent:      string;
   overlay:     string;
@@ -141,7 +142,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     imagem: "/assets/imgs/produtos/focopay.webp",
     screenshot: "/assets/imgs/produtos/focopay.webp",
     screenshotWidth: 815, screenshotHeight: 584,
-    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.webp",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.png",
     bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.webp",
     accent: "#22d3ee",
     overlay: "from-cyan-950/85 to-cyan-900/25",
@@ -191,15 +192,15 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // (contain/crop pelo topo), sem quebrar layout.
     screenshot: "/assets/imgs/home/otheoai/chat-ia.webp",
     // Mesma estrutura de mockups empilhados/sobrepostos da Experiência do
-    // Hóspede (DuoPhoneStage no desktop, mesmos celulares brancos do
-    // TriplePhoneStage), só que com 2 telas em vez de 3 — o Otheo AI só tem
-    // 2 telas reais hoje (chat e lista de reservas), sem uma 3ª pra repetir
-    // o trio sem duplicar imagem. Ordem importa: o primeiro item vai pro
-    // celular de trás (menor/atrás), o segundo pro da frente (grande,
-    // destaque) — ver DuoPhoneStage em product-showcase.tsx.
+    // Hóspede (TriplePhoneStage: celular central em destaque, os 2 laterais
+    // um pouco menores atrás). Ordem importa: primeiro item = celular
+    // esquerdo (menor, atrás), segundo = central (grande, destaque),
+    // terceiro = direito (menor, atrás) — ver TriplePhoneStage em
+    // product-showcase.tsx.
     mockups: [
-      { src: "/assets/imgs/otheo-ai/mockup.webp", alt: "Otheo AI listando reservas com check-in hoje, direto no chat" },
-      { src: "/assets/imgs/home/otheoai/chat-ia.webp", alt: "Otheo AI respondendo um comando na extranet do hotel, via chat" },
+      { src: "/assets/imgs/home/otheoai/mockup1-otheoai.png", alt: "Histórico de conversas do Otheo AI, com perguntas e comandos anteriores" },
+      { src: "/assets/imgs/home/otheoai/mockup2-otheoai.png", alt: "Tela inicial do Otheo AI, pronto para ajudar por voz ou texto" },
+      { src: "/assets/imgs/home/otheoai/mockup3-otheoai.png", alt: "Otheo AI respondendo com os detalhes da reserva e voucher para reenvio" },
     ],
     // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
     // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro

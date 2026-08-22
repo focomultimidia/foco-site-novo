@@ -388,6 +388,38 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
   );
 }
 
+// ── PhoneScreenImage ─────────────────────────────────────────────────────────
+// Tela de um celular empilhado (Triple/Duo/MobileStacked) — print real quando
+// `src` existe, ou o mesmo placeholder tracejado do PhoneMockup quando ainda
+// não existe. Reserva o espaço/silhueta do celular sem quebrar layout
+// enquanto a imagem real não chega.
+function PhoneScreenImage({ src, alt }: { src?: string; alt: string }) {
+  if (!src) {
+    return (
+      <div
+        className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 border-2 border-dashed"
+        style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
+      >
+        <Smartphone className="w-5 h-5" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+        <span
+          className="text-[9px] font-semibold text-center leading-tight px-2"
+          style={{ color: "#285992" }}
+        >
+          {alt}
+        </span>
+      </div>
+    );
+  }
+  return (
+    <img
+      src={src}
+      alt={alt}
+      loading="eager"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  );
+}
+
 // ── TriplePhoneStage ──────────────────────────────────────────────────────────
 // Substitui o par screenshot+PhoneMockup quando o produto define `mockups`
 // (3 telas) — celular central em primeiro plano, os das laterais um pouco
@@ -399,7 +431,7 @@ function StagePanel({ activeIndex }: { activeIndex: number }) {
 // por celular nem clique pra trazer um lateral pro centro, ao contrário
 // daquela hero) — é um card secundário do showcase, a versão interativa
 // completa já existe na página do produto.
-function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+function TriplePhoneStage({ mockups }: { mockups: readonly { src?: string; alt: string }[] }) {
   const ROLES = [
     { x: -186, scale: 0.86, opacity: 0.88, z: 10 },
     { x: 0,    scale: 1,    opacity: 1,    z: 30 },
@@ -449,12 +481,7 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
                   carregadas apenas quando este produto específico fica
                   ativo, `eager` nas 3 é o fix seguro (não um workaround).
                 */}
-                <img
-                  src={mock.src}
-                  alt={mock.alt}
-                  loading="eager"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <PhoneScreenImage src={mock.src} alt={mock.alt} />
               </div>
             </div>
           </div>
@@ -470,12 +497,11 @@ function TriplePhoneStage({ mockups }: { mockups: readonly { src: string; alt: s
 // mesma escala (0.86) e opacidade (0.88) pro que fica atrás — só que
 // recentrada pra 2 celulares em vez de 3 (`x: ∓93` em vez de `-186/0/186`,
 // senão a dupla nascia deslocada pra esquerda dentro da caixa). Usada
-// quando `mockups` tem exatamente 2 itens (hoje só Otheo AI, que só tem 2
-// telas reais e não sustentaria um trio sem repetir imagem).
+// quando `mockups` tem exatamente 2 itens.
 // `mockups[0]` vai pro celular de trás (menor, atrás), `mockups[1]` pro da
 // frente (grande, em destaque) — mesma convenção de ordem do
 // TriplePhoneStage (laterais primeiro, central por último).
-function DuoPhoneStage({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+function DuoPhoneStage({ mockups }: { mockups: readonly { src?: string; alt: string }[] }) {
   const ROLES = [
     { x: -93, scale: 0.86, opacity: 0.88, z: 10 },
     { x: 93,  scale: 1,    opacity: 1,    z: 30 },
@@ -509,12 +535,7 @@ function DuoPhoneStage({ mockups }: { mockups: readonly { src: string; alt: stri
                 style={{ aspectRatio: "9 / 19.5" }}
               >
                 <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 w-9 h-[9px] bg-[#1c1c1e] rounded-full" />
-                <img
-                  src={mock.src}
-                  alt={mock.alt}
-                  loading="eager"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <PhoneScreenImage src={mock.src} alt={mock.alt} />
               </div>
             </div>
           </div>
@@ -531,7 +552,7 @@ function DuoPhoneStage({ mockups }: { mockups: readonly { src: string; alt: stri
 // Genérico por comprimento do array — hoje serve tanto o trio da
 // Experiência do Hóspede quanto a dupla do Otheo AI. Os demais produtos
 // continuam com a captura única acima do título, inalterados.
-function MobileStackedMockups({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+function MobileStackedMockups({ mockups }: { mockups: readonly { src?: string; alt: string }[] }) {
   return (
     <div className="lg:hidden flex items-end justify-center gap-3 mb-6">
       {mockups.map((mock, i) => (
@@ -545,12 +566,7 @@ function MobileStackedMockups({ mockups }: { mockups: readonly { src: string; al
               style={{ aspectRatio: "9 / 19.5" }}
             >
               <div className="absolute top-1.5 left-1/2 -translate-x-1/2 z-10 w-6 h-[6px] rounded-full bg-[#1c1c1e]" />
-              <img
-                src={mock.src}
-                alt={mock.alt}
-                loading="eager"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
+              <PhoneScreenImage src={mock.src} alt={mock.alt} />
             </div>
           </div>
         </div>

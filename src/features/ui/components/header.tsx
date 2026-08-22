@@ -328,7 +328,7 @@ function Header() {
             {/* Logo */}
             <Link to="/" className="shrink-0">
               <motion.img
-                src="/assets/imgs/logo/logo-foco.webp"
+                src="/assets/imgs/logo/logo-foco.svg"
                 alt="Foco Tecnologia e Marketing"
                 width={147}
                 height={55}
@@ -487,7 +487,7 @@ function Header() {
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 shrink-0">
               <Link to="/" onClick={closeMobile}>
                 <img
-                  src="/assets/imgs/logo/logo-foco.webp"
+                  src="/assets/imgs/logo/logo-foco.svg"
                   alt="Foco Tecnologia e Marketing"
                   width={147}
                   height={55}

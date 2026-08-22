@@ -105,18 +105,8 @@ function PassoItem({ passo }: { passo: (typeof PASSOS)[number] }) {
 function PassoItemStacked({ passo }: { passo: (typeof PASSOS)[number] }) {
   return (
     <div>
-      <img
-        src={passo.imagem}
-        alt={passo.titulo}
-        width={500}
-        height={334}
-        loading="lazy"
-        decoding="async"
-        className="w-full max-w-[320px] mx-auto h-auto object-contain rounded-[24px] mb-5"
-        style={{ filter: "drop-shadow(0 16px 32px rgba(15,40,80,0.18))" }}
-      />
       <div
-        className="rounded-[24px] bg-white p-5 xl:p-6 max-w-[320px] mx-auto"
+        className="rounded-[24px] bg-white p-5 xl:p-6 max-w-[320px] mx-auto mb-5"
         style={{ boxShadow: "0 8px 16px rgba(15,40,80,0.06), 0 24px 48px -20px rgba(15,40,80,0.20)" }}
       >
         <h3 className="font-display text-lg font-semibold text-[#1e293b] tracking-tight leading-snug mb-2">
@@ -126,6 +116,16 @@ function PassoItemStacked({ passo }: { passo: (typeof PASSOS)[number] }) {
           {passo.descricao}
         </p>
       </div>
+      <img
+        src={passo.imagem}
+        alt={passo.titulo}
+        width={500}
+        height={334}
+        loading="lazy"
+        decoding="async"
+        className="w-full max-w-[320px] mx-auto h-auto object-contain rounded-[24px]"
+        style={{ filter: "drop-shadow(0 16px 32px rgba(15,40,80,0.18))" }}
+      />
     </div>
   );
 }

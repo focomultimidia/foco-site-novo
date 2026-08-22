@@ -66,7 +66,7 @@ function Footer() {
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex mb-6">
               <img
-                src="/assets/imgs/logo/logo-foco.webp"
+                src="/assets/imgs/logo/logo-foco.svg"
                 alt="Foco Tecnologia e Marketing"
                 width={147}
                 height={55}

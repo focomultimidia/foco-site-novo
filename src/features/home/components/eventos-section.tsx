@@ -23,7 +23,7 @@ const EVENTO_IMAGES: Record<string, string> = {
 // existem na linha do tempo (TimelineRail no desktop, trilho vertical no
 // mobile) — nunca mais duplicados dentro do card de conteúdo.
 const EVENTO_LOGOS: Record<string, string> = {
-  "1": "/assets/imgs/feiras-eventos/equipotel.webp",
+  "1": "/assets/imgs/feiras-eventos/equipotel.png",
   "2": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
   "3": "/assets/imgs/feiras-eventos/expotel.webp",
   "4": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
@@ -126,11 +126,16 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
           <img
             src={EVENTO_LOGOS[evento.id]}
             alt={`Logo do evento: ${evento.titulo}`}
-            width={90}
-            height={30}
+            width={130}
+            height={44}
             loading="lazy"
             decoding="async"
-            className="h-5 sm:h-6 w-auto max-w-[90px] object-contain mb-2"
+            // `self-start` — sem isso o `w-auto` não bloqueia o
+            // `align-items:stretch` herdado do pai (flex-col): a caixa da
+            // imagem esticava pra largura cheia da coluna e o
+            // `object-contain` centralizava a logo dentro dela, parecendo
+            // "centralizada" apesar do container começar na esquerda.
+            className="self-start h-7 sm:h-9 w-auto max-w-[130px] object-contain object-left mb-2"
           />
         )}
         <span className="flex items-center gap-1 text-[11px] font-medium text-slate-600 mb-1.5">
@@ -164,9 +169,22 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
 //    Transições em tween curto (0.3–0.35s) em vez de spring solto — o
 //    spring anterior (stiffness 120–140) não tinha tempo de assentar num
 //    scroll rápido. ──
-function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex: number }) {
+function TimelineRail({
+  eventos,
+  activeIndex,
+  positions,
+}: {
+  eventos: Evento[];
+  activeIndex: number;
+  /** Posição (0–1) de cada estação, medida a partir do centro real do
+      respectivo card — ver computeCardPositions em use-eventos-scroll.ts.
+      Cai para fatias iguais só antes da 1ª medição (fallback inicial). */
+  positions: number[];
+}) {
   const total = eventos.length;
-  const activePct = total > 0 ? ((activeIndex + 0.5) / total) * 100 : 0;
+  const fallback = (i: number) => (total > 0 ? (i + 0.5) / total : 0);
+  const posFor = (i: number) => (positions[i] ?? fallback(i)) * 100;
+  const activePct = posFor(activeIndex);
 
   return (
     // `top: calc(<centro do trilho de cards> + <metade da altura do card> + <espaço fixo>)`
@@ -190,7 +208,7 @@ function TimelineRail({ eventos, activeIndex }: { eventos: Evento[]; activeIndex
             contagem clara ("01", "02", "03") independente do idioma. */}
         {eventos.map((evento, i) => {
           const isActive = i === activeIndex;
-          const leftPct = total > 0 ? ((i + 0.5) / total) * 100 : 0;
+          const leftPct = posFor(i);
           return (
             <div
               key={evento.id}
@@ -284,6 +302,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
   const sortedEventos = useMemo(() => sortEventosDesc(eventos), [eventos]);
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [positions, setPositions] = useState<number[]>([]);
   const total = sortedEventos.length;
 
   useEventosScroll(
@@ -293,6 +312,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
     textRef,
     total,
     setActiveIndex,
+    setPositions,
   );
 
   const [showAll, setShowAll] = useState(false);
@@ -335,7 +355,7 @@ function EventosSection({ eventos }: EventosSectionProps) {
             ))}
           </div>
 
-          <TimelineRail eventos={sortedEventos} activeIndex={activeIndex} />
+          <TimelineRail eventos={sortedEventos} activeIndex={activeIndex} positions={positions} />
         </section>
       )}
 

@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useLayoutEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   motion,
   AnimatePresence,
-  useMotionValue,
-  useMotionTemplate,
-  useSpring,
   useReducedMotion,
   type PanInfo,
 } from "framer-motion";
@@ -95,71 +92,25 @@ function distributeColumns<T>(items: T[], columnCount: number): T[][] {
   return columns;
 }
 
-// ── Cartão de texto — spotlight + tilt 3D (mesma técnica já usada no site) ───
+// ── Cartão de texto ───────────────────────────────────────────────────────
 function TextCard({
   dep,
-  onHover,
   compact = false,
 }: {
   dep:      Depoimento;
-  onHover:  (h: boolean) => void;
-  /** Trunca a citação (com fade, não corte seco) — usado só pelo
-      TestimonialCarousel, cujos slots têm altura fixa (o texto completo
-      continua na galeria "ver mais"). */
+  /** Ativa o modo compacto — usado só pelo TestimonialCarousel, cujos slots
+      têm altura fixa. A citação nunca é cortada: quando não cabe, o próprio
+      texto rola dentro do card (ver `overflow-y-auto` abaixo). */
   compact?: boolean;
 }) {
-  const mx = useMotionValue(-999);
-  const my = useMotionValue(-999);
-  const spotlight = useMotionTemplate`radial-gradient(280px circle at ${mx}px ${my}px, rgba(40,89,146,0.06), transparent 70%)`;
-  const rotateX = useSpring(0, { stiffness: 260, damping: 28 });
-  const rotateY = useSpring(0, { stiffness: 260, damping: 28 });
-
-  // Detecta se o `line-clamp` está de fato cortando ALGUMA coisa (em vez de
-  // assumir por contagem de caracteres, frágil e diferente por breakpoint) —
-  // só aí o degradê de esmaecimento entra; um depoimento curto, que já cabe
-  // inteiro, não ganha um fade artificial no fim de uma frase completa.
-  const quoteRef = useRef<HTMLParagraphElement>(null);
-  const [isTruncated, setIsTruncated] = useState(false);
-  useLayoutEffect(() => {
-    if (!compact) return;
-    const el = quoteRef.current;
-    if (!el) return;
-    setIsTruncated(el.scrollHeight - el.clientHeight > 1);
-  }, [compact, dep.texto]);
-
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - r.left;
-    const y = e.clientY - r.top;
-    mx.set(x);
-    my.set(y);
-    rotateY.set(((x - r.width / 2) / (r.width / 2)) * 4);
-    rotateX.set(((r.height / 2 - y) / (r.height / 2)) * 3);
-  };
-  const onMouseLeave = () => {
-    rotateX.set(0);
-    rotateY.set(0);
-    mx.set(-999);
-    my.set(-999);
-    onHover(false);
-  };
-
   return (
-    <motion.div
-      className={`relative rounded-3xl bg-white p-7 transform-gpu overflow-hidden ${compact ? "h-full flex flex-col" : ""}`}
+    <div
+      className={`relative rounded-3xl bg-white p-7 overflow-hidden ${compact ? "h-full flex flex-col" : ""}`}
       style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 900,
         border: "1px solid rgba(15,23,42,0.06)",
         boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(15,23,42,0.06)",
       }}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      onMouseEnter={() => onHover(true)}
     >
-      <motion.div className="pointer-events-none absolute inset-0 rounded-3xl" style={{ background: spotlight }} />
-
       {/* Aspas de fundo — marca d'água em duas camadas (eco tipográfico), não
           o ícone de "quote" óbvio: sangra pelo canto, quase invisível, só
           registra como textura ao olhar de novo. */}
@@ -205,19 +156,15 @@ function TextCard({
           ))}
         </div>
 
+        {/* `compact`: sem line-clamp — a citação nunca é cortada. Quando o
+            texto é maior que o slot fixo do carrossel, ele rola dentro do
+            próprio card (`overflow-y-auto`) em vez de truncar. */}
         <div className={compact ? "relative flex-1 min-h-0" : undefined}>
           <p
-            ref={quoteRef}
-            className={`leading-relaxed text-slate-700 ${compact ? "text-[13px] line-clamp-[9] h-full" : "text-[15px]"}`}
+            className={`leading-relaxed text-slate-700 ${compact ? "text-[13px] h-full overflow-y-auto pr-1" : "text-[15px]"}`}
           >
             {dep.texto}
           </p>
-          {compact && isTruncated && (
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-white via-white/80 to-transparent"
-            />
-          )}
         </div>
 
         <div className="h-px bg-gradient-to-r from-[#285992]/10 via-[#285992]/5 to-transparent my-6" />
@@ -238,19 +185,17 @@ function TextCard({
           </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 // ── Cartão de vídeo — thumbnail + play + citação em destaque ─────────────────
 function VideoCard({
   item,
-  onHover,
   onOpen,
   fixedHeight,
 }: {
   item: VideoDepoimento;
-  onHover: (h: boolean) => void;
   onOpen: () => void;
   /** Substitui o `aspect-[4/5]` por uma altura fixa em px — usado só pelo
       TestimonialCarousel, onde o card de vídeo precisa bater com a mesma
@@ -262,9 +207,7 @@ function VideoCard({
     <button
       type="button"
       onClick={onOpen}
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
-      className="group relative w-full text-left rounded-3xl overflow-hidden bg-black"
+      className="relative w-full text-left rounded-3xl overflow-hidden bg-black"
       style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.04), 0 12px 28px rgba(15,23,42,0.14)" }}
     >
       <div className={`relative ${fixedHeight ? "" : "aspect-[4/5]"}`} style={fixedHeight ? { height: fixedHeight } : undefined}>
@@ -273,33 +216,13 @@ function VideoCard({
           alt={item.title}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover"
         />
         <div
           className="absolute inset-0"
           style={{ background: "linear-gradient(150deg, rgba(40,89,146,0.35), rgba(15,23,42,0.15))", mixBlendMode: "multiply" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-black/20" />
-
-        {/* Faíscas douradas — só no hover, assinatura própria do mural */}
-        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          {[
-            { left: "18%", top: "22%", delay: "0s" },
-            { left: "78%", top: "16%", delay: "0.4s" },
-            { left: "68%", top: "62%", delay: "0.8s" },
-          ].map((s, i) => (
-            <span
-              key={i}
-              className="absolute w-1.5 h-1.5 rotate-45"
-              style={{
-                left: s.left,
-                top: s.top,
-                background: "#fccc30",
-                animation: `wall-sparkle-float 3.5s ease-in-out ${s.delay} infinite`,
-              }}
-            />
-          ))}
-        </div>
 
         {item.stat && (
           <span
@@ -310,14 +233,14 @@ function VideoCard({
           </span>
         )}
 
-        {/* Play — anel pulsante contínuo, mais forte no hover */}
+        {/* Play — anel pulsante contínuo */}
         <div className="absolute inset-0 flex items-center justify-center">
           <span
             className="absolute w-14 h-14 rounded-full animate-ping"
             style={{ background: "rgba(255,255,255,0.35)", animationDuration: "2.2s" }}
           />
           <div
-            className="relative w-14 h-14 rounded-full flex items-center justify-center border transition-transform duration-300 group-hover:scale-110"
+            className="relative w-14 h-14 rounded-full flex items-center justify-center border"
             style={{ background: "rgba(255,255,255,0.14)", borderColor: "rgba(255,255,255,0.4)", backdropFilter: "blur(6px)" }}
           >
             <Play className="w-5 h-5 text-white ml-0.5" fill="currentColor" />
@@ -353,7 +276,6 @@ function MasonryWall({
   onOpenVideo: (v: VideoDepoimento) => void;
   staggerCards?: boolean;
 }) {
-  const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const columns = distributeColumns(cards, columnCount);
 
   return (
@@ -362,8 +284,6 @@ function MasonryWall({
         <div key={ci} className="flex-1 min-w-0 flex flex-col gap-5">
           {col.map((card) => {
             const key = cardKey(card);
-            const isHovered = hoveredKey === key;
-            const isDimmed = hoveredKey !== null && !isHovered;
             return (
               <motion.div
                 key={key}
@@ -375,18 +295,12 @@ function MasonryWall({
                     ? { duration: 0.45, ease: [0.22, 1, 0.36, 1] }
                     : { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
                 }
-                style={{
-                  opacity: isDimmed ? 0.55 : 1,
-                  transform: isHovered ? "scale(1.02)" : "scale(1)",
-                  transition: "opacity 300ms ease, transform 300ms ease",
-                }}
               >
                 {card.kind === "text" ? (
-                  <TextCard dep={card.data} onHover={h => setHoveredKey(h ? key : null)} />
+                  <TextCard dep={card.data} />
                 ) : (
                   <VideoCard
                     item={card.data}
-                    onHover={h => setHoveredKey(h ? key : null)}
                     onOpen={() => onOpenVideo(card.data)}
                   />
                 )}
@@ -533,7 +447,6 @@ function CarouselCard({
     : abs === 2
     ? 0.3
     : 0;
-  const noop = () => {};
   const target = { x: xForOffset(offset, metrics), scaleX, scaleY, opacity, zIndex: 100 - abs * 10 };
 
   return (
@@ -551,9 +464,9 @@ function CarouselCard({
       transition={{ x: CARD_SPRING, scaleX: CARD_SPRING, scaleY: CARD_SPRING, opacity: { duration: 0.35, ease: "easeOut" }, zIndex: { duration: 0 } }}
     >
       {card.kind === "text" ? (
-        <TextCard dep={card.data} compact onHover={noop} />
+        <TextCard dep={card.data} compact />
       ) : (
-        <VideoCard item={card.data} onHover={noop} onOpen={() => onOpenVideo(card.data)} fixedHeight={metrics.cardHeight} />
+        <VideoCard item={card.data} onOpen={() => onOpenVideo(card.data)} fixedHeight={metrics.cardHeight} />
       )}
     </motion.div>
   );
@@ -652,7 +565,7 @@ function TestimonialCarousel({
           resto da página. */}
       <motion.div
         ref={stageRef}
-        className="relative isolate w-full overflow-hidden touch-pan-y"
+        className="relative isolate w-full overflow-hidden touch-pan-y cursor-grab active:cursor-grabbing"
         style={{
           height: metrics.stageHeight,
           ...(metrics.showSides
@@ -662,9 +575,10 @@ function TestimonialCarousel({
               }
             : {}),
         }}
-        // Swipe só abaixo de lg (`!metrics.showSides`) — em desktop os cards
-        // laterais já são clicáveis, arrastar ali competiria com esse gesto.
-        drag={!metrics.showSides ? "x" : false}
+        // Arrastar com o mouse (não só touch/swipe) em qualquer breakpoint —
+        // os cards laterais do desktop não têm onClick próprio, então não há
+        // gesto concorrente aqui.
+        drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.15}
         dragMomentum={false}
@@ -735,13 +649,6 @@ function WallOfLoveSection({
 
   return (
     <>
-      <style>{`
-        @keyframes wall-sparkle-float {
-          0%, 100% { opacity: 0; transform: translateY(0) rotate(45deg) scale(0.6); }
-          50%      { opacity: 1; transform: translateY(-14px) rotate(45deg) scale(1); }
-        }
-      `}</style>
-
       <section className="relative py-24 bg-[#f4f7fb] overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div

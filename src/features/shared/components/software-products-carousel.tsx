@@ -13,7 +13,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { ArrowUpRight, Check, Smartphone } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -46,7 +46,7 @@ const ACCENT_SOFT = "#427AB9";
 // num card mobile full-bleed. Ancorado no topo do palco, como o screenshot
 // único dos outros produtos, pro corte do overflow-hidden ficar consistente
 // entre os cards.
-function StackedMockupsPreview({ mockups }: { mockups: readonly { src: string; alt: string }[] }) {
+function StackedMockupsPreview({ mockups }: { mockups: readonly { src?: string; alt: string }[] }) {
   const roles = mockups.length === 2
     ? ([
         { leftPct: 34, scale: 0.86, opacity: 0.88, z: 10 },
@@ -88,12 +88,21 @@ function StackedMockupsPreview({ mockups }: { mockups: readonly { src: string; a
                 style={{ aspectRatio: "9 / 19.5" }}
               >
                 <div className="absolute top-1 left-1/2 -translate-x-1/2 z-20 w-4 h-[4px] bg-[#1c1c1e] rounded-full" />
-                <img
-                  src={mock.src}
-                  alt={mock.alt}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                {mock.src ? (
+                  <img
+                    src={mock.src}
+                    alt={mock.alt}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0 flex flex-col items-center justify-center gap-1 border-2 border-dashed"
+                    style={{ borderColor: "rgba(40,89,146,0.22)", background: "rgba(40,89,146,0.04)" }}
+                  >
+                    <Smartphone className="w-4 h-4" style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+                  </div>
+                )}
               </div>
             </div>
           </div>

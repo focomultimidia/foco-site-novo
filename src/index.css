@@ -125,11 +125,20 @@
   }
   html {
     background-color: #f4f7fb;
+    /* Várias seções usam framer-motion `initial={{ x: ±N }}` pra animar
+       entrada (whileInView). Enquanto o elemento ainda não entrou em vista,
+       o transform translateX permanece aplicado — e, sem essa guarda, ele
+       contribui pra área de scroll do documento, abrindo rolagem horizontal
+       na página inteira até o usuário rolar até aquela seção. Precisa estar
+       tanto no html quanto no body: em modo standards o html é a scrolling
+       box da viewport, então só o body não basta pra bloquear o scroll. */
+    overflow-x: hidden;
   }
   body {
     @apply bg-background text-foreground antialiased;
     /* Inter OpenType features: cv03 = open 6/9, cv04 = open 4, ss01 = alt digits */
     font-feature-settings: "cv03", "cv04", "ss01";
+    overflow-x: hidden;
   }
 }
 
