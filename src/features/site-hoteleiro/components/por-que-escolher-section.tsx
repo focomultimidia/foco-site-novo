@@ -52,7 +52,7 @@ const BENEFICIOS = [
     titulo: "Tecnologia feita para o setor hoteleiro",
     descricao:
       "Mais que uma agência, somos especialistas em soluções digitais para hotéis, pousadas e resorts.",
-    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/tecnologia-hotelaria.png",
+    imagem: "/assets/imgs/site-hoteleiro/porque-a-foco/tecnologia-hotelaria.webp",
   },
 ] as const;
 

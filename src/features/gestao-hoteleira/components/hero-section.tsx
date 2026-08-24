@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/mapa.webp", alt: "PMS e Integrações" };
-const MOBILE_IMAGE = { src: "/assets/imgs/produtos/mobile-mapa-uh.webp", alt: "PMS e Integrações no mobile" };
+const MOBILE_IMAGE = { src: "/assets/imgs/produtos/hospedagem.webp", alt: "PMS e Integrações no mobile" };
 
 const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Sem taxa de setup" },

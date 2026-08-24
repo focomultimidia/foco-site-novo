@@ -175,7 +175,7 @@ function GenericInfoSection({
   // default abaixo fica byte-a-byte igual ao componente original.
   if (!imageBelowTitleOnMobile) {
     return (
-      <section className={`py-24 lg:py-24 ${background} ${className}`}>
+      <section className={`overflow-x-hidden py-24 lg:py-24 ${background} ${className}`}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-6 items-center">
 
@@ -221,7 +221,7 @@ function GenericInfoSection({
   // ── Título → imagem → descrição no mobile (pedido só pra
   //    /experiencia-do-hospede); em lg+ volta ao layout de 2 colunas de sempre. ──
   return (
-    <section className={`py-24 lg:py-24 ${background} ${className}`}>
+    <section className={`overflow-x-hidden py-24 lg:py-24 ${background} ${className}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-5 lg:gap-6 lg:items-center">
 

@@ -16,28 +16,28 @@ const PASSOS = [
     titulo: "Recuperação automática de reservas",
     descricao:
       "Envie lembretes por e-mail e WhatsApp para retomar o contato com hóspedes que iniciaram a reserva, mas não finalizaram.",
-    imagem: "/assets/imgs/site-hoteleiro/recursos/recuperacao-reserva.png",
+    imagem: "/assets/imgs/site-hoteleiro/recursos/recuperacao-reserva.webp",
   },
   {
     numero: "02",
     titulo: "Reserva finalizada em segundos",
     descricao:
       "Com a integração total entre site e motor, seu hóspede conclui a reserva de forma simples e imediata.",
-    imagem: "/assets/imgs/site-hoteleiro/recursos/reserva-finalizada.png",
+    imagem: "/assets/imgs/site-hoteleiro/recursos/reserva-finalizada.webp",
   },
   {
     numero: "03",
     titulo: "Gatilhos e alertas de urgência",
     descricao:
       'Ative recursos como "pouca disponibilidade", contadores, descontos, comparador de preços e outros estímulos à decisão.',
-    imagem: "/assets/imgs/site-hoteleiro/recursos/gatilhos-ofertas.png",
+    imagem: "/assets/imgs/site-hoteleiro/recursos/gatilhos-ofertas.webp",
   },
   {
     numero: "04",
     titulo: "Pagamento facilitado e completo",
     descricao:
       "Aceite Pix e todas as bandeiras de cartão de crédito, incentivando a compra online com um processo rápido e confiável.",
-    imagem: "/assets/imgs/site-hoteleiro/recursos/pagamento-facilitado.png",
+    imagem: "/assets/imgs/site-hoteleiro/recursos/pagamento-facilitado.webp",
   },
 ] as const;
 

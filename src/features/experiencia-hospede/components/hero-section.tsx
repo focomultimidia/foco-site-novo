@@ -27,6 +27,7 @@ const PRODUTOS_HERO = [
       { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",    alt: "Foco Pass - App do Hóspede" },
       { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp",      alt: "Foco Pass - Atrações do hotel" },
       { src: "/assets/imgs/experiencia-do-hospede/app-hospede2.webp",      alt: "Foco Pass - Programação do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-whatsapp.webp",       alt: "Foco Pass - Integração via WhatsApp" },
 
     ],
   },
@@ -35,9 +36,8 @@ const PRODUTOS_HERO = [
     interval: 4000,
     startSlide: 0,
     slides: [
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-1.webp", alt: "Motor de Reservas: Busca" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-2.webp", alt: "Motor de Reservas: Quarto" },
-      { src: "/assets/imgs/experiencia-do-hospede/hero/reservas-3.webp", alt: "Motor de Reservas: Confirmação" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-pagamento.webp", alt: "Pagamento de contas via PIX" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-avaliacao.webp", alt: "Avaliação da estadia" },
     ],
   },
 ] as const;

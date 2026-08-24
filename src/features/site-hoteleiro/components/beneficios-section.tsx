@@ -11,7 +11,7 @@ interface BeneficiosSectionProps {
 
 function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
   return (
-    <section className="py-16 lg:py-24 bg-[#f4f7fb]">
+    <section className="overflow-x-hidden py-16 lg:py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">

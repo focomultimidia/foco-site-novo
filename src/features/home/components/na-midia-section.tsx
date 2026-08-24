@@ -48,7 +48,7 @@ const IMAGES: Record<string, string> = {
   "1": "/assets/imgs/na-midia/materia-1.webp",
   "2": "/assets/imgs/na-midia/materia-2.webp",
   "3": "/assets/imgs/na-midia/materia-3.webp",
-  "4": "/assets/imgs/na-midia/materia-4.jpg",
+  "4": "/assets/imgs/na-midia/materia-4.webp",
 };
 
 // Logo real de cada veículo — substitui o ícone genérico de jornal (era o
@@ -57,7 +57,7 @@ const IMAGES: Record<string, string> = {
 const PUBLICACAO_LOGOS: Record<string, string> = {
   "Valor Econômico": "/assets/imgs/na-midia/logos/valor-economico.svg",
   "Terra": "/assets/imgs/na-midia/logos/terra.svg",
-  "Revista Hotéis": "/assets/imgs/na-midia/logos/revista-hoteis.png",
+  "Revista Hotéis": "/assets/imgs/na-midia/logos/revista-hoteis.webp",
   "O Globo": "/assets/imgs/na-midia/logos/oglobo.svg",
 };
 

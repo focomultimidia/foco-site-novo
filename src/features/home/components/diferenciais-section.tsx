@@ -97,7 +97,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
   const right = diferenciais.slice(4, 8);
 
   return (
-    <section className="py-24 bg-[#f4f7fb]">
+    <section className="overflow-x-hidden py-24 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}

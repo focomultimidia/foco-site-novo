@@ -156,7 +156,7 @@ export function MagneticButton({
 
 export function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <section className={`py-24 lg:py-32 ${className}`}>
+    <section className={`overflow-x-hidden py-24 lg:py-32 ${className}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">{children}</div>
     </section>
   );

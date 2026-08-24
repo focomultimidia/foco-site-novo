@@ -82,7 +82,7 @@ function DorParallaxSection({ dorId, backgroundImage, backgroundAlt }: DorParall
   const icons = SOLUCAO_ICONS[dorId] ?? [];
 
   return (
-    <section className="relative py-20 sm:py-24 md:py-28 bg-[#f4f7fb]">
+    <section className="hidden lg:block relative py-20 sm:py-24 md:py-28 bg-[#f4f7fb]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={cardRef}

@@ -62,7 +62,7 @@ const DESKTOP_SLIDE: SlideDef = {
 };
 
 const MOBILE_SLIDE: SlideDef = {
-  src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp",
+  src: "/assets/imgs/home/produtos/mapa-mobile.webp",
   alt: "Check-in digital do hóspede",
 };
 

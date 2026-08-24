@@ -110,7 +110,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     imagem: "/assets/imgs/produtos/mapa.webp",
     screenshot: "/assets/imgs/produtos/mapa.webp",
     screenshotWidth: 815, screenshotHeight: 584,
-    mobileScreenshot: "/assets/imgs/produtos/mobile-mapa-uh.webp",
+    mobileScreenshot: "/assets/imgs/produtos/hospedagem.webp",
     bkgImagem: "/assets/imgs/gestao-hoteleira-pms/bkg-accordion.webp",
     accent: "#a78bfa",
     overlay: "from-violet-950/85 to-violet-900/25",
@@ -142,7 +142,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     imagem: "/assets/imgs/produtos/focopay.webp",
     screenshot: "/assets/imgs/produtos/focopay.webp",
     screenshotWidth: 815, screenshotHeight: 584,
-    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.png",
+    mobileScreenshot: "/assets/imgs/produtos/mobile-focopay.webp",
     bkgImagem: "/assets/imgs/software-de-pagamento/bkg-accordion.webp",
     accent: "#22d3ee",
     overlay: "from-cyan-950/85 to-cyan-900/25",
@@ -167,9 +167,9 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // troquei pela 3ª tela de cardápio digital, real e já usada em produção.
     screenshot: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp",
     mockups: [
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.webp", alt: "Cardápio digital do hotel" },
-      { src: "/assets/imgs/experiencia-do-hospede/app-hospede1.webp", alt: "App do hóspede: atrações do hotel" },
-      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital1.webp", alt: "Cardápio digital: detalhe do item" },
+      { src: "/assets/imgs/experiencia-do-hospede/cardapio-digital.webp", alt: "Aplicativo do hóspede/: Cardápio digital do hotel" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-whatsapp.webp", alt: "Aplicativo do hóspede: Integração com Whatsapp" },
+      { src: "/assets/imgs/experiencia-do-hospede/app-hospede.webp", alt: "Aplicativo do hóspede" },
     ],
     bkgImagem: "/assets/imgs/experiencia-do-hospede/bkg-accordion.webp",
     accent: "#fb7185",
@@ -198,9 +198,9 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // terceiro = direito (menor, atrás) — ver TriplePhoneStage em
     // product-showcase.tsx.
     mockups: [
-      { src: "/assets/imgs/home/otheoai/mockup1-otheoai.png", alt: "Histórico de conversas do Otheo AI, com perguntas e comandos anteriores" },
-      { src: "/assets/imgs/home/otheoai/mockup2-otheoai.png", alt: "Tela inicial do Otheo AI, pronto para ajudar por voz ou texto" },
-      { src: "/assets/imgs/home/otheoai/mockup3-otheoai.png", alt: "Otheo AI respondendo com os detalhes da reserva e voucher para reenvio" },
+      { src: "/assets/imgs/home/otheoai/mockup1-otheoai.webp", alt: "Histórico de conversas do Otheo AI, com perguntas e comandos anteriores" },
+      { src: "/assets/imgs/home/otheoai/mockup2-otheoai.webp", alt: "Tela inicial do Otheo AI, pronto para ajudar por voz ou texto" },
+      { src: "/assets/imgs/home/otheoai/mockup3-otheoai.webp", alt: "Otheo AI respondendo com os detalhes da reserva e voucher para reenvio" },
     ],
     // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
     // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro

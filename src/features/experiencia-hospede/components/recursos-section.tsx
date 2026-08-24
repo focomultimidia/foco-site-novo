@@ -60,7 +60,7 @@ const FASES = [
     id: "saida",
     nome: "Controle & Saída",
     icon: Wallet,
-    tela: null,
+    tela: "/assets/imgs/experiencia-do-hospede/app-pagamento.webp",
     descricaoPre: "Transparência que fecha o ciclo ",
     keyword: "sem surpresa",
     descricaoPos: " no check-out.",

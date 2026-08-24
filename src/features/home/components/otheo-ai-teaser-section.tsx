@@ -272,7 +272,7 @@ function OtheoAiTeaserSection() {
                   mockup mobile da hero (HeroMobileMockup em hero-section.tsx),
                   aqui sem a complexidade de `fluidPx`/`isWideLayout` porque
                   esta seção não escala fluida como a hero. Proporção real do
-                  print (738×1456, medida do arquivo) em vez do 9:19.5
+                  print (600×1300, medida do arquivo) em vez do 9:19.5
                   chutado do placeholder anterior — `object-cover` já não
                   cortaria nada mesmo, mas a proporção exata evita qualquer
                   distorção. Sem "notch" sintético: o print já é uma tela
@@ -291,7 +291,7 @@ function OtheoAiTeaserSection() {
               >
                 <div
                   className="relative overflow-hidden rounded-[22px] ring-1 ring-white/15"
-                  style={{ aspectRatio: "738 / 1456" }}
+                  style={{ aspectRatio: "600 / 1300" }}
                 >
                   <img
                     src="/assets/imgs/home/otheoai/chat-ia.webp"

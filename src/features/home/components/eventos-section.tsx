@@ -15,7 +15,7 @@ const EVENTO_IMAGES: Record<string, string> = {
   "1": "/assets/imgs/feiras-eventos/equipotel-2025.webp",
   "2": "/assets/imgs/feiras-eventos/expohotel-2025.webp",
   "3": "/assets/imgs/feiras-eventos/expohotel-2024.webp",
-  "4": "/assets/imgs/feiras-eventos/encatho2026.jpg",
+  "4": "/assets/imgs/feiras-eventos/encatho2026.webp",
 };
 
 // Logo do evento/feira — antes vivia no EventoInfoCard (card separado com
@@ -23,7 +23,7 @@ const EVENTO_IMAGES: Record<string, string> = {
 // existem na linha do tempo (TimelineRail no desktop, trilho vertical no
 // mobile) — nunca mais duplicados dentro do card de conteúdo.
 const EVENTO_LOGOS: Record<string, string> = {
-  "1": "/assets/imgs/feiras-eventos/equipotel.png",
+  "1": "/assets/imgs/feiras-eventos/equipotel.webp",
   "2": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",
   "3": "/assets/imgs/feiras-eventos/expotel.webp",
   "4": "/assets/imgs/feiras-eventos/encatho-exprotel.webp",

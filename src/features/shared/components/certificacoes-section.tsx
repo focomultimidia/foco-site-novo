@@ -25,8 +25,8 @@ const certificacoes = [
   },
   {
     id:       "stone",
-    logo:     "/assets/imgs/certificacoes/stone.png",
-    titulo:   "Stone Master Partner",
+    logo:     "/assets/imgs/certificacoes/stone.webp",
+    titulo:   "Stone Advanced Partner",
     descricao:
       "Integramos a mais robusta plataforma financeira diretamente ao nosso ecossistema. Facilitamos a gestão do seu negócio com pagamentos rápidos, seguros e sem dor de cabeça.",
     accent:   "#00a868",
