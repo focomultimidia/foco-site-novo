@@ -2,10 +2,10 @@ import type { IntegracoesHoteleirasData } from "../types";
 
 const integracoesHoteleirasData: IntegracoesHoteleirasData = {
   hero: {
-    titulo: "Integrações Hoteleiras",
+    titulo: "O maior ecossistema de integrações hoteleiras",
     subtitulo: "Ecossistema Conectado",
     descricao:
-      "Conecte seu hotel com as melhores ferramentas do mercado. Nossa plataforma se integra com OTAs, gateways de pagamento, sistemas contábeis e muito mais.",
+      "Multiplique o alcance e a eficiência do seu hotel conectando-se às ferramentas mais poderosas do mercado. Nossa plataforma oferece integração total com PMS, OTAs, Agências, Google, gateways de pagamento, plataformas de marketing, chatbots e ferramentas de IA. Tudo fluindo em perfeita sincronia.",
     ctaPrimario: "Ver Integrações",
     ctaSecundario: "Solicitar Nova Integração",
     imagemUrl: "/assets/imgs/integracoes-hoteleiras/img-hero.webp",

@@ -13,9 +13,9 @@ const DESKTOP_IMAGE = { src: "/assets/imgs/shared/1.webp", alt: "Busca de dispon
 const MOBILE_IMAGE = { src: "/assets/imgs/shared/site1.webp", alt: "Busca de disponibilidade" };
 
 const TRUST_BADGES = [
-  { icon: CheckCircle2, label: "Sem taxa de setup" },
-  { icon: CheckCircle2, label: "Cancele quando quiser" },
-  { icon: CheckCircle2, label: "Suporte incluso" },
+  { icon: CheckCircle2, label: "Sem taxa de adesão" },
+  { icon: CheckCircle2, label: "Contrato sem multa rescisória" },
+  { icon: CheckCircle2, label: "Suporte humanizado" },
 ];
 
 function HeroSection({ data, onCtaClick }: HeroSectionProps) {

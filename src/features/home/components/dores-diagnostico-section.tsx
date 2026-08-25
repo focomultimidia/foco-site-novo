@@ -153,36 +153,6 @@ function DiagnosticoVisual({ dor, index }: { dor: DorSolucao; index: number }) {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* Duotone de marca — legibilidade dos elementos flutuantes + clima "surreal" */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(11,26,46,0.15) 0%, rgba(11,26,46,0.35) 55%, rgba(11,26,46,0.92) 100%)" }}
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 mix-blend-color"
-            style={{ background: "linear-gradient(135deg, rgba(40,89,146,0.55), rgba(16,35,61,0.55))" }}
-          />
-
-          {/* Grade técnica sutil, sempre em deriva lenta */}
-          <div
-            aria-hidden="true"
-            className="dores-diag-grid absolute inset-0 opacity-[0.12]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
-              backgroundSize: "26px 26px",
-            }}
-          />
-
-          {/* Feixe de varredura */}
-          <div
-            aria-hidden="true"
-            className="dores-diag-scanline absolute inset-x-0 h-1/3 pointer-events-none"
-            style={{ background: "linear-gradient(180deg, transparent, rgba(252,204,48,0.32), transparent)" }}
-          />
-
           <ScanCorners />
 
           {/* Status bar */}
@@ -464,66 +434,14 @@ const panelVariants = {
 
 function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
   const [activeId, setActiveId] = useState<string>(dores[0]?.id ?? "");
-  const [loopKey, setLoopKey] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
   const activeIndex = Math.max(0, dores.findIndex(d => d.id === activeId));
   const dor = dores[activeIndex] ?? dores[0];
-
-  // Start/stop autoplay based on viewport visibility — mesmo padrão do
-  // ReservaSection/CardapioDigitalSection. O mesmo `activeId` alimenta o
-  // seletor de 3 cards (desktop) e o acordeão (mobile), então um único
-  // ciclo mantém as duas variantes sempre em movimento.
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (!isVisible || dores.length === 0) return;
-    const id = setInterval(() => {
-      setActiveId(prev => {
-        const idx = dores.findIndex(d => d.id === prev);
-        return dores[(idx + 1) % dores.length]?.id ?? dores[0].id;
-      });
-    }, 5000);
-    return () => clearInterval(id);
-  }, [loopKey, isVisible, dores]);
 
   if (!dor) return null;
 
   return (
     <>
-      {/*
-        Animações puramente CSS (sem depender de rAF de biblioteca) — feixe de
-        varredura sobe/desce dentro da imagem, e a grade técnica deriva
-        lentamente na diagonal. Ambas rodam em loop infinito, independente de
-        scroll ou interação (seção "sempre viva", mesma filosofia da aurora
-        do hero e do ripple d'água do NumerosSection/DoresSection).
-      */}
-      <style>{`
-        @keyframes dores-diag-scan {
-          0%   { transform: translateY(-120%); opacity: 0; }
-          15%  { opacity: 1; }
-          85%  { opacity: 1; }
-          100% { transform: translateY(420%); opacity: 0; }
-        }
-        .dores-diag-scanline { animation: dores-diag-scan 4.5s ease-in-out infinite; }
-
-        @keyframes dores-diag-grid-pan {
-          0%   { background-position: 0 0; }
-          100% { background-position: 26px 26px; }
-        }
-        .dores-diag-grid { animation: dores-diag-grid-pan 7s linear infinite; }
-      `}</style>
-
-      <section ref={sectionRef} className="relative py-24 md:py-32 bg-[#0b1a2e]">
+      <section className="relative py-24 md:py-32 bg-[#0b1a2e]">
         {/* Aurora azul em deriva lenta — mesmas keyframes do hero da home.
             `overflow-hidden` mora neste wrapper (recortado exatamente nos
             limites da seção via `inset-0`), não na <section> — a seção
@@ -618,10 +536,7 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
               return (
                 <button
                   key={d.id}
-                  onClick={() => {
-                    setActiveId(d.id);
-                    setLoopKey(k => k + 1);
-                  }}
+                  onClick={() => setActiveId(d.id)}
                   aria-pressed={isActive}
                   className="group relative text-left rounded-2xl p-4 sm:p-5 border transition-colors duration-300 overflow-hidden"
                   style={{
@@ -697,10 +612,7 @@ function DoresDiagnosticoSection({ dores }: DoresDiagnosticoSectionProps) {
                 dor={d}
                 index={i}
                 isOpen={activeId === d.id}
-                onToggle={() => {
-                  setActiveId(prev => (prev === d.id ? "" : d.id));
-                  setLoopKey(k => k + 1);
-                }}
+                onToggle={() => setActiveId(prev => (prev === d.id ? "" : d.id))}
               />
             ))}
           </div>

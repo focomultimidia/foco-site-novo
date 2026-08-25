@@ -38,13 +38,13 @@ const pmsIntegrados = [
     descricao:
       "Xenios: Sistema de gestão de hotéis, pousadas e hostels de fácil utilização. Possui integração com outros módulos como estoque, restaurante, financeiro, eventos, controle de serviços e reserva online direto pelo site do hotel/pousada. Conta com suporte 24 horas.",
   },
-  {
+  /*{
     id: "desbravador",
     nome: "Desbravador",
     logo: "/assets/imgs/integracoes/pms/desbravador.webp",
     descricao:
       "Atuamos no desenvolvimento de software para a gestão de hotéis desde 1988. Somos Desbravadores! Atendemos hotéis de pequeno, médio e grande porte, fornecendo soluções que otimizam suas operações e aprimoram a experiência do hóspede. Hoje são mais de 3.500 clientes espalhados em dez países.",
-  },
+  },*/
   {
     id: "esolution",
     nome: "eSolution",
@@ -383,36 +383,7 @@ function PmsIntegradosSection() {
   const [activeTab, setActiveTab] = useState(categorias[0].id);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activePms, setActivePms] = useState<PmsItem | null>(null);
-  const [loopKey, setLoopKey] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
-
-  // Start/stop autoplay based on viewport visibility — mesmo padrão do
-  // ReservaSection/CardapioDigitalSection.
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
-  // Autoplay — só roda enquanto a seção está visível; troca manual reinicia
-  // a contagem (loopKey), mas o ciclo nunca fica parado.
-  useEffect(() => {
-    if (!isVisible) return;
-    const id = setInterval(() => {
-      setActiveTab(prev => {
-        const idx = categorias.findIndex(c => c.id === prev);
-        return categorias[(idx + 1) % categorias.length].id;
-      });
-      setHoveredIndex(null);
-    }, 4500);
-    return () => clearInterval(id);
-  }, [loopKey, isVisible]);
 
   return (
     <section ref={sectionRef} className="relative py-24 bg-[#f4f7fb]">
@@ -445,7 +416,6 @@ function PmsIntegradosSection() {
           onValueChange={(v) => {
             setActiveTab(v);
             setHoveredIndex(null);
-            setLoopKey(k => k + 1);
           }}
           className="w-full"
         >

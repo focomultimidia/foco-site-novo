@@ -13,9 +13,9 @@ const DESKTOP_IMAGE = { src: "/assets/imgs/produtos/motor-de-reservas.webp", alt
 const MOBILE_IMAGE = { src: "/assets/imgs/produtos/motor-mobile.webp", alt: "Motor de Reservas no mobile" };
 
 const TRUST_BADGES = [
-  { icon: CheckCircle2, label: "Sem taxa de setup" },
-  { icon: CheckCircle2, label: "Cancele quando quiser" },
-  { icon: CheckCircle2, label: "Suporte incluso" },
+  { icon: CheckCircle2, label: "Sem taxa de adesão" },
+  { icon: CheckCircle2, label: "Contrato sem multa rescisória" },
+  { icon: CheckCircle2, label: "Suporte humanizado" },
 ];
 
 function HeroSection({ data, onCtaClick }: HeroSectionProps) {

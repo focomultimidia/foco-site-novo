@@ -2,10 +2,10 @@ import type { ChannelManagerData } from "../types";
 
 const channelManagerData: ChannelManagerData = {
   hero: {
-    titulo: "Channel Manager Integrado",
+    titulo: "Channel Manager integrado.",
     subtitulo: "Sincronização em Tempo Real",
     descricao:
-      "Conecte seu hotel aos principais OTAs e metasearch engines do mundo. Sincronização automática de tarifas, disponibilidade e reservas em tempo real.",
+      "Aumente suas vendas e elimine o overbooking. Conecte-se às principais OTAs com sincronização de tarifas e reservas em tempo real.",
     ctaPrimario: "Quero me conectar com +800 canais",
     ctaSecundario: "Ver Demonstração",
     imagemUrl:

@@ -55,6 +55,17 @@ export interface HomeStyleHeroProps {
   desktopAspectRatio?: string;
   /** Proporção (CSS aspect-ratio) do mockup mobile flutuante — default "9 / 19.5". Ajuste para bater com as dimensões reais de `mobileImage`. */
   mobileAspectRatio?: string;
+  /** Silhueta de celular flutuante sobre o palco desktop — default true. Desligue em páginas cuja imagem desktop já é a peça inteira (sem um segundo mockup mobile fazendo sentido ao lado). */
+  showMobileMockup?: boolean;
+  /**
+   * Imagem full-bleed atrás de toda a hero, só em desktop (`lg:` — gate por
+   * CSS, não por `isWideLayout`, pra não haver flash no hydration). Quando
+   * presente, o palco de vidro (mockup) some no desktop via `lg:hidden` —
+   * a coluna direita fica vazia e a foto aparece por trás, escurecida por um
+   * degradê à esquerda pra manter o texto legível. Mobile continua mostrando
+   * o mockup normalmente, sem nenhuma mudança.
+   */
+  desktopBackgroundImage?: string;
   /** Até 3 — mesmo tratamento visual dos stat-badges da Home. */
   badges?: HomeStyleHeroBadge[];
   /**
@@ -157,6 +168,8 @@ function HomeStyleHero({
   mobileImage,
   desktopAspectRatio = "16 / 10",
   mobileAspectRatio = "9 / 19.5",
+  showMobileMockup = true,
+  desktopBackgroundImage,
   badges = [],
   children,
 }: HomeStyleHeroProps) {
@@ -222,11 +235,19 @@ function HomeStyleHero({
       // mínima igual à tela inteira mesmo quando o conteúdo real é bem mais
       // curto, criando um scroll "preso" (muito espaço morto pra rolar antes
       // da seção seguinte aparecer). Em lg+ mantém a trava de sempre.
-      className="relative lg:min-h-[600px] lg:h-dvh overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
+      // `isolate` — sem isso, a section (relative sem z-index próprio não
+      // forma contexto de empilhamento) deixava os filhos de z-index
+      // negativo (foto de fundo) escaparem pro contexto do documento e
+      // pintarem atrás da própria section (que é conteúdo normal ali fora),
+      // escondendo a foto atrás do bg-[#10233d] mesmo com -z-20 correto.
+      className="relative isolate lg:min-h-[600px] lg:h-dvh overflow-x-hidden lg:overflow-hidden bg-[#10233d] grid grid-rows-[auto_auto] lg:grid-rows-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]"
       style={{ "--hero-scale": HERO_SCALE_CSS } as React.CSSProperties}
     >
-      {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas da Home. */}
-      <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(50px)", opacity: 0.85 }}>
+      {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas da Home. Some
+          no desktop quando há `desktopBackgroundImage` — a foto já carrega
+          o próprio interesse visual, e os blobs coloridos por cima
+          brigavam com ela. No mobile continua igual (mockup normal). */}
+      <div aria-hidden="true" className={`absolute -inset-[10%] -z-10 overflow-hidden ${desktopBackgroundImage ? "lg:hidden" : ""}`} style={{ filter: "blur(50px)", opacity: 0.85 }}>
         <div
           className="absolute w-[480px] h-[480px] -left-20 -top-16 rounded-full motion-safe:animate-aurora-a"
           style={{ background: "radial-gradient(circle, rgba(66,122,185,0.65), transparent 70%)" }}
@@ -240,6 +261,24 @@ function HomeStyleHero({
           style={{ background: "radial-gradient(circle, rgba(40,89,146,0.55), transparent 70%)" }}
         />
       </div>
+
+      {/* Foto de fundo full-bleed — só desktop (CSS puro, `hidden lg:block`,
+          sem gate por `isWideLayout` pra não piscar no hydration). Fica
+          atrás de tudo (-z-20), sem nenhum degradê/overlay por cima —
+          pedido explícito pra manter a foto no estado original. */}
+      {desktopBackgroundImage && (
+        <div aria-hidden="true" className="hidden lg:block absolute inset-0 -z-20">
+          <img
+            src={desktopBackgroundImage}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+      )}
+
       {/* Grão sutil — mesmo tratamento da Home. */}
       <div
         aria-hidden="true"
@@ -308,7 +347,7 @@ function HomeStyleHero({
             initial={{ opacity: 0, y: 50, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
-            className="min-w-0"
+            className={`min-w-0 ${desktopBackgroundImage ? "lg:hidden" : ""}`}
             style={mockupStageStyle}
           >
             <div
@@ -353,7 +392,7 @@ function HomeStyleHero({
                   9:19.5) transbordava pra baixo do palco raso (16:10) e
                   sobrepunha o CTA logo abaixo (pedido explícito pra
                   remover). */}
-              {isWideLayout && (
+              {isWideLayout && showMobileMockup && (
                 <HeroMobileMockup
                   isWideLayout={isWideLayout}
                   src={mobileImage?.src}

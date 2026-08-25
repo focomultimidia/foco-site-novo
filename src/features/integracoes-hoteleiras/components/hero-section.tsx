@@ -17,6 +17,9 @@ function HeroSection({ data, onCtaClick }: HeroSectionProps) {
       ctaLabel={data.ctaPrimario}
       onCtaClick={onCtaClick}
       desktopImage={{ src: data.imagemUrl, alt: "Integrações Hoteleiras" }}
+      desktopAspectRatio="1074 / 976"
+      showMobileMockup={false}
+      desktopBackgroundImage="/assets/imgs/integracoes-hoteleiras/bkg-hero.webp"
     />
   );
 }

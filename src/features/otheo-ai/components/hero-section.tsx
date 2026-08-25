@@ -27,9 +27,9 @@ function HeroSection({ onCtaClick }: HeroSectionProps) {
   return (
     <HomeStyleHero
       eyebrow="Novidade · Inteligência Artificial"
-      title="O hotel inteiro, a uma pergunta de distância."
+      title="O hotel inteiro, a um comando de distância."
       highlightKeyword="distância"
-      subtitle="Otheo entende sua operação e age por você: ocupação, tarifas e disponibilidade, em português, de qualquer lugar."
+      subtitle="Acelere sua rotina com um assistente inteligente que entende sua operação e age por você. Consulte ocupação, gerencie disponibilidade e altere tarifas instantaneamente com simples comandos de texto ou voz. Menos cliques, mais produtividade de onde você estiver."
       ctaLabel="Solicite uma demonstração"
       onCtaClick={onCtaClick}
     >

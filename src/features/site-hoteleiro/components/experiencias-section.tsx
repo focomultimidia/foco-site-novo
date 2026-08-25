@@ -73,32 +73,35 @@ interface FrameConfig {
   left: string;
   top: string;
   width: string;
-  height: string;
   rotate: number;
   z: number;
 }
 
+// Cada imagem é quadrada (800×800) — os frames usam apenas `width` (a altura
+// vem sozinha via `aspect-square` no ImageFrame), então a caixa é sempre
+// proporcional à imagem real, não importa a proporção do container em volta.
+
 // ── Palco (centro) — para onde a imagem da categoria ativa viaja ────────────
-const CENTER_DESKTOP: FrameConfig = { left: "24%", top: "8%", width: "46%", height: "72%", rotate: 0, z: 30 };
-const CENTER_MOBILE: FrameConfig = { left: "13%", top: "6%", width: "74%", height: "56%", rotate: 0, z: 30 };
+const CENTER_DESKTOP: FrameConfig = { left: "32%", top: "14%", width: "36%", rotate: 0, z: 30 };
+const CENTER_MOBILE: FrameConfig = { left: "25%", top: "10%", width: "50%", rotate: 0, z: 30 };
 
 // ── Casas fixas — cada categoria tem a sua; a inclinação sutil e o
 // posicionamento assimétrico dão o ar de "fotografias espalhadas" que se
 // alinham perfeitamente ao chegar ao centro.
 const HOME_DESKTOP: FrameConfig[] = [
-  { left: "-3%", top: "2%", width: "23%", height: "34%", rotate: -3, z: 20 },
-  { left: "-1%", top: "44%", width: "20%", height: "60%", rotate: 2.5, z: 15 },
-  { left: "75%", top: "0%", width: "24%", height: "22%", rotate: 3, z: 22 },
-  { left: "77%", top: "26%", width: "22%", height: "34%", rotate: -2, z: 18 },
-  { left: "27%", top: "84%", width: "22%", height: "20%", rotate: 1.8, z: 12 },
+  { left: "-2%", top: "2%", width: "18%", rotate: -3, z: 20 },
+  { left: "-1%", top: "50%", width: "17%", rotate: 2.5, z: 15 },
+  { left: "76%", top: "0%", width: "19%", rotate: 3, z: 22 },
+  { left: "78%", top: "44%", width: "18%", rotate: -2, z: 18 },
+  { left: "30%", top: "64%", width: "17%", rotate: 1.8, z: 12 },
 ];
 
 const HOME_MOBILE: FrameConfig[] = [
-  { left: "-5%", top: "0%", width: "34%", height: "20%", rotate: -3, z: 20 },
-  { left: "-3%", top: "62%", width: "32%", height: "30%", rotate: 2.5, z: 15 },
-  { left: "68%", top: "2%", width: "34%", height: "18%", rotate: 3, z: 22 },
-  { left: "70%", top: "40%", width: "30%", height: "24%", rotate: -2, z: 18 },
-  { left: "30%", top: "84%", width: "34%", height: "16%", rotate: 1.8, z: 12 },
+  { left: "-4%", top: "0%", width: "22%", rotate: -3, z: 20 },
+  { left: "-2%", top: "68%", width: "20%", rotate: 2.5, z: 15 },
+  { left: "70%", top: "2%", width: "22%", rotate: 3, z: 22 },
+  { left: "74%", top: "46%", width: "20%", rotate: -2, z: 18 },
+  { left: "30%", top: "72%", width: "18%", rotate: 1.8, z: 12 },
 ];
 
 function ImageFrame({
@@ -119,12 +122,15 @@ function ImageFrame({
       layout
       layoutId={`experiencia-frame-${index}`}
       onClick={onSelect}
-      className="absolute rounded-2xl overflow-hidden"
-      // left/top/width/height ficam no style "cru" — é a mudança nesses
-      // valores entre renders que o `layout` detecta e transforma numa
-      // animação suave (FLIP), em vez de deixar o Framer tentar animar o
-      // CSS diretamente (que entraria em conflito com o próprio `layout`).
-      style={{ left: frame.left, top: frame.top, width: frame.width, height: frame.height, zIndex: isActive ? 30 : frame.z }}
+      className="absolute aspect-square rounded-2xl overflow-hidden"
+      // left/top/width ficam no style "cru" — é a mudança nesses valores
+      // entre renders que o `layout` detecta e transforma numa animação
+      // suave (FLIP), em vez de deixar o Framer tentar animar o CSS
+      // diretamente (que entraria em conflito com o próprio `layout`).
+      // A altura vem de `aspect-square` (className) — as imagens são
+      // quadradas (800×800), então a caixa fica sempre proporcional a elas,
+      // independente da proporção do container em volta.
+      style={{ left: frame.left, top: frame.top, width: frame.width, zIndex: isActive ? 30 : frame.z }}
       animate={{
         rotate: frame.rotate,
         boxShadow: isActive

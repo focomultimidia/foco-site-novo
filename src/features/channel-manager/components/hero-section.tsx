@@ -586,7 +586,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
 // ── Título ────────────────────────────────────────────────────────────────────
 
 function buildTitle(raw: string) {
-  const kw = "Integrado";
+  const kw = "integrado";
   const idx = raw.indexOf(kw);
   if (idx === -1) return raw;
   return (
