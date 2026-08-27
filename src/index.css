@@ -249,3 +249,20 @@
   14%  { opacity: 0; transform: scaleY(0.4); }
   100% { opacity: 0; }
 }
+
+/* ──────────────────────────────────────────────────────────────────────────
+   MARQUEE DE POSTS — duas fileiras em sentidos opostos (mural de conteúdo,
+   marketing-para-hoteis). translateX(-50%) desloca exatamente um conjunto
+   completo já que o conteúdo é duplicado 2x — o loop fecha sem soluço
+   independente da largura real em pixels, mesmo princípio do x:["0%","-50%"]
+   de TrustedLogosMarquee, só que via CSS puro (não Framer) pra poder pausar
+   no hover com animation-play-state, controlado por estado React.
+   ────────────────────────────────────────────────────────────────────────── */
+@keyframes mkt-posts-scroll-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes mkt-posts-scroll-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}

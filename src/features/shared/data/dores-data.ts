@@ -27,7 +27,7 @@ const DORES_DATA: DorSolucao[] = [
         titulo: "Atrair visitantes qualificados",
         descricao:
           "Tenha uma estratégia de Marketing digital eficiente com anúncios no Google Hotel e Meta ADS.",
-        link: "#",
+        link: "/marketing-para-hoteis",
       },
       {
         titulo: "Gatilhos para mais reservas",

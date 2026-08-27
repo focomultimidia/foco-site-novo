@@ -117,7 +117,7 @@ function GradientHero({
   const handleMouseLeave = () => { px.set(0); py.set(0); };
 
   return (
-    <section className="relative bg-[#10233d] pb-10 sm:pb-14 lg:pb-16">
+    <section className="relative overflow-x-hidden bg-[#10233d] pb-10 sm:pb-14 lg:pb-16">
       {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas de todas as
           outras heroes do site (Home, HomeStyleHero). */}
       <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(50px)", opacity: 0.85 }}>

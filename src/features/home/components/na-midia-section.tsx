@@ -97,7 +97,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           decoding="async"
         />
         <div className="text-right">
-          <p className="text-sm font-semibold text-gray-400 leading-tight">
+          <p className="text-sm font-semibold text-gray-500 leading-tight">
             {artigo.publicacao}
           </p>
           <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>

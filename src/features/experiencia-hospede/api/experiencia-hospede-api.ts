@@ -2,7 +2,7 @@ import type { ExperienciaHospedeData } from "../types";
 
 const experienciaHospedeData: ExperienciaHospedeData = {
   hero: {
-    titulo: "Aplicativo de hospedagem para uma experiência do hóspede excepcional",
+    titulo: "Aplicativo de hospedagem para uma experiência excepcional",
     subtitulo: "Do Pré-Check-in ao Pós-Estadia",
     descricao:
       "O aplicativo do hóspede da Foco cria experiências memoráveis em cada etapa da jornada. Comunicação personalizada, check-in digital, concierge virtual e muito mais.",

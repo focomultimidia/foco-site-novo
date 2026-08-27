@@ -412,6 +412,32 @@ function OrbitDiagram({
 
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Escala fluida — todo o diagrama é desenhado em coordenadas fixas (raios
+  // 110/190px etc.) pensadas pro tamanho de referência 420px (480 em lg+).
+  // Sem isso, em telas mais estreitas que 420px (a maioria dos celulares) o
+  // diagrama simplesmente vazava pra fora do próprio wrapper — cortado pelo
+  // `overflow-x-hidden` da seção, mas o WRAPPER (w-[420px] fixo) também
+  // forçava a coluna do grid a ficar mais larga que a viewport, cortando
+  // até o texto ao lado. Aqui o wrapper vira fluido (`w-full max-w-[420px]`)
+  // e o conteúdo original (não mexido) é escalado via `transform: scale()`
+  // pra caber na largura real disponível — `getBoundingClientRect` já
+  // reflete transforms sozinho, então o ConnectionLines (que lê posição real
+  // a cada frame) continua funcionando em qualquer escala sem ajuste extra.
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [orbitScale, setOrbitScale] = useState(1);
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const sync = () => {
+      const w = el.offsetWidth;
+      if (w > 0) setOrbitScale(Math.min(1, w / 420));
+    };
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   // Refs pro nó posicionado de cada badge (pro ConnectionLines ler a
   // posição real a cada frame) — Map porque a lista de parceiros é
   // dinâmica (props), então não dá pra usar useRef por item.
@@ -446,9 +472,11 @@ function OrbitDiagram({
   }, [showConnections, innerPartners, outerPartners]);
 
   return (
+    <div ref={wrapRef} className="relative w-full max-w-[420px] lg:max-w-[480px] aspect-square shrink-0">
     <div
       ref={containerRef}
-      className="relative w-[420px] h-[420px] lg:w-[480px] lg:h-[480px] shrink-0"
+      className="absolute w-[420px] h-[420px] lg:w-[480px] lg:h-[480px]"
+      style={{ top: "50%", left: "50%", transform: `translate(-50%, -50%) scale(${orbitScale})` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -527,6 +555,7 @@ function OrbitDiagram({
           </motion.div>
         </OrbitItem>
       ))}
+    </div>
     </div>
   );
 }
