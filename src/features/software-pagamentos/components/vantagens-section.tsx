@@ -191,7 +191,7 @@ function VantagensSection() {
               </span>{" "}
               para hotéis
             </h2>
-            <p className="font-sans font-normal text-slate-500 text-lg leading-relaxed">
+            <p className="font-sans font-normal text-slate-600 text-lg leading-relaxed">
               Segurança, flexibilidade e automação para transformar a gestão
               financeira do seu hotel.
             </p>

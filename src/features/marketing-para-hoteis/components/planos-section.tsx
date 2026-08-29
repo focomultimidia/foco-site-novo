@@ -200,7 +200,7 @@ function PlanosSection({ onSelectPlano }: PlanosSectionProps) {
               mais direto
             </span>
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Sem letras miúdas nem mensalidade padronizada — o valor certo depende do porte e do destino do seu hotel.
             Fale com um consultor pra montar o plano.
           </p>

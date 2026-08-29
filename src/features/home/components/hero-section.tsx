@@ -264,7 +264,6 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
           className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em]"
         >
-          <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
           Ecossistema completo para hotelaria
         </motion.div>
 
@@ -331,7 +330,12 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
           cima/sobre a imagem e foram pra baixo dela). ────────────────────── */}
       <div className="relative z-10 min-h-0 min-w-0 lg:h-full flex flex-col items-center justify-center gap-7 lg:gap-0 px-4 lg:px-0 pb-10 lg:pb-0">
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.96 }}
+          // Candidato a LCP (medido com trace de performance) — mesmo
+          // motivo do `initial={false}` do H1 acima: com opacity:0 de
+          // largada, o paint fica refém do delay+duração da animação
+          // (aqui, ~1,4s a mais só de espera). `initial={false}` pula o
+          // "de onde vem" e renderiza direto no estado final do `animate`.
+          initial={false}
           animate={{ opacity: 1, y: 0,  scale: 1 }}
           transition={{ duration: 0.9, delay: 0.5, ease: EASE }}
           className="min-w-0"
@@ -521,7 +525,9 @@ function HeroStatBadge({
 function HeroMobileMockup({ isWideLayout }: { isWideLayout: boolean }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.85 }}
+      // Outro candidato a LCP nos traces (ver comentário equivalente no
+      // mockup desktop acima) — mesmo tratamento: sem opacity:0 de largada.
+      initial={false}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.75, ease: EASE }}
       className="absolute -top-6 -right-2 sm:-top-8 sm:-right-4 lg:-top-10 lg:-right-6 z-20 w-[160px] sm:w-[175px] lg:w-[220px]"
@@ -558,6 +564,7 @@ function HeroMobileMockup({ isWideLayout }: { isWideLayout: boolean }) {
           <SlideVisual
             src={MOBILE_SLIDE.src}
             alt={MOBILE_SLIDE.alt}
+            eager
             icon={Smartphone}
             iconClassName="w-6 h-6"
             labelClassName="text-[10px] font-medium text-center px-2"

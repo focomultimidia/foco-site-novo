@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -iE \"\\\\.env\\($|[^.]\\)\")",
+      "Bash(awk '{print length\\($0\\), $0}')",
+      "Bash(awk -F/ '{print length\\($NF\\), $0}')",
+      "Bash(echo \"EXIT:$?\")"
+    ]
+  }
+}

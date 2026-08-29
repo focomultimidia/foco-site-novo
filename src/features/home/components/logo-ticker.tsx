@@ -25,6 +25,10 @@ function LogoTicker({ logos }: LogoTickerProps) {
       {/* Ticker container */}
       <motion.div
         className="flex gap-8"
+        // `initial` explícito — evita o Framer Motion ler o `x` atual do
+        // DOM antes de animar (força reflow logo após o mount; ver mesmo
+        // comentário em trusted-logos-marquee.tsx).
+        initial={{ x: "0%" }}
         animate={{ x: ["0%", "-50%"] }}
         transition={{
           duration: 30,

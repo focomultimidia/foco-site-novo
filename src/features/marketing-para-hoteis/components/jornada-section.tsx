@@ -120,7 +120,7 @@ function JornadaSection() {
                   <h3 className="font-display mb-3 text-2xl font-semibold tracking-tight text-[#1e3a5f]">
                     {estagio.titulo}
                   </h3>
-                  <p className="max-w-[280px] text-sm leading-relaxed text-slate-500">{estagio.descricao}</p>
+                  <p className="max-w-[280px] text-sm leading-relaxed text-slate-600">{estagio.descricao}</p>
                 </motion.div>
               );
             })}
@@ -159,7 +159,7 @@ function JornadaSection() {
                     {estagio.numero} · {estagio.subtitulo}
                   </span>
                   <h3 className="font-display mb-2 text-xl font-semibold tracking-tight text-[#1e3a5f]">{estagio.titulo}</h3>
-                  <p className="text-sm leading-relaxed text-slate-500">{estagio.descricao}</p>
+                  <p className="text-sm leading-relaxed text-slate-600">{estagio.descricao}</p>
                 </div>
               </div>
             );

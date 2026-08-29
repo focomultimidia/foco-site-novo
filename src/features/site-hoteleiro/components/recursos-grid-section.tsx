@@ -239,7 +239,7 @@ function Stage({ activeIndex, direction }: { activeIndex: number; direction: num
                         </span>
                         <Check className="h-4 w-4 text-[#285992]/50 flex-shrink-0" strokeWidth={3} />
                       </div>
-                      <p className="text-[15px] leading-relaxed text-slate-500 pl-[52px]">
+                      <p className="text-[15px] leading-relaxed text-slate-600 pl-[52px]">
                         {item.descricao}
                       </p>
                     </motion.li>

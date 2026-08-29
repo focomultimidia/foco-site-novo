@@ -61,7 +61,7 @@ function RecursosSection({ recursos }: RecursosSectionProps) {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{recurso.titulo}</h3>
-                  <p className="text-sm text-slate-500">{recurso.descricao}</p>
+                  <p className="text-sm text-slate-600">{recurso.descricao}</p>
                 </div>
               </motion.div>
             );

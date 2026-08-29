@@ -300,7 +300,6 @@ function HomeStyleHero({
           transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
           className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em]"
         >
-          <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
           {eyebrow}
         </motion.div>
 
@@ -528,6 +527,13 @@ function HeroMobileMockup({ isWideLayout, src, alt, aspectRatio }: { isWideLayou
           <SlideVisual
             src={src}
             alt={alt}
+            // Visível de cara em qualquer página que usa este hero (leque de
+            // 8+ produtos) — sem isso nasce com loading="lazy"/fetchPriority
+            // "low" (default de SlideVisual), atrasando o carregamento de um
+            // elemento que já está acima da dobra. Achado numa varredura com
+            // Playwright em todas as rotas do site (mesmo bug já corrigido
+            // separadamente no hero da Home).
+            eager
             icon={Smartphone}
             iconClassName="w-6 h-6"
             labelClassName="text-[10px] font-medium text-center px-2"

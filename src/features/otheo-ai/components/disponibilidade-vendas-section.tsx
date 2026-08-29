@@ -43,7 +43,7 @@ function DisponibilidadeVendasSection() {
                 Ele fecha com você.
               </span>
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Sem abrir o channel manager, sem procurar o módulo certo. Você fala o que precisa
               e o agente de CRS executa a alteração pra você.
             </p>

@@ -51,7 +51,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-[#1E3A5F] mb-1">{beneficio.titulo}</h3>
-                    <p className="text-sm text-slate-500">{beneficio.descricao}</p>
+                    <p className="text-sm text-slate-600">{beneficio.descricao}</p>
                   </div>
                 </div>
               ))}
@@ -76,7 +76,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
                 className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
               >
                 <p className="text-4xl font-bold text-[#285992] mb-1">{beneficio.estatistica}</p>
-                <p className="text-sm text-slate-500">{beneficio.estatisticaLabel}</p>
+                <p className="text-sm text-slate-600">{beneficio.estatisticaLabel}</p>
               </motion.div>
             ))}
           </motion.div>

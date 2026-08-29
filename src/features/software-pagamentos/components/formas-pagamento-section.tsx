@@ -36,7 +36,7 @@ function FormasPagamentoSection({ formas }: FormasPagamentoSectionProps) {
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] mb-4">
             Formas de Pagamento Aceitas
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Ofereça aos seus hóspedes todas as opções de pagamento que eles
             esperam.
           </p>

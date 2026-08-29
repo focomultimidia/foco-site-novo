@@ -18,6 +18,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -26,14 +27,17 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Channel Manager";
+
 function ChannelManagerPage() {
   useSeo({
     title: "Channel Manager Hoteleiro | +800 canais | Foco Tecnologia",
     description:
       "Conecte seu hotel a mais de 850 OTAs e metasearch engines com sincronização automática de tarifas, disponibilidade e reservas em tempo real.",
-    path: "/channel-manager",
+    path: "/gestor-de-canais-channel-manager",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useChannelManagerPage();
 
   if (isLoading) {
@@ -69,7 +73,10 @@ function ChannelManagerPage() {
     <div className="space-y-0">
 
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_channel_manager", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é um gestor de canais */}
       <GenericInfoSection {...INFO_SECTIONS.channelManager} imageSide="right" />
@@ -135,6 +142,8 @@ function ChannelManagerPage() {
         title="Pronto para eliminar o overbooking e aumentar sua ocupação?"
         subtitle="Solicite uma demonstração e descubra como o Channel Manager da Foco pode transformar a gestão do seu hotel."
         badge="Comece agora"
+        source="cta_final_channel_manager"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

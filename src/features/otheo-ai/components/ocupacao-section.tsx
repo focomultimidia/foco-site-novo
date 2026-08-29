@@ -51,11 +51,11 @@ function OcupacaoSection() {
                 Pergunte.
               </span>
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed mb-6">
+            <p className="text-slate-600 text-lg leading-relaxed mb-6">
               Otheo não decora respostas prontas: quando você pergunta pela sua ocupação, ele
               soma as UHs totais, cruza com as ocupadas e chega ao número, na hora.
             </p>
-            <p className="text-slate-500 leading-relaxed">
+            <p className="text-slate-600 leading-relaxed">
               É a mesma lógica por trás de qualquer pergunta sobre a sua operação: o Otheo
               entende o que falta pra responder e vai atrás, em vez de consultar uma lista fixa
               de perguntas e respostas.

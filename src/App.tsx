@@ -28,6 +28,17 @@ const OtheoAiPage = lazy(() => import('./features/otheo-ai/otheo-ai-page').then(
 const SobrePage = lazy(() => import('./features/sobre/sobre-page').then((m) => ({ default: m.SobrePage })));
 const MarketingParaHoteisPage = lazy(() => import('./features/marketing-para-hoteis/marketing-para-hoteis-page').then((m) => ({ default: m.MarketingParaHoteisPage })));
 const PoliticaDePrivacidadePage = lazy(() => import('./features/politica-de-privacidade/politica-de-privacidade-page').then((m) => ({ default: m.PoliticaDePrivacidadePage })));
+// Cada uma aponta pro PRÓPRIO arquivo, não pro barrel `./features/blog` —
+// importar todas do mesmo barrel faz o Rollup fundir as 6 páginas (+ os
+// posts MDX) num único chunk, já que teriam o mesmo module specifier;
+// apontando direto pro arquivo de cada uma, cada rota do blog mantém seu
+// próprio chunk, igual toda outra rota do site.
+const BlogHomePage = lazy(() => import('./features/blog/blog-home-page').then((m) => ({ default: m.BlogHomePage })));
+const BlogPostPage = lazy(() => import('./features/blog/blog-post-page').then((m) => ({ default: m.BlogPostPage })));
+const BlogCategoryPage = lazy(() => import('./features/blog/blog-category-page').then((m) => ({ default: m.BlogCategoryPage })));
+const BlogTagPage = lazy(() => import('./features/blog/blog-tag-page').then((m) => ({ default: m.BlogTagPage })));
+const BlogAuthorPage = lazy(() => import('./features/blog/blog-author-page').then((m) => ({ default: m.BlogAuthorPage })));
+const BlogSearchPage = lazy(() => import('./features/blog/blog-search-page').then((m) => ({ default: m.BlogSearchPage })));
 const NotFoundPage = lazy(() => import('./features/ui/not-found-page').then((m) => ({ default: m.NotFoundPage })));
 
 // Fallback simples enquanto o chunk da rota carrega — mesmo spinner já
@@ -51,18 +62,27 @@ function App() {
             <Routes>
               <Route element={<MainLayout />}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/site-hoteleiro" element={<SiteHoteleiroPage />} />
+                <Route path="/sites-para-hoteis-e-pousadas" element={<SiteHoteleiroPage />} />
                 <Route path="/motor-de-reservas" element={<MotorReservasPage />} />
-                <Route path="/channel-manager" element={<ChannelManagerPage />} />
-                <Route path="/gestao-hoteleira" element={<GestaoHoteleiraPage />} />
-                <Route path="/experiencia-do-hospede" element={<ExperienciaHospedePage />} />
+                <Route path="/gestor-de-canais-channel-manager" element={<ChannelManagerPage />} />
+                <Route path="/sistema-de-gestao-hoteleira-pms" element={<GestaoHoteleiraPage />} />
+                <Route path="/aplicativo-de-hospedagem" element={<ExperienciaHospedePage />} />
                 <Route path="/software-de-pagamentos" element={<SoftwarePagamentosPage />} />
                 <Route path="/integracoes-hoteleiras" element={<IntegracoesHoteleirasPage />} />
                 <Route path="/crm-hoteleiro" element={<CrmHoteleiroPage />} />
-                <Route path="/otheo-ai" element={<OtheoAiPage />} />
+                <Route path="/inteligencia-artificial-para-hoteis-e-pousadas" element={<OtheoAiPage />} />
                 <Route path="/sobre" element={<SobrePage />} />
                 <Route path="/marketing-para-hoteis" element={<MarketingParaHoteisPage />} />
                 <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidadePage />} />
+                {/* Rotas mais específicas ANTES do catch-all de 1 segmento
+                    (/blog/:slug) — senão "/blog/categoria" seria lido como
+                    se "categoria" fosse o slug de um post. */}
+                <Route path="/blog" element={<BlogHomePage />} />
+                <Route path="/blog/busca" element={<BlogSearchPage />} />
+                <Route path="/blog/categoria/:slug" element={<BlogCategoryPage />} />
+                <Route path="/blog/tag/:slug" element={<BlogTagPage />} />
+                <Route path="/blog/autor/:slug" element={<BlogAuthorPage />} />
+                <Route path="/blog/:slug" element={<BlogPostPage />} />
                 <Route path="*" element={<NotFoundPage />} />
               </Route>
             </Routes>

@@ -76,7 +76,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     solucaoIcons: [Cloud, CreditCard, Headset, Plug],
     ctaTexto: "Quer parar de ter prejuízos e começar a obter lucros com seu estabelecimento?",
     ctaBotao: "Quero obter lucros",
-    ctaLink: "/gestao-hoteleira",
+    ctaLink: "/sistema-de-gestao-hoteleira-pms",
   },
   "experiencia-ruim": {
     Icon: Frown,
@@ -87,7 +87,7 @@ const DOR_CONFIG: Record<string, DorConfig> = {
     solucaoIcons: [Star, Smartphone, MessageCircle, Percent],
     ctaTexto: "Quer melhorar a experiência do seu hóspede e aumentar sua reputação online?",
     ctaBotao: "Quero aumentar a reputação do meu hotel",
-    ctaLink: "/experiencia-do-hospede",
+    ctaLink: "/aplicativo-de-hospedagem",
   },
 };
 
@@ -158,7 +158,6 @@ function DiagnosticoVisual({ dor, index }: { dor: DorSolucao; index: number }) {
           {/* Status bar */}
           <div className="absolute top-4 sm:top-5 left-4 sm:left-5 right-4 sm:right-5 z-20 flex items-center justify-between">
             <span className="inline-flex items-center gap-1.5 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.18em] text-white/85 bg-black/30 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#fccc30] animate-pulse" />
               Diagnóstico ativo
             </span>
             <span className="font-mono text-[9px] sm:text-[10px] text-white/45">0{index + 1}/03</span>

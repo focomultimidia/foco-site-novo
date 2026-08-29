@@ -29,7 +29,7 @@ export interface GenericInfoSectionProps {
   /** Cantos arredondados na imagem (rounded-3xl, o mesmo raio usado em
    *  cards/imagens no resto do site) — opt-in porque esse componente é
    *  compartilhado por várias páginas e a mudança foi pedida só pra
-   *  /experiencia-do-hospede; default false preserva as outras como estão. */
+   *  /aplicativo-de-hospedagem; default false preserva as outras como estão. */
   imageRounded?: boolean;
   /**
    * Troca a imagem única por um mockup desktop (mesmo padrão visual do
@@ -46,7 +46,7 @@ export interface GenericInfoSectionProps {
    * No mobile, empurra a imagem pra logo abaixo do título (antes dos
    * parágrafos de descrição) em vez de depois deles. Opt-in porque esse
    * componente é compartilhado por várias páginas — pedido só pra
-   * /experiencia-do-hospede; default false preserva as outras como estão.
+   * /aplicativo-de-hospedagem; default false preserva as outras como estão.
    * Não afeta o layout em lg+ (colunas texto/imagem lado a lado, como sempre).
    */
   imageBelowTitleOnMobile?: boolean;
@@ -195,7 +195,7 @@ function GenericInfoSection({
               </h2>
 
               {paragraphs.map((p, i) => (
-                <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
+                <p key={i} className="text-slate-600 text-base lg:text-base leading-relaxed">
                   {p}
                 </p>
               ))}
@@ -219,7 +219,7 @@ function GenericInfoSection({
   }
 
   // ── Título → imagem → descrição no mobile (pedido só pra
-  //    /experiencia-do-hospede); em lg+ volta ao layout de 2 colunas de sempre. ──
+  //    /aplicativo-de-hospedagem); em lg+ volta ao layout de 2 colunas de sempre. ──
   return (
     <section className={`overflow-x-hidden py-24 lg:py-24 ${background} ${className}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -261,7 +261,7 @@ function GenericInfoSection({
             className={`order-3 ${desktopTitleCol} lg:row-start-2 space-y-5 ${textOrder}`}
           >
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-slate-500 text-base lg:text-base leading-relaxed">
+              <p key={i} className="text-slate-600 text-base lg:text-base leading-relaxed">
                 {p}
               </p>
             ))}

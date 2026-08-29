@@ -72,7 +72,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     titulo: "Channel Manager: Venda mais, em mais lugares, sem esforço",
     descricao: "Coloque o seu hotel na vitrine do turismo mundial. Alcance milhões de viajantes conectando-se simultaneamente a mais de 800 canais de vendas (Booking, Airbnb, Expedia e muito mais), com sincronização automática em tempo real de tarifas e disponibilidade.",
     beneficios: ["Otas, operadoras e agências de viagens", "Disponibilidade real em todos os canais", "Proteção contra overbooking"],
-    link: "/channel-manager",
+    link: "/gestor-de-canais-channel-manager",
     ctaLabel: "Quero vender em +800 canais",
     Icone: Globe,
     imagem: "/assets/imgs/produtos/channel-manager.webp",
@@ -104,7 +104,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     titulo: "PMS - Gestão hoteleira: Centralize sua operação em um único sistema",
     descricao: "Diga adeus ao retrabalho e às falhas operacionais. Conheça o nosso PMS completo: o sistema de gestão hoteleira definitivo, com motor de reservas e gestor de canais 100% nativos e integrados. Controle seu hotel, pousada ou rede em um único painel na nuvem, sem planilhas, sem sistemas paralelos e sem complicações.",
     beneficios: ["Sistema anti-overbooking", "Gestão completa do hotel", "Gestão leve, rápida e 100% online"],
-    link: "/gestao-hoteleira",
+    link: "/sistema-de-gestao-hoteleira-pms",
     ctaLabel: "Automatizar minha operação agora",
     Icone: LayoutGrid,
     imagem: "/assets/imgs/produtos/mapa.webp",
@@ -120,7 +120,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     titulo: "Site Hoteleiro: Seu melhor canal de vendas começa no seu site",
     descricao: "Não tenha apenas um cartão de visitas na internet, tenha uma plataforma de alta conversão. Nossos sites são desenhados para capturar viajantes, transmitir autoridade e guiá-los direto para a reserva direta, eliminando taxas de terceiros. Um site de reservas completo para hotel, pousada ou temporada, com motor de reservas nativo.",
     beneficios: ["Motor de reservas integrado", "Personalização completa", "Otimizado para Google e IA"],
-    link: "/site-hoteleiro",
+    link: "/sites-para-hoteis-e-pousadas",
     ctaLabel: "Quero um site que vende de verdade",
     Icone: Monitor,
     imagem: "/assets/imgs/site-hoteleiro/modelos/modelo1.webp",
@@ -152,7 +152,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     titulo: "Experiência do Hóspede: FocoPass - Aplicativo do hóspede",
     descricao: "Leve a estada do seu hóspede para a era digital. Dê total autonomia ao cliente através de um app intuitivo enquanto economiza o tempo da sua equipe de recepção e acumula avaliações 5 estrelas na internet. Da comunicação por WhatsApp ao check-in digital, cada etapa da jornada acontece sem fricção.",
     beneficios: ["Gestão de avaliações", "Check-in online integrado ao Ministério do Turismo", "Notificações via Whastapp"],
-    link: "/experiencia-do-hospede",
+    link: "/aplicativo-de-hospedagem",
     ctaLabel: "Garantir a experiência do hóspede",
     Icone: Smartphone,
     imagem: "/assets/imgs/produtos/foco-pass.webp",
@@ -160,7 +160,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     // lg, ver ScrollContentBlock) — no desktop o palco inteiro vira os 3
     // mockups abaixo (`mockups`), review pedida pelo usuário: nada de
     // screenshot único + 1 celular flutuando, igual à hero de
-    // /experiencia-do-hospede (3 celulares, o do meio nítido). Não reaproveita
+    // /aplicativo-de-hospedagem (3 celulares, o do meio nítido). Não reaproveita
     // a estrutura de dados daquela hero, só os arquivos de imagem — e não
     // inclui a categoria "Motor de Reservas" da hero original porque os
     // arquivos dela (hero/reservas-*.webp) não existem no repo (confirmado);
@@ -180,11 +180,11 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     titulo: "Otheo AI: A inteligência que opera o seu hotel",
     descricao: "Abra vendas, altere tarifas, confira check-ins, consulte reservas, gerencie bloqueios e muito mais, com um comando de voz ou texto. O Otheo AI entende sua operação e executa por você.",
     beneficios: ["Aplicativo para facilitar sua operação", "Execução de tarefas em tempo real", "Gerencie sem acessar a extranet"],
-    link: "/otheo-ai",
+    link: "/inteligencia-artificial-para-hoteis-e-pousadas",
     ctaLabel: "Gerenciar minha operação com IA",
     Icone: Bot,
     imagem: "/assets/imgs/home/otheoai/chat-ia.webp",
-    // Mesmo print real usado no mockup da hero de /otheo-ai e no
+    // Mesmo print real usado no mockup da hero de /inteligencia-artificial-para-hoteis-e-pousadas e no
     // OtheoAiTeaserSection — não existe (ainda) um dashboard desktop do
     // Otheo AI, só a tela de chat (retrato). Os 3 componentes que
     // realmente renderizam isso hoje (StagePanel, ScrollContentBlock
@@ -203,7 +203,7 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
       { src: "/assets/imgs/home/otheoai/mockup3-otheoai.webp", alt: "Otheo AI respondendo com os detalhes da reserva e voucher para reenvio" },
     ],
     // Sem `bkg-accordion.webp` próprio ainda — reaproveita uma foto
-    // atmosférica já em uso no /otheo-ai (hero-uber, o hoteleiro
+    // atmosférica já em uso no /inteligencia-artificial-para-hoteis-e-pousadas (hero-uber, o hoteleiro
     // resolvendo por voz no carro) em vez de cair no fallback pro
     // screenshot de chat (que ficaria ruim esticado como plano de fundo).
     bkgImagem: "/assets/imgs/otheo-ai/hoteleiro-uber.webp",

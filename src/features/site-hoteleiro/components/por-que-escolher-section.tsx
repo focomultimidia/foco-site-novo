@@ -85,7 +85,7 @@ function PorQueEscolherSection() {
             </span>{" "}
             no site do seu hotel
           </h2>
-          <p className="text-sm sm:text-base text-slate-500 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             Continue rolando: cada motivo se empilha sobre o anterior.
           </p>
         </div>

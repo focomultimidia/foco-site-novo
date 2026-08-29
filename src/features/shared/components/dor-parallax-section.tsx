@@ -143,9 +143,9 @@ function DorParallaxSection({ dorId, backgroundImage, backgroundAlt }: DorParall
                         <Icon className="w-5 h-5 text-[#fccc30]" strokeWidth={1.8} />
                       </div>
                     )}
-                    <h4 className="text-white font-semibold text-sm sm:text-[15px] mb-1.5 leading-snug pr-5">
+                    <h3 className="text-white font-semibold text-sm sm:text-[15px] mb-1.5 leading-snug pr-5">
                       {solucao.titulo}
-                    </h4>
+                    </h3>
                     <p className="text-white/60 text-sm leading-relaxed">
                       {solucao.descricao}
                     </p>

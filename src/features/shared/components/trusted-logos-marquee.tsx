@@ -177,6 +177,14 @@ function TrustedLogosMarquee() {
         <div className="flex overflow-hidden">
           <motion.div
             className="flex gap-16 items-center"
+            // `initial` explícito — sem isso, o Framer Motion não sabe de
+            // onde partir e lê o valor `x` atual direto do DOM
+            // (`readValueFromInstance`) antes de animar. Nesta esteira (52
+            // filhos, a maior do site) essa leitura força o navegador a
+            // recalcular o layout da página inteira que acabou de montar —
+            // media 226ms de reflow forçado num trace de performance.
+            // Passar o `initial` mata a leitura: o Framer já sabe a partida.
+            initial={{ x: "0%" }}
             animate={{
               x: ["0%", "-50%"],
             }}

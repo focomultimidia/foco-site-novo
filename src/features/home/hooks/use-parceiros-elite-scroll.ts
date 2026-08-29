@@ -36,27 +36,45 @@
  *      cardWidth`. As logos literalmente NÃO PODEM aparecer antes do card
  *      abrir caminho — nunca "nascem" soltas no meio do container.
  *
- * VELOCIDADE E DIREÇÃO da esteira — quatro estados possíveis
- * (`MarqueeState`), decididos no `onUpdate` do próprio ScrollTrigger (que
- * expõe `self.direction`: 1 = rolando pra baixo/card indo pra ESQUERDA,
- * -1 = rolando pra cima/card indo pra DIREITA):
- *   · progresso < `DOCK_DURATION` E `direction === 1` (card em trânsito
- *     rumo ao encaixe) → "fast": esteira flui pra DIREITA, rápida
- *     (`FAST_TIME_SCALE`). Com um timer curto: se nenhum novo `onUpdate`
- *     chegar dentro desse prazo (usuário parou de rolar NO MEIO do
- *     trajeto, card também parou), cai pro ritmo lento ("slow").
- *   · progresso < `DOCK_DURATION` E `direction === -1` (card voltando pra
- *     direita, desencaixando) → "reverse": esteira flui pra ESQUERDA
- *     (CONTRÁRIO ao fluxo padrão), na MESMA velocidade rápida — pedido
- *     explícito, é só inverter o sinal do `timeScale` (GSAP toca o tween
- *     de trás pra frente com `timeScale` negativo, então a esteira
- *     "desenrola" pro lado oposto sem precisar de um segundo tween).
- *   · progresso ≥ `DOCK_DURATION` (card encaixado, sem mais tween tocando
- *     sua posição) → "slow": ritmo lento de sempre, pra DIREITA — dali em
- *     diante o loop segue sozinho, por tempo (não depende mais de
- *     scroll).
+ * VELOCIDADE E DIREÇÃO da esteira — amostragem em relógio fixo, não reação
+ * por evento. A primeira versão deste hook decidia a velocidade da esteira
+ * DENTRO do `onUpdate` do ScrollTrigger, usando a flag `self.direction` do
+ * GSAP (1 = rolando pra baixo, -1 = pra cima) mais dois timers (`setTimeout`)
+ * pra filtrar ruído. Esse desenho tinha um problema estrutural: `onUpdate`
+ * dispara a uma frequência IRREGULAR (várias vezes por frame durante o
+ * "alcançar" do `scrub`, às vezes só uma vez), e `self.direction` é
+ * calculado a partir de leituras cruas e consecutivas de posição — com um
+ * `scrub:0.9` (bastante inércia, de propósito, ver mais abaixo) e scroll
+ * real (notch de mouse wheel, momentum de trackpad — nenhum dos dois é
+ * perfeitamente monotônico pixel a pixel), bastava UM único frame reportar
+ * `direction:-1` no meio de um gesto que no geral era pra baixo pra esse
+ * desenho antigo confirmar "reverse" e a esteira visivelmente voltar e
+ * repetir um trecho antes de corrigir — exatamente o sintoma relatado.
+ *
+ * A versão atual não olha `self.direction` nem reage a cada `onUpdate`.
+ * Em vez disso, guarda só o progresso mais recente (`latestProgress`,
+ * atualizado no `onUpdate`) e um `setInterval` PRÓPRIO, em relógio fixo
+ * (`SAMPLE_MS`), compara esse progresso contra o da última amostra. Como a
+ * amostragem é desacoplada da frequência do `onUpdate`, ruído de um único
+ * frame nunca chega a virar uma amostra por si só — ele se dilui dentro da
+ * janela de `SAMPLE_MS`. Um estado só muda quando a variação de progresso
+ * na janela ultrapassa um threshold com sinal claro (`FORWARD_THRESHOLD`/
+ * `REVERSE_THRESHOLD`); variação pequena/ambígua simplesmente mantém o
+ * estado atual (sem "flicker" por não ter pra onde decidir). Só existe um
+ * timer agora (parado por `STOP_MS` sem variação mensurável → ritmo
+ * ambiente), não dois.
+ *
+ * Os quatro estados possíveis (`MarqueeState`):
+ *   · progresso < `DOCK_DURATION` e progresso avançando de verdade na
+ *     janela → "fast": esteira flui pra DIREITA, rápida.
+ *   · progresso < `DOCK_DURATION` e progresso RECUANDO de verdade na
+ *     janela (usuário rolou pra cima, card devolvendo) → "reverse": esteira
+ *     flui pra ESQUERDA (contrário ao padrão), mesma velocidade — só
+ *     inverte o sinal do `timeScale`, GSAP toca o tween de trás pra frente.
+ *   · progresso ≥ `DOCK_DURATION` (card encaixado) → "slow": ritmo lento de
+ *     sempre, pra DIREITA — dali em diante o loop segue sozinho, por tempo.
  *   · `onLeaveBack` (usuário saiu do pin por cima) → "stopped": esteira
- *     parada — nada está visível ali mesmo (máscara fechada de novo).
+ *     parada, máscara fechada de novo.
  * PAUSA NO HOVER — sobrepõe TODOS os estados acima: enquanto o mouse está
  * sobre a esteira (`mouseenter`/`mouseleave` em `logosWrapRef`),
  * `isHovered` força `timeScale:0` incondicionalmente; ao sair do hover,
@@ -89,9 +107,19 @@ const DOCK_DURATION = 0.65;
 // o mesmo módulo de FAST_TIME_SCALE, só com o sinal invertido.
 const SLOW_TIME_SCALE = 1;
 const FAST_TIME_SCALE = 6;
-// Quanto tempo sem um novo `onUpdate` até considerar que o scroll parou de
-// verdade (card parou no meio do trajeto, não só entre dois frames).
-const SCROLL_STOP_MS = 150;
+// Relógio fixo de amostragem do progresso — desacoplado da frequência
+// (irregular) do `onUpdate` do ScrollTrigger. Ver comentário no topo do
+// arquivo sobre por que reagir direto a cada `onUpdate`/`self.direction`
+// causava o bug de "repetir".
+const SAMPLE_MS = 90;
+// Sem variação mensurável de progresso por esse tempo → considera que o
+// scroll parou de verdade (não só entre duas amostras).
+const STOP_MS = 200;
+// Variação de progresso por JANELA de amostragem (não por frame) acima
+// desse módulo já conta como movimento real e com sinal claro. Abaixo
+// disso, ambíguo — mantém o estado atual em vez de decidir por ruído.
+const FORWARD_THRESHOLD = 0.0025;
+const REVERSE_THRESHOLD = -0.0025;
 
 type MarqueeState = "fast" | "slow" | "reverse" | "stopped";
 
@@ -118,7 +146,7 @@ export function useParceirosEliteScroll(
     const logosTrack = logosTrackRef.current;
     if (!section || !mainCard || !logosWrap || !logosTrack) return;
 
-    let stopTimer: ReturnType<typeof setTimeout> | undefined;
+    let sampleTimer: ReturnType<typeof setInterval> | undefined;
     // Declarados fora do `gsap.context` de propósito — o `context.revert()`
     // só desfaz animações/ScrollTriggers criados durante o callback, não
     // trata o retorno do callback como cleanup (diferente do `useEffect`).
@@ -189,8 +217,18 @@ export function useParceirosEliteScroll(
 
       // ── Fase B — pin + scrub. Card e máscara avançam juntos na mesma
       // timeline — reverter o scroll reverte os dois em uníssono. A
-      // velocidade/direção da esteira é controlada à parte, no
-      // `onUpdate` abaixo (ver explicação no comentário do topo). ──────
+      // velocidade/direção da esteira é decidida à parte, pelo relógio de
+      // amostragem abaixo (ver explicação no comentário do topo), nunca
+      // dentro do próprio `onUpdate`. ─────────────────────────────────
+      let latestProgress = 0;
+      // Guarda de atividade — sem ela, o relógio de amostragem (que segue
+      // rodando o tempo todo, ver `setInterval` mais abaixo) reagiria ao
+      // progresso "parado em 0" depois que o usuário sai do pin por cima
+      // (`onLeaveBack`) como se fosse um scroll genuinamente parado, e
+      // reescreveria `marqueeState` de volta pra "slow" — brigando com o
+      // "stopped" que o próprio `onLeaveBack` acabou de forçar.
+      let pinActive = false;
+
       const dockTl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -201,34 +239,16 @@ export function useParceirosEliteScroll(
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            if (self.progress < DOCK_DURATION) {
-              if (self.direction === 1) {
-                clearTimeout(stopTimer);
-                if (marqueeState !== "fast") {
-                  marqueeState = "fast";
-                  render(0.25);
-                }
-                stopTimer = setTimeout(() => {
-                  marqueeState = "slow";
-                  render(0.6);
-                }, SCROLL_STOP_MS);
-              } else {
-                clearTimeout(stopTimer);
-                if (marqueeState !== "reverse") {
-                  marqueeState = "reverse";
-                  render(0.25);
-                }
-              }
-            } else {
-              clearTimeout(stopTimer);
-              if (marqueeState !== "slow") {
-                marqueeState = "slow";
-                render(0.4);
-              }
-            }
+            latestProgress = self.progress;
+          },
+          onEnter: () => {
+            pinActive = true;
+          },
+          onEnterBack: () => {
+            pinActive = true;
           },
           onLeaveBack: () => {
-            clearTimeout(stopTimer);
+            pinActive = false;
             marqueeState = "stopped";
             gsap.set(marqueeTl, { timeScale: 0 });
           },
@@ -239,10 +259,49 @@ export function useParceirosEliteScroll(
         .to(mainCard,  { x: 0, ease: "power3.out", duration: DOCK_DURATION }, 0)
         .to(logosWrap, { clipPath: "inset(0px 0px 0px 0px)", ease: "power3.out", duration: DOCK_DURATION }, 0)
         .to({}, { duration: 1 - DOCK_DURATION });
+
+      let lastSampledProgress = 0;
+      let lastChangeAt = performance.now();
+
+      function sample() {
+        if (!pinActive) return;
+
+        const delta = latestProgress - lastSampledProgress;
+        lastSampledProgress = latestProgress;
+
+        const now = performance.now();
+        if (Math.abs(delta) > FORWARD_THRESHOLD / 2) lastChangeAt = now;
+        const stalled = now - lastChangeAt > STOP_MS;
+
+        let next: MarqueeState;
+        if (latestProgress >= DOCK_DURATION) {
+          next = "slow";
+        } else if (stalled) {
+          next = "slow";
+        } else if (delta > FORWARD_THRESHOLD) {
+          next = "fast";
+        } else if (delta < REVERSE_THRESHOLD) {
+          next = "reverse";
+        } else {
+          // Variação ambígua dentro da janela — não decide nada, mantém o
+          // estado atual (é isso que impede o "flicker" por ruído).
+          next = marqueeState;
+        }
+
+        if (next !== marqueeState) {
+          marqueeState = next;
+          render(next === "slow" ? 0.5 : 0.3);
+        }
+      }
+
+      // Começa a amostrar assim que a Fase B existe — o pin pode não ter
+      // engatado ainda (`onEnter` cobre isso), mas ter o relógio rodando
+      // de saída é inofensivo: progresso fica em 0 até o pin engatar.
+      sampleTimer = setInterval(sample, SAMPLE_MS);
     }, sectionRef);
 
     return () => {
-      clearTimeout(stopTimer);
+      clearInterval(sampleTimer);
       if (handleMouseEnter) logosWrap.removeEventListener("mouseenter", handleMouseEnter);
       if (handleMouseLeave) logosWrap.removeEventListener("mouseleave", handleMouseLeave);
       ctx.revert();

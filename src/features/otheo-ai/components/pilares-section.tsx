@@ -59,7 +59,7 @@ function PilaresSection() {
               resolver
             </span>
           </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-slate-600 text-lg leading-relaxed">
             O Otheo combina agentes que agem por você com um agente que ensina, dependendo do
             que a pergunta pedir.
           </p>
@@ -159,7 +159,7 @@ function PilaresSection() {
               <motion.p variants={itemVariants} className="relative z-10 font-mono text-[11px] uppercase tracking-[0.14em] text-[#285992]/70 mb-4">
                 Orienta e ensina
               </motion.p>
-              <motion.p variants={itemVariants} className="relative z-10 text-slate-500 leading-relaxed mb-7 flex-1">
+              <motion.p variants={itemVariants} className="relative z-10 text-slate-600 leading-relaxed mb-7 flex-1">
                 Um agente dedicado a ensinar, alimentado progressivamente com a documentação da
                 Foco. Ele orienta o hoteleiro passo a passo em vez de executar a ação por conta
                 própria.

@@ -51,7 +51,7 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] mb-4">
             Nossas Integrações
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Conecte-se com as principais ferramentas do mercado hoteleiro.
           </p>
         </motion.div>
@@ -95,7 +95,7 @@ function IntegracoesSection({ integracoes, categorias }: IntegracoesSectionProps
                         className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-shadow"
                       >
                         <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-4">
-                          <IntegracaoIcon className="w-6 h-6 text-slate-500" />
+                          <IntegracaoIcon className="w-6 h-6 text-slate-600" />
                         </div>
                         <h4 className="font-semibold text-[#1e293b] mb-2">
                           {integracao.nome}

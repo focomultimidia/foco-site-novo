@@ -156,7 +156,7 @@ function PorQueSection() {
               </span>{" "}
               os pagamentos de reservas
             </h2>
-            <p className="font-sans font-normal text-slate-500 text-lg leading-relaxed">
+            <p className="font-sans font-normal text-slate-600 text-lg leading-relaxed">
               Ganhe eficiência, reduza inadimplência e garanta a receita do seu
               hotel de forma segura e automática.
             </p>

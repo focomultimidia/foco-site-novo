@@ -19,6 +19,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -27,15 +28,17 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Experiência do Hóspede";
 
 function ExperienciaHospedePage() {
   useSeo({
     title: "Aplicativo de Hospedagem e Experiência do Hóspede | Foco",
     description:
       "Aplicativo de hospedagem com check-in digital, comunicação personalizada e concierge virtual do pré-check-in ao pós-estadia. Monitore a satisfação do hóspede.",
-    path: "/experiencia-do-hospede",
+    path: "/aplicativo-de-hospedagem",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useExperienciaHospedePage();
 
   if (isLoading) {
@@ -70,7 +73,10 @@ function ExperienciaHospedePage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_experiencia_hospede", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é um motor de reservas */}
       <GenericInfoSection {...INFO_SECTIONS.experienciaHospede} imageSide="right" imageRounded imageBelowTitleOnMobile />
@@ -137,6 +143,8 @@ function ExperienciaHospedePage() {
         title="Pronto para transformar a experiência dos seus hóspedes?"
         subtitle="Solicite uma demonstração e descubra como o Foco Pass pode elevar o padrão de serviço do seu hotel."
         badge="Comece agora"
+        source="cta_final_experiencia_hospede"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

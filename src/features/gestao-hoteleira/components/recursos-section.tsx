@@ -177,7 +177,7 @@ function ItemCard({
           {item.titulo}
         </span>
       </div>
-      <p className={`leading-relaxed text-slate-500 ${big ? "text-[14.5px]" : "text-[14.5px]"}`}>
+      <p className={`leading-relaxed text-slate-600 ${big ? "text-[14.5px]" : "text-[14.5px]"}`}>
         {item.descricao}
       </p>
     </motion.li>

@@ -21,7 +21,7 @@ export function OrbitSection() {
             </h2>
           </StaggerItem>
           <StaggerItem>
-            <p className="text-slate-500 text-base leading-relaxed mb-8 max-w-lg">
+            <p className="text-slate-600 text-base leading-relaxed mb-8 max-w-lg">
               Nossa plataforma não vive isolada. Ela se conecta ao Booking.com, Expedia, Stone, PCI e dezenas de outros sistemas, criando um único fluxo que elimina retrabalho e maximiza cada reserva.
             </p>
           </StaggerItem>

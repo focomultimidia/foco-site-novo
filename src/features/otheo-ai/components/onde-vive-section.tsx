@@ -67,7 +67,7 @@ function AcessoSection() {
               está disponível
             </span>
           </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-slate-600 text-lg leading-relaxed">
             Hoje na extranet, com um aplicativo próprio a caminho das lojas.
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ function AcessoSection() {
             <h3 className="font-display text-2xl font-semibold text-[#1e3a5f] tracking-tight mb-3">
               Na extranet
             </h3>
-            <p className="text-slate-500 leading-relaxed">
+            <p className="text-slate-600 leading-relaxed">
               O Otheo fica sempre visível no canto da tela, com chamadas visuais para abrir o
               chat sempre que você precisar, sem sair do que está fazendo.
             </p>

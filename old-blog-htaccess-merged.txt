@@ -1,0 +1,54 @@
+##### LOCAWEB - NAO REMOVER #####
+AddHandler php80-script .php
+suPHP_ConfigPath /home/blogfocomultimid2/
+##### LOCAWEB - NAO REMOVER #####
+
+# ── Redirects 301 — blog.focomultimidia.com → focomultimidia.com/blog ──────
+# Precisa vir ANTES do bloco "BEGIN WordPress" abaixo: a última regra
+# daquele bloco (RewriteRule . /index.php [L]) casa com QUALQUER
+# requisição e para o processamento ali (flag [L]) — se essas regras
+# viessem depois, nunca seriam alcançadas.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Duas contas WP diferentes ("focomult_user" e "foco") viraram um autor só
+# ("foco-multimidia") no site novo.
+RewriteRule ^author/focomult_user/?$ https://focomultimidia.com/blog/autor/foco-multimidia [R=301,L]
+RewriteRule ^author/foco/?$ https://focomultimidia.com/blog/autor/foco-multimidia [R=301,L]
+
+# Páginas do blog (mais específico primeiro)
+RewriteRule ^category/([^/]+)/?$ https://focomultimidia.com/blog/categoria/$1 [R=301,L]
+RewriteRule ^tag/([^/]+)/?$ https://focomultimidia.com/blog/tag/$1 [R=301,L]
+RewriteRule ^author/([^/]+)/?$ https://focomultimidia.com/blog/autor/$1 [R=301,L]
+RewriteRule ^page/([0-9]+)/?$ https://focomultimidia.com/blog?pagina=$1 [R=301,L]
+
+# Home do blog
+RewriteRule ^$ https://focomultimidia.com/blog [R=301,L]
+
+# Posts — regra genérica (o slug é idêntico entre o blog antigo e o novo,
+# só o domínio e o prefixo "/blog/" mudam). !-f/!-d evita sequestrar
+# arquivo ou pasta que realmente existe no servidor (wp-admin, wp-content,
+# wp-json, etc.).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9-]+)/?$ https://focomultimidia.com/blog/$1 [R=301,L]
+</IfModule>
+
+# BEGIN WordPress
+# As diretrizes (linhas) entre "BEGIN WordPress" e "END WordPress" são
+# geradas dinamicamente e só devem ser modificadas através de filtros do WordPress.
+# Quaisquer alterações nas diretivas entre esses marcadores serão sobrescritas.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+
+php_value max_execution_time 300

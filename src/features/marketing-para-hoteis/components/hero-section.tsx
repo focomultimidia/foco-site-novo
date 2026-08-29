@@ -83,7 +83,13 @@ function AdStage() {
               transition={{ duration: 0.9, delay: 0.55 + i * 0.12, ease: EASE }}
             >
               <div style={{ transform: "translateY(-50%)" }}>
-                <Comp />
+                {/* Os 3 mockups do leque ficam acima da dobra — `eager`
+                    evita que as fotos (Instagram/Google Hotel Ads) nasçam
+                    com loading="lazy", que é o default certo pra quando os
+                    mesmos componentes reaparecem numa aba do CanaisSection,
+                    abaixo da dobra (achado numa varredura com Playwright em
+                    todas as rotas do site). */}
+                <Comp eager />
               </div>
             </motion.div>
           );

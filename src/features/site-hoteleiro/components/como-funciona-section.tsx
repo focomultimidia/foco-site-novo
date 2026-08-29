@@ -48,7 +48,7 @@ function ComoFuncionaSection({ passos }: ComoFuncionaSectionProps) {
                 <span className="text-2xl font-bold text-white">{passo.numero}</span>
               </div>
               <h3 className="text-lg font-bold text-[#1E3A5F] mb-2">{passo.titulo}</h3>
-              <p className="text-sm text-slate-500">{passo.descricao}</p>
+              <p className="text-sm text-slate-600">{passo.descricao}</p>
             </motion.div>
           ))}
         </div>

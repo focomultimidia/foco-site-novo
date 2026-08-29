@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useHomePage } from "./hooks/use-home-page";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import {
@@ -16,7 +15,7 @@ import { EventosSection } from "@/features/home/components/eventos-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
-import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 import { TrustedLogosMarquee, SmartIntegrationsTabs, CertificacoesSection, WallOfLoveSection } from "@/features/shared/components";
 import { eventos, depoimentos, numeros, videosData, artigosMidia } from "@/features/shared/data/social-proof-data";
 import { Spinner } from "@/components/ui/spinner";
@@ -33,7 +32,7 @@ export function HomePage() {
   });
 
   const { data, isLoading, isError, refetch } = useHomePage();
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const { openLeadCapture } = useLeadCapture();
 
   if (isLoading) {
     return (
@@ -68,7 +67,7 @@ export function HomePage() {
     <div className="min-h-screen">
       <HeroSection
         data={data.hero}
-        onCtaClick={() => setIsLeadModalOpen(true)}
+        onCtaClick={() => openLeadCapture({ source: "home_hero", title: "Foco Tecnologia" })}
       />
 
       <TrustedLogosMarquee />
@@ -123,13 +122,6 @@ export function HomePage() {
         showContactButton
       />
 
-      <LeadCaptureModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        title="Solicite uma Demonstração Grátis"
-        description="Preencha seus dados e nossa equipe entrará em contato para agendar uma demonstração personalizada do nosso sistema."
-        source="home"
-      />
     </div>
   );
 }

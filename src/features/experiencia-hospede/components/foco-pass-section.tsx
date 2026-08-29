@@ -34,21 +34,21 @@ function FocoPassSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               O <strong>Foco Pass</strong> é a solução definitiva para a{" "}
               <strong>automação completa da jornada do seu hóspede</strong>, desde o
               check-in até o check-out. Para o hoteleiro, isso significa{" "}
               <strong>máxima eficiência operacional</strong>, redução de custos com
               tarefas manuais e a garantia de um serviço impecável.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Para o hóspede, o Foco Pass é sinônimo de{" "}
               <strong>comodidade incomparável</strong>. Através do nosso aplicativo de
               hospedagem, ele tem acesso a uma jornada fluida e, o melhor de tudo, a
               descontos exclusivos e curados em bares, restaurantes, receptivos e
               ingressos no destino.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Transforme a estadia em uma experiência completa,{" "}
               <strong>fidelize seu cliente</strong> e veja a satisfação refletida nas
               suas avaliações.

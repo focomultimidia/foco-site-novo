@@ -269,7 +269,7 @@ function PmsOrcamentoModal({ pms, onClose }: PmsOrcamentoModalProps) {
                         className="relative flex items-center justify-center h-10 rounded-xl border border-slate-200 cursor-pointer transition-colors has-[[data-state=checked]]:border-[#285992] has-[[data-state=checked]]:bg-[#285992]/[0.06]"
                       >
                         <RadioGroupItem id={`cliente-foco-${v}`} value={v} className="peer sr-only" />
-                        <span className="text-[14px] font-medium text-slate-500 peer-data-[state=checked]:text-[#285992] transition-colors">
+                        <span className="text-[14px] font-medium text-slate-600 peer-data-[state=checked]:text-[#285992] transition-colors">
                           {v === "sim" ? "Sim" : "Não"}
                         </span>
                       </label>
@@ -310,7 +310,7 @@ function PmsOrcamentoModal({ pms, onClose }: PmsOrcamentoModalProps) {
                   <button
                     type="button"
                     onClick={onClose}
-                    className="flex-1 h-11 rounded-full border border-slate-200 text-slate-500 text-sm font-medium hover:bg-slate-50 transition-colors"
+                    className="flex-1 h-11 rounded-full border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition-colors"
                   >
                     Fechar
                   </button>

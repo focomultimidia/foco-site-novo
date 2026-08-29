@@ -182,7 +182,7 @@ function VantagensSection() {
               </span>{" "}
               para hotéis e pousadas
             </h2>
-            <p className="font-sans font-normal text-slate-500 text-lg leading-relaxed">
+            <p className="font-sans font-normal text-slate-600 text-lg leading-relaxed">
               O guia completo para transformar seu site em sua principal máquina
               de vendas diretas, garantindo a melhor margem de lucro.
             </p>

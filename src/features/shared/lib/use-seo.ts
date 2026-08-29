@@ -13,7 +13,7 @@ interface SeoOptions {
   title: string;
   /** 140–160 caracteres, específica da página — nunca a description genérica do index.html. */
   description: string;
-  /** Caminho da rota, ex.: "/gestao-hoteleira". Usado para a canonical e og:url. */
+  /** Caminho da rota, ex.: "/sistema-de-gestao-hoteleira-pms". Usado para a canonical e og:url. */
   path: string;
 }
 

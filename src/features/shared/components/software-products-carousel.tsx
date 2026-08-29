@@ -224,7 +224,7 @@ function CompactProductCard({ produto, index }: { produto: ProdutoItem; index: n
             {produto.titulo}
           </h3>
         </div>
-        <p className="mt-3 line-clamp-3 text-[12.5px] leading-relaxed text-slate-500">
+        <p className="mt-3 line-clamp-3 text-[12.5px] leading-relaxed text-slate-600">
           {produto.descricao}
         </p>
 
@@ -327,7 +327,7 @@ function SoftwareProductsCarousel() {
             </span>{" "}
             dos nossos clientes
           </h2>
-          <p className="mx-auto max-w-3xl leading-relaxed text-slate-500">
+          <p className="mx-auto max-w-3xl leading-relaxed text-slate-600">
             Da reserva à gestão financeira, nossa plataforma reúne produtos inovadores
             para otimizar cada detalhe do seu hotel ou pousada
           </p>

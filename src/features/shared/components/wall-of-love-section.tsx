@@ -181,7 +181,7 @@ function TextCard({
           </div>
           <div>
             <p className="font-display font-bold text-[#0f172a] text-sm tracking-tight">{dep.autor}</p>
-            <p className="text-slate-500 text-xs mt-0.5">{dep.cargo}</p>
+            <p className="text-slate-600 text-xs mt-0.5">{dep.cargo}</p>
           </div>
         </div>
       </div>
@@ -662,7 +662,7 @@ function WallOfLoveSection({
             <h2 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e3a5f] leading-none tracking-tighter antialiased mb-4">
               {title}
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed">{subtitle}</p>
+            <p className="text-slate-600 text-lg leading-relaxed">{subtitle}</p>
           </motion.div>
 
           {/* Mural compacto — coverflow contínuo (o card em evidência no centro,
@@ -709,7 +709,7 @@ function WallOfLoveSection({
                 <p className="font-display font-bold text-[#1e3a5f] text-lg leading-tight">
                   Todos os depoimentos
                 </p>
-                <p className="text-slate-500 text-xs">{allCards.length} hoteleiros reais</p>
+                <p className="text-slate-600 text-xs">{allCards.length} hoteleiros reais</p>
               </div>
               <button
                 type="button"
@@ -801,3 +801,4 @@ function WallOfLoveSection({
 }
 
 export { WallOfLoveSection };
+export type { WallOfLoveSectionProps };

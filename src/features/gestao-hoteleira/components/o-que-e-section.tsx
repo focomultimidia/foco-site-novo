@@ -34,19 +34,19 @@ function OQueESection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               O <strong>PMS (Property Management System)</strong> é o coração da
               gestão hoteleira moderna. Este sistema de gerenciamento e controle
               de hotéis e pousadas foi desenvolvido para ser a ferramenta central
               que unifica e otimiza todas as operações.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Com o PMS, cada setor da sua propriedade ganha em eficiência: o
               gerente do hotel obtém relatórios estratégicos; o setor de reservas
               gerencia a ocupação com precisão; a recepção agiliza o check-in e o
               check-out; e a camareira recebe as ordens de serviço em tempo real.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Ao automatizar atividades cruciais como fechamento de contas,
               controle de estoque e gestão de tarifas, o Property Management System
               garante mais produtividade para toda a equipe e, consequentemente,

@@ -89,7 +89,7 @@ function PassoItem({ passo }: { passo: (typeof PASSOS)[number] }) {
         <h3 className="font-display text-lg xl:text-xl font-semibold text-[#1e293b] tracking-tight leading-snug mb-2">
           {passo.titulo}
         </h3>
-        <p className="text-[13.5px] leading-relaxed text-slate-500">
+        <p className="text-[13.5px] leading-relaxed text-slate-600">
           {passo.descricao}
         </p>
       </div>
@@ -112,7 +112,7 @@ function PassoItemStacked({ passo }: { passo: (typeof PASSOS)[number] }) {
         <h3 className="font-display text-lg font-semibold text-[#1e293b] tracking-tight leading-snug mb-2">
           {passo.titulo}
         </h3>
-        <p className="text-[13.5px] leading-relaxed text-slate-500">
+        <p className="text-[13.5px] leading-relaxed text-slate-600">
           {passo.descricao}
         </p>
       </div>

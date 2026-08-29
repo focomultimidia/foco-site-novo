@@ -82,7 +82,7 @@ function GlassCard({ diferencial, colorIdx, delay, alignRight = false }: GlassCa
         <h3 className="font-bold text-slate-800 text-sm leading-snug mb-1 tracking-tight">
           {diferencial.titulo}
         </h3>
-        <p className="text-slate-500 text-xs leading-relaxed">
+        <p className="text-slate-600 text-xs leading-relaxed">
           {diferencial.descricao}
         </p>
       </div>

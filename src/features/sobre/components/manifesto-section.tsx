@@ -141,14 +141,14 @@ function PillarBlock({
     <div ref={ref} className="py-32 lg:py-36 lg:pl-12">
       <motion.div animate={{ opacity: isActive ? 1 : 0.20 }} transition={{ duration: 0.5, ease: "easeOut" }}>
         <div className="flex items-center gap-3 mb-6">
-          <span className="text-[10px] font-bold tracking-[0.20em] uppercase text-slate-500">{pillar.eyebrow}</span>
+          <span className="text-[10px] font-bold tracking-[0.20em] uppercase text-slate-600">{pillar.eyebrow}</span>
           <div className="h-px w-8 rounded-full" style={{ backgroundColor: `${pillar.accent}55` }} />
           <span className="text-[10px] font-bold tracking-[0.10em] uppercase" style={{ color: pillar.accent }}>{pillar.tag}</span>
         </div>
         <h3 className="font-display text-4xl sm:text-5xl font-semibold text-[#1e293b] tracking-tighter leading-[1.05] mb-7">
           {pillar.headline.map((line, i) => <span key={i} className="block">{line}</span>)}
         </h3>
-        <p className="text-slate-500 text-base lg:text-lg leading-relaxed max-w-lg mb-8">{pillar.body}</p>
+        <p className="text-slate-600 text-base lg:text-lg leading-relaxed max-w-lg mb-8">{pillar.body}</p>
         <div className="relative pl-4">
           <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full" style={{ backgroundColor: `${pillar.accent}50` }} />
           <p className="text-sm font-medium text-slate-600 leading-relaxed italic">"{pillar.quote}"</p>

@@ -174,7 +174,7 @@ function PorQueContratarSection() {
               </span>{" "}
               para o seu hóspede
             </h2>
-            <p className="font-sans font-normal text-slate-500 text-lg leading-relaxed">
+            <p className="font-sans font-normal text-slate-600 text-lg leading-relaxed">
               Autonomia, praticidade e satisfação garantidas para o seu hóspede
               vivenciar experiências únicas em sua viagem.
             </p>

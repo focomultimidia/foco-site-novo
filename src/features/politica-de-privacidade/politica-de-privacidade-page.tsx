@@ -62,7 +62,7 @@ function PoliticaDePrivacidadePage() {
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#132840] tracking-tighter leading-[1.05] mb-5">
             Política de Privacidade de Dados
           </h1>
-          <p className="text-slate-500 text-base sm:text-lg leading-relaxed mb-6">
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed mb-6">
             Como coletamos, usamos e protegemos as suas informações, em conformidade com a Lei
             Geral de Proteção de Dados (LGPD).
           </p>

@@ -38,7 +38,7 @@ function MobileVozSection() {
             </span>
             .
           </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-slate-600 text-lg leading-relaxed">
             Ações rápidas, chat completo, mensagens de áudio. Resolva no trânsito o que antes
             esperava você voltar pra recepção.
           </p>

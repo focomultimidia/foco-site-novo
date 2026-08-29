@@ -28,7 +28,7 @@ const homeData: HomeData = {
         "Reduz overbooking",
         "Certificação Premier Booking",
       ],
-      link: "/channel-manager",
+      link: "/gestor-de-canais-channel-manager",
     },
     {
       id: "2",
@@ -54,7 +54,7 @@ const homeData: HomeData = {
         "Otimização da governança",
         "Eliminação de Overbooking",
       ],
-      link: "/gestao-hoteleira",
+      link: "/sistema-de-gestao-hoteleira-pms",
     },
     {
       id: "4",
@@ -67,7 +67,7 @@ const homeData: HomeData = {
         "Personalização completa",
         "SEO 100%",
       ],
-      link: "/site-hoteleiro",
+      link: "/sites-para-hoteis-e-pousadas",
     },
     {
       id: "5",
@@ -93,7 +93,7 @@ const homeData: HomeData = {
         "Check-in online dos hóspedes",
         "Cardápio digital do hotel",
       ],
-      link: "/experiencia-do-hospede",
+      link: "/aplicativo-de-hospedagem",
     },
   ],
   artigosMidia,

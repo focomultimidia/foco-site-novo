@@ -176,6 +176,30 @@
     box-shadow: inset 0 1px 3px rgba(19, 40, 64, 0.10),
                 inset 0 0 0 1px rgba(19, 40, 64, 0.05);
   }
+
+  /* Sumário lateral (FloatingToc) — a barra de rolagem padrão do navegador
+     (cinza grosso) destoava do resto do painel. Fina, com o dourado da
+     marca no polegar (mesmo tom do traço que já marca o item ativo ao
+     lado) sobre trilho cinza claro — não o azul, pra não competir com o
+     texto/ícones azuis do próprio sumário. */
+  .toc-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #fccc30 #f1f5f9;
+  }
+  .toc-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+  .toc-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 999px;
+  }
+  .toc-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #fccc30;
+    border-radius: 999px;
+  }
+  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #e0b429;
+  }
 }
 
 /* ──────────────────────────────────────────────────────────────────────────

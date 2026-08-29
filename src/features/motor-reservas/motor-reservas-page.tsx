@@ -19,6 +19,7 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, W
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
 //import { ProdutosAccordionSection } from "@/features/shared/components";
 
@@ -30,6 +31,7 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Motor de Reservas";
 
 function MotorReservasPage() {
   useSeo({
@@ -39,6 +41,7 @@ function MotorReservasPage() {
     path: "/motor-de-reservas",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useMotorReservasPage();
 
   if (isLoading) {
@@ -73,7 +76,10 @@ function MotorReservasPage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_motor_de_reservas", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é um motor de reservas */}
       <GenericInfoSection {...INFO_SECTIONS.motorReservas} imageSide="right" />
@@ -142,6 +148,8 @@ function MotorReservasPage() {
         title="Pronto para aumentar suas reservas diretas?"
         subtitle="Solicite uma demonstração e descubra como o Motor de Reservas da Foco pode transformar seu negócio."
         badge="Comece agora"
+        source="cta_final_motor_de_reservas"
+        leadTitle={LEAD_TITLE}
       />
 
     </div>

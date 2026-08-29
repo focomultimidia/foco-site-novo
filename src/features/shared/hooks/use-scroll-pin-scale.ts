@@ -49,7 +49,7 @@ export function useScrollPinScale(
 
     const ctx = gsap.context(() => {
       // `gsap.set` explícito, ANTES do timeline/ScrollTrigger — em páginas
-      // com mais de um trigger pinado (ex.: /site-hoteleiro, que também
+      // com mais de um trigger pinado (ex.: /sites-para-hoteis-e-pousadas, que também
       // pina uma seção h-screen mais abaixo), o primeiro `refresh()`
       // automático do ScrollTrigger — disparado pelo OUTRO trigger se
       // registrando, ou por imagens carregando e mudando a altura da

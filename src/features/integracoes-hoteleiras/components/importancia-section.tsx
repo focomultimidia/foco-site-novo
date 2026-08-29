@@ -60,14 +60,14 @@ function ImportanciaSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               No cenário competitivo da hotelaria, a integração de sistemas não é
               mais um luxo, mas sim uma necessidade estratégica. Para o hoteleiro,
               possuir um ecossistema tecnológico onde o PMS (gestão operacional), o
               RMS (gestão de receita), e as ferramentas de Marketing se comunicam
               perfeitamente é o que define a eficiência e a lucratividade do negócio.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Em suma, um sistema integrado transforma a tecnologia de um custo
               operacional em um centro de inteligência e lucro, garantindo que o
               hotel opere com máxima eficiência e esteja sempre um passo à frente da

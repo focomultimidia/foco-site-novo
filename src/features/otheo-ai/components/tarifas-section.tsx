@@ -42,7 +42,7 @@ function TarifasSection() {
                 Você não precisa estar no computador.
               </span>
             </h2>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Uma reserva de última hora, um evento na cidade, o preço muda. Ajuste a tarifa
               direto do chat, de onde você estiver.
             </p>

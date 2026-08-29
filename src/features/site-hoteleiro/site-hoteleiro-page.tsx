@@ -17,20 +17,24 @@ import { WebsitePortfolioCarousel } from "@/features/shared/components";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
 import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 import { eventos, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Site Hoteleiro";
+
 function SiteHoteleiroPage() {
   useSeo({
     title: "Site Hoteleiro que Converte Visitantes em Reservas",
     description:
       "Site moderno, responsivo e otimizado para SEO, 100% editável. Reduza a dependência de OTAs e aumente sua margem com reservas diretas.",
-    path: "/site-hoteleiro",
+    path: "/sites-para-hoteis-e-pousadas",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, error, refetch } = useSiteHoteleiroPage();
 
   if (isLoading) {
@@ -65,7 +69,10 @@ function SiteHoteleiroPage() {
   return (
     <div className="space-y-0">
       {/* Hero Section */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_site_hoteleiro", title: LEAD_TITLE })}
+      />
 
       {/* Section 1: Modelos de sites */}
       <WebsitePortfolioCarousel />
@@ -129,6 +136,8 @@ function SiteHoteleiroPage() {
         title="Pronto para ter um Site Hoteleiro Profissional?"
         subtitle="Solicite uma demonstração e veja como podemos ajudar seu hotel a vender mais diretamente."
         badge="Comece agora"
+        source="cta_final_site_hoteleiro"
+        leadTitle={LEAD_TITLE}
       />
 
     </div>

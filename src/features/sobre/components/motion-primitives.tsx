@@ -187,7 +187,7 @@ export function SectionHeader({
       </StaggerItem>
       {subtitle && (
         <StaggerItem>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
         </StaggerItem>
       )}
     </StaggerSection>

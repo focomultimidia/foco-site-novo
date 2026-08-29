@@ -51,19 +51,50 @@
 #    de uma vez (ver plano de ação de conteúdo/SEO para o raciocínio por
 #    trás de cada destino).
 <IfModule mod_alias.c>
-  Redirect 301 /software-gestao-hoteleira-pms.html /gestao-hoteleira
+  Redirect 301 /software-gestao-hoteleira-pms.html /sistema-de-gestao-hoteleira-pms
   Redirect 301 /motor-de-reservas.html /motor-de-reservas
-  Redirect 301 /gestor-de-canais-channel-manager.html /channel-manager
-  Redirect 301 /reviews-satisfacao-hotel-experiencia-hospede-nps.html /experiencia-do-hospede
+  Redirect 301 /gestor-de-canais-channel-manager.html /gestor-de-canais-channel-manager
+  Redirect 301 /reviews-satisfacao-hotel-experiencia-hospede-nps.html /aplicativo-de-hospedagem
   Redirect 301 /focopay-pagamentos-automatico-de-reservas-para-hoteis.html /software-de-pagamentos
-  Redirect 301 /aplicativo-de-hospedagem-focopass.html /experiencia-do-hospede
-  Redirect 301 /site-hotel.html /site-hoteleiro
+  Redirect 301 /aplicativo-de-hospedagem-focopass.html /aplicativo-de-hospedagem
+  Redirect 301 /site-hotel.html /sites-para-hoteis-e-pousadas
   Redirect 301 /marketing-para-hoteis.html /marketing-para-hoteis
 </IfModule>
 
+# ── Redirects 301 — renomeação de rotas (URLs limpas antigas, já indexadas,
+#    pro novo nome) ──────────────────────────────────────────────────────
+#    Preserva a indexação/ranking que essas URLs já tinham antes da troca de
+#    nome — sem isso, quem chega por um link salvo, um resultado de busca
+#    antigo ou um backlink externo cairia direto na página 404 (a rota
+#    antiga não existe mais no React Router, ver App.tsx).
+<IfModule mod_alias.c>
+  Redirect 301 /channel-manager /gestor-de-canais-channel-manager
+  Redirect 301 /gestao-hoteleira /sistema-de-gestao-hoteleira-pms
+  Redirect 301 /experiencia-do-hospede /aplicativo-de-hospedagem
+  Redirect 301 /otheo-ai /inteligencia-artificial-para-hoteis-e-pousadas
+  Redirect 301 /site-hoteleiro /sites-para-hoteis-e-pousadas
+</IfModule>
+
+# ── Redirects 301 — slugs numéricos herdados da migração do WordPress
+#    (posts sem slug próprio no banco antigo, salvos só com o ID) pro slug
+#    descritivo definitivo. Mesmo motivo dos blocos acima: sem isso, quem
+#    chega pelo link antigo (ou o Google, que já indexou a URL numérica)
+#    cai em 404 em vez de ser encaminhado pro post de verdade.
+#
+#    `RedirectMatch` com âncoras (^...$), não `Redirect` puro: o `Redirect`
+#    do mod_alias casa por PREFIXO, não por caminho exato — `Redirect 301
+#    /blog/3062-2 ...` também redirecionaria `/blog/3062-2-qualquer-coisa`
+#    se um post assim existisse um dia. Sem impacto hoje (nenhum slug atual
+#    começa com esses dois prefixos), mas as âncoras fecham essa brecha de
+#    vez em vez de depender de nenhuma colisão futura por sorte. ─────────
+<IfModule mod_alias.c>
+  RedirectMatch 301 ^/blog/3062-2$ /blog/sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade
+  RedirectMatch 301 ^/blog/3411-2$ /blog/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas
+</IfModule>
+
 # ── SPA fallback — todas as rotas do React Router caem no mesmo index.html
-#    (sem isso, recarregar/entrar direto em /channel-manager etc. dá 404 no
-#    Apache, que tenta achar um arquivo real com esse nome). ──────────────
+#    (sem isso, recarregar/entrar direto em /motor-de-reservas etc. dá 404
+#    no Apache, que tenta achar um arquivo real com esse nome). ───────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /

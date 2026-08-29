@@ -48,7 +48,7 @@ function ShowcaseHeader() {
         </span>{" "}
         dos nossos clientes
       </h2>
-      <p className="text-slate-500 max-w-2xl mx-auto leading-relaxed">
+      <p className="text-slate-600 max-w-2xl mx-auto leading-relaxed">
         Da reserva à gestão financeira, nossa plataforma reúne produtos inovadores
         para otimizar cada detalhe do seu hotel ou pousada
       </p>
@@ -425,7 +425,7 @@ function PhoneScreenImage({ src, alt }: { src?: string; alt: string }) {
 // (3 telas) — celular central em primeiro plano, os das laterais um pouco
 // menores atrás dele. Sem blur nos três (pedido explícito: "totalmente
 // nítidos" — a versão anterior desfocava as laterais, imitando a hero de
-// /experiencia-do-hospede, mas aqui as 3 telas precisam ser lidas com
+// /aplicativo-de-hospedagem, mas aqui as 3 telas precisam ser lidas com
 // clareza, não sugeridas). A diferença de plano vem só de escala + z-index
 // + uma leve opacidade (0.88, não os 0.5 de antes). Estático (sem autoplay
 // por celular nem clique pra trazer um lateral pro centro, ao contrário

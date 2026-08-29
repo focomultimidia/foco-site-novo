@@ -56,7 +56,7 @@ function PareComissoesSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Em um mercado hoteleiro cada vez mais competitivo, a verdadeira
               margem de lucro do seu hotel, pousada ou resort está na capacidade
               de <strong>gerar reservas diretas</strong>. Você está cansado de ver
@@ -64,7 +64,7 @@ function PareComissoesSection() {
               <strong>comissões de terceiros</strong>? Chegou a hora de retomar o
               controle.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Ter um motor de reservas próprio não é apenas uma conveniência, é
               a estratégia mais inteligente para garantir a independência das
               OTAs, <strong>otimizar sua taxa de conversão</strong> e, o mais

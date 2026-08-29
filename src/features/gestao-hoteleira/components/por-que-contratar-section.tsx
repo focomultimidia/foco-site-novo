@@ -33,7 +33,7 @@ function PorQueContratarSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               O <strong>PMS (Property Management System)</strong> é a ferramenta
               fundamental para a gestão hoteleira de sucesso. Com este sistema
               para hotel ou pousada, você centraliza todas as ferramentas
@@ -41,7 +41,7 @@ function PorQueContratarSection() {
               significativo na produtividade da sua equipe e, consequentemente, na
               sua lucratividade.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Um PMS para hotel robusto é a sua defesa contra os erros mais
               custosos da hotelaria. Ele elimina de forma definitiva problemas como
               overbookings (reservas duplicadas), a perda do histórico de reservas

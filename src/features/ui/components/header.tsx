@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { PremiumCTAButton } from "./premium-cta-button";
 import { BetaBadge } from "@/features/shared/components/beta-badge";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 // Ícone oficial do WhatsApp (glifo de marca) — não existe em lucide-react.
 // `currentColor` herda a cor do texto do botão (branco), consistente com
@@ -46,7 +47,7 @@ const softwaresSubmenu: SoftwareMenuItem[] = [
   {
     label: "Site Hoteleiro",
     description: "Presença digital profissional para o seu hotel",
-    href: "/site-hoteleiro",
+    href: "/sites-para-hoteis-e-pousadas",
     icon: Globe,
     iconClass: "bg-blue-50 text-blue-600",
   },
@@ -60,21 +61,21 @@ const softwaresSubmenu: SoftwareMenuItem[] = [
   {
     label: "Channel Manager",
     description: "Sincronize +800 canais em tempo real",
-    href: "/channel-manager",
+    href: "/gestor-de-canais-channel-manager",
     icon: LayoutGrid,
     iconClass: "bg-violet-50 text-violet-600",
   },
   {
     label: "Gestão Hoteleira (PMS)",
     description: "Controle total da operação do seu hotel",
-    href: "/gestao-hoteleira",
+    href: "/sistema-de-gestao-hoteleira-pms",
     icon: Monitor,
     iconClass: "bg-sky-50 text-sky-600",
   },
   {
     label: "Experiência do Hóspede",
     description: "Encante e fidelize quem se hospeda com você",
-    href: "/experiencia-do-hospede",
+    href: "/aplicativo-de-hospedagem",
     icon: Smartphone,
     iconClass: "bg-orange-50 text-orange-600",
   },
@@ -88,7 +89,7 @@ const softwaresSubmenu: SoftwareMenuItem[] = [
   {
     label: "Otheo AI",
     description: "Inteligência Artificial no comando da sua operação",
-    href: "/otheo-ai",
+    href: "/inteligencia-artificial-para-hoteis-e-pousadas",
     icon: Bot,
     iconClass: "bg-amber-50 text-amber-600",
     beta: true,
@@ -115,29 +116,31 @@ const navLinksBefore = [
 ];
 
 // Páginas com a hero no mesmo fundo navy escuro (aurora) da Home — ver
-// HomeStyleHero (e, para /channel-manager, GradientHero recolorida no mesmo
-// padrão). O header, que por padrão assume fundo claro por baixo (texto/
-// logo escuros, transparente até rolar), precisa da variante clara nelas
-// enquanto ainda não rolou, senão logo/texto ficam ilegíveis sobre o navy.
-// Fora dessa lista (hero clara, ex.: sobre), ou já rolado (pill branca
-// flutuante), continua exatamente como sempre foi.
+// HomeStyleHero (e, para /gestor-de-canais-channel-manager, GradientHero recolorida no mesmo
+// padrão; para /sobre, foto da equipe corrigida de cor pra dentro da mesma
+// paleta — ver sobre/components/hero-section.tsx). O header, que por padrão
+// assume fundo claro por baixo (texto/logo escuros, transparente até
+// rolar), precisa da variante clara nelas enquanto ainda não rolou, senão
+// logo/texto ficam ilegíveis sobre o navy. Fora dessa lista, ou já rolado
+// (pill branca flutuante), continua exatamente como sempre foi.
 const DARK_HERO_ROUTES = new Set([
   "/",
-  "/site-hoteleiro",
+  "/sites-para-hoteis-e-pousadas",
   "/motor-de-reservas",
-  "/gestao-hoteleira",
+  "/sistema-de-gestao-hoteleira-pms",
   "/software-de-pagamentos",
   "/integracoes-hoteleiras",
   //"/crm-hoteleiro",
-  "/experiencia-do-hospede",
-  "/channel-manager",
-  "/otheo-ai",
+  "/aplicativo-de-hospedagem",
+  "/gestor-de-canais-channel-manager",
+  "/inteligencia-artificial-para-hoteis-e-pousadas",
   "/marketing-para-hoteis",
+  "/sobre",
 ]);
 
 const navLinksAfter = [
   { label: "Marketing",        href: "/marketing-para-hoteis" },
-  { label: "Blog",             href: "https://blog.focomultimidia.com" },
+  { label: "Blog",             href: "/blog" },
   { label: "Seja um parceiro", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
 ];
 
@@ -186,6 +189,7 @@ function Header() {
   const [isMegamenuOpen,        setIsMegamenuOpen]        = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location   = useLocation();
+  const { openLeadCapture } = useLeadCapture();
   const headerRef  = useRef<HTMLElement | null>(null);
   const megamenuButtonRef  = useRef<HTMLButtonElement | null>(null);
   const mobileOverlayRef   = useRef<HTMLDivElement | null>(null);
@@ -419,7 +423,7 @@ function Header() {
                                     {item.label}
                                     {item.beta && <BetaBadge />}
                                   </p>
-                                  <p className="text-sm text-slate-500 mt-0.5 leading-snug">
+                                  <p className="text-sm text-slate-600 mt-0.5 leading-snug">
                                     {item.description}
                                   </p>
                                 </div>
@@ -453,7 +457,12 @@ function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center">
-              <PremiumCTAButton label="Fale com um consultor" icon={WhatsAppIcon} variant="green" />
+              <PremiumCTAButton
+                label="Fale com um consultor"
+                icon={WhatsAppIcon}
+                variant="green"
+                onClick={() => openLeadCapture({ source: `header_consultor:${location.pathname}`, title: "Foco Tecnologia" })}
+              />
             </div>
 
             {/* Mobile hamburger */}
@@ -592,8 +601,13 @@ function Header() {
 
             {/* Bottom CTA — identical premium button from desktop */}
             <div className="shrink-0 flex flex-col items-center gap-3 px-5 pt-4 pb-8 border-t border-slate-100">
-              <PremiumCTAButton label="Fale com um consultor" icon={WhatsAppIcon} variant="green" />
-              <p className="text-xs text-slate-500 tracking-wide">Demonstração gratuita · Sem compromisso</p>
+              <PremiumCTAButton
+                label="Fale com um consultor"
+                icon={WhatsAppIcon}
+                variant="green"
+                onClick={() => openLeadCapture({ source: `header_consultor:${location.pathname}`, title: "Foco Tecnologia" })}
+              />
+              <p className="text-xs text-slate-600 tracking-wide">Demonstração gratuita · Sem compromisso</p>
             </div>
           </motion.div>
         )}

@@ -366,7 +366,7 @@ function PmsCard({ pms, index, isHovered, onEnter, onSolicitar }: PmsCardProps) 
             )}
           </div>
 
-          <p className="text-slate-500 text-sm leading-relaxed flex-grow mb-4">
+          <p className="text-slate-600 text-sm leading-relaxed flex-grow mb-4">
             {pms.descricao}
           </p>
 
@@ -405,7 +405,7 @@ function PmsIntegradosSection() {
             </span>{" "}
             da Foco Tecnologia
           </h2>
-          <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
             Do PMS aos canais de venda, marketing e pagamentos, conheça o ecossistema
             que se conecta à nossa plataforma, com sincronização em tempo real e sem retrabalho.
           </p>

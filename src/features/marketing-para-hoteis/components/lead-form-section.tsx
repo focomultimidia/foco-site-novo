@@ -176,7 +176,7 @@ function LeadFormSection() {
               queremos entender seu hotel
             </span>
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Preencha o formulário e um consultor retorna com um diagnóstico honesto — sem letra miúda, sem contrato
             na primeira ligação.
           </p>
@@ -211,7 +211,7 @@ function LeadFormSection() {
                     <CheckCircle2 className="h-7 w-7" strokeWidth={1.8} />
                   </motion.div>
                   <h3 className="font-display mb-2 text-xl font-semibold text-[#132840]">Solicitação enviada!</h3>
-                  <p className="mb-7 max-w-xs text-sm leading-relaxed text-slate-500">
+                  <p className="mb-7 max-w-xs text-sm leading-relaxed text-slate-600">
                     Recebemos seus dados. Nossa equipe entra em contato em breve pra montar o diagnóstico do seu
                     hotel.
                   </p>

@@ -21,7 +21,7 @@ import { ArrowRight, Image as ImageIcon, Smartphone } from "lucide-react";
 // safe regardless of how long a given page's title/subtitle is. Don't port
 // this back onto the Home hero; it's already verified with its own approach.
 //
-// Only consumer today is /channel-manager — recolored to match Home's exact
+// Only consumer today is /gestor-de-canais-channel-manager — recolored to match Home's exact
 // palette (navy base, blue aurora undertone, gold accent, white text/CTA)
 // instead of the earlier light sky-blue theme. Background is now the EXACT
 // same treatment as every other hero on the site (bg-[#10233d] + 3 animated
@@ -117,10 +117,47 @@ function GradientHero({
   const handleMouseLeave = () => { px.set(0); py.set(0); };
 
   return (
-    <section className="relative overflow-x-hidden bg-[#10233d] pb-10 sm:pb-14 lg:pb-16">
+    // `overflow-x-clip`, não `overflow-x-hidden`: por spec, um eixo em
+    // `hidden` sozinho (sem o outro eixo também não-visible) faz o navegador
+    // computar `overflow-y: auto` no elemento — cria uma barra de rolagem
+    // vertical DE VERDADE, aninhada dentro da hero, sempre que o conteúdo
+    // (aqui: diagrama do Stage + badges/CTA que sangram por fora do padding)
+    // passa a altura da section por qualquer margem. Era a causa real da
+    // "barra de rolagem duplicada" — `clip` recorta igual a `hidden` no
+    // eixo X mas não entra nessa regra de coerção do outro eixo.
+    // `min-h-[950px] lg:min-h-0` evita o flash de altura zero antes do
+    // MobileFlow montar, mas isso sozinho NÃO resolve o CLS abaixo — é só
+    // um piso, e o conteúdo real desta page estabiliza em ~1166px (acima
+    // do piso), então a section ainda cresce depois de atingi-lo. `lg:`
+    // (desktop, Stage) já reserva a própria altura via
+    // `useStageScale`/`useLayoutEffect` antes do primeiro paint — sem esse
+    // problema.
+    <section className="relative overflow-x-clip bg-[#10233d] pb-10 sm:pb-14 lg:pb-16 min-h-[950px] lg:min-h-0">
       {/* Fundo — aurora azul em deriva lenta, mesmas 3 manchas de todas as
-          outras heroes do site (Home, HomeStyleHero). */}
-      <div aria-hidden="true" className="absolute -inset-[10%] -z-10 overflow-hidden" style={{ filter: "blur(50px)", opacity: 0.85 }}>
+          outras heroes do site (Home, HomeStyleHero).
+          A altura/posição deste wrapper não pode depender da altura da
+          section no mobile: com `-inset-[10%]` nos 4 lados, a altura vira
+          `top + bottom` (= altura da section × 1,2) — qualquer mudança na
+          altura da section depois do primeiro paint (troca de fonte via
+          `font-display:swap`, decodificação de imagem, etc. — confirmado
+          via trace de performance e Lighthouse, embora sem uma única causa
+          raiz identificável) recalcula essa altura e desloca a mancha
+          inteira, virando um CLS gigante (~0,3, muito acima do limite de
+          0,1) só porque o elemento que se move é enorme — não porque o
+          conteúdo real mudou muito. `-left-[10%]`/`-right-[10%]` continuam
+          em `%` porque dependem da LARGURA (estável desde o primeiro
+          frame, definida pelo viewport, não pelo conteúdo). Já
+          `-top`/altura dependem da ALTURA da section, que é o valor
+          instável — por isso ficam fixos em px no mobile (`h-[1400px]` ==
+          altura estabilizada da section, ~1166px, × 1,2), desacoplados de
+          qualquer mudança futura na section. No desktop (`lg:`) a section
+          já nasce do tamanho certo (ver comentário acima), então ali o
+          wrapper volta ao inset percentual original nos 4 lados. */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-[120px] -left-[10%] -right-[10%] h-[1400px] lg:-top-[10%] lg:-bottom-[10%] lg:h-auto -z-10 overflow-hidden"
+        style={{ filter: "blur(50px)", opacity: 0.85 }}
+      >
         <div
           className="absolute w-[480px] h-[480px] -left-20 -top-16 rounded-full motion-safe:animate-aurora-a"
           style={{ background: "radial-gradient(circle, rgba(66,122,185,0.65), transparent 70%)" }}
@@ -155,7 +192,6 @@ function GradientHero({
                 transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
                 className="inline-flex items-center gap-2.5 border border-white/15 bg-white/8 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-6"
               >
-                <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
                 {eyebrow}
               </motion.div>
             )}
@@ -373,7 +409,7 @@ function GradientHeroBadgeChip({
       {value ? (
         <div className="text-left whitespace-nowrap">
           <div className="text-[#1e3a5f] font-bold text-xs sm:text-base leading-none">{value}</div>
-          <div className="text-slate-500 text-[10px] sm:text-[12px] mt-0.5">{label}</div>
+          <div className="text-slate-600 text-[10px] sm:text-[12px] mt-0.5">{label}</div>
         </div>
       ) : (
         <span className="text-[#1e3a5f] text-xs sm:text-sm font-semibold whitespace-nowrap">{label}</span>

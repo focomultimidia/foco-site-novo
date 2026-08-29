@@ -4,7 +4,7 @@
  * BetaBadge — selo compacto "BETA" em dourado (o acento #fccc30 da própria
  * marca), usado nas chamadas do Otheo AI espalhadas pelo site (menu, cards
  * de produto) pra deixar clara a condição atual do produto. Versões
- * dedicadas e mais elaboradas existem na hero de /otheo-ai e no
+ * dedicadas e mais elaboradas existem na hero de /inteligencia-artificial-para-hoteis-e-pousadas e no
  * OtheoAiTeaserSection (home) — este é o selo pequeno, pra contextos
  * compactos onde um badge maior não cabe.
  */

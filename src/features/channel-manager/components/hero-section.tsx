@@ -27,7 +27,7 @@
  * "toca a tela", fechando a história: canais → fusão → hub → produto.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { GradientHero } from "@/features/shared/components/gradient-hero";
 import type { HeroData } from "../types";
@@ -175,7 +175,15 @@ function useIsDesktop() {
 function useStageScale(ref: React.RefObject<HTMLDivElement | null>) {
   const [scale, setScale] = useState(1);
 
-  useEffect(() => {
+  // `useLayoutEffect`, não `useEffect` — a medição precisa rodar ANTES do
+  // navegador pintar o primeiro frame. Com `useEffect` (que roda DEPOIS da
+  // pintura), a página chegava a pintar um frame inteiro com `scale=1`
+  // (palco no tamanho real de 1520px, sem correção) antes do
+  // ResizeObserver medir a largura de verdade e encolher — um flash breve,
+  // mas real, de altura errada no wrapper (`STAGE_H * scale`), que podia
+  // fazer a barra de rolagem vertical da página aparecer e sumir sozinha
+  // logo depois do load.
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
@@ -249,7 +257,7 @@ function ChannelCard({ ch, index, animated }: { ch: Channel; index: number; anim
         decoding="async"
         className="max-w-[72px] max-h-[26px] w-auto h-auto object-contain transition-opacity duration-300 opacity-90 group-hover:opacity-100"
       />
-      <span className="text-[12px] font-medium text-[#244248]/55 leading-none">{ch.alt}</span>
+      <span className="text-[12px] font-medium text-[#244248]/75 leading-none">{ch.alt}</span>
     </motion.div>
   );
 }
@@ -407,7 +415,16 @@ function Stage({
   wrapRef: React.RefObject<HTMLDivElement | null>;
 }) {
   return (
-    <div ref={wrapRef} className="relative w-full" style={{ height: STAGE_H * scale }}>
+    // `overflow-hidden` local — o palco interno é sempre desenhado em
+    // STAGE_W (1520px) e só fica visualmente do tamanho certo por causa do
+    // `scale(...)` abaixo (que não recalcula a caixa de layout, só o
+    // pintado). Sem clipar aqui, esse elemento de 1520px de largura conta
+    // pra o overflow horizontal de QUEM QUER QUE seja o ancestral rolável
+    // mais próximo — hoje o GradientHero já clipa isso alguns níveis acima,
+    // mas depender só disso deixa a hero vulnerável a voltar a vazar barra
+    // de rolagem horizontal se aquele wrapper mudar (mesma categoria de bug
+    // já visto antes neste projeto com offsets de `whileInView`).
+    <div ref={wrapRef} className="relative w-full overflow-hidden" style={{ height: STAGE_H * scale }}>
       <div
         className="absolute top-0"
         style={{
@@ -475,7 +492,7 @@ function MobileFlow({ animated }: { animated: boolean }) {
               decoding="async"
               className="max-w-[62px] max-h-[24px] w-auto h-auto object-contain opacity-90"
             />
-            <span className="text-[11px] font-medium text-[#244248]/55">{ch.alt}</span>
+            <span className="text-[11px] font-medium text-[#244248]/75">{ch.alt}</span>
           </motion.div>
         ))}
       </div>

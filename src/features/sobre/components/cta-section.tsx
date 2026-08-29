@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ChevronRight, Award } from "lucide-react";
-import { Section, StaggerSection, StaggerItem, MagneticButton } from "./motion-primitives";
+import { ChevronRight, ArrowRight, Award } from "lucide-react";
+import { Section, StaggerSection, StaggerItem } from "./motion-primitives";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 export function CTASection() {
+  const { openLeadCapture } = useLeadCapture();
+
   return (
     <Section className="bg-[#f4f7fb]">
       <StaggerSection>
@@ -25,10 +28,20 @@ export function CTASection() {
               Junte-se aos mais de 2.700 estabelecimentos que já confiam na Foco Tecnologia para crescer com mais eficiência e menos estresse operacional.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <MagneticButton>Solicitar demonstração gratuita</MagneticButton>
+              <motion.button
+                type="button"
+                onClick={() => openLeadCapture({ source: "cta_final_sobre", title: "Foco Tecnologia" })}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 360, damping: 24 }}
+                className="inline-flex items-center gap-2.5 px-8 py-4 bg-gradient-to-t from-[#285992] to-[#427ab9] text-white text-sm font-semibold rounded-full shadow-lg shadow-[#285992]/25 hover:brightness-110 transition-all"
+              >
+                Solicitar demonstração gratuita
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
               <Link
                 to="/"
-                className="inline-flex items-center gap-1.5 text-[#285992] hover:text-[#132840] font-medium transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-[#285992]/20 text-[#285992] text-sm font-semibold hover:bg-[#285992]/5 hover:border-[#285992]/30 transition-colors"
               >
                 Conhecer nossas soluções <ChevronRight className="w-4 h-4" />
               </Link>

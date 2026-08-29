@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   HeroSection,
   PorQueInvestirSection,
@@ -15,9 +14,11 @@ import { WallOfLoveSection, TrustedLogosMarquee, CertificacoesSection } from "@/
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
-import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import { depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
+
+const LEAD_TITLE = "Marketing para Hotéis";
 
 const PLANO_NOMES: Record<string, string> = {
   turbo: "Marketing Turbo",
@@ -71,14 +72,11 @@ function MarketingParaHoteisPage() {
     path: "/marketing-para-hoteis",
   });
 
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
-  const [selectedPlano, setSelectedPlano] = useState<string | null>(null);
-
-  const planoNome = selectedPlano ? PLANO_NOMES[selectedPlano] : undefined;
+  const { openLeadCapture } = useLeadCapture();
 
   return (
     <div className="space-y-0">
-      <HeroSection onCtaClick={() => { setSelectedPlano(null); setIsLeadModalOpen(true); }} />
+      <HeroSection onCtaClick={() => openLeadCapture({ source: "hero_marketing_para_hoteis", title: LEAD_TITLE })} />
 
       <PorQueInvestirSection />
 
@@ -93,10 +91,9 @@ function MarketingParaHoteisPage() {
       <PostsShowcaseSection />
 
       <PlanosSection
-        onSelectPlano={(planoId) => {
-          setSelectedPlano(planoId);
-          setIsLeadModalOpen(true);
-        }}
+        onSelectPlano={(planoId) =>
+          openLeadCapture({ source: `planos_${planoId}`, title: PLANO_NOMES[planoId] ?? LEAD_TITLE })
+        }
       />
 
       {/* Prova Social: Mural de depoimentos (texto + vídeo, unificados) */}
@@ -119,18 +116,8 @@ function MarketingParaHoteisPage() {
         badge="Comece agora"
         title="Pronto para vender mais reservas diretas?"
         subtitle="Fale com um consultor e descubra como a Foco pode estruturar o marketing digital do seu hotel."
-      />
-
-      <LeadCaptureModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        title={planoNome ? `Solicitar o plano ${planoNome}` : "Solicite uma Demonstração Grátis"}
-        description={
-          planoNome
-            ? `Preencha seus dados e nossa equipe entrará em contato pra montar o ${planoNome} pro seu hotel.`
-            : "Preencha seus dados e nossa equipe entrará em contato para falar sobre marketing digital para o seu hotel."
-        }
-        source="marketing-para-hoteis"
+        source="cta_final_marketing_para_hoteis"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

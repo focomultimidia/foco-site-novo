@@ -15,6 +15,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -23,6 +24,7 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "CRM Hoteleiro";
 
 function CrmHoteleiroPage() {
   useSeo({
@@ -32,6 +34,7 @@ function CrmHoteleiroPage() {
     path: "/crm-hoteleiro",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useCrmHoteleiroPage();
 
   if (isLoading) {
@@ -66,7 +69,10 @@ function CrmHoteleiroPage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_crm_hoteleiro", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é um CRM */}
       <GenericInfoSection {...INFO_SECTIONS.crmHoteleiro} imageSide="right" />
@@ -113,6 +119,8 @@ function CrmHoteleiroPage() {
         title="Pronto para transformar dados em hóspedes fiéis?"
         subtitle="Solicite uma demonstração e descubra como o CRM da Foco pode aumentar sua fidelização e reservas diretas."
         badge="Comece agora"
+        source="cta_final_crm_hoteleiro"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

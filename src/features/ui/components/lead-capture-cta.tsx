@@ -3,11 +3,16 @@
 import { motion } from "framer-motion";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { ArrowRight } from "lucide-react";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 interface LeadCaptureCTAProps {
   badge?: string;
   title?: string;
   subtitle?: string;
+  /** De onde veio o lead (qual página) — ex.: "cta_final_site_hoteleiro". Vai junto no payload do envio. */
+  source: string;
+  /** Texto curto do produto/página, usado no cabeçalho do modal ("Contato: {leadTitle}") — default "Foco Tecnologia". */
+  leadTitle?: string;
 }
 
 /**
@@ -21,7 +26,10 @@ function LeadCaptureCTA({
   badge = "Comece agora",
   title = "Pronto para transformar a gestão do seu hotel?",
   subtitle = "Solicite uma demonstração e descubra como a Foco pode otimizar todas as operações do seu negócio.",
+  source,
+  leadTitle,
 }: LeadCaptureCTAProps) {
+  const { openLeadCapture } = useLeadCapture();
   return (
     <section className="bg-[#f4f7fb] py-24 lg:py-28">
       <div className="container mx-auto px-6 lg:px-8 flex flex-col items-center text-center">
@@ -46,8 +54,9 @@ function LeadCaptureCTA({
           </p>
 
           {/* CTA button */}
-          <motion.a
-            href="#contato"
+          <motion.button
+            type="button"
+            onClick={() => openLeadCapture({ source, title: leadTitle })}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 360, damping: 24 }}
@@ -55,7 +64,7 @@ function LeadCaptureCTA({
           >
             Solicite uma demonstração
             <ArrowRight className="w-4 h-4" />
-          </motion.a>
+          </motion.button>
         </motion.div>
       </div>
     </section>

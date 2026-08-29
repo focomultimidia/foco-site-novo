@@ -15,13 +15,13 @@ const DORES_DATA: DorSolucao[] = [
         titulo: "Mais canais, mais reservas",
         descricao:
           "Conecte-se a +800 canais de vendas com o nosso Channel manager, garantindo mais visibilidade e menos overbooking.",
-        link: "/channel-manager",
+        link: "/gestor-de-canais-channel-manager",
       },
       {
         titulo: "Site que vende para você",
         descricao:
           "Tenha um Site hoteleiro otimizado para transformar acessos em hóspedes, reduzindo custos com comissões.",
-        link: "/site-hoteleiro",
+        link: "/sites-para-hoteis-e-pousadas",
       },
       {
         titulo: "Atrair visitantes qualificados",
@@ -47,7 +47,7 @@ const DORES_DATA: DorSolucao[] = [
         titulo: "Sem controle e organização?",
         descricao:
           "Gerencie a sua propriedade com um PMS em nuvem e 100% mobile: mapa de apartamentos, governança, PDV, financeiro.",
-        link: "/gestao-hoteleira",
+        link: "/sistema-de-gestao-hoteleira-pms",
       },
       {
         titulo: "Problemas com pagamentos?",

@@ -3,8 +3,8 @@
 /**
  * SpatialPhoneCarousel — os 3 celulares clicáveis (central grande + 2
  * laterais menores/desfocados atrás), extraído da hero de
- * /experiencia-do-hospede pra ser reaproveitado tal e qual em outras heras
- * (ex.: /otheo-ai). Cada celular pode ter seu próprio mini-slideshow
+ * /aplicativo-de-hospedagem pra ser reaproveitado tal e qual em outras heras
+ * (ex.: /inteligencia-artificial-para-hoteis-e-pousadas). Cada celular pode ter seu próprio mini-slideshow
  * (`slides`) ou uma única imagem estática (array de 1 item) — a mecânica
  * espacial (posições, mola, clique-pra-centralizar) é idêntica nos dois
  * casos.

@@ -177,7 +177,7 @@ function PhaseCard({ fase, index }: { fase: (typeof FASES)[number]; index: numbe
                   {item.titulo}
                 </span>
               </div>
-              <p className="text-[14px] leading-relaxed text-slate-500">
+              <p className="text-[14px] leading-relaxed text-slate-600">
                 {item.descricao}
               </p>
             </li>

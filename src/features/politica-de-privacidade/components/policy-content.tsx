@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { Fingerprint, ShieldCheck, Mail, ExternalLink, ArrowRight } from "lucide-react";
+import { Callout } from "@/features/shared/components/callout";
 import { tocSections } from "../data/toc-sections";
 
 // ── PolicySection ─────────────────────────────────────────────────────────
@@ -40,20 +41,6 @@ function PolicySection({
 // sumário (que só indexa as 14 seções numeradas, não os subtópicos).
 function SubHeading({ children }: { children: ReactNode }) {
   return <p className="font-semibold text-[#1e3a5f]">{children}</p>;
-}
-
-// Card de destaque — usado só nas duas seções sobre dado sensível/segurança
-// (biometria facial e segurança da informação), pra essas duas se
-// diferenciarem visualmente do restante do texto corrido e chamarem mais
-// atenção (pedido implícito em "altamente navegável e intuitiva": destacar
-// o que mais importa, não só listar tudo no mesmo peso visual).
-function Callout({ icon: Icon, children }: { icon: typeof ShieldCheck; children: ReactNode }) {
-  return (
-    <div className="flex gap-3.5 bg-[#285992]/[0.04] border border-[#285992]/12 rounded-2xl px-5 py-4">
-      <Icon className="w-5 h-5 text-[#285992] flex-shrink-0 mt-0.5" strokeWidth={1.8} />
-      <div className="space-y-3 text-slate-600 text-[15px] leading-relaxed">{children}</div>
-    </div>
-  );
 }
 
 const FINALIDADES = [

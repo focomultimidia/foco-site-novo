@@ -114,7 +114,7 @@ function PostsShowcaseSection() {
               querer reservar
             </span>
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-slate-500">
+          <p className="mt-4 text-lg leading-relaxed text-slate-600">
             Fotografia, copy e direção de arte — tudo produzido pela nossa equipe. Alguns posts reais que já rodaram
             nas contas dos nossos clientes.
           </p>

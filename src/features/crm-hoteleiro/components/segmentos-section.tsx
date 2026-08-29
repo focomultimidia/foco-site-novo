@@ -31,7 +31,7 @@ function SegmentosSection({ segmentos }: SegmentosSectionProps) {
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] mb-4">
             Segmentação Inteligente
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Segmentos pré-configurados para campanhas mais efetivas e
             personalizadas.
           </p>

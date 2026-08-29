@@ -50,7 +50,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#1E3A5F] mb-1">{beneficio.titulo}</h3>
-                <p className="text-sm text-slate-500">{beneficio.descricao}</p>
+                <p className="text-sm text-slate-600">{beneficio.descricao}</p>
               </div>
             </motion.div>
           ))}

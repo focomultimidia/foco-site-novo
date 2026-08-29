@@ -13,6 +13,7 @@ import {
   Key,
   ArrowRight,
 } from "lucide-react";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 import type { TipoPropriedade } from "../types";
 
 // ── Icon registry ─────────────────────────────────────────────────────────────
@@ -58,14 +59,15 @@ const SPRING = { type: "spring" as const, stiffness: 280, damping: 28 };
 
 // ── Desktop accordion panel ───────────────────────────────────────────────────
 interface DesktopCardProps {
-  tipo:       TipoPropriedade;
-  isActive:   boolean;
+  tipo:        TipoPropriedade;
+  isActive:    boolean;
   isCollapsed: boolean;
-  onEnter:    () => void;
-  onLeave:    () => void;
+  onEnter:     () => void;
+  onLeave:     () => void;
+  onSolicitar: () => void;
 }
 
-function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave }: DesktopCardProps) {
+function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave, onSolicitar }: DesktopCardProps) {
   const Icon = ICON_MAP[tipo.icone] ?? Home;
   const ts   = TYPE_STYLES[tipo.id] ?? TYPE_STYLES["1"];
   const img  = IMAGE_MAP[tipo.id]   ?? IMAGE_MAP["1"];
@@ -179,6 +181,8 @@ function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave }: DesktopC
             </p>
 
             <button
+              type="button"
+              onClick={onSolicitar}
               className="self-start flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full text-[#0f172a] transition-opacity hover:opacity-90 active:opacity-75"
               style={{ backgroundColor: ts.accent }}
             >
@@ -194,12 +198,13 @@ function DesktopCard({ tipo, isActive, isCollapsed, onEnter, onLeave }: DesktopC
 
 // ── Mobile vertical accordion card ────────────────────────────────────────────
 interface MobileCardProps {
-  tipo:     TipoPropriedade;
-  isActive: boolean;
-  onToggle: () => void;
+  tipo:        TipoPropriedade;
+  isActive:    boolean;
+  onToggle:    () => void;
+  onSolicitar: () => void;
 }
 
-function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
+function MobileCard({ tipo, isActive, onToggle, onSolicitar }: MobileCardProps) {
   const Icon = ICON_MAP[tipo.icone] ?? Home;
   const ts   = TYPE_STYLES[tipo.id] ?? TYPE_STYLES["1"];
   const img  = IMAGE_MAP[tipo.id]   ?? IMAGE_MAP["1"];
@@ -254,6 +259,7 @@ function MobileCard({ tipo, isActive, onToggle }: MobileCardProps) {
               <p className="text-white/75 text-sm leading-relaxed mb-4">{desc}</p>
               <button
                 type="button"
+                onClick={onSolicitar}
                 className="flex items-center gap-2 text-sm font-bold px-5 py-2.5 rounded-full text-[#0f172a]"
                 style={{ backgroundColor: ts.accent }}
               >
@@ -275,6 +281,7 @@ interface TiposPropriedadeSectionProps {
 
 function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const { openLeadCapture } = useLeadCapture();
 
   return (
     <section className="py-20 bg-[#f4f7fb]">
@@ -316,6 +323,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
               isCollapsed={activeId !== null && activeId !== tipo.id}
               onEnter={() => setActiveId(tipo.id)}
               onLeave={() => setActiveId(null)}
+              onSolicitar={() => openLeadCapture({ source: `home_tipos_propriedade_${tipo.id}`, title: tipo.nome })}
             />
           ))}
         </motion.div>
@@ -336,6 +344,7 @@ function TiposPropriedadeSection({ tipos }: TiposPropriedadeSectionProps) {
                 onToggle={() =>
                   setActiveId(prev => (prev === tipo.id ? null : tipo.id))
                 }
+                onSolicitar={() => openLeadCapture({ source: `home_tipos_propriedade_${tipo.id}`, title: tipo.nome })}
               />
             </motion.div>
           ))}

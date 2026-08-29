@@ -22,7 +22,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] mb-4">
             Benefícios para seu Hotel
           </h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             Resultados mensuráveis que transformam a relação com seus hóspedes.
           </p>
         </motion.div>
@@ -44,7 +44,7 @@ function BeneficiosSection({ beneficios }: BeneficiosSectionProps) {
                 <h3 className="text-xl font-semibold text-[#1e293b] mb-2">
                   {beneficio.titulo}
                 </h3>
-                <p className="text-slate-500">{beneficio.descricao}</p>
+                <p className="text-slate-600">{beneficio.descricao}</p>
               </div>
             </motion.div>
           ))}

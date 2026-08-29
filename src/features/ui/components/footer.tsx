@@ -18,14 +18,14 @@ const footerSections: FooterSection[] = [
   {
     title: "Soluções",
     links: [
-      { label: "Site Hoteleiro", href: "/site-hoteleiro" },
+      { label: "Site Hoteleiro", href: "/sites-para-hoteis-e-pousadas" },
       { label: "Motor de Reservas", href: "/motor-de-reservas" },
-      { label: "Channel Manager", href: "/channel-manager" },
-      { label: "Gestão Hoteleira (PMS)", href: "/gestao-hoteleira" },
-      { label: "Experiência do Hóspede", href: "/experiencia-do-hospede" },
+      { label: "Channel Manager", href: "/gestor-de-canais-channel-manager" },
+      { label: "Gestão Hoteleira (PMS)", href: "/sistema-de-gestao-hoteleira-pms" },
+      { label: "Experiência do Hóspede", href: "/aplicativo-de-hospedagem" },
       { label: "Software de Pagamentos", href: "/software-de-pagamentos" },
       { label: "Integrações Hoteleiras", href: "/integracoes-hoteleiras" },
-      { label: "Otheo AI", href: "/otheo-ai" },
+      { label: "Otheo AI", href: "/inteligencia-artificial-para-hoteis-e-pousadas" },
       //{ label: "CRM Hoteleiro", href: "/crm-hoteleiro" },
     ],
   },
@@ -33,7 +33,7 @@ const footerSections: FooterSection[] = [
     title: "Empresa",
     links: [
       { label: "Sobre Nós", href: "/sobre" },
-      { label: "Blog", href: "https://blog.focomultimidia.com" },
+      { label: "Blog", href: "/blog" },
       { label: "Parceiros", href: "https://promocoes.focomultimidia.com/foco-partner-program" },
     ],
   },
@@ -84,7 +84,11 @@ function Footer() {
           {/* Link Columns */}
           {footerSections.map((section) => (
             <div key={section.title}>
-              <h3 className="font-semibold text-white mb-4">{section.title}</h3>
+              {/* h2, não h3 — o rodapé é compartilhado por todo o site, e em
+                  páginas com pouco conteúdo textual antes dele (ex.:
+                  /blog/busca sem resultados) não existe h2 nenhum entre o
+                  <h1> da página e o rodapé — h3 pulava um nível. */}
+              <h2 className="font-semibold text-white mb-4">{section.title}</h2>
               <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.label}>

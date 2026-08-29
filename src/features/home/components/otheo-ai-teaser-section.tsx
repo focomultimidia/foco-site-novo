@@ -21,7 +21,7 @@ const CAPACIDADES = [
 /**
  * OtheoAiTeaserSection — um único chamado, de impacto, apresentando o
  * Otheo AI na home. Não tenta replicar o cockpit inteiro (isso já existe
- * em /otheo-ai) — aqui é só o "trailer": vídeo do Theo em destaque com um
+ * em /inteligencia-artificial-para-hoteis-e-pousadas) — aqui é só o "trailer": vídeo do Theo em destaque com um
  * halo pulsante, título, uma frase e UM botão. O vídeo substituiu o
  * mascote placeholder (ícone) que existia aqui antes — a logo/mascote em
  * SVG dos outros lugares (header docado, chat drawer) continuam
@@ -202,7 +202,6 @@ function OtheoAiTeaserSection() {
                 className="inline-flex items-center gap-2.5 backdrop-blur-sm text-white px-4 py-2 rounded-full font-mono text-[11px] uppercase tracking-[0.18em] mb-5"
                 style={{ border: "1px solid rgba(255,255,255,0.18)", background: "rgba(255,255,255,0.08)" }}
               >
-                <span className="w-1.5 h-1.5 bg-[#fccc30] rounded-full animate-pulse" />
                 Novidade · Inteligência Artificial
               </span>
 
@@ -237,7 +236,7 @@ function OtheoAiTeaserSection() {
               </div>
 
               <Link
-                to="/otheo-ai"
+                to="/inteligencia-artificial-para-hoteis-e-pousadas"
                 className="group inline-flex items-center gap-2 bg-[#fccc30] text-[#132840] font-semibold px-8 py-4 rounded-full transition-all duration-300 text-base shadow-lg shadow-[#fccc30]/25 hover:shadow-[#fccc30]/45 hover:-translate-y-0.5"
               >
                 Quero saber como funciona
@@ -306,7 +305,7 @@ function OtheoAiTeaserSection() {
                     pulsante das chips CAPACIDADES logo abaixo e do LiveDot
                     de PilaresSection, em vez de um adesivo dourado sólido —
                     fica no mesmo vocabulário visual do resto do site.
-                    Tratamento idêntico ao da hero de /otheo-ai, de
+                    Tratamento idêntico ao da hero de /inteligencia-artificial-para-hoteis-e-pousadas, de
                     propósito: quem vê o teaser aqui e depois abre a página
                     reconhece o mesmo selo. */}
                 <motion.div

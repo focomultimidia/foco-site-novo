@@ -172,7 +172,7 @@ function CertificacoesSection({
             </span>
           </h2>
           {subtitle && (
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
               {subtitle}
             </p>
           )}

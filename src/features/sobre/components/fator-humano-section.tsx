@@ -5,19 +5,31 @@ import {
   useSpring,
   useMotionTemplate,
 } from "framer-motion";
-import { Users, Clock, TrendingUp, GraduationCap, Globe } from "lucide-react";
+import { Users, Clock, TrendingUp, GraduationCap, Globe, MessageCircle, MessageSquare, Phone, Mail } from "lucide-react";
 import { Section, SectionHeader, StaggerSection, StaggerItem } from "./motion-primitives";
 import type { CulturePillarData } from "../types";
 
-// ── Live Command Center data ──────────────────────────────────────────────────
+// ── Live support feed data ──────────────────────────────────────────────────
+// Registro de atendimento, não card de estatística — os números (365/<2min/97%)
+// já vivem na BentoNetworkSection logo acima nesta mesma página; repeti-los
+// aqui como mais um card seria redundante. Este bloco prova a mesma promessa
+// ("suporte 365 dias") de outro jeito: mostrando horários reais de plantão,
+// inclusive fim de semana e madrugada, em vez de mais um número.
 
-interface Channel { label: string; dot: string; }
+interface FeedEntry {
+  day:     string;
+  time:    string;
+  channel: string;
+  color:   string;
+  icon:    React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  text:    string;
+}
 
-const CMD_CHANNELS: Channel[] = [
-  { label: "Chat ao vivo", dot: "#285992" },
-  { label: "WhatsApp",     dot: "#25d366" },
-  { label: "E-mail",       dot: "#7c3aed" },
-  { label: "Telefone",     dot: "#0f766e" },
+const SUPPORT_FEED: FeedEntry[] = [
+  { day: "Sábado",  time: "23:47", channel: "WhatsApp",     color: "#25d366", icon: MessageCircle, text: "Sincronização de reserva confirmada minutos após o pedido do hóspede." },
+  { day: "Domingo", time: "04:12", channel: "Chat ao vivo", color: "#285992", icon: MessageSquare, text: "Instabilidade identificada e corrigida antes do horário de check-in." },
+  { day: "Terça",   time: "14:30", channel: "Telefone",     color: "#0f766e", icon: Phone,         text: "Onboarding de um novo hotel concluído com suporte dedicado, do início ao fim." },
+  { day: "Sexta",   time: "19:05", channel: "E-mail",       color: "#7c3aed", icon: Mail,          text: "Dúvida sobre tarifas de alta temporada esclarecida no mesmo dia." },
 ];
 
 // ── Culture pillars data ──────────────────────────────────────────────────────
@@ -45,117 +57,61 @@ const CULTURE_PILLARS: CulturePillarData[] = [
   },
 ];
 
-// ── RadarRings ────────────────────────────────────────────────────────────────
+// ── LiveSupportFeed ───────────────────────────────────────────────────────────
+// Um único painel — não uma pilha de cards — narrando plantões reais em vez
+// de repetir números. A linha do tempo à esquerda é o dispositivo estrutural:
+// cada ponto é um atendimento real, a proximidade entre horários prova a
+// cobertura contínua sem precisar dizer "365" de novo.
 
-function RadarRings({ active }: { active: boolean }) {
+function LiveSupportFeed() {
   return (
-    <div aria-hidden className="absolute top-1/2 left-1/2 pointer-events-none z-0">
-      {[0, 0.62, 1.24].map(delay => (
-        <motion.span key={delay} className="absolute rounded-full border border-[#285992]"
-          style={{ width: 28, height: 28, top: -14, left: -14 }}
-          animate={active ? { scale: [1, 6.5], opacity: [0.30, 0] } : { scale: 1, opacity: 0 }}
-          transition={{ duration: 2.1, delay, repeat: Infinity, ease: "easeOut" }} />
-      ))}
-    </div>
-  );
-}
+    <motion.div
+      initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+      transition={{ type: "spring", stiffness: 200, damping: 26, delay: 0.05 }}
+      className="relative rounded-3xl overflow-hidden p-6 sm:p-7"
+      style={{
+        background: "linear-gradient(145deg, rgba(238,244,253,0.98) 0%, rgba(248,250,252,0.95) 100%)",
+        border: "1px solid rgba(40,89,146,0.14)",
+        boxShadow: "0 8px 32px rgba(40,89,146,0.08), inset 0 1px 0 rgba(255,255,255,0.85)",
+      }}
+    >
+      <motion.div aria-hidden className="absolute inset-0 pointer-events-none rounded-3xl"
+        style={{ background: "radial-gradient(ellipse 75% 55% at 25% 75%, rgba(40,89,146,0.07), transparent)" }}
+        animate={{ opacity: [0.4, 0.9, 0.4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} />
 
-// ── SmallMetricCard ───────────────────────────────────────────────────────────
-
-function SmallMetricCard({ value, label, delay }: { value: string; label: string; delay: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const spotX   = useMotionValue(50);
-  const spotY   = useMotionValue(50);
-  const glowOp  = useSpring(0, { stiffness: 220, damping: 28 });
-  const glow    = useMotionTemplate`radial-gradient(110px circle at ${spotX}% ${spotY}%, rgba(40,89,146,0.10), transparent 75%)`;
-
-  function onMouseMove(e: React.MouseEvent) {
-    const el = cardRef.current; if (!el) return;
-    const { left, top, width, height } = el.getBoundingClientRect();
-    spotX.set(((e.clientX - left) / width) * 100);
-    spotY.set(((e.clientY - top) / height) * 100);
-  }
-
-  return (
-    <motion.div ref={cardRef}
-      initial={{ opacity: 0, scale: 0.88, y: 8 }} whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true }} transition={{ type: "spring", stiffness: 280, damping: 24, delay }}
-      className="relative flex-1 rounded-3xl overflow-hidden p-5 cursor-default"
-      style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(14px)", border: "1px solid rgba(226,232,240,0.92)", boxShadow: "0 4px 20px rgba(30,58,95,0.05)" }}
-      onMouseMove={onMouseMove} onMouseEnter={() => glowOp.set(1)} onMouseLeave={() => glowOp.set(0)}>
-      <motion.div aria-hidden className="absolute inset-0 rounded-3xl pointer-events-none" style={{ background: glow, opacity: glowOp }} />
-      <div className="relative z-10">
-        <div className="font-display text-3xl font-bold text-[#1e3a5f] leading-none mb-1">{value}</div>
-        <div className="text-[10px] font-medium text-slate-500 leading-snug">{label}</div>
+      <div className="relative z-10 flex items-center justify-between mb-7 flex-wrap gap-2">
+        <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/70">
+          <motion.span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"
+            animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
+          <span className="text-[10px] font-bold text-emerald-700 tracking-wider uppercase">Equipe online agora</span>
+        </div>
+        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-400">Plantão real, sem horário fixo</span>
       </div>
-    </motion.div>
-  );
-}
 
-// ── LiveCommandCenter ─────────────────────────────────────────────────────────
-
-function LiveCommandCenter() {
-  const [heroHovered, setHeroHovered] = useState(false);
-
-  return (
-    <div className="w-full flex flex-col gap-3">
-      <div className="flex gap-3 items-stretch">
-        {/* Hero card: < 2 min */}
-        <motion.div
-          initial={{ opacity: 0, x: 32 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 200, damping: 26, delay: 0.05 }}
-          className="relative flex-1 rounded-3xl overflow-hidden p-6 flex flex-col justify-between min-h-[200px] cursor-default"
-          style={{ background: "linear-gradient(145deg, rgba(238,244,253,0.98) 0%, rgba(248,250,252,0.95) 100%)", border: "1px solid rgba(40,89,146,0.14)", boxShadow: "0 8px 32px rgba(40,89,146,0.08), inset 0 1px 0 rgba(255,255,255,0.85)" }}
-          whileHover={{ scale: 1.018, boxShadow: "0 14px 48px rgba(40,89,146,0.13), inset 0 1px 0 rgba(255,255,255,0.9)" }}
-          onMouseEnter={() => setHeroHovered(true)} onMouseLeave={() => setHeroHovered(false)}>
-          <RadarRings active={heroHovered} />
-          <motion.div aria-hidden className="absolute inset-0 pointer-events-none rounded-3xl"
-            style={{ background: "radial-gradient(ellipse 75% 55% at 25% 75%, rgba(40,89,146,0.07), transparent)" }}
-            animate={{ opacity: [0.4, 0.9, 0.4] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} />
-          {/* Status badge */}
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200/70 self-start relative z-10">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-            </span>
-            <span className="text-[10px] font-bold text-emerald-700 tracking-wider uppercase">Equipe Online</span>
-          </div>
-          {/* Metric */}
-          <div className="relative z-10">
-            <div className="font-display text-5xl sm:text-6xl font-bold text-[#1e3a5f] leading-none mb-2 tracking-tighter">{"< 2 min"}</div>
-            <div className="flex items-center gap-2 text-xs font-medium text-slate-500">
-              <span>Tempo médio de resposta</span>
-              <motion.span className="inline-block w-1.5 h-1.5 rounded-full bg-[#285992] shrink-0"
-                animate={{ opacity: [1, 0.25, 1] }} transition={{ duration: 1.5, repeat: Infinity }} />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Secondary stack */}
-        <div className="flex flex-col gap-3 w-[128px] shrink-0">
-          <SmallMetricCard value="97%" label="Satisfação no suporte" delay={0.18} />
-          <SmallMetricCard value="365"  label="Dias de atendimento"  delay={0.26} />
+      <div className="relative z-10 pl-8">
+        <div className="absolute left-[13px] top-1 bottom-1 w-px bg-gradient-to-b from-[#285992]/30 via-slate-300/60 to-transparent" />
+        <div className="flex flex-col gap-6">
+          {SUPPORT_FEED.map((entry, i) => {
+            const Icon = entry.icon;
+            return (
+              <motion.div key={entry.channel} className="relative"
+                initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+                transition={{ delay: 0.12 + i * 0.1, duration: 0.5, ease: "easeOut" }}>
+                <div className="absolute -left-8 top-0.5 w-7 h-7 rounded-full flex items-center justify-center"
+                  style={{ background: `${entry.color}14`, boxShadow: "0 0 0 3px rgba(248,250,252,0.95)" }}>
+                  <Icon className="w-3.5 h-3.5" style={{ color: entry.color }} />
+                </div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-[10px] font-bold tracking-wider uppercase" style={{ color: entry.color }}>{entry.channel}</span>
+                  <span className="text-[10px] text-slate-400">· {entry.day}, {entry.time}</span>
+                </div>
+                <p className="text-sm text-slate-600 leading-relaxed">{entry.text}</p>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-
-      {/* Channel footer */}
-      <motion.div initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-        transition={{ delay: 0.34, duration: 0.45, ease: "easeOut" }}
-        className="rounded-3xl px-5 py-3.5 flex items-center gap-3 flex-wrap"
-        style={{ background: "rgba(255,255,255,0.92)", backdropFilter: "blur(10px)", border: "1px solid rgba(226,232,240,0.92)", boxShadow: "0 2px 12px rgba(30,58,95,0.04)" }}>
-        <span className="text-[10px] font-bold tracking-widest uppercase text-slate-500 shrink-0">4 canais</span>
-        <div className="h-3 w-px bg-slate-200 shrink-0" />
-        {CMD_CHANNELS.map(c => (
-          <div key={c.label} className="flex items-center gap-1.5 shrink-0">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-45" style={{ backgroundColor: c.dot }} />
-              <span className="relative inline-flex h-2 w-2 rounded-full" style={{ backgroundColor: c.dot }} />
-            </span>
-            <span className="text-xs font-medium text-slate-600">{c.label}</span>
-          </div>
-        ))}
-      </motion.div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -214,7 +170,7 @@ function CultureCard({
             </motion.div>
           </div>
           <h4 className="font-display text-sm font-bold text-[#1e293b] mb-2 leading-tight">{pillar.title}</h4>
-          <p className="text-xs text-slate-500 leading-relaxed">{pillar.desc}</p>
+          <p className="text-xs text-slate-600 leading-relaxed">{pillar.desc}</p>
         </div>
       </motion.div>
     </motion.div>
@@ -244,7 +200,7 @@ function CultureSection() {
           </h3>
         </StaggerItem>
         <StaggerItem>
-          <p className="text-slate-500 leading-relaxed text-base mb-8">
+          <p className="text-slate-600 leading-relaxed text-base mb-8">
             Nossa cultura é simples: autonomia, colaboração e a convicção de que o crescimento de cada colaborador se reflete diretamente na qualidade do produto que o hoteleiro recebe.
           </p>
         </StaggerItem>
@@ -253,7 +209,7 @@ function CultureSection() {
             <div className="absolute left-0 top-0 bottom-0 w-0.5 rounded-full bg-gradient-to-b from-[#285992]/50 to-[#c9972a]/50" />
             <p className="text-base text-slate-700 leading-relaxed">
               Investimos em pessoas porque acreditamos que{" "}
-              <span className="font-bold bg-gradient-to-r from-[#285992] to-[#c9972a] bg-clip-text text-transparent">
+              <span className="font-bold bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">
                 tecnologia excepcional é feita por humanos excepcionais.
               </span>
             </p>
@@ -296,7 +252,7 @@ function FeatureRow({ eyebrow, title, body, icon: Icon, accentColor, visual }: {
           </div>
           <span className="block text-[10px] font-bold tracking-[0.15em] uppercase mb-4" style={{ color: accentColor }}>{eyebrow}</span>
           <h3 className="font-display text-3xl sm:text-4xl font-semibold text-[#1e293b] tracking-tight leading-tight mb-5">{title}</h3>
-          <p className="text-slate-500 leading-relaxed text-base">{body}</p>
+          <p className="text-slate-600 leading-relaxed text-base">{body}</p>
         </StaggerItem>
         <StaggerItem>{visual}</StaggerItem>
       </div>
@@ -320,13 +276,13 @@ export function HumanFactorSection() {
           eyebrow="Suporte Ininterrupto"
           title={
             <>365 dias.{" "}
-              <span className="bg-gradient-to-r from-[#285992] to-[#c9972a] bg-clip-text text-transparent">Sempre</span>
+              <span className="bg-gradient-to-r from-[#285992] via-[#427ab9] to-[#285992] bg-clip-text text-transparent">Sempre</span>
               {" "}que você precisar.</>
           }
           body="O check-in não para no feriado. Sua operação não para no fim de semana. E o nosso suporte, também não. Temos uma equipe dedicada que respira hotelaria e entende que um problema no sistema num sábado à noite não pode esperar até segunda-feira de manhã."
           icon={Clock}
           accentColor="#285992"
-          visual={<LiveCommandCenter />}
+          visual={<LiveSupportFeed />}
         />
         <CultureSection />
       </div>

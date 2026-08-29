@@ -44,7 +44,13 @@ const OTAS_COMPARACAO = [
 ] as const;
 
 // ── InstagramAdMockup ─────────────────────────────────────────────────────────
-function InstagramAdMockup({ className = "" }: { className?: string }) {
+// `eager` — este componente é reaproveitado em dois contextos bem diferentes:
+// no leque da hero (acima da dobra, precisa carregar imediatamente) e numa
+// aba do CanaisSection (abaixo da dobra, pode continuar lazy). Sem essa
+// prop, a foto sempre nascia com loading="lazy" — inofensivo na aba, mas
+// atrasava o carregamento de um elemento visível de cara na hero (achado
+// numa varredura com Playwright em todas as rotas do site).
+function InstagramAdMockup({ className = "", eager = false }: { className?: string; eager?: boolean }) {
   return (
     <div
       className={`w-[300px] shrink-0 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/10 ${className}`}
@@ -65,7 +71,7 @@ function InstagramAdMockup({ className = "" }: { className?: string }) {
             <span className="truncate text-[13px] font-semibold text-slate-900">seuhotel.oficial</span>
             <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-[#3897f0]" fill="#3897f0" strokeWidth={0} />
           </div>
-          <span className="text-[11px] text-slate-500">Publi · Patrocinado</span>
+          <span className="text-[11px] text-slate-600">Publi · Patrocinado</span>
         </div>
         <MoreHorizontal className="h-4 w-4 shrink-0 text-slate-400" />
       </div>
@@ -77,7 +83,8 @@ function InstagramAdMockup({ className = "" }: { className?: string }) {
           src={HOTEL_PHOTO_META_ADS}
           alt=""
           className="absolute inset-0 h-full w-full object-cover"
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
           decoding="async"
         />
         <div
@@ -110,7 +117,7 @@ function InstagramAdMockup({ className = "" }: { className?: string }) {
 
       {/* Rodapé — CTA do anúncio */}
       <div className="mt-3 flex items-center justify-between border-t border-slate-100 px-3.5 py-2.5">
-        <span className="text-[11px] text-slate-500">seuhotel.com.br</span>
+        <span className="text-[11px] text-slate-600">seuhotel.com.br</span>
         <span className="text-[12px] font-semibold text-[#285992]">Reservar →</span>
       </div>
     </div>
@@ -118,7 +125,9 @@ function InstagramAdMockup({ className = "" }: { className?: string }) {
 }
 
 // ── GoogleSearchAdMockup ──────────────────────────────────────────────────────
-function GoogleSearchAdMockup({ className = "" }: { className?: string }) {
+// `eager` aceito só por consistência de props com os outros dois mockups
+// (não tem `<img>` própria — é composto, sem foto real).
+function GoogleSearchAdMockup({ className = "" }: { className?: string; eager?: boolean }) {
   return (
     <div
       className={`w-[320px] shrink-0 rounded-2xl bg-white p-5 ring-1 ring-slate-900/10 ${className}`}
@@ -127,7 +136,7 @@ function GoogleSearchAdMockup({ className = "" }: { className?: string }) {
       {/* Barra de busca — só pra dar o contexto "isto é um resultado de busca" */}
       <div className="mb-4 flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2">
         <Search className="h-3.5 w-3.5 shrink-0 text-slate-400" />
-        <span className="truncate text-[12.5px] text-slate-500">hotel em porto de galinhas</span>
+        <span className="truncate text-[12.5px] text-slate-600">hotel em porto de galinhas</span>
       </div>
 
       {/* Bloco do anúncio */}
@@ -182,7 +191,9 @@ function MiniMap() {
 }
 
 // ── GoogleHotelAdsMockup ──────────────────────────────────────────────────────
-function GoogleHotelAdsMockup({ className = "" }: { className?: string }) {
+// `eager` — mesmo motivo do InstagramAdMockup acima (reaproveitado na hero e
+// numa aba do CanaisSection).
+function GoogleHotelAdsMockup({ className = "", eager = false }: { className?: string; eager?: boolean }) {
   return (
     <div
       className={`w-[300px] shrink-0 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/10 ${className}`}
@@ -196,7 +207,8 @@ function GoogleHotelAdsMockup({ className = "" }: { className?: string }) {
             src={HOTEL_PHOTO_HOTEL_ADS}
             alt=""
             className="h-full w-full object-cover"
-            loading="lazy"
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager ? "high" : "auto"}
             decoding="async"
           />
           <span className="absolute bottom-1.5 right-1.5 rounded-md bg-black/40 px-1.5 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">

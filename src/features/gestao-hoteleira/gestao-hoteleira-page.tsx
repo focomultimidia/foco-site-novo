@@ -16,6 +16,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -24,15 +25,17 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Gestão Hoteleira (PMS)";
 
 function GestaoHoteleiraPage() {
   useSeo({
     title: "Sistema de Gestão Hoteleira (PMS) | Foco Tecnologia",
     description:
       "PMS para hotéis e pousadas com controle total da operação: check-in, check-out, financeiro e housekeeping integrados em uma única plataforma na nuvem.",
-    path: "/gestao-hoteleira",
+    path: "/sistema-de-gestao-hoteleira-pms",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useGestaoHoteleiraPage();
 
   if (isLoading) {
@@ -67,7 +70,10 @@ function GestaoHoteleiraPage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_gestao_hoteleira", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é um sistema PMS */}
       <GenericInfoSection {...INFO_SECTIONS.gestaoHoteleira} imageSide="right" />
@@ -129,6 +135,8 @@ function GestaoHoteleiraPage() {
         title="Pronto para transformar a gestão do seu hotel?"
         subtitle="Solicite uma demonstração e descubra como o PMS da Foco pode otimizar todas as operações do seu negócio."
         badge="Comece agora"
+        source="cta_final_gestao_hoteleira"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

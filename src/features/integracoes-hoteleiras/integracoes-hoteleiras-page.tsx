@@ -13,6 +13,7 @@ import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -21,6 +22,7 @@ import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
+const LEAD_TITLE = "Integrações Hoteleiras";
 
 function IntegracoesHoteleirasPage() {
   useSeo({
@@ -30,6 +32,7 @@ function IntegracoesHoteleirasPage() {
     path: "/integracoes-hoteleiras",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useIntegracoesHoteleirasPage();
 
   if (isLoading) {
@@ -64,7 +67,10 @@ function IntegracoesHoteleirasPage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_integracoes_hoteleiras", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: Importância da Integração */}
       <ImportanciaSection />

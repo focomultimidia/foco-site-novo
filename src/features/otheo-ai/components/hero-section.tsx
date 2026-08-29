@@ -9,8 +9,8 @@ import { PRODUTOS_DATA } from "@/features/shared/data/produtos-data";
 // duplica os paths aqui: se alguém trocar um print lá, a hero acompanha
 // sozinha. Ordem [esquerdo, central, direito] é a mesma dos 2 lugares —
 // aqui cada um vira um "produto" de 1 tela só (sem slideshow) pro mesmo
-// SpatialPhoneCarousel usado na hero de /experiencia-do-hospede.
-const OTHEO_MOCKUPS = PRODUTOS_DATA.find((p) => p.link === "/otheo-ai")?.mockups ?? [];
+// SpatialPhoneCarousel usado na hero de /aplicativo-de-hospedagem.
+const OTHEO_MOCKUPS = PRODUTOS_DATA.find((p) => p.link === "/inteligencia-artificial-para-hoteis-e-pousadas")?.mockups ?? [];
 const OTHEO_PHONES = OTHEO_MOCKUPS.map((mock, i) => ({
   id: i,
   interval: 4000,
@@ -39,7 +39,7 @@ function HeroSection({ onCtaClick }: HeroSectionProps) {
         {/* Selo Beta — mesmo selo compacto usado no menu/cards de produto
             (ver beta-badge.tsx); a versão maior/dedicada que existia aqui
             saiu junto com o palco antigo, ao adotar a mesma estrutura de
-            hero de /experiencia-do-hospede. Só em desktop: no mobile o
+            hero de /aplicativo-de-hospedagem. Só em desktop: no mobile o
             palco encolhido (ver useMobileStageScale) não sobra espaço de
             canto pra um selo fixo sem competir com os celulares. */}
         <div className="hidden lg:block absolute top-14 right-6 xl:top-16 xl:right-10 z-40">

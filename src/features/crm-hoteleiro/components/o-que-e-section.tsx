@@ -34,7 +34,7 @@ function OQueESection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               O <strong>CRM (Customer Relationship Management) Hoteleiro</strong> é um
               sistema estratégico focado em gerenciar e analisar as interações e os
               dados de todos os hóspedes e potenciais clientes. Ele vai além de um
@@ -43,7 +43,7 @@ function OQueESection() {
               passando pelas preferências de quarto, consumo no frigobar, reclamações
               e até mesmo datas especiais.
             </p>
-            <p className="text-slate-500 text-lg leading-relaxed">
+            <p className="text-slate-600 text-lg leading-relaxed">
               Seu principal objetivo é permitir que o hotel ofereça um atendimento
               altamente personalizado e crie relacionamentos duradouros. Ao conhecer
               profundamente o hóspede, o CRM possibilita a criação de campanhas de

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HeroSection } from "./components/hero-section";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import { ProblemaParallaxSection } from "./components/problema-parallax-section";
@@ -11,7 +10,9 @@ import { AcessoSection } from "./components/onde-vive-section";
 import { ManifestoSection } from "./components/manifesto-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
-import { LeadCaptureModal } from "@/components/shared/lead-capture-modal";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+
+const LEAD_TITLE = "Otheo AI";
 
 /**
  * OtheoAiPage — roteiro em 3 atos: problema (seis abas abertas) → como o
@@ -26,14 +27,14 @@ function OtheoAiPage() {
     title: "Otheo AI: Assistente com Inteligência Artificial | Foco",
     description:
       "Otheo é o copiloto de IA da Foco: responde sobre ocupação, disponibilidade e tarifas em segundos, liberando sua equipe para atender o hóspede.",
-    path: "/otheo-ai",
+    path: "/inteligencia-artificial-para-hoteis-e-pousadas",
   });
 
-  const [isLeadModalOpen, setIsLeadModalOpen] = useState(false);
+  const { openLeadCapture } = useLeadCapture();
 
   return (
     <div className="min-h-screen">
-      <HeroSection onCtaClick={() => setIsLeadModalOpen(true)} />
+      <HeroSection onCtaClick={() => openLeadCapture({ source: "hero_otheo_ai", title: LEAD_TITLE })} />
       <ProblemaParallaxSection />
       <PilaresSection />
       <OcupacaoSection />
@@ -98,14 +99,8 @@ function OtheoAiPage() {
         badge="Comece agora"
         title="Pronto para ter um copiloto de IA na sua operação?"
         subtitle="Solicite uma demonstração e veja o Otheo respondendo perguntas reais do seu hotel, ao vivo."
-      />
-
-      <LeadCaptureModal
-        isOpen={isLeadModalOpen}
-        onClose={() => setIsLeadModalOpen(false)}
-        title="Solicite uma Demonstração Grátis"
-        description="Preencha seus dados e nossa equipe entrará em contato para agendar uma demonstração personalizada do Otheo AI."
-        source="otheo-ai"
+        source="cta_final_otheo_ai"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

@@ -147,7 +147,7 @@ function EventoCard({ evento, compact = false }: { evento: Evento; compact?: boo
         </h3>
         {/* Resumo completo — sem `line-clamp`, pedido explícito. O card
             cresce (`min-h`, ver acima) pra caber o texto inteiro. */}
-        <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
           {evento.descricao}
         </p>
       </div>

@@ -1,0 +1,49 @@
+# ── Redirects 301 — blog.focomultimidia.com → focomultimidia.com/blog ──────
+#
+# Instala ESTE arquivo no servidor do blog ANTIGO (blog.focomultimidia.com),
+# não neste repositório — o .htaccess daqui só controla o domínio novo, não
+# alcança o subdomínio antigo. Cole o conteúdo abaixo no .htaccess da raiz
+# do WordPress antigo, ANTES das regras padrão do WordPress
+# ("# BEGIN WordPress").
+#
+# Por que 301 (permanente) e não 302: 301 diz ao Google "esse conteúdo
+# mudou de endereço pra sempre" e transfere a maior parte da autoridade/
+# ranking acumulado da URL antiga pra nova. 302 (temporário) NÃO transfere
+# esse valor — o Google continua indexando a URL antiga.
+#
+# O que este arquivo NÃO cobre (fora do escopo, ver aviso no chat):
+#   - Imagens (blog.../wp-content/uploads/...) — trocaram de pasta E de
+#     formato (.webp) na migração; mapear cada uma exigiria uma tabela de
+#     centenas de linhas. Prioridade menor que as páginas em si.
+#   - Alguns links internos que apontavam pra slugs que não existem mais
+#     na migração (posts renomeados/removidos no WP em algum momento) —
+#     esses caem no fallback genérico no fim do arquivo, que manda pra
+#     home do blog novo em vez de dar 404.
+
+RewriteEngine On
+
+# ── Autores consolidados na migração ────────────────────────────────────────
+# Duas contas diferentes do WP ("focomult_user" e "foco") viraram um autor
+# só ("foco-multimidia") no site novo — precisa de regra explícita, a
+# genérica de baixo não cobre esse caso (slug muda, não só o domínio).
+RewriteRule ^author/focomult_user/?$ https://focomultimidia.com/blog/autor/foco-multimidia [R=301,L]
+RewriteRule ^author/foco/?$ https://focomultimidia.com/blog/autor/foco-multimidia [R=301,L]
+
+# ── Páginas do blog (mais específico primeiro) ──────────────────────────────
+RewriteRule ^category/([^/]+)/?$ https://focomultimidia.com/blog/categoria/$1 [R=301,L]
+RewriteRule ^tag/([^/]+)/?$ https://focomultimidia.com/blog/tag/$1 [R=301,L]
+RewriteRule ^author/([^/]+)/?$ https://focomultimidia.com/blog/autor/$1 [R=301,L]
+RewriteRule ^page/([0-9]+)/?$ https://focomultimidia.com/blog?pagina=$1 [R=301,L]
+
+# Home do blog
+RewriteRule ^$ https://focomultimidia.com/blog [R=301,L]
+
+# ── Posts — regra genérica ───────────────────────────────────────────────────
+# Cobre TODOS os 146 posts migrados numa regra só, porque o slug (parte da
+# URL) é idêntico entre o blog antigo e o novo — só o domínio e o prefixo
+# "/blog/" mudam. `!-f`/`!-d` evita sequestrar arquivo ou pasta que
+# realmente existe no servidor antigo (wp-admin, wp-content, wp-json,
+# etc.) — mesma lógica de guarda já usada no .htaccess do site novo.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9-]+)/?$ https://focomultimidia.com/blog/$1 [R=301,L]

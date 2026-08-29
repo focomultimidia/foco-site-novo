@@ -97,7 +97,7 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
           decoding="async"
         />
         <div className="text-right">
-          <p className="text-sm font-semibold text-gray-500 leading-tight">
+          <p className="text-sm font-semibold text-gray-600 leading-tight">
             {artigo.publicacao}
           </p>
           <p className="text-xs text-gray-700 mt-0.5">{artigo.data}</p>
@@ -155,10 +155,11 @@ function ArticleCard({ artigo, isCenter }: ArticleCardProps) {
   );
 }
 
-// ── Swipe (mobile) ───────────────────────────────────────────────────────────
+// ── Swipe (desktop + mobile) ──────────────────────────────────────────────────
 // Mesmo par de limiares (offset OU velocidade) usado nos outros carrosséis de
 // arrastar do site — cobre tanto o gesto lento e longo quanto o "flick" rápido
-// e curto.
+// e curto. Compartilhado entre o palco 3D do desktop (mouse) e o card único
+// do mobile (dedo) — mesmo handler, os dois só decidem a direção.
 const SWIPE_OFFSET_THRESHOLD = 60;
 const SWIPE_VELOCITY_THRESHOLD = 400;
 
@@ -174,10 +175,11 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
   const prev = () => setCenter(c => (c - 1 + total) % total);
   const next = () => setCenter(c => (c + 1) % total);
 
-  // Arrasta o dedo, não o card em si (dragConstraints trava em 0, dragElastic
-  // só dá uma "borrachinha" — mesma técnica já usada nos carrosséis de swipe
-  // do site): o gesto só decide a direção, quem anima a troca continua sendo
-  // o AnimatePresence de sempre.
+  // Arrasta o ponteiro (mouse ou dedo), não o card em si (dragConstraints
+  // trava em 0, dragElastic só dá uma "borrachinha" — mesma técnica já usada
+  // nos carrosséis de arrastar do site): o gesto só decide a direção, quem
+  // anima a troca continua sendo o `animate` de cada card (desktop) ou o
+  // AnimatePresence (mobile).
   function handleDragEnd(_event: unknown, info: PanInfo) {
     if (info.offset.x < -SWIPE_OFFSET_THRESHOLD || info.velocity.x < -SWIPE_VELOCITY_THRESHOLD) {
       next();
@@ -226,9 +228,21 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
         x-animation moves them cleanly left/right from that common origin.
         rotateY + x together create the "cards fanning out behind" look.
       */}
-      <div
-        className="relative hidden md:block"
+      <motion.div
+        className="relative hidden md:block touch-pan-y cursor-grab active:cursor-grabbing"
         style={{ height: CARD_H, perspective: "1200px" }}
+        // Arrastar com o mouse (não só clicar no card lateral) — mesma
+        // técnica de TestimonialCarousel em wall-of-love-section.tsx:
+        // dragConstraints trava em 0, dragElastic só dá a "borrachinha" de
+        // feedback, e reaproveita o MESMO handleDragEnd (com os mesmos
+        // limiares) já usado pelo swipe do mobile logo abaixo — o gesto só
+        // decide a direção, quem anima a troca de centro continua sendo o
+        // `animate` de cada card.
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        dragElastic={0.12}
+        dragMomentum={false}
+        onDragEnd={handleDragEnd}
       >
         {artigos.map((artigo, i) => {
           const role = getRole(i, center, total);
@@ -268,7 +282,7 @@ function NaMidiaSection({ artigos }: NaMidiaSectionProps) {
             </motion.div>
           );
         })}
-      </div>
+      </motion.div>
 
       {/*
         ── Mobile — single card with slide transition ────────────────────────

@@ -17,6 +17,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorParallaxSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
+import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -24,6 +25,8 @@ import { Button } from "@/components/ui/button";
 import { RefreshCw } from "lucide-react";
 
 import { artigosMidia, depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
+
+const LEAD_TITLE = "Software de Pagamentos";
 
 function SoftwarePagamentosPage() {
   useSeo({
@@ -33,6 +36,7 @@ function SoftwarePagamentosPage() {
     path: "/software-de-pagamentos",
   });
 
+  const { openLeadCapture } = useLeadCapture();
   const { data, isLoading, isError, refetch } = useSoftwarePagamentosPage();
 
   if (isLoading) {
@@ -67,7 +71,10 @@ function SoftwarePagamentosPage() {
   return (
     <div className="space-y-0">
       {/* Section 1: Hero */}
-      <HeroSection data={data.hero} />
+      <HeroSection
+        data={data.hero}
+        onCtaClick={() => openLeadCapture({ source: "hero_software_pagamentos", title: LEAD_TITLE })}
+      />
 
       {/* Section 2: O que é o Foco Pay */}
       <GenericInfoSection
@@ -132,6 +139,8 @@ function SoftwarePagamentosPage() {
         title="Pronto para automatizar a gestão financeira do seu hotel?"
         subtitle="Solicite uma demonstração e descubra como o Foco Pay pode transformar seus pagamentos."
         badge="Comece agora"
+        source="cta_final_software_pagamentos"
+        leadTitle={LEAD_TITLE}
       />
     </div>
   );

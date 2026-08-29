@@ -132,7 +132,7 @@ function PartnerTile({ parceiro }: { parceiro: Parceiro }) {
         {parceiro.nome}
       </span>
 
-      <p className="text-slate-500 text-[12.5px] leading-relaxed line-clamp-6">
+      <p className="text-slate-600 text-[12.5px] leading-relaxed line-clamp-6">
         {parceiro.resumo}
       </p>
     </div>
@@ -268,7 +268,7 @@ function ParceirosEliteSection() {
                     referência no mercado
                   </span>
                 </h2>
-                <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+                <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
                   Construímos nosso ecossistema ao lado de parceiros estratégicos,
                   altamente engajados: cada logo abaixo é uma integração testada,
                   aprovada e em uso todos os dias pelos nossos clientes.
@@ -325,7 +325,7 @@ function ParceirosEliteSection() {
                   referência no mercado
                 </span>
               </h2>
-              <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+              <p className="text-slate-600 text-lg max-w-2xl mx-auto leading-relaxed">
                 Construímos nosso ecossistema ao lado de parceiros estratégicos,
                 altamente engajados. Cada parceiro representa uma integração
                 testada, aprovada e em uso todos os dias pelos nossos clientes.
@@ -354,6 +354,10 @@ function ParceirosEliteSection() {
               <div className="flex overflow-hidden px-4 sm:px-0">
                 <motion.div
                   className={`flex items-stretch gap-4 sm:gap-5 ${CARD_HEIGHT}`}
+                  // `initial` explícito — evita o Framer Motion ler o `x`
+                  // atual do DOM antes de animar (força reflow logo após o
+                  // mount; ver mesmo comentário em trusted-logos-marquee.tsx).
+                  initial={{ x: "0%" }}
                   animate={{ x: ["0%", "-50%"] }}
                   transition={{ x: { repeat: Infinity, repeatType: "loop", duration: 32, ease: "linear" } }}
                 >

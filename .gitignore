@@ -11,6 +11,10 @@ node_modules
 dist-ssr
 *.local
 
+# Gerado por scripts/generate-blog-index.mjs a cada dev/build — ver
+# posts-index.ts pra entender por que não é eager glob direto no .mdx.
+src/features/blog/lib/_generated-index.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
