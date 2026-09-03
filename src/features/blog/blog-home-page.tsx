@@ -177,15 +177,15 @@ function BlogHomePage() {
           ))}
         </div>
 
-        {/* `flex-wrap` + `shrink-0` nos botões — sem isso o flexbox
-            espremia cada botão pra caber tudo numa linha só no mobile
-            (chegavam a ~13px de largura em vez dos 36px pedidos, viravam
-            praticamente impossíveis de tocar). Agora quebra linha em vez
-            de espremer. Números resumidos via buildPageList — ver comentário
-            lá — mais Anterior/Próxima pra navegar sem precisar do número
-            exato. */}
+        {/* Números resumidos via buildPageList — ver comentário lá — só a
+            partir de `sm`: no mobile, prev + até 9 botões (7 números +
+            reticências + next) não cabem numa linha de ~340px, e o
+            `flex-wrap` deixava o botão "Próxima" órfão numa 2ª linha
+            sozinho. Abaixo de `sm` troca os números por um indicador
+            "página X de Y" — sempre cabe numa linha só, não importa quantas
+            páginas existam, sem depender de contar pixel de botão. */}
         {totalPages > 1 && (
-          <nav aria-label="Paginação" className="flex flex-wrap items-center justify-center gap-2 mt-14">
+          <nav aria-label="Paginação" className="flex items-center justify-center gap-2 mt-14">
             <button
               type="button"
               onClick={() => goToPage(page - 1)}
@@ -196,25 +196,31 @@ function BlogHomePage() {
               <ChevronLeft className="w-4 h-4" strokeWidth={2} />
             </button>
 
-            {buildPageList(page, totalPages).map((item, i) =>
-              item === "…" ? (
-                <span key={`ellipsis-${i}`} aria-hidden="true" className="w-9 shrink-0 text-center text-[13.5px] text-slate-400 select-none">
-                  &hellip;
-                </span>
-              ) : (
-                <button
-                  key={item}
-                  type="button"
-                  onClick={() => goToPage(item)}
-                  aria-current={item === page ? "page" : undefined}
-                  className={`h-9 w-9 shrink-0 rounded-full text-[13.5px] font-medium transition-colors ${
-                    item === page ? "bg-[#285992] text-white" : "bg-white border border-slate-200 text-slate-600 hover:border-[#285992]/40"
-                  }`}
-                >
-                  {item}
-                </button>
-              )
-            )}
+            <span className="sm:hidden text-[13.5px] font-medium text-slate-600 px-2 whitespace-nowrap">
+              Página {page} de {totalPages}
+            </span>
+
+            <div className="hidden sm:flex items-center gap-2">
+              {buildPageList(page, totalPages).map((item, i) =>
+                item === "…" ? (
+                  <span key={`ellipsis-${i}`} aria-hidden="true" className="w-9 shrink-0 text-center text-[13.5px] text-slate-400 select-none">
+                    &hellip;
+                  </span>
+                ) : (
+                  <button
+                    key={item}
+                    type="button"
+                    onClick={() => goToPage(item)}
+                    aria-current={item === page ? "page" : undefined}
+                    className={`h-9 w-9 shrink-0 rounded-full text-[13.5px] font-medium transition-colors ${
+                      item === page ? "bg-[#285992] text-white" : "bg-white border border-slate-200 text-slate-600 hover:border-[#285992]/40"
+                    }`}
+                  >
+                    {item}
+                  </button>
+                )
+              )}
+            </div>
 
             <button
               type="button"
