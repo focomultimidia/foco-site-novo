@@ -1,7 +1,7 @@
 "use client";
 
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
-import { SyncHubDiagram } from "./sync-hub-diagram";
+import { OrbitDiagram } from "@/features/shared/components/orbit-diagram";
 import { motion } from "framer-motion";
 import {
   Award,
@@ -137,11 +137,9 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             ))}
           </div>
 
-          {/* Center column — hub de sincronização (ver sync-hub-diagram.tsx):
-              o painel Foco fica fixo e dispara pulsos de luz por canal, que
-              ecoam nos badges na chegada. Peça própria da home, não o
-              OrbitDiagram (esse reaparece em /sobre e /integracoes-hoteleiras
-              com os anéis girando) | mobile: order-1 */}
+          {/* Center column — animação do orbit (mesma do OrbitSection em
+              /sobre, só a peça visual, sem a metade de texto/copy daquela
+              seção) no lugar do vídeo | mobile: order-1 */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -149,7 +147,7 @@ function DiferenciaisSection({ diferenciais }: DiferenciaisSectionProps) {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-1 lg:order-none flex items-center justify-center py-8 lg:py-0"
           >
-            <SyncHubDiagram />
+            <OrbitDiagram showConnections innerDurationSec={12} outerDurationSec={50} />
           </motion.div>
 
           {/* Right column — cards 5–8 | mobile: order-3 */}
