@@ -13,10 +13,11 @@ import {
   Users,
   TrendingUp,
   CheckCircle2,
+  Image as ImageIcon,
+  Smartphone,
 } from "lucide-react";
 import type { HeroData } from "../types";
 import { HERO_SCALE_CSS, fluidRem, fluidPx } from "@/features/shared/lib/hero-scale";
-import { HeroDashboardMockup, HeroMobileScreenMockup } from "./hero-mockup-content";
 
 // ── Entry easing ──────────────────────────────────────────────────────────────
 
@@ -46,9 +47,61 @@ const TRUST_BADGES = [
   { icon: CheckCircle2, label: "Suporte humanizado" },
 ] as const;
 
-// ── Conteúdo dos mockups — dashboard "vivo" (desktop) e chave digital
-//    (mobile), ambos desenhados em código em hero-mockup-content.tsx, sem
-//    print real. Substituíram a imagem única fixa que havia antes aqui. ──
+// ── Imagem única do mockup — desktop e celular, sem troca/transição (pedido
+//    explícito: um print fixo em cada tela, nada de carrossel ou scrollytelling). ──
+
+interface SlideDef {
+  src?: string;
+  alt: string;
+  objectPosition?: string;
+}
+
+const DESKTOP_SLIDE: SlideDef = {
+  src: "/assets/imgs/home/dashboard.webp",
+  alt: "Ecossistema Foco Tecnologia conectando sistemas de gestão hoteleira em uma única plataforma",
+};
+
+const MOBILE_SLIDE: SlideDef = {
+  src: "/assets/imgs/home/produtos/mapa-mobile.webp",
+  alt: "Check-in digital do hóspede",
+};
+
+// ── SlideVisual — imagem real ou placeholder tracejado, usado pelos mockups
+//    desktop e mobile. ────────────────────────────────────────────────────
+
+function SlideVisual({ src, alt, eager, icon, iconClassName, labelClassName, objectPosition }: {
+  src?: string;
+  alt: string;
+  eager?: boolean;
+  icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>;
+  iconClassName: string;
+  labelClassName: string;
+  objectPosition?: string;
+}) {
+  if (src) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        fetchPriority={eager ? "high" : "low"}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        className="w-full h-full object-cover block"
+        style={objectPosition ? { objectPosition } : undefined}
+      />
+    );
+  }
+  const Icon = icon ?? ImageIcon;
+  return (
+    <div
+      className="absolute inset-0 flex flex-col items-center justify-center gap-2 border-2 border-dashed"
+      style={{ borderColor: "rgba(40,89,146,0.2)", background: "rgba(40,89,146,0.04)" }}
+    >
+      <Icon className={iconClassName} style={{ color: "rgba(40,89,146,0.35)" }} strokeWidth={1.5} />
+      <span className={labelClassName} style={{ color: "rgba(40,89,146,0.45)" }}>{alt}</span>
+    </div>
+  );
+}
 
 // ── HeroSection ───────────────────────────────────────────────────────────────
 
@@ -329,7 +382,14 @@ function HeroSection({ data: _data, onCtaClick }: HeroSectionProps) {
                 style={{ background: "linear-gradient(135deg, rgba(255,255,255,0.22), transparent 40%)" }}
               />
               <div className="relative w-full h-full" style={{ aspectRatio: "815 / 584" }}>
-                <HeroDashboardMockup />
+                <SlideVisual
+                  src={DESKTOP_SLIDE.src}
+                  alt={DESKTOP_SLIDE.alt}
+                  eager
+                  objectPosition={DESKTOP_SLIDE.objectPosition}
+                  iconClassName="w-7 h-7"
+                  labelClassName="text-xs font-medium px-6 text-center"
+                />
               </div>
 
             </motion.div>
@@ -501,7 +561,14 @@ function HeroMobileMockup({ isWideLayout }: { isWideLayout: boolean }) {
             style={isWideLayout ? { top: fluidPx(12), width: fluidPx(32), height: fluidPx(7) } : undefined}
           />
 
-          <HeroMobileScreenMockup />
+          <SlideVisual
+            src={MOBILE_SLIDE.src}
+            alt={MOBILE_SLIDE.alt}
+            eager
+            icon={Smartphone}
+            iconClassName="w-6 h-6"
+            labelClassName="text-[10px] font-medium text-center px-2"
+          />
         </div>
       </div>
     </motion.div>

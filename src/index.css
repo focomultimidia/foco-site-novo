@@ -325,16 +325,6 @@
   100% { opacity: 0; }
 }
 
-/* Brilho em varredura do card "chave digital" (hero da Home, mockup mobile
-   recriado em código) — mesma técnica do cm-hub-glint acima, só que num
-   loop simples (sem sincronismo com nenhum outro traçado). */
-@keyframes hero-key-glint {
-  0%   { transform: translateX(-160%) rotate(15deg); opacity: 0; }
-  6%   { opacity: 1; }
-  16%  { transform: translateX(220%) rotate(15deg); opacity: 0; }
-  100% { opacity: 0; }
-}
-
 /* ──────────────────────────────────────────────────────────────────────────
    MARQUEE DE POSTS — duas fileiras em sentidos opostos (mural de conteúdo,
    marketing-para-hoteis). translateX(-50%) desloca exatamente um conjunto
