@@ -159,16 +159,16 @@ const homeData: HomeData = {
    {
       id: "5",
       icone: "Star",
-      titulo: "Elite Partner 2025",
+      titulo: "Elite Partner 2026",
       descricao:
-        "Fomos reconhecidos pelo Expedia Group como Elite Partner 2025 por atender a padrões excepcionais de desempenho, integração e suporte.",
+        "Fomos reconhecidos pelo Expedia Group como Elite Partner 2026 por atender a padrões excepcionais de desempenho, integração e suporte.",
     },
     {
       id: "6",
       icone: "Users",
       titulo: "+2.700 Hoteleiros Satisfeitos",
       descricao:
-        "Mais de 2.500 hoteleiros satisfeitos com as nossas soluções no Brasil.",
+        "Mais de 2.700 hoteleiros satisfeitos com as nossas soluções no Brasil.",
     },
     {
       id: "7",
@@ -210,9 +210,9 @@ const homeData: HomeData = {
     {
       id: "4",
       icone: "Database",
-      titulo: "Data Encryption",
+      titulo: "Oracle Cloud Guard",
       descricao:
-        "Seus dados protegidos com criptografia avançada 256-bit.",
+        "Detecta ameaças, identifique configurações incorretas e monitore atividades inseguras.",
     },
   ],
   tiposPropriedade: [

@@ -6,6 +6,13 @@
     <title>Revenue Management na hotelaria: potencialize sua receita | Blog Foco</title>
     <meta name="description" content="Entender o comportamento e perfil do cliente, para aumentar a venda de reservas é o sonho de qualquer dono de hotel ou pousada. E o Revenue Management na hotelaria (RM) é a metodologia que irá ajudá-los a oferecer o produto certo, pelo preço certo, na hora certa e para o cliente certo, como bem definiu Robert Cross, um dos principais estudiosos sobre o tema. Porém, na hotelaria, assim como em qualquer negócio, aumentar a receita não necessariamente significa aumentar os lucros. E somente através do correto gerenciamento dessas receitas e despesas, é que se consegue obter o lucro almejado. O RM consiste em flutuar as tarifas dos quartos com base em análises e métricas provenientes da inteligência de dados, de forma que se aproveite o máximo possível as tendências e demandas do mercado. Quando você coloca um preço na diária, precisa levar em consideração: concorrência, mercado econômico, localização, estrutura e a percepção do seu cliente sobre o seu meio de hospedagem, e é nisso que o Revenue Management pode te ajudar. Estima-se que hotéis conseguiram aumentar em 35% a sua receita, utilizando o RM, pois a metodologia os fizeram identificar oportunidades de mercado e perceber que era possível operar tarifas" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/revenue-management-na-hotelaria-maximize-sua-receita" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Revenue Management na hotelaria: potencialize sua receita","description":"Entender o comportamento e perfil do cliente, para aumentar a venda de reservas é o sonho de qualquer dono de hotel ou pousada. E o Revenue Management na hotelaria (RM) é a metodologia que irá ajudá-los a oferecer o produto certo, pelo preço certo, na hora certa e para o cliente certo, como bem definiu Robert Cross, um dos principais estudiosos sobre o tema. Porém, na hotelaria, assim como em qualquer negócio, aumentar a receita não necessariamente significa aumentar os lucros. E somente através do correto gerenciamento dessas receitas e despesas, é que se consegue obter o lucro almejado. O RM consiste em flutuar as tarifas dos quartos com base em análises e métricas provenientes da inteligência de dados, de forma que se aproveite o máximo possível as tendências e demandas do mercado. Quando você coloca um preço na diária, precisa levar em consideração: concorrência, mercado econômico, localização, estrutura e a percepção do seu cliente sobre o seu meio de hospedagem, e é nisso que o Revenue Management pode te ajudar. Estima-se que hotéis conseguiram aumentar em 35% a sua receita, utilizando o RM, pois a metodologia os fizeram identificar oportunidades de mercado e perceber que era possível operar tarifas","image":"https://focomultimidia.com/assets/imgs/blog/revenue-management-na-hotelaria-maximize-sua-receita/Revenue_management_blog.webp","datePublished":"2023-10-30","dateModified":"2023-10-30","author":{"@type":"Person","name":"Marketing"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/revenue-management-na-hotelaria-maximize-sua-receita"}}</script>

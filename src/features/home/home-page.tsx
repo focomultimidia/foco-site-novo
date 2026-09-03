@@ -1,22 +1,34 @@
 import { useHomePage } from "./hooks/use-home-page";
 import { useSeo } from "@/features/shared/lib/use-seo";
-import {
-  HeroSection,
-  ProdutosSection,
-  //DoresSection,
-  DoresDiagnosticoSection,
-  OtheoAiTeaserSection,
-  ParceirosEliteSection,
-  DiferenciaisSection,
-  SegurancaSection,
-  TiposPropriedadeSection,
-} from "./components";
+import { HeroSection } from "./components";
+// Import direto de cada arquivo `-lazy` (não do barrel `./components`) pelo
+// MESMO motivo do bloco de shared/components abaixo: um barrel com vários
+// exports faz o Rollup fundir o wrapper lazy de volta no mesmo chunk da
+// implementação real (medido: sem isso, otheo-ai-teaser-section e as outras
+// seções abaixo continuavam baixando o chunk inteiro, não só o wrapper).
+import { ProdutosSection } from "./components/produtos-section-lazy";
+import { DoresDiagnosticoSection } from "./components/dores-diagnostico-section-lazy";
+import { OtheoAiTeaserSection } from "./components/otheo-ai-teaser-section-lazy";
+import { ParceirosEliteSection } from "./components/parceiros-elite-section-lazy";
+import { DiferenciaisSection } from "./components/diferenciais-section-lazy";
+import { SegurancaSection } from "./components/seguranca-section-lazy";
+import { TiposPropriedadeSection } from "./components/tipos-propriedade-section-lazy";
 import { EventosSection } from "@/features/home/components/eventos-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NumerosSection } from "@/features/home/components/numeros-section";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
-import { TrustedLogosMarquee, SmartIntegrationsTabs, CertificacoesSection, WallOfLoveSection } from "@/features/shared/components";
+// Import direto de cada arquivo (não do barrel `@/features/shared/components`)
+// de propósito: barrel com >15 exports faz o Rollup incluir o grafo estático
+// inteiro do barrel como dependência do chunk da Home, mesmo os exports que
+// a Home nunca usa (medido: puxava dor-parallax-section, que a Home não
+// renderiza) — mesmo problema já documentado em App.tsx sobre não importar
+// as páginas do blog pelo barrel.
+import { TrustedLogosMarquee } from "@/features/shared/components/trusted-logos-marquee-lazy";
+import { SmartIntegrationsTabs } from "@/features/shared/components/smart-integrations-tabs-lazy";
+import { CertificacoesSection } from "@/features/shared/components/certificacoes-section-lazy";
+import { WallOfLoveSection } from "@/features/shared/components/wall-of-love-section-lazy";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
 import { eventos, depoimentos, numeros, videosData, artigosMidia } from "@/features/shared/data/social-proof-data";
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -67,7 +79,7 @@ export function HomePage() {
     <div className="min-h-screen">
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "home_hero", title: "Foco Tecnologia" })}
+        onCtaClick={() => openLeadCapture({ source: "form-home", title: "Foco Tecnologia" })}
       />
 
       <TrustedLogosMarquee />
@@ -106,6 +118,8 @@ export function HomePage() {
       <TiposPropriedadeSection tipos={data.tiposPropriedade} />
 
       <NumerosSection numeros={numeros} />
+
+      <UltimasDoBlogSection />
 
       {/* Prova Social: FAQ */}
       <FAQAccordion

@@ -20,6 +20,8 @@ import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 import { WebsitePortfolioCarousel } from "@/features/shared/components";
 //import { ProdutosAccordionSection } from "@/features/shared/components";
 
@@ -78,7 +80,7 @@ function MotorReservasPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_motor_de_reservas", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-motor-de-reservas", title: LEAD_TITLE, icon: getProdutoIcone("/motor-de-reservas") })}
       />
 
       {/* Section 2: O que é um motor de reservas */}
@@ -133,7 +135,7 @@ function MotorReservasPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
-      {/*<ProdutosAccordionSection //*>}
+      <UltimasDoBlogSection productSlug="motor-de-reservas" />
 
       {/* Prova Social: FAQ */}
       <FAQAccordion
@@ -148,7 +150,7 @@ function MotorReservasPage() {
         title="Pronto para aumentar suas reservas diretas?"
         subtitle="Solicite uma demonstração e descubra como o Motor de Reservas da Foco pode transformar seu negócio."
         badge="Comece agora"
-        source="cta_final_motor_de_reservas"
+        source="motor-de-reservas"
         leadTitle={LEAD_TITLE}
       />
 

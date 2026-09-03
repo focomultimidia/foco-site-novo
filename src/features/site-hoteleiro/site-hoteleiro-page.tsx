@@ -18,6 +18,8 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorPa
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
 import { Button } from "@/components/ui/button";
@@ -71,7 +73,7 @@ function SiteHoteleiroPage() {
       {/* Hero Section */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_site_hoteleiro", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-sites-para-hoteis-e-pousadas", title: LEAD_TITLE, icon: getProdutoIcone("/sites-para-hoteis-e-pousadas") })}
       />
 
       {/* Section 1: Modelos de sites */}
@@ -122,6 +124,8 @@ function SiteHoteleiroPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="sites-para-hoteis-e-pousadas" />
+
       {/* Prova Social 4: FAQ */}
       <FAQAccordion
         items={data.faq.map((f) => ({ id: f.id, question: f.pergunta, answer: f.resposta }))}
@@ -136,7 +140,7 @@ function SiteHoteleiroPage() {
         title="Pronto para ter um Site Hoteleiro Profissional?"
         subtitle="Solicite uma demonstração e veja como podemos ajudar seu hotel a vender mais diretamente."
         badge="Comece agora"
-        source="cta_final_site_hoteleiro"
+        source="sites-para-hoteis-e-pousadas"
         leadTitle={LEAD_TITLE}
       />
 

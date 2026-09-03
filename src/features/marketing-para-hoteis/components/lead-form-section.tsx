@@ -7,7 +7,7 @@ import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PolicyModal } from "@/features/politica-de-privacidade/components/policy-modal";
-import { submitMarketingLead } from "../api/lead-api";
+import { submitLeadCapture } from "@/features/shared/api/lead-capture-api";
 
 const EASE = [0.22, 1, 0.36, 1] as [number, number, number, number];
 const CARD_BG = "linear-gradient(135deg, #1e4d85 0%, #285992 45%, #3a72b0 100%)";
@@ -114,6 +114,7 @@ function LeadFormSection() {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState | "aceitePolitica", string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [isPolicyOpen, setIsPolicyOpen] = useState(false);
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
@@ -138,8 +139,10 @@ function LeadFormSection() {
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
-      await submitMarketingLead({
+      await submitLeadCapture({
+        source:          "marketing_para_hoteis_diagnostico_gratuito",
         nome:            form.nome.trim(),
         estabelecimento: form.estabelecimento.trim(),
         telefone:        form.telefone,
@@ -147,6 +150,9 @@ function LeadFormSection() {
         clienteFoco:     form.clienteFoco === "sim",
       });
       setIsSuccess(true);
+    } catch (err) {
+      console.error("[lead-form-section] Falha ao enviar:", err);
+      setSubmitError("Não foi possível enviar sua solicitação. Tente novamente em instantes.");
     } finally {
       setIsSubmitting(false);
     }
@@ -156,6 +162,7 @@ function LeadFormSection() {
     setForm(EMPTY_FORM);
     setAceitePolitica(false);
     setErrors({});
+    setSubmitError(null);
     setIsSuccess(false);
   }
 
@@ -327,6 +334,12 @@ function LeadFormSection() {
                     </div>
                     {errors.aceitePolitica && <p className="mt-1.5 text-[12px] text-red-500">{errors.aceitePolitica}</p>}
                   </div>
+
+                  {submitError && (
+                    <p className="rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-[13px] text-red-600">
+                      {submitError}
+                    </p>
+                  )}
 
                   <button
                     type="submit"

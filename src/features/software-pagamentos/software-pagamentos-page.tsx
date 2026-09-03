@@ -18,6 +18,8 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorPa
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -73,7 +75,7 @@ function SoftwarePagamentosPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_software_pagamentos", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-software-de-pagamentos", title: LEAD_TITLE, icon: getProdutoIcone("/software-de-pagamentos") })}
       />
 
       {/* Section 2: O que é o Foco Pay */}
@@ -119,6 +121,8 @@ function SoftwarePagamentosPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="software-de-pagamentos" />
+
       {/* Prova Social: FAQ */}
       <FAQAccordion
         items={[
@@ -139,7 +143,7 @@ function SoftwarePagamentosPage() {
         title="Pronto para automatizar a gestão financeira do seu hotel?"
         subtitle="Solicite uma demonstração e descubra como o Foco Pay pode transformar seus pagamentos."
         badge="Comece agora"
-        source="cta_final_software_pagamentos"
+        source="software-de-pagamentos"
         leadTitle={LEAD_TITLE}
       />
     </div>

@@ -185,8 +185,17 @@ function buildHead(template, { title, description, path: routePath, image, image
   return html;
 }
 
+// Bloco de preload que só vale pra Home — ver o comentário no index.html.
+// Fica marcado por comentários HTML em vez de casar a <link> pelo href
+// porque o alvo pode mudar (outro print, outro formato) e o marcador
+// continua valendo; e porque deixa explícito no próprio index.html que
+// aquele trecho tem escopo de rota, não de site.
+const HOME_ONLY_PRELOAD = /[ \t]*<!-- lcp-preload:home -->[\s\S]*?<!-- \/lcp-preload:home -->\n?/;
+
 async function writeRoute(template, routePath, seo) {
-  const html = buildHead(template, seo);
+  let html = buildHead(template, seo);
+  // Toda rota que não é a Home baixaria de graça o print do dashboard.
+  if (routePath !== "/") html = html.replace(HOME_ONLY_PRELOAD, "");
   const outDir = routePath === "/" ? DIST : path.join(DIST, routePath.replace(/^\//, ""));
   await mkdir(outDir, { recursive: true });
   await writeFile(path.join(outDir, "index.html"), html, "utf8");
@@ -218,14 +227,24 @@ async function main() {
       ? `${SITE_URL}/assets/imgs/og/${seo.path.slice(1)}.jpeg`
       : DEFAULT_OG_IMAGE;
     if (isProduct) {
+      // "SoftwareApplication", não "Product" — são módulos de um SaaS
+      // hoteleiro (sem preço público fixo, sem review/rating coletado no
+      // site), e o Search Console reprova "Product" sem pelo menos um de
+      // "offers"/"review"/"aggregateRating" (erro real visto: "Snippets do
+      // produto: Especifique 'offers', 'review' ou 'aggregateRating'" nas
+      // páginas de produto). Inventar esses campos violaria as políticas de
+      // dados estruturados do Google; "SoftwareApplication" descreve o que
+      // a página realmente é sem exigir nenhum deles.
       jsonLd.push({
         "@context": "https://schema.org",
-        "@type": "Product",
+        "@type": "SoftwareApplication",
         name: seo.title.split("|")[0].trim(),
         description: seo.description,
         image,
         url: `${SITE_URL}${seo.path}`,
-        brand: { "@type": "Brand", name: "Foco Tecnologia" },
+        applicationCategory: "BusinessApplication",
+        operatingSystem: "Web",
+        author: { "@type": "Organization", name: "Foco Tecnologia" },
       });
     }
     await writeRoute(template, seo.path, {

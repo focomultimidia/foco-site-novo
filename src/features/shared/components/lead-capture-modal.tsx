@@ -7,7 +7,7 @@
 // Este componente é o padrão único de captura de lead do resto do site:
 // mesmo visual, mesmos campos (Nome, Email, Telefone, Estabelecimento,
 // "Você é cliente da Foco?", aceite de política), só que parametrizado por
-// `title`/`logo`/`source` em vez de amarrado a um objeto `pms`. Normalmente
+// `title`/`icon`/`source` em vez de amarrado a um objeto `pms`. Normalmente
 // não é instanciado direto — ver useLeadCapture()/LeadCaptureProvider em
 // src/features/shared/lib/lead-capture-context.tsx.
 
@@ -29,8 +29,10 @@ interface LeadCaptureModalProps {
   title:   string;
   /** Selo acima do título — default "Solicitar orçamento". */
   eyebrow?: string;
-  /** Logo/ícone opcional ao lado do título — sem ele, cai no mesmo placeholder tracejado do PmsOrcamentoModal. */
-  logo?:    string;
+  /** Ícone do produto ao lado do título — mesmo componente de `PRODUTOS_DATA`
+      (ver `Icone` em produtos-data.ts, `getProdutoIcone`); sem ele, cai no
+      mesmo placeholder neutro do PmsOrcamentoModal. */
+  icon?:    React.ComponentType<{ className?: string }>;
   /** De onde veio o lead (hero de qual página, header, CTA final, etc.) — vai junto no payload do envio. */
   source:   string;
 }
@@ -92,7 +94,7 @@ function Field({
 
 // ── LeadCaptureModal ──────────────────────────────────────────────────────────
 
-function LeadCaptureModal({ isOpen, onClose, title, eyebrow = "Solicitar orçamento", logo, source }: LeadCaptureModalProps) {
+function LeadCaptureModal({ isOpen, onClose, title, eyebrow = "Solicitar orçamento", icon: Icon, source }: LeadCaptureModalProps) {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [aceitePolitica, setAceitePolitica] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState | "aceitePolitica", string>>>({});
@@ -208,11 +210,11 @@ function LeadCaptureModal({ isOpen, onClose, title, eyebrow = "Solicitar orçame
                 </span>
 
                 <div className="flex items-center gap-3 pr-8">
-                  <div className="w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center p-1.5 shrink-0">
-                    {logo ? (
-                      <img src={logo} alt="" className="max-w-full max-h-full object-contain" />
+                  <div className="w-11 h-11 rounded-xl bg-[#285992]/10 flex items-center justify-center shrink-0">
+                    {Icon ? (
+                      <Icon className="w-5 h-5 text-[#285992]" />
                     ) : (
-                      <ImageIcon className="w-4 h-4 text-slate-300" strokeWidth={1.5} />
+                      <ImageIcon className="w-4 h-4 text-[#285992]/40" strokeWidth={1.5} />
                     )}
                   </div>
                   <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#132840] tracking-tight leading-tight">

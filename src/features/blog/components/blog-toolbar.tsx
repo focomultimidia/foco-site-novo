@@ -24,7 +24,7 @@ function BlogToolbar() {
         </Link>
       )}
 
-      <BlogSearchBar className="w-full max-w-[220px] sm:max-w-[260px] shrink-0 ml-auto" />
+      <BlogSearchBar className="w-full max-w-none sm:max-w-[260px] shrink-0 ml-auto" />
     </div>
   );
 }

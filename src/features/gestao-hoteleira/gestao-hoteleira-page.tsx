@@ -17,6 +17,12 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, W
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
+// Import direto do arquivo `-lazy` (não do barrel `./components` da Home)
+// pelo mesmo motivo já documentado em home-page.tsx: evita que o Rollup
+// funda o wrapper lazy de volta no chunk da implementação real.
+import { OtheoAiTeaserSection } from "@/features/home/components/otheo-ai-teaser-section-lazy";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -72,7 +78,7 @@ function GestaoHoteleiraPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_gestao_hoteleira", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-sistema-de-gestao-hoteleira-pms", title: LEAD_TITLE, icon: getProdutoIcone("/sistema-de-gestao-hoteleira-pms") })}
       />
 
       {/* Section 2: O que é um sistema PMS */}
@@ -87,6 +93,8 @@ function GestaoHoteleiraPage() {
 
       {/* Section 3: Recursos do PMS */}
       <RecursosSection />
+
+      <OtheoAiTeaserSection />
 
       {/* Integrações Inteligentes */}
       <SmartIntegrationsTabs />
@@ -113,6 +121,8 @@ function GestaoHoteleiraPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="sistema-de-gestao-hoteleira-pms" />
+
       {/* Prova Social: FAQ */}
       <FAQAccordion
         items={[
@@ -135,7 +145,7 @@ function GestaoHoteleiraPage() {
         title="Pronto para transformar a gestão do seu hotel?"
         subtitle="Solicite uma demonstração e descubra como o PMS da Foco pode otimizar todas as operações do seu negócio."
         badge="Comece agora"
-        source="cta_final_gestao_hoteleira"
+        source="sistema-de-gestao-hoteleira-pms"
         leadTitle={LEAD_TITLE}
       />
     </div>

@@ -6,6 +6,13 @@
     <title>Governanta de hotel: Entenda a importância da sua função para a hotelaria | Blog Foco</title>
     <meta name="description" content="Em muitos estabelecimentos do segmento hoteleiro, a função de governanta de hotel é realizada pelo próprio dono, por um gerente e até por um camareira mais experiente. Esse fato depende do porte e necessidades do hotel ou pousada, entre outros fatores. No entanto, o hoteleiro deve entender que essa função precisa figurar como fundamental para o negócio funcionar da melhor forma possível e possibilitar uma experiência excepcional para cada hóspede. Tudo isso porque, a grosso modo, a governanta de hotelaria gerencia todo o coração de um hotel. Como dito anteriormente, essa atividade pode esbarrar em diferentes colaboradores e, por isso, há um pouco de confusão para entender quais são as responsabilidades desse profissional. Portanto, criamos este artigo com tudo o que você precisa saber sobre a atividade de uma governanta de hotel para poder posicionar este funcionário da maneira ideal na sua empresa. Continue lendo e saiba mais! O que uma governanta de hotel faz? Em geral, gerir a qualidade dos produtos e serviços, limpeza e organização do hotel ou pousada. Ou seja, dar as cartas no setor de governança, que cuida da arrumação dos apartamentos, lavanderia, rouparia, limpeza e manutenção. Sob o seu escrutínio, estão as funções de camareira," />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/governanta-de-hotel" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Governanta de hotel: Entenda a importância da sua função para a hotelaria","description":"Em muitos estabelecimentos do segmento hoteleiro, a função de governanta de hotel é realizada pelo próprio dono, por um gerente e até por um camareira mais experiente. Esse fato depende do porte e necessidades do hotel ou pousada, entre outros fatores. No entanto, o hoteleiro deve entender que essa função precisa figurar como fundamental para o negócio funcionar da melhor forma possível e possibilitar uma experiência excepcional para cada hóspede. Tudo isso porque, a grosso modo, a governanta de hotelaria gerencia todo o coração de um hotel. Como dito anteriormente, essa atividade pode esbarrar em diferentes colaboradores e, por isso, há um pouco de confusão para entender quais são as responsabilidades desse profissional. Portanto, criamos este artigo com tudo o que você precisa saber sobre a atividade de uma governanta de hotel para poder posicionar este funcionário da maneira ideal na sua empresa. Continue lendo e saiba mais! O que uma governanta de hotel faz? Em geral, gerir a qualidade dos produtos e serviços, limpeza e organização do hotel ou pousada. Ou seja, dar as cartas no setor de governança, que cuida da arrumação dos apartamentos, lavanderia, rouparia, limpeza e manutenção. Sob o seu escrutínio, estão as funções de camareira,","image":"https://focomultimidia.com/assets/imgs/blog/governanta-de-hotel/Governanta_de_hotel_blog-1-1.webp","datePublished":"2023-01-05","dateModified":"2023-01-24","author":{"@type":"Person","name":"Fabiana Guia"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/governanta-de-hotel"}}</script>

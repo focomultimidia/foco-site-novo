@@ -15,6 +15,7 @@ import { NumerosSection } from "@/features/home/components/numeros-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import { depoimentos, numeros, videosData } from "@/features/shared/data/social-proof-data";
 
@@ -76,7 +77,7 @@ function MarketingParaHoteisPage() {
 
   return (
     <div className="space-y-0">
-      <HeroSection onCtaClick={() => openLeadCapture({ source: "hero_marketing_para_hoteis", title: LEAD_TITLE })} />
+      <HeroSection onCtaClick={() => openLeadCapture({ source: "form-marketing-para-hoteis", title: LEAD_TITLE })} />
 
       <PorQueInvestirSection />
 
@@ -110,13 +111,15 @@ function MarketingParaHoteisPage() {
       <TrustedLogosMarquee />
       <CertificacoesSection />
 
+      <UltimasDoBlogSection productSlug="marketing-para-hoteis" />
+
       <FAQAccordion items={FAQ_ITEMS} title="Dúvidas Frequentes" subtitle="Tire suas dúvidas sobre marketing digital para hotelaria" badge="FAQ" showContactButton />
 
       <LeadCaptureCTA
         badge="Comece agora"
         title="Pronto para vender mais reservas diretas?"
         subtitle="Fale com um consultor e descubra como a Foco pode estruturar o marketing digital do seu hotel."
-        source="cta_final_marketing_para_hoteis"
+        source="marketing-para-hoteis"
         leadTitle={LEAD_TITLE}
       />
     </div>

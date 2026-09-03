@@ -19,6 +19,8 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, SmartIntegrationsTabs, W
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -75,7 +77,7 @@ function ChannelManagerPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_channel_manager", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-gestor-de-canais-channel-manager", title: LEAD_TITLE, icon: getProdutoIcone("/gestor-de-canais-channel-manager") })}
       />
 
       {/* Section 2: O que é um gestor de canais */}
@@ -122,6 +124,8 @@ function ChannelManagerPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="gestor-de-canais-channel-manager" />
+
       {/* Prova Social: FAQ */}
       <FAQAccordion
         items={[
@@ -142,7 +146,7 @@ function ChannelManagerPage() {
         title="Pronto para eliminar o overbooking e aumentar sua ocupação?"
         subtitle="Solicite uma demonstração e descubra como o Channel Manager da Foco pode transformar a gestão do seu hotel."
         badge="Comece agora"
-        source="cta_final_channel_manager"
+        source="gestor-de-canais-channel-manager"
         leadTitle={LEAD_TITLE}
       />
     </div>

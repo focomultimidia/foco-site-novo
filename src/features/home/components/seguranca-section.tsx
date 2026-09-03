@@ -2,7 +2,6 @@
 
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { motion, type Variants } from "framer-motion";
-import { Lock, Cloud, FileKey2 } from "lucide-react";
 import type { Certificacao } from "../types";
 
 interface SegurancaSectionProps {
@@ -16,7 +15,7 @@ const LOGO_MAP: Record<string, string> = {
   "1": "/assets/imgs/seguranca/pci-dss.svg",
   "2": "/assets/imgs/seguranca/lgpd.svg",
   "3": "/assets/imgs/seguranca/ssl.svg",
-  "4": "/assets/imgs/seguranca/data-encryption.svg",
+  "4": "/assets/imgs/seguranca/oracle.svg",
 };
 
 /**
@@ -146,30 +145,6 @@ function SegurancaSection({ certificacoes }: SegurancaSectionProps) {
           </motion.div>
 
         </div>
-
-        {/* Bottom trust bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-[#4c5c73] text-sm"
-        >
-          <div className="flex items-center gap-2">
-            <Lock className="w-4 h-4 text-[#285992]/70" />
-            <span>Criptografia SSL/TLS</span>
-          </div>
-          <div className="hidden sm:block w-px h-4 bg-[#132840]/12" />
-          <div className="flex items-center gap-2">
-            <Cloud className="w-4 h-4 text-[#285992]/70" />
-            <span>Hospedagem AWS &amp; Google Cloud</span>
-          </div>
-          <div className="hidden sm:block w-px h-4 bg-[#132840]/12" />
-          <div className="flex items-center gap-2">
-            <FileKey2 className="w-4 h-4 text-[#285992]/70" />
-            <span>Conformidade LGPD &amp; PCI DSS</span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

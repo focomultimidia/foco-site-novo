@@ -6,6 +6,13 @@
     <title>Fidelização de hóspedes: Expedia Group | Blog Foco</title>
     <meta name="description" content="Como ficou claro no nosso último artigo, a Expedia é uma empresa de viagens e tecnologia norte-americana, que atua em 29 países, realizando reservas em mais de 140 mil hotéis em todo o mundo, com receita divulgada de US$ 2 bilhões de dólares no segundo trimestre de 2021, segundo o phocuswire. A empresa também conta com o programa de fidelidade exclusiva para membros do Expedia Group, cujo objetivo é oferecer as suas melhores tarifas para viajantes frequentes através de promoções exclusivas para membros do grupo. Em recente pesquisa divulgada pelo Expedia, mais de 60% dos viajantes que pertencem ao grupo afirmaram que tencionam viajar várias vezes por ano, e que esses viajantes tendem a gastar mais, optando por estadias mais longas e reserva com maior frequência do que os não membros. Na pesquisa do Traveller Value Index (Índice de Princípios do Viajante) publicado pelo Skift, quase um em cada cinco viajantes, espera que as viagens sejam o setor de maiores gastos em 2021, enquanto um em cada três relatou ter orçamentos maiores para viagens este ano frente a 2020. O Expedia Group também anunciou na última quarta-feira (21 de setembro) que já tem uma programação definida para unificar e expandir" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/fidelizacao-de-hospedes-expedia-group" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Fidelização de hóspedes: Expedia Group","description":"Como ficou claro no nosso último artigo, a Expedia é uma empresa de viagens e tecnologia norte-americana, que atua em 29 países, realizando reservas em mais de 140 mil hotéis em todo o mundo, com receita divulgada de US$ 2 bilhões de dólares no segundo trimestre de 2021, segundo o phocuswire. A empresa também conta com o programa de fidelidade exclusiva para membros do Expedia Group, cujo objetivo é oferecer as suas melhores tarifas para viajantes frequentes através de promoções exclusivas para membros do grupo. Em recente pesquisa divulgada pelo Expedia, mais de 60% dos viajantes que pertencem ao grupo afirmaram que tencionam viajar várias vezes por ano, e que esses viajantes tendem a gastar mais, optando por estadias mais longas e reserva com maior frequência do que os não membros. Na pesquisa do Traveller Value Index (Índice de Princípios do Viajante) publicado pelo Skift, quase um em cada cinco viajantes, espera que as viagens sejam o setor de maiores gastos em 2021, enquanto um em cada três relatou ter orçamentos maiores para viagens este ano frente a 2020. O Expedia Group também anunciou na última quarta-feira (21 de setembro) que já tem uma programação definida para unificar e expandir","image":"https://focomultimidia.com/assets/imgs/blog/fidelizacao-de-hospedes-expedia-group/11_-_fidelizacao_BLOG.webp","datePublished":"2021-09-30","dateModified":"2021-09-30","author":{"@type":"Person","name":"Fernanda Mattos"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/fidelizacao-de-hospedes-expedia-group"}}</script>

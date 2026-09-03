@@ -6,6 +6,13 @@
     <title>5 Dicas para seu hotel se destacar nas redes sociais | Blog Foco</title>
     <meta name="description" content="Não é novidade que as redes sociais são ferramentas poderosas para negócios das mais diversas áreas e para hotelaria não é diferente. Fique com a gente até o final deste artigo e descubra 5 dicas para fazer o seu hotel se destacar no mundo digital. Cada vez mais os viajantes estão procurando por referências online para conhecer as melhores opções de hospedagem e ver conselhos de outras pessoas. Nesse sentido, estar online deixou de ser uma opção e é obrigatório que o hoteleiro invista em estratégias de marketing digital para se tornar referência de mercado e desejo dos hóspedes. Não há dúvidas sobre a importância e potencial que as redes sociais têm na hotelaria, ainda mais em um cenário em que boa parte dos viajantes utilizam mídias digitais para compartilhar experiências de viagem. Segundo relatório de 2021 da Hootsuite, somos 150.4 milhões de usuários na internet ativos no Brasil, dos quais, 70,3% dedicam, em média, 3h42 por dia nas redes sociais. E seu hotel não pode perder essa oportunidade! Afinal, se é nas redes sociais que seus hóspedes estão engajados e procurando informações para suas próximas viagens, é lá que o seu estabelecimento precisa estar também para superar a concorrência" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"5 Dicas para seu hotel se destacar nas redes sociais","description":"Não é novidade que as redes sociais são ferramentas poderosas para negócios das mais diversas áreas e para hotelaria não é diferente. Fique com a gente até o final deste artigo e descubra 5 dicas para fazer o seu hotel se destacar no mundo digital. Cada vez mais os viajantes estão procurando por referências online para conhecer as melhores opções de hospedagem e ver conselhos de outras pessoas. Nesse sentido, estar online deixou de ser uma opção e é obrigatório que o hoteleiro invista em estratégias de marketing digital para se tornar referência de mercado e desejo dos hóspedes. Não há dúvidas sobre a importância e potencial que as redes sociais têm na hotelaria, ainda mais em um cenário em que boa parte dos viajantes utilizam mídias digitais para compartilhar experiências de viagem. Segundo relatório de 2021 da Hootsuite, somos 150.4 milhões de usuários na internet ativos no Brasil, dos quais, 70,3% dedicam, em média, 3h42 por dia nas redes sociais. E seu hotel não pode perder essa oportunidade! Afinal, se é nas redes sociais que seus hóspedes estão engajados e procurando informações para suas próximas viagens, é lá que o seu estabelecimento precisa estar também para superar a concorrência","image":"https://focomultimidia.com/assets/imgs/blog/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais/1605_foco_appblog-1.webp","datePublished":"2022-05-17","dateModified":"2022-05-17","author":{"@type":"Person","name":"Marketing"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais"}}</script>

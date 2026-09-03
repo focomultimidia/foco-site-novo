@@ -20,23 +20,37 @@ const pmsIntegrados = [
   {
     id: "adm",
     nome: "ADM",
-    logo: "/assets/imgs/integracoes/pms/adm-hoteleiro.webp",
+    logo: "/assets/imgs/integracoes/pms/adm-hoteleiro.svg",
     descricao:
       "A ADM Desenvolvimento de Sistemas é uma empresa de tecnologia, sediada em Ilhéus-BA, criada em 2008, que desenvolve e comercializa o ADM Hotel e o ADM Restaurante, ferramentas para gestão de hotéis, pousadas, bares, restaurantes e similares com mais de 1200 licenças em todo o Brasil.",
   },
   {
     id: "bitz",
     nome: "Bitz",
-    logo: "/assets/imgs/integracoes/pms/bitz.webp",
+    logo: "/assets/imgs/integracoes/pms/bitz.svg",
     descricao:
       "A Bitz Softwares está há mais de 9 anos no mercado, uma empresa de tecnologia especializada no setor hoteleiro. Nosso propósito é gerar ótimas experiências para as pessoas. Facilitando suas vidas, economizando seu tempo e aumentando seu rendimento no dia-a-dia.",
   },
   {
     id: "carsoft",
     nome: "Carsoft",
-    logo: "/assets/imgs/integracoes/pms/carsoft.webp",
+    logo: "/assets/imgs/integracoes/pms/carsoft.svg",
     descricao:
       "Xenios: Sistema de gestão de hotéis, pousadas e hostels de fácil utilização. Possui integração com outros módulos como estoque, restaurante, financeiro, eventos, controle de serviços e reserva online direto pelo site do hotel/pousada. Conta com suporte 24 horas.",
+  },
+  {
+    id: "coniahoteis",
+    nome: "ConIA Hotéis",
+    logo: "/assets/imgs/integracoes/pms/conia.webp",
+    descricao:
+      "Soluções para Gestão Hoteleira e E.R.P. Facilite a gestão do seu hotel, pousada ou resort com a ferramenta certa para o seu negócio!",
+  },
+  {
+    id: "controlhotel",
+    nome: "Control Hotel Softwares",
+    logo: "/assets/imgs/integracoes/pms/control-hotel.svg",
+    descricao:
+      "Automatize reservas, controle o financeiro e gerencie seu hotel com um sistema 100% em nuvem e multi hotel. Tenha mais eficiência, reduza custos e facilite sua operação com uma plataforma intuitiva e completa.",
   },
   /*{
     id: "desbravador",
@@ -48,91 +62,91 @@ const pmsIntegrados = [
   {
     id: "esolution",
     nome: "eSolution",
-    logo: "/assets/imgs/integracoes/pms/esolution.webp",
+    logo: "/assets/imgs/integracoes/pms/esolution.svg",
     descricao:
       "A eSolution é uma empresa de software que está no mercado desde 2007. Sua atuação está focada em softwares de gestão em hotelaria e parques temáticos. Com um ideal de excelência, ela vem ganhando destaque nesses setores.",
   },
   {
     id: "hmax",
     nome: "HMAX",
-    logo: "/assets/imgs/integracoes/pms/hmax.webp",
+    logo: "/assets/imgs/integracoes/pms/hmax.svg",
     descricao:
       "A HMAX é uma empresa pioneira no mercado de automação hoteleira. O nosso sistema de gestão oferece 30 anos de conhecimento organizados em módulos, que você pode contratar segundo a sua necessidade. O PMS HMAX está integrado com a Foco Multimídia.",
   },
   {
     id: "hotelflow",
     nome: "Hotelflow",
-    logo: "/assets/imgs/integracoes/pms/hotelflow.webp",
+    logo: "/assets/imgs/integracoes/pms/hotelflow.svg",
     descricao:
       "Com o Hotelflow, você tem em mãos um gerenciamento moderno, prático e intuitivo para aumentar a produtividade do seu empreendimento hoteleiro. O sistema é web, não requer instalação, basta acessar pelo seu navegador e usar de qualquer lugar, até mesmo do seu dispositivo móvel!",
   },
   {
     id: "isasoft",
     nome: "Isasoft",
-    logo: "/assets/imgs/integracoes/pms/isasoft.webp",
+    logo: "/assets/imgs/integracoes/pms/isasoft.svg",
     descricao:
       "Empresa voltada para o desenvolvimento de sistemas para gerenciamento de micros e pequenas empresas do comércio para todo o território nacional. O Isasoft Inn, foi desenvolvido para administrar pousadas, hotéis e resorts de forma rápida e profissional.",
   },
   {
     id: "mde",
     nome: "MDE",
-    logo: "/assets/imgs/integracoes/pms/mde.webp",
+    logo: "/assets/imgs/integracoes/pms/mde.svg",
     descricao:
       "Há mais de 27 anos a MDE Informática projeta e desenvolve Sistemas de Gestão para os segmentos Hoteleiro e Motelero. Nosso diferencial está em oferecer soluções personalizadas para a necessidade específica de cada cliente.",
   },
   {
     id: "newhotel",
     nome: "Newhotel",
-    logo: "/assets/imgs/integracoes/pms/newhotel.webp",
+    logo: "/assets/imgs/integracoes/pms/newhotel.svg",
     descricao:
       "Uma empresa de software especializada em desenvolver sistemas para gestão hoteleira. Pioneiros internacionais em soluções Cloud para o setor hoteleiro, estamos no mercado há 37 anos e possuímos um portfólio com mais de 6 mil hotéis, em 64 países.",
   },
   {
     id: "queops",
     nome: "Queops",
-    logo: "/assets/imgs/integracoes/pms/queops.webp",
+    logo: "/assets/imgs/integracoes/pms/queops.svg",
     descricao:
       "A Quéops possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     id: "sachar",
     nome: "Sachar",
-    logo: "/assets/imgs/integracoes/pms/saghar.webp",
+    logo: "/assets/imgs/integracoes/pms/saghar.svg",
     descricao:
       "A Sachar (SGH) possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     id: "silbeck",
     nome: "Silbeck",
-    logo: "/assets/imgs/integracoes/pms/silbeck.webp",
+    logo: "/assets/imgs/integracoes/pms/silbeck.svg",
     descricao:
       "Somos uma empresa de software para gestão hoteleira. Atuamos há 25 anos no mercado com foco na busca da excelência em nosso atendimento e no desenvolvimento de nossos produtos. O nosso objetivo nunca foi oferecer apenas um sistema de gestão.",
   },
   {
-    id: "simpleshotel",
-    nome: "Simpleshotel",
-    logo: "/assets/imgs/integracoes/pms/simpleshotel.webp",
+    id: "simplehotel",
+    nome: "Simplehotel",
+    logo: "/assets/imgs/integracoes/pms/simplehotel.svg",
     descricao:
       "A Simple Hotel possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     id: "techside",
     nome: "Techside",
-    logo: "/assets/imgs/integracoes/pms/techside.webp",
+    logo: "/assets/imgs/integracoes/pms/techside.svg",
     descricao:
       "A TechSide (TechHotel) possui integração com a Foco, permitindo uma comunicação direta entre os sistemas para troca de informações como disponibilidade, tarifas e reservas. Essa conexão otimiza rotinas, evita inconsistências de dados e facilita o controle da operação hoteleira.",
   },
   {
     id: "to-de-ferias",
     nome: "Tô de Férias",
-    logo: "/assets/imgs/integracoes/pms/to-de-ferias.webp",
+    logo: "/assets/imgs/integracoes/pms/to-de-ferias.svg",
     descricao:
       "O TDF Hotel é um PMS completo, integrando as rotinas de recepção, reservas, governança, financeiro e estoque, que possui integrações comerciais e administrativas, além de configurações personalizadas e foco no relacionamento entre hoteleiro e hóspede.",
   },
   {
     id: "totvs",
     nome: "TOTVS",
-    logo: "/assets/imgs/integracoes/pms/totvs.webp",
+    logo: "/assets/imgs/integracoes/pms/totvs.svg",
     descricao:
       "A TOTVS cresce junto com a sua empresa. Aumente sua eficiência operacional e produtividade com um software completo para gestão e automação de processos. Não perca tempo e automatize a sua gestão de reservas, unificando toda a sua disponibilidade em um só sistema.",
   },
@@ -144,21 +158,21 @@ const marketingHoteleiro = [
   {
     id: "tribuzana",
     nome: "Tribuzana",
-    logo: "/assets/imgs/parceiros-elite/tribuzana.svg",
+    logo: "/assets/imgs/logos/tribuzana.svg",
     descricao:
       "Autoridade no segmento, há mais de 10 anos ao lado dos hoteleiros com soluções que unem estratégia e tecnologia para transformar meios de hospedagem.",
   },
   {
     id: "reprotel",
     nome: "Reprotel",
-    logo: "/assets/imgs/parceiros-elite/reprotel.svg",
+    logo: "/assets/imgs/logos/reprotel.svg",
     descricao:
       "Reprotel oferece sistemas completos para hotéis e pousadas, integrando reservas, finanças e canais de venda para mais eficiência, economia e resultados.",
   },
   {
     id: "storm",
     nome: "Storm",
-    logo: "/assets/imgs/parceiros-elite/storm.svg",
+    logo: "/assets/imgs/logos/storm.svg",
     descricao:
       "Na Storm, unimos branding estratégico e identidade visual para posicionar sua empresa com autoridade e atrair clientes certos.",
   },
@@ -168,21 +182,21 @@ const canalDeVendas = [
   {
     id: "b2b-reservas",
     nome: "B2B Reservas",
-    logo: "/assets/imgs/parceiros-elite/b2breservas.svg",
+    logo: "/assets/imgs/logos/b2b-reservas.svg",
     descricao:
       "A B2B Reservas conecta hotéis e pousadas a centenas de agências e operadoras, ampliando vendas e fortalecendo a distribuição hoteleira.",
   },
   {
     id: "decolar",
     nome: "Decolar",
-    logo: "/assets/imgs/parceiros-elite/decolar.svg",
+    logo: "/assets/imgs/logos/decolar.svg",
     descricao:
       "Cadastre seu hotel com suporte da Foco, ganhe comissão especial e destaque sua propriedade na Decolar.com com voucher exclusivo.",
   },
   {
     id: "expedia",
     nome: "Expedia",
-    logo: "/assets/imgs/parceiros-elite/expedia.svg",
+    logo: "/assets/imgs/logos/expedia.svg",
     descricao:
       "Cadastre seu hotel com o apoio da Foco, aproveite comissionamento reduzido por 180 dias e acesse a distribuição global e B2B do Expedia.",
   },
@@ -192,7 +206,7 @@ const chatbotIa = [
   {
     id: "asksuite",
     nome: "Asksuite",
-    logo: "/assets/imgs/parceiros-elite/asksuite.svg",
+    logo: "/assets/imgs/logos/asksuite.svg",
     descricao:
       "Conheça o melhor chatbot de reservas e plataforma de atendimento para hotéis do mundo, e comece hoje a revolucionar as interações do seu hotel via WhatsApp, Instagram, Chat do Site, telefone e email.",
   },
@@ -202,7 +216,7 @@ const adquirentes = [
   {
     id: "stone",
     nome: "Stone",
-    logo: "/assets/imgs/parceiros-elite/stone.svg",
+    logo: "/assets/imgs/logos/stone.svg",
     descricao:
       "Transforme a experiência de pagamento do seu hóspede com Pix, cartão e maquininhas integrados ao sistema Foco, sem complicação.",
   },

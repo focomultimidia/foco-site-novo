@@ -20,6 +20,8 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection, DorPa
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -75,7 +77,7 @@ function ExperienciaHospedePage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_experiencia_hospede", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-aplicativo-de-hospedagem", title: LEAD_TITLE, icon: getProdutoIcone("/aplicativo-de-hospedagem") })}
       />
 
       {/* Section 2: O que é um motor de reservas */}
@@ -122,6 +124,8 @@ function ExperienciaHospedePage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="aplicativo-de-hospedagem" />
+
       {/* Prova Social: FAQ */}
       <FAQAccordion
         items={[
@@ -143,7 +147,7 @@ function ExperienciaHospedePage() {
         title="Pronto para transformar a experiência dos seus hóspedes?"
         subtitle="Solicite uma demonstração e descubra como o Foco Pass pode elevar o padrão de serviço do seu hotel."
         badge="Comece agora"
-        source="cta_final_experiencia_hospede"
+        source="aplicativo-de-hospedagem"
         leadTitle={LEAD_TITLE}
       />
     </div>

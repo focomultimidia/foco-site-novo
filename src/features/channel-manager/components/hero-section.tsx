@@ -58,13 +58,13 @@ interface Channel {
 }
 
 const CHANNELS: Channel[] = [
-  { src: "/assets/imgs/integracoes/canais/booking.webp",       alt: "Booking.com",   x: 0,   cy: 140 },
-  { src: "/assets/imgs/integracoes/canais/airbnb.webp",        alt: "Airbnb",        x: 0,   cy: 330 },
-  { src: "/assets/imgs/integracoes/canais/expedia.webp",       alt: "Expedia",       x: 150, cy: 62  },
-  { src: "/assets/imgs/integracoes/canais/decolar.webp",       alt: "Decolar",       x: 150, cy: 235 },
-  { src: "/assets/imgs/integracoes/canais/agoda.webp",         alt: "Agoda",         x: 150, cy: 408 },
-  { src: "/assets/imgs/integracoes/canais/google-hoteis.webp", alt: "Google Hotéis", x: 300, cy: 168, wired: true },
-  { src: "/assets/imgs/integracoes/canais/trivago.svg",        alt: "Trivago",       x: 300, cy: 302, wired: true },
+  { src: "/assets/imgs/channel-manager/icones-canais/booking.svg", alt: "Booking.com",   x: 0,   cy: 140 },
+  { src: "/assets/imgs/channel-manager/icones-canais/airbnb.svg",  alt: "Airbnb",        x: 0,   cy: 330 },
+  { src: "/assets/imgs/channel-manager/icones-canais/expedia.svg", alt: "Expedia",       x: 150, cy: 62  },
+  { src: "/assets/imgs/channel-manager/icones-canais/decolar.svg", alt: "Decolar",       x: 150, cy: 235 },
+  { src: "/assets/imgs/channel-manager/icones-canais/agoda.svg",   alt: "Agoda",         x: 150, cy: 408 },
+  { src: "/assets/imgs/channel-manager/icones-canais/google.svg",  alt: "Google Hotéis", x: 300, cy: 168, wired: true },
+  { src: "/assets/imgs/channel-manager/icones-canais/trivago.svg", alt: "Trivago",       x: 300, cy: 302, wired: true },
 ];
 
 // Versão mobile — mesmos canais, só 6 (não 7): a grade 2×N do MobileFlow
@@ -252,10 +252,10 @@ function ChannelCard({ ch, index, animated }: { ch: Channel; index: number; anim
       <img
         src={ch.src}
         alt={ch.alt}
-        width={228}
-        height={80}
+        width={40}
+        height={40}
         decoding="async"
-        className="max-w-[72px] max-h-[26px] w-auto h-auto object-contain transition-opacity duration-300 opacity-90 group-hover:opacity-100"
+        className="w-9 h-9 object-contain transition-opacity duration-300 opacity-90 group-hover:opacity-100"
       />
       <span className="text-[12px] font-medium text-[#244248]/75 leading-none">{ch.alt}</span>
     </motion.div>
@@ -487,10 +487,10 @@ function MobileFlow({ animated }: { animated: boolean }) {
             <img
               src={ch.src}
               alt={ch.alt}
-              width={228}
-              height={80}
+              width={40}
+              height={40}
               decoding="async"
-              className="max-w-[62px] max-h-[24px] w-auto h-auto object-contain opacity-90"
+              className="w-8 h-8 object-contain opacity-90"
             />
             <span className="text-[11px] font-medium text-[#244248]/75">{ch.alt}</span>
           </motion.div>

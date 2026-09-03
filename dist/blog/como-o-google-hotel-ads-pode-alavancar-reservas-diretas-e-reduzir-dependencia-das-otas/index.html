@@ -6,6 +6,13 @@
     <title>Como o Google Hotel Ads pode alavancar reservas diretas e reduzir dependência das OTA’s | Blog Foco</title>
     <meta name="description" content="Quando um viajante pesquisa “hotel em Gramado” ou “pousada em Arraial do Cabo” no Google, uma vitrine poderosa aparece no topo da página com preços, avaliações e a opção de reservar com apenas alguns cliques. Essa vitrine é o Google Hotel Ads (GHA), uma das ferramentas mais eficazes para hoteleiros que desejam aumentar a visibilidade online e incentivar reservas diretas sem pagar comissão para OTAs. Se você ainda não utiliza o Google Hotel Ads no seu hotel ou pousada, este guia completo vai mostrar como funciona, como anunciar, quanto custa, e como ele pode transformar seus resultados. O que é o Google Hotel Ads? O Google Hotel Ads é a plataforma de publicidade do Google voltada exclusivamente para o setor de hospitalidade. Ela exibe seu hotel em destaque quando viajantes pesquisam acomodações: Como aparece: Seu estabelecimento aparece com: Esse é o mesmo espaço onde Booking, Expedia e outras OTAs investem fortemente para captar o hóspede antes de você. Mas com o GHA, você também pode estar ali, disputando a atenção e levando a reserva direto para o seu site. Diferença entre Google Free Booking Links e Google Hotel Ads Com o GHA, você tem controle total sobre a estratégia de" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Como o Google Hotel Ads pode alavancar reservas diretas e reduzir dependência das OTA’s","description":"Quando um viajante pesquisa “hotel em Gramado” ou “pousada em Arraial do Cabo” no Google, uma vitrine poderosa aparece no topo da página com preços, avaliações e a opção de reservar com apenas alguns cliques. Essa vitrine é o Google Hotel Ads (GHA), uma das ferramentas mais eficazes para hoteleiros que desejam aumentar a visibilidade online e incentivar reservas diretas sem pagar comissão para OTAs. Se você ainda não utiliza o Google Hotel Ads no seu hotel ou pousada, este guia completo vai mostrar como funciona, como anunciar, quanto custa, e como ele pode transformar seus resultados. O que é o Google Hotel Ads? O Google Hotel Ads é a plataforma de publicidade do Google voltada exclusivamente para o setor de hospitalidade. Ela exibe seu hotel em destaque quando viajantes pesquisam acomodações: Como aparece: Seu estabelecimento aparece com: Esse é o mesmo espaço onde Booking, Expedia e outras OTAs investem fortemente para captar o hóspede antes de você. Mas com o GHA, você também pode estar ali, disputando a atenção e levando a reserva direto para o seu site. Diferença entre Google Free Booking Links e Google Hotel Ads Com o GHA, você tem controle total sobre a estratégia de","image":"https://focomultimidia.com/assets/imgs/blog/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas/1-1.webp","datePublished":"2025-08-01","dateModified":"2025-08-20","author":{"@type":"Person","name":"Nayara Rosa"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas"}}</script>

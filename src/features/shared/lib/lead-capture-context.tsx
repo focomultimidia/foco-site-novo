@@ -12,16 +12,23 @@
 // submitLeadCapture em lead-capture-api.ts), pronto pra quando a integração
 // real com o RD Station entrar.
 
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode, type ComponentType } from "react";
 import { LeadCaptureModal } from "@/features/shared/components/lead-capture-modal";
 
 interface OpenLeadCaptureOptions {
-  /** De onde veio o lead — ex.: "hero_motor_de_reservas", "header_consultor", "cta_final_site_hoteleiro", "home_tipos_propriedade_pousada". */
+  /** De onde veio o lead — SEMPRE "form-[nome da página de origem]" (ex.:
+      "form-motor-de-reservas", "form-home") — o único parâmetro de
+      rastreamento que os botões padrão (header, heros, LeadCaptureCTA)
+      passam. Fora desse conjunto (ex.: seleção de plano em
+      marketing-para-hoteis) outros valores continuam válidos quando a
+      informação extra importa mais que a uniformidade. */
   source:   string;
   /** Texto principal do modal — default "Foco Tecnologia". */
   title?:   string;
   eyebrow?: string;
-  logo?:    string;
+  /** Ícone do produto — mesmo componente de `PRODUTOS_DATA` (ver
+      `getProdutoIcone` em produtos-data.ts). */
+  icon?:    ComponentType<{ className?: string }>;
 }
 
 interface LeadCaptureContextValue {
@@ -46,7 +53,7 @@ function LeadCaptureProvider({ children }: { children: ReactNode }) {
         onClose={close}
         title={request?.title ?? "Foco Tecnologia"}
         eyebrow={request?.eyebrow}
-        logo={request?.logo}
+        icon={request?.icon}
         source={request?.source ?? "unknown"}
       />
     </LeadCaptureContext.Provider>

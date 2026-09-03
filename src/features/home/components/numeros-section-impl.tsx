@@ -35,6 +35,7 @@ const METRICAS = [
   {
     icon: TrendingUp,
     valor: 20,
+    prefixo: "+",
     sufixo: "",
     label: "anos de mercado",
     iconHoverType: "lift" as const,
@@ -42,6 +43,7 @@ const METRICAS = [
   {
     icon: Users,
     valor: 2700,
+    prefixo: "+",
     sufixo: "",
     label: "clientes ativos",
     iconHoverType: "expand" as const,
@@ -49,6 +51,7 @@ const METRICAS = [
   {
     icon: Calendar,
     valor: 120,
+    prefixo: "+",
     sufixo: "",
     label: "colaboradores",
     iconHoverType: "expand" as const,
@@ -56,6 +59,7 @@ const METRICAS = [
   {
     icon: TrendingUp,
     valor: 2,
+    prefixo: "+",
     sufixo: " bi",
     label: "transações/ano",
     iconHoverType: "lift" as const,
@@ -63,6 +67,7 @@ const METRICAS = [
   {
     icon: Link2,
     valor: 800,
+    prefixo: "+",
     sufixo: "",
     label: "integrações disponíveis",
     iconHoverType: "spin" as const,
@@ -70,6 +75,7 @@ const METRICAS = [
   {
     icon: Clock,
     valor: 365,
+    prefixo: "",
     sufixo: " dias",
     label: "suporte disponível",
     iconHoverType: "spin" as const,
@@ -372,7 +378,7 @@ function NumerosSection(_props: NumerosSectionProps) {
                       </div>
 
                       <div className="text-3xl font-extrabold text-white mb-1 tabular-nums">
-                        +<span ref={el => { if (el) numRefs.current[i] = el; }}>0</span>
+                        {m.prefixo}<span ref={el => { if (el) numRefs.current[i] = el; }}>0</span>
                         {m.sufixo && (
                           <span className="text-xl font-bold text-blue-200/80 ml-0.5">
                             {m.sufixo}

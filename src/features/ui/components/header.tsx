@@ -19,6 +19,7 @@ import {
 import { PremiumCTAButton } from "./premium-cta-button";
 import { BetaBadge } from "@/features/shared/components/beta-badge";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 // Ícone oficial do WhatsApp (glifo de marca) — não existe em lucide-react.
 // `currentColor` herda a cor do texto do botão (branco), consistente com
@@ -191,6 +192,18 @@ function Header() {
   const location   = useLocation();
   const { openLeadCapture } = useLeadCapture();
   const headerRef  = useRef<HTMLElement | null>(null);
+
+  // "form-[nome da página de origem]" — único parâmetro de rastreamento do
+  // botão do header, igual ao das heros/LeadCaptureCTA (ver comentário em
+  // OpenLeadCaptureOptions). Como o header aparece em toda rota (não só nas
+  // 11 páginas de produto), deriva o nome direto do path em vez de um mapa
+  // fixo — "/" vira "home", "/motor-de-reservas" vira "motor-de-reservas".
+  // O ícone (getProdutoIcone) resolve pra undefined fora das páginas de
+  // produto — o modal já cai no placeholder neutro nesse caso.
+  const handleConsultorClick = () => {
+    const page = location.pathname === "/" ? "home" : location.pathname.replace(/^\//, "");
+    openLeadCapture({ source: `form-${page}`, title: "Foco Tecnologia", icon: getProdutoIcone(location.pathname) });
+  };
   const megamenuButtonRef  = useRef<HTMLButtonElement | null>(null);
   const mobileOverlayRef   = useRef<HTMLDivElement | null>(null);
   const mobileCloseButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -461,7 +474,7 @@ function Header() {
                 label="Fale com um consultor"
                 icon={WhatsAppIcon}
                 variant="green"
-                onClick={() => openLeadCapture({ source: `header_consultor:${location.pathname}`, title: "Foco Tecnologia" })}
+                onClick={handleConsultorClick}
               />
             </div>
 
@@ -605,7 +618,7 @@ function Header() {
                 label="Fale com um consultor"
                 icon={WhatsAppIcon}
                 variant="green"
-                onClick={() => openLeadCapture({ source: `header_consultor:${location.pathname}`, title: "Foco Tecnologia" })}
+                onClick={handleConsultorClick}
               />
               <p className="text-xs text-slate-600 tracking-wide">Demonstração gratuita · Sem compromisso</p>
             </div>

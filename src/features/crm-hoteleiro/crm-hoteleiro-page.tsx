@@ -16,6 +16,7 @@ import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -71,7 +72,7 @@ function CrmHoteleiroPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_crm_hoteleiro", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-crm-hoteleiro", title: LEAD_TITLE })}
       />
 
       {/* Section 2: O que é um CRM */}
@@ -99,6 +100,8 @@ function CrmHoteleiroPage() {
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
 
+      <UltimasDoBlogSection productSlug="crm-hoteleiro" />
+
       {/* Prova Social: FAQ */}
       <FAQAccordion
         items={[
@@ -119,7 +122,7 @@ function CrmHoteleiroPage() {
         title="Pronto para transformar dados em hóspedes fiéis?"
         subtitle="Solicite uma demonstração e descubra como o CRM da Foco pode aumentar sua fidelização e reservas diretas."
         badge="Comece agora"
-        source="cta_final_crm_hoteleiro"
+        source="crm-hoteleiro"
         leadTitle={LEAD_TITLE}
       />
     </div>

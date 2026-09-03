@@ -6,6 +6,13 @@
     <title>Renovação em serviços de hospedagem: O Airbnb para Hoteleiros | Blog Foco</title>
     <meta name="description" content="O Airbnb chegou para inovar o mercado hoteleiro com hospedagem por temporada, melhor custo-benefício, conexão com o hóspede, interação com pessoas locais no destino de viagem e dicas dos próprios moradores. Esses são alguns dos motivos mais apontados pelos viajantes que buscam meios de hospedagem na plataforma. O que o Airbnb oferece é uma diversidade de acomodações, que vão de quartos compartilhados, a lugares inteiros, quartos de hotel e entre outros. Então, hoteleiro, você está pensando em como cadastrar ou conectar o seu anúncio no Airbnb e ainda tem algumas dúvidas? Não se preocupe, no decorrer do artigo vamos te ajudar. Boa leitura! Para começar, não podemos esquecer que o anúncio no Airbnb é de um quarto. Portanto, hoteleiro, caso ainda não tenha anúncios na plataforma, o processo de cadastro é muito simples, intuitivo e sem custos. Basta acessar a página Airbnb e clicar em cadastrar-se ou baixar o aplicativo e seguir as seguintes coordenadas: criar uma conta; verificar as formas de hospedar no Airbnb; criar um anúncio; proporcionar uma experiência que seja única; observar quem pode se tornar um anfitrião de aventuras e atualizar o aplicativo. Você também pode se cadastrar usando qualquer uma destas opções: Endereço de e-mail" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Renovação em serviços de hospedagem: O Airbnb para Hoteleiros","description":"O Airbnb chegou para inovar o mercado hoteleiro com hospedagem por temporada, melhor custo-benefício, conexão com o hóspede, interação com pessoas locais no destino de viagem e dicas dos próprios moradores. Esses são alguns dos motivos mais apontados pelos viajantes que buscam meios de hospedagem na plataforma. O que o Airbnb oferece é uma diversidade de acomodações, que vão de quartos compartilhados, a lugares inteiros, quartos de hotel e entre outros. Então, hoteleiro, você está pensando em como cadastrar ou conectar o seu anúncio no Airbnb e ainda tem algumas dúvidas? Não se preocupe, no decorrer do artigo vamos te ajudar. Boa leitura! Para começar, não podemos esquecer que o anúncio no Airbnb é de um quarto. Portanto, hoteleiro, caso ainda não tenha anúncios na plataforma, o processo de cadastro é muito simples, intuitivo e sem custos. Basta acessar a página Airbnb e clicar em cadastrar-se ou baixar o aplicativo e seguir as seguintes coordenadas: criar uma conta; verificar as formas de hospedar no Airbnb; criar um anúncio; proporcionar uma experiência que seja única; observar quem pode se tornar um anfitrião de aventuras e atualizar o aplicativo. Você também pode se cadastrar usando qualquer uma destas opções: Endereço de e-mail","image":"https://focomultimidia.com/assets/imgs/blog/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros/03_-_artigo_blog5.webp","datePublished":"2021-09-16","dateModified":"2021-09-20","author":{"@type":"Person","name":"Fernanda Mattos"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros"}}</script>

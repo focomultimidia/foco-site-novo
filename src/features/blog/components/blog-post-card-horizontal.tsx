@@ -17,17 +17,25 @@ function BlogPostCardHorizontal({ post }: { post: BlogPost }) {
       to={`/blog/${post.slug}`}
       className="group flex flex-col sm:flex-row gap-5 rounded-3xl bg-white ring-1 ring-slate-900/[0.06] p-4 sm:p-5 transition-shadow hover:shadow-lg hover:shadow-[#285992]/[0.08]"
     >
-      <div className="relative shrink-0 w-full sm:w-[220px] aspect-[16/10] sm:aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50">
+      <div className="self-start shrink-0 w-full sm:w-[220px] overflow-hidden rounded-2xl bg-gradient-to-br from-slate-100 to-slate-50">
         {post.coverImage ? (
+          // Sem caixa de proporção fixa — mesma solução do BlogPostCard
+          // (ver comentário lá): a altura acompanha a largura fixa do card
+          // na proporção real da imagem, então nunca sobra fundo vazio
+          // (object-contain) nem corta o conteúdo (object-cover).
+          // `self-start` é obrigatório aqui: o card é `flex sm:flex-row` e
+          // o `align-items: stretch` padrão esticaria essa caixa até a
+          // altura da coluna de texto ao lado, recriando o mesmo espaço
+          // vazio que a `aspect-ratio` fixa causava antes.
           <img
             src={post.coverImage}
             alt=""
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.04]"
+            className="block w-full h-auto transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#285992]/[0.06] to-[#1e3a5f]/[0.10]">
+          <div className="aspect-[16/10] flex items-center justify-center bg-gradient-to-br from-[#285992]/[0.06] to-[#1e3a5f]/[0.10]">
             <ImageOff className="w-7 h-7 text-[#285992]/25" strokeWidth={1.5} />
           </div>
         )}
@@ -40,7 +48,7 @@ function BlogPostCardHorizontal({ post }: { post: BlogPost }) {
         <h3 className="font-display font-semibold text-[#1e3a5f] tracking-tight leading-snug text-[17px] sm:text-[18px] mb-2 group-hover:text-[#285992] transition-colors">
           {post.title}
         </h3>
-        <p className="text-slate-600 text-[13.5px] leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
+        <p className="sm:hidden text-slate-600 text-[13.5px] leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
         <div className="flex items-center gap-2.5 text-[12px] text-slate-600">
           <span>{post.author.nome}</span>
           <span aria-hidden="true">&middot;</span>

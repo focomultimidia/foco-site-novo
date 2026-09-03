@@ -1,0 +1,2 @@
+import{g as e}from"./index-QoerxoIZ.js";const c=[["path",{d:"M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16",key:"jecpp"}],["rect",{width:"20",height:"14",x:"2",y:"6",rx:"2",key:"i6l2r4"}]],a=e("briefcase",c);const r=[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["circle",{cx:"12",cy:"10",r:"3",key:"ilqhr7"}],["path",{d:"M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662",key:"154egf"}]],o=e("circle-user",r);export{a as B,o as C};
+//# sourceMappingURL=circle-user-Csu4RVZ5.js.map

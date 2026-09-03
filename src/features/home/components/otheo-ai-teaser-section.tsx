@@ -295,6 +295,8 @@ function OtheoAiTeaserSection() {
                   <img
                     src="/assets/imgs/home/otheoai/chat-ia.webp"
                     alt="Otheo AI respondendo um comando na extranet do hotel, via chat"
+                    width={600}
+                    height={1300}
                     loading="lazy"
                     decoding="async"
                     className="absolute inset-0 w-full h-full object-cover"

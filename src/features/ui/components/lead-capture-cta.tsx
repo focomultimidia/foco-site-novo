@@ -4,12 +4,19 @@ import { motion } from "framer-motion";
 import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { ArrowRight } from "lucide-react";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 interface LeadCaptureCTAProps {
   badge?: string;
   title?: string;
   subtitle?: string;
-  /** De onde veio o lead (qual página) — ex.: "cta_final_site_hoteleiro". Vai junto no payload do envio. */
+  /** De onde veio o lead — o slug da página, ex.: "motor-de-reservas" (sem o
+      prefixo "form-", aplicado no onClick abaixo) — o mesmo valor usado
+      pela hero da mesma página, pra "form-motor-de-reservas" ser o único
+      parâmetro de rastreamento independente de qual botão da página abriu
+      o modal. Também usado pra resolver o ícone do produto no modal (ver
+      getProdutoIcone) — por isso precisa ser exatamente o slug da rota
+      (sem a barra inicial), não um rótulo livre. */
   source: string;
   /** Texto curto do produto/página, usado no cabeçalho do modal ("Contato: {leadTitle}") — default "Foco Tecnologia". */
   leadTitle?: string;
@@ -56,7 +63,7 @@ function LeadCaptureCTA({
           {/* CTA button */}
           <motion.button
             type="button"
-            onClick={() => openLeadCapture({ source, title: leadTitle })}
+            onClick={() => openLeadCapture({ source: `form-${source}`, title: leadTitle, icon: getProdutoIcone(`/${source}`) })}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 360, damping: 24 }}

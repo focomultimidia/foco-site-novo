@@ -14,6 +14,7 @@ import { NaMidiaSection } from "@/features/home/components/na-midia-section";
 import { SoftwareProductsCarousel, TrustedLogosMarquee, WallOfLoveSection } from "@/features/shared/components";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
 
 import { Spinner } from "@/components/ui/spinner";
 import { Empty, EmptyHeader, EmptyTitle, EmptyDescription, EmptyContent } from "@/components/ui/empty";
@@ -69,7 +70,7 @@ function IntegracoesHoteleirasPage() {
       {/* Section 1: Hero */}
       <HeroSection
         data={data.hero}
-        onCtaClick={() => openLeadCapture({ source: "hero_integracoes_hoteleiras", title: LEAD_TITLE })}
+        onCtaClick={() => openLeadCapture({ source: "form-integracoes-hoteleiras", title: LEAD_TITLE })}
       />
 
       {/* Section 2: Importância da Integração */}
@@ -96,6 +97,8 @@ function IntegracoesHoteleirasPage() {
 
       {/* Prova Social: Carrossel de Produtos */}
       <SoftwareProductsCarousel />
+
+      <UltimasDoBlogSection productSlug="integracoes-hoteleiras" />
 
       {/* Prova Social: FAQ */}
       <FAQAccordion

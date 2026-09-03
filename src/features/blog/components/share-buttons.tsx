@@ -27,6 +27,22 @@ function XIcon() {
     </svg>
   );
 }
+function FacebookIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-[18px] h-[18px]" fill="currentColor" aria-hidden="true">
+      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.88h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z" />
+    </svg>
+  );
+}
+function InstagramIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-[17px] h-[17px]" fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" />
+      <circle cx="12" cy="12" r="4.4" />
+      <circle cx="17.35" cy="6.65" r="1.05" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 // ── ShareButtons ──────────────────────────────────────────────────────────────
 // Gap real do blog atual — hoje só existe "seguir no Instagram", nenhum
@@ -36,15 +52,15 @@ function XIcon() {
 // da página precisa ter og:title/og:image corretos — isso é o que
 // scripts/generate-blog-static.mjs garante (ver plano técnico).
 function ShareButtons({ url, title }: { url: string; title: string }) {
-  const [copied, setCopied] = useState(false);
+  const [copiedKey, setCopiedKey] = useState<"link" | "instagram" | null>(null);
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
 
-  async function handleCopy() {
+  async function copyLink(key: "link" | "instagram") {
     try {
       await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey(null), 1800);
     } catch {
       // Clipboard indisponível (ex.: contexto não-seguro) — sem fallback
       // silencioso enganoso, só não marca "copiado".
@@ -53,6 +69,7 @@ function ShareButtons({ url, title }: { url: string; title: string }) {
 
   const links = [
     { label: "WhatsApp", Icon: WhatsAppIcon, href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}` },
+    { label: "Facebook", Icon: FacebookIcon, href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
     { label: "LinkedIn", Icon: LinkedInIcon, href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
     { label: "X", Icon: XIcon, href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}` },
   ] as const;
@@ -72,13 +89,26 @@ function ShareButtons({ url, title }: { url: string; title: string }) {
           <Icon />
         </a>
       ))}
+      {/* Instagram não tem intent de compartilhamento por URL na web (só
+          Stories via app nativo) — o botão copia o link pro usuário colar
+          onde quiser (Story, bio, DM), mesmo mecanismo do "copiar link"
+          abaixo, só com feedback próprio. */}
       <button
         type="button"
-        onClick={handleCopy}
+        onClick={() => copyLink("instagram")}
+        aria-label="Copiar link para compartilhar no Instagram"
+        title="Instagram não permite compartilhar um link direto — copie e cole onde quiser"
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#285992]/10 hover:text-[#285992] transition-colors"
+      >
+        {copiedKey === "instagram" ? <Check className="w-4 h-4 text-[#1a7e43]" strokeWidth={2.4} /> : <InstagramIcon />}
+      </button>
+      <button
+        type="button"
+        onClick={() => copyLink("link")}
         aria-label="Copiar link"
         className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-slate-600 hover:bg-[#285992]/10 hover:text-[#285992] transition-colors"
       >
-        {copied ? <Check className="w-4 h-4 text-[#1a7e43]" strokeWidth={2.4} /> : <Link2 className="w-4 h-4" strokeWidth={2} />}
+        {copiedKey === "link" ? <Check className="w-4 h-4 text-[#1a7e43]" strokeWidth={2.4} /> : <Link2 className="w-4 h-4" strokeWidth={2} />}
       </button>
     </div>
   );

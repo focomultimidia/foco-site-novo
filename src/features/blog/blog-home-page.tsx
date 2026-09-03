@@ -2,13 +2,49 @@
 
 import { useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import { ImageOff } from "lucide-react";
+import { ImageOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSeo } from "@/features/shared/lib/use-seo";
 import { getAllPosts, CATEGORIES } from "./lib/posts-index";
 import { BlogPostCard, BlogToolbar } from "./components";
 import { formatDate } from "./components/blog-post-card";
 
 const POSTS_PER_PAGE = 9;
+
+// Resume a lista de páginas em vez de cravar um botão pra cada uma —
+// com 146 posts (17 páginas) a barra virava uma parede de números. Sempre
+// mostra a 1ª, a última, e um "miolo" de 3 (a atual + 1 vizinha de cada
+// lado) ao redor da página corrente, com "…" preenchendo o vão — nenhuma
+// página fica inalcançável, só deixa de ter um botão dedicado: chegar nela
+// é 1-2 cliques de Anterior/Próxima ou de outro número do miolo, que
+// desliza junto conforme a navegação. Mesmo algoritmo usado por libs como
+// MUI/shadcn (`usePagination`), sem precisar da dependência.
+function buildPageList(current: number, total: number): (number | "…")[] {
+  const siblingCount = 1;
+  const windowSize = siblingCount * 2 + 5; // 1ª + última + miolo (atual + 2 vizinhas) + 2 buffers
+
+  if (total <= windowSize) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+
+  const leftSibling = Math.max(current - siblingCount, 1);
+  const rightSibling = Math.min(current + siblingCount, total);
+  const showLeftEllipsis = leftSibling > 2;
+  const showRightEllipsis = rightSibling < total - 1;
+  const edgeRangeSize = siblingCount * 2 + 3;
+
+  if (!showLeftEllipsis && showRightEllipsis) {
+    const left = Array.from({ length: edgeRangeSize }, (_, i) => i + 1);
+    return [...left, "…", total];
+  }
+
+  if (showLeftEllipsis && !showRightEllipsis) {
+    const right = Array.from({ length: edgeRangeSize }, (_, i) => total - edgeRangeSize + i + 1);
+    return [1, "…", ...right];
+  }
+
+  const middle = Array.from({ length: rightSibling - leftSibling + 1 }, (_, i) => leftSibling + i);
+  return [1, "…", ...middle, "…", total];
+}
 // Altura aproximada da BlogToolbar (py-3 + conteúdo ~36px) — soma à altura
 // real do header (var(--header-height)) pra saber até onde rolar sem
 // deixar o início da listagem escondido atrás da barra sticky.
@@ -141,26 +177,54 @@ function BlogHomePage() {
           ))}
         </div>
 
-        {/* `flex-wrap` + `shrink-0` nos botões — sem isso, com 17 páginas
-            (146 posts / 9 por página), o flexbox espremia cada botão pra
-            caber tudo numa linha só no mobile (chegavam a ~13px de
-            largura em vez dos 36px pedidos, viravam praticamente
-            impossíveis de tocar). Agora quebra linha em vez de espremer. */}
+        {/* `flex-wrap` + `shrink-0` nos botões — sem isso o flexbox
+            espremia cada botão pra caber tudo numa linha só no mobile
+            (chegavam a ~13px de largura em vez dos 36px pedidos, viravam
+            praticamente impossíveis de tocar). Agora quebra linha em vez
+            de espremer. Números resumidos via buildPageList — ver comentário
+            lá — mais Anterior/Próxima pra navegar sem precisar do número
+            exato. */}
         {totalPages > 1 && (
           <nav aria-label="Paginação" className="flex flex-wrap items-center justify-center gap-2 mt-14">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
-              <button
-                key={n}
-                type="button"
-                onClick={() => goToPage(n)}
-                aria-current={n === page ? "page" : undefined}
-                className={`h-9 w-9 shrink-0 rounded-full text-[13.5px] font-medium transition-colors ${
-                  n === page ? "bg-[#285992] text-white" : "bg-white border border-slate-200 text-slate-600 hover:border-[#285992]/40"
-                }`}
-              >
-                {n}
-              </button>
-            ))}
+            <button
+              type="button"
+              onClick={() => goToPage(page - 1)}
+              disabled={page === 1}
+              aria-label="Página anterior"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 transition-colors hover:border-[#285992]/40 disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <ChevronLeft className="w-4 h-4" strokeWidth={2} />
+            </button>
+
+            {buildPageList(page, totalPages).map((item, i) =>
+              item === "…" ? (
+                <span key={`ellipsis-${i}`} aria-hidden="true" className="w-9 shrink-0 text-center text-[13.5px] text-slate-400 select-none">
+                  &hellip;
+                </span>
+              ) : (
+                <button
+                  key={item}
+                  type="button"
+                  onClick={() => goToPage(item)}
+                  aria-current={item === page ? "page" : undefined}
+                  className={`h-9 w-9 shrink-0 rounded-full text-[13.5px] font-medium transition-colors ${
+                    item === page ? "bg-[#285992] text-white" : "bg-white border border-slate-200 text-slate-600 hover:border-[#285992]/40"
+                  }`}
+                >
+                  {item}
+                </button>
+              )
+            )}
+
+            <button
+              type="button"
+              onClick={() => goToPage(page + 1)}
+              disabled={page === totalPages}
+              aria-label="Próxima página"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 transition-colors hover:border-[#285992]/40 disabled:opacity-40 disabled:pointer-events-none"
+            >
+              <ChevronRight className="w-4 h-4" strokeWidth={2} />
+            </button>
           </nav>
         )}
       </div>

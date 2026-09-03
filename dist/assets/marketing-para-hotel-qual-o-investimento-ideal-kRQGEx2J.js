@@ -1,0 +1,81 @@
+import{j as e}from"./index-QoerxoIZ.js";const i=[],n=8,t={title:"Marketing para hotel: qual o investimento ideal?",seoTitle:"Marketing para hotel: qual o investimento ideal?",excerpt:"Fechar mais reservas e gerar faturamento positivo para a empresa é o sonho de todo hoteleiro. E para que esse sonho se torne realidade, é preciso investir em ações estratégicas de marketing. Fique com a gente até o final deste artigo e descubra qual o investimento ideal em marketing para hotel. O ambiente digital revolucionou o modo como as pessoas se relacionam, adquirem conhecimento e, principalmente, como elas compram. O processo de aquisição mudou bastante e várias teorias começaram a ser criadas acerca dele, o AIDA (Atenção, Interesse, Desejo e Ação), a jornada de compra e funil de vendas são apenas alguns deles. Sabemos que a tecnologia trouxe muitos avanços e, assim, estar presente no mundo da internet deixou de ser uma escolha e passou a ser um pré-requisito básico. Toda essa mudança impactou diretamente como as pessoas decidem para onde viajar, em qual estabelecimento se hospedar e quais pontos turísticos visitar. A busca por termos relacionados ao turismo é enorme e sites de dicas de viagem chegam a ter milhões de acessos. Nesse sentido, para ser notado e ganhar competitividade no ramo hoteleiro, é essencial estruturar um bom plano de marketing para hotéis e pousadas. Investir em marketing digital",date:"2022-03-22",updatedAt:"2022-03-22",author:"thayna",category:"marketing",tags:[],coverImage:"/assets/imgs/blog/conheca-os-ganhos-com-a-automatizacao-de-pagamentos/2203_blog.webp",ctaProduct:"motor-de-reservas"};function s(o){const a={a:"a",img:"img",li:"li",p:"p",strong:"strong",ul:"ul",...o.components};return e.jsxs(e.Fragment,{children:[e.jsxs(a.p,{children:["Fechar mais reservas e gerar faturamento positivo para a empresa é o sonho de todo hoteleiro. E para que esse sonho se torne realidade, é preciso investir em ações estratégicas de ",e.jsx(a.a,{href:"https://focomultimidia.com/marketing-para-hoteis.html",children:"marketing"}),". Fique com a gente até o final deste artigo e descubra qual o investimento ideal em ",e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/marketing-hoteleiro-confira-as-principais-dicas/",children:"marketing para hotel"}),"."]}),`
+`,e.jsx(a.p,{children:"O ambiente digital revolucionou o modo como as pessoas se relacionam, adquirem conhecimento e, principalmente, como elas compram. O processo de aquisição mudou bastante e várias teorias começaram a ser criadas acerca dele, o AIDA (Atenção, Interesse, Desejo e Ação), a jornada de compra e funil de vendas são apenas alguns deles."}),`
+`,e.jsx(a.p,{children:"Sabemos que a tecnologia trouxe muitos avanços e, assim, estar presente no mundo da internet deixou de ser uma escolha e passou a ser um pré-requisito básico. Toda essa mudança impactou diretamente como as pessoas decidem para onde viajar, em qual estabelecimento se hospedar e quais pontos turísticos visitar."}),`
+`,e.jsx(a.p,{children:"A busca por termos relacionados ao turismo é enorme e sites de dicas de viagem chegam a ter milhões de acessos. Nesse sentido, para ser notado e ganhar competitividade no ramo hoteleiro, é essencial estruturar um bom plano de marketing para hotéis e pousadas."}),`
+`,e.jsx(a.p,{children:"Investir em marketing digital é estratégia fundamental para se colocar em uma posição de referência para hóspedes, pois é por meio dele que você promoverá seus serviços nas mídias sociais. "}),`
+`,e.jsx(a.p,{children:"Além disso, ter um planejamento e realizar um acompanhamento minucioso das suas ações é essencial para medir seus resultados e continuar levando um conteúdo que realmente interessa ao seu público. Consequentemente, você terá um controle maior do seu Retorno Sobre Investimento (ROI), melhorando a saúde financeira do seu negócio."}),`
+`,e.jsx(a.p,{children:"Confira agora, como definir, de forma estratégica, o orçamento de marketing para o seu hotel ou pousada."}),`
+`,e.jsx(a.p,{children:e.jsx(a.img,{src:"http://blogfocomultimid1.hospedagemdesites.ws/wp-content/uploads/2021/10/0610_mkt_artigo_blog.jpg",alt:""})}),`
+`,e.jsx(a.p,{children:e.jsx(a.strong,{children:"Como planejar o marketing do meu hotel?"})}),`
+`,e.jsx(a.p,{children:"Montar, seguir e acompanhar um plano de marketing é um investimento. Por isso, você precisa começar com planejamento. É preciso pensar estratégias de marketing para hotéis de maneira ampla. Visando objetivos a curto e longo prazo para que as suas ações sejam efetivas, gerando maior receita através do aumento das reservas."}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:e.jsx(a.strong,{children:"Definir objetivos"})}),`
+`]}),`
+`,e.jsx(a.p,{children:"Produzir conteúdo de qualidade, divulgar ofertas, pacotes e promoções nos canais digitais é garantia de impactar e ser descoberto por clientes em potencial para o seu hotel ou pousada. Por isso, você precisa definir quais são os seus objetivos, que devem ser inspiradores e qualitativos. Afinal, de nada adianta traçar o caminho se você não sabe onde quer chegar. Então, se faça essa pergunta e defina em qual patamar você quer estar daqui a um determinado tempo."}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:e.jsx(a.strong,{children:"Mensurar resultados"})}),`
+`]}),`
+`,e.jsx(a.p,{children:"Analisar resultados atuais e mapear estratégias que já deram certo e quais já deram errado. Isso vai te ajudar a ter um norte muito mais assertivo no momento de escolher as ações que serão realizadas. Além disso, vai impedir que você gaste dinheiro e tempo com estratégias que não dão certo no seu ramo."}),`
+`,e.jsx(a.p,{children:"E têm ações específicas que só é possível analisar com tags de monitoramento do Facebook Ads e Google Ads. Elas são muito úteis para otimização das campanhas de marketing, pois são ferramentas que, dentre outras possibilidades, podem te direcionar para o perfil de clientes que mais convertem em suas campanhas de vendas."}),`
+`,e.jsx(a.p,{children:"Saiba mais sobre como utilizar essas poderosas ferramentas a seu favor nos artigos:"}),`
+`,e.jsxs(a.p,{children:[e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas/",children:e.jsx(a.strong,{children:"Tudo sobre Google Ads para hotéis e pousadas"})})," "]}),`
+`,e.jsx(a.p,{children:e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/descomplica-como-aumentar-suas-reservas-com-o-google-ads/",children:e.jsx(a.strong,{children:"Google Ads: descubra como aumentar as reservas do seu hotel"})})}),`
+`,e.jsx(a.p,{children:e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/marketing-hoteleiro-confira-as-principais-dicas/",children:e.jsx(a.strong,{children:"Marketing hoteleiro: confira as principais estratégias"})})}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:e.jsx(a.strong,{children:"Conhecer o seu público"})}),`
+`]}),`
+`,e.jsxs(a.p,{children:["Quando a sua empresa trabalha com uma ",e.jsx(a.a,{href:"https://focomultimidia.com/marketing-para-hoteis.html",children:e.jsx(a.strong,{children:"agência de marketing para hotéis"})})," é preciso de uma análise criteriosa a fim de ajustar as estratégias. Afinal, a agência precisa conhecer a fundo as particularidades do seu negócio, sua demanda, o perfil ideal do seu cliente, bem como identificar os gargalos mais urgentes para traçar um plano de ação eficiente."]}),`
+`,e.jsx(a.p,{children:"Nesse contexto é importante destacar a necessidade de se saber quem é o seu cliente ideal. Quais são as expectativas dos visitantes da sua região? Para quem são destinados os serviços e produtos comercializados pelo seu meio de hospedagem? Assim, ao identificar esse perfil por meio de análise de tendências do setor, da sua região e do histórico dos hóspedes que já passaram pelo seu hotel, você tem a definição do seu cliente ideal que é a persona do seu negócio."}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:e.jsx(a.strong,{children:"Fortalecer a sua marca"})}),`
+`]}),`
+`,e.jsx(a.p,{children:"Outro ponto que é importante avaliar é que, além dos fins comerciais, o seu plano de marketing também deve divulgar e promover a marca do seu hotel ou pousada, visando se tornar uma referência naquele destino. Assim, você poderá inclusive utilizar isso como argumento comercial no futuro."}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:e.jsx(a.strong,{children:"Investir em anúncios"})}),`
+`]}),`
+`,e.jsxs(a.p,{children:["Através de um planejamento estratégico de anúncios em gigantes como a ",e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas/",children:"Google"})," e ",e.jsx(a.a,{href:"http://blogfocomultimid1.hospedagemdesites.ws/5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram/",children:"Facebook"})," é possível que o hoteleiro alcance potenciais hóspedes exatamente no momento em que estão pesquisando por hotéis e pousadas no seu destino, aumentando as suas reservas diretas e aproveitando todo o potencial da internet para lucrar mais."]}),`
+`,e.jsx(a.p,{children:"Agora que você já sabe como estruturar a sua estratégia de marketing, continue com a gente para descobrir qual o investimento ideal para que o seu trabalho tenha resultados!"}),`
+`,e.jsx(a.p,{children:e.jsx(a.img,{src:"http://blogfocomultimid1.hospedagemdesites.ws/wp-content/uploads/2022/03/2203_blog.png",alt:"marketing para hotel"})}),`
+`,e.jsx(a.p,{children:e.jsx(a.strong,{children:"Como obter retorno financeiro com o marketing para hotel"})}),`
+`,e.jsx(a.p,{children:"O marketing para hotéis precisa ser orientado por resultados, por esse motivo, o que efetivamente importa é o retorno sobre o investimento. Sem a definição prévia do orçamento de marketing, você pode acabar gastando a mais ou a menos, e as duas situações não são boas."}),`
+`,e.jsx(a.p,{children:"Gastar com marketing tem um custo, não gastar com marketing tem um custo ainda maior. Nem sempre é fácil planejar o orçamento e ao buscar resultados, é fundamental contar com métricas que permitam não só um bom poder de análise, mas também uma forma de melhorar a atuação da empresa como um todo."}),`
+`,e.jsx(a.p,{children:"Uma coisa muito comum em pequenos e médios hotéis e pousadas são os gastos com marketing e comercial sem controle e planejamento. Quando se fala em custos fixos e também na força de determinados períodos, como no caso de um hotel, essa importância fica ainda maior."}),`
+`,e.jsx(a.p,{children:"Uma das métricas mais importantes para se ter esse controle é o chamado ROI (Retorno Sobre o Investimento). Em resumo, ela é utilizada para medir os resultados alcançados por meio de investimentos feitos para custear o serviço, se posicionar melhor no mercado e atrair clientes."}),`
+`,e.jsx(a.p,{children:"Vamos descobrir agora como usar essa métrica para avaliar os resultados do seu hotel."}),`
+`,e.jsx(a.p,{children:e.jsx(a.strong,{children:"Cálculo do ROI"})}),`
+`,e.jsx(a.p,{children:"Apesar de existirem variações na forma de calcular o ROI, há uma fórmula padrão que pode ser aplicada que consiste na seguinte equação: Retorno do Investimento X Custo do Investimento."}),`
+`,e.jsx(a.p,{children:"Vamos supor que você investiu R$1.000,00 em links patrocinados do Google durante um mês para divulgar uma promoção para o feriado da Semana Santa e nos trouxe um retorno de 20 reservas."}),`
+`,e.jsx(a.p,{children:"Se a tarifa das suas Unidades Habitacionais (UHs), têm um custo médio de R$200,00 por dia, e cada reserva tem em média 3 noites, totalizam um valor recebido por cada hospedagem de R $600,00. Logo o valor investido nos trouxe um faturamento de: R$600,00 x 20 reservas = R$12.000,00."}),`
+`,e.jsx(a.p,{children:"Nessa simulação, para faturar R$12.000,00 em hospedagens o seu hotel ou pousada teve que investir R$1.000,00, equivalente a 8,33% do seu faturamento. Com isso, podemos dizer que o valor investido em campanhas patrocinadas no Facebook ADS ou Google ADS pode, sim, ser mais barato que adquirir um hóspede por uma OTA’s que cobra de 13 a 30% de comissão."}),`
+`,e.jsx(a.p,{children:"Ainda temos que considerar o valor da sua diária média que, nesse cálculo, levamos em consideração apenas R$200,00 reais. Se o seu meio de hospedagem tem uma tarifa mais alta, o seu custo de aquisição de hóspedes tende a ficar menor."}),`
+`,e.jsx(a.p,{children:"Há outras variáveis, como empresas que preferem analisar esse número em porcentagem ou em quanto cada real investido trouxe de lucro. Tendo a equação padrão, é possível acrescentar os elementos para calcular da forma que você entenda ser a mais adequada."}),`
+`,e.jsx(a.p,{children:e.jsx(a.strong,{children:"Qual o valor do investimento ideal?"})}),`
+`,e.jsx(a.p,{children:"Antes de saber qual o valor que você tem que investir, é preciso saber quanto você quer faturar. O orçamento de marketing tem que ser proporcional ao faturamento desejado, ou seja, definir as metas de faturamento é fundamental para se chegar à verba destinada ao setor de marketing e comercial."}),`
+`,e.jsx(a.p,{children:"O ideal é que se gaste entre 4% e 5% do faturamento planejado para o hotel com marketing e comercial. Por exemplo:"}),`
+`,e.jsx(a.p,{children:"Faturamento planejado x 5% = Orçamento de marketing/comercial."}),`
+`,e.jsxs(a.p,{children:["Se a meta do seu hotel para 2022 é um faturamento de ",e.jsx(a.strong,{children:"R$1.000.000,00"}),", o orçamento de marketing/comercial planejado para esse período deverá ser de ",e.jsx(a.strong,{children:"R$50.000,00"}),"."]}),`
+`,e.jsx(a.p,{children:e.jsx(a.strong,{children:"E onde deve ser empregado esse investimento?"})}),`
+`,e.jsx(a.p,{children:"É preciso que fique claro que os recursos de marketing e comercial não devem ser alocados em outros setores, bem como não se deve fazer o inverso, que é inchar os setores de marketing e comercial com gastos de outros departamentos. Abaixo, alguns exemplos de gastos que entram no orçamento:"}),`
+`,e.jsxs(a.ul,{children:[`
+`,e.jsx(a.li,{children:"Gastos com publicidade e propaganda;"}),`
+`,e.jsx(a.li,{children:"Anúncios no Google, Facebook, Instagram e outros canais digitais;"}),`
+`,e.jsx(a.li,{children:"Comissões de OTA’s, Agências e outros parceiros;"}),`
+`,e.jsx(a.li,{children:"Despesas com visitas e viagens comerciais;"}),`
+`,e.jsx(a.li,{children:"Participação em feiras;"}),`
+`,e.jsx(a.li,{children:"Ferramentas (e-mail marketing, CRM, etc.);"}),`
+`,e.jsxs(a.li,{children:[e.jsx(a.a,{href:"https://asksuite.com/br/",children:"Chatbot"}),";"]}),`
+`,e.jsx(a.li,{children:"Agências e profissionais de marketing e comercial;"}),`
+`,e.jsx(a.li,{children:"Identidade visual;"}),`
+`,e.jsx(a.li,{children:"Gastos com site;"}),`
+`,e.jsx(a.li,{children:"Fotos e vídeos do hotel;"}),`
+`,e.jsx(a.li,{children:"Papelaria (cartões de visita, folder, pastas, etc.);"}),`
+`,e.jsx(a.li,{children:"Brindes e presentes para hóspedes e parceiros;"}),`
+`,e.jsx(a.li,{children:"Inclusão em portais."}),`
+`]}),`
+`,e.jsx(a.p,{children:"Mas, mais importante que decorar uma fórmula, é preciso entender o conceito e o raciocínio na hora de pensar o orçamento de marketing hoteleiro: tudo começa no objetivo do seu meio de hospedagem; em seguida você deve separar uma verba proporcional e definir o orçamento de marketing para o seu hotel ou pousada e também estabelece as ações para atingir esse objetivo."}),`
+`,e.jsxs(a.p,{children:["Ainda ficou alguma dúvida sobre como investir em estratégias de marketing para hotel? Preencha o formulário abaixo e fale com o time de especialistas da ",e.jsx(a.a,{href:"https://focomultimidia.com/index.html",children:"Foco Tecnologia e Marketing"}),"."]}),`
+`,e.jsx(a.p,{children:"Agende uma Consultoria Gratuita"}),`
+`,e.jsx(a.p,{children:"Preencha e ganhe uma consultoria gratuita com um dos nossos especialistas"}),`
+`,e.jsx(a.p,{children:"Δ"}),`
+`,e.jsx(a.p,{children:"Não iremos fornecer, e nem utilizaremos essas informações para enviar mensagens indesejadas (SPAM)."})]})}function d(o={}){const{wrapper:a}=o.components||{};return a?e.jsx(a,{...o,children:e.jsx(s,{...o})}):s(o)}export{d as default,t as frontmatter,n as readingTimeMin,i as toc};
+//# sourceMappingURL=marketing-para-hotel-qual-o-investimento-ideal-kRQGEx2J.js.map

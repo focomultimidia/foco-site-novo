@@ -6,6 +6,13 @@
     <title>Cancelamento de reserva de hotel: como criar políticas, aplicar multas e organizar a operação | Blog Foco</title>
     <meta name="description" content="Uma reserva cancelada em cima da hora não afeta apenas a ocupação. Ela muda a previsão de receita, interfere na escala da equipe e altera a rotina da governança. Também pode deixar uma acomodação vazia justamente quando o hotel mais precisava vendê-la. Por isso, o cancelamento de reserva de hotel não deve ser tratado como um detalhe burocrático. Ele faz parte da rotina da hotelaria, mas exige regras claras, comunicação transparente, registros confiáveis e controle operacional. Para hotéis, pousadas e resorts, uma política bem estruturada reduz conflitos com hóspedes, protege a receita e evita diferenças entre os canais de venda. Também ajuda a preservar a reputação do negócio. O hoteleiro precisa conhecer os prazos, saber quando pode cobrar multa e entender em quais situações cabe reembolso. Também deve definir como agir diante de no-show e overbooking, além de manter as condições alinhadas em reservas diretas, OTAs, vouchers e mensagens de confirmação. A política não pode ficar restrita a uma página do site. Ela precisa chegar ao hóspede no momento certo, de forma simples e registrada. Nesse processo, a tecnologia ajuda a reduzir falhas manuais e melhora a comunicação desde a reserva até o pós-estadia. Neste artigo, você entenderá como definir" />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,25 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a
@@ -133,8 +159,8 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-DOe_PGHs.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-ClbbuY8p.css">
+    <script type="module" crossorigin src="/assets/index-QoerxoIZ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DuT3xjdU.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/cancelamento-de-reservas-entenda-tudo" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cancelamento de reserva de hotel: como criar políticas, aplicar multas e organizar a operação","description":"Uma reserva cancelada em cima da hora não afeta apenas a ocupação. Ela muda a previsão de receita, interfere na escala da equipe e altera a rotina da governança. Também pode deixar uma acomodação vazia justamente quando o hotel mais precisava vendê-la. Por isso, o cancelamento de reserva de hotel não deve ser tratado como um detalhe burocrático. Ele faz parte da rotina da hotelaria, mas exige regras claras, comunicação transparente, registros confiáveis e controle operacional. Para hotéis, pousadas e resorts, uma política bem estruturada reduz conflitos com hóspedes, protege a receita e evita diferenças entre os canais de venda. Também ajuda a preservar a reputação do negócio. O hoteleiro precisa conhecer os prazos, saber quando pode cobrar multa e entender em quais situações cabe reembolso. Também deve definir como agir diante de no-show e overbooking, além de manter as condições alinhadas em reservas diretas, OTAs, vouchers e mensagens de confirmação. A política não pode ficar restrita a uma página do site. Ela precisa chegar ao hóspede no momento certo, de forma simples e registrada. Nesse processo, a tecnologia ajuda a reduzir falhas manuais e melhora a comunicação desde a reserva até o pós-estadia. Neste artigo, você entenderá como definir","image":"https://focomultimidia.com/assets/imgs/blog/cancelamento-de-reservas-entenda-tudo/banner-cancelamento-de-reservas-1-1.webp","datePublished":"2026-07-31","dateModified":"2026-07-31","author":{"@type":"Person","name":"Nayara Rosa"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/cancelamento-de-reservas-entenda-tudo"}}</script>

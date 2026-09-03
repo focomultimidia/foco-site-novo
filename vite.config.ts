@@ -57,4 +57,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // `true`, não "hidden". Os dois geram os mesmos .map em dist/; a única
+    // diferença é o comentário `//# sourceMappingURL=` no fim do JS servido.
+    //
+    // "hidden" existia aqui pra "não expor o fonte em produção", mas isso
+    // nunca funcionou: o deploy sobe a pasta dist/ inteira, então os .map já
+    // estão públicos no servidor há tempos — verificado em produção,
+    // https://focomultimidia.com/assets/index-<hash>.js.map devolve 200 com o
+    // mapa real (2,79 MB, `{"version":3,...}`). Como o nome do .map é só o
+    // nome do .js + ".map", qualquer um chega nele. Omitir o comentário não
+    // escondia nada: só impedia o DevTools (e o Lighthouse) de ACHAR o mapa
+    // que já estava lá — daí o aviso "Mapas de origem ausentes no JavaScript
+    // principal grande" no PageSpeed Insights.
+    //
+    // Sem custo pro usuário final: navegador nenhum baixa .map a menos que o
+    // DevTools esteja aberto, então o payload real da página não muda.
+    sourcemap: true,
+  },
 });

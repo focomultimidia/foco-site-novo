@@ -11,6 +11,8 @@ import { ManifestoSection } from "./components/manifesto-section";
 import { FAQAccordion } from "@/features/ui/components/faq-accordion";
 import { LeadCaptureCTA } from "@/features/ui/components/lead-capture-cta";
 import { useLeadCapture } from "@/features/shared/lib/lead-capture-context";
+import { UltimasDoBlogSection } from "@/features/shared/components/ultimas-do-blog-section-lazy";
+import { getProdutoIcone } from "@/features/shared/data/produtos-data";
 
 const LEAD_TITLE = "Otheo AI";
 
@@ -34,7 +36,7 @@ function OtheoAiPage() {
 
   return (
     <div className="min-h-screen">
-      <HeroSection onCtaClick={() => openLeadCapture({ source: "hero_otheo_ai", title: LEAD_TITLE })} />
+      <HeroSection onCtaClick={() => openLeadCapture({ source: "form-inteligencia-artificial-para-hoteis-e-pousadas", title: LEAD_TITLE, icon: getProdutoIcone("/inteligencia-artificial-para-hoteis-e-pousadas") })} />
       <ProblemaParallaxSection />
       <PilaresSection />
       <OcupacaoSection />
@@ -43,6 +45,8 @@ function OtheoAiPage() {
       <MobileVozSection />
       <AcessoSection />
       <ManifestoSection />
+
+      <UltimasDoBlogSection productSlug="inteligencia-artificial-para-hoteis-e-pousadas" />
 
       <FAQAccordion
         items={[
@@ -99,7 +103,7 @@ function OtheoAiPage() {
         badge="Comece agora"
         title="Pronto para ter um copiloto de IA na sua operação?"
         subtitle="Solicite uma demonstração e veja o Otheo respondendo perguntas reais do seu hotel, ao vivo."
-        source="cta_final_otheo_ai"
+        source="inteligencia-artificial-para-hoteis-e-pousadas"
         leadTitle={LEAD_TITLE}
       />
     </div>

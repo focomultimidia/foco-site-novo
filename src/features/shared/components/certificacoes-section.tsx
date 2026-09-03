@@ -6,38 +6,49 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
 
+// Altura comum de exibição (px) — mesma altura do selo booking.svg. Cada
+// largura abaixo é calculada a partir da proporção real do viewBox de cada
+// SVG para essa altura, evitando esticar/achatar os selos com proporções
+// diferentes (ver certificacoes-section.tsx original: width/height fixos
+// e iguais para todos os selos distorcia expedia, stone e pci).
+const SELO_HEIGHT = 70;
+
 const certificacoes = [
   {
     id:       "booking",
-    logo:     "/assets/imgs/certificacoes/booking.webp",
-    titulo:   "Booking Connectivity Partner Premier",
+    logo:     "/assets/imgs/certificacoes/booking.svg",
+    titulo:   "Premier Connectivity Partner 2026",
     descricao:
       "Oferecemos a você a conexão mais avançada e estável do mercado, garantindo que suas reservas fluam com segurança, agilidade e máxima eficiência.",
     accent:   "#08397e",
+    width:    242, // viewBox 1042.31 x 302
   },
   {
     id:       "expedia",
-    logo:     "/assets/imgs/certificacoes/expedia.webp",
+    logo:     "/assets/imgs/certificacoes/expedia.svg",
     titulo:   "Expedia Elite Partner 2025",
     descricao:
       "Estamos no seleto grupo dos 2% melhores fornecedores globais de tecnologia do Expedia Group. Para o seu hotel, isso significa integrações perfeitas e desempenho de reservas otimizado ao máximo.",
     accent:   "#000099",
+    width:    163, // viewBox 355.19 x 152.6
   },
   {
     id:       "stone",
-    logo:     "/assets/imgs/certificacoes/stone.webp",
+    logo:     "/assets/imgs/certificacoes/stone.svg",
     titulo:   "Stone Advanced Partner",
     descricao:
       "Integramos a mais robusta plataforma financeira diretamente ao nosso ecossistema. Facilitamos a gestão do seu negócio com pagamentos rápidos, seguros e sem dor de cabeça.",
     accent:   "#00a868",
+    width:    161, // viewBox 411.34 x 179.23
   },
   {
     id:       "pci",
-    logo:     "/assets/imgs/certificacoes/pci.webp",
+    logo:     "/assets/imgs/certificacoes/pci.svg",
     titulo:   "Certificação Global PCI SSC",
     descricao:
       "A segurança dos dados dos seus hóspedes é nossa prioridade absoluta. Todas as transações feitas através da Foco seguem os mais rigorosos padrões mundiais de proteção de dados.",
     accent:   "#006b74",
+    width:    232, // viewBox 191.34 x 57.83
   },
 ];
 
@@ -106,11 +117,11 @@ function CertCard({ cert }: { cert: typeof certificacoes[number] }) {
         <img
           src={cert.logo}
           alt={cert.titulo}
-          width={281}
-          height={70}
+          width={cert.width}
+          height={SELO_HEIGHT}
           loading="lazy"
           decoding="async"
-          className="max-w-full h-auto object-contain"
+          className="h-[70px] w-auto max-w-full object-contain"
           style={{
             filter:     isHovered ? "brightness(0) invert(1)" : "none",
             transition: "filter 0.25s ease",

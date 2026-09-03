@@ -6,6 +6,13 @@
     <title>Foco Tecnologia</title>
     <meta name="description" content="Ecossistema completo de tecnologia hoteleira: Site Hoteleiro, Motor de Reservas, Channel Manager, Gestão Hoteleira (PMS), Software de Pagamentos, CRM Hoteleiro e Experiência do Hóspede, tudo integrado em uma única plataforma." />
     <link rel="icon" type="image/webp" href="/assets/imgs/logo/foco.webp" />
+    <!-- /favicon.ico precisa existir como arquivo real: navegadores e o
+         Googlebot pedem essa URL direto (independente desta tag), e sem um
+         arquivo físico ali o fallback de SPA do .htaccess (RewriteCond
+         %{REQUEST_FILENAME} !-f) devolvia o index.html inteiro com 200 —
+         o Search Console então tentava indexar esse HTML como se fosse a
+         URL /favicon.ico, e travava em "Rastreada, mas não indexada". -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- Preload da General Sans Bold (peso 700) — é a fonte de TODO H1/título
          de hero do site (font-display font-bold), sempre acima da dobra. Sem
@@ -25,6 +32,50 @@
          spec: toda fetch de fonte é modo CORS anônimo; sem o atributo aqui,
          o preload não bate com a fetch real do @font-face e é ignorado). -->
     <link rel="preload" href="/assets/fonts/general-sans/GeneralSans-700.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Preload da Inter (peso variável 300-600, subset latin) — é a
+         `font-sans` do Tailwind, ou seja, a fonte de TODO o corpo de texto
+         do site. Mesmo raciocínio do preload acima: sem isto o arquivo só é
+         descoberto depois de baixar e parsear o index.css.
+
+         Aqui existiam dois `preconnect` (fonts.googleapis.com e
+         fonts.gstatic.com) porque Inter e JetBrains Mono vinham do Google.
+         Agora são auto-hospedadas (ver index.css), então os preconnect
+         viraram custo puro: reservavam socket + DNS + TLS pra dois domínios
+         que a página não acessa mais. Same-origin não precisa de
+         preconnect — a conexão do documento já está aberta e é reusada.
+
+         Só a Inter é pré-carregada, não a JetBrains Mono: a mono só aparece
+         em eyebrows/labels pequenos, quase todos abaixo da dobra, e cada
+         preload disputa banda na janela crítica do LCP. `crossorigin` é
+         obrigatório mesmo same-origin (mesmo quirk explicado acima). -->
+    <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- lcp-preload:home -->
+    <!-- Preload do print do dashboard — é o elemento de LCP da Home (medido
+         no PageSpeed Insights: `<img src="/assets/imgs/home/dashboard.webp"
+         fetchpriority="high">`, em hero-section.tsx).
+
+         O arquivo tem só 26 KiB: o problema nunca foi peso, foi DESCOBERTA.
+         O relatório separa o LCP em subpartes e mostra 930 ms de "atraso no
+         carregamento de recursos" — tempo em que o navegador nem sabia que
+         essa imagem existia. Causa: o site é uma SPA, o HTML entregue tem só
+         `<div id="root">`, e a tag <img> só passa a existir depois que o
+         bundle baixa, parseia e o React renderiza. O `fetchpriority="high"`
+         no <img> não adianta esse relógio — ele só prioriza a fetch DEPOIS
+         que a tag existe.
+
+         O preload aqui é lido pelo preload scanner ainda no parse bruto do
+         HTML, então o download começa em paralelo com o próprio bundle, em
+         vez de esperar por ele.
+
+         Os marcadores "lcp-preload:home" que cercam este bloco existem
+         porque este index.html é o template de TODAS as rotas (ver
+         scripts/generate-static-meta.mjs): o bloco é removido de toda rota
+         que não seja a Home, senão as outras páginas baixariam 26 KiB de
+         uma imagem que nunca vão mostrar. -->
+    <link rel="preload" href="/assets/imgs/home/dashboard.webp" as="image" fetchpriority="high" />
+    <!-- /lcp-preload:home -->
 
     <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
          trace de performance: sob throttling pesado, o elemento de LCP (a

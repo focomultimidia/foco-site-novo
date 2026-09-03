@@ -5,25 +5,43 @@
  * ParceirosEliteSection: o card principal (selo "Foco Elite Partner") entra
  * em cena ainda durante o final da seção anterior (CertificacoesSection),
  * sai do CANTO DIREITO do palco e desliza até encaixar na borda esquerda
- * enquanto a seção pina. A esteira de logos parceiras fica atrás de uma
- * MÁSCARA (`clip-path`) que só abre conforme o card vai "trilhando o
- * caminho" pra esquerda — nunca opacidade, é revelação por corte mesmo.
- * Por baixo dessa máscara, a esteira flui continuamente — a direção e a
- * velocidade desse fluxo dependem do que o card principal está fazendo
- * AGORA (ver "VELOCIDADE E DIREÇÃO" abaixo). Depois de aberta 100%, a
- * esteira continua fluindo sozinha em loop infinito (sem depender mais do
- * scroll).
+ * conforme a seção atravessa a viewport. A esteira de logos parceiras fica
+ * atrás de uma MÁSCARA (`clip-path`) que só abre conforme o card vai
+ * "trilhando o caminho" pra esquerda — nunca opacidade, é revelação por
+ * corte mesmo. Por baixo dessa máscara, a esteira flui continuamente — a
+ * direção e a velocidade desse fluxo dependem do que o card principal está
+ * fazendo AGORA (ver "VELOCIDADE E DIREÇÃO" abaixo). Depois de aberta
+ * 100%, a esteira continua fluindo sozinha em loop infinito (sem depender
+ * mais do scroll).
  *
- * FASE A — pré-revelação, SEM pin (`start: "top bottom"` → `"top 82%"`).
+ * SEM PIN — decisão deliberada. A versão anterior PINAVA a seção
+ * (`h-screen` + `pin: true` + `end: "+=170%"`): a página congelava por
+ * ~1,7 viewport de scroll (uns 1300px numa tela de 768px) enquanto o card
+ * encaixava. Isso trouxe uma família inteira de defeitos difíceis de
+ * reproduzir — o GSAP precisa criar um `pin-spacer`, alternar a seção
+ * entre `position: fixed` e `relative` em tempo real, e recalcular tudo
+ * isso a cada refresh; qualquer dessincronia entre a thread do compositor
+ * (onde o scroll acontece) e a principal (onde o ScrollTrigger roda)
+ * aparece como a seção "pulando", "repetindo" ou saindo do lugar. Relatado
+ * pelo usuário de forma consistente e reproduzível na máquina dele.
+ * Sem pin nada disso existe: a seção é um bloco de fluxo normal como
+ * qualquer outra, e o efeito é só uma timeline scrubada pelo progresso
+ * natural dela atravessando a viewport. O resultado visual é praticamente
+ * o mesmo (o card encaixa e a esteira se revela conforme você rola), com a
+ * diferença de que a página nunca trava.
+ *
+ * FASE A — pré-revelação (`start: "top bottom"` → `"top 82%"` na seção).
  * O card materializa (fade + scale + sobe) enquanto o topo desta seção
  * ainda está atravessando a metade de baixo da viewport — os últimos
  * instantes de scroll dentro da CertificacoesSection já mostram o selo
- * aparecendo. Termina bem antes do pin engatar. A esteira NÃO participa
- * desta fase — a máscara começa 100% fechada, nada dela é visível ainda.
+ * aparecendo. A esteira NÃO participa desta fase — a máscara começa 100%
+ * fechada, nada dela é visível ainda.
  *
- * FASE B — pin + scrub (`start: "top top"`, `end: "+=170%"`). Duas coisas
- * partem da MESMA curva de progresso (mesma duração/easing dentro da
- * timeline), garantindo que fiquem sincronizadas o tempo todo:
+ * FASE B — encaixe + revelação, scrubada no PALCO (`trigger: stage`,
+ * `start: "top 85%"` → `end: "top 35%"`): o efeito acontece ao longo de
+ * meia viewport de scroll, exatamente enquanto o palco sobe pela tela.
+ * Duas coisas partem da MESMA curva de progresso (mesma duração/easing
+ * dentro da timeline), garantindo que fiquem sincronizadas o tempo todo:
  *   1. O card desliza de `x: stageWidth-cardWidth` (canto direito medido,
  *      não chutado) até `x:0` (encaixado à esquerda).
  *   2. A máscara da esteira (`clip-path: inset(0 0 0 X)`) fecha a partir
@@ -65,16 +83,16 @@
  * ambiente), não dois.
  *
  * Os quatro estados possíveis (`MarqueeState`):
- *   · progresso < `DOCK_DURATION` e progresso avançando de verdade na
+ *   · progresso < `DOCKED_AT` e progresso avançando de verdade na
  *     janela → "fast": esteira flui pra DIREITA, rápida.
- *   · progresso < `DOCK_DURATION` e progresso RECUANDO de verdade na
+ *   · progresso < `DOCKED_AT` e progresso RECUANDO de verdade na
  *     janela (usuário rolou pra cima, card devolvendo) → "reverse": esteira
  *     flui pra ESQUERDA (contrário ao padrão), mesma velocidade — só
  *     inverte o sinal do `timeScale`, GSAP toca o tween de trás pra frente.
- *   · progresso ≥ `DOCK_DURATION` (card encaixado) → "slow": ritmo lento de
+ *   · progresso ≥ `DOCKED_AT` (card encaixado) → "slow": ritmo lento de
  *     sempre, pra DIREITA — dali em diante o loop segue sozinho, por tempo.
- *   · `onLeaveBack` (usuário saiu do pin por cima) → "stopped": esteira
- *     parada, máscara fechada de novo.
+ *   · `onLeaveBack` (usuário voltou pra cima do início do efeito) →
+ *     "stopped": esteira parada, máscara fechada de novo.
  * PAUSA NO HOVER — sobrepõe TODOS os estados acima: enquanto o mouse está
  * sobre a esteira (`mouseenter`/`mouseleave` em `logosWrapRef`),
  * `isHovered` força `timeScale:0` incondicionalmente; ao sair do hover,
@@ -89,10 +107,9 @@
  *
  * Igual ao useScrollPinScale/useEventosScroll: `gsap.set()` do estado
  * inicial roda ANTES de qualquer timeline/ScrollTrigger, fora do ciclo de
- * vida deles. Nesta página convivem 3 seções pinadas (Otheo teaser,
- * Eventos e esta) — sem isso, um refresh automático disparado por
- * QUALQUER uma delas pode pintar este card já no estado final antes do
- * primeiro frame.
+ * vida deles. Esta página ainda tem outras seções pinadas (Otheo teaser,
+ * Eventos) — sem isso, um refresh automático disparado por QUALQUER uma
+ * delas pode pintar este card já no estado final antes do primeiro frame.
  */
 
 import { useLayoutEffect, type RefObject } from "react";
@@ -101,7 +118,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const DOCK_DURATION = 0.65;
+// Progresso a partir do qual o card já está praticamente encaixado e a
+// esteira passa a fluir sozinha no ritmo ambiente. Sem pin, o encaixe ocupa
+// a timeline INTEIRA (não sobra "tempo morto" no fim como na versão pinada,
+// que tinha 1,7 viewport de scroll pra preencher), então o limiar fica perto
+// de 1 — não em 0,65.
+const DOCKED_AT = 0.98;
 // Ritmo "atual" (card parado) vs. muito mais rápido (card em trânsito) —
 // multiplicadores do `timeScale` do tween de 32s da esteira. "reverse" usa
 // o mesmo módulo de FAST_TIME_SCALE, só com o sinal invertido.
@@ -215,40 +237,45 @@ export function useParceirosEliteScroll(
       logosWrap.addEventListener("mouseenter", handleMouseEnter);
       logosWrap.addEventListener("mouseleave", handleMouseLeave);
 
-      // ── Fase B — pin + scrub. Card e máscara avançam juntos na mesma
-      // timeline — reverter o scroll reverte os dois em uníssono. A
-      // velocidade/direção da esteira é decidida à parte, pelo relógio de
-      // amostragem abaixo (ver explicação no comentário do topo), nunca
-      // dentro do próprio `onUpdate`. ─────────────────────────────────
+      // ── Fase B — encaixe + revelação, SEM pin. Card e máscara avançam
+      // juntos na mesma timeline — reverter o scroll reverte os dois em
+      // uníssono. A velocidade/direção da esteira é decidida à parte, pelo
+      // relógio de amostragem abaixo (ver explicação no comentário do
+      // topo), nunca dentro do próprio `onUpdate`.
+      //
+      // O trigger é o PALCO (`stage`), não a section: é ele que precisa
+      // estar visível pro efeito fazer sentido. `top 85%` → `top 35%` faz o
+      // encaixe acontecer ao longo de meia viewport de scroll, exatamente
+      // enquanto o palco sobe pela tela — sem congelar a página em momento
+      // nenhum. ────────────────────────────────────────────────────────
       let latestProgress = 0;
       // Guarda de atividade — sem ela, o relógio de amostragem (que segue
       // rodando o tempo todo, ver `setInterval` mais abaixo) reagiria ao
-      // progresso "parado em 0" depois que o usuário sai do pin por cima
-      // (`onLeaveBack`) como se fosse um scroll genuinamente parado, e
-      // reescreveria `marqueeState` de volta pra "slow" — brigando com o
-      // "stopped" que o próprio `onLeaveBack` acabou de forçar.
-      let pinActive = false;
+      // progresso "parado em 0" depois que o usuário volta pra cima do
+      // início do efeito (`onLeaveBack`) como se fosse um scroll
+      // genuinamente parado, e reescreveria `marqueeState` de volta pra
+      // "slow" — brigando com o "stopped" que o `onLeaveBack` acabou de
+      // forçar.
+      let revealActive = false;
 
       const dockTl = gsap.timeline({
         scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "+=170%",
-          pin: true,
+          trigger: stage,
+          start: "top 85%",
+          end: "top 35%",
           scrub: 0.9,
-          anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             latestProgress = self.progress;
           },
           onEnter: () => {
-            pinActive = true;
+            revealActive = true;
           },
           onEnterBack: () => {
-            pinActive = true;
+            revealActive = true;
           },
           onLeaveBack: () => {
-            pinActive = false;
+            revealActive = false;
             marqueeState = "stopped";
             gsap.set(marqueeTl, { timeScale: 0 });
           },
@@ -256,15 +283,14 @@ export function useParceirosEliteScroll(
       });
 
       dockTl
-        .to(mainCard,  { x: 0, ease: "power3.out", duration: DOCK_DURATION }, 0)
-        .to(logosWrap, { clipPath: "inset(0px 0px 0px 0px)", ease: "power3.out", duration: DOCK_DURATION }, 0)
-        .to({}, { duration: 1 - DOCK_DURATION });
+        .to(mainCard,  { x: 0, ease: "power3.out", duration: 1 }, 0)
+        .to(logosWrap, { clipPath: "inset(0px 0px 0px 0px)", ease: "power3.out", duration: 1 }, 0);
 
       let lastSampledProgress = 0;
       let lastChangeAt = performance.now();
 
       function sample() {
-        if (!pinActive) return;
+        if (!revealActive) return;
 
         const delta = latestProgress - lastSampledProgress;
         lastSampledProgress = latestProgress;
@@ -274,7 +300,7 @@ export function useParceirosEliteScroll(
         const stalled = now - lastChangeAt > STOP_MS;
 
         let next: MarqueeState;
-        if (latestProgress >= DOCK_DURATION) {
+        if (latestProgress >= DOCKED_AT) {
           next = "slow";
         } else if (stalled) {
           next = "slow";

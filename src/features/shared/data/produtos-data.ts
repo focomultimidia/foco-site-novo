@@ -212,3 +212,17 @@ export const PRODUTOS_DATA: ProdutoItem[] = [
     beta: true,
   },
 ];
+
+// ── getProdutoIcone ───────────────────────────────────────────────────────────
+// Único ponto que resolve "ícone do produto pela rota" — usado tanto pelo
+// header (rota atual, via location.pathname) quanto por cada hero/CTA de
+// página de produto (rota já conhecida, literal) pra colocar o ícone certo
+// no modal de captura de lead. `link` já é o mesmo path usado nas rotas do
+// App.tsx, incluindo a barra inicial. Produtos fora de PRODUTOS_DATA (CRM
+// Hoteleiro, Integrações Hoteleiras, Marketing para Hotéis) e páginas que
+// não são de um produto específico (Home, Sobre, Blog...) retornam
+// `undefined` — o modal já lida bem com "sem ícone" (mesmo placeholder
+// neutro de antes).
+export function getProdutoIcone(link: string): React.ComponentType<{ className?: string }> | undefined {
+  return PRODUTOS_DATA.find((p) => p.link === link)?.Icone;
+}

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { MessageCircle } from "lucide-react";
 import { PremiumCTAButton } from "./premium-cta-button";
+import { openLeadster } from "@/features/shared/lib/leadster";
 
 interface FAQItem {
   id: string;
@@ -64,7 +65,7 @@ function FAQAccordion({
       transition={{ duration: 0.5, delay: 0.3 }}
     >
       <p className="text-gray-600 mb-4">Ainda tem dúvidas?</p>
-      <PremiumCTAButton label="Falar com especialista" icon={MessageCircle} />
+      <PremiumCTAButton label="Falar com especialista" icon={MessageCircle} onClick={openLeadster} />
     </motion.div>
   ) : null;
 
@@ -137,8 +138,13 @@ function FAQAccordion({
               ))}
             </Accordion>
 
-            {/* Mobile — botão vem DEPOIS do acordeão inteiro, no final do módulo. */}
-            {contactCta && <div className="lg:hidden mt-8">{contactCta}</div>}
+            {/* Mobile — botão vem DEPOIS do acordeão inteiro, no final do
+                módulo, centralizado (o texto/botão do desktop ficam à
+                esquerda, herdando o alinhamento da coluna sticky — no
+                mobile não existe essa coluna, então sem `text-center` o
+                texto e o botão (`inline-block`) ficavam colados na borda
+                esquerda). */}
+            {contactCta && <div className="lg:hidden mt-8 text-center">{contactCta}</div>}
           </motion.div>
 
         </div>

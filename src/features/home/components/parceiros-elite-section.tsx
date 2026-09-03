@@ -7,10 +7,12 @@ import { SectionEyebrow } from "@/features/shared/components/section-eyebrow";
 import { useParceirosEliteScroll } from "../hooks/use-parceiros-elite-scroll";
 
 // ── Data ──────────────────────────────────────────────────────────────────────
-// Logos em `public/assets/imgs/parceiros-elite/` — parceiros estratégicos do
-// ecossistema Foco (pagamentos, distribuição, atendimento, consultoria...).
-// Axé Benefícios fica sempre em primeiro (pedido explícito), o resto segue a
-// ordem em que foi cadastrado.
+// Logos em `public/assets/imgs/logos/` — pasta única compartilhada com
+// PmsIntegradosSection, SmartIntegrationsTabs e a HeroSection do Channel
+// Manager, evitando cópias duplicadas do mesmo arquivo em pastas diferentes
+// (ver histórico: expedia/decolar/b2b-reservas existiam repetidos em
+// `parceiros-elite/` e `integracoes/canais/`). Axé Benefícios fica sempre em
+// primeiro (pedido explícito), o resto segue a ordem em que foi cadastrado.
 
 interface Parceiro {
   id: string;
@@ -22,62 +24,62 @@ interface Parceiro {
 const parceiros: Parceiro[] = [
   {
     id: "axe-beneficios", nome: "Axé Benefícios",
-    logo: "/assets/imgs/parceiros-elite/logo-axe-beneficios.svg",
+    logo: "/assets/imgs/logos/logo-axe-beneficios.svg",
     resumo: "Solução de saúde corporativa com telemedicina 24h, psicologia e TotalPass para colaboradores, com implementação rápida e sem burocracia.",
   },
   {
     id: "asksuite", nome: "Asksuite",
-    logo: "/assets/imgs/parceiros-elite/asksuite.svg",
+    logo: "/assets/imgs/logos/asksuite.svg",
     resumo: "Chatbot e plataforma de atendimento multicanal (WhatsApp, redes sociais, site) focado em automatizar e aumentar as reservas diretas dos hotéis.",
   },
   {
     id: "b2breservas", nome: "B2B Reservas",
-    logo: "/assets/imgs/parceiros-elite/b2breservas.svg",
+    logo: "/assets/imgs/logos/b2b-reservas.svg",
     resumo: "A B2B Reservas conecta hotéis e pousadas a centenas de agências e operadoras, ampliando vendas e fortalecendo a distribuição hoteleira.",
   },
   {
     id: "decolar", nome: "Decolar",
-    logo: "/assets/imgs/parceiros-elite/decolar.svg",
+    logo: "/assets/imgs/logos/decolar.svg",
     resumo: "Cadastre seu hotel com suporte da Foco, ganhe comissão especial e destaque sua propriedade na Decolar.com com voucher exclusivo.",
   },
   {
     id: "expedia", nome: "Expedia",
-    logo: "/assets/imgs/parceiros-elite/expedia.svg",
+    logo: "/assets/imgs/logos/expedia.svg",
     resumo: "Cadastre seu hotel com o apoio da Foco, aproveite comissionamento reduzido por 180 dias e acesse a distribuição global e B2B do Expedia.",
   },
   {
     id: "hotei-rev", nome: "Hotel Rev",
-    logo: "/assets/imgs/parceiros-elite/hotei-rev.svg",
+    logo: "/assets/imgs/logos/hotei-rev.svg",
     resumo: "Consultoria e administração de vendas com estratégias de RM, marketing e inovação que aumentam receita, ocupação e vendas diretas.",
   },
   {
     id: "registrou-marcas", nome: "Registrou Marcas",
-    logo: "/assets/imgs/parceiros-elite/registroumarcas.svg",
+    logo: "/assets/imgs/logos/registroumarcas.svg",
     resumo: "Ter CNPJ, site, domínio ou conta na Booking.com não protege o nome do seu hotel. A única forma de garantir exclusividade legal sobre a sua marca é registrando no INPI.",
   },
   {
     id: "reprotel", nome: "Reprotel",
-    logo: "/assets/imgs/parceiros-elite/reprotel.svg",
+    logo: "/assets/imgs/logos/reprotel.svg",
     resumo: "Reprotel oferece sistemas completos para hotéis e pousadas, integrando reservas, finanças e canais de venda para mais eficiência, economia e resultados.",
   },
   {
     id: "stone", nome: "Stone",
-    logo: "/assets/imgs/parceiros-elite/stone.svg",
+    logo: "/assets/imgs/logos/stone.svg",
     resumo: "Transforme a experiência de pagamento do seu hóspede com Pix, cartão e maquininhas integrados ao sistema Foco, sem complicação.",
   },
   {
     id: "storm", nome: "Storm",
-    logo: "/assets/imgs/parceiros-elite/storm.svg",
+    logo: "/assets/imgs/logos/storm.svg",
     resumo: "Na Storm, unimos branding estratégico e identidade visual para posicionar sua empresa com autoridade e atrair clientes certos.",
   },
   {
     id: "tribuzana", nome: "Tribuzana",
-    logo: "/assets/imgs/parceiros-elite/tribuzana.svg",
+    logo: "/assets/imgs/logos/tribuzana.svg",
     resumo: "Autoridade no segmento, há mais de 10 anos ao lado dos hoteleiros com soluções que unem estratégia e tecnologia para transformar meios de hospedagem.",
   },
   {
     id: "viver-de-pousada", nome: "Viver de Pousada",
-    logo: "/assets/imgs/parceiros-elite/viver-de-pousada.webp",
+    logo: "/assets/imgs/logos/viver-de-pousada.svg",
     resumo: "O Viver de Pousada desenvolve consultorias, mentorias e treinamentos personalizados para seu hotel ou pousada lucrar o ano todo.",
   },
 ];
@@ -88,7 +90,10 @@ const parceiros: Parceiro[] = [
 const parceirosLoop = [...parceiros, ...parceiros];
 
 // Altura COMPARTILHADA entre o card principal e os cards de logo — pedido
-// explícito ("mesma altura"). Um único ponto de ajuste pros dois.
+// explícito ("mesma altura"). Um único ponto de ajuste pros dois. O bump
+// pra 320px em `lg:` voltou a caber depois que a section deixou de ser
+// `h-screen` pinada: sem aquela camisa de força de altura, o conteúdo
+// ocupa o espaço que precisa e nada é cortado.
 const CARD_HEIGHT = "h-[300px] lg:h-[320px]";
 
 // ── PartnerTile ───────────────────────────────────────────────────────────────
@@ -143,7 +148,7 @@ function PartnerTile({ parceiro }: { parceiro: Parceiro }) {
 // O selo "Foco Elite Partner" — card principal do efeito. No desktop, o
 // `ref` é o alvo direto do GSAP (use-parceiros-elite-scroll.ts: `x`, opacity,
 // scale, y são todos manipulados nele); no fallback mobile, entra sozinho
-// via `whileInView` (ver bloco `!usePinnedElite` abaixo). Por isso NENHUM
+// via `whileInView` (ver bloco `!useStageReveal` abaixo). Por isso NENHUM
 // estilo de posicionamento (absolute/left/top) vive aqui dentro — quem
 // posiciona é sempre o chamador, via `className`. Conteúdo interno em
 // `h-full flex-col justify-between` pra se espalhar bem na altura
@@ -179,7 +184,7 @@ const EliteBadgeCard = forwardRef<HTMLDivElement, { className?: string }>(
                 por isso não repetimos o nome em texto aqui embaixo (era
                 redundante com um <h3> antes desta logo existir). */}
             <img
-              src="/assets/imgs/parceiros-elite/logo-foco-elite-partner.svg"
+              src="/assets/imgs/logos/logo-foco-elite-partner.svg"
               alt="Foco Elite Partner"
               width={289}
               height={101}
@@ -215,13 +220,13 @@ const EliteBadgeCard = forwardRef<HTMLDivElement, { className?: string }>(
 // ── ParceirosEliteSection ───────────────────────────────────────────────────
 
 function ParceirosEliteSection() {
-  // Pin + parallax só em desktop largo + sem reduced-motion — mesmo critério
-  // de `canScrollytell`/`useHorizontalScroll` já usado na hero e em
-  // EventosSection. Fora dessa condição, a seção nem monta a variante
-  // pinada (ver comentário em use-eventos-scroll.ts sobre por que isso não
-  // pode ser só `display:none`: o GSAP mede a largura real da esteira pra
-  // calcular a distância do pin, e um elemento oculto mede 0).
-  const [usePinnedElite, setUsePinnedElite] = useState(
+  // Efeito de encaixe/revelação só em desktop largo + sem reduced-motion —
+  // mesmo critério de `canScrollytell`/`useHorizontalScroll` já usado na
+  // hero e em EventosSection. Fora dessa condição a seção monta a variante
+  // simples (selo estático + esteira CSS), e não só esconde com
+  // `display:none`: o GSAP mede larguras reais do palco pra calcular o
+  // ponto de partida do card, e um elemento oculto mede 0.
+  const [useStageReveal, setUseStageReveal] = useState(
     () =>
       typeof window !== "undefined" &&
       window.matchMedia("(min-width: 1024px)").matches &&
@@ -230,7 +235,7 @@ function ParceirosEliteSection() {
   useEffect(() => {
     const widthMq = window.matchMedia("(min-width: 1024px)");
     const motionMq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setUsePinnedElite(widthMq.matches && !motionMq.matches);
+    const update = () => setUseStageReveal(widthMq.matches && !motionMq.matches);
     update();
     widthMq.addEventListener("change", update);
     motionMq.addEventListener("change", update);
@@ -245,14 +250,24 @@ function ParceirosEliteSection() {
   const logosWrapRef  = useRef<HTMLDivElement>(null);
   const logosTrackRef = useRef<HTMLDivElement>(null);
 
-  useParceirosEliteScroll(usePinnedElite, sectionRef, mainCardRef, logosWrapRef, logosTrackRef);
+  useParceirosEliteScroll(useStageReveal, sectionRef, mainCardRef, logosWrapRef, logosTrackRef);
 
   return (
     <>
-      {/* ── Desktop — pin + card deslizando + esteira em loop infinito ──── */}
-      {usePinnedElite && (
-        <section ref={sectionRef} className="relative h-screen overflow-hidden bg-[#f4f7fb]">
-          <div className="relative z-10 h-full flex flex-col justify-center">
+      {/* ── Desktop — card deslizando até encaixar + esteira em loop ─────
+          SEM PIN: a section é um bloco de fluxo normal (`py-24`, igual a
+          CertificacoesSection e todas as outras), sem `h-screen` e sem
+          congelar a página. Todo o efeito é uma timeline scrubada pelo
+          progresso natural do palco atravessando a viewport (ver
+          use-parceiros-elite-scroll.ts). Como não existe mais um
+          `h-screen` espremendo tudo, também não são mais necessários os
+          malabarismos de altura que a versão pinada exigia (padding
+          calculado pelo header, margens reduzidas, altura de card
+          menor) — o conteúdo simplesmente ocupa o espaço de que
+          precisa. */}
+      {useStageReveal && (
+        <section ref={sectionRef} className="relative overflow-hidden bg-[#f4f7fb] py-24">
+          <div className="relative z-10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -275,9 +290,10 @@ function ParceirosEliteSection() {
                 </p>
               </motion.div>
 
-              {/* Palco do efeito — card principal + esteira, ambos centralizados
-                  verticalmente e posicionados via `absolute` (o GSAP manipula
-                  `x`/opacity/scale diretamente nos nós via ref). */}
+              {/* Palco do efeito — card principal + esteira, posicionados via
+                  `absolute` (o GSAP manipula `x`/opacity/scale diretamente
+                  nos nós via ref). É ESTE elemento que dispara a timeline de
+                  encaixe (trigger no palco, não na section). */}
               <div className={`relative mt-14 lg:mt-16 ${CARD_HEIGHT}`}>
                 <div
                   ref={logosWrapRef}
@@ -308,7 +324,7 @@ function ParceirosEliteSection() {
 
       {/* ── Mobile / tablet / reduced-motion — selo estático + grid com
           stagger reveal (o mesmo efeito que a seção sempre teve). ────────── */}
-      {!usePinnedElite && (
+      {!useStageReveal && (
         <section className="relative py-24 sm:py-28 overflow-hidden bg-[#f4f7fb]">
           <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div

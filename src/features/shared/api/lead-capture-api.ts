@@ -6,7 +6,11 @@
 // src/features/shared/lib/lead-capture-context.tsx).
 
 interface LeadCapturePayload {
-  /** De onde veio o lead — ex.: "hero_motor_de_reservas", "header_consultor", "cta_final_site_hoteleiro". */
+  /** De onde veio o lead — "form-[nome da página de origem]" pros botões
+      padrão (ex.: "form-motor-de-reservas", "form-home"); outros valores
+      (ex.: "planos_turbo" em marketing-para-hoteis) continuam válidos fora
+      desse conjunto, quando a informação extra importa mais que a
+      uniformidade. */
   source:          string;
   nome:            string;
   email:           string;

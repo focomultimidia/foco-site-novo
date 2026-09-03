@@ -64,6 +64,7 @@ function BlogPostPage() {
           apertado demais por não bater com a altura real dele. */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-20">
         <Breadcrumbs
+          hideLastOnMobile
           items={[
             { label: "Home", href: "/" },
             { label: "Blog", href: "/blog" },
