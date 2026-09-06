@@ -120,8 +120,4 @@ const softwarePagamentosData: SoftwarePagamentosData = {
   ],
 };
 
-async function fetchSoftwarePagamentosData(): Promise<SoftwarePagamentosData> {
-  return softwarePagamentosData;
-}
-
-export { fetchSoftwarePagamentosData };
+export { softwarePagamentosData };

@@ -82,8 +82,8 @@ interface FrameConfig {
 // proporcional à imagem real, não importa a proporção do container em volta.
 
 // ── Palco (centro) — para onde a imagem da categoria ativa viaja ────────────
-const CENTER_DESKTOP: FrameConfig = { left: "32%", top: "14%", width: "36%", rotate: 0, z: 30 };
-const CENTER_MOBILE: FrameConfig = { left: "25%", top: "10%", width: "50%", rotate: 0, z: 30 };
+const CENTER_DESKTOP: FrameConfig = { left: "29%", top: "8%", width: "42%", rotate: 0, z: 30 };
+const CENTER_MOBILE: FrameConfig = { left: "20%", top: "5%", width: "60%", rotate: 0, z: 30 };
 
 // ── Casas fixas — cada categoria tem a sua; a inclinação sutil e o
 // posicionamento assimétrico dão o ar de "fotografias espalhadas" que se
@@ -208,12 +208,18 @@ function ExperienciasSection() {
 
   // Mobile: abas em rolagem horizontal (ver className abaixo) — sem isso,
   // trocar pra uma aba fora da faixa visível deixava ela cortada na borda
-  // da tela. Rola sozinha atrás da aba ativa a cada troca.
-  useEffect(() => {
+  // da tela. Rola sozinha atrás da aba ativa a cada troca — disparado
+  // direto pelos pontos que trocam `activeIndex` (seleção manual e
+  // autoplay), nunca por um efeito ligado a `activeIndex`: esse efeito
+  // também dispararia na montagem, e `block: "nearest"` arrasta o scroll
+  // da JANELA (não só do container horizontal) quando a seção ainda está
+  // fora da tela — a página inteira abria pulando a hero (achado ao testar
+  // a rota no mobile, onde carregava já rolada até aqui).
+  const scrollActiveTabIntoView = (index: number) => {
     const container = tabsScrollRef.current;
-    const activeTab = container?.children[activeIndex] as HTMLElement | undefined;
+    const activeTab = container?.children[index] as HTMLElement | undefined;
     activeTab?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  }, [activeIndex]);
+  };
 
   // Start/stop autoplay based on viewport visibility — mesmo padrão do
   // ReservaSection/CardapioDigitalSection.
@@ -233,7 +239,11 @@ function ExperienciasSection() {
   useEffect(() => {
     if (!isVisible) return;
     const id = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % EXPERIENCIAS.length);
+      setActiveIndex(prev => {
+        const next = (prev + 1) % EXPERIENCIAS.length;
+        scrollActiveTabIntoView(next);
+        return next;
+      });
     }, 4000);
     return () => clearInterval(id);
   }, [loopKey, isVisible]);
@@ -241,6 +251,7 @@ function ExperienciasSection() {
   const handleSelect = (i: number) => {
     setActiveIndex(i);
     setLoopKey(k => k + 1);
+    scrollActiveTabIntoView(i);
   };
 
   return (

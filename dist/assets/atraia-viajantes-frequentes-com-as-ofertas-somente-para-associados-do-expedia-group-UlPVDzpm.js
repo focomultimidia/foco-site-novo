@@ -1,0 +1,29 @@
+import{j as a}from"./index-D9L6UhaX.js";const i=[],t=2,n={title:"Atraia viajantes frequentes com as ofertas somente para associados do Expedia Group",seoTitle:"Atraia viajantes frequentes com as ofertas somente para associados do Expedia Group",excerpt:"Associados dos programas de fidelidade do Expedia Group tendem a gastar mais e reservar com mais frequência do que não associados. Você pode atrair esses viajantes de alto valor usando as ofertas somente para associados. As ofertas somente para associados alcançam e convertem um conjunto de viajantes do Expedia Group que gastam e reservam mais. Uma pesquisa recente do Expedia Group mostrou que os descontos são um grande motivador para viajantes que desejam fazer uma reserva em 2023. – Preço baixo é o aspecto que clientes mais valorizam ao reservar uma viagem.*– Para 52% dos consumidores, é melhor um desconto especial do que qualquer outro benefíciodos programas de fidelidade de viagem.*– Consumidores indicaram que as tarifas com desconto são o tipo de oferta mais atrativo na horade reservar uma viagem.* Mas isso não quer dizer que as pessoas estão só em busca da tarifa mais baixa. Muita gente pode estar disposta a aumentar o orçamento para as viagens, mas quer um bom custo-benefício. Então, enquanto viajantes buscam descontos e extras, é fundamental criar uma estratégia promocional que ofereça um bom retorno sobre o seu investimento. As ofertas somente para associados são uma ótima estratégia para criar uma oferta sob medida",date:"2024-12-05",updatedAt:"2024-12-05",author:"foco-multimidia",category:"artigos",tags:[],coverImage:"/assets/imgs/blog/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group/Alcance-viajantes-blog.webp",ctaProduct:"gestor-de-canais-channel-manager"};function o(s){const e={a:"a",br:"br",h2:"h2",img:"img",p:"p",...s.components};return a.jsxs(a.Fragment,{children:[a.jsx(e.p,{children:a.jsx(e.img,{src:"/assets/imgs/blog/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group/Alcance-viajantes-blog-1024x439.webp",alt:""})}),`
+`,a.jsx(e.p,{children:"Associados dos programas de fidelidade do Expedia Group tendem a gastar mais e reservar com mais frequência do que não associados. Você pode atrair esses viajantes de alto valor usando as ofertas somente para associados. As ofertas somente para associados alcançam e convertem um conjunto de viajantes do Expedia Group que gastam e reservam mais."}),`
+`,a.jsx(e.p,{children:"Uma pesquisa recente do Expedia Group mostrou que os descontos são um grande motivador para viajantes que desejam fazer uma reserva em 2023."}),`
+`,a.jsxs(e.p,{children:["– Preço baixo é o aspecto que clientes mais valorizam ao reservar uma viagem.*",a.jsx(e.br,{}),`
+`,"– Para 52% dos consumidores, é melhor um desconto especial do que qualquer outro benefício",a.jsx(e.br,{}),`
+`,"dos programas de fidelidade de viagem.*",a.jsx(e.br,{}),`
+`,"– Consumidores indicaram que as tarifas com desconto são o tipo de oferta mais atrativo na hora",a.jsx(e.br,{}),`
+`,"de reservar uma viagem.*"]}),`
+`,a.jsx(e.p,{children:"Mas isso não quer dizer que as pessoas estão só em busca da tarifa mais baixa. Muita gente pode estar disposta a aumentar o orçamento para as viagens, mas quer um bom custo-benefício. Então, enquanto viajantes buscam descontos e extras, é fundamental criar uma estratégia promocional que ofereça um bom retorno sobre o seu investimento. As ofertas somente para associados são uma ótima estratégia para criar uma oferta sob medida para o melhor público possível e melhorar a sua visibilidade nos resultados de busca."}),`
+`,a.jsx(e.p,{children:a.jsx(e.a,{href:"https://www.youtube.com/watch?v=S0ItTzjJviU",children:"https://www.youtube.com/watch?v=S0ItTzjJviU"})}),`
+`,a.jsx(e.h2,{}),`
+`,a.jsx(e.p,{children:"Atraia viajantes de alto valor"}),`
+`,a.jsx(e.p,{children:"Em média, associados dos programas de fidelidade do Expedia Group reservam viagens com 2,5 vezes mais frequência do que não associados e gastam mais com viagens. Na verdade, associados Gold do Expedia Group gastam 22% a mais do que não associados.**"}),`
+`,a.jsx(e.h2,{}),`
+`,a.jsx(e.p,{children:"Aumente a sua visibilidade nos resultados de busca"}),`
+`,a.jsx(e.p,{children:"Quando você cria uma oferta somente para associados, sua propriedade recebe um selo especial para se destacar dos concorrentes nos sites do Expedia Group. Além disso, uma oferta desse tipo melhora a posição do seu anúncio nos resultados de busca, aumenta as suas opções de merchandising e ajuda você a aparecer nas buscas de viajantes que usam filtro."}),`
+`,a.jsx(e.h2,{}),`
+`,a.jsx(e.p,{children:"Supere a concorrência"}),`
+`,a.jsxs(e.p,{children:["Em média, as propriedades com uma oferta somente para associados de 20% ou mais têm um GBV 25%",a.jsx(e.br,{}),`
+`,"mais alto do que outras propriedades da cesta competitiva com uma oferta de 10%.**",a.jsx(e.br,{}),`
+`,"Vamos começar?"]}),`
+`,a.jsx(e.p,{children:"É fácil criar e gerenciar as ofertas somente para associados do Expedia Group direto na sua extranet da Foco."}),`
+`,a.jsx(e.p,{children:"Ficou com alguma dúvida? Nosso time está pronto pra te ajudar!"}),`
+`,a.jsx(e.p,{children:"Preencha e ganhe uma consultoria gratuita com um dos nossos especialistas"}),`
+`,a.jsx(e.p,{children:"Δ"}),`
+`,a.jsx(e.p,{children:"Não iremos fornecer, e nem utilizaremos essas informações para enviar mensagens indesejadas (SPAM)."}),`
+`,a.jsxs(e.p,{children:["*Fonte: ",a.jsx(e.a,{href:"https://partner.expediagroup.com/en-us",children:"Expedia Group, Índice de valor do viajante, 2023"}),a.jsx(e.br,{}),`
+`,"**Fonte: dados internos do Expedia Group, 2023"]})]})}function d(s={}){const{wrapper:e}=s.components||{};return e?a.jsx(e,{...s,children:a.jsx(o,{...s})}):o(s)}export{d as default,n as frontmatter,t as readingTimeMin,i as toc};
+//# sourceMappingURL=atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group-UlPVDzpm.js.map

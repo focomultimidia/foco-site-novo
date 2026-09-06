@@ -95,8 +95,4 @@ const channelManagerData: ChannelManagerData = {
   ],
 };
 
-async function fetchChannelManagerData(): Promise<ChannelManagerData> {
-  return channelManagerData;
-}
-
-export { fetchChannelManagerData };
+export { channelManagerData };

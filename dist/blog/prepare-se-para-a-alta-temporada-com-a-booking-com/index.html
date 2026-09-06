@@ -52,44 +52,41 @@
     <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 
-    <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
-         trace de performance: sob throttling pesado, o elemento de LCP (a
-         <img> do mockup, não o H1) só entra no DOM depois que o bundle JS
-         baixa, faz parse e o React monta o componente — o "preload scanner"
-         do navegador nunca vê essa URL no HTML bruto, então o pedido de
-         rede só começa tarde. Como é uma SPA sem SSR/prerender por rota (um
-         único index.html pra todas as rotas), um <link rel=preload>
-         estático aqui preloadaria essa imagem em TODAS as páginas — por
-         isso o script só injeta os links quando a rota atual é a home,
-         rodando síncrono durante o parse do HTML (antes do bundle
-         carregar), bem cedo o bastante pro navegador começar o fetch em
-         paralelo com o JS.
+    <!-- Preload do mockup de celular flutuante da hero — DESKTOP APENAS.
+         Traces repetidos (produção e local) mostram o Chrome às vezes
+         elegendo esse mockup pequeno (mapa-mobile.webp), e não o print
+         grande do dashboard, como elemento de LCP — provável artefato de
+         timing da animação de entrada (Framer Motion) de cada um. Como não
+         dá pra saber qual dos dois "vence" numa viewport larga, os dois são
+         preloadados lá.
 
-         DUAS imagens, não uma: o mockup principal (dashboard.webp) é
-         visualmente ~3x maior na tela, mas traces repetidos (produção e
-         local) mostram o Chrome elegendo o mockup de celular flutuante
-         (mapa-mobile.webp) como o elemento de LCP mesmo assim — provável
-         artefato de timing da animação de entrada (Framer Motion) de cada
-         mockup. Sem certeza de qual dos dois "vence" em qualquer viewport
-         dado, preloada os dois — custo baixo (a segunda imagem já é
-         pequena) contra a certeza de acertar o preload independente de
-         qual é medido como LCP. -->
+         Mas ele só EXISTE a partir de lg: `{isWideLayout && <HeroMobileMockup/>}`
+         em hero-section.tsx, com `isWideLayout` vindo de
+         `matchMedia("(min-width: 1024px)")`. Antes este script preloadava a
+         imagem em qualquer largura, e o Chrome reclamava no console em toda
+         carga mobile: "The resource .../mapa-mobile.webp was preloaded using
+         link preload but not used within a few seconds from the window's
+         load event". Não era só barulho de log — era download desperdiçado
+         com `fetchpriority=high` exatamente na janela crítica do LCP, no
+         aparelho que tem menos banda pra gastar. A mesma media query decide
+         aqui, então mobile não paga mais por ela.
+
+         O print grande (dashboard.webp) NÃO é preloadado aqui: ele vale pras
+         duas larguras, então virou um <link rel=preload> estático no bloco
+         "lcp-preload:home" acima — melhor lugar, porque o preload scanner o
+         lê no parse bruto do HTML, sem depender deste script rodar. -->
     <script>
     (function () {
-      if (location.pathname === '/') {
-        [
-          '/assets/imgs/home/dashboard.webp',
-          '/assets/imgs/home/produtos/mapa-mobile.webp'
-        ].forEach(function (href) {
-          var link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'image';
-          link.href = href;
-          link.type = 'image/webp';
-          link.fetchPriority = 'high';
-          document.head.appendChild(link);
-        });
-      }
+      if (location.pathname !== '/') return;
+      if (!window.matchMedia('(min-width: 1024px)').matches) return;
+
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = '/assets/imgs/home/produtos/mapa-mobile.webp';
+      link.type = 'image/webp';
+      link.fetchPriority = 'high';
+      document.head.appendChild(link);
     })();
     </script>
 
@@ -159,11 +156,28 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-BgEcUsJQ.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C8ZtC_AL.css">
+    <script type="module" crossorigin src="/assets/index-D9L6UhaX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CxzBGNqN.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/prepare-se-para-a-alta-temporada-com-a-booking-com" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Prepare-se para a alta temporada com a Booking.com","description":"Com as campanhas de vacinação contra a covid-19 a todo vapor no mundo inteiro, é chegada a hora do setor hoteleiro se preparar para uma gigante demanda reprimida de viajantes ávidos por momentos de descanso e lazer. E, conforme essa demanda aumenta, nós queremos ajudar você, amigo hoteleiro, a compreender o novo comportamento dos viajantes e a estar preparado para maximizar suas reservas, aproveitando essa grande retomada do setor turístico brasileiro. A Booking.Com divulgou o perfil dos viajantes atuais, com base em seus registros de reservas e acessos, e nós vamos apresentar agora para você, esse novo comportamento. Confira! Viajantes planejam se hospedar por mais tempo Com tantos dias de férias acumuladas e passado muito tempo desde a última viagem, faz sentido que os viajantes queiram estender ao máximo os seus dias de descanso. Por esse motivo, é importante estar atento a esse movimento e atrair esse possível público com planos de hospedagem de longa permanência. Esses planos são projetados, especificamente, para atrair estadias lucrativas de uma semana ou mais para os hotéis e pousadas e ofertar benefícios para os viajantes. Hóspedes buscam por protocolos de segurança nos hotéis Dados da Booking.com comprovam que hotéis ou pousadas que exibem","image":"https://focomultimidia.com/assets/imgs/blog/prepare-se-para-a-alta-temporada-com-a-booking-com/2607_booking_blog.webp","datePublished":"2021-07-26","dateModified":"2021-07-26","author":{"@type":"Person","name":"Marketing"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/prepare-se-para-a-alta-temporada-com-a-booking-com"}}</script>
+      <link rel="modulepreload" crossorigin href="/assets/blog-post-page-C2EFWwse.js" />
+    <link rel="modulepreload" crossorigin href="/assets/use-seo-BeV1WKAu.js" />
+    <link rel="modulepreload" crossorigin href="/assets/floating-toc-BAuuZyuX.js" />
+    <link rel="modulepreload" crossorigin href="/assets/button-DEARr97i.js" />
+    <link rel="modulepreload" crossorigin href="/assets/not-found-page-CPfZOp6d.js" />
+    <link rel="modulepreload" crossorigin href="/assets/section-eyebrow-DEXr4i35.js" />
+    <link rel="modulepreload" crossorigin href="/assets/arrow-left-CEwDgqg9.js" />
+    <link rel="modulepreload" crossorigin href="/assets/arrow-up-right-Pin9duEE.js" />
+    <link rel="modulepreload" crossorigin href="/assets/blog-post-card-CvGMYLjl.js" />
+    <link rel="modulepreload" crossorigin href="/assets/tag-chip-Qj_CLQNL.js" />
+    <link rel="modulepreload" crossorigin href="/assets/breadcrumbs-DuKBOg-D.js" />
+    <link rel="modulepreload" crossorigin href="/assets/chevron-right-DgzXQsm_.js" />
+    <link rel="modulepreload" crossorigin href="/assets/author-bio-BOYM1hxi.js" />
+    <link rel="modulepreload" crossorigin href="/assets/sparkles-BX-d3xDu.js" />
+    <link rel="modulepreload" crossorigin href="/assets/blog-toolbar-DD3Yps3z.js" />
+    <link rel="modulepreload" crossorigin href="/assets/search-DJyzhvze.js" />
+    <link rel="modulepreload" crossorigin href="/assets/clock-D8QStjRi.js" />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

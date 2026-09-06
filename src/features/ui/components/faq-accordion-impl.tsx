@@ -39,24 +39,12 @@ function FAQAccordion({
   // antes ele vinha antes do acordeão por herdar a ordem da coluna
   // esquerda). `hidden lg:block` / `lg:hidden` garantem que só UMA das
   // duas cópias fica visível por vez — nada de duplicar o botão na tela.
-  // Marca cada resposta como Q&A pro Google — sem isso, um acordeão de FAQ
-  // é só texto comum: nada garante que o snippet "o que é X" na SERP puxe
-  // a resposta certa em vez de uma página concorrente. `dangerouslySetInnerHTML`
-  // é seguro aqui porque `items` vem sempre de arrays estáticos escritos no
-  // código de cada página, nunca de input do usuário.
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
-
+  //
+  // O JSON-LD de FAQPage (schema.org) NÃO mora mais aqui: subiu pro wrapper
+  // `faq-accordion.tsx`, que é leve e monta imediatamente. Este chunk agora
+  // só é baixado quando o usuário chega perto da seção, então manter o
+  // schema aqui significaria não emiti-lo em nenhum crawl que não role até o
+  // rodapé — e emitir nos dois lugares duplicaria o script no DOM.
   const contactCta = showContactButton ? (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -71,10 +59,6 @@ function FAQAccordion({
 
   return (
     <section className="py-16 lg:py-24 bg-[#f4f7fb]">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[4fr_6fr] gap-10 lg:gap-12 items-start">
 

@@ -120,8 +120,4 @@ const crmHoteleiroData: CrmHoteleiroData = {
   ],
 };
 
-async function fetchCrmHoteleiroData(): Promise<CrmHoteleiroData> {
-  return crmHoteleiroData;
-}
-
-export { fetchCrmHoteleiroData };
+export { crmHoteleiroData };

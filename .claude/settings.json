@@ -4,7 +4,13 @@
       "Bash(grep -iE \"\\\\.env\\($|[^.]\\)\")",
       "Bash(awk '{print length\\($0\\), $0}')",
       "Bash(awk -F/ '{print length\\($NF\\), $0}')",
-      "Bash(echo \"EXIT:$?\")"
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(grep -o '<body[^>]*>.\\\\{0,3000\\\\}' \"dist/sites-para-hoteis-e-pousadas/index.html\")",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__emulate",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__evaluate_script"
     ]
   }
 }

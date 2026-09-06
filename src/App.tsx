@@ -1,7 +1,5 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './core/api/query-client';
 import { MainLayout } from './features/ui/components/main-layout';
 import { ScrollToTop } from './features/ui/components/scroll-to-top';
 import { Spinner } from './components/ui/spinner';
@@ -56,40 +54,45 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <QueryClientProvider client={queryClient}>
-        <CookieConsentProvider>
-          <Suspense fallback={<RouteFallback />}>
-            <Routes>
-              <Route element={<MainLayout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/sites-para-hoteis-e-pousadas" element={<SiteHoteleiroPage />} />
-                <Route path="/motor-de-reservas" element={<MotorReservasPage />} />
-                <Route path="/gestor-de-canais-channel-manager" element={<ChannelManagerPage />} />
-                <Route path="/sistema-de-gestao-hoteleira-pms" element={<GestaoHoteleiraPage />} />
-                <Route path="/aplicativo-de-hospedagem" element={<ExperienciaHospedePage />} />
-                <Route path="/software-de-pagamentos" element={<SoftwarePagamentosPage />} />
-                <Route path="/integracoes-hoteleiras" element={<IntegracoesHoteleirasPage />} />
-                <Route path="/crm-hoteleiro" element={<CrmHoteleiroPage />} />
-                <Route path="/inteligencia-artificial-para-hoteis-e-pousadas" element={<OtheoAiPage />} />
-                <Route path="/sobre" element={<SobrePage />} />
-                <Route path="/marketing-para-hoteis" element={<MarketingParaHoteisPage />} />
-                <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidadePage />} />
-                {/* Rotas mais específicas ANTES do catch-all de 1 segmento
-                    (/blog/:slug) — senão "/blog/categoria" seria lido como
-                    se "categoria" fosse o slug de um post. */}
-                <Route path="/blog" element={<BlogHomePage />} />
-                <Route path="/blog/busca" element={<BlogSearchPage />} />
-                <Route path="/blog/categoria/:slug" element={<BlogCategoryPage />} />
-                <Route path="/blog/tag/:slug" element={<BlogTagPage />} />
-                <Route path="/blog/autor/:slug" element={<BlogAuthorPage />} />
-                <Route path="/blog/:slug" element={<BlogPostPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Route>
-            </Routes>
-          </Suspense>
-          <CookieConsentWidget />
-        </CookieConsentProvider>
-      </QueryClientProvider>
+      {/* Havia um <QueryClientProvider> do TanStack Query aqui. Todas as 9
+          páginas que usavam `useQuery` liam objetos ESTÁTICOS do próprio
+          código (ver os `use-*-query.ts`), então o provider não cobria
+          nenhuma requisição de verdade — só carregava a biblioteca inteira
+          (~13 KB gzip) no bundle principal, que é o JS do caminho crítico
+          de TODA rota do site. Se algum dia esses dados virarem chamadas
+          reais, o provider volta aqui. */}
+      <CookieConsentProvider>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/sites-para-hoteis-e-pousadas" element={<SiteHoteleiroPage />} />
+              <Route path="/motor-de-reservas" element={<MotorReservasPage />} />
+              <Route path="/gestor-de-canais-channel-manager" element={<ChannelManagerPage />} />
+              <Route path="/sistema-de-gestao-hoteleira-pms" element={<GestaoHoteleiraPage />} />
+              <Route path="/aplicativo-de-hospedagem" element={<ExperienciaHospedePage />} />
+              <Route path="/software-de-pagamentos" element={<SoftwarePagamentosPage />} />
+              <Route path="/integracoes-hoteleiras" element={<IntegracoesHoteleirasPage />} />
+              <Route path="/crm-hoteleiro" element={<CrmHoteleiroPage />} />
+              <Route path="/inteligencia-artificial-para-hoteis-e-pousadas" element={<OtheoAiPage />} />
+              <Route path="/sobre" element={<SobrePage />} />
+              <Route path="/marketing-para-hoteis" element={<MarketingParaHoteisPage />} />
+              <Route path="/politica-de-privacidade" element={<PoliticaDePrivacidadePage />} />
+              {/* Rotas mais específicas ANTES do catch-all de 1 segmento
+                  (/blog/:slug) — senão "/blog/categoria" seria lido como
+                  se "categoria" fosse o slug de um post. */}
+              <Route path="/blog" element={<BlogHomePage />} />
+              <Route path="/blog/busca" element={<BlogSearchPage />} />
+              <Route path="/blog/categoria/:slug" element={<BlogCategoryPage />} />
+              <Route path="/blog/tag/:slug" element={<BlogTagPage />} />
+              <Route path="/blog/autor/:slug" element={<BlogAuthorPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        </Suspense>
+        <CookieConsentWidget />
+      </CookieConsentProvider>
     </BrowserRouter>
   );
 }

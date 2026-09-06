@@ -74,5 +74,19 @@ export default defineConfig({
     // Sem custo pro usuário final: navegador nenhum baixa .map a menos que o
     // DevTools esteja aberto, então o payload real da página não muda.
     sourcemap: true,
+
+    // Emite dist/.vite/manifest.json (mapa "arquivo-fonte → chunk hasheado +
+    // seus imports estáticos"). Não vai pro navegador: é consumido em build
+    // por scripts/generate-static-meta.mjs pra escrever os
+    // <link rel="modulepreload"> do chunk de cada rota no HTML daquela rota.
+    //
+    // Por que isso importa: as rotas são `lazy()` (ver App.tsx), então a URL
+    // do chunk da página só existe DENTRO do index.js. Medido em trace
+    // (throttling 4x + Slow 4G), o pedido de home-page-*.js só saía aos
+    // ~1.024 ms — o navegador precisou baixar E avaliar os 568 KB do
+    // index.js antes de descobrir que esse arquivo existia, enquanto o
+    // próprio index.js tinha começado aos 648 ms. Com o modulepreload no
+    // HTML, o preload scanner dispara os dois em paralelo já no parse bruto.
+    manifest: true,
   },
 });

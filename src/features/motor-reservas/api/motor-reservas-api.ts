@@ -128,8 +128,4 @@ const motorReservasData: MotorReservasData = {
   ],
 };
 
-async function fetchMotorReservasData(): Promise<MotorReservasData> {
-  return motorReservasData;
-}
-
-export { fetchMotorReservasData, motorReservasData };
+export { motorReservasData };

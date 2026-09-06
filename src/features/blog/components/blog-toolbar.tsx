@@ -16,7 +16,7 @@ function BlogToolbar() {
   const isBlogHome = location.pathname === "/blog";
 
   return (
-    <div className="sticky sm:static top-[var(--header-height,88px)] z-40 sm:z-auto bg-white sm:bg-transparent mt-[var(--header-height,88px)] container mx-auto flex items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+    <div className="sticky sm:static top-[var(--header-height,88px)] z-40 sm:z-auto mt-[var(--header-height,88px)] container mx-auto flex items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
       {!isBlogHome && (
         <Link
           to="/blog"

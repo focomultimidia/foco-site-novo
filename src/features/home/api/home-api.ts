@@ -296,8 +296,4 @@ const homeData: HomeData = {
   ],
 };
 
-async function fetchHomeData(): Promise<HomeData> {
-  return homeData;
-}
-
-export { fetchHomeData };
+export { homeData };

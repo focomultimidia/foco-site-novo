@@ -288,6 +288,12 @@ function Header() {
   const closeMobile = () => {
     setIsMobileOpen(false);
     setIsMobileSoftwaresOpen(false);
+    // `ScrollToTop` (App.tsx) só reresolve quando o pathname muda — clicar
+    // num link do menu que aponta pra página em que o usuário já está (ex.:
+    // "Site Hoteleiro" estando em /sites-para-hoteis-e-pousadas) não muda a
+    // rota, então o scroll ficava parado onde estava. Chamando aqui,
+    // cobre esse caso também, sem depender da navegação do router.
+    window.scrollTo(0, 0);
   };
 
   // Focus trap + Escape-to-close for the full-screen mobile nav overlay

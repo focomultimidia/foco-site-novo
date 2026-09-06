@@ -52,44 +52,41 @@
     <link rel="preload" href="/assets/fonts/inter/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
 
 
-    <!-- Preload das imagens do mockup da hero (LCP da home) — medido com
-         trace de performance: sob throttling pesado, o elemento de LCP (a
-         <img> do mockup, não o H1) só entra no DOM depois que o bundle JS
-         baixa, faz parse e o React monta o componente — o "preload scanner"
-         do navegador nunca vê essa URL no HTML bruto, então o pedido de
-         rede só começa tarde. Como é uma SPA sem SSR/prerender por rota (um
-         único index.html pra todas as rotas), um <link rel=preload>
-         estático aqui preloadaria essa imagem em TODAS as páginas — por
-         isso o script só injeta os links quando a rota atual é a home,
-         rodando síncrono durante o parse do HTML (antes do bundle
-         carregar), bem cedo o bastante pro navegador começar o fetch em
-         paralelo com o JS.
+    <!-- Preload do mockup de celular flutuante da hero — DESKTOP APENAS.
+         Traces repetidos (produção e local) mostram o Chrome às vezes
+         elegendo esse mockup pequeno (mapa-mobile.webp), e não o print
+         grande do dashboard, como elemento de LCP — provável artefato de
+         timing da animação de entrada (Framer Motion) de cada um. Como não
+         dá pra saber qual dos dois "vence" numa viewport larga, os dois são
+         preloadados lá.
 
-         DUAS imagens, não uma: o mockup principal (dashboard.webp) é
-         visualmente ~3x maior na tela, mas traces repetidos (produção e
-         local) mostram o Chrome elegendo o mockup de celular flutuante
-         (mapa-mobile.webp) como o elemento de LCP mesmo assim — provável
-         artefato de timing da animação de entrada (Framer Motion) de cada
-         mockup. Sem certeza de qual dos dois "vence" em qualquer viewport
-         dado, preloada os dois — custo baixo (a segunda imagem já é
-         pequena) contra a certeza de acertar o preload independente de
-         qual é medido como LCP. -->
+         Mas ele só EXISTE a partir de lg: `{isWideLayout && <HeroMobileMockup/>}`
+         em hero-section.tsx, com `isWideLayout` vindo de
+         `matchMedia("(min-width: 1024px)")`. Antes este script preloadava a
+         imagem em qualquer largura, e o Chrome reclamava no console em toda
+         carga mobile: "The resource .../mapa-mobile.webp was preloaded using
+         link preload but not used within a few seconds from the window's
+         load event". Não era só barulho de log — era download desperdiçado
+         com `fetchpriority=high` exatamente na janela crítica do LCP, no
+         aparelho que tem menos banda pra gastar. A mesma media query decide
+         aqui, então mobile não paga mais por ela.
+
+         O print grande (dashboard.webp) NÃO é preloadado aqui: ele vale pras
+         duas larguras, então virou um <link rel=preload> estático no bloco
+         "lcp-preload:home" acima — melhor lugar, porque o preload scanner o
+         lê no parse bruto do HTML, sem depender deste script rodar. -->
     <script>
     (function () {
-      if (location.pathname === '/') {
-        [
-          '/assets/imgs/home/dashboard.webp',
-          '/assets/imgs/home/produtos/mapa-mobile.webp'
-        ].forEach(function (href) {
-          var link = document.createElement('link');
-          link.rel = 'preload';
-          link.as = 'image';
-          link.href = href;
-          link.type = 'image/webp';
-          link.fetchPriority = 'high';
-          document.head.appendChild(link);
-        });
-      }
+      if (location.pathname !== '/') return;
+      if (!window.matchMedia('(min-width: 1024px)').matches) return;
+
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = '/assets/imgs/home/produtos/mapa-mobile.webp';
+      link.type = 'image/webp';
+      link.fetchPriority = 'high';
+      document.head.appendChild(link);
     })();
     </script>
 
@@ -159,11 +156,28 @@
     })();
     </script>
     <!-- End Google Tag Manager -->
-    <script type="module" crossorigin src="/assets/index-BgEcUsJQ.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C8ZtC_AL.css">
+    <script type="module" crossorigin src="/assets/index-D9L6UhaX.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CxzBGNqN.css">
       <link rel="canonical" href="https://focomultimidia.com/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2" />
       <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Foco Tecnologia","url":"https://focomultimidia.com","logo":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg","description":"Ecossistema completo de tecnologia hoteleira: PMS, motor de reservas, channel manager, site hoteleiro e CRM integrados em uma única plataforma.","foundingDate":"2006","sameAs":["https://br.linkedin.com/company/focotecnologiaemarketing","https://www.instagram.com/focomultimidia/","https://www.facebook.com/focotecnologiaemarketing/","https://www.youtube.com/channel/UCufhGIuMoV3ASJxaOR4Ci_Q","https://twitter.com/FocoMultimidia_"]}</script>
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Concierge de hotel: entenda o que é, o que faz e quanto ganha","description":"Um nome distinto para designar uma profissão que exala elegância, inteligência e discrição. Obviamente estamos falando do concierge hoteleiro, que ocupa relevante papel dentro de um meio de hospedagem. Se você nunca ouviu falar sobre esse profissional da hospitalidade ou se já ouviu falar, mas tem vontade de aprender ainda mais sobre ele, trazemos adiante a definição de concierge hoteleiro, a explicação do que ele faz, o que é preciso para se tornar um deles, qual a diferença entre ele e o recepcionista de hotel e, ainda, qual o salário que ele recebe. Fique com a gente e confira. 1- SIGNIFICADO Existem diferentes explicações para o termo concierge. Ao pé da letra, é uma palavra francesa que significa porteiro. E o porteiro, como de conhecimento geral, é uma espécie de “guardião das chaves” de um determinado local. A maior parte dos estudiosos da área linguística acredita, contudo, que a palavra concierge derive do latim medieval “consergius/conversus”, que significa “ajudante/serviçal”. Como nem tudo se resume a traduções puras e frias, existe uma história interessante por trás desse termo. Na idade média, existia um certo cargo em que a pessoa que o ocupava era a primeira a se levantar para destrancar as","image":"https://focomultimidia.com/assets/imgs/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2/Concierge-de-hotel_blog-1.webp","datePublished":"2024-06-05","dateModified":"2026-06-26","author":{"@type":"Person","name":"Thayse Malheiros"},"publisher":{"@type":"Organization","name":"Foco Tecnologia","logo":{"@type":"ImageObject","url":"https://focomultimidia.com/assets/imgs/logo/logo-foco.svg"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://focomultimidia.com/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2"}}</script>
+      <link rel="modulepreload" crossorigin href="/assets/blog-post-page-C2EFWwse.js" />
+    <link rel="modulepreload" crossorigin href="/assets/use-seo-BeV1WKAu.js" />
+    <link rel="modulepreload" crossorigin href="/assets/floating-toc-BAuuZyuX.js" />
+    <link rel="modulepreload" crossorigin href="/assets/button-DEARr97i.js" />
+    <link rel="modulepreload" crossorigin href="/assets/not-found-page-CPfZOp6d.js" />
+    <link rel="modulepreload" crossorigin href="/assets/section-eyebrow-DEXr4i35.js" />
+    <link rel="modulepreload" crossorigin href="/assets/arrow-left-CEwDgqg9.js" />
+    <link rel="modulepreload" crossorigin href="/assets/arrow-up-right-Pin9duEE.js" />
+    <link rel="modulepreload" crossorigin href="/assets/blog-post-card-CvGMYLjl.js" />
+    <link rel="modulepreload" crossorigin href="/assets/tag-chip-Qj_CLQNL.js" />
+    <link rel="modulepreload" crossorigin href="/assets/breadcrumbs-DuKBOg-D.js" />
+    <link rel="modulepreload" crossorigin href="/assets/chevron-right-DgzXQsm_.js" />
+    <link rel="modulepreload" crossorigin href="/assets/author-bio-BOYM1hxi.js" />
+    <link rel="modulepreload" crossorigin href="/assets/sparkles-BX-d3xDu.js" />
+    <link rel="modulepreload" crossorigin href="/assets/blog-toolbar-DD3Yps3z.js" />
+    <link rel="modulepreload" crossorigin href="/assets/search-DJyzhvze.js" />
+    <link rel="modulepreload" crossorigin href="/assets/clock-D8QStjRi.js" />
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

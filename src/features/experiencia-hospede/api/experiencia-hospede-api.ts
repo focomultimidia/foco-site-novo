@@ -126,8 +126,4 @@ const experienciaHospedeData: ExperienciaHospedeData = {
   ],
 };
 
-async function fetchExperienciaHospedeData(): Promise<ExperienciaHospedeData> {
-  return experienciaHospedeData;
-}
-
-export { fetchExperienciaHospedeData };
+export { experienciaHospedeData };

@@ -1,2 +1,0 @@
-import{j as e,a5 as n}from"./index-BgEcUsJQ.js";function o(t){return t.replace(/-/g," ")}function s({tag:t}){return e.jsxs(n,{"code-path":"src\\features\\blog\\components\\tag-chip.tsx:13:5",to:`/blog/tag/${t}`,className:"inline-flex items-center rounded-full bg-[#285992]/[0.06] text-[#285992] px-3 py-1.5 text-[12.5px] font-medium hover:bg-[#285992]/[0.12] transition-colors",children:["#",o(t)]})}export{s as T,o as t};
-//# sourceMappingURL=tag-chip-D00WUjo2.js.map

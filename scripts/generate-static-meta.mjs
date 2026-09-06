@@ -192,10 +192,74 @@ function buildHead(template, { title, description, path: routePath, image, image
 // aquele trecho tem escopo de rota, não de site.
 const HOME_ONLY_PRELOAD = /[ \t]*<!-- lcp-preload:home -->[\s\S]*?<!-- \/lcp-preload:home -->\n?/;
 
-async function writeRoute(template, routePath, seo) {
+// ── modulepreload do chunk de cada rota ──────────────────────────────────────
+// As páginas são `lazy()` (ver App.tsx), então a URL do chunk de cada uma só
+// aparece DENTRO do index.js. Medido em trace (throttling 4x + Slow 4G): o
+// index.js começava a baixar aos 648 ms, mas o pedido do home-page-*.js só
+// saía aos 1.024 ms — o navegador teve que baixar E avaliar os 568 KB do
+// bundle principal antes de sequer saber que aquele arquivo existia. Esses
+// ~370 ms são serializados bem no meio da janela do LCP.
+//
+// `<link rel="modulepreload">` escrito no HTML resolve porque o preload
+// scanner o lê no parse bruto do documento, junto com a tag do próprio
+// index.js: os dois passam a baixar em paralelo. É `modulepreload` e não
+// `preload as=script` de propósito — o primeiro também resolve e compila o
+// módulo (e é o mesmo tipo de link que o `__vitePreload` do Vite injetaria em
+// runtime), então quando o React chegar no `lazy()` o módulo já está pronto,
+// sem segunda requisição.
+//
+// Escopo: o chunk da rota mais seus imports ESTÁTICOS (recursivo). Ficam de
+// fora os `lazy()` internos da própria página (as seções gated por
+// IntersectionObserver) — preloadá-los desfaria exatamente o adiamento que
+// eles existem pra fazer.
+let manifestCache;
+
+async function loadManifest() {
+  if (manifestCache) return manifestCache;
+  try {
+    manifestCache = JSON.parse(
+      await readFile(path.join(DIST, ".vite/manifest.json"), "utf8"),
+    );
+  } catch {
+    // `build.manifest` desligado ou build parcial: seguir sem os preloads é
+    // degradação aceitável (o site continua correto, só perde o ganho), mas
+    // avisa alto pra não passar despercebido numa mudança de config.
+    console.warn(
+      "[static-meta] dist/.vite/manifest.json não encontrado — nenhum <link rel=modulepreload> por rota será escrito. Confira `build.manifest` no vite.config.ts.",
+    );
+    manifestCache = {};
+  }
+  return manifestCache;
+}
+
+async function modulePreloadLinks(entryKey) {
+  const manifest = await loadManifest();
+  if (!entryKey || !manifest[entryKey]) return "";
+
+  const files = [];
+  const seen = new Set();
+  (function collect(key) {
+    if (seen.has(key)) return;
+    seen.add(key);
+    const chunk = manifest[key];
+    if (!chunk) return;
+    // A entrada (index.js) já vem como <script type="module"> no HTML; e o CSS
+    // já vem como <link rel=stylesheet>. Só os chunks JS da rota interessam.
+    if (chunk.file && !chunk.isEntry) files.push(chunk.file);
+    for (const dep of chunk.imports ?? []) collect(dep);
+  })(entryKey);
+
+  return files
+    .map((f) => `    <link rel="modulepreload" crossorigin href="/${f}" />`)
+    .join("\n");
+}
+
+async function writeRoute(template, routePath, seo, entryKey) {
   let html = buildHead(template, seo);
   // Toda rota que não é a Home baixaria de graça o print do dashboard.
   if (routePath !== "/") html = html.replace(HOME_ONLY_PRELOAD, "");
+  const preloads = await modulePreloadLinks(entryKey);
+  if (preloads) html = html.replace("</head>", `${preloads}\n  </head>`);
   const outDir = routePath === "/" ? DIST : path.join(DIST, routePath.replace(/^\//, ""));
   await mkdir(outDir, { recursive: true });
   await writeFile(path.join(outDir, "index.html"), html, "utf8");
@@ -253,7 +317,7 @@ async function main() {
       imageWidth: isProduct ? 1200 : undefined,
       imageHeight: isProduct ? 630 : undefined,
       jsonLd,
-    });
+    }, file);
     count++;
   }
 
@@ -265,7 +329,7 @@ async function main() {
     path: "/blog",
     image: DEFAULT_OG_IMAGE,
     jsonLd: [ORGANIZATION_JSONLD],
-  });
+  }, "src/features/blog/blog-home-page.tsx");
   count++;
 
   await writeRoute(template, "/blog/busca", {
@@ -274,7 +338,7 @@ async function main() {
     path: "/blog/busca",
     image: DEFAULT_OG_IMAGE,
     jsonLd: [ORGANIZATION_JSONLD],
-  });
+  }, "src/features/blog/blog-search-page.tsx");
   count++;
 
   // 3 — cada post
@@ -309,7 +373,7 @@ async function main() {
       path: `/blog/${post.slug}`,
       image,
       jsonLd,
-    });
+    }, "src/features/blog/blog-post-page.tsx");
     count++;
   }
 
@@ -326,7 +390,7 @@ async function main() {
       path: `/blog/categoria/${slug}`,
       image: DEFAULT_OG_IMAGE,
       jsonLd: [ORGANIZATION_JSONLD],
-    });
+    }, "src/features/blog/blog-category-page.tsx");
     count++;
   }
 
@@ -339,7 +403,7 @@ async function main() {
       path: `/blog/tag/${tag}`,
       image: DEFAULT_OG_IMAGE,
       jsonLd: [ORGANIZATION_JSONLD],
-    });
+    }, "src/features/blog/blog-tag-page.tsx");
     count++;
   }
 
@@ -353,7 +417,7 @@ async function main() {
       path: `/blog/autor/${id}`,
       image: DEFAULT_OG_IMAGE,
       jsonLd: [ORGANIZATION_JSONLD],
-    });
+    }, "src/features/blog/blog-author-page.tsx");
     count++;
   }
 

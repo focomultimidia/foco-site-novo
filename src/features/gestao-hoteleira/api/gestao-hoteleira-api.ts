@@ -162,8 +162,4 @@ const gestaoHoteleiraData: GestaoHoteleiraData = {
   ],
 };
 
-async function fetchGestaoHoteleiraData(): Promise<GestaoHoteleiraData> {
-  return gestaoHoteleiraData;
-}
-
-export { fetchGestaoHoteleiraData };
+export { gestaoHoteleiraData };
