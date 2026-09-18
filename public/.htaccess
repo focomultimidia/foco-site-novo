@@ -92,12 +92,69 @@
   RedirectMatch 301 ^/blog/3411-2$ /blog/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas
 </IfModule>
 
-# ── SPA fallback — todas as rotas do React Router caem no mesmo index.html
-#    (sem isso, recarregar/entrar direto em /motor-de-reservas etc. dá 404
-#    no Apache, que tenta achar um arquivo real com esse nome). ───────────
+# ── Canonicalização de URL + SPA fallback ─────────────────────────────────
+#
+#    O problema que os dois primeiros blocos abaixo resolvem: desde que o
+#    `generate-static-meta.mjs` passou a gerar um dist/<rota>/index.html por
+#    rota, cada rota virou um DIRETÓRIO real no servidor. Com isso, o
+#    mod_dir do Apache (DirectorySlash On, o padrão) passou a responder
+#    301 em /crm-hoteleiro → /crm-hoteleiro/ — e a condição `!-d` do
+#    fallback abaixo já não salva, justamente porque agora o diretório
+#    existe. O Search Console viu o estrago pelos dois lados ao mesmo
+#    tempo: 117 URLs sem barra em "Página com redirecionamento" (o 301) e
+#    122 URLs com barra em "Página alternativa com tag canônica adequada"
+#    (essas respondem 200, mas o <link rel="canonical"> aponta pra versão
+#    sem barra — a que redireciona). Nenhum dos dois caminhos chega a ser
+#    indexado: 239 das 276 páginas não indexadas da propriedade vinham daqui.
+#
+#    A forma canônica do site é SEM barra final — é o que o sitemap.xml
+#    declara, o que o <link rel="canonical"> de cada página aponta e o que
+#    o React Router usa nos links internos. Estes dois blocos fazem o
+#    servidor concordar com isso, em vez de contradizê-lo.
+
+# Com DirectorySlash Off o mod_dir para de emitir aquele 301. A regra (2)
+# abaixo é que passa a resolver a rota, servindo o HTML pré-renderizado do
+# diretório direto na URL sem barra — 200, sem salto intermediário.
+#
+# `IndexIgnore *` é a rede de proteção que vem junto: sem o redirect do
+# mod_dir, um diretório SEM index.html poderia cair no mod_autoindex e
+# listar o conteúdo. Na prática isso não chega a acontecer — /assets não
+# casa a regra (2), cai no fallback (3) e recebe o index.html do SPA antes
+# de o autoindex entrar —, mas a linha fecha a porta de vez.
+#
+# É `IndexIgnore`, e não o `Options -Indexes` que seria o reflexo natural
+# aqui, por causa do AllowOverride: `Options` exige `AllowOverride Options`,
+# que este servidor pode não liberar — e um .htaccess com diretiva não
+# autorizada não é ignorado, ele derruba o site inteiro com 500 ("Options
+# not allowed here"). `IndexIgnore` e `DirectorySlash` estão no grupo
+# `Indexes`, o mesmo do `ExpiresActive`/`ExpiresDefault` do bloco de cache
+# lá em cima — que hoje funciona em produção, o que prova que esse grupo
+# está liberado.
+IndexIgnore *
+DirectorySlash Off
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 1) Versão com barra final → 301 pra versão sem barra (a canônica).
+  #    Recolhe as 122 URLs que hoje o Google conhece na forma /rota/ e as
+  #    devolve pra forma única. A raiz "/" fica de fora: ela É a barra.
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteRule ^(.+?)/+$ /$1 [R=301,L]
+
+  # 2) Existe dist/<rota>/index.html? Serve ele direto, na URL sem barra.
+  #    É o que o mod_dir fazia via 301 — agora sem o 301. Sem essa regra,
+  #    /crm-hoteleiro cairia no fallback (3) e receberia o index.html raiz,
+  #    com o <head> genérico da Home, perdendo todo o meta por página que o
+  #    generate-static-meta.mjs existe pra produzir.
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)/?$ /$1/index.html [L]
+
+  # 3) SPA fallback — as rotas do React Router que não têm HTML próprio
+  #    (ex.: /blog/busca com query) caem no index.html raiz. Sem isso,
+  #    entrar direto nelas ou recarregar dá 404 no Apache, que tenta achar
+  #    um arquivo real com esse nome.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
