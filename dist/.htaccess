@@ -61,6 +61,60 @@
   Redirect 301 /marketing-para-hoteis.html /marketing-para-hoteis
 </IfModule>
 
+# ── Redirects 301 — URLs .html do site antigo que ficaram DE FORA do bloco
+#    acima ───────────────────────────────────────────────────────────────
+#    Encontradas no Search Console (18/09/2026), cruzando os relatórios de
+#    páginas não indexadas. Sem redirect elas não davam 404: caíam no SPA
+#    fallback lá embaixo e respondiam 200 servindo o HTML da Home. Isso é
+#    pior que um 404 — é um soft 404, uma URL morta que finge estar viva,
+#    que o Google rastreia repetidamente e ainda pode indexar com o
+#    conteúdo errado.
+#
+#    `RedirectMatch` com âncoras (^...$), não `Redirect`, pelo motivo
+#    explicado no bloco de slugs numéricos mais abaixo — e aqui a brecha
+#    não é hipotética: `/channel-manager.html/blog/...` existe de verdade
+#    (link malformado do site antigo, o Google achou). Um `Redirect 301
+#    /channel-manager.html` casaria esse caminho também, porque mod_alias
+#    casa por SEGMENTO completo e `/channel-manager.html` é o primeiro
+#    segmento inteiro dele — mandaria a request pra
+#    `/gestor-de-canais-channel-manager/blog/channel-manager-...`, que não
+#    existe. Ancorado, cada URL casa só a si mesma e a ordem entre as
+#    linhas deixa de importar.
+#    `/index.html` NÃO entra aqui de propósito. Ela também aparece no
+#    relatório do Search Console, mas é o único caso da lista que não é
+#    soft 404: ela serve a Home de verdade (é o próprio dist/index.html), o
+#    canonical dela já aponta pra `/`, e o Google a classifica como
+#    "canônica alternativa ADEQUADA" — ou seja, já resolvida. Redirecioná-la
+#    custaria caro e quebraria: um `RedirectMatch ^/index\.html$ /` casa
+#    também a subrequest interna que o DirectoryIndex faz ao servir `/`,
+#    então `/` passa a redirecionar pra si mesma — loop infinito na Home, o
+#    site inteiro fora do ar. Desviar disso exigiria um `RewriteCond
+#    %{THE_REQUEST}` só pra distinguir request externa de interna:
+#    maquinário frágil para um ganho que o canonical já entrega.
+<IfModule mod_alias.c>
+  RedirectMatch 301 ^/quem-somos\.html$                              /sobre
+  RedirectMatch 301 ^/channel-manager\.html$                         /gestor-de-canais-channel-manager
+
+  # URL sem nenhum snapshot no Internet Archive e com os nomes de DUAS
+  # páginas reais do site antigo grudados (`gestor-de-canais-` +
+  # `software-gestao-hoteleira`): não é página que existiu, é link
+  # malformado que o Google rastreou. Vai pro primeiro dos dois termos.
+  RedirectMatch 301 ^/gestor-de-canais-software-gestao-hoteleira\.html$ /gestor-de-canais-channel-manager
+
+  # O outro link malformado: `/channel-manager.html` + o caminho de um post
+  # que existe. Mandar pro post, que é o destino que o link tentava.
+  RedirectMatch 301 ^/channel-manager\.html/blog/channel-manager-o-que-e-e-qual-o-melhor$ /blog/channel-manager-o-que-e-e-qual-o-melhor
+
+  # "Agências receptivas" era uma linha de produto própria no site antigo
+  # (item de menu ao lado de "Marketing hoteleiro") e não tem equivalente
+  # no site novo. Pelo snapshot de 2022, vendia "o mais completo e inovador
+  # site para agências de viagens e receptivos" — ou seja, o produto era um
+  # site com reservas online, então o parente mais próximo hoje é a página
+  # de sites. Destino escolhido por aproximação, não por equivalência: se a
+  # Foco preferir mandar pra Home, é só trocar esta linha.
+  RedirectMatch 301 ^/agencias-de-viagens-receptivas\.html$          /sites-para-hoteis-e-pousadas
+</IfModule>
+
 # ── Redirects 301 — renomeação de rotas (URLs limpas antigas, já indexadas,
 #    pro novo nome) ──────────────────────────────────────────────────────
 #    Preserva a indexação/ranking que essas URLs já tinham antes da troca de
