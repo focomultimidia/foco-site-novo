@@ -65,14 +65,18 @@ function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link to="/" className="inline-flex mb-6">
+              {/* Versão branca de verdade da marca, não a colorida sob
+                  `brightness-0 invert`: aquele filtro achatava tudo pra
+                  branco puro sobre o navy e apagava o dourado #f1c930 do
+                  acento. Mesmo viewBox, então a troca é direta. */}
               <img
-                src="/assets/imgs/logo/logo-foco.svg"
+                src="/assets/imgs/logo/logo-foco-branca.svg"
                 alt="Foco Tecnologia e Marketing"
                 width={147}
                 height={55}
                 loading="lazy"
                 decoding="async"
-                className="h-10 w-auto brightness-0 invert"
+                className="h-10 w-auto"
               />
             </Link>
             <p className="text-white/80 text-sm mb-6 max-w-sm">

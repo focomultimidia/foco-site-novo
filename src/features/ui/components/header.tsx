@@ -348,18 +348,48 @@ function Header() {
             variants={rowVariants}
             transition={CARD_TRANSITION}
           >
-            {/* Logo */}
-            <Link to="/" className="shrink-0">
-              <motion.img
-                src="/assets/imgs/logo/logo-foco.svg"
-                alt="Foco Tecnologia e Marketing"
-                width={147}
-                height={55}
-                decoding="async"
-                className={`w-auto transition-[filter] duration-300 ${isTransparentDark ? "brightness-0 invert" : ""}`}
-                animate={{ height: isScrolled ? 40 : 50 }}
-                transition={CARD_TRANSITION}
-              />
+            {/* Logo — os dois arquivos da marca sobrepostos em cross-fade.
+                Sobre a hero navy entra a versão branca DE VERDADE
+                (logo-foco-branca.svg), que preserva o dourado #f1c930; o
+                `brightness-0 invert` que fazia esse papel antes achatava a
+                logo inteira pra branco puro e apagava justamente o acento
+                da marca.
+
+                Empilhadas, e não uma troca de `src`: trocar o src daria um
+                corte seco no meio dos 450ms em que o header inteiro está
+                animando, e o segundo arquivo só seria buscado na primeira
+                rolagem — piscando um vazio no lugar da logo. Com as duas
+                montadas desde o início, a troca é só opacidade, na mesma
+                curva do resto do header.
+
+                As duas na mesma célula do grid (col/row 1) em vez de
+                position:absolute: os dois SVGs têm o mesmo viewBox e a
+                mesma altura animada, então a célula é dimensionada
+                corretamente por qualquer uma das duas — sem depender de
+                altura definida num pai que não tem. `justify-items-start`
+                porque o padrão do grid é esticar o item, e `w-auto` não
+                impede isso. */}
+            <Link to="/" className="shrink-0 grid justify-items-start [&>*]:col-start-1 [&>*]:row-start-1">
+              {[
+                { src: "/assets/imgs/logo/logo-foco.svg",        visible: !isTransparentDark },
+                { src: "/assets/imgs/logo/logo-foco-branca.svg", visible: isTransparentDark  },
+              ].map(({ src, visible }, i) => (
+                <motion.img
+                  key={src}
+                  src={src}
+                  /* Só a primeira leva o alt: são a MESMA marca, e dois
+                     <img> com o mesmo alt fazem o leitor de tela anunciar
+                     "Foco Tecnologia e Marketing" duas vezes seguidas. */
+                  alt={i === 0 ? "Foco Tecnologia e Marketing" : ""}
+                  aria-hidden={i === 0 ? undefined : true}
+                  width={147}
+                  height={55}
+                  decoding="async"
+                  className="w-auto"
+                  animate={{ height: isScrolled ? 40 : 50, opacity: visible ? 1 : 0 }}
+                  transition={CARD_TRANSITION}
+                />
+              ))}
             </Link>
 
             {/* ── Desktop nav ─────────────────────────────────────────────── */}
