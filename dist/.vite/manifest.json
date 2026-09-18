@@ -3,43 +3,43 @@
     "file": "assets/ScrollTrigger-a3sj5zmn.js",
     "name": "ScrollTrigger"
   },
-  "_arrow-left-CEwDgqg9.js": {
-    "file": "assets/arrow-left-CEwDgqg9.js",
+  "_arrow-left-DeuLzSB0.js": {
+    "file": "assets/arrow-left-DeuLzSB0.js",
     "name": "arrow-left",
     "imports": [
       "index.html"
     ]
   },
-  "_arrow-up-right-Pin9duEE.js": {
-    "file": "assets/arrow-up-right-Pin9duEE.js",
+  "_arrow-up-right-Ca71Xgbv.js": {
+    "file": "assets/arrow-up-right-Ca71Xgbv.js",
     "name": "arrow-up-right",
     "imports": [
       "index.html"
     ]
   },
-  "_author-bio-BOYM1hxi.js": {
-    "file": "assets/author-bio-BOYM1hxi.js",
+  "_author-bio-BH_DfD-S.js": {
+    "file": "assets/author-bio-BH_DfD-S.js",
     "name": "author-bio",
     "imports": [
       "index.html"
     ]
   },
-  "_award-DZJaZ6Rc.js": {
-    "file": "assets/award-DZJaZ6Rc.js",
+  "_award-Den3sRoq.js": {
+    "file": "assets/award-Den3sRoq.js",
     "name": "award",
     "imports": [
       "index.html"
     ]
   },
-  "_badge-check-B972MY_o.js": {
-    "file": "assets/badge-check-B972MY_o.js",
+  "_badge-check-C9pLEM0n.js": {
+    "file": "assets/badge-check-C9pLEM0n.js",
     "name": "badge-check",
     "imports": [
       "index.html"
     ]
   },
-  "_blog-post-card-CvGMYLjl.js": {
-    "file": "assets/blog-post-card-CvGMYLjl.js",
+  "_blog-post-card-B2lgVT2i.js": {
+    "file": "assets/blog-post-card-B2lgVT2i.js",
     "name": "blog-post-card",
     "imports": [
       "index.html"
@@ -193,406 +193,406 @@
       "content/blog/venda-mais-com-upselling-e-crosseling-na-hotelaria.mdx"
     ]
   },
-  "_blog-toolbar-DD3Yps3z.js": {
-    "file": "assets/blog-toolbar-DD3Yps3z.js",
+  "_blog-toolbar-BZEeekc2.js": {
+    "file": "assets/blog-toolbar-BZEeekc2.js",
     "name": "blog-toolbar",
     "imports": [
       "index.html",
-      "_blog-post-card-CvGMYLjl.js",
-      "_search-DJyzhvze.js"
+      "_blog-post-card-B2lgVT2i.js",
+      "_search-pza-gkbY.js"
     ]
   },
-  "_breadcrumbs-DuKBOg-D.js": {
-    "file": "assets/breadcrumbs-DuKBOg-D.js",
+  "_breadcrumbs-DLXo2v3C.js": {
+    "file": "assets/breadcrumbs-DLXo2v3C.js",
     "name": "breadcrumbs",
     "imports": [
       "index.html",
-      "_chevron-right-DgzXQsm_.js"
+      "_chevron-right-EyF7WVce.js"
     ]
   },
-  "_building-2-DuLDknlw.js": {
-    "file": "assets/building-2-DuLDknlw.js",
+  "_building-2-CXkczYFW.js": {
+    "file": "assets/building-2-CXkczYFW.js",
     "name": "building-2",
     "imports": [
       "index.html"
     ]
   },
-  "_building-BPozjUGg.js": {
-    "file": "assets/building-BPozjUGg.js",
+  "_building-Crt8EPKJ.js": {
+    "file": "assets/building-Crt8EPKJ.js",
     "name": "building",
     "imports": [
       "index.html"
     ]
   },
-  "_button-DEARr97i.js": {
-    "file": "assets/button-DEARr97i.js",
+  "_button-Djb_-Ueh.js": {
+    "file": "assets/button-Djb_-Ueh.js",
     "name": "button",
     "imports": [
       "index.html"
     ]
   },
-  "_carousel-DWFCXeeY.js": {
-    "file": "assets/carousel-DWFCXeeY.js",
+  "_carousel-controls-yyg4DKqh.js": {
+    "file": "assets/carousel-controls-yyg4DKqh.js",
+    "name": "carousel-controls",
+    "imports": [
+      "index.html",
+      "_arrow-left-DeuLzSB0.js"
+    ]
+  },
+  "_carousel-tibVcQRG.js": {
+    "file": "assets/carousel-tibVcQRG.js",
     "name": "carousel",
     "imports": [
       "index.html"
     ]
   },
-  "_carousel-controls-Dv2c-Hjd.js": {
-    "file": "assets/carousel-controls-Dv2c-Hjd.js",
-    "name": "carousel-controls",
-    "imports": [
-      "index.html",
-      "_arrow-left-CEwDgqg9.js"
-    ]
-  },
-  "_chevron-right-DgzXQsm_.js": {
-    "file": "assets/chevron-right-DgzXQsm_.js",
+  "_chevron-right-EyF7WVce.js": {
+    "file": "assets/chevron-right-EyF7WVce.js",
     "name": "chevron-right",
     "imports": [
       "index.html"
     ]
   },
-  "_circle-user-luZFkbl7.js": {
-    "file": "assets/circle-user-luZFkbl7.js",
+  "_circle-user-CYNoecNk.js": {
+    "file": "assets/circle-user-CYNoecNk.js",
     "name": "circle-user",
     "imports": [
       "index.html"
     ]
   },
-  "_clock-D8QStjRi.js": {
-    "file": "assets/clock-D8QStjRi.js",
+  "_clock-CGd22nTM.js": {
+    "file": "assets/clock-CGd22nTM.js",
     "name": "clock",
     "imports": [
       "index.html"
     ]
   },
-  "_compass-B1n9pL__.js": {
-    "file": "assets/compass-B1n9pL__.js",
+  "_compass-COFiFijY.js": {
+    "file": "assets/compass-COFiFijY.js",
     "name": "compass",
     "imports": [
       "index.html"
     ]
   },
-  "_dollar-sign-mjGxUddI.js": {
-    "file": "assets/dollar-sign-mjGxUddI.js",
+  "_dollar-sign-CRXFqlG2.js": {
+    "file": "assets/dollar-sign-CRXFqlG2.js",
     "name": "dollar-sign",
     "imports": [
       "index.html"
     ]
   },
-  "_dor-parallax-section-Dxc75J7W.js": {
-    "file": "assets/dor-parallax-section-Dxc75J7W.js",
+  "_dor-parallax-section-BkiaBCA6.js": {
+    "file": "assets/dor-parallax-section-BkiaBCA6.js",
     "name": "dor-parallax-section",
     "imports": [
       "index.html",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_zap-BQ3g0zcL.js"
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "_embla-carousel-autoplay.esm-CjDxzJE7.js": {
     "file": "assets/embla-carousel-autoplay.esm-CjDxzJE7.js",
     "name": "embla-carousel-autoplay.esm"
   },
-  "_empty-DZwjS8Vl.js": {
-    "file": "assets/empty-DZwjS8Vl.js",
+  "_empty-DxktJz4I.js": {
+    "file": "assets/empty-DxktJz4I.js",
     "name": "empty",
     "imports": [
       "index.html"
     ]
   },
-  "_eventos-section-Zu88zlF_.js": {
-    "file": "assets/eventos-section-Zu88zlF_.js",
+  "_eventos-section-Ba2f6bJk.js": {
+    "file": "assets/eventos-section-Ba2f6bJk.js",
     "name": "eventos-section",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/home/components/eventos-section-impl.tsx"
     ]
   },
-  "_faq-accordion-DkQPmIqQ.js": {
-    "file": "assets/faq-accordion-DkQPmIqQ.js",
+  "_faq-accordion-CueLcDCu.js": {
+    "file": "assets/faq-accordion-CueLcDCu.js",
     "name": "faq-accordion",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/ui/components/faq-accordion-impl.tsx"
     ]
   },
-  "_file-text-BeDCVMvO.js": {
-    "file": "assets/file-text-BeDCVMvO.js",
+  "_file-text-BTU_O0HL.js": {
+    "file": "assets/file-text-BTU_O0HL.js",
     "name": "file-text",
     "imports": [
       "index.html"
     ]
   },
-  "_floating-toc-BAuuZyuX.js": {
-    "file": "assets/floating-toc-BAuuZyuX.js",
+  "_floating-toc-B7sWi5jO.js": {
+    "file": "assets/floating-toc-B7sWi5jO.js",
     "name": "floating-toc",
     "imports": [
       "index.html"
     ]
   },
-  "_handshake-VxUrXmZJ.js": {
-    "file": "assets/handshake-VxUrXmZJ.js",
+  "_handshake-CqMONbok.js": {
+    "file": "assets/handshake-CqMONbok.js",
     "name": "handshake",
     "imports": [
       "index.html"
     ]
   },
-  "_heart-n3SePOl2.js": {
-    "file": "assets/heart-n3SePOl2.js",
+  "_heart-D50DAgS3.js": {
+    "file": "assets/heart-D50DAgS3.js",
     "name": "heart",
     "imports": [
       "index.html"
     ]
   },
-  "_history-DGWcWE-k.js": {
-    "file": "assets/history-DGWcWE-k.js",
+  "_history-C3YQ2JVg.js": {
+    "file": "assets/history-C3YQ2JVg.js",
     "name": "history",
     "imports": [
       "index.html"
     ]
   },
-  "_home-style-hero-A85MKJMb.js": {
-    "file": "assets/home-style-hero-A85MKJMb.js",
+  "_home-style-hero-CPszYAot.js": {
+    "file": "assets/home-style-hero-CPszYAot.js",
     "name": "home-style-hero",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ]
   },
-  "_index-DFL9nNL5.js": {
-    "file": "assets/index-DFL9nNL5.js",
+  "_index-WF28vgtA.js": {
+    "file": "assets/index-WF28vgtA.js",
     "name": "index",
     "imports": [
       "index.html"
     ]
   },
-  "_info-sections-lqHubvwm.js": {
-    "file": "assets/info-sections-lqHubvwm.js",
+  "_info-sections-ahcAdn5u.js": {
+    "file": "assets/info-sections-ahcAdn5u.js",
     "name": "info-sections",
     "imports": [
       "index.html"
     ]
   },
-  "_layout-dashboard-CIYE4rv8.js": {
-    "file": "assets/layout-dashboard-CIYE4rv8.js",
+  "_layout-dashboard-szPnGHDA.js": {
+    "file": "assets/layout-dashboard-szPnGHDA.js",
     "name": "layout-dashboard",
     "imports": [
       "index.html"
     ]
   },
-  "_lead-capture-cta-CSh8Od3p.js": {
-    "file": "assets/lead-capture-cta-CSh8Od3p.js",
+  "_lead-capture-cta-DLU-t9hB.js": {
+    "file": "assets/lead-capture-cta-DLU-t9hB.js",
     "name": "lead-capture-cta",
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js"
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
-  "_lock-Djm6V-ay.js": {
-    "file": "assets/lock-Djm6V-ay.js",
+  "_lock-C5i7z7Sl.js": {
+    "file": "assets/lock-C5i7z7Sl.js",
     "name": "lock",
     "imports": [
       "index.html"
     ]
   },
-  "_map-pin-FSvXb5Hy.js": {
-    "file": "assets/map-pin-FSvXb5Hy.js",
+  "_map-pin-D_pzplxG.js": {
+    "file": "assets/map-pin-D_pzplxG.js",
     "name": "map-pin",
     "imports": [
       "index.html"
     ]
   },
-  "_message-circle-CulNM8xz.js": {
-    "file": "assets/message-circle-CulNM8xz.js",
+  "_message-circle-B_QIGgc1.js": {
+    "file": "assets/message-circle-B_QIGgc1.js",
     "name": "message-circle",
     "imports": [
       "index.html"
     ]
   },
-  "_message-square-CO0QRaWy.js": {
-    "file": "assets/message-square-CO0QRaWy.js",
+  "_message-square-CCWFID-n.js": {
+    "file": "assets/message-square-CCWFID-n.js",
     "name": "message-square",
     "imports": [
       "index.html"
     ]
   },
-  "_na-midia-section-B2Jlirns.js": {
-    "file": "assets/na-midia-section-B2Jlirns.js",
+  "_na-midia-section-ocYajS0Q.js": {
+    "file": "assets/na-midia-section-ocYajS0Q.js",
     "name": "na-midia-section",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/home/components/na-midia-section-impl.tsx"
     ]
   },
-  "_network-Bc3aUOgO.js": {
-    "file": "assets/network-Bc3aUOgO.js",
+  "_network-ClndwRco.js": {
+    "file": "assets/network-ClndwRco.js",
     "name": "network",
     "imports": [
       "index.html"
     ]
   },
-  "_numeros-section-BTMM_sBQ.js": {
-    "file": "assets/numeros-section-BTMM_sBQ.js",
+  "_numeros-section-BplELoHS.js": {
+    "file": "assets/numeros-section-BplELoHS.js",
     "name": "numeros-section",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/home/components/numeros-section-impl.tsx"
     ]
   },
-  "_orbit-diagram-3eKM5MG1.js": {
-    "file": "assets/orbit-diagram-3eKM5MG1.js",
+  "_orbit-diagram-JL00eR1l.js": {
+    "file": "assets/orbit-diagram-JL00eR1l.js",
     "name": "orbit-diagram",
     "imports": [
       "index.html",
-      "_index-DFL9nNL5.js"
+      "_index-WF28vgtA.js"
     ]
   },
-  "_otheo-ai-teaser-section-lazy-vYOdymEy.js": {
-    "file": "assets/otheo-ai-teaser-section-lazy-vYOdymEy.js",
+  "_otheo-ai-teaser-section-lazy-Br8SG5pF.js": {
+    "file": "assets/otheo-ai-teaser-section-lazy-Br8SG5pF.js",
     "name": "otheo-ai-teaser-section-lazy",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/home/components/otheo-ai-teaser-section.tsx"
     ]
   },
-  "_qr-code-CwpiU9uU.js": {
-    "file": "assets/qr-code-CwpiU9uU.js",
+  "_qr-code-C54LWQUv.js": {
+    "file": "assets/qr-code-C54LWQUv.js",
     "name": "qr-code",
     "imports": [
       "index.html"
     ]
   },
-  "_search-DJyzhvze.js": {
-    "file": "assets/search-DJyzhvze.js",
+  "_search-pza-gkbY.js": {
+    "file": "assets/search-pza-gkbY.js",
     "name": "search",
     "imports": [
       "index.html"
     ]
   },
-  "_section-eyebrow-DEXr4i35.js": {
-    "file": "assets/section-eyebrow-DEXr4i35.js",
+  "_section-eyebrow-C6Ay6Lvm.js": {
+    "file": "assets/section-eyebrow-C6Ay6Lvm.js",
     "name": "section-eyebrow",
     "imports": [
       "index.html"
     ]
   },
-  "_send-Chi0Y_gm.js": {
-    "file": "assets/send-Chi0Y_gm.js",
+  "_send-pne4T4Y8.js": {
+    "file": "assets/send-pne4T4Y8.js",
     "name": "send",
     "imports": [
       "index.html"
     ]
   },
-  "_shield-CSr14uc5.js": {
-    "file": "assets/shield-CSr14uc5.js",
+  "_shield-CcCuSgty.js": {
+    "file": "assets/shield-CcCuSgty.js",
     "name": "shield",
     "imports": [
       "index.html"
     ]
   },
-  "_sliders-horizontal-qDyAcuGi.js": {
-    "file": "assets/sliders-horizontal-qDyAcuGi.js",
+  "_sliders-horizontal-CLKTSjca.js": {
+    "file": "assets/sliders-horizontal-CLKTSjca.js",
     "name": "sliders-horizontal",
     "imports": [
       "index.html"
     ]
   },
-  "_software-products-carousel-CLFqtuJn.js": {
-    "file": "assets/software-products-carousel-CLFqtuJn.js",
+  "_software-products-carousel-5cTdmrEo.js": {
+    "file": "assets/software-products-carousel-5cTdmrEo.js",
     "name": "software-products-carousel",
     "imports": [
       "index.html",
-      "_carousel-DWFCXeeY.js",
+      "_carousel-tibVcQRG.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-up-right-Pin9duEE.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-up-right-Ca71Xgbv.js"
     ]
   },
-  "_sparkles-BX-d3xDu.js": {
-    "file": "assets/sparkles-BX-d3xDu.js",
+  "_sparkles-HO9woxSG.js": {
+    "file": "assets/sparkles-HO9woxSG.js",
     "name": "sparkles",
     "imports": [
       "index.html"
     ]
   },
-  "_spatial-phone-carousel-BIiChzZk.js": {
-    "file": "assets/spatial-phone-carousel-BIiChzZk.js",
+  "_spatial-phone-carousel-i8_dnS0-.js": {
+    "file": "assets/spatial-phone-carousel-i8_dnS0-.js",
     "name": "spatial-phone-carousel",
     "imports": [
       "index.html"
     ]
   },
-  "_star-Gc90iB61.js": {
-    "file": "assets/star-Gc90iB61.js",
+  "_star-c351ery2.js": {
+    "file": "assets/star-c351ery2.js",
     "name": "star",
     "imports": [
       "index.html"
     ]
   },
-  "_sticky-tabs-list-DvZLBI6Q.js": {
-    "file": "assets/sticky-tabs-list-DvZLBI6Q.js",
+  "_sticky-tabs-list-k5Qk08x_.js": {
+    "file": "assets/sticky-tabs-list-k5Qk08x_.js",
     "name": "sticky-tabs-list",
     "imports": [
       "index.html"
     ]
   },
-  "_tabs-DrqkdMCw.js": {
-    "file": "assets/tabs-DrqkdMCw.js",
+  "_tabs-DXiybBZ7.js": {
+    "file": "assets/tabs-DXiybBZ7.js",
     "name": "tabs",
     "imports": [
       "index.html"
     ]
   },
-  "_tag-Czk7ofvH.js": {
-    "file": "assets/tag-Czk7ofvH.js",
+  "_tag-C0zzMYCC.js": {
+    "file": "assets/tag-C0zzMYCC.js",
     "name": "tag",
     "imports": [
       "index.html"
     ]
   },
-  "_tag-chip-Qj_CLQNL.js": {
-    "file": "assets/tag-chip-Qj_CLQNL.js",
+  "_tag-chip-B4vB0nJU.js": {
+    "file": "assets/tag-chip-B4vB0nJU.js",
     "name": "tag-chip",
     "imports": [
       "index.html"
     ]
   },
-  "_target-DwyDBgH6.js": {
-    "file": "assets/target-DwyDBgH6.js",
+  "_target-CfuWcOte.js": {
+    "file": "assets/target-CfuWcOte.js",
     "name": "target",
     "imports": [
       "index.html"
     ]
   },
-  "_trending-up-Dc-Afp4u.js": {
-    "file": "assets/trending-up-Dc-Afp4u.js",
+  "_trending-up-f-DNSTaM.js": {
+    "file": "assets/trending-up-f-DNSTaM.js",
     "name": "trending-up",
     "imports": [
       "index.html"
     ]
   },
-  "_ultimas-do-blog-section-lazy-BavQ65vb.js": {
-    "file": "assets/ultimas-do-blog-section-lazy-BavQ65vb.js",
+  "_ultimas-do-blog-section-lazy-DChHb6zF.js": {
+    "file": "assets/ultimas-do-blog-section-lazy-DChHb6zF.js",
     "name": "ultimas-do-blog-section-lazy",
     "imports": [
       "index.html"
@@ -601,76 +601,76 @@
       "src/features/shared/components/ultimas-do-blog-section.tsx"
     ]
   },
-  "_use-animation-CCA_YmbW.js": {
-    "file": "assets/use-animation-CCA_YmbW.js",
+  "_use-animation-BDn4s5Sw.js": {
+    "file": "assets/use-animation-BDn4s5Sw.js",
     "name": "use-animation",
     "imports": [
       "index.html"
     ]
   },
-  "_use-in-view-BRu_D7HX.js": {
-    "file": "assets/use-in-view-BRu_D7HX.js",
+  "_use-in-view-DKEip-GF.js": {
+    "file": "assets/use-in-view-DKEip-GF.js",
     "name": "use-in-view",
     "imports": [
       "index.html"
     ]
   },
-  "_use-motion-template-CndgsRrI.js": {
-    "file": "assets/use-motion-template-CndgsRrI.js",
+  "_use-motion-template-C2GzWTNB.js": {
+    "file": "assets/use-motion-template-C2GzWTNB.js",
     "name": "use-motion-template",
     "imports": [
       "index.html"
     ]
   },
-  "_use-scroll-UzOy9hI4.js": {
-    "file": "assets/use-scroll-UzOy9hI4.js",
+  "_use-scroll-BX3g3fjZ.js": {
+    "file": "assets/use-scroll-BX3g3fjZ.js",
     "name": "use-scroll",
     "imports": [
       "index.html"
     ]
   },
-  "_use-scroll-pin-scale-C1MtxjBS.js": {
-    "file": "assets/use-scroll-pin-scale-C1MtxjBS.js",
+  "_use-scroll-pin-scale-CGB19ZR4.js": {
+    "file": "assets/use-scroll-pin-scale-CGB19ZR4.js",
     "name": "use-scroll-pin-scale",
     "imports": [
       "index.html",
       "_ScrollTrigger-a3sj5zmn.js"
     ]
   },
-  "_use-seo-BeV1WKAu.js": {
-    "file": "assets/use-seo-BeV1WKAu.js",
+  "_use-seo-S7YA0Pq-.js": {
+    "file": "assets/use-seo-S7YA0Pq-.js",
     "name": "use-seo",
     "imports": [
       "index.html"
     ]
   },
-  "_user-check-CmCErB5E.js": {
-    "file": "assets/user-check-CmCErB5E.js",
+  "_user-check-lIFbaTw6.js": {
+    "file": "assets/user-check-lIFbaTw6.js",
     "name": "user-check",
     "imports": [
       "index.html"
     ]
   },
-  "_users-CCbP5w22.js": {
-    "file": "assets/users-CCbP5w22.js",
+  "_users-DsHEW018.js": {
+    "file": "assets/users-DsHEW018.js",
     "name": "users",
     "imports": [
       "index.html"
     ]
   },
-  "_utensils-_0hBONvO.js": {
-    "file": "assets/utensils-_0hBONvO.js",
+  "_utensils-BNXm5_pP.js": {
+    "file": "assets/utensils-BNXm5_pP.js",
     "name": "utensils",
     "imports": [
       "index.html"
     ]
   },
-  "_wall-of-love-section-lazy-Ce8Nm6Dl.js": {
-    "file": "assets/wall-of-love-section-lazy-Ce8Nm6Dl.js",
+  "_wall-of-love-section-lazy-BzaXdCTR.js": {
+    "file": "assets/wall-of-love-section-lazy-BzaXdCTR.js",
     "name": "wall-of-love-section-lazy",
     "imports": [
       "index.html",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ],
     "dynamicImports": [
       "src/features/shared/components/trusted-logos-marquee.tsx",
@@ -679,25 +679,25 @@
       "src/features/shared/components/wall-of-love-section.tsx"
     ]
   },
-  "_website-portfolio-carousel-Drl0dAJh.js": {
-    "file": "assets/website-portfolio-carousel-Drl0dAJh.js",
+  "_website-portfolio-carousel-ZEjv2ZA4.js": {
+    "file": "assets/website-portfolio-carousel-ZEjv2ZA4.js",
     "name": "website-portfolio-carousel",
     "imports": [
       "index.html",
-      "_carousel-DWFCXeeY.js",
+      "_carousel-tibVcQRG.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js"
+      "_carousel-controls-yyg4DKqh.js"
     ]
   },
-  "_zap-BQ3g0zcL.js": {
-    "file": "assets/zap-BQ3g0zcL.js",
+  "_zap-CW3VSpmd.js": {
+    "file": "assets/zap-CW3VSpmd.js",
     "name": "zap",
     "imports": [
       "index.html"
     ]
   },
   "content/blog/05-vantagens-de-um-software-de-gestao-hoteleira-em-nuvem.mdx": {
-    "file": "assets/05-vantagens-de-um-software-de-gestao-hoteleira-em-nuvem-uTRM-Z2v.js",
+    "file": "assets/05-vantagens-de-um-software-de-gestao-hoteleira-em-nuvem-BF8S_vi0.js",
     "name": "05-vantagens-de-um-software-de-gestao-hoteleira-em-nuvem",
     "src": "content/blog/05-vantagens-de-um-software-de-gestao-hoteleira-em-nuvem.mdx",
     "isDynamicEntry": true,
@@ -706,7 +706,7 @@
     ]
   },
   "content/blog/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais.mdx": {
-    "file": "assets/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais-COUuSOGA.js",
+    "file": "assets/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais-s1q6J-FB.js",
     "name": "5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais",
     "src": "content/blog/5-dicas-para-seu-hotel-se-destacar-nas-redes-sociais.mdx",
     "isDynamicEntry": true,
@@ -715,7 +715,7 @@
     ]
   },
   "content/blog/5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram.mdx": {
-    "file": "assets/5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram-DwlDWi83.js",
+    "file": "assets/5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram-BAXCeJo1.js",
     "name": "5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram",
     "src": "content/blog/5-dicas-para-turbinar-os-anuncios-do-seu-hotel-no-facebook-e-instagram.mdx",
     "isDynamicEntry": true,
@@ -724,7 +724,7 @@
     ]
   },
   "content/blog/a-pandemia-e-a-experiencia-do-hospede-saiba-como-se-adequar-ao-novo-normal.mdx": {
-    "file": "assets/a-pandemia-e-a-experiencia-do-hospede-saiba-como-se-adequar-ao-novo-normal-COIdREe6.js",
+    "file": "assets/a-pandemia-e-a-experiencia-do-hospede-saiba-como-se-adequar-ao-novo-normal-BS8RI4b4.js",
     "name": "a-pandemia-e-a-experiencia-do-hospede-saiba-como-se-adequar-ao-novo-normal",
     "src": "content/blog/a-pandemia-e-a-experiencia-do-hospede-saiba-como-se-adequar-ao-novo-normal.mdx",
     "isDynamicEntry": true,
@@ -733,7 +733,7 @@
     ]
   },
   "content/blog/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-2024.mdx": {
-    "file": "assets/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-2024-DA8ywLkF.js",
+    "file": "assets/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-2024-Duh07k_b.js",
     "name": "acessibilidade-na-hotelaria-o-que-voce-deve-fazer-2024",
     "src": "content/blog/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-2024.mdx",
     "isDynamicEntry": true,
@@ -742,7 +742,7 @@
     ]
   },
   "content/blog/acessibilidade-na-hotelaria-o-que-voce-deve-fazer.mdx": {
-    "file": "assets/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-WaGzNjSZ.js",
+    "file": "assets/acessibilidade-na-hotelaria-o-que-voce-deve-fazer-CXkKC1Y6.js",
     "name": "acessibilidade-na-hotelaria-o-que-voce-deve-fazer",
     "src": "content/blog/acessibilidade-na-hotelaria-o-que-voce-deve-fazer.mdx",
     "isDynamicEntry": true,
@@ -751,7 +751,7 @@
     ]
   },
   "content/blog/alta-temporada-na-hotelaria-como-aproveitar-ao-maximo.mdx": {
-    "file": "assets/alta-temporada-na-hotelaria-como-aproveitar-ao-maximo-Br7KJsYs.js",
+    "file": "assets/alta-temporada-na-hotelaria-como-aproveitar-ao-maximo-C-WXZxxz.js",
     "name": "alta-temporada-na-hotelaria-como-aproveitar-ao-maximo",
     "src": "content/blog/alta-temporada-na-hotelaria-como-aproveitar-ao-maximo.mdx",
     "isDynamicEntry": true,
@@ -760,7 +760,7 @@
     ]
   },
   "content/blog/amenities-de-hoteis.mdx": {
-    "file": "assets/amenities-de-hoteis-unlYI2xZ.js",
+    "file": "assets/amenities-de-hoteis-3jzu7Tez.js",
     "name": "amenities-de-hoteis",
     "src": "content/blog/amenities-de-hoteis.mdx",
     "isDynamicEntry": true,
@@ -769,7 +769,7 @@
     ]
   },
   "content/blog/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-2024.mdx": {
-    "file": "assets/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-2024-CaQlYyFQ.js",
+    "file": "assets/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-2024-Dl5nCSV1.js",
     "name": "amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-2024",
     "src": "content/blog/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-2024.mdx",
     "isDynamicEntry": true,
@@ -778,7 +778,7 @@
     ]
   },
   "content/blog/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede.mdx": {
-    "file": "assets/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-DfAKV476.js",
+    "file": "assets/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede-d_ZI5rCv.js",
     "name": "amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede",
     "src": "content/blog/amenities-de-hotel-a-estrategia-perfeita-para-surpreender-seu-hospede.mdx",
     "isDynamicEntry": true,
@@ -787,7 +787,7 @@
     ]
   },
   "content/blog/aplicativos-de-hoteis.mdx": {
-    "file": "assets/aplicativos-de-hoteis-BekaFYG8.js",
+    "file": "assets/aplicativos-de-hoteis-DEXFzhR2.js",
     "name": "aplicativos-de-hoteis",
     "src": "content/blog/aplicativos-de-hoteis.mdx",
     "isDynamicEntry": true,
@@ -796,7 +796,7 @@
     ]
   },
   "content/blog/arrendamento-de-pousada-2.mdx": {
-    "file": "assets/arrendamento-de-pousada-2-CPzZL_ev.js",
+    "file": "assets/arrendamento-de-pousada-2-BcdvcUS9.js",
     "name": "arrendamento-de-pousada-2",
     "src": "content/blog/arrendamento-de-pousada-2.mdx",
     "isDynamicEntry": true,
@@ -805,7 +805,7 @@
     ]
   },
   "content/blog/arrendamento-de-pousada-como-funciona.mdx": {
-    "file": "assets/arrendamento-de-pousada-como-funciona-BhGwvaGU.js",
+    "file": "assets/arrendamento-de-pousada-como-funciona-BYm3uXNv.js",
     "name": "arrendamento-de-pousada-como-funciona",
     "src": "content/blog/arrendamento-de-pousada-como-funciona.mdx",
     "isDynamicEntry": true,
@@ -814,7 +814,7 @@
     ]
   },
   "content/blog/arrendamento-de-pousada.mdx": {
-    "file": "assets/arrendamento-de-pousada-CX8cQ-OS.js",
+    "file": "assets/arrendamento-de-pousada-Da8mBK5M.js",
     "name": "arrendamento-de-pousada",
     "src": "content/blog/arrendamento-de-pousada.mdx",
     "isDynamicEntry": true,
@@ -823,7 +823,7 @@
     ]
   },
   "content/blog/arrendar-pousada-como-transformar-o-seu-negocio-em-uma-oportunidade-lucrativa.mdx": {
-    "file": "assets/arrendar-pousada-como-transformar-o-seu-negocio-em-uma-oportunidade-lucrativa-CRP9qcdS.js",
+    "file": "assets/arrendar-pousada-como-transformar-o-seu-negocio-em-uma-oportunidade-lucrativa-Duv3djg3.js",
     "name": "arrendar-pousada-como-transformar-o-seu-negocio-em-uma-oportunidade-lucrativa",
     "src": "content/blog/arrendar-pousada-como-transformar-o-seu-negocio-em-uma-oportunidade-lucrativa.mdx",
     "isDynamicEntry": true,
@@ -832,7 +832,7 @@
     ]
   },
   "content/blog/atraia-hospedes-utilizando-destino-da-sua-pousada.mdx": {
-    "file": "assets/atraia-hospedes-utilizando-destino-da-sua-pousada-BdettfDR.js",
+    "file": "assets/atraia-hospedes-utilizando-destino-da-sua-pousada-C9C4rlPW.js",
     "name": "atraia-hospedes-utilizando-destino-da-sua-pousada",
     "src": "content/blog/atraia-hospedes-utilizando-destino-da-sua-pousada.mdx",
     "isDynamicEntry": true,
@@ -841,7 +841,7 @@
     ]
   },
   "content/blog/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group.mdx": {
-    "file": "assets/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group-UlPVDzpm.js",
+    "file": "assets/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group-CfQ2clun.js",
     "name": "atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group",
     "src": "content/blog/atraia-viajantes-frequentes-com-as-ofertas-somente-para-associados-do-expedia-group.mdx",
     "isDynamicEntry": true,
@@ -850,7 +850,7 @@
     ]
   },
   "content/blog/atualize-seus-quartos-na-expedia-e-aumente-suas-reservas.mdx": {
-    "file": "assets/atualize-seus-quartos-na-expedia-e-aumente-suas-reservas-BB_aSh_W.js",
+    "file": "assets/atualize-seus-quartos-na-expedia-e-aumente-suas-reservas-DnWPPxpu.js",
     "name": "atualize-seus-quartos-na-expedia-e-aumente-suas-reservas",
     "src": "content/blog/atualize-seus-quartos-na-expedia-e-aumente-suas-reservas.mdx",
     "isDynamicEntry": true,
@@ -859,7 +859,7 @@
     ]
   },
   "content/blog/aumente-as-reservas-com-oportunidades-da-booking.mdx": {
-    "file": "assets/aumente-as-reservas-com-oportunidades-da-booking-CN_ElQsw.js",
+    "file": "assets/aumente-as-reservas-com-oportunidades-da-booking-DT7dZV0N.js",
     "name": "aumente-as-reservas-com-oportunidades-da-booking",
     "src": "content/blog/aumente-as-reservas-com-oportunidades-da-booking.mdx",
     "isDynamicEntry": true,
@@ -868,7 +868,7 @@
     ]
   },
   "content/blog/aumente-as-suas-reservas-na-booking-com-com-tarifas-exclusivas-para-celulares.mdx": {
-    "file": "assets/aumente-as-suas-reservas-na-booking-com-com-tarifas-exclusivas-para-celulares-afCXpltA.js",
+    "file": "assets/aumente-as-suas-reservas-na-booking-com-com-tarifas-exclusivas-para-celulares-CfpuWtiI.js",
     "name": "aumente-as-suas-reservas-na-booking-com-com-tarifas-exclusivas-para-celulares",
     "src": "content/blog/aumente-as-suas-reservas-na-booking-com-com-tarifas-exclusivas-para-celulares.mdx",
     "isDynamicEntry": true,
@@ -877,7 +877,7 @@
     ]
   },
   "content/blog/aumente-suas-reservas-com-o-melhor-site-hoteleiro.mdx": {
-    "file": "assets/aumente-suas-reservas-com-o-melhor-site-hoteleiro-CqvwrDaU.js",
+    "file": "assets/aumente-suas-reservas-com-o-melhor-site-hoteleiro-DaJbsUBv.js",
     "name": "aumente-suas-reservas-com-o-melhor-site-hoteleiro",
     "src": "content/blog/aumente-suas-reservas-com-o-melhor-site-hoteleiro.mdx",
     "isDynamicEntry": true,
@@ -886,7 +886,7 @@
     ]
   },
   "content/blog/automatizacao-hoteleira.mdx": {
-    "file": "assets/automatizacao-hoteleira-DrKRy17p.js",
+    "file": "assets/automatizacao-hoteleira-C0nMOeGj.js",
     "name": "automatizacao-hoteleira",
     "src": "content/blog/automatizacao-hoteleira.mdx",
     "isDynamicEntry": true,
@@ -895,7 +895,7 @@
     ]
   },
   "content/blog/avaliacoes-de-hospedes-na-hospedagem.mdx": {
-    "file": "assets/avaliacoes-de-hospedes-na-hospedagem-DJMOgGga.js",
+    "file": "assets/avaliacoes-de-hospedes-na-hospedagem-D2O_XBAk.js",
     "name": "avaliacoes-de-hospedes-na-hospedagem",
     "src": "content/blog/avaliacoes-de-hospedes-na-hospedagem.mdx",
     "isDynamicEntry": true,
@@ -904,7 +904,7 @@
     ]
   },
   "content/blog/black-friday-na-hotelaria-venda-mais.mdx": {
-    "file": "assets/black-friday-na-hotelaria-venda-mais-DyrRdazb.js",
+    "file": "assets/black-friday-na-hotelaria-venda-mais-Bwp_Tcr-.js",
     "name": "black-friday-na-hotelaria-venda-mais",
     "src": "content/blog/black-friday-na-hotelaria-venda-mais.mdx",
     "isDynamicEntry": true,
@@ -913,7 +913,7 @@
     ]
   },
   "content/blog/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-2023.mdx": {
-    "file": "assets/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-2023-D1WMvteQ.js",
+    "file": "assets/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-2023-DJLwUGE7.js",
     "name": "cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-2023",
     "src": "content/blog/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-2023.mdx",
     "isDynamicEntry": true,
@@ -922,7 +922,7 @@
     ]
   },
   "content/blog/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes.mdx": {
-    "file": "assets/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-1zZWbZyV.js",
+    "file": "assets/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes-B0uGvg4i.js",
     "name": "cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes",
     "src": "content/blog/cafe-da-manha-de-hoteis-como-oferecer-uma-experiencia-inesquecivel-para-os-hospedes.mdx",
     "isDynamicEntry": true,
@@ -931,7 +931,7 @@
     ]
   },
   "content/blog/camareira-de-hotel-2023.mdx": {
-    "file": "assets/camareira-de-hotel-2023-B02CScPg.js",
+    "file": "assets/camareira-de-hotel-2023-D0x7pRK8.js",
     "name": "camareira-de-hotel-2023",
     "src": "content/blog/camareira-de-hotel-2023.mdx",
     "isDynamicEntry": true,
@@ -940,7 +940,7 @@
     ]
   },
   "content/blog/camareira-de-hotel.mdx": {
-    "file": "assets/camareira-de-hotel-C58f43H3.js",
+    "file": "assets/camareira-de-hotel-D-irLnSK.js",
     "name": "camareira-de-hotel",
     "src": "content/blog/camareira-de-hotel.mdx",
     "isDynamicEntry": true,
@@ -949,7 +949,7 @@
     ]
   },
   "content/blog/cancelamento-de-reservas-entenda-tudo-2024.mdx": {
-    "file": "assets/cancelamento-de-reservas-entenda-tudo-2024-JRzLgmTY.js",
+    "file": "assets/cancelamento-de-reservas-entenda-tudo-2024-DO73WjuV.js",
     "name": "cancelamento-de-reservas-entenda-tudo-2024",
     "src": "content/blog/cancelamento-de-reservas-entenda-tudo-2024.mdx",
     "isDynamicEntry": true,
@@ -958,7 +958,7 @@
     ]
   },
   "content/blog/cancelamento-de-reservas-entenda-tudo.mdx": {
-    "file": "assets/cancelamento-de-reservas-entenda-tudo-TwMeF577.js",
+    "file": "assets/cancelamento-de-reservas-entenda-tudo-C-c7kYTI.js",
     "name": "cancelamento-de-reservas-entenda-tudo",
     "src": "content/blog/cancelamento-de-reservas-entenda-tudo.mdx",
     "isDynamicEntry": true,
@@ -967,7 +967,7 @@
     ]
   },
   "content/blog/central-de-reservas-de-hotel-terceirizada.mdx": {
-    "file": "assets/central-de-reservas-de-hotel-terceirizada-Ds-n8XFm.js",
+    "file": "assets/central-de-reservas-de-hotel-terceirizada-DyIKBVvJ.js",
     "name": "central-de-reservas-de-hotel-terceirizada",
     "src": "content/blog/central-de-reservas-de-hotel-terceirizada.mdx",
     "isDynamicEntry": true,
@@ -976,7 +976,7 @@
     ]
   },
   "content/blog/central-de-reservas.mdx": {
-    "file": "assets/central-de-reservas-DQW5U-iT.js",
+    "file": "assets/central-de-reservas-hcbGvEdy.js",
     "name": "central-de-reservas",
     "src": "content/blog/central-de-reservas.mdx",
     "isDynamicEntry": true,
@@ -985,7 +985,7 @@
     ]
   },
   "content/blog/channel-manager-o-que-e-e-qual-o-melhor-1.mdx": {
-    "file": "assets/channel-manager-o-que-e-e-qual-o-melhor-1-DpVjyWmF.js",
+    "file": "assets/channel-manager-o-que-e-e-qual-o-melhor-1-Ccg8c8-k.js",
     "name": "channel-manager-o-que-e-e-qual-o-melhor-1",
     "src": "content/blog/channel-manager-o-que-e-e-qual-o-melhor-1.mdx",
     "isDynamicEntry": true,
@@ -994,7 +994,7 @@
     ]
   },
   "content/blog/channel-manager-o-que-e-e-qual-o-melhor.mdx": {
-    "file": "assets/channel-manager-o-que-e-e-qual-o-melhor-XIPqQ1jA.js",
+    "file": "assets/channel-manager-o-que-e-e-qual-o-melhor-CC9ps4Cg.js",
     "name": "channel-manager-o-que-e-e-qual-o-melhor",
     "src": "content/blog/channel-manager-o-que-e-e-qual-o-melhor.mdx",
     "isDynamicEntry": true,
@@ -1003,7 +1003,7 @@
     ]
   },
   "content/blog/chatbot-hoteleiro-pode-aumentar-suas-reservas-diretas.mdx": {
-    "file": "assets/chatbot-hoteleiro-pode-aumentar-suas-reservas-diretas-C38ElEw5.js",
+    "file": "assets/chatbot-hoteleiro-pode-aumentar-suas-reservas-diretas-BvI4Z9Jr.js",
     "name": "chatbot-hoteleiro-pode-aumentar-suas-reservas-diretas",
     "src": "content/blog/chatbot-hoteleiro-pode-aumentar-suas-reservas-diretas.mdx",
     "isDynamicEntry": true,
@@ -1012,7 +1012,7 @@
     ]
   },
   "content/blog/check-in-e-check-out-como-a-tecnologia-transforma-a-experiencia-do-hospede.mdx": {
-    "file": "assets/check-in-e-check-out-como-a-tecnologia-transforma-a-experiencia-do-hospede-Bbm06sm_.js",
+    "file": "assets/check-in-e-check-out-como-a-tecnologia-transforma-a-experiencia-do-hospede-BS_UcDsK.js",
     "name": "check-in-e-check-out-como-a-tecnologia-transforma-a-experiencia-do-hospede",
     "src": "content/blog/check-in-e-check-out-como-a-tecnologia-transforma-a-experiencia-do-hospede.mdx",
     "isDynamicEntry": true,
@@ -1021,7 +1021,7 @@
     ]
   },
   "content/blog/check-in-e-check-out-de-hotel.mdx": {
-    "file": "assets/check-in-e-check-out-de-hotel-CgFM0Eon.js",
+    "file": "assets/check-in-e-check-out-de-hotel-3gAxErdg.js",
     "name": "check-in-e-check-out-de-hotel",
     "src": "content/blog/check-in-e-check-out-de-hotel.mdx",
     "isDynamicEntry": true,
@@ -1030,7 +1030,7 @@
     ]
   },
   "content/blog/check-in-e-check-out.mdx": {
-    "file": "assets/check-in-e-check-out-BrOkQ5RM.js",
+    "file": "assets/check-in-e-check-out-BZG7E3Fu.js",
     "name": "check-in-e-check-out",
     "src": "content/blog/check-in-e-check-out.mdx",
     "isDynamicEntry": true,
@@ -1039,7 +1039,7 @@
     ]
   },
   "content/blog/como-calcular-a-diaria-de-hotel-descubra-o-melhor-jeito.mdx": {
-    "file": "assets/como-calcular-a-diaria-de-hotel-descubra-o-melhor-jeito-CjwZ_uwh.js",
+    "file": "assets/como-calcular-a-diaria-de-hotel-descubra-o-melhor-jeito-DfLV0uuz.js",
     "name": "como-calcular-a-diaria-de-hotel-descubra-o-melhor-jeito",
     "src": "content/blog/como-calcular-a-diaria-de-hotel-descubra-o-melhor-jeito.mdx",
     "isDynamicEntry": true,
@@ -1048,7 +1048,7 @@
     ]
   },
   "content/blog/como-calcular-a-diaria-de-hotel-em-2026-precificacao-lucrativa-e-estrategica.mdx": {
-    "file": "assets/como-calcular-a-diaria-de-hotel-em-2026-precificacao-lucrativa-e-estrategica-BImCClfp.js",
+    "file": "assets/como-calcular-a-diaria-de-hotel-em-2026-precificacao-lucrativa-e-estrategica-DElfHj6D.js",
     "name": "como-calcular-a-diaria-de-hotel-em-2026-precificacao-lucrativa-e-estrategica",
     "src": "content/blog/como-calcular-a-diaria-de-hotel-em-2026-precificacao-lucrativa-e-estrategica.mdx",
     "isDynamicEntry": true,
@@ -1057,7 +1057,7 @@
     ]
   },
   "content/blog/como-calcular-a-taxa-de-ocupacao-hoteleira.mdx": {
-    "file": "assets/como-calcular-a-taxa-de-ocupacao-hoteleira-CA2xUwwh.js",
+    "file": "assets/como-calcular-a-taxa-de-ocupacao-hoteleira-C90OoZvP.js",
     "name": "como-calcular-a-taxa-de-ocupacao-hoteleira",
     "src": "content/blog/como-calcular-a-taxa-de-ocupacao-hoteleira.mdx",
     "isDynamicEntry": true,
@@ -1066,7 +1066,7 @@
     ]
   },
   "content/blog/como-divulgar-a-minha-pousada-confira-dicas-valiosas.mdx": {
-    "file": "assets/como-divulgar-a-minha-pousada-confira-dicas-valiosas-BPHI8VaU.js",
+    "file": "assets/como-divulgar-a-minha-pousada-confira-dicas-valiosas-Yzl1WEjI.js",
     "name": "como-divulgar-a-minha-pousada-confira-dicas-valiosas",
     "src": "content/blog/como-divulgar-a-minha-pousada-confira-dicas-valiosas.mdx",
     "isDynamicEntry": true,
@@ -1075,7 +1075,7 @@
     ]
   },
   "content/blog/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas.mdx": {
-    "file": "assets/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas-CK36WQtC.js",
+    "file": "assets/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas-B4QJtspf.js",
     "name": "como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas",
     "src": "content/blog/como-o-google-hotel-ads-pode-alavancar-reservas-diretas-e-reduzir-dependencia-das-otas.mdx",
     "isDynamicEntry": true,
@@ -1084,7 +1084,7 @@
     ]
   },
   "content/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2.mdx": {
-    "file": "assets/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2-43bkzuoE.js",
+    "file": "assets/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2-D_5Il5pg.js",
     "name": "concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2",
     "src": "content/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-2.mdx",
     "isDynamicEntry": true,
@@ -1093,7 +1093,7 @@
     ]
   },
   "content/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha.mdx": {
-    "file": "assets/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-LRtG-WCY.js",
+    "file": "assets/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha-DCMaRnjc.js",
     "name": "concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha",
     "src": "content/blog/concierge-de-hotel-o-que-e-o-que-faz-e-quanto-ganha.mdx",
     "isDynamicEntry": true,
@@ -1102,7 +1102,7 @@
     ]
   },
   "content/blog/configure-promocoes-dispositivos-moveis-expedia.mdx": {
-    "file": "assets/configure-promocoes-dispositivos-moveis-expedia-DT3AbLMt.js",
+    "file": "assets/configure-promocoes-dispositivos-moveis-expedia-RICteCdE.js",
     "name": "configure-promocoes-dispositivos-moveis-expedia",
     "src": "content/blog/configure-promocoes-dispositivos-moveis-expedia.mdx",
     "isDynamicEntry": true,
@@ -1111,7 +1111,7 @@
     ]
   },
   "content/blog/confira-4-dicas-para-ter-uma-equipe-hoteleira-de-sucesso.mdx": {
-    "file": "assets/confira-4-dicas-para-ter-uma-equipe-hoteleira-de-sucesso-BkCKeEpq.js",
+    "file": "assets/confira-4-dicas-para-ter-uma-equipe-hoteleira-de-sucesso-C5pVQsCZ.js",
     "name": "confira-4-dicas-para-ter-uma-equipe-hoteleira-de-sucesso",
     "src": "content/blog/confira-4-dicas-para-ter-uma-equipe-hoteleira-de-sucesso.mdx",
     "isDynamicEntry": true,
@@ -1120,7 +1120,7 @@
     ]
   },
   "content/blog/conheca-a-lei-da-hospedagem.mdx": {
-    "file": "assets/conheca-a-lei-da-hospedagem-CLKL0Y5D.js",
+    "file": "assets/conheca-a-lei-da-hospedagem-CTvB1iJH.js",
     "name": "conheca-a-lei-da-hospedagem",
     "src": "content/blog/conheca-a-lei-da-hospedagem.mdx",
     "isDynamicEntry": true,
@@ -1129,7 +1129,7 @@
     ]
   },
   "content/blog/conheca-os-ganhos-com-a-automatizacao-de-pagamentos.mdx": {
-    "file": "assets/conheca-os-ganhos-com-a-automatizacao-de-pagamentos-i3wAV7pI.js",
+    "file": "assets/conheca-os-ganhos-com-a-automatizacao-de-pagamentos-DSyV5yqV.js",
     "name": "conheca-os-ganhos-com-a-automatizacao-de-pagamentos",
     "src": "content/blog/conheca-os-ganhos-com-a-automatizacao-de-pagamentos.mdx",
     "isDynamicEntry": true,
@@ -1138,7 +1138,7 @@
     ]
   },
   "content/blog/curso-de-hotelaria.mdx": {
-    "file": "assets/curso-de-hotelaria-BPW2_LBt.js",
+    "file": "assets/curso-de-hotelaria-TmbUc_qG.js",
     "name": "curso-de-hotelaria",
     "src": "content/blog/curso-de-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1147,7 +1147,7 @@
     ]
   },
   "content/blog/day-use-lucro-alem-da-diaria.mdx": {
-    "file": "assets/day-use-lucro-alem-da-diaria-lQeEc5oY.js",
+    "file": "assets/day-use-lucro-alem-da-diaria-YTRfqBJV.js",
     "name": "day-use-lucro-alem-da-diaria",
     "src": "content/blog/day-use-lucro-alem-da-diaria.mdx",
     "isDynamicEntry": true,
@@ -1156,7 +1156,7 @@
     ]
   },
   "content/blog/day-use-na-hotelaria-2.mdx": {
-    "file": "assets/day-use-na-hotelaria-2-BXl66ipH.js",
+    "file": "assets/day-use-na-hotelaria-2-CwWW6sHW.js",
     "name": "day-use-na-hotelaria-2",
     "src": "content/blog/day-use-na-hotelaria-2.mdx",
     "isDynamicEntry": true,
@@ -1165,7 +1165,7 @@
     ]
   },
   "content/blog/day-use-na-hotelaria-vantagens-para-o-meio-de-hospedagem.mdx": {
-    "file": "assets/day-use-na-hotelaria-vantagens-para-o-meio-de-hospedagem-BEqgjyij.js",
+    "file": "assets/day-use-na-hotelaria-vantagens-para-o-meio-de-hospedagem-B9jXfgZV.js",
     "name": "day-use-na-hotelaria-vantagens-para-o-meio-de-hospedagem",
     "src": "content/blog/day-use-na-hotelaria-vantagens-para-o-meio-de-hospedagem.mdx",
     "isDynamicEntry": true,
@@ -1174,7 +1174,7 @@
     ]
   },
   "content/blog/decoracao-de-hall-de-entrada-e-lobbies-do-hotel-favorece-a-fidelizacao-dos-clientes.mdx": {
-    "file": "assets/decoracao-de-hall-de-entrada-e-lobbies-do-hotel-favorece-a-fidelizacao-dos-clientes-Cl0DvwQK.js",
+    "file": "assets/decoracao-de-hall-de-entrada-e-lobbies-do-hotel-favorece-a-fidelizacao-dos-clientes-DZfgjkP8.js",
     "name": "decoracao-de-hall-de-entrada-e-lobbies-do-hotel-favorece-a-fidelizacao-dos-clientes",
     "src": "content/blog/decoracao-de-hall-de-entrada-e-lobbies-do-hotel-favorece-a-fidelizacao-dos-clientes.mdx",
     "isDynamicEntry": true,
@@ -1183,7 +1183,7 @@
     ]
   },
   "content/blog/decoracao-de-quarto-de-hotel-2020.mdx": {
-    "file": "assets/decoracao-de-quarto-de-hotel-2020-ByS1QSqq.js",
+    "file": "assets/decoracao-de-quarto-de-hotel-2020-B_jNo6ah.js",
     "name": "decoracao-de-quarto-de-hotel-2020",
     "src": "content/blog/decoracao-de-quarto-de-hotel-2020.mdx",
     "isDynamicEntry": true,
@@ -1192,7 +1192,7 @@
     ]
   },
   "content/blog/departamentos-e-funcoes-do-hotel-2.mdx": {
-    "file": "assets/departamentos-e-funcoes-do-hotel-2-Bsal5Cw_.js",
+    "file": "assets/departamentos-e-funcoes-do-hotel-2-BldM3FLd.js",
     "name": "departamentos-e-funcoes-do-hotel-2",
     "src": "content/blog/departamentos-e-funcoes-do-hotel-2.mdx",
     "isDynamicEntry": true,
@@ -1201,7 +1201,7 @@
     ]
   },
   "content/blog/departamentos-e-funcoes-do-hotel.mdx": {
-    "file": "assets/departamentos-e-funcoes-do-hotel-BXH90D3E.js",
+    "file": "assets/departamentos-e-funcoes-do-hotel-C4bBK1MG.js",
     "name": "departamentos-e-funcoes-do-hotel",
     "src": "content/blog/departamentos-e-funcoes-do-hotel.mdx",
     "isDynamicEntry": true,
@@ -1210,7 +1210,7 @@
     ]
   },
   "content/blog/descomplica-como-aumentar-suas-reservas-com-o-google-ads.mdx": {
-    "file": "assets/descomplica-como-aumentar-suas-reservas-com-o-google-ads-BSIRfXoX.js",
+    "file": "assets/descomplica-como-aumentar-suas-reservas-com-o-google-ads-CY7Z3Rra.js",
     "name": "descomplica-como-aumentar-suas-reservas-com-o-google-ads",
     "src": "content/blog/descomplica-como-aumentar-suas-reservas-com-o-google-ads.mdx",
     "isDynamicEntry": true,
@@ -1219,7 +1219,7 @@
     ]
   },
   "content/blog/descubra-as-vantagens-de-ser-um-hotel-pet-friendly.mdx": {
-    "file": "assets/descubra-as-vantagens-de-ser-um-hotel-pet-friendly-RstZrLRE.js",
+    "file": "assets/descubra-as-vantagens-de-ser-um-hotel-pet-friendly-Dz2hsnwd.js",
     "name": "descubra-as-vantagens-de-ser-um-hotel-pet-friendly",
     "src": "content/blog/descubra-as-vantagens-de-ser-um-hotel-pet-friendly.mdx",
     "isDynamicEntry": true,
@@ -1228,7 +1228,7 @@
     ]
   },
   "content/blog/descubra-os-beneficios-de-hotel-com-day-use.mdx": {
-    "file": "assets/descubra-os-beneficios-de-hotel-com-day-use-MVkApsdD.js",
+    "file": "assets/descubra-os-beneficios-de-hotel-com-day-use-CvLzJ0Ma.js",
     "name": "descubra-os-beneficios-de-hotel-com-day-use",
     "src": "content/blog/descubra-os-beneficios-de-hotel-com-day-use.mdx",
     "isDynamicEntry": true,
@@ -1237,7 +1237,7 @@
     ]
   },
   "content/blog/descubra-qual-o-melhor-motor-de-reservas.mdx": {
-    "file": "assets/descubra-qual-o-melhor-motor-de-reservas-CUjRuVax.js",
+    "file": "assets/descubra-qual-o-melhor-motor-de-reservas-DN057uyD.js",
     "name": "descubra-qual-o-melhor-motor-de-reservas",
     "src": "content/blog/descubra-qual-o-melhor-motor-de-reservas.mdx",
     "isDynamicEntry": true,
@@ -1246,7 +1246,7 @@
     ]
   },
   "content/blog/descubra-vantagens-de-reabrir-seu-hotel-no-booking-com.mdx": {
-    "file": "assets/descubra-vantagens-de-reabrir-seu-hotel-no-booking-com-2cm_z0nZ.js",
+    "file": "assets/descubra-vantagens-de-reabrir-seu-hotel-no-booking-com-SYlIsq18.js",
     "name": "descubra-vantagens-de-reabrir-seu-hotel-no-booking-com",
     "src": "content/blog/descubra-vantagens-de-reabrir-seu-hotel-no-booking-com.mdx",
     "isDynamicEntry": true,
@@ -1255,7 +1255,7 @@
     ]
   },
   "content/blog/destaque-se-nos-sites-do-grupo-expedia-com-tarifas-reembolsaveis.mdx": {
-    "file": "assets/destaque-se-nos-sites-do-grupo-expedia-com-tarifas-reembolsaveis-B16MR052.js",
+    "file": "assets/destaque-se-nos-sites-do-grupo-expedia-com-tarifas-reembolsaveis-C-FfTYbs.js",
     "name": "destaque-se-nos-sites-do-grupo-expedia-com-tarifas-reembolsaveis",
     "src": "content/blog/destaque-se-nos-sites-do-grupo-expedia-com-tarifas-reembolsaveis.mdx",
     "isDynamicEntry": true,
@@ -1264,7 +1264,7 @@
     ]
   },
   "content/blog/dicas-para-escolher-a-melhor-hospedagem.mdx": {
-    "file": "assets/dicas-para-escolher-a-melhor-hospedagem-Bw82J-Kp.js",
+    "file": "assets/dicas-para-escolher-a-melhor-hospedagem-DLFB-a42.js",
     "name": "dicas-para-escolher-a-melhor-hospedagem",
     "src": "content/blog/dicas-para-escolher-a-melhor-hospedagem.mdx",
     "isDynamicEntry": true,
@@ -1273,7 +1273,7 @@
     ]
   },
   "content/blog/entenda-5-problemas-que-a-transformacao-digital-ajuda-a-solucionar-no-seu-hotel.mdx": {
-    "file": "assets/entenda-5-problemas-que-a-transformacao-digital-ajuda-a-solucionar-no-seu-hotel-C18oaMvt.js",
+    "file": "assets/entenda-5-problemas-que-a-transformacao-digital-ajuda-a-solucionar-no-seu-hotel-C8QP-B9u.js",
     "name": "entenda-5-problemas-que-a-transformacao-digital-ajuda-a-solucionar-no-seu-hotel",
     "src": "content/blog/entenda-5-problemas-que-a-transformacao-digital-ajuda-a-solucionar-no-seu-hotel.mdx",
     "isDynamicEntry": true,
@@ -1282,7 +1282,7 @@
     ]
   },
   "content/blog/experiencia-do-hospede-como-torna-la-inesquecivel.mdx": {
-    "file": "assets/experiencia-do-hospede-como-torna-la-inesquecivel-D647otrE.js",
+    "file": "assets/experiencia-do-hospede-como-torna-la-inesquecivel-BGEAbZyb.js",
     "name": "experiencia-do-hospede-como-torna-la-inesquecivel",
     "src": "content/blog/experiencia-do-hospede-como-torna-la-inesquecivel.mdx",
     "isDynamicEntry": true,
@@ -1291,7 +1291,7 @@
     ]
   },
   "content/blog/experiencia-do-hospede.mdx": {
-    "file": "assets/experiencia-do-hospede-Cdzn4LEo.js",
+    "file": "assets/experiencia-do-hospede-B6vnJyeu.js",
     "name": "experiencia-do-hospede",
     "src": "content/blog/experiencia-do-hospede.mdx",
     "isDynamicEntry": true,
@@ -1300,7 +1300,7 @@
     ]
   },
   "content/blog/faculdade-de-hotelaria-como-e-o-que-se-estuda-e-como-se-destacar-na-gestao-hoteleira.mdx": {
-    "file": "assets/faculdade-de-hotelaria-como-e-o-que-se-estuda-e-como-se-destacar-na-gestao-hoteleira-C3GffxPz.js",
+    "file": "assets/faculdade-de-hotelaria-como-e-o-que-se-estuda-e-como-se-destacar-na-gestao-hoteleira-BdQPdShg.js",
     "name": "faculdade-de-hotelaria-como-e-o-que-se-estuda-e-como-se-destacar-na-gestao-hoteleira",
     "src": "content/blog/faculdade-de-hotelaria-como-e-o-que-se-estuda-e-como-se-destacar-na-gestao-hoteleira.mdx",
     "isDynamicEntry": true,
@@ -1309,7 +1309,7 @@
     ]
   },
   "content/blog/ficha-nacional-de-registro-de-hospedes-online-entenda-a-obrigatoriedade-e-como-se-preparar.mdx": {
-    "file": "assets/ficha-nacional-de-registro-de-hospedes-online-entenda-a-obrigatoriedade-e-como-se-preparar-DdRBiTYe.js",
+    "file": "assets/ficha-nacional-de-registro-de-hospedes-online-entenda-a-obrigatoriedade-e-como-se-preparar-DmrET4GU.js",
     "name": "ficha-nacional-de-registro-de-hospedes-online-entenda-a-obrigatoriedade-e-como-se-preparar",
     "src": "content/blog/ficha-nacional-de-registro-de-hospedes-online-entenda-a-obrigatoriedade-e-como-se-preparar.mdx",
     "isDynamicEntry": true,
@@ -1318,7 +1318,7 @@
     ]
   },
   "content/blog/fidelizacao-de-hospedes-expedia-group.mdx": {
-    "file": "assets/fidelizacao-de-hospedes-expedia-group-Cyks5McF.js",
+    "file": "assets/fidelizacao-de-hospedes-expedia-group-B_jrkm99.js",
     "name": "fidelizacao-de-hospedes-expedia-group",
     "src": "content/blog/fidelizacao-de-hospedes-expedia-group.mdx",
     "isDynamicEntry": true,
@@ -1327,7 +1327,7 @@
     ]
   },
   "content/blog/fidelizacao-hoteleira.mdx": {
-    "file": "assets/fidelizacao-hoteleira-CAR9ARyT.js",
+    "file": "assets/fidelizacao-hoteleira-BIG4yVG_.js",
     "name": "fidelizacao-hoteleira",
     "src": "content/blog/fidelizacao-hoteleira.mdx",
     "isDynamicEntry": true,
@@ -1336,7 +1336,7 @@
     ]
   },
   "content/blog/foco-15-anos-muito-obrigado.mdx": {
-    "file": "assets/foco-15-anos-muito-obrigado-RmGEB-hi.js",
+    "file": "assets/foco-15-anos-muito-obrigado-DqzzYgsu.js",
     "name": "foco-15-anos-muito-obrigado",
     "src": "content/blog/foco-15-anos-muito-obrigado.mdx",
     "isDynamicEntry": true,
@@ -1345,7 +1345,7 @@
     ]
   },
   "content/blog/full-commerce-na-hotelaria-implemente-em-seu-negocio.mdx": {
-    "file": "assets/full-commerce-na-hotelaria-implemente-em-seu-negocio-ClKWK4Qd.js",
+    "file": "assets/full-commerce-na-hotelaria-implemente-em-seu-negocio-DyFtj0Cz.js",
     "name": "full-commerce-na-hotelaria-implemente-em-seu-negocio",
     "src": "content/blog/full-commerce-na-hotelaria-implemente-em-seu-negocio.mdx",
     "isDynamicEntry": true,
@@ -1354,7 +1354,7 @@
     ]
   },
   "content/blog/garanta-mais-reservas-para-o-seu-hotel-em-2022-com-a-booking-com.mdx": {
-    "file": "assets/garanta-mais-reservas-para-o-seu-hotel-em-2022-com-a-booking-com-DAJQlsRD.js",
+    "file": "assets/garanta-mais-reservas-para-o-seu-hotel-em-2022-com-a-booking-com-Z34vOlz4.js",
     "name": "garanta-mais-reservas-para-o-seu-hotel-em-2022-com-a-booking-com",
     "src": "content/blog/garanta-mais-reservas-para-o-seu-hotel-em-2022-com-a-booking-com.mdx",
     "isDynamicEntry": true,
@@ -1363,7 +1363,7 @@
     ]
   },
   "content/blog/gestao-hoteleira-veja-a-importancia-da-area-para-manter-o-bom-funcionamento-de-um-hotel.mdx": {
-    "file": "assets/gestao-hoteleira-veja-a-importancia-da-area-para-manter-o-bom-funcionamento-de-um-hotel-BgeD21bF.js",
+    "file": "assets/gestao-hoteleira-veja-a-importancia-da-area-para-manter-o-bom-funcionamento-de-um-hotel-TD-13tOm.js",
     "name": "gestao-hoteleira-veja-a-importancia-da-area-para-manter-o-bom-funcionamento-de-um-hotel",
     "src": "content/blog/gestao-hoteleira-veja-a-importancia-da-area-para-manter-o-bom-funcionamento-de-um-hotel.mdx",
     "isDynamicEntry": true,
@@ -1372,7 +1372,7 @@
     ]
   },
   "content/blog/google-hoteis-como-colocar-seu-hotel-em-destaque-e-aumentar-reservas-diretas.mdx": {
-    "file": "assets/google-hoteis-como-colocar-seu-hotel-em-destaque-e-aumentar-reservas-diretas-DL35n3tY.js",
+    "file": "assets/google-hoteis-como-colocar-seu-hotel-em-destaque-e-aumentar-reservas-diretas-BUnZWm9r.js",
     "name": "google-hoteis-como-colocar-seu-hotel-em-destaque-e-aumentar-reservas-diretas",
     "src": "content/blog/google-hoteis-como-colocar-seu-hotel-em-destaque-e-aumentar-reservas-diretas.mdx",
     "isDynamicEntry": true,
@@ -1381,7 +1381,7 @@
     ]
   },
   "content/blog/google-hoteis.mdx": {
-    "file": "assets/google-hoteis-DTSPeC_G.js",
+    "file": "assets/google-hoteis-C3UE02Dn.js",
     "name": "google-hoteis",
     "src": "content/blog/google-hoteis.mdx",
     "isDynamicEntry": true,
@@ -1390,7 +1390,7 @@
     ]
   },
   "content/blog/google-na-hotelaria-descubra-como-usa-lo-a-seu-favor.mdx": {
-    "file": "assets/google-na-hotelaria-descubra-como-usa-lo-a-seu-favor-AgWyIIb9.js",
+    "file": "assets/google-na-hotelaria-descubra-como-usa-lo-a-seu-favor-C4HXa0g6.js",
     "name": "google-na-hotelaria-descubra-como-usa-lo-a-seu-favor",
     "src": "content/blog/google-na-hotelaria-descubra-como-usa-lo-a-seu-favor.mdx",
     "isDynamicEntry": true,
@@ -1399,7 +1399,7 @@
     ]
   },
   "content/blog/governanca-hoteleira-conheca-a-importancia-desse-setor-para-o-crescimento-do-seu-hotel.mdx": {
-    "file": "assets/governanca-hoteleira-conheca-a-importancia-desse-setor-para-o-crescimento-do-seu-hotel-YIjFmUED.js",
+    "file": "assets/governanca-hoteleira-conheca-a-importancia-desse-setor-para-o-crescimento-do-seu-hotel-D1tCQ0U6.js",
     "name": "governanca-hoteleira-conheca-a-importancia-desse-setor-para-o-crescimento-do-seu-hotel",
     "src": "content/blog/governanca-hoteleira-conheca-a-importancia-desse-setor-para-o-crescimento-do-seu-hotel.mdx",
     "isDynamicEntry": true,
@@ -1408,7 +1408,7 @@
     ]
   },
   "content/blog/governanta-de-hotel.mdx": {
-    "file": "assets/governanta-de-hotel-Co3SxgzT.js",
+    "file": "assets/governanta-de-hotel-1MHD4cpj.js",
     "name": "governanta-de-hotel",
     "src": "content/blog/governanta-de-hotel.mdx",
     "isDynamicEntry": true,
@@ -1417,7 +1417,7 @@
     ]
   },
   "content/blog/guia-de-apoio-como-a-hotelaria-pode-enfrentar-a-crise.mdx": {
-    "file": "assets/guia-de-apoio-como-a-hotelaria-pode-enfrentar-a-crise-C0UTBRMZ.js",
+    "file": "assets/guia-de-apoio-como-a-hotelaria-pode-enfrentar-a-crise-DpFQxw_X.js",
     "name": "guia-de-apoio-como-a-hotelaria-pode-enfrentar-a-crise",
     "src": "content/blog/guia-de-apoio-como-a-hotelaria-pode-enfrentar-a-crise.mdx",
     "isDynamicEntry": true,
@@ -1426,7 +1426,7 @@
     ]
   },
   "content/blog/hospedaria.mdx": {
-    "file": "assets/hospedaria-BL40cFNX.js",
+    "file": "assets/hospedaria-CMpVaK3_.js",
     "name": "hospedaria",
     "src": "content/blog/hospedaria.mdx",
     "isDynamicEntry": true,
@@ -1435,7 +1435,7 @@
     ]
   },
   "content/blog/hotel-boutique-destaque-se-e-maximize-reservas.mdx": {
-    "file": "assets/hotel-boutique-destaque-se-e-maximize-reservas-2dPLBJj9.js",
+    "file": "assets/hotel-boutique-destaque-se-e-maximize-reservas-DgvBp4wX.js",
     "name": "hotel-boutique-destaque-se-e-maximize-reservas",
     "src": "content/blog/hotel-boutique-destaque-se-e-maximize-reservas.mdx",
     "isDynamicEntry": true,
@@ -1444,7 +1444,7 @@
     ]
   },
   "content/blog/hotel-ou-pousada-o-que-os-hospedes-buscam.mdx": {
-    "file": "assets/hotel-ou-pousada-o-que-os-hospedes-buscam-C0p6oQnj.js",
+    "file": "assets/hotel-ou-pousada-o-que-os-hospedes-buscam-BZepFm-c.js",
     "name": "hotel-ou-pousada-o-que-os-hospedes-buscam",
     "src": "content/blog/hotel-ou-pousada-o-que-os-hospedes-buscam.mdx",
     "isDynamicEntry": true,
@@ -1453,7 +1453,7 @@
     ]
   },
   "content/blog/hotelaria-o-que-e-tudo-que-voce-precisa-saber-1.mdx": {
-    "file": "assets/hotelaria-o-que-e-tudo-que-voce-precisa-saber-1-C_OTcimd.js",
+    "file": "assets/hotelaria-o-que-e-tudo-que-voce-precisa-saber-1-BqPsmQi4.js",
     "name": "hotelaria-o-que-e-tudo-que-voce-precisa-saber-1",
     "src": "content/blog/hotelaria-o-que-e-tudo-que-voce-precisa-saber-1.mdx",
     "isDynamicEntry": true,
@@ -1462,7 +1462,7 @@
     ]
   },
   "content/blog/hotelaria-o-que-e-tudo-que-voce-precisa-saber.mdx": {
-    "file": "assets/hotelaria-o-que-e-tudo-que-voce-precisa-saber-PSoTcnQa.js",
+    "file": "assets/hotelaria-o-que-e-tudo-que-voce-precisa-saber-BA6GJsCM.js",
     "name": "hotelaria-o-que-e-tudo-que-voce-precisa-saber",
     "src": "content/blog/hotelaria-o-que-e-tudo-que-voce-precisa-saber.mdx",
     "isDynamicEntry": true,
@@ -1471,7 +1471,7 @@
     ]
   },
   "content/blog/hotelaria-para-idosos-descubra-como-se-adaptar.mdx": {
-    "file": "assets/hotelaria-para-idosos-descubra-como-se-adaptar-Cibd-vys.js",
+    "file": "assets/hotelaria-para-idosos-descubra-como-se-adaptar-BiQWKxFg.js",
     "name": "hotelaria-para-idosos-descubra-como-se-adaptar",
     "src": "content/blog/hotelaria-para-idosos-descubra-como-se-adaptar.mdx",
     "isDynamicEntry": true,
@@ -1480,7 +1480,7 @@
     ]
   },
   "content/blog/influenciadores-nas-redes-sociais-do-seu-hotel.mdx": {
-    "file": "assets/influenciadores-nas-redes-sociais-do-seu-hotel-BAz5Vxps.js",
+    "file": "assets/influenciadores-nas-redes-sociais-do-seu-hotel-De3Nfngh.js",
     "name": "influenciadores-nas-redes-sociais-do-seu-hotel",
     "src": "content/blog/influenciadores-nas-redes-sociais-do-seu-hotel.mdx",
     "isDynamicEntry": true,
@@ -1489,7 +1489,7 @@
     ]
   },
   "content/blog/jornada-do-cliente-na-hotelaria-como-a-tecnologia-pode-melhorar-a-experiencia-do-hospede-e-otimizar-a-gestao-de-hoteis.mdx": {
-    "file": "assets/jornada-do-cliente-na-hotelaria-como-a-tecnologia-pode-melhorar-a-experiencia-do-hospede-e-otimizar-a-gestao-de-hoteis-CF3uTbxK.js",
+    "file": "assets/jornada-do-cliente-na-hotelaria-como-a-tecnologia-pode-melhorar-a-experiencia-do-hospede-e-otimizar-a-gestao-de-hoteis-ChkfjBqT.js",
     "name": "jornada-do-cliente-na-hotelaria-como-a-tecnologia-pode-melhorar-a-experiencia-do-hospede-e-otimizar-a-gestao-de-hoteis",
     "src": "content/blog/jornada-do-cliente-na-hotelaria-como-a-tecnologia-pode-melhorar-a-experiencia-do-hospede-e-otimizar-a-gestao-de-hoteis.mdx",
     "isDynamicEntry": true,
@@ -1498,7 +1498,7 @@
     ]
   },
   "content/blog/lavanderia-de-hotel-como-funciona-vantagens-e-o-que-considerar-entre-operacao-propria-ou-terceirizada.mdx": {
-    "file": "assets/lavanderia-de-hotel-como-funciona-vantagens-e-o-que-considerar-entre-operacao-propria-ou-terceirizada-B6lTbcFM.js",
+    "file": "assets/lavanderia-de-hotel-como-funciona-vantagens-e-o-que-considerar-entre-operacao-propria-ou-terceirizada-B7l7Y24E.js",
     "name": "lavanderia-de-hotel-como-funciona-vantagens-e-o-que-considerar-entre-operacao-propria-ou-terceirizada",
     "src": "content/blog/lavanderia-de-hotel-como-funciona-vantagens-e-o-que-considerar-entre-operacao-propria-ou-terceirizada.mdx",
     "isDynamicEntry": true,
@@ -1507,7 +1507,7 @@
     ]
   },
   "content/blog/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas.mdx": {
-    "file": "assets/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas-CZpsLnkH.js",
+    "file": "assets/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas-DTInJmhh.js",
     "name": "lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas",
     "src": "content/blog/lei-da-hospedagem-em-2026-guia-atualizado-para-hoteis-e-pousadas.mdx",
     "isDynamicEntry": true,
@@ -1516,7 +1516,7 @@
     ]
   },
   "content/blog/marketing-digital-para-hotel-tudo-o-que-voce-precisa-saber.mdx": {
-    "file": "assets/marketing-digital-para-hotel-tudo-o-que-voce-precisa-saber-x5jnr_lP.js",
+    "file": "assets/marketing-digital-para-hotel-tudo-o-que-voce-precisa-saber-CI0SDyOQ.js",
     "name": "marketing-digital-para-hotel-tudo-o-que-voce-precisa-saber",
     "src": "content/blog/marketing-digital-para-hotel-tudo-o-que-voce-precisa-saber.mdx",
     "isDynamicEntry": true,
@@ -1525,7 +1525,7 @@
     ]
   },
   "content/blog/marketing-digital-para-hotelaria-estrategias-que-irao-alavancar-suas-vendas.mdx": {
-    "file": "assets/marketing-digital-para-hotelaria-estrategias-que-irao-alavancar-suas-vendas-Cl_Tkq-b.js",
+    "file": "assets/marketing-digital-para-hotelaria-estrategias-que-irao-alavancar-suas-vendas-CFxHtwJi.js",
     "name": "marketing-digital-para-hotelaria-estrategias-que-irao-alavancar-suas-vendas",
     "src": "content/blog/marketing-digital-para-hotelaria-estrategias-que-irao-alavancar-suas-vendas.mdx",
     "isDynamicEntry": true,
@@ -1534,7 +1534,7 @@
     ]
   },
   "content/blog/marketing-hoteleiro-confira-as-principais-dicas.mdx": {
-    "file": "assets/marketing-hoteleiro-confira-as-principais-dicas-ZCkRyZG5.js",
+    "file": "assets/marketing-hoteleiro-confira-as-principais-dicas-Dit4TtzR.js",
     "name": "marketing-hoteleiro-confira-as-principais-dicas",
     "src": "content/blog/marketing-hoteleiro-confira-as-principais-dicas.mdx",
     "isDynamicEntry": true,
@@ -1543,7 +1543,7 @@
     ]
   },
   "content/blog/marketing-para-hotel-qual-o-investimento-ideal.mdx": {
-    "file": "assets/marketing-para-hotel-qual-o-investimento-ideal-CZtELfql.js",
+    "file": "assets/marketing-para-hotel-qual-o-investimento-ideal-BE-E5344.js",
     "name": "marketing-para-hotel-qual-o-investimento-ideal",
     "src": "content/blog/marketing-para-hotel-qual-o-investimento-ideal.mdx",
     "isDynamicEntry": true,
@@ -1552,7 +1552,7 @@
     ]
   },
   "content/blog/maximize-suas-reservas-no-expedia-group.mdx": {
-    "file": "assets/maximize-suas-reservas-no-expedia-group-BGE5z8sO.js",
+    "file": "assets/maximize-suas-reservas-no-expedia-group-CZrcZiBp.js",
     "name": "maximize-suas-reservas-no-expedia-group",
     "src": "content/blog/maximize-suas-reservas-no-expedia-group.mdx",
     "isDynamicEntry": true,
@@ -1561,7 +1561,7 @@
     ]
   },
   "content/blog/meios-de-hospedagem-confira-qual-a-melhor-opcao-ao-montar-seu-negocio.mdx": {
-    "file": "assets/meios-de-hospedagem-confira-qual-a-melhor-opcao-ao-montar-seu-negocio-CzBNWIEr.js",
+    "file": "assets/meios-de-hospedagem-confira-qual-a-melhor-opcao-ao-montar-seu-negocio-qiyZH2Hc.js",
     "name": "meios-de-hospedagem-confira-qual-a-melhor-opcao-ao-montar-seu-negocio",
     "src": "content/blog/meios-de-hospedagem-confira-qual-a-melhor-opcao-ao-montar-seu-negocio.mdx",
     "isDynamicEntry": true,
@@ -1570,7 +1570,7 @@
     ]
   },
   "content/blog/motor-de-reservas-para-hoteis-como-escolher-a-melhor-solucao-para-vender-mais-em-2026.mdx": {
-    "file": "assets/motor-de-reservas-para-hoteis-como-escolher-a-melhor-solucao-para-vender-mais-em-2026-hsFnZM4G.js",
+    "file": "assets/motor-de-reservas-para-hoteis-como-escolher-a-melhor-solucao-para-vender-mais-em-2026-DDGzrckA.js",
     "name": "motor-de-reservas-para-hoteis-como-escolher-a-melhor-solucao-para-vender-mais-em-2026",
     "src": "content/blog/motor-de-reservas-para-hoteis-como-escolher-a-melhor-solucao-para-vender-mais-em-2026.mdx",
     "isDynamicEntry": true,
@@ -1579,7 +1579,7 @@
     ]
   },
   "content/blog/neda-mais-com-dispositivos-moveis-expedia.mdx": {
-    "file": "assets/neda-mais-com-dispositivos-moveis-expedia-Ckb0DFXv.js",
+    "file": "assets/neda-mais-com-dispositivos-moveis-expedia-DDeNCJrP.js",
     "name": "neda-mais-com-dispositivos-moveis-expedia",
     "src": "content/blog/neda-mais-com-dispositivos-moveis-expedia.mdx",
     "isDynamicEntry": true,
@@ -1588,7 +1588,7 @@
     ]
   },
   "content/blog/novas-experiencias-o-airbnb-para-hoteleiros-do-brasil.mdx": {
-    "file": "assets/novas-experiencias-o-airbnb-para-hoteleiros-do-brasil-DZ9XzC5d.js",
+    "file": "assets/novas-experiencias-o-airbnb-para-hoteleiros-do-brasil-Ck91vbEE.js",
     "name": "novas-experiencias-o-airbnb-para-hoteleiros-do-brasil",
     "src": "content/blog/novas-experiencias-o-airbnb-para-hoteleiros-do-brasil.mdx",
     "isDynamicEntry": true,
@@ -1597,7 +1597,7 @@
     ]
   },
   "content/blog/novas-regras-de-check-in-e-check-out-o-que-muda-para-os-hoteis-e-como-se-adaptar-com-tecnologia.mdx": {
-    "file": "assets/novas-regras-de-check-in-e-check-out-o-que-muda-para-os-hoteis-e-como-se-adaptar-com-tecnologia-zCCniQ1t.js",
+    "file": "assets/novas-regras-de-check-in-e-check-out-o-que-muda-para-os-hoteis-e-como-se-adaptar-com-tecnologia-qvfzSDIQ.js",
     "name": "novas-regras-de-check-in-e-check-out-o-que-muda-para-os-hoteis-e-como-se-adaptar-com-tecnologia",
     "src": "content/blog/novas-regras-de-check-in-e-check-out-o-que-muda-para-os-hoteis-e-como-se-adaptar-com-tecnologia.mdx",
     "isDynamicEntry": true,
@@ -1606,7 +1606,7 @@
     ]
   },
   "content/blog/novo-normal-boas-praticas-de-seguranca-passam-a-ser-diferencial-competitivo-na-hotelaria.mdx": {
-    "file": "assets/novo-normal-boas-praticas-de-seguranca-passam-a-ser-diferencial-competitivo-na-hotelaria-D_V1qk_m.js",
+    "file": "assets/novo-normal-boas-praticas-de-seguranca-passam-a-ser-diferencial-competitivo-na-hotelaria-D0zvCfQ2.js",
     "name": "novo-normal-boas-praticas-de-seguranca-passam-a-ser-diferencial-competitivo-na-hotelaria",
     "src": "content/blog/novo-normal-boas-praticas-de-seguranca-passam-a-ser-diferencial-competitivo-na-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1615,7 +1615,7 @@
     ]
   },
   "content/blog/nr-1-riscos-psicossociais-hotelaria-telemedicina.mdx": {
-    "file": "assets/nr-1-riscos-psicossociais-hotelaria-telemedicina-CJPHUNEK.js",
+    "file": "assets/nr-1-riscos-psicossociais-hotelaria-telemedicina-TcJh4Q96.js",
     "name": "nr-1-riscos-psicossociais-hotelaria-telemedicina",
     "src": "content/blog/nr-1-riscos-psicossociais-hotelaria-telemedicina.mdx",
     "isDynamicEntry": true,
@@ -1624,7 +1624,7 @@
     ]
   },
   "content/blog/o-que-e-crm-hoteleiro.mdx": {
-    "file": "assets/o-que-e-crm-hoteleiro-BOEI8TSx.js",
+    "file": "assets/o-que-e-crm-hoteleiro-DUBt2fiN.js",
     "name": "o-que-e-crm-hoteleiro",
     "src": "content/blog/o-que-e-crm-hoteleiro.mdx",
     "isDynamicEntry": true,
@@ -1633,7 +1633,7 @@
     ]
   },
   "content/blog/o-que-e-wifi-marketing.mdx": {
-    "file": "assets/o-que-e-wifi-marketing-DXPcFnY9.js",
+    "file": "assets/o-que-e-wifi-marketing-D-iLZ0VH.js",
     "name": "o-que-e-wifi-marketing",
     "src": "content/blog/o-que-e-wifi-marketing.mdx",
     "isDynamicEntry": true,
@@ -1642,7 +1642,7 @@
     ]
   },
   "content/blog/o-que-faz-um-recepcionista-funcoes-desafios-e-oportunidades.mdx": {
-    "file": "assets/o-que-faz-um-recepcionista-funcoes-desafios-e-oportunidades-D77L4grr.js",
+    "file": "assets/o-que-faz-um-recepcionista-funcoes-desafios-e-oportunidades-CQvq13fF.js",
     "name": "o-que-faz-um-recepcionista-funcoes-desafios-e-oportunidades",
     "src": "content/blog/o-que-faz-um-recepcionista-funcoes-desafios-e-oportunidades.mdx",
     "isDynamicEntry": true,
@@ -1651,7 +1651,7 @@
     ]
   },
   "content/blog/oportunidades-na-booking-com-aumente-a-receita-do-seu-hotel.mdx": {
-    "file": "assets/oportunidades-na-booking-com-aumente-a-receita-do-seu-hotel-DdBRTn5W.js",
+    "file": "assets/oportunidades-na-booking-com-aumente-a-receita-do-seu-hotel-QHr_yXZX.js",
     "name": "oportunidades-na-booking-com-aumente-a-receita-do-seu-hotel",
     "src": "content/blog/oportunidades-na-booking-com-aumente-a-receita-do-seu-hotel.mdx",
     "isDynamicEntry": true,
@@ -1660,7 +1660,7 @@
     ]
   },
   "content/blog/orcamentos-para-hotelaria-e-retomada-em-2022.mdx": {
-    "file": "assets/orcamentos-para-hotelaria-e-retomada-em-2022-Bgf-F1cy.js",
+    "file": "assets/orcamentos-para-hotelaria-e-retomada-em-2022-D9dC2PrE.js",
     "name": "orcamentos-para-hotelaria-e-retomada-em-2022",
     "src": "content/blog/orcamentos-para-hotelaria-e-retomada-em-2022.mdx",
     "isDynamicEntry": true,
@@ -1669,7 +1669,7 @@
     ]
   },
   "content/blog/otas-o-que-sao-e-qual-a-sua-importancia-para-hotelaria-2024.mdx": {
-    "file": "assets/otas-o-que-sao-e-qual-a-sua-importancia-para-hotelaria-2024-BCDugZ0L.js",
+    "file": "assets/otas-o-que-sao-e-qual-a-sua-importancia-para-hotelaria-2024-CQkvxXaM.js",
     "name": "otas-o-que-sao-e-qual-a-sua-importancia-para-hotelaria-2024",
     "src": "content/blog/otas-o-que-sao-e-qual-a-sua-importancia-para-hotelaria-2024.mdx",
     "isDynamicEntry": true,
@@ -1678,7 +1678,7 @@
     ]
   },
   "content/blog/overbooking-na-hotelaria.mdx": {
-    "file": "assets/overbooking-na-hotelaria-DhQAogeS.js",
+    "file": "assets/overbooking-na-hotelaria-4me1WJTJ.js",
     "name": "overbooking-na-hotelaria",
     "src": "content/blog/overbooking-na-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1687,7 +1687,7 @@
     ]
   },
   "content/blog/pacotes-expedia-group-impulsione-reservas.mdx": {
-    "file": "assets/pacotes-expedia-group-impulsione-reservas-C-3Io_w6.js",
+    "file": "assets/pacotes-expedia-group-impulsione-reservas-_LglbYkU.js",
     "name": "pacotes-expedia-group-impulsione-reservas",
     "src": "content/blog/pacotes-expedia-group-impulsione-reservas.mdx",
     "isDynamicEntry": true,
@@ -1696,7 +1696,7 @@
     ]
   },
   "content/blog/perfis-fakes-de-hoteis-nas-redes-sociais-o-que-fazer-se-a-vitima-for-voce.mdx": {
-    "file": "assets/perfis-fakes-de-hoteis-nas-redes-sociais-o-que-fazer-se-a-vitima-for-voce-BCPYDGN4.js",
+    "file": "assets/perfis-fakes-de-hoteis-nas-redes-sociais-o-que-fazer-se-a-vitima-for-voce-CUxSYBiI.js",
     "name": "perfis-fakes-de-hoteis-nas-redes-sociais-o-que-fazer-se-a-vitima-for-voce",
     "src": "content/blog/perfis-fakes-de-hoteis-nas-redes-sociais-o-que-fazer-se-a-vitima-for-voce.mdx",
     "isDynamicEntry": true,
@@ -1705,7 +1705,7 @@
     ]
   },
   "content/blog/pesquisa-de-satisfacao-para-hotel-descubra-como-fazer-e-os-principais-beneficios.mdx": {
-    "file": "assets/pesquisa-de-satisfacao-para-hotel-descubra-como-fazer-e-os-principais-beneficios-CYhfyn3g.js",
+    "file": "assets/pesquisa-de-satisfacao-para-hotel-descubra-como-fazer-e-os-principais-beneficios-CZGYhDyh.js",
     "name": "pesquisa-de-satisfacao-para-hotel-descubra-como-fazer-e-os-principais-beneficios",
     "src": "content/blog/pesquisa-de-satisfacao-para-hotel-descubra-como-fazer-e-os-principais-beneficios.mdx",
     "isDynamicEntry": true,
@@ -1714,7 +1714,7 @@
     ]
   },
   "content/blog/por-que-o-design-thinking-e-uma-boa-estrategia-para-o-setor-hoteleiro.mdx": {
-    "file": "assets/por-que-o-design-thinking-e-uma-boa-estrategia-para-o-setor-hoteleiro-WMlkhsCb.js",
+    "file": "assets/por-que-o-design-thinking-e-uma-boa-estrategia-para-o-setor-hoteleiro-RbgGGYZ1.js",
     "name": "por-que-o-design-thinking-e-uma-boa-estrategia-para-o-setor-hoteleiro",
     "src": "content/blog/por-que-o-design-thinking-e-uma-boa-estrategia-para-o-setor-hoteleiro.mdx",
     "isDynamicEntry": true,
@@ -1723,7 +1723,7 @@
     ]
   },
   "content/blog/por-que-seu-hotel-nao-pode-ficar-de-fora-da-campanha-black-friday-do-expedia-group.mdx": {
-    "file": "assets/por-que-seu-hotel-nao-pode-ficar-de-fora-da-campanha-black-friday-do-expedia-group-RlmR9UGm.js",
+    "file": "assets/por-que-seu-hotel-nao-pode-ficar-de-fora-da-campanha-black-friday-do-expedia-group-DfE69jQK.js",
     "name": "por-que-seu-hotel-nao-pode-ficar-de-fora-da-campanha-black-friday-do-expedia-group",
     "src": "content/blog/por-que-seu-hotel-nao-pode-ficar-de-fora-da-campanha-black-friday-do-expedia-group.mdx",
     "isDynamicEntry": true,
@@ -1732,7 +1732,7 @@
     ]
   },
   "content/blog/potencialize-suas-reservas-e-lucratividade-com-a-booking-com.mdx": {
-    "file": "assets/potencialize-suas-reservas-e-lucratividade-com-a-booking-com-CnaJUrBz.js",
+    "file": "assets/potencialize-suas-reservas-e-lucratividade-com-a-booking-com-BJ2YZQ_b.js",
     "name": "potencialize-suas-reservas-e-lucratividade-com-a-booking-com",
     "src": "content/blog/potencialize-suas-reservas-e-lucratividade-com-a-booking-com.mdx",
     "isDynamicEntry": true,
@@ -1741,7 +1741,7 @@
     ]
   },
   "content/blog/prepare-se-para-a-alta-temporada-com-a-booking-com.mdx": {
-    "file": "assets/prepare-se-para-a-alta-temporada-com-a-booking-com-BvfghACS.js",
+    "file": "assets/prepare-se-para-a-alta-temporada-com-a-booking-com-BH_27Vb_.js",
     "name": "prepare-se-para-a-alta-temporada-com-a-booking-com",
     "src": "content/blog/prepare-se-para-a-alta-temporada-com-a-booking-com.mdx",
     "isDynamicEntry": true,
@@ -1750,7 +1750,7 @@
     ]
   },
   "content/blog/programa-genius-aproxime-o-seu-hotel-dos-melhores-hospedes-da-booking-com.mdx": {
-    "file": "assets/programa-genius-aproxime-o-seu-hotel-dos-melhores-hospedes-da-booking-com-Bh8LqFRb.js",
+    "file": "assets/programa-genius-aproxime-o-seu-hotel-dos-melhores-hospedes-da-booking-com-CN1KU1uu.js",
     "name": "programa-genius-aproxime-o-seu-hotel-dos-melhores-hospedes-da-booking-com",
     "src": "content/blog/programa-genius-aproxime-o-seu-hotel-dos-melhores-hospedes-da-booking-com.mdx",
     "isDynamicEntry": true,
@@ -1759,7 +1759,7 @@
     ]
   },
   "content/blog/quarto-de-hotel.mdx": {
-    "file": "assets/quarto-de-hotel-BsNZm8WN.js",
+    "file": "assets/quarto-de-hotel-CoIdle-0.js",
     "name": "quarto-de-hotel",
     "src": "content/blog/quarto-de-hotel.mdx",
     "isDynamicEntry": true,
@@ -1768,7 +1768,7 @@
     ]
   },
   "content/blog/rate-shopper-para-hotel-monitore-a-concorrencia-e-se-torne-mais-competitivo.mdx": {
-    "file": "assets/rate-shopper-para-hotel-monitore-a-concorrencia-e-se-torne-mais-competitivo-BQWYUcMn.js",
+    "file": "assets/rate-shopper-para-hotel-monitore-a-concorrencia-e-se-torne-mais-competitivo-BhXM2-5S.js",
     "name": "rate-shopper-para-hotel-monitore-a-concorrencia-e-se-torne-mais-competitivo",
     "src": "content/blog/rate-shopper-para-hotel-monitore-a-concorrencia-e-se-torne-mais-competitivo.mdx",
     "isDynamicEntry": true,
@@ -1777,7 +1777,7 @@
     ]
   },
   "content/blog/recepcao-de-hotel-entenda-a-sua-importancia.mdx": {
-    "file": "assets/recepcao-de-hotel-entenda-a-sua-importancia-DYikRQ1Z.js",
+    "file": "assets/recepcao-de-hotel-entenda-a-sua-importancia-BFB8tEVX.js",
     "name": "recepcao-de-hotel-entenda-a-sua-importancia",
     "src": "content/blog/recepcao-de-hotel-entenda-a-sua-importancia.mdx",
     "isDynamicEntry": true,
@@ -1786,7 +1786,7 @@
     ]
   },
   "content/blog/recepcionista-de-hotel.mdx": {
-    "file": "assets/recepcionista-de-hotel-DHN8St8n.js",
+    "file": "assets/recepcionista-de-hotel-T9rI8R_P.js",
     "name": "recepcionista-de-hotel",
     "src": "content/blog/recepcionista-de-hotel.mdx",
     "isDynamicEntry": true,
@@ -1795,7 +1795,7 @@
     ]
   },
   "content/blog/registro-de-marca-de-hotel-evite-problemas-judiciais.mdx": {
-    "file": "assets/registro-de-marca-de-hotel-evite-problemas-judiciais-CMq-JDMs.js",
+    "file": "assets/registro-de-marca-de-hotel-evite-problemas-judiciais-BaAVRn0_.js",
     "name": "registro-de-marca-de-hotel-evite-problemas-judiciais",
     "src": "content/blog/registro-de-marca-de-hotel-evite-problemas-judiciais.mdx",
     "isDynamicEntry": true,
@@ -1804,7 +1804,7 @@
     ]
   },
   "content/blog/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros.mdx": {
-    "file": "assets/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros-Czhoq9wp.js",
+    "file": "assets/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros-B-WZrWzt.js",
     "name": "renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros",
     "src": "content/blog/renovacao-em-servicos-de-hospedagem-o-airbnb-para-hoteleiros.mdx",
     "isDynamicEntry": true,
@@ -1813,7 +1813,7 @@
     ]
   },
   "content/blog/restrospectiva-2023.mdx": {
-    "file": "assets/restrospectiva-2023-CYIeA3JP.js",
+    "file": "assets/restrospectiva-2023-CmnEi31H.js",
     "name": "restrospectiva-2023",
     "src": "content/blog/restrospectiva-2023.mdx",
     "isDynamicEntry": true,
@@ -1822,7 +1822,7 @@
     ]
   },
   "content/blog/retrospectiva-da-foco-em-2021.mdx": {
-    "file": "assets/retrospectiva-da-foco-em-2021-DjFirVpt.js",
+    "file": "assets/retrospectiva-da-foco-em-2021-CCw5NRQ8.js",
     "name": "retrospectiva-da-foco-em-2021",
     "src": "content/blog/retrospectiva-da-foco-em-2021.mdx",
     "isDynamicEntry": true,
@@ -1831,7 +1831,7 @@
     ]
   },
   "content/blog/retrospectiva-foco-2022.mdx": {
-    "file": "assets/retrospectiva-foco-2022-DR0mdMWJ.js",
+    "file": "assets/retrospectiva-foco-2022-Bg3aRThM.js",
     "name": "retrospectiva-foco-2022",
     "src": "content/blog/retrospectiva-foco-2022.mdx",
     "isDynamicEntry": true,
@@ -1840,7 +1840,7 @@
     ]
   },
   "content/blog/revenue-management-na-hotelaria-maximize-sua-receita.mdx": {
-    "file": "assets/revenue-management-na-hotelaria-maximize-sua-receita-rgklOvOC.js",
+    "file": "assets/revenue-management-na-hotelaria-maximize-sua-receita-CLaogwDI.js",
     "name": "revenue-management-na-hotelaria-maximize-sua-receita",
     "src": "content/blog/revenue-management-na-hotelaria-maximize-sua-receita.mdx",
     "isDynamicEntry": true,
@@ -1849,7 +1849,7 @@
     ]
   },
   "content/blog/roupa-de-cama-para-hotel.mdx": {
-    "file": "assets/roupa-de-cama-para-hotel-BqlXNnkA.js",
+    "file": "assets/roupa-de-cama-para-hotel-s0TEweZT.js",
     "name": "roupa-de-cama-para-hotel",
     "src": "content/blog/roupa-de-cama-para-hotel.mdx",
     "isDynamicEntry": true,
@@ -1858,7 +1858,7 @@
     ]
   },
   "content/blog/saiba-como-o-rate-connect-da-trivago-pode-aumentar-as-suas-reservas-diretas.mdx": {
-    "file": "assets/saiba-como-o-rate-connect-da-trivago-pode-aumentar-as-suas-reservas-diretas-DO5repIe.js",
+    "file": "assets/saiba-como-o-rate-connect-da-trivago-pode-aumentar-as-suas-reservas-diretas-0EOpGexd.js",
     "name": "saiba-como-o-rate-connect-da-trivago-pode-aumentar-as-suas-reservas-diretas",
     "src": "content/blog/saiba-como-o-rate-connect-da-trivago-pode-aumentar-as-suas-reservas-diretas.mdx",
     "isDynamicEntry": true,
@@ -1867,7 +1867,7 @@
     ]
   },
   "content/blog/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas.mdx": {
-    "file": "assets/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas-DrMM06QO.js",
+    "file": "assets/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas-DWKL3WZu.js",
     "name": "saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas",
     "src": "content/blog/saiba-tudo-sobre-google-ads-para-hoteis-e-pousadas.mdx",
     "isDynamicEntry": true,
@@ -1876,7 +1876,7 @@
     ]
   },
   "content/blog/seguranca-hoteleira-engenharia-social-e-seus-riscos-para-a-hotelaria.mdx": {
-    "file": "assets/seguranca-hoteleira-engenharia-social-e-seus-riscos-para-a-hotelaria-BsdKW2lE.js",
+    "file": "assets/seguranca-hoteleira-engenharia-social-e-seus-riscos-para-a-hotelaria-_nZ5zEUd.js",
     "name": "seguranca-hoteleira-engenharia-social-e-seus-riscos-para-a-hotelaria",
     "src": "content/blog/seguranca-hoteleira-engenharia-social-e-seus-riscos-para-a-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1885,7 +1885,7 @@
     ]
   },
   "content/blog/seguranca-hoteleira-mantenha-a-rede-do-seu-hotel-livre-de-ataques.mdx": {
-    "file": "assets/seguranca-hoteleira-mantenha-a-rede-do-seu-hotel-livre-de-ataques-CkMeiQ6P.js",
+    "file": "assets/seguranca-hoteleira-mantenha-a-rede-do-seu-hotel-livre-de-ataques-wmCcI0Je.js",
     "name": "seguranca-hoteleira-mantenha-a-rede-do-seu-hotel-livre-de-ataques",
     "src": "content/blog/seguranca-hoteleira-mantenha-a-rede-do-seu-hotel-livre-de-ataques.mdx",
     "isDynamicEntry": true,
@@ -1894,7 +1894,7 @@
     ]
   },
   "content/blog/sete-dicas-de-fotografia-para-hotelaria.mdx": {
-    "file": "assets/sete-dicas-de-fotografia-para-hotelaria-DZ0C6yaq.js",
+    "file": "assets/sete-dicas-de-fotografia-para-hotelaria-EddxtAdx.js",
     "name": "sete-dicas-de-fotografia-para-hotelaria",
     "src": "content/blog/sete-dicas-de-fotografia-para-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1903,7 +1903,7 @@
     ]
   },
   "content/blog/sistema-para-hotel-aumente-a-sua-distribuicao-com-um-gestor-de-canais-integrado.mdx": {
-    "file": "assets/sistema-para-hotel-aumente-a-sua-distribuicao-com-um-gestor-de-canais-integrado-CyonQlLH.js",
+    "file": "assets/sistema-para-hotel-aumente-a-sua-distribuicao-com-um-gestor-de-canais-integrado-C2vyk8e9.js",
     "name": "sistema-para-hotel-aumente-a-sua-distribuicao-com-um-gestor-de-canais-integrado",
     "src": "content/blog/sistema-para-hotel-aumente-a-sua-distribuicao-com-um-gestor-de-canais-integrado.mdx",
     "isDynamicEntry": true,
@@ -1912,7 +1912,7 @@
     ]
   },
   "content/blog/sistema-para-pousada-economize-tempo-e-dinheiro-escolhendo-a-solucao-para-o-seu-negocio.mdx": {
-    "file": "assets/sistema-para-pousada-economize-tempo-e-dinheiro-escolhendo-a-solucao-para-o-seu-negocio-WqdAKhxW.js",
+    "file": "assets/sistema-para-pousada-economize-tempo-e-dinheiro-escolhendo-a-solucao-para-o-seu-negocio-BfAFdOGA.js",
     "name": "sistema-para-pousada-economize-tempo-e-dinheiro-escolhendo-a-solucao-para-o-seu-negocio",
     "src": "content/blog/sistema-para-pousada-economize-tempo-e-dinheiro-escolhendo-a-solucao-para-o-seu-negocio.mdx",
     "isDynamicEntry": true,
@@ -1921,7 +1921,7 @@
     ]
   },
   "content/blog/sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade.mdx": {
-    "file": "assets/sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade-rh-mZk--.js",
+    "file": "assets/sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade-DBWI2d1A.js",
     "name": "sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade",
     "src": "content/blog/sistemas-para-hotel-guia-completo-para-modernizar-sua-gestao-e-aumentar-a-rentabilidade.mdx",
     "isDynamicEntry": true,
@@ -1930,7 +1930,7 @@
     ]
   },
   "content/blog/site-de-hotel-por-que-ter-um-site-profissional-aumenta-suas-reservas-diretas.mdx": {
-    "file": "assets/site-de-hotel-por-que-ter-um-site-profissional-aumenta-suas-reservas-diretas-CZxY6HC-.js",
+    "file": "assets/site-de-hotel-por-que-ter-um-site-profissional-aumenta-suas-reservas-diretas-5QFmANck.js",
     "name": "site-de-hotel-por-que-ter-um-site-profissional-aumenta-suas-reservas-diretas",
     "src": "content/blog/site-de-hotel-por-que-ter-um-site-profissional-aumenta-suas-reservas-diretas.mdx",
     "isDynamicEntry": true,
@@ -1939,7 +1939,7 @@
     ]
   },
   "content/blog/software-hoteleiro-5-recursos-obrigatorios-em-um-pms.mdx": {
-    "file": "assets/software-hoteleiro-5-recursos-obrigatorios-em-um-pms-C6PgEd_N.js",
+    "file": "assets/software-hoteleiro-5-recursos-obrigatorios-em-um-pms-Bvh6iozX.js",
     "name": "software-hoteleiro-5-recursos-obrigatorios-em-um-pms",
     "src": "content/blog/software-hoteleiro-5-recursos-obrigatorios-em-um-pms.mdx",
     "isDynamicEntry": true,
@@ -1948,7 +1948,7 @@
     ]
   },
   "content/blog/soufoco2021-confira-como-foi.mdx": {
-    "file": "assets/soufoco2021-confira-como-foi-MBHtPc8R.js",
+    "file": "assets/soufoco2021-confira-como-foi-D1cjlIIK.js",
     "name": "soufoco2021-confira-como-foi",
     "src": "content/blog/soufoco2021-confira-como-foi.mdx",
     "isDynamicEntry": true,
@@ -1957,7 +1957,7 @@
     ]
   },
   "content/blog/tarifa-reembolsavel-expedia.mdx": {
-    "file": "assets/tarifa-reembolsavel-expedia-DumOmK7z.js",
+    "file": "assets/tarifa-reembolsavel-expedia-DYLdBjNO.js",
     "name": "tarifa-reembolsavel-expedia",
     "src": "content/blog/tarifa-reembolsavel-expedia.mdx",
     "isDynamicEntry": true,
@@ -1966,7 +1966,7 @@
     ]
   },
   "content/blog/taxa-de-ocupacao-o-que-e-como-calcular-e-como-aumentar-esse-indicador-na-hotelaria.mdx": {
-    "file": "assets/taxa-de-ocupacao-o-que-e-como-calcular-e-como-aumentar-esse-indicador-na-hotelaria-DjCvKCeK.js",
+    "file": "assets/taxa-de-ocupacao-o-que-e-como-calcular-e-como-aumentar-esse-indicador-na-hotelaria-d-XOfuaV.js",
     "name": "taxa-de-ocupacao-o-que-e-como-calcular-e-como-aumentar-esse-indicador-na-hotelaria",
     "src": "content/blog/taxa-de-ocupacao-o-que-e-como-calcular-e-como-aumentar-esse-indicador-na-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -1975,7 +1975,7 @@
     ]
   },
   "content/blog/trabalhar-a-produtividade-dos-colaboradores-de-um-hotel-ajuda-a-melhorar-a-experiencia-dos-hospedes.mdx": {
-    "file": "assets/trabalhar-a-produtividade-dos-colaboradores-de-um-hotel-ajuda-a-melhorar-a-experiencia-dos-hospedes-Ba_U6FCp.js",
+    "file": "assets/trabalhar-a-produtividade-dos-colaboradores-de-um-hotel-ajuda-a-melhorar-a-experiencia-dos-hospedes-DZzsboAE.js",
     "name": "trabalhar-a-produtividade-dos-colaboradores-de-um-hotel-ajuda-a-melhorar-a-experiencia-dos-hospedes",
     "src": "content/blog/trabalhar-a-produtividade-dos-colaboradores-de-um-hotel-ajuda-a-melhorar-a-experiencia-dos-hospedes.mdx",
     "isDynamicEntry": true,
@@ -1984,7 +1984,7 @@
     ]
   },
   "content/blog/transforme-a-baixa-temporada-em-oportunidade-com-tecnologia.mdx": {
-    "file": "assets/transforme-a-baixa-temporada-em-oportunidade-com-tecnologia-CDt1M9Ej.js",
+    "file": "assets/transforme-a-baixa-temporada-em-oportunidade-com-tecnologia-DU9ok2hp.js",
     "name": "transforme-a-baixa-temporada-em-oportunidade-com-tecnologia",
     "src": "content/blog/transforme-a-baixa-temporada-em-oportunidade-com-tecnologia.mdx",
     "isDynamicEntry": true,
@@ -1993,7 +1993,7 @@
     ]
   },
   "content/blog/tudo-sobre-lgpd-e-os-seus-impactos-na-hotelaria.mdx": {
-    "file": "assets/tudo-sobre-lgpd-e-os-seus-impactos-na-hotelaria-Dd5E2d-P.js",
+    "file": "assets/tudo-sobre-lgpd-e-os-seus-impactos-na-hotelaria-DdcAayi8.js",
     "name": "tudo-sobre-lgpd-e-os-seus-impactos-na-hotelaria",
     "src": "content/blog/tudo-sobre-lgpd-e-os-seus-impactos-na-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -2002,7 +2002,7 @@
     ]
   },
   "content/blog/venda-mais-com-upselling-e-crosseling-na-hotelaria.mdx": {
-    "file": "assets/venda-mais-com-upselling-e-crosseling-na-hotelaria-wP0i28h7.js",
+    "file": "assets/venda-mais-com-upselling-e-crosseling-na-hotelaria-z5B5zqHk.js",
     "name": "venda-mais-com-upselling-e-crosseling-na-hotelaria",
     "src": "content/blog/venda-mais-com-upselling-e-crosseling-na-hotelaria.mdx",
     "isDynamicEntry": true,
@@ -2011,7 +2011,7 @@
     ]
   },
   "index.html": {
-    "file": "assets/index-D9L6UhaX.js",
+    "file": "assets/index-Cdfs--Mm.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -2038,441 +2038,441 @@
       "src/features/ui/not-found-page.tsx"
     ],
     "css": [
-      "assets/index-CxzBGNqN.css"
+      "assets/index-CHsknvZt.css"
     ]
   },
   "src/features/blog/blog-author-page.tsx": {
-    "file": "assets/blog-author-page-szs136Qc.js",
+    "file": "assets/blog-author-page-DcRW819N.js",
     "name": "blog-author-page",
     "src": "src/features/blog/blog-author-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
+      "_use-seo-S7YA0Pq-.js",
       "src/features/ui/not-found-page.tsx",
-      "_blog-post-card-CvGMYLjl.js",
-      "_breadcrumbs-DuKBOg-D.js",
-      "_author-bio-BOYM1hxi.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_search-DJyzhvze.js"
+      "_blog-post-card-B2lgVT2i.js",
+      "_breadcrumbs-DLXo2v3C.js",
+      "_author-bio-BH_DfD-S.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_chevron-right-EyF7WVce.js",
+      "_search-pza-gkbY.js"
     ]
   },
   "src/features/blog/blog-category-page.tsx": {
-    "file": "assets/blog-category-page-C_9470Z4.js",
+    "file": "assets/blog-category-page-OT72QvqB.js",
     "name": "blog-category-page",
     "src": "src/features/blog/blog-category-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
+      "_use-seo-S7YA0Pq-.js",
       "src/features/ui/not-found-page.tsx",
-      "_blog-post-card-CvGMYLjl.js",
-      "_breadcrumbs-DuKBOg-D.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_search-DJyzhvze.js"
+      "_blog-post-card-B2lgVT2i.js",
+      "_breadcrumbs-DLXo2v3C.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_chevron-right-EyF7WVce.js",
+      "_search-pza-gkbY.js"
     ]
   },
   "src/features/blog/blog-home-page.tsx": {
-    "file": "assets/blog-home-page-DaxzIX1g.js",
+    "file": "assets/blog-home-page-KpqyI9oa.js",
     "name": "blog-home-page",
     "src": "src/features/blog/blog-home-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_blog-post-card-CvGMYLjl.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_search-DJyzhvze.js"
+      "_use-seo-S7YA0Pq-.js",
+      "_blog-post-card-B2lgVT2i.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_chevron-right-EyF7WVce.js",
+      "_search-pza-gkbY.js"
     ]
   },
   "src/features/blog/blog-post-page.tsx": {
-    "file": "assets/blog-post-page-C2EFWwse.js",
+    "file": "assets/blog-post-page-CDJLlq1l.js",
     "name": "blog-post-page",
     "src": "src/features/blog/blog-post-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_floating-toc-BAuuZyuX.js",
-      "_button-DEARr97i.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_floating-toc-B7sWi5jO.js",
+      "_button-Djb_-Ueh.js",
       "src/features/ui/not-found-page.tsx",
-      "_blog-post-card-CvGMYLjl.js",
-      "_tag-chip-Qj_CLQNL.js",
-      "_breadcrumbs-DuKBOg-D.js",
-      "_author-bio-BOYM1hxi.js",
-      "_sparkles-BX-d3xDu.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_clock-D8QStjRi.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_search-DJyzhvze.js"
+      "_blog-post-card-B2lgVT2i.js",
+      "_tag-chip-B4vB0nJU.js",
+      "_breadcrumbs-DLXo2v3C.js",
+      "_author-bio-BH_DfD-S.js",
+      "_sparkles-HO9woxSG.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_clock-CGd22nTM.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_chevron-right-EyF7WVce.js",
+      "_search-pza-gkbY.js"
     ]
   },
   "src/features/blog/blog-search-page.tsx": {
-    "file": "assets/blog-search-page-CP0ypScG.js",
+    "file": "assets/blog-search-page-Btmw8aZP.js",
     "name": "blog-search-page",
     "src": "src/features/blog/blog-search-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_blog-post-card-CvGMYLjl.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_breadcrumbs-DuKBOg-D.js",
-      "_search-DJyzhvze.js",
-      "_chevron-right-DgzXQsm_.js"
+      "_use-seo-S7YA0Pq-.js",
+      "_blog-post-card-B2lgVT2i.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_breadcrumbs-DLXo2v3C.js",
+      "_search-pza-gkbY.js",
+      "_chevron-right-EyF7WVce.js"
     ]
   },
   "src/features/blog/blog-tag-page.tsx": {
-    "file": "assets/blog-tag-page-BPGbCIsh.js",
+    "file": "assets/blog-tag-page-QBM0u_e5.js",
     "name": "blog-tag-page",
     "src": "src/features/blog/blog-tag-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
+      "_use-seo-S7YA0Pq-.js",
       "src/features/ui/not-found-page.tsx",
-      "_blog-post-card-CvGMYLjl.js",
-      "_tag-chip-Qj_CLQNL.js",
-      "_breadcrumbs-DuKBOg-D.js",
-      "_blog-toolbar-DD3Yps3z.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_search-DJyzhvze.js"
+      "_blog-post-card-B2lgVT2i.js",
+      "_tag-chip-B4vB0nJU.js",
+      "_breadcrumbs-DLXo2v3C.js",
+      "_blog-toolbar-BZEeekc2.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_chevron-right-EyF7WVce.js",
+      "_search-pza-gkbY.js"
     ]
   },
   "src/features/channel-manager/channel-manager-page.tsx": {
-    "file": "assets/channel-manager-page-D6pWlAV_.js",
+    "file": "assets/channel-manager-page-5sLL6DmO.js",
     "name": "channel-manager-page",
     "src": "src/features/channel-manager/channel-manager-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_info-sections-lqHubvwm.js",
-      "_send-Chi0Y_gm.js",
-      "_tag-Czk7ofvH.js",
-      "_layout-dashboard-CIYE4rv8.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_building-2-DuLDknlw.js",
-      "_target-DwyDBgH6.js",
-      "_use-animation-CCA_YmbW.js",
-      "_index-DFL9nNL5.js",
-      "_zap-BQ3g0zcL.js",
-      "_empty-DZwjS8Vl.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_button-DEARr97i.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_info-sections-ahcAdn5u.js",
+      "_send-pne4T4Y8.js",
+      "_tag-C0zzMYCC.js",
+      "_layout-dashboard-szPnGHDA.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_building-2-CXkczYFW.js",
+      "_target-CfuWcOte.js",
+      "_use-animation-BDn4s5Sw.js",
+      "_index-WF28vgtA.js",
+      "_zap-CW3VSpmd.js",
+      "_empty-DxktJz4I.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_button-Djb_-Ueh.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_section-eyebrow-DEXr4i35.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/crm-hoteleiro/crm-hoteleiro-page.tsx": {
-    "file": "assets/crm-hoteleiro-page-Cc8NOWt4.js",
+    "file": "assets/crm-hoteleiro-page-Co0qurcB.js",
     "name": "crm-hoteleiro-page",
     "src": "src/features/crm-hoteleiro/crm-hoteleiro-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_history-DGWcWE-k.js",
-      "_zap-BQ3g0zcL.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_use-animation-CCA_YmbW.js",
-      "_info-sections-lqHubvwm.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_history-C3YQ2JVg.js",
+      "_zap-CW3VSpmd.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_use-animation-BDn4s5Sw.js",
+      "_info-sections-ahcAdn5u.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_section-eyebrow-DEXr4i35.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/experiencia-hospede/experiencia-hospede-page.tsx": {
-    "file": "assets/experiencia-hospede-page-b1J3vScb.js",
+    "file": "assets/experiencia-hospede-page-Dg1h7K0M.js",
     "name": "experiencia-hospede-page",
     "src": "src/features/experiencia-hospede/experiencia-hospede-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_spatial-phone-carousel-BIiChzZk.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_map-pin-FSvXb5Hy.js",
-      "_building-BPozjUGg.js",
-      "_utensils-_0hBONvO.js",
-      "_sparkles-BX-d3xDu.js",
-      "_message-circle-CulNM8xz.js",
-      "_compass-B1n9pL__.js",
-      "_qr-code-CwpiU9uU.js",
-      "_star-Gc90iB61.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_heart-n3SePOl2.js",
-      "_shield-CSr14uc5.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_use-scroll-pin-scale-C1MtxjBS.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_spatial-phone-carousel-i8_dnS0-.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_map-pin-D_pzplxG.js",
+      "_building-Crt8EPKJ.js",
+      "_utensils-BNXm5_pP.js",
+      "_sparkles-HO9woxSG.js",
+      "_message-circle-B_QIGgc1.js",
+      "_compass-COFiFijY.js",
+      "_qr-code-C54LWQUv.js",
+      "_star-c351ery2.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_heart-D50DAgS3.js",
+      "_shield-CcCuSgty.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_use-scroll-pin-scale-CGB19ZR4.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_tag-Czk7ofvH.js",
-      "_info-sections-lqHubvwm.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
+      "_tag-C0zzMYCC.js",
+      "_info-sections-ahcAdn5u.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_zap-BQ3g0zcL.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "src/features/gestao-hoteleira/gestao-hoteleira-page.tsx": {
-    "file": "assets/gestao-hoteleira-page-ynzf9n8p.js",
+    "file": "assets/gestao-hoteleira-page-DSUYzlaX.js",
     "name": "gestao-hoteleira-page",
     "src": "src/features/gestao-hoteleira/gestao-hoteleira-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_sparkles-BX-d3xDu.js",
-      "_lock-Djm6V-ay.js",
-      "_history-DGWcWE-k.js",
-      "_file-text-BeDCVMvO.js",
-      "_utensils-_0hBONvO.js",
-      "_search-DJyzhvze.js",
-      "_circle-user-luZFkbl7.js",
-      "_user-check-CmCErB5E.js",
-      "_dollar-sign-mjGxUddI.js",
-      "_users-CCbP5w22.js",
-      "_handshake-VxUrXmZJ.js",
-      "_layout-dashboard-CIYE4rv8.js",
-      "_info-sections-lqHubvwm.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_otheo-ai-teaser-section-lazy-vYOdymEy.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_sparkles-HO9woxSG.js",
+      "_lock-C5i7z7Sl.js",
+      "_history-C3YQ2JVg.js",
+      "_file-text-BTU_O0HL.js",
+      "_utensils-BNXm5_pP.js",
+      "_search-pza-gkbY.js",
+      "_circle-user-CYNoecNk.js",
+      "_user-check-lIFbaTw6.js",
+      "_dollar-sign-CRXFqlG2.js",
+      "_users-DsHEW018.js",
+      "_handshake-CqMONbok.js",
+      "_layout-dashboard-szPnGHDA.js",
+      "_info-sections-ahcAdn5u.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_otheo-ai-teaser-section-lazy-Br8SG5pF.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_zap-BQ3g0zcL.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "src/features/home/components/diferenciais-section.tsx": {
-    "file": "assets/diferenciais-section-eZ5LlIOW.js",
+    "file": "assets/diferenciais-section-C480TYx7.js",
     "name": "diferenciais-section",
     "src": "src/features/home/components/diferenciais-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_orbit-diagram-3eKM5MG1.js",
-      "_lock-Djm6V-ay.js",
-      "_zap-BQ3g0zcL.js",
-      "_users-CCbP5w22.js",
-      "_shield-CSr14uc5.js",
-      "_handshake-VxUrXmZJ.js",
-      "_star-Gc90iB61.js",
-      "_award-DZJaZ6Rc.js",
-      "_index-DFL9nNL5.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_orbit-diagram-JL00eR1l.js",
+      "_lock-C5i7z7Sl.js",
+      "_zap-CW3VSpmd.js",
+      "_users-DsHEW018.js",
+      "_shield-CcCuSgty.js",
+      "_handshake-CqMONbok.js",
+      "_star-c351ery2.js",
+      "_award-Den3sRoq.js",
+      "_index-WF28vgtA.js"
     ]
   },
   "src/features/home/components/dores-diagnostico-section.tsx": {
-    "file": "assets/dores-diagnostico-section-swjBYJ96.js",
+    "file": "assets/dores-diagnostico-section-C8vVMARa.js",
     "name": "dores-diagnostico-section",
     "src": "src/features/home/components/dores-diagnostico-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_sticky-tabs-list-DvZLBI6Q.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_zap-BQ3g0zcL.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js"
+      "_sticky-tabs-list-k5Qk08x_.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_zap-CW3VSpmd.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js"
     ]
   },
   "src/features/home/components/eventos-section-impl.tsx": {
-    "file": "assets/eventos-section-impl-x85XyHoo.js",
+    "file": "assets/eventos-section-impl-BpJ_P5Bn.js",
     "name": "eventos-section-impl",
     "src": "src/features/home/components/eventos-section-impl.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_map-pin-FSvXb5Hy.js"
+      "_map-pin-D_pzplxG.js"
     ]
   },
   "src/features/home/components/na-midia-section-impl.tsx": {
-    "file": "assets/na-midia-section-impl-BjLfoA_t.js",
+    "file": "assets/na-midia-section-impl-CPA2GGcX.js",
     "name": "na-midia-section-impl",
     "src": "src/features/home/components/na-midia-section-impl.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js"
     ]
   },
   "src/features/home/components/numeros-section-impl.tsx": {
-    "file": "assets/numeros-section-impl-DnBwA-0F.js",
+    "file": "assets/numeros-section-impl-D0VQDvUN.js",
     "name": "numeros-section-impl",
     "src": "src/features/home/components/numeros-section-impl.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_users-CCbP5w22.js",
-      "_clock-D8QStjRi.js"
+      "_trending-up-f-DNSTaM.js",
+      "_users-DsHEW018.js",
+      "_clock-CGd22nTM.js"
     ]
   },
   "src/features/home/components/otheo-ai-teaser-section.tsx": {
-    "file": "assets/otheo-ai-teaser-section-DCNH10FE.js",
+    "file": "assets/otheo-ai-teaser-section-C3z-wuC1.js",
     "name": "otheo-ai-teaser-section",
     "src": "src/features/home/components/otheo-ai-teaser-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-scroll-pin-scale-C1MtxjBS.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_zap-BQ3g0zcL.js",
+      "_use-scroll-pin-scale-CGB19ZR4.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_zap-CW3VSpmd.js",
       "_ScrollTrigger-a3sj5zmn.js"
     ]
   },
   "src/features/home/components/parceiros-elite-section.tsx": {
-    "file": "assets/parceiros-elite-section-B5eYSzcj.js",
+    "file": "assets/parceiros-elite-section-Q7jF-TzN.js",
     "name": "parceiros-elite-section",
     "src": "src/features/home/components/parceiros-elite-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_handshake-VxUrXmZJ.js",
-      "_award-DZJaZ6Rc.js"
+      "_handshake-CqMONbok.js",
+      "_award-Den3sRoq.js"
     ]
   },
   "src/features/home/components/produtos-section.tsx": {
-    "file": "assets/produtos-section-DDwYsofn.js",
+    "file": "assets/produtos-section-rlfaNQep.js",
     "name": "produtos-section",
     "src": "src/features/home/components/produtos-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_use-in-view-BRu_D7HX.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_arrow-up-right-Pin9duEE.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_use-in-view-DKEip-GF.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_arrow-up-right-Ca71Xgbv.js"
     ]
   },
   "src/features/home/components/seguranca-section.tsx": {
-    "file": "assets/seguranca-section-C_u-vIZS.js",
+    "file": "assets/seguranca-section-ymFnFjLB.js",
     "name": "seguranca-section",
     "src": "src/features/home/components/seguranca-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js"
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/home/components/tipos-propriedade-section.tsx": {
-    "file": "assets/tipos-propriedade-section-BXLQP8PF.js",
+    "file": "assets/tipos-propriedade-section-Cbzcl0Ik.js",
     "name": "tipos-propriedade-section",
     "src": "src/features/home/components/tipos-propriedade-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_users-CCbP5w22.js",
-      "_building-BPozjUGg.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_users-DsHEW018.js",
+      "_building-Crt8EPKJ.js"
     ]
   },
   "src/features/home/home-page.tsx": {
-    "file": "assets/home-page-DMpTfcb4.js",
+    "file": "assets/home-page-1RgWrvQv.js",
     "name": "home-page",
     "src": "src/features/home/home-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_numeros-section-BTMM_sBQ.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_use-seo-BeV1WKAu.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_users-CCbP5w22.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_button-DEARr97i.js",
-      "_otheo-ai-teaser-section-lazy-vYOdymEy.js",
-      "_eventos-section-Zu88zlF_.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_empty-DZwjS8Vl.js"
+      "_numeros-section-BplELoHS.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_users-DsHEW018.js",
+      "_trending-up-f-DNSTaM.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_button-Djb_-Ueh.js",
+      "_otheo-ai-teaser-section-lazy-Br8SG5pF.js",
+      "_eventos-section-Ba2f6bJk.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_empty-DxktJz4I.js"
     ],
     "dynamicImports": [
       "src/features/home/components/produtos-section.tsx",
@@ -2484,365 +2484,365 @@
     ]
   },
   "src/features/integracoes-hoteleiras/integracoes-hoteleiras-page.tsx": {
-    "file": "assets/integracoes-hoteleiras-page-DgCEyZqj.js",
+    "file": "assets/integracoes-hoteleiras-page-COxT1p2j.js",
     "name": "integracoes-hoteleiras-page",
     "src": "src/features/integracoes-hoteleiras/integracoes-hoteleiras-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_orbit-diagram-3eKM5MG1.js",
-      "_tabs-DrqkdMCw.js",
-      "_sticky-tabs-list-DvZLBI6Q.js",
-      "_building-2-DuLDknlw.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_button-DEARr97i.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_empty-DZwjS8Vl.js",
-      "_index-DFL9nNL5.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_orbit-diagram-JL00eR1l.js",
+      "_tabs-DXiybBZ7.js",
+      "_sticky-tabs-list-k5Qk08x_.js",
+      "_building-2-CXkczYFW.js",
+      "_trending-up-f-DNSTaM.js",
+      "_button-Djb_-Ueh.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_empty-DxktJz4I.js",
+      "_index-WF28vgtA.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_zap-BQ3g0zcL.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "src/features/marketing-para-hoteis/marketing-para-hoteis-page.tsx": {
-    "file": "assets/marketing-para-hoteis-page-XGYZL0zu.js",
+    "file": "assets/marketing-para-hoteis-page-szmqelLD.js",
     "name": "marketing-para-hoteis-page",
     "src": "src/features/marketing-para-hoteis/marketing-para-hoteis-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_home-style-hero-A85MKJMb.js",
-      "_building-2-DuLDknlw.js",
-      "_badge-check-B972MY_o.js",
-      "_heart-n3SePOl2.js",
-      "_message-circle-CulNM8xz.js",
-      "_send-Chi0Y_gm.js",
-      "_search-DJyzhvze.js",
-      "_star-Gc90iB61.js",
-      "_map-pin-FSvXb5Hy.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_target-DwyDBgH6.js",
-      "_user-check-CmCErB5E.js",
-      "_sparkles-BX-d3xDu.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_use-animation-CCA_YmbW.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_clock-D8QStjRi.js",
-      "_users-CCbP5w22.js",
-      "_sticky-tabs-list-DvZLBI6Q.js",
-      "_tabs-DrqkdMCw.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_use-seo-BeV1WKAu.js",
-      "_zap-BQ3g0zcL.js"
+      "_home-style-hero-CPszYAot.js",
+      "_building-2-CXkczYFW.js",
+      "_badge-check-C9pLEM0n.js",
+      "_heart-D50DAgS3.js",
+      "_message-circle-B_QIGgc1.js",
+      "_send-pne4T4Y8.js",
+      "_search-pza-gkbY.js",
+      "_star-c351ery2.js",
+      "_map-pin-D_pzplxG.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_target-CfuWcOte.js",
+      "_user-check-lIFbaTw6.js",
+      "_sparkles-HO9woxSG.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_use-animation-BDn4s5Sw.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_clock-CGd22nTM.js",
+      "_users-DsHEW018.js",
+      "_sticky-tabs-list-k5Qk08x_.js",
+      "_tabs-DXiybBZ7.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_numeros-section-BplELoHS.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "src/features/motor-reservas/motor-reservas-page.tsx": {
-    "file": "assets/motor-reservas-page-cdIaYq6L.js",
+    "file": "assets/motor-reservas-page-B4cXmucg.js",
     "name": "motor-reservas-page",
     "src": "src/features/motor-reservas/motor-reservas-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_info-sections-lqHubvwm.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_clock-D8QStjRi.js",
-      "_dollar-sign-mjGxUddI.js",
-      "_lock-Djm6V-ay.js",
-      "_target-DwyDBgH6.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_use-animation-CCA_YmbW.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_message-circle-CulNM8xz.js",
-      "_use-in-view-BRu_D7HX.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_info-sections-ahcAdn5u.js",
+      "_trending-up-f-DNSTaM.js",
+      "_clock-CGd22nTM.js",
+      "_dollar-sign-CRXFqlG2.js",
+      "_lock-C5i7z7Sl.js",
+      "_target-CfuWcOte.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_use-animation-BDn4s5Sw.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_message-circle-B_QIGgc1.js",
+      "_use-in-view-DKEip-GF.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_qr-code-CwpiU9uU.js",
-      "_zap-BQ3g0zcL.js",
-      "_search-DJyzhvze.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_message-square-CO0QRaWy.js",
-      "_sliders-horizontal-qDyAcuGi.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_website-portfolio-carousel-Drl0dAJh.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
-      "_carousel-DWFCXeeY.js",
+      "_qr-code-C54LWQUv.js",
+      "_zap-CW3VSpmd.js",
+      "_search-pza-gkbY.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_message-square-CCWFID-n.js",
+      "_sliders-horizontal-CLKTSjca.js",
+      "_numeros-section-BplELoHS.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_website-portfolio-carousel-ZEjv2ZA4.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
+      "_carousel-tibVcQRG.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_star-Gc90iB61.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_star-c351ery2.js"
     ]
   },
   "src/features/otheo-ai/otheo-ai-page.tsx": {
-    "file": "assets/otheo-ai-page-CftO66t4.js",
+    "file": "assets/otheo-ai-page-BcSGCP65.js",
     "name": "otheo-ai-page",
     "src": "src/features/otheo-ai/otheo-ai-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_home-style-hero-A85MKJMb.js",
-      "_spatial-phone-carousel-BIiChzZk.js",
-      "_use-seo-BeV1WKAu.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_dollar-sign-mjGxUddI.js",
-      "_message-circle-CulNM8xz.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_sparkles-BX-d3xDu.js",
-      "_lock-Djm6V-ay.js",
-      "_send-Chi0Y_gm.js",
-      "_zap-BQ3g0zcL.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_section-eyebrow-DEXr4i35.js"
+      "_home-style-hero-CPszYAot.js",
+      "_spatial-phone-carousel-i8_dnS0-.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_dollar-sign-CRXFqlG2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_sparkles-HO9woxSG.js",
+      "_lock-C5i7z7Sl.js",
+      "_send-pne4T4Y8.js",
+      "_zap-CW3VSpmd.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/politica-de-privacidade/politica-de-privacidade-page.tsx": {
-    "file": "assets/politica-de-privacidade-page-CtTpREY4.js",
+    "file": "assets/politica-de-privacidade-page-BCG4zgzh.js",
     "name": "politica-de-privacidade-page",
     "src": "src/features/politica-de-privacidade/politica-de-privacidade-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_floating-toc-BAuuZyuX.js",
-      "_use-seo-BeV1WKAu.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_floating-toc-B7sWi5jO.js",
+      "_use-seo-S7YA0Pq-.js"
     ]
   },
   "src/features/shared/components/certificacoes-section.tsx": {
-    "file": "assets/certificacoes-section-Be2s803n.js",
+    "file": "assets/certificacoes-section-BQd8DYR5.js",
     "name": "certificacoes-section",
     "src": "src/features/shared/components/certificacoes-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js"
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/shared/components/smart-integrations-tabs.tsx": {
-    "file": "assets/smart-integrations-tabs-BshEMQ6B.js",
+    "file": "assets/smart-integrations-tabs-BYdVOvqV.js",
     "name": "smart-integrations-tabs",
     "src": "src/features/shared/components/smart-integrations-tabs.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_tabs-DrqkdMCw.js",
-      "_carousel-DWFCXeeY.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_tabs-DXiybBZ7.js",
+      "_carousel-tibVcQRG.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_use-in-view-BRu_D7HX.js",
-      "_building-2-DuLDknlw.js",
-      "_trending-up-Dc-Afp4u.js"
+      "_use-in-view-DKEip-GF.js",
+      "_building-2-CXkczYFW.js",
+      "_trending-up-f-DNSTaM.js"
     ]
   },
   "src/features/shared/components/trusted-logos-marquee.tsx": {
-    "file": "assets/trusted-logos-marquee-CVGh3_AY.js",
+    "file": "assets/trusted-logos-marquee-BUAE8CNa.js",
     "name": "trusted-logos-marquee",
     "src": "src/features/shared/components/trusted-logos-marquee.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js"
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/shared/components/ultimas-do-blog-section.tsx": {
-    "file": "assets/ultimas-do-blog-section-CTDLxbFd.js",
+    "file": "assets/ultimas-do-blog-section-D3yL8EgC.js",
     "name": "ultimas-do-blog-section",
     "src": "src/features/shared/components/ultimas-do-blog-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_blog-post-card-CvGMYLjl.js",
-      "_arrow-up-right-Pin9duEE.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_blog-post-card-B2lgVT2i.js",
+      "_arrow-up-right-Ca71Xgbv.js"
     ]
   },
   "src/features/shared/components/wall-of-love-section.tsx": {
-    "file": "assets/wall-of-love-section-DB7NiCTS.js",
+    "file": "assets/wall-of-love-section-Cg7-m1QK.js",
     "name": "wall-of-love-section",
     "src": "src/features/shared/components/wall-of-love-section.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_sparkles-BX-d3xDu.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_star-Gc90iB61.js",
-      "_badge-check-B972MY_o.js",
-      "_arrow-left-CEwDgqg9.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_carousel-controls-yyg4DKqh.js",
+      "_sparkles-HO9woxSG.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_star-c351ery2.js",
+      "_badge-check-C9pLEM0n.js",
+      "_arrow-left-DeuLzSB0.js"
     ]
   },
   "src/features/site-hoteleiro/site-hoteleiro-page.tsx": {
-    "file": "assets/site-hoteleiro-page-CUbHyY4A.js",
+    "file": "assets/site-hoteleiro-page-C9M-evKq.js",
     "name": "site-hoteleiro-page",
     "src": "src/features/site-hoteleiro/site-hoteleiro-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
-      "_section-eyebrow-DEXr4i35.js",
-      "_sticky-tabs-list-DvZLBI6Q.js",
-      "_tag-Czk7ofvH.js",
-      "_zap-BQ3g0zcL.js",
-      "_star-Gc90iB61.js",
-      "_building-BPozjUGg.js",
-      "_award-DZJaZ6Rc.js",
-      "_compass-B1n9pL__.js",
-      "_message-circle-CulNM8xz.js",
-      "_target-DwyDBgH6.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_sticky-tabs-list-k5Qk08x_.js",
+      "_tag-C0zzMYCC.js",
+      "_zap-CW3VSpmd.js",
+      "_star-c351ery2.js",
+      "_building-Crt8EPKJ.js",
+      "_award-Den3sRoq.js",
+      "_compass-COFiFijY.js",
+      "_message-circle-B_QIGgc1.js",
+      "_target-CfuWcOte.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_network-Bc3aUOgO.js",
-      "_search-DJyzhvze.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_circle-user-luZFkbl7.js",
-      "_shield-CSr14uc5.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_use-animation-CCA_YmbW.js",
-      "_eventos-section-Zu88zlF_.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_website-portfolio-carousel-Drl0dAJh.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
-      "_carousel-DWFCXeeY.js",
+      "_network-ClndwRco.js",
+      "_search-pza-gkbY.js",
+      "_trending-up-f-DNSTaM.js",
+      "_circle-user-CYNoecNk.js",
+      "_shield-CcCuSgty.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_use-animation-BDn4s5Sw.js",
+      "_eventos-section-Ba2f6bJk.js",
+      "_numeros-section-BplELoHS.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_website-portfolio-carousel-ZEjv2ZA4.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
+      "_carousel-tibVcQRG.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js"
     ]
   },
   "src/features/sobre/sobre-page.tsx": {
-    "file": "assets/sobre-page-wWt2ZcMB.js",
+    "file": "assets/sobre-page-D9rJzP6W.js",
     "name": "sobre-page",
     "src": "src/features/sobre/sobre-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_use-in-view-BRu_D7HX.js",
-      "_index-DFL9nNL5.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_map-pin-FSvXb5Hy.js",
-      "_award-DZJaZ6Rc.js",
-      "_clock-D8QStjRi.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_sparkles-BX-d3xDu.js",
-      "_use-motion-template-CndgsRrI.js",
-      "_orbit-diagram-3eKM5MG1.js",
-      "_message-circle-CulNM8xz.js",
-      "_message-square-CO0QRaWy.js",
-      "_users-CCbP5w22.js",
-      "_chevron-right-DgzXQsm_.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_use-seo-BeV1WKAu.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_zap-BQ3g0zcL.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_use-in-view-DKEip-GF.js",
+      "_index-WF28vgtA.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_map-pin-D_pzplxG.js",
+      "_award-Den3sRoq.js",
+      "_clock-CGd22nTM.js",
+      "_trending-up-f-DNSTaM.js",
+      "_sparkles-HO9woxSG.js",
+      "_use-motion-template-C2GzWTNB.js",
+      "_orbit-diagram-JL00eR1l.js",
+      "_message-circle-B_QIGgc1.js",
+      "_message-square-CCWFID-n.js",
+      "_users-DsHEW018.js",
+      "_chevron-right-EyF7WVce.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_zap-CW3VSpmd.js"
     ]
   },
   "src/features/software-pagamentos/software-pagamentos-page.tsx": {
-    "file": "assets/software-pagamentos-page-m1KiOobI.js",
+    "file": "assets/software-pagamentos-page-CggDwzjE.js",
     "name": "software-pagamentos-page",
     "src": "src/features/software-pagamentos/software-pagamentos-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_use-seo-BeV1WKAu.js",
-      "_home-style-hero-A85MKJMb.js",
+      "_use-seo-S7YA0Pq-.js",
+      "_home-style-hero-CPszYAot.js",
       "_ScrollTrigger-a3sj5zmn.js",
-      "_sliders-horizontal-qDyAcuGi.js",
-      "_lock-Djm6V-ay.js",
-      "_network-Bc3aUOgO.js",
-      "_file-text-BeDCVMvO.js",
-      "_zap-BQ3g0zcL.js",
-      "_trending-up-Dc-Afp4u.js",
-      "_clock-D8QStjRi.js",
-      "_layout-dashboard-CIYE4rv8.js",
-      "_info-sections-lqHubvwm.js",
-      "_numeros-section-BTMM_sBQ.js",
-      "_na-midia-section-B2Jlirns.js",
-      "_software-products-carousel-CLFqtuJn.js",
-      "_carousel-DWFCXeeY.js",
-      "_wall-of-love-section-lazy-Ce8Nm6Dl.js",
-      "_ultimas-do-blog-section-lazy-BavQ65vb.js",
-      "_dor-parallax-section-Dxc75J7W.js",
-      "_faq-accordion-DkQPmIqQ.js",
-      "_lead-capture-cta-CSh8Od3p.js",
-      "_empty-DZwjS8Vl.js",
-      "_button-DEARr97i.js",
+      "_sliders-horizontal-CLKTSjca.js",
+      "_lock-C5i7z7Sl.js",
+      "_network-ClndwRco.js",
+      "_file-text-BTU_O0HL.js",
+      "_zap-CW3VSpmd.js",
+      "_trending-up-f-DNSTaM.js",
+      "_clock-CGd22nTM.js",
+      "_layout-dashboard-szPnGHDA.js",
+      "_info-sections-ahcAdn5u.js",
+      "_numeros-section-BplELoHS.js",
+      "_na-midia-section-ocYajS0Q.js",
+      "_software-products-carousel-5cTdmrEo.js",
+      "_carousel-tibVcQRG.js",
+      "_wall-of-love-section-lazy-BzaXdCTR.js",
+      "_ultimas-do-blog-section-lazy-DChHb6zF.js",
+      "_dor-parallax-section-BkiaBCA6.js",
+      "_faq-accordion-CueLcDCu.js",
+      "_lead-capture-cta-DLU-t9hB.js",
+      "_empty-DxktJz4I.js",
+      "_button-Djb_-Ueh.js",
       "_embla-carousel-autoplay.esm-CjDxzJE7.js",
-      "_carousel-controls-Dv2c-Hjd.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js",
-      "_use-scroll-UzOy9hI4.js",
-      "_target-DwyDBgH6.js",
-      "_star-Gc90iB61.js",
-      "_message-circle-CulNM8xz.js",
-      "_section-eyebrow-DEXr4i35.js"
+      "_carousel-controls-yyg4DKqh.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js",
+      "_use-scroll-BX3g3fjZ.js",
+      "_target-CfuWcOte.js",
+      "_star-c351ery2.js",
+      "_message-circle-B_QIGgc1.js",
+      "_section-eyebrow-C6Ay6Lvm.js"
     ]
   },
   "src/features/ui/components/faq-accordion-impl.tsx": {
-    "file": "assets/faq-accordion-impl-B-i0T1iu.js",
+    "file": "assets/faq-accordion-impl-QH_vAY-9.js",
     "name": "faq-accordion-impl",
     "src": "src/features/ui/components/faq-accordion-impl.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_message-circle-CulNM8xz.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_message-circle-B_QIGgc1.js"
     ]
   },
   "src/features/ui/not-found-page.tsx": {
-    "file": "assets/not-found-page-CPfZOp6d.js",
+    "file": "assets/not-found-page-Bjgh8zVv.js",
     "name": "not-found-page",
     "src": "src/features/ui/not-found-page.tsx",
     "isDynamicEntry": true,
     "imports": [
       "index.html",
-      "_section-eyebrow-DEXr4i35.js",
-      "_arrow-left-CEwDgqg9.js",
-      "_arrow-up-right-Pin9duEE.js"
+      "_section-eyebrow-C6Ay6Lvm.js",
+      "_arrow-left-DeuLzSB0.js",
+      "_arrow-up-right-Ca71Xgbv.js"
     ]
   }
 }
